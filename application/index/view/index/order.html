@@ -1,0 +1,32 @@
+ {include file="index/header" /} 
+ <p>我的课程订单：</p>
+ 
+ <table class="table table-bordered table-hover ">
+ 	<thead>
+ 		<tr  ><th > 排序</th><th > 课程标题</th><th >交易金额</th><th > 订单日期</th><th > 播放 </th>
+ 		</tr>
+ 	</thead>
+
+ 	<tbody>
+ 		{volist name='show' id='user'}
+ 		 
+ 		<tr  ><th> {$user.id} </th><td> <a href="__ROOT__/index/index/view/id/{$user.id} ">{$user.subject|mb_substr=0,50,'utf-8' }</a></td><td> {$user.total_fee}</del></span> 
+ 		</td>
+ 			<td>		
+ 			{$user.create_time} 
+ 		</td><td>		
+ 			<a href="__ROOT__/index/index/view/id/{$user.id}" class="btn btn-success" target="_blank"  >立即播放</a>
+ 		</td>
+		
+ 		 </tr>
+
+
+ 		 
+ 		{/volist} 
+ 	</tbody>
+ </table>
+ {$show->render()}
+ 
+ 
+ 
+ {include file="index/footer" /}

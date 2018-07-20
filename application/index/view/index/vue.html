@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+
+    <h1>666</h1>
+    <div id="app">
+        <timer-btn class="btn btn-default" @click="send" :disabled="disabled" v-ref:btn :second="5"></timer-btn>
+    </div>
+
+    <template id="timerBtn">
+        <button :disabled="disabled || time > 0">
+            {{ text }}
+        </button>
+    </template>
+
+    <script src="http://cdn.bootcss.com/vue/1.0.17/vue.min.js"></script>
+
+    <script>
+        'use strict';
+
+        Vue.component('timerBtn', {
+            template: '#timerBtn',
+            props: {
+                second: {
+                    type: Number,
+                    default: 60
+                },
+                disabled: {
+                    type: Boolean,
+                    default: false
+                }
+            },
+            data: function () {
+                return {
+                    time: 0
+                }
+            },
+            methods: {
+                run: function () {
+                    this.time = this.second
+                    this.timer()
+                },
+                timer: function () {
+                    if (this.time > 0) {
+                        this.time--;
+                        setTimeout(this.timer, 2000);
+                    }
+                }
+            },
+            computed: {
+                text: function () {
+                    return this.time > 0 ? this.time + 's 后重新获取' : '获取验证码';
+                }
+            }
+        });
+
+        new Vue({
+            el: '#app',
+            data: function () {
+                return {
+                    disabled: false
+                }
+            },
+            methods: {
+                send: function () {
+                    this.disabled = true;
+                    setTimeout(this.sended, 2000);
+                },
+                sended() {
+                    this.$refs.btn.run();
+                    this.disabled = false;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

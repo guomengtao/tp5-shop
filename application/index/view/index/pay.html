@@ -1,0 +1,118 @@
+ {include file="index/header" /} 
+<script>
+function showHint(str)
+{
+
+  var xmlhttp;
+ if (str.length==0)
+  { 
+    document.getElementById("txtHint").innerHTML="请输入手机号";
+    return;
+  }
+
+  if (str.length!=11)
+  { 
+    document.getElementById("txtHint").innerHTML="手机号格式有误";
+    return;
+  }
+  if (window.XMLHttpRequest)
+  {
+    // IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+    xmlhttp=new XMLHttpRequest();
+  }
+  else
+  {
+    // IE6, IE5 浏览器执行代码
+    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+  xmlhttp.onreadystatechange=function()
+  {
+    if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+      document.getElementById("txtHint").innerHTML="通信成功，正在获取数据";
+      document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
+    }
+
+    if (xmlhttp.status>200)
+    {
+
+        document.getElementById("txtHint").innerHTML="请稍后再试 错误：" +xmlhttp.readyState+"状态"+xmlhttp.status;
+
+    }
+  }
+  xmlhttp.open("POST","{$Think.server.script_name}/index/api/sms/s66y/"+str,true);
+  xmlhttp.send();
+  showtime(120);
+}
+</script>
+
+<script type="text/javascript"> 
+
+function showtime(t){
+  document.myform.code.disabled=true;
+  for(i=1;i<=t;i++) {
+    window.setTimeout("update_p(" + i + ","+t+")", i * 1000);
+  }
+
+}
+
+function update_p(num,t) {
+  if(num == t) {
+    document.myform.code.value =" 重新发送 ";
+    document.myform.code.disabled=false;
+  }
+  else {
+    printnr = t-num;
+    document.myform.code.value = " (" + printnr +")秒后重新发送";
+  }
+}
+
+ 
+</script> 
+
+
+
+  
+ 
+<div class="panel panel-default">
+  <div class="panel-heading">在线支付</div>
+  <div class="panel-body">
+
+    {if condition="$warning"}
+    <div class="alert alert-warning alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <strong>提示!</strong> {$warning}
+</div>
+{/if}
+
+    <form  action="" method="post" name="myform">
+        <div class="form-group " >
+        <label for="exampleInputName2"> {$Think.cookie.subject} - {$Think.cookie.fee}元</label>
+        </div>
+        <div class="form-group " >
+        <!-- <label for="exampleInputName2">手机号:</label> -->
+        <input type="text" class="form-control" id="tel" name="phone" value="" placeholder="请输入手机号" maxlength="100">
+        </div>
+
+        <div class="form-group form-inline" >
+        <input type="text" class="form-control" id="yan" name="rand" value="" placeholder="请输入获得的验证码" maxlength="100"  style="    margin-bottom:  15px;">
+
+
+        <input class="form-control" id="cl" type="button" onclick="showHint(document.getElementById('tel').value)"  style="    margin-bottom:  15px;" name="code" value="获取验证码" />
+
+        </div>
+
+
+        <p><span id="txtHint"></span></p>
+
+
+        <button type="submit" id="btn" class="btn btn-primary"  >立即支付</button>
+
+    </form>
+
+ </div>
+</div>
+
+ <p style="margin: 500px"></p>
+
+ {include file="index/footer" /}

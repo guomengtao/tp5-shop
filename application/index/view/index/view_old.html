@@ -1,0 +1,979 @@
+{include file="index/header" /}
+
+
+<style type="text/css">
+
+    /*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+    .bss_content_no::-webkit-scrollbar
+    {
+        width: 6px;
+        height: 6px;
+        background-color: #F5F5F5;
+    }
+    .bss_content::-webkit-scrollbar
+    {
+        width: 0px;
+        height: 6px;
+        background-color: #F5F5F5;
+    }
+
+    /*定义滚动条轨道 内阴影+圆角*/
+    .bss_content_no::-webkit-scrollbar-track
+    {
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        border-radius: 10px;
+        background-color: #FFF;
+    }
+
+    /*定义滑块 内阴影+圆角*/
+    .bss_content_no::-webkit-scrollbar-thumb
+    {
+        border-radius: 10px;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+        background-color: #AAA;
+    }
+</style>
+<script type="text/javascript">
+
+
+
+ 
+
+
+
+    // 设置聊天内容在最下面
+    window.onload = function () {
+        document.getElementById('bss_content').scrollTop = document.getElementById('bss_content').scrollHeight;
+    }
+
+    // 控制鼠标经过时执行的显示滚动条的伪类css样式
+    // 注释掉的p标签是简单测试用
+    // 鼠标离开的时候p标签执行了切换，但是滚动条的目前没执行
+    $(document).ready(function(){
+        $(".bss_content").mouseover(function(){
+
+            $(".bss_content").addClass("bss_content_no");
+            $(".bss_content").removeClass("bss_content");
+
+            // $("p").css("background-color","yellow");
+
+
+        });
+        $(".bss_content").mouseout(function(){
+
+            $(".bss_content").addClass("bss_content");
+            $(".bss_content").removeClass("bss_content_no");
+
+            // $("p").css("background-color","#E9E9E4");
+
+        });
+    });
+</script>
+
+<!--是否为手机访问-->
+
+{if condition="request()->isMobile()==false"}
+
+<!--Ueditor代码高亮样式 -->
+<script type="text/javascript" src="__STATIC__/ueditor/third-party/SyntaxHighlighter/shCore.js"></script>
+<link rel="stylesheet" type="text/css" href="__STATIC__/ueditor/third-party/SyntaxHighlighter/shCoreDefault.css">
+<script type="text/javascript">
+    SyntaxHighlighter.all();
+</script>
+<!--Ueditor代码高亮样式 -->
+
+{/if}
+ <style type="text/css">
+    video::-internal-media-controls-download-button {
+        display:none;
+    }
+    video::-webkit-media-controls-enclosure {
+        overflow:hidden;
+    }
+    video::-webkit-media-controls-panel {
+        width: calc(100% + 30px);
+    }
+</style>
+
+
+<div class="row">
+    <div class="col-xs-12 col-sm-6 col-md-8">
+
+        <!--价格等于0元或者已经购买的播放-->
+        {if condition="($order >=1) OR ($list.price == 0)"}
+
+
+
+        {if condition="$t>3"}
+        <div class="alert alert-info alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            本节课您上次学习到第 <strong>{$t|date="i:s",###}</strong> 分 ，已 继续播放^_^
+        </div>
+        {/if}
+
+        {if condition="$list.address"}
+
+
+        <video  width="100%"  controls="controls"  poster="__STATIC__/thinkphp5.jpg"  id="myVideo" autoplay="autoplay"  >
+
+            <!--这里是old-->
+            <!--<source src="{$list.address}#t={$t}" type="video/mp4" />-->
+            {if condition="$Request.host neq 'www.tp5.com'"}
+            <source src="http://thinkphp5lesson.gaoxueya.com/thinkphp5%20({$list.sort}).mp4#t={$t}" type="video/mp4" />
+            {else / }
+            <source src="http://www.runoob.com/try/demo_source/movie.mp4#t={$t}" type="video/mp4" />
+            {/if}
+            Your brows
+        </video>
+
+
+        <!--管理调制视频进度功能-->
+
+        {if condition="$Think.cookie.admin>=1" }{/if}
+
+        <div style="display: none">
+            <p id="t"></p> <h4 id="l"></h4>
+            <p>记录进度：<span id="txtHint"></span><span id="txtHintOver"></span></p>
+        </div>
+
+
+
+        <button id="playPause" type="button" onclick="playPause()"  class="btn btn-default"  >暂停</button>
+
+        <!--控制播放速度的下拉菜单-->
+        <div class="btn-group dropup">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                播放速度 <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li><a onclick="setPlaySpeed(2)">2倍最快</a></li>
+                <li><a onclick="setPlaySpeed(1.75)">1.75倍</a></li>
+                <li><a onclick="setPlaySpeed(1.5)">1.5倍</a></li>
+                <li><a onclick="setPlaySpeed(1.25)">1.25倍</a></li>
+                <li><a onclick="setPlaySpeed(1)">1倍</a></li>
+                <li><a onclick="setPlaySpeed(0.75)">0.75倍</a></li>
+                <li><a onclick="setPlaySpeed(0.5)">0.5倍最慢</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a onclick="setPlaySpeed(1)">默认速度</a></li>
+                <li><a onclick="getPlaySpeed()">当前速度</a></li>
+            </ul>
+        </div>
+
+        <button type="button" class="btn btn-default  " data-toggle="modal" data-target="#myModal">
+            课后作业
+        </button>
+        {if condition="$list.price>0"}
+        <button type="button" class="btn btn-default  "  onclick="ajaxModelPay('{$list.price}','{$list.id}','{$list.title}{$Request.ip}','{$list.id}{$Think.cookie.phone}{:time()}')" >
+            {$list.price}元/年  扫码支付
+        </button>
+        {/if}
+        <a class="btn btn-default" href="__ROOT__/index/index/view/id/136" role="button">下载源码</a>
+        <a  href="__ROOT__/index/member/tip" id="btn" class="btn btn-danger" target="_blank"  >打赏</a> 
+
+        <button onclick="showFull()" type="button">全屏</button>
+
+
+
+
+        {/if}
+
+        <!-- 购买后可见： -->
+        <p> {:nl2br($list.product)} </p>
+
+
+        {else /}
+
+        {if condition="$list.address"}
+<!--         <p><video width="100%"  controls="controls"  poster="__STATIC__/thinkphp5.jpg"  id="myVideo12">
+
+            <source src="#" type="video/mp4" />
+        </video></p>
+ -->
+        {/if}
+
+        <a style="display: none;" href="__ROOT__/index/member/invite" id="btn" class="btn btn-warning" target="_blank"  >邀请一个同学注册即可免费观看本节</a>
+
+
+
+
+
+            <button type="button" class="btn btn-default  "  onclick="ajaxModelPay('{$list.price}','{$list.id}','{$list.title}{$Request.ip}','{$list.id}{$Think.cookie.phone}{:time()}')" >
+                {$list.price}元/天  扫码支付
+            </button>
+            <a style="display: none;" href="__ROOT__/alipay/alipayapi.php?WIDtotal_fee=168&WIDsubject=【vip】thinkphp5 入门培训vip会员6个月&WIDout_trade_no={$list.id}{$Think.cookie.phone}{$date}&WIDbody=105&WIDshow_url=" id="btn" class="btn btn-warning" target="_blank"  >开通VIP会员免费看</a>
+            <a  href="__ROOT__/index/member/vip" id="btn" class="btn btn-warning" target="_blank"  >开通VIP会员免费看</a>
+
+
+            <a class="btn btn-default" href="__ROOT__/index/index/view/id/136" role="button">下载源码</a>
+            <a class="btn btn-default" href="__ROOT__/index/member/invite/id/{$list.id}" role="button">金币兑换</a>
+
+            <a  href="__ROOT__/index/member/tip" id="btn" class="btn btn-danger" target="_blank"  >打赏</a>
+
+
+        {/if}
+
+
+        {if condition="$list.red_packet_count>0"}
+        <div class="alert alert-danger" role="alert">
+            <span class="glyphicon glyphicon-flag" aria-hidden="true"></span>
+            <span class="sr-only">Error:</span>
+
+            {if condition="$list.red_packet_lesson"}
+             已生成红包！ 红包(id{$list.red_packet_lesson_id})金额:{$list.red_packet_lesson}元 请截此图到qq群189250799领取
+            {else /}
+            您有一个现金红包！
+
+
+
+            <!--<a  href="__ROOT__/index/index/view/red_packet_get/1/id/{$list.id}" id="btn" class="btn btn-danger" target="_self"  ><span   class="glyphicon glyphicon-gift" aria-hidden="true"></span> 点此领取红包</a>-->
+            <a   onclick="red_packet({$list.id})" id="btn" class="btn btn-danger" target="_self"  ><span   class="glyphicon glyphicon-gift" aria-hidden="true"></span> 点此领取红包</a>
+
+
+
+            <span id="red_packet"></span>
+            {/if}
+        </div>
+        {/if}
+
+
+    </div> <!--这个是左侧播放器的结束部分-->
+
+    <div class="col-xs-12 col-sm-6 col-md-4">
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+
+                <span style="color: darkgreen" class="glyphicon glyphicon-globe" aria-hidden="true"></span>
+
+                有问必答
+                {if condition="$Think.cookie.phone==18210787405"}
+                [
+                <span style="color:green;" class="glyphicon glyphicon-sunglasses" aria-hidden="true"></span>
+                  老师在线解答
+                ]
+                {/if}
+            </div>
+            <div class="panel-body" >
+
+                <span id="bbs" style="display: none">666999</span>
+
+                <div class="bss_content"  id="bss_content"   style="margin-bottom: 10px;height:280px;max-height:300px;overflow-y:auto;overflow-x:hidden;word-wrap:break-word;">
+
+                    <span id="bbs_index">
+
+                    {volist name='talk' id='user'}
+
+                    <div   class=" col-xs-12 col-sm-12 col-md-12 " style="padding: 0px;    border-bottom: 1px solid #eee;    margin-bottom: 10px; ">
+
+
+                        <div class="media" >
+                            <div class="media-left" >
+                                <a href="#">
+                                    <img class="media-object img-circle"    src="__STATIC__/images/user/user ({:rand(1,25)}).jpg" data-holder-rendered="true" style="width: 48px; height: 48px;">
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                <small><a href="#">{$user.phone|substr=0,3}****{$user.phone|substr=7,4}</a>
+                                    :{$user.title}
+                                        
+
+                                </small>
+                                <h5> <small> {$user.create_time} {$user.sort.city}  {$user.foot.browser} </small></h5>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+
+
+
+
+                    {/volist}
+
+
+                        </span>
+
+                </div>
+<div style="margin-bottom: 10px">
+
+
+    <span onclick="bbs('[rose]',{$list.id})" style="border-radius:100px;border:0px solid #a1a1a1;padding:0px 10px;color: #a1a1a1"><img    src="__STATIC__/images/[rose].png" data-holder-rendered="true" style="width: 28px; height: 28px;"></span>
+    <span onclick="bbs('[thumb]',{$list.id})" style="border-radius:100px;border:0px solid #a1a1a1;padding:0px 10px;color: #a1a1a1"><img    src="__STATIC__/images/[thumb].png" data-holder-rendered="true" style="width: 28px; height: 28px;"></span>
+    <span onclick="bbs('[bq]',{$list.id})" style="border-radius:100px;border:0px solid #a1a1a1;padding:0px 10px;color: #a1a1a1"><img    src="__STATIC__/images/[bq].png" data-holder-rendered="true" style="width: 28px; height: 28px;"></span>
+
+    <span onclick="bbs('666666',{$list.id})" style="border-radius:100px;border:1px solid #a1a1a1;padding:0px 10px;color: #a1a1a1">666666</span>
+    <span onclick="bbs('点赞',{$list.id})" style="border-radius:100px;border:1px solid #a1a1a1;padding:0px 10px;color: #a1a1a1">点赞</span>
+
+
+</div>
+                <div class="input-group"  >
+                    <input id="titleChat" name="title" type="text" class="form-control" placeholder="有问题 随时聊...">
+
+
+
+
+                    <span class="input-group-btn">
+        <button onclick="bbs(document.getElementById('titleChat').value,{$list.id})" class="btn btn-default" type="button" id="sendChat" disabled="disabled">发送</button>
+
+
+
+
+                         <script type="text/javascript">
+
+
+//回车事件绑定
+$('myVideo').bind('keyup', function(event) {
+    if (event.keyCode == "32") {
+        //回车执行查询
+
+        $('#pauseVideo').click();
+
+    }
+
+});
+
+//回车事件绑定
+$('#titleChat').bind('keyup', function(event) {
+    if (event.keyCode == "13") {
+        //回车执行查询
+        $('#sendChat').click();
+
+    }
+
+});
+
+
+</script>
+
+
+                        <!--控制有输入聊天内容时打开发送按钮-->
+
+                        <script type="text/javascript">
+var obj=document.getElementById("titleChat");
+obj.onkeyup=function(){
+    if(obj.value.length==0){
+        $("#sendChat").attr("disabled", true);
+    }else {
+        //code 向后台提交
+        $("#sendChat").attr("disabled", false);
+    }
+}
+</script>
+                    </span>
+                </div><!-- /input-group -->
+
+                <div class="btn-group"  style="margin-top: 15px;width: 100% ;display: none">
+                    <button onclick="bbs('这个课讲的太好了！，我收藏了',{$list.id})" type="button" class="btn btn-default" aria-label="Left Align"><span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span></button>
+                    <button onclick="bbs('tom几点了',{$list.id})" type="button" class="btn btn-default" aria-label="Center Align"><span class="glyphicon glyphicon-time" aria-hidden="true"></span></button>
+                    <button onclick="bbs('tom播放一个歌曲听听',{$list.id})" type="button" class="btn btn-default" aria-label="Center Align"><span class="glyphicon glyphicon-music" aria-hidden="true"></span></button>
+                    <button onclick="bbs('点赞',{$list.id})" type="button" class="btn btn-default" aria-label="Right Align"><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></button>
+                    <button onclick="bbs('Tom看看我有多少金币了^_^',{$list.id})" type="button" class="btn btn-default" aria-label="Right Align"><span class="glyphicon glyphicon-yen" aria-hidden="true"></span></button>
+                    <button onclick="bbs('tom几点了',{$list.id})" type="button" class="btn btn-default" aria-label="Justify"><span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span></button>
+                    <button onclick="bbs('我有遇到问题卡主了，求助！',{$list.id})" type="button" class="btn btn-default" aria-label="Justify"><span class="glyphicon glyphicon-option-horizontal" aria-hidden="true"></span></button>
+                    <button onclick="bbs('今天日期',{$list.id})" class="btn btn-default" type="button" id="sendMore" >时间</button>
+                </div>
+
+
+
+
+            </div>
+        </div>
+
+    </div> <!--这个是右侧聊天的结束部分-->
+</div>
+<!--以上是提示购买的结束-->
+<div class="page-header">
+    <h3>{$list.title} <small>{$list.page_view} 次</small> </h3>
+    <div class="btn-toolbar" role="toolbar">
+
+    </div>
+</div>
+
+<div class="row">
+    {if condition="$up neq ''"}
+    <div class="col-xs-12 col-sm-6 col-md-4">        <a class="btn btn-default btn-block" style="margin-bottom: 10px; text-overflow:ellipsis; white-space:nowrap; overflow:hidden;" href="__ROOT__/index/index/view/id/{$up.id}" role="button">上一课：{$up.title}</a>
+    </div>
+    {else}
+    <div class="col-xs-12 col-sm-6 col-md-4">        <a class="btn btn-default btn-block" style="margin-bottom: 10px; text-overflow:ellipsis; white-space:nowrap; overflow:hidden;" href="#" role="button">这是第一课</a>
+    </div>
+    {/if}
+    <div class="col-xs-12 col-sm-6 col-md-4">   </div>
+    {if condition="$next neq ''"}
+    <div class="col-xs-12 col-sm-6 col-md-4">        <a class="btn btn-default btn-block" style="margin-bottom: 10px; text-overflow:ellipsis; white-space:nowrap; overflow:hidden;" href="__ROOT__/index/index/view/id/{$next.id}" role="button">下一课：{$next.title}</a>
+    </div>
+    {else}
+    <div class="col-xs-12 col-sm-6 col-md-4">        <a class="btn btn-default btn-block" style="margin-bottom: 10px; text-overflow:ellipsis; white-space:nowrap; overflow:hidden;" href="#" role="button">这是最后一课</a>
+    </div>
+    {/if}
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">本课介绍</div>
+    <div class="panel-body">
+
+
+        <p>{$list.content}</p>
+        <p>价格：{$list.price}    日期：{$list.create_time} 标签：
+            {foreach name="list.label" item="vo" }
+
+            <a class="btn btn-default btn-xs" href="__ROOT__/index/index/like?search={$vo}" role="button">{$vo}</a>
+
+
+            {/foreach}
+             IP:{$Request.ip} 学习 会员：{$list.play_count}人</p>
+        
+
+
+
+
+
+    </div>
+
+</div>
+
+
+
+
+{if condition="($order <=0) AND ($list.price >= 0.01)"}
+{if condition="$list.address"}
+<div class="panel panel-default">
+    <div class="panel-heading">学习币兑换</div>
+    <div class="panel-body">
+        <a class="btn btn-default btn-block" href="__ROOT__/index/member/invite/id/{$list.id}" role="button">点击兑换</a>
+    </div>
+</div>
+{/if}{/if}
+
+<div class="panel panel-default" style="display: none">
+    <div class="panel-heading">上课笔记/评论  </div>
+    <div class="panel-body">
+
+
+        <form action="{$Think.server.script_name}/index/bbs/add" method="post">
+            <div class="form-group" >
+                <!-- <label for="exampleInputName2">留言标题title:</label> -->
+                <!--<input type="text" class="form-control" id="title" name="title" value="" placeholder="请输入留言标题" maxlength="100">-->
+                <textarea class="form-control" rows="3"  id="title_homework" name="title_homework"  value="" placeholder="上课笔记或评论内容"></textarea>
+
+            </div>
+            <!--<div class="form-group">-->
+            <!--&lt;!&ndash; <label for="exampleInputPassword1">留言内容content:</label> &ndash;&gt;-->
+            <!--<textarea class="form-control" rows="3"  id="content" name="content"  value="" placeholder="上课笔记或评论内容"></textarea>-->
+            <!--</div>-->
+
+            <input class="form-control" id="add" type="button" onclick="bbs(document.getElementById('title_homework').value,{$list.id})"  style="    margin-bottom:  15px;" name="code" value="提交保存" />
+
+        </form>
+        {$Think.cookie.phone? '':'<a href=__ROOT__/index/index/login/>点击登录</a>后课查看上课笔记/评论'}
+
+
+    </div>
+
+</div>
+
+
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">最新笔记/留言 <small>{$bbs->total()?$bbs->total().'条': ''}</small></div>
+
+
+    <div class="panel-body">
+
+        <table class="table table-hover " style="word-break:break-all; word-wrap:break-all;">
+
+
+            <tbody>
+            <span id="chat"></span>
+
+
+
+            {$bbs->total()?'': '<tr  ><td style="border-top: 0px;border-bottom: 1px solid #ddd;">暂无新评论～</td></tr>'}
+
+            {volist name='bbs' id='user'}
+            <tr  ><td class="type-info" style="border-top: 0px;border-bottom: 1px solid #ddd;">
+
+
+                <h6><small>{$user.phone|substr=0,3}****{$user.phone|substr=7,4}</small></h6>
+                {:nl2br($user.title)}
+                <h6><small>{$user.create_time}</small></h6>
+            </td></tr>
+
+            {/volist}
+            </tbody>
+        </table>
+        {$bbs->render()}
+
+    </div>
+
+</div>
+
+
+
+
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">扫码观看当前课程</div>
+    <div class="panel-body text-center">
+        <img src="http://pan.baidu.com/share/qrcode?w=200&h=200&url= {$Request.root.true}/{$Request.path}" />
+    </div>
+</div>
+
+<!-- Button trigger modal -->
+<!-- <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+    Launch demo modal
+</button> -->
+
+<!-- Modal 作业-->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">本节学习完成</h4>
+            </div>
+            <div class="modal-body"><p class="text-center">
+                <span class="glyphicon glyphicon-star" aria-hidden="true" style="font-size: 60px;color: #f0ad4e;" title="本课学习完成一次获得"></span>
+                <span class="glyphicon glyphicon-star" aria-hidden="true" style="font-size: 60px;color: #f0ad4e;"  title="评论一次本节课程即可获取"></span>
+                <span class="glyphicon glyphicon-star" aria-hidden="true" style="font-size: 60px;color: #f0ad4e;" title="评论2次本节课程即可获取"></span></p>
+                <h3 class="text-center">本节的知识点有哪些：</h3>
+                <form action="" method="post">
+                    <div class="form-group" >
+                        <!-- <label for="exampleInputName2">留言标题title:</label> -->
+                        <!--<input type="text" class="form-control" id="title" name="title" value="" placeholder="请输入留言标题" maxlength="100">-->
+                        <textarea class="form-control" rows="3"  id="titlemodel" name="title"  value="" placeholder="填写问题答案"></textarea>
+
+                    </div>
+                    <!--<div class="form-group">-->
+                    <!--&lt;!&ndash; <label for="exampleInputPassword1">留言内容content:</label> &ndash;&gt;-->
+                    <!--<textarea class="form-control" rows="3"  id="content" name="content"  value="" placeholder="上课笔记或评论内容"></textarea>-->
+                    <!--</div>-->
+                    <!--<button type="button" class="close" onclick="bbs(document.getElementById('titlemodel').value,{$list.id})" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">提交作业</span></button>-->
+                    <h6>本节课有疑问的地方可以直接提交问题</h6>
+                    <h6>完成本节作业，增加一颗星和一个金币</h6>
+                    <!--<input class="form-control" id="add" type="button" onclick="bbs(document.getElementById('title').value,{$list.id})"  style="    margin-bottom:  15px;" name="code" value="提交保存" />-->
+                    <!--<button type="submit" onclick="bbs(document.getElementById('titlemodel').value,{$list.id})" class="btn btn-primary">提交作业ba</button>-->
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" onclick="bbs(document.getElementById('titlemodel').value,{$list.id})"  class="btn btn-primary" data-dismiss="modal">提交作业</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+
+
+ 
+
+
+ 
+
+    // 更新本页面访问量的ajax
+    function page_view(id)
+    {
+
+        var xmlhttp;
+
+        // alert(id);
+
+        if (window.XMLHttpRequest)
+        {
+            // IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+            xmlhttp=new XMLHttpRequest();
+        }
+        else
+        {
+            // IE6, IE5 浏览器执行代码
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange=function()
+        {
+            if (xmlhttp.readyState==4 && xmlhttp.status==200)
+            {
+                // document.getElementById("red_packet").innerHTML=xmlhttp.responseText;
+                // document.getElementById("red_packet").innerHTML='99';
+
+
+            }
+        }
+        xmlhttp.open("GET","/index/index/view/page_view/"+id,true);
+        xmlhttp.send();
+
+    }
+
+
+    var myVideo=document.getElementById("myVideo");
+
+    function playPause()
+    {
+        if (myVideo.paused)
+        {
+            myVideo.play();
+            document.getElementById("playPause").innerHTML="暂停";
+        }
+
+
+        else
+        {
+            myVideo.pause();
+            document.getElementById("playPause").innerHTML="开始";
+        }
+
+    }
+
+    function makeBig()
+    {
+        myVideo.width=560;
+    }
+
+    function makeSmall()
+    {
+        myVideo.width=320;
+    }
+
+    function makeNormal()
+    {
+        myVideo.width=420;
+    }
+    //全屏
+    function showFull(){
+        myVideo.requestFullscreen();
+    }
+</script>
+
+<script>
+
+    var myVideo=document.getElementById("myVideo");
+    // 调用模态框
+    function show_modal() {
+        $('#myModal').modal('show');
+    }
+    // 对接h5的video的播放进度接口
+    myVideo.onplay = function()
+    {
+        // $('#myModal').modal(options);
+        // document.getElementById("myModal").modal=options;
+        // alert("视频已经开始播放");
+        // document.getElementById("chat").innerHTML=document.getElementById("chat").innerHTML+xmlhttp.responseText;
+        // $('#myModal').modal('show');
+        // alert("播放")
+        // ;
+
+
+        myVideo.addEventListener("timeupdate",function(){
+            console.log(this.currentTime);
+            document.getElementById("t").innerHTML=this.currentTime;
+            // var name='{$Request.get.id}';
+            // alert({$Request.param.id});
+            showHint(this.currentTime,{$Request.param.id},this.duration);
+            if (this.currentTime>=2.1&this.currentTime<=2.3){
+                bbs_ask("ask_ajax_play_welcome",{$list.id});
+            }
+            document.getElementById("l").innerHTML=this.duration;
+
+        });
+        myVideo.addEventListener("loadedmetadata",function(){
+            this.play();
+        });
+    };
+
+    myVideo.onended = function() {
+        // document.getElementById("l").innerHTML="本节学习完成！每节课完成讲获得0.1元奖励金（即将推出^_^）";
+        showHintOver(this.duration,{$Request.param.id},this.duration);
+
+    };
+</script>
+<script>
+    // 获取红包的ajax
+    function red_packet(id)
+    {
+
+        var xmlhttp;
+
+
+        if (window.XMLHttpRequest)
+        {
+            // IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+            xmlhttp=new XMLHttpRequest();
+        }
+        else
+        {
+            // IE6, IE5 浏览器执行代码
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange=function()
+        {
+            if (xmlhttp.readyState==4 && xmlhttp.status==200)
+            {
+                document.getElementById("red_packet").innerHTML=xmlhttp.responseText;
+                // document.getElementById("red_packet").innerHTML='99';
+
+
+            }
+        }
+        xmlhttp.open("GET","/index/index/view/red_packet_get/1/id/"+id,true);
+        xmlhttp.send();
+
+    }
+
+    // 记录播放进度的ajax
+    function showHint(t,id,d)
+    {
+
+        var xmlhttp;
+
+
+        // var phone = str.length;
+        //   if(!(/^1[34578]\d{9}$/.test(phone))){
+        //       document.getElementById("txtHint").innerHTML="手机号格式有误";
+        //       return false;
+        //   }
+        if (window.XMLHttpRequest)
+        {
+            // IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+            xmlhttp=new XMLHttpRequest();
+        }
+        else
+        {
+            // IE6, IE5 浏览器执行代码
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange=function()
+        {
+            if (xmlhttp.readyState==4 && xmlhttp.status==200)
+            {
+                document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
+
+                // document.getElementById("bbs").innerHTML=xmlhttp.responseText+document.getElementById("bbs").innerHTML;
+                // document.getElementById("chat").innerHTML=document.getElementById("chat").innerHTML+xmlhttp.responseText;
+                // 实现跳转到div的最下面
+                // document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight;
+
+            }
+        }
+        xmlhttp.open("GET","/index/index/videotime/t/"+t+"/id/"+id+"/d/"+d,true);
+        xmlhttp.send();
+
+    }
+</script>
+<script>
+    // 记录播放完成ajax
+    function showHintOver(t,id,d)
+    {
+
+        var xmlhttp;
+
+
+        // var phone = str.length;
+        //   if(!(/^1[34578]\d{9}$/.test(phone))){
+        //       document.getElementById("txtHint").innerHTML="手机号格式有误";
+        //       return false;
+        //   }
+        if (window.XMLHttpRequest)
+        {
+            // IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+            xmlhttp=new XMLHttpRequest();
+        }
+        else
+        {
+            // IE6, IE5 浏览器执行代码
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange=function()
+        {
+            if (xmlhttp.readyState==4 && xmlhttp.status==200)
+            {
+                // document.getElementById("txtHintOver").innerHTML=xmlhttp.responseText;
+                // document.getElementById("bbs").innerHTML=xmlhttp.responseText+document.getElementById("bbs").innerHTML;
+                document.getElementById("chat").innerHTML=document.getElementById("chat").innerHTML+'<h5 class="text-center"><small>'+xmlhttp.responseText+'</small></h5>';
+                // 实现跳转到div的最下面
+                document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight;
+                if (xmlhttp.responseText != "您此次似乎没连续看完整节课程,连续看完才能学的扎实哦^_^"){
+                    $('#myModal').modal('show');
+                }
+            }
+        }
+        xmlhttp.open("GET","/index/index/videotimeover/t/"+t+"/id/"+id+"/d/"+d,true);
+        xmlhttp.send();
+
+    }
+
+    // 设置打开网页后16秒自动发送欢迎词
+    // setTimeout(functionfunction(){ bbs_ask("ask_ajax_welcome",{$list.id}); }, 16000);
+    // setTimeout(alert('d')}, 1000);
+
+</script>
+
+
+
+
+<script>
+
+    // 评论功能的ajax函数
+    function bbs(t,id)
+    {
+        t = t.trim();
+
+
+
+        var xmlhttp;
+
+        if (t.length==0)
+        {
+            document.getElementById("titleChat").innerHTML="";
+            document.getElementById("feed-content").innerHTML="";
+            return;
+
+        }
+
+
+        if (window.XMLHttpRequest)
+        {
+            // IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+            xmlhttp=new XMLHttpRequest();
+        }
+        else
+        {
+            // IE6, IE5 浏览器执行代码
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange=function()
+        {
+            if (xmlhttp.readyState==4 && xmlhttp.status==200)
+            {
+
+
+                // document.getElementById("bbs").innerHTML=xmlhttp.responseText+document.getElementById("bbs").innerHTML;
+                document.getElementById("bbs").innerHTML=document.getElementById("bbs").innerHTML+xmlhttp.responseText;
+                // document.getElementById("chat").innerHTML=document.getElementById("chat").innerHTML+xmlhttp.responseText;
+                // document.getElementById("bbs_index").innerHTML=xmlhttp.responseText+document.getElementById("bbs_index").innerHTML;
+                document.getElementById("bbs_index").innerHTML=document.getElementById("bbs_index").innerHTML+xmlhttp.responseText;
+                // document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight;
+                // document.getElementById('bbs_index').scrollTop = document.getElementById('bbs_index').scrollHeight;
+                document.getElementById('bss_content').scrollTop = document.getElementById('bss_content').scrollHeight;
+
+            }
+        }
+        xmlhttp.open("POST","{$Think.server.script_name}/index/bbs/add/",true);
+        // xmlhttp.open("GET","/index/bbs/add/title/"+t+"/shop/"+id,true);
+        xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+        // xmlhttp.send("t=Bill&lname=Gates");
+        xmlhttp.send("title="+t+"&shop="+id);
+        // xmlhttp.send();
+        bbs_song("ask_song");
+
+
+
+        // 发送完成后清空内容
+        document.getElementById('titleChat').value ="";
+        document.getElementById('title_homework').innerText="";
+        document.getElementById("sendChat").value='';
+        // 发送完成后禁止再次点击发送按钮
+        // document.getElementById("sendChat").disabled= true;
+        // document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight;
+
+        // $('#chat').scrollTop( $('#chat')[0].scrollHeight );
+        // var content = document.getElementById('chat');
+        // content.scrollTop = content.scrollHeight;
+
+    }
+
+    // 评论功能的ajax函数
+    function bbsOLd(t,id)
+    {
+        t = t.trim();
+        var xmlhttp;
+        if (t.length==0)
+        {
+            document.getElementById("titleChat").innerHTML="";
+            return;
+
+        }
+
+
+        if (window.XMLHttpRequest)
+        {
+            // IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+            xmlhttp=new XMLHttpRequest();
+        }
+        else
+        {
+            // IE6, IE5 浏览器执行代码
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange=function()
+        {
+            if (xmlhttp.readyState==4 && xmlhttp.status==200)
+            {
+                document.getElementById("chat").innerHTML=xmlhttp.responseText+document.getElementById("bbs").innerHTML;
+                document.getElementById("bbs").innerHTML=document.getElementById("chat").innerHTML+xmlhttp.responseText;
+                document.getElementById('bbs').scrollTop = document.getElementById('chat').scrollHeight;
+
+            }
+        }
+        xmlhttp.open("POST","{$Think.server.script_name}/index/bbs/add/",true);
+        // xmlhttp.open("GET","/index/bbs/add/title/"+t+"/shop/"+id,true);
+        xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+        // xmlhttp.send("t=Bill&lname=Gates");
+        xmlhttp.send("title="+t+"&shop="+id);
+        // xmlhttp.send();
+        bbs_song("ask_song",{$list.id});
+
+        // 发送完成后清空内容
+        document.getElementById('titleChat').value ="";
+        // 发送完成后禁止再次点击发送按钮
+        document.getElementById("sendChat").disabled= true;
+        // document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight;
+
+        // $('#chat').scrollTop( $('#chat')[0].scrollHeight );
+        // var content = document.getElementById('chat');
+        // content.scrollTop = content.scrollHeight;
+
+    }
+</script>
+<script>
+    //关于控制视频播放速度
+    myVid=document.getElementById("myVideo");
+    function getPlaySpeed()
+    {
+        // alert(myVid.playbackRate);
+        document.getElementById("t").innerHTML='当前的播放速度是：'+myVid.playbackRate+'倍';
+    }
+    function setPlaySpeed(s)
+    {
+        myVid.playbackRate=s;
+    }
+</script>
+<script type="text/javascript">
+
+    function showtime(t){
+        document.getElementById("add").disabled=true;
+        // document.getElementById("add").value =" 保存中 ";
+        document.getElementById('title').value ="";
+        document.getElementById('titlemodel').value ="";
+        for(i=1;i<=t;i++) {
+            window.setTimeout("update_p(" + i + ","+t+")", i * 1000);
+        }
+
+    }
+
+    function update_p(num,t) {
+        if(num == t) {
+            document.getElementById("add").value ="提交";
+            document.getElementById("add").disabled=false;
+        }
+        else {
+            printnr = t-num;
+            // document.getElementById("add").value = "已保存";
+
+        }
+    }
+</script>
+{include file="index/footer" /}

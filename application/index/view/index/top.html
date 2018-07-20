@@ -1,0 +1,210 @@
+{include file="index/header" /}
+
+
+
+
+ <div class="page-header">
+            <h2>排行榜 </h2>
+        </div>
+
+<div class="row">
+
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+       
+        <div class="panel panel-success">
+            <div class="panel-heading">在v</div>
+            <div class="panel-body">
+                {volist name='online_time' id='user' key="k"}
+                <div class="col-xs-12 col-sm-6 col-md-12" style="padding: 0px;">
+
+
+                    <div class="media" >
+                        <div class="media-left" >
+                            <a href="#">
+                                <img class="media-object img-thumbnail"    src="__STATIC__/images/user/user ({:rand(1,25)}).jpg" data-holder-rendered="true" style="width: 48px; height: 48px;">
+                            </a>
+                        </div>
+                        <div class="media-body">
+                            <small><a href="#">{$user.phone|substr=0,3}****{$user.phone|substr=7,4}</a>
+                                NO.<span style="color: #D8582B;font-weight: bold;">{$k}</span></small>
+                            <h5> <small>在线时长：<span style="color: #D8582B;font-weight: bold;">{$user.online_time}</span></small></h5>
+                            
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+                {/volist}
+            </div>
+        </div>      
+    </div>
+
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+       
+        <div class="panel panel-info">
+            <div class="panel-heading">在线时长榜</div>
+            <div class="panel-body">
+                {volist name='online_time' id='user' key="k"}
+                 
+                 <div   class=" col-xs-12 col-sm-12 col-md-12 " style="padding: 0px;    border-bottom: 1px solid #eee;    margin-bottom: 10px;padding-bottom: 10px;  ">
+
+
+                        <div class="media" >
+                            <div class="media-left" >
+                                <a href="#">
+                                    <img class="media-object img-thumbnail"    src="__STATIC__/images/user/user ({:rand(1,25)}).jpg" data-holder-rendered="true" style="width: 48px; height: 48px;">
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                
+
+
+                                    <small><a href="#">{$user.phone|substr=0,3}****{$user.phone|substr=7,4}</a>
+                                NO.<span style="color: #D8582B;font-weight: bold;">{$k}</span></small>
+                                <h5> <small>在线时长：<span style="color: #D8582B;font-weight: bold;">{:floor($user.online_time/60)}</span>小时<span style="color: #D8582B;font-weight: bold;">{:floor($user.online_time % 60)}</span>分</small></h5>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+                {/volist}
+            </div>
+        </div>      
+    </div>
+
+
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+       
+        <div class="panel panel-default">
+            <div class="panel-heading">学习时长榜</div>
+            <div class="panel-body">
+                {volist name='leraning_time' id='user' key="k"}
+
+                <div   class=" col-xs-12 col-sm-12 col-md-12 " style="padding: 0px;    border-bottom: 1px solid #eee;    margin-bottom: 10px;padding-bottom: 10px; ">
+
+
+                        <div class="media" >
+                            <div class="media-left" >
+                                <a href="#">
+                                    <img class="media-object img-thumbnail"    src="__STATIC__/images/user/user ({:rand(1,25)}).jpg" data-holder-rendered="true" style="width: 48px; height: 48px;">
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                
+
+
+                                    <small><a href="#">{$user.phone|substr=0,3}****{$user.phone|substr=7,4}</a>
+                                NO.<span style="color: #D8582B;font-weight: bold;">{$k}</span></small>
+                                <h5><small>学习时长：<span style="color: #D8582B;font-weight: bold;"> {:floor($user.title/60/60)} </span>小时<span style="color: #D8582B;font-weight: bold;"> {:floor($user.title/60 % 60)} </span>分</small></h5>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+
+                
+
+
+
+                {/volist}
+            </div>
+        </div>      
+    </div>
+
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+       
+        <div class="panel panel-default">
+            <div class="panel-heading">连续签到排名</div>
+            <div class="panel-body">
+                {volist name='list_top' id='user' key="k"}
+                <div class="col-xs-12 col-sm-6 col-md-12" style="padding: 0px;">
+
+
+                    <div class="media" >
+                        <div class="media-left" >
+                            <a href="#">
+                                <img class="media-object img-thumbnail"    src="__STATIC__/images/user/user ({:rand(1,25)}).jpg" data-holder-rendered="true" style="width: 48px; height: 48px;">
+                            </a>
+                        </div>
+                        <div class="media-body">
+                            <small><a href="#">{$user.phone|substr=0,3}****{$user.phone|substr=7,4}</a>
+                                NO.<span style="color: #D8582B;font-weight: bold;">{$k}</span></small>
+                            <h5> <small>签到时间：<span style="color: #D8582B;font-weight: bold;">{$user.create_time}</span></small></h5>
+                            <h5><small>连续签到：<span style="color: #D8582B;font-weight: bold;">{$user.rand}</span>天</small></h5>
+                        </div>
+                    </div>
+
+
+                    <hr>
+
+
+                </div>
+
+
+
+                {/volist}
+            </div>
+        </div>      
+    </div>
+
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+       
+        <div class="panel panel-default">
+            <div class="panel-heading">连续签到排名</div>
+            <div class="panel-body">
+                {volist name='list_top' id='user' key="k"}
+                <div class="col-xs-12 col-sm-6 col-md-12" style="padding: 0px;">
+
+
+                    <div class="media" >
+                        <div class="media-left" >
+                            <a href="#">
+                                <img class="media-object img-thumbnail"    src="__STATIC__/images/user/user ({:rand(1,25)}).jpg" data-holder-rendered="true" style="width: 48px; height: 48px;">
+                            </a>
+                        </div>
+                        <div class="media-body">
+                            <small><a href="#">{$user.phone|substr=0,3}****{$user.phone|substr=7,4}</a>
+                                NO.<span style="color: #D8582B;font-weight: bold;">{$k}</span></small>
+                            <h5> <small>签到时间：<span style="color: #D8582B;font-weight: bold;">{$user.create_time}</span></small></h5>
+                            <h5><small>连续签到：<span style="color: #D8582B;font-weight: bold;">{$user.rand}</span>天</small></h5>
+                        </div>
+                    </div>
+
+
+                    <hr>
+
+
+                </div>
+
+
+
+                {/volist}
+            </div>
+        </div>      
+    </div>
+
+</div>
+
+ 
+
+<div class="panel panel-default">
+    <div class="panel-heading">提示：</div>
+    <div class="panel-body">
+        <h5><small> 希望大家相互学习，共同进步。^_^ </small></h5>
+
+        <h5><small> 刚开发好，还有许多BUG,欢迎提意见。  </small></h5>
+
+<h5><small> 统计各种排名 各种最新动态  </small></h5>
+    </div>
+</div>
+ 
+ 
+
+
+{include file="index/footer" /}

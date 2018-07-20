@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+ 
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+ 
+	 
+	<title>{$name} - 个人中心</title>
+ 
+    </head>
+
+    <body>
+<!-- 名字：{$name} 
+你的邮箱是：{$email} 
+Name：{$data.name}
+Email：{$data.email} -->
+
+<!-- 直接输出 -->
+
+
+
+
+<!-- 循环输出 -->
+{foreach $list as $key=>$vo } 
+    ID:{$vo.id}  姓名：{$vo.name} 年龄：{$vo.age} <br />
+{/foreach}
+<br />------------------------<br />
+
+<!-- volist标签输出 -->
+{volist name="list" id="data"}
+
+{$data.id}:{$data.name}<br/>
+
+{/volist}
+
+<!-- 输出其中的第5～15条记录 -->
+<br />------------------------<br />
+{volist name="list" id="vo" offset="5" length='10' empty="暂时没有数据！"}
+{$i} {$vo.id}<br />
+{/volist}
+ </body>
+ </html>

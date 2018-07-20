@@ -1,0 +1,23 @@
+ {include file="index/header" /} 
+  
+  
+ <div class="panel panel-default">
+  <div class="panel-heading">{$result}:</div>
+  <div class="panel-body">
+    
+   
+    
+<ul class="list-group">
+  <li class="list-group-item list-group-item-success">订单号：{$Request.param.out_trade_no}</li>
+  <li class="list-group-item list-group-item-info"> 订单名称：{$Request.param.subject}</li>
+  <li class="list-group-item list-group-item-warning">付款金额：{$Request.param.total_fee}</li>
+  <li class="list-group-item list-group-item-danger">付款信息：{$Request.param.buyer_email} </li>
+  <li class="list-group-item list-group-item-danger">课程ID：{$Request.param.body} </li>
+</ul>
+
+
+ </div>
+</div>
+
+{include file="index/footer" /}
+ 

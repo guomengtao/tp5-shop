@@ -1,0 +1,507 @@
+{include file="index/header" /}
+
+<style type="text/css">
+
+    /*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+    .bss_content_no::-webkit-scrollbar
+    {
+        width: 6px;
+        height: 6px;
+        background-color: #F5F5F5;
+    }
+    .bss_content::-webkit-scrollbar
+    {
+        width: 0px;
+        height: 6px;
+        background-color: #F5F5F5;
+    }
+
+    /*定义滚动条轨道 内阴影+圆角*/
+    .bss_content_no::-webkit-scrollbar-track
+    {
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        border-radius: 10px;
+        background-color: #FFF;
+    }
+
+    /*定义滑块 内阴影+圆角*/
+    .bss_content_no::-webkit-scrollbar-thumb
+    {
+        border-radius: 10px;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+        background-color: #AAA;
+    }
+</style>
+
+
+<script type="text/javascript">
+
+    // 控制鼠标经过时执行的显示滚动条的伪类css样式
+    // 注释掉的p标签是简单测试用
+    // 鼠标离开的时候p标签执行了切换，但是滚动条的目前没执行
+    $(document).ready(function(){
+        $(".bss_content").mouseover(function(){
+
+            $(".bss_content").addClass("bss_content_no");
+            $(".bss_content").removeClass("bss_content");
+
+            // $("p").css("background-color","yellow");
+
+
+        });
+        $(".bss_content").mouseout(function(){
+
+            $(".bss_content").addClass("bss_content");
+            $(".bss_content").removeClass("bss_content_no");
+
+            // $("p").css("background-color","#E9E9E4");
+
+        });
+    });
+</script>
+
+<!--<p style="background-color:#E9E9E4">请把鼠标指针移动到这个段落上。</p>-->
+
+
+
+<div class="row">
+    <div class="col-md-8 col-lg-9" >
+
+
+
+ 
+        <!--课程章节开始的位置-->
+        <h5>{$Think.cookie.phone?'':'<a href="__ROOT__/index/index/login ">登录后可保存学习进度</a>';}</h5>
+        <style>
+            .table-hover td{
+                vertical-align:middle;/** 设置垂直方向居中 */
+            }
+        </style>
+        <table class="table table-bordered table-hover " >
+            <thead>
+            <tr>
+                <th> ID</th>
+                <th> 课程标题</th>
+                <th>   {$Think.cookie.vip?'学习进度':'<a href="__ROOT__/index/index/view/id/105 ">价格</a>';}
+                    <!-- 提示加入vip -->
+                    <small>{$Think.cookie.vip?'':'<a href="__ROOT__/index/index/view/id/105 ">VIP全部免费</a>';}</small>
+                </th>
+                <th> 播放/购买</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            {volist name='show' id='user'}
+
+            <!-- 设置章节的功能 -->
+            {switch name="$user.sort"}
+            {case value="1"}
+            <tr id="section-1">
+                <td colspan="4">
+                    <h5> 第一季 零基础入门 ThinkPHP5 简易BBS留言板
+                        <small> 共50课</small>
+                    </h5>
+                </td>
+            </tr>
+            {/case}
+            {case value="51"}
+            <tr id="section-2">
+                <th colspan="4">
+                    <h5>第二季 实战 ThinkPHP5 简易SHOP商城 [本平台既是 效果演示，真实实战演练！]
+                        <small> 共50课</small>
+                    </h5>
+                </th>
+            </tr>
+            {/case}
+            {case value="101"}
+            <tr id="section-3">
+                <th colspan="4">
+                    <h5>第三季 提高 ThinkPHP5 AJAX零基础入门 及商城提高
+                        <small> 共50课</small>
+                    </h5>
+                </th>
+            </tr>
+            {/case}
+            {case value="151"}
+            <tr id="section-4">
+                <th colspan="4">
+                    <h5>第四季 高级 ThinkPHP5 模型关联入门  及商城功能扩展
+                        <small> 录制中...</small>
+                    </h5>
+                </th>
+            </tr>
+            {/case}
+            {default /}
+            {/switch}
+
+            <tr>
+                <th style="vertical-align:middle;"> {$user.sort?: '置顶'}  </th>
+                <td style="vertical-align:middle;"><a href="__ROOT__/index/index/view/id/{$user.id} ">{$user.title|mb_substr=0,50,'utf-8' }</a>  <small style="color: #ccc;font-size: x-small ">{$user.page_view}人在学 {$user.play_count}学员  </small> </td>
+                <td style="vertical-align:middle;min-width: 78px;">
+                    {if condition="$Think.cookie.vip>0"}
+                    {if condition="$user.video_status>0"}
+                    <span class="glyphicon glyphicon-star" aria-hidden="true" style="color: #f0ad4e;" title="本课学习完成一次获得"></span>
+                    <span class="glyphicon glyphicon-star" aria-hidden="true" style="font-size: 18px;color: {$user.data_count>0?'#f0ad4e':'#e7e7e7'};"  title="评论一次本节课程即可获取"></span>
+                    <span class="glyphicon glyphicon-star" aria-hidden="true" style="color: {$user.data_count>1?'#f0ad4e':'#e7e7e7'};" title="评论2次本节课程即可获取"></span>
+                    {else /}
+                    <div class="progress">
+                        <div class="progress-bar  progress-bar-striped active" role="progressbar"
+                             aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"
+                             style="min-width: {$user.video_title>2?'2':''}em;width: {:round($user.video_title/$user.video_age*100)}%">
+                            {if condition="$user.video_title>2"}{:round($user.video_title/$user.video_age*100)}%{/if}
+                        </div>
+                    </div>
+                    {/if}
+                    {else /}
+                    <!-- 非VIP显示价格 --><small>
+                    {if condition="$user.price>0" }<p class="text-muted">{$user.price}元/年</p> {else /}<p class="text-muted">免费课</p>   {/if}</small>
+
+
+                    {/if}
+
+                </td>
+                <td style="vertical-align:middle;">
+
+                    {if condition="($user.price > 0) AND ($user.buy == 0)" }
+
+
+                    <!--<a onclick="ajaxModelPay('{$user.price}','{$user.id}','{$user.title|mb_substr=0,20,'utf-8' }','{$user.id}{$Think.cookie.phone}{:time()}')" href="#" id="btnShop"   class="btn btn-danger"   name="alipayapiurl" >立即购买</a>-->
+                    <button onclick="ajaxModelPay('{$user.price}','{$user.id}','{$user.title|mb_substr=0,50,'utf-8' }','{$user.id}{$Think.cookie.phone}{:time()}')" type="button" class="btn btn-danger">立即购买</button>
+
+                    {else /}
+
+                        {if condition="$user.play_count > 10" }
+                            <a href="__ROOT__/index/index/view/id/{$user.id}" class="btn btn-success" target="_blank">
+
+                            {$user.address? $user.price>0?'立即播放':'免费播放':'查看详情'} </a>
+
+                        {else /}
+
+
+                            {if condition="$Think.cookie.vip>=1"}
+
+                    <a href="__ROOT__/index/index/view/id/{$user.id}" class="btn btn-warning" target="_blank">
+
+                    VIP 免费
+                    </a>
+                    {else /}
+
+                    <a href="__ROOT__/index/index/view/id/{$user.id}" class="btn btn-success" target="_blank">
+
+                        限时免费
+                    </a>
+
+
+
+
+
+                            {/if}
+
+
+                        {/if}
+
+
+                    {/if}
+
+
+
+                </td>
+            </tr>
+            {/volist}
+            </tbody>
+        </table>
+        {$show->render()}
+
+    </div>
+    <div class="col-md-4 col-lg-3" style="padding-top: 10px;">
+
+        <!--签到功能-->
+        <div class="btn-group btn-group-justified " style="padding-bottom: 20px;">
+            <a class="btn btn-success btn-registration"  style="font-size: 12px;"style="font-size: 12px;" onclick="ajaxModelPay('0.1','135','签到{$Think.cookie.phone}{:date("y年m月d日 H:i:s")}','135{$Think.cookie.phone}{:time()}')">
+            点此处签到<br>签到有好礼</a>
+            <a class="btn btn-primary" href="__ROOT__/index/member/registration" style="font-size: 12px;">{:date("Y年m月d日")}<br>
+                今日已有{$registration_count}人签到</a>
+        </div>
+
+
+        <!--简易即时聊天-->
+        <div class="panel panel-default">
+            <div class="panel-heading">  <span class="glyphicon glyphicon-volume-up" aria-hidden="true"></span> 大家正在说 ··· <small><span class="badge" style="background-color: #a7a7a7;display: none">666 </span></small></div>
+
+
+            <div class="panel-body">
+                <span id="bbs" style="display: none">666999</span>
+
+                <div class="bss_content"  id="bss_content" name="bss_content" style="margin-bottom: 10px;height:280px;max-height:300px;overflow-y:auto;overflow-x:hidden;word-wrap:break-word;">
+
+                    <span id="bbs_index">
+
+                    {volist name='bbs' id='user'}
+
+                    <div   class=" col-xs-12 col-sm-12 col-md-12 " style="padding: 0px;    border-bottom: 1px solid #eee;    margin-bottom: 10px; ">
+
+
+                        <div class="media" >
+                            <div class="media-left" >
+                                <a href="#">
+                                    <img class="media-object img-thumbnail"    src="__STATIC__/images/user/user ({:rand(1,25)}).jpg" data-holder-rendered="true" style="width: 48px; height: 48px;">
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                <small><a href="#">{$user.phone|substr=0,3}****{$user.phone|substr=7,4}</a>
+                                    :{$user.title}</small>
+                                <h5> <small> {$user.create_time} {$user.sort.city}  {$user.foot.browser} </small></h5>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+
+
+
+
+                    {/volist}
+
+
+                        </span>
+
+                </div>
+
+
+
+                <div class="form-group input-group field-feed-content required">
+                    <textarea id="feed-content" class="form-control" name="Feed[content]" placeholder="我想说..." aria-required="true"></textarea>
+                    <span class="input-group-btn"><button type="submit" class="btn btn-success" onclick="bbs(document.getElementById('feed-content').value,111)" style="height: 54px;width: 54px;">发布</button></span>
+                </div>
+
+
+
+
+            </div>
+
+        </div>
+
+        <!-- 在线打赏 -->
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <span class="glyphicon glyphicon-jpy" style="color: goldenrod" aria-hidden="true"></span> 在线打赏：
+            </div>
+            <div class="panel-footer">
+
+
+                <form method=post class="form-horizontal" action="">
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-3 control-label" style="color: #777;">选择金额</label>
+                        <div class="col-sm-9">
+                           
+
+                            <select class="form-control" id="WIDtotal_fee" name="WIDtotal_fee">
+                            <option value ="1" >￥ 1</option>
+                            <option value ="9" selected="selected">￥ 9</option>
+                            <option value ="19" >￥ 19</option>
+                            <option value ="29" >￥ 29</option>
+                            <option value ="39" >￥ 39</option>
+                            <option value ="49" >￥ 49</option>
+                            <option value ="59" >￥ 59</option>
+                            <option value ="69" >￥ 69</option>
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword3" class="col-sm-3 control-label" style="color: #777;">赞赏留言</label>
+                        <div class="col-sm-9">
+                            <textarea class="form-control" rows="3" name="WIDsubject" id="WIDsubject"  value="" placeholder="留言内容(选填)"></textarea>
+                             
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+
+                            
+
+                            <button class="btn btn-danger"    type="button"    style="    margin-bottom:  5px;" name="code65"    onclick="ajaxModelPay(document.getElementById('WIDtotal_fee').value,'37','打赏：' + document.getElementById('WIDsubject').value + '','{$Think.cookie.phone}{:time()}')" />开始打赏</button>
+ 
+                        </div>
+                    </div>
+       
+
+                </form>
+
+            </div>
+        </div>
+
+        <!--在线会员-->
+        <div class="panel panel-default">
+            <div class="panel-heading"> <span class="glyphicon glyphicon-user" aria-hidden="true"></span> 24h内在线同学  <span class="badge" style="background-color: #a7a7a7;">{:count($online)}</span>  </div>
+            <div class="panel-body">
+                {volist name='$online' id='user' key="k"}
+                <div class="col-xs-12 col-sm-12 col-md-12 " style="padding: 0px;">
+
+
+                    <div class="media" >
+                        <div class="media-left" >
+                            <a href="#">
+                                <img class="media-object img-thumbnail"    src="__STATIC__/images/user/user ({:rand(1,25)}).jpg" data-holder-rendered="true" style="width: 64px; height: 64px;">
+                            </a>
+                        </div>
+                        <div class="media-body">
+                            <small><a href="#">{$user.phone|substr=0,3}****{$user.phone|substr=7,4}</a>
+                                NO.<span style="color: #D8582B;font-weight: bold;">{$k}</span></small>
+                            <h5> <small>最后在线时间：<span style="color: #D8582B;font-weight: bold;">{$user.update_time}</span></small></h5>
+                            <h5><small>累计在线：<span style="color: #D8582B;font-weight: bold;">{$user.online_time}</span>分钟</small></h5>
+                        </div>
+                    </div>
+
+
+                    <hr>
+
+
+                </div>
+
+
+
+                {/volist}
+
+            </div>
+        </div>
+
+
+
+        <div class="list-group">
+            <a href="__ROOT__/#section-1" class="list-group-item list-group-item-success">第一季 零基础入门 ThinkPHP5 简易BBS留言板 </a>
+            <a href="__ROOT__/#section-2" class="list-group-item list-group-item-info">第二季 实战 ThinkPHP5 简易SHOP商城 </a>
+            <a href="__ROOT__/index.php?page=2#section-3" class="list-group-item list-group-item-success">第三季 提高 ThinkPHP5 AJAX入门 及商城提高 </a>
+            <a href="__ROOT__/index.php?page=2#section-4" class="list-group-item list-group-item-info">第四季 ThinkPHP5 模型关联入门  及商城扩展 </a>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                课程交流QQ群:189250799
+            </div>
+            <div class="panel-footer"><img class="img-rounded" style="width: 100%" src="__STATIC__/images/qqgroup_189250799.jpg"></div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                VIP专属QQ群:423922212
+            </div>
+            <div class="panel-footer text-center">
+                <img class="img-rounded" style="width: 100%" src="__STATIC__/images/vipqqgroup_423922212.jpg">
+                <h5><small>加群验证码 : {$Think.cookie.vip>0?'1206':'**** VIP会员可见'}</small></h5>
+            </div>
+        </div>
+
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                微信打赏：
+            </div>
+            <div class="panel-footer"><img class="img-rounded" style="width: 100%" src="__STATIC__/images/wechat.png"></div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                支付宝打赏：
+            </div>
+            <div class="panel-footer"><img class="img-rounded" style="width: 100%" src="__STATIC__/images/alipay.jpg"></div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                有疑问 联系我
+            </div>
+            <div class="panel-footer text-center">
+                <img class="img-circle"  style="width: 30%" src="__STATIC__/images/tom.jpg">
+                <h5><small>ThinkPHP5 Lecturer</small></h5>
+                <img class="img-rounded" style="width: 100%" src="__STATIC__/images/qq_250285636.jpg">
+                <img class="img-rounded" style="width: 100%" src="__STATIC__/images/wechat_18210787405.png">
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+    </div>
+</div>
+
+<script>
+    // 设置聊天内容在最下面
+window.onload = function () {
+    document.getElementById('bss_content').scrollTop = document.getElementById('bss_content').scrollHeight;
+}
+
+    // 评论功能的ajax函数
+    function bbs(t,id)
+    {
+        t = t.trim();
+
+
+
+        var xmlhttp;
+
+        if (t.length==0)
+        {
+            document.getElementById("titleChat").innerHTML="";
+            document.getElementById("feed-content").innerHTML="";
+            return;
+
+        }
+
+
+        if (window.XMLHttpRequest)
+        {
+            // IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+            xmlhttp=new XMLHttpRequest();
+        }
+        else
+        {
+            // IE6, IE5 浏览器执行代码
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange=function()
+        {
+            if (xmlhttp.readyState==4 && xmlhttp.status==200)
+            {
+
+
+                // document.getElementById("bbs").innerHTML=xmlhttp.responseText+document.getElementById("bbs").innerHTML;
+                document.getElementById("bbs").innerHTML=document.getElementById("bbs").innerHTML+xmlhttp.responseText;
+                // document.getElementById("chat").innerHTML=document.getElementById("chat").innerHTML+xmlhttp.responseText;
+                // document.getElementById("bbs_index").innerHTML=xmlhttp.responseText+document.getElementById("bbs_index").innerHTML;
+                document.getElementById("bbs_index").innerHTML=document.getElementById("bbs_index").innerHTML+xmlhttp.responseText;
+                // document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight;
+                // document.getElementById('bbs_index').scrollTop = document.getElementById('bbs_index').scrollHeight;
+                document.getElementById('bss_content').scrollTop = document.getElementById('bss_content').scrollHeight;
+
+            }
+        }
+        xmlhttp.open("POST","{$Think.server.script_name}/index/bbs/add/",true);
+        // xmlhttp.open("GET","/index/bbs/add/title/"+t+"/shop/"+id,true);
+        xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+        // xmlhttp.send("t=Bill&lname=Gates");
+        xmlhttp.send("title="+t+"&shop="+id);
+        // xmlhttp.send();
+        bbs_song("ask_song");
+
+        // 发送完成后清空内容
+        // document.getElementById('titleChat').value ="";
+        // document.getElementById('feed-content').innerText="";
+        document.getElementById("feed-content").value='';
+        // 发送完成后禁止再次点击发送按钮
+        // document.getElementById("sendChat").disabled= true;
+        // document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight;
+
+        // $('#chat').scrollTop( $('#chat')[0].scrollHeight );
+        // var content = document.getElementById('chat');
+        // content.scrollTop = content.scrollHeight;
+
+    }
+</script>
+
+    {include file="index/footer" /}

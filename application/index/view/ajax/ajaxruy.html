@@ -1,0 +1,71 @@
+ <script>
+function showHint(str)
+{
+  var tom;
+  if (window.XMLHttpRequest)
+    { // code for IE7+, Firefox, Chrome, Opera, Safari
+        tom=new XMLHttpRequest();
+    }
+  else
+    {
+    // code for IE6, IE5
+        tom=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+   
+
+
+  tom.onreadystatechange=function()
+  {
+         if (tom.readyState==3 && tom.status==200)
+    {
+        document.getElementById("txtHint").innerHTML="请求处理中....";
+    }
+
+     if (tom.readyState==4 && tom.status==200)
+    {
+        document.getElementById("txtHint").innerHTML=tom.responseText;
+    }
+          
+     
+         
+  }
+ tom.open("GET","/index/api/sms/s/"+str,true);
+  tom.send();   
+}
+ 
+ 
+
+</script>
+
+<!-- ajax教程地址 -->
+<!-- http://www.w3school.com.cn/ajax/ajax_xmlhttprequest_create.asp -->
+
+          <input class="form-control" id="cl" type="button" onclick="loadXMLDoc()" name="code" value="点击loadXMLDoc()" />
+
+          <div onclick="showHint(1)">首页showHint()</div>
+          
+        
+
+<p></p>
+
+        请输入您要跳转到的页数：<input type="text" id="txt1" onkeyup="showHint(this.value)" />
+
+
+        <select name="customers" onchange="showHint(this.value)" style="font-family:Verdana, Arial, Helvetica, sans-serif;">
+<option value="1">首页</option>
+<option value="BAIDU ">BAIDU, Inc</option>
+<option value="Canon">Canon USA, Inc.</option>
+<option value="Google">Google, Inc.</option>
+<option value="Nokia">Nokia Corporation</option>
+<option value="100">第100页</option>
+</select>
+
+<div>用户注册：</div>
+
+手机号：<input type="text" id="txt1" onblur="showHint(this.value)" /><span id="txtHint"></span>
+密码：<input type="text" id="txt1"   />
+
+ 
+   
+ 

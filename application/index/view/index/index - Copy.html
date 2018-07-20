@@ -1,0 +1,810 @@
+{include file="index/header" /}
+
+<!-- {:debug('begin')}
+{:debug('end')}
+{:debug('begin','end').'s'} -->
+<style type="text/css">
+
+    /*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+    .bss_content_no::-webkit-scrollbar
+    {
+        width: 6px;
+        height: 6px;
+        background-color: #F5F5F5;
+    }
+    .bss_content::-webkit-scrollbar
+    {
+        width: 0px;
+        height: 6px;
+        background-color: #F5F5F5;
+    }
+
+    /*定义滚动条轨道 内阴影+圆角*/
+    .bss_content_no::-webkit-scrollbar-track
+    {
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        border-radius: 10px;
+        background-color: #FFF;
+    }
+
+    /*定义滑块 内阴影+圆角*/
+    .bss_content_no::-webkit-scrollbar-thumb
+    {
+        border-radius: 10px;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+        background-color: #AAA;
+    }
+</style>
+
+
+<script type="text/javascript">
+
+    // 控制鼠标经过时执行的显示滚动条的伪类css样式
+    // 注释掉的p标签是简单测试用
+    // 鼠标离开的时候p标签执行了切换，但是滚动条的目前没执行
+    $(document).ready(function(){
+        $(".bss_content").mouseover(function(){
+
+            $(".bss_content").addClass("bss_content_no");
+            $(".bss_content").removeClass("bss_content");
+
+            // $("p").css("background-color","yellow");
+
+
+        });
+        $(".bss_content").mouseout(function(){
+
+            $(".bss_content").addClass("bss_content");
+            $(".bss_content").removeClass("bss_content_no");
+
+            // $("p").css("background-color","#E9E9E4");
+
+        });
+    });
+</script>
+
+<!--<p style="background-color:#E9E9E4">请把鼠标指针移动到这个段落上。</p>-->
+
+
+
+ 
+
+
+ 
+
+
+
+
+<div class="page-header" style="display: none;">
+    <h2><a href="{$Think.server.script_name}">{:lang('Tp5简易商城')}</a><small>  
+        {:lang('入门视频课')}   
+<a href="__ROOT__/index/index/index/lang/zh-cn">{:lang('中文')}</a>
+<a href="__ROOT__/index/index/index/lang/en-us">{:lang('English')}</a> 
+<!-- <a href="__ROOT__/index/index/index/lang/thai">{:lang('บทความภาษาไทย')}</a> 
+<a href="__ROOT__/index/index/index/lang/fayu">{:lang('Français')}</a>  -->
+</small>
+    </h2> 
+ 
+  
+ 
+</div>
+ 
+<div class="row">
+    <div class="col-md-8 col-lg-9" >
+ 
+ 
+ 
+        <!-- 签到免费学习活动提示功能 -->
+
+        <div class="alert alert-info alert-dismissible" role="alert" style="display: none">
+
+
+            {if condition="$registration_count < 10"}
+
+            <div class="progress">
+                <div class="progress-bar  progress-bar-striped " role="progressbar"
+                     aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"
+                     style="min-width: 15em;width: {:round($registration_count/10*100)}%">
+                    加{$registration_count-$registration_count+10-$registration_count}人签到解锁 
+                </div>
+            </div>
+
+
+
+            即将免费解锁所有课程，已{$registration_count}人  
+
+
+             <a class="btn btn-success btn-registration"  style="font-size: 12px;"style="font-size: 12px;" onclick="public_ajax('{$Think.server.script_name}/index/member/registration/',1);">
+                        2.0版点击直接ajax签到成功 </a> （VIP会员登录自动签到）
+
+
+
+            <a class="btn btn-success btn-registration"  style="font-size: 12px;"style="font-size: 12px;" onclick="ajaxModelPay('0.1','135','签到{$Think.cookie.phone}{:date("y年m月d日 H:i:s")}','135{$Think.cookie.phone}{:time()}') ">
+            1.0版扫码支付1毛签到 </a>
+
+
+           
+
+
+            
+
+
+
+
+
+
+
+            {else/}
+            今日已有{$registration_count}人签到 ，所有课程免费中~~~
+            {/if}
+        </div>
+        <!--签到功能 这个地方计划只是最小页面显示，方便手机登录是快速签到-->
+        <div class="btn-group btn-group-justified   hidden-lg  hidden-md" style="padding-bottom: 20px;">
+
+            <a class="btn btn-success btn-registration"  style="font-size: 12px;"style="font-size: 12px;" onclick="public_ajax('{$Think.server.script_name}/index/member/registration/',1);">
+            点此处签到<br>签到有好礼</a>
+            <a class="btn btn-primary" href="__ROOT__/index/member/registration" style="font-size: 12px;">{:date("Y年m月d日")}<br>
+                今日已有{$registration_count}人签到</a>
+        </div>
+
+
+
+
+
+
+
+
+
+        <!--课程章节开始的位置-->
+
+    <!--     <h5>
+            
+           
+            <small>
+
+                <a href="__ROOT__/index/index/index"><span class="glyphicon glyphicon-fire" style="color: palevioletred;" aria-hidden="true"></span></a>
+                <a href="__ROOT__/index/index/index">热门课程</a> 
+
+
+
+                <a href="__ROOT__/index/index/news"><span class="glyphicon glyphicon-sort-by-order-alt" aria-hidden="true"></span></a>
+                <a href="__ROOT__/index/index/news">最新课程</a> 
+
+
+
+                <a href="__ROOT__/index/index/all"><span class="glyphicon glyphicon-sort-by-order" aria-hidden="true"</small>
+                <a href="__ROOT__/index/index/all">全部课程</a></small>
+
+
+            {$Think.cookie.phone?'':'<a href="__ROOT__/index/index/login ">登录后可保存学习进度</a>';}
+
+        </h5> -->
+
+<div class="panel panel-default">
+  <div class="panel-body">
+
+
+
+        <h4>
+            <small>
+        <span class="glyphicon glyphicon-volume-up" style="color: #337ab7"   aria-hidden="true"></span> 活动推荐： 
+         <a href="__ROOT__/index/member/invite"> 邀请新会员注册奖励6天VIP会员 </a></small>
+        <img    src="__STATIC__/images/vip4.png" data-holder-rendered="true" style="width: 18px; height: 18px;"> </h4>
+
+ 
+
+
+        <h4>
+            <small>
+        <span class="glyphicon glyphicon-tint" style="color: #337ab7"  aria-hidden="true"></span> 回馈活动：免费送VIP会员 困难家庭 残障人士 女程序员 海外学员 资源置换 等等    微信：18210787405 </small>
+
+        </h4>
+
+        <h4>
+            <small>
+        <span class="glyphicon glyphicon-tint" style="color: #337ab7"  aria-hidden="true"></span> 课程推荐：新录制的[<a href=" http://163.lu/jknmV2" target="_blank" >  Laravel5.6 零基础入门课 </a> ] 请大家多多支持 鼓励</small>
+
+        </h4>
+
+        <h4>
+            <small>
+        <span class="glyphicon glyphicon-tint" style="color: #337ab7"  aria-hidden="true"></span> 腾讯课堂：<a href="https://ke.qq.com/course/package/9509?flowToken=1002207" target="_blank" >  ThinkPHP5简易商城 4季 打包 </a> </small>
+
+        </h4>
+
+        <h4>
+            <small>
+        <span class="glyphicon glyphicon-tint" style="color: #337ab7"  aria-hidden="true"></span> 腾讯课堂：<a href="https://ke.qq.com/course/294322?flowToken=1002208" target="_blank" >  ThinkPHP5零基础入门课 </a> </small>
+
+        </h4>
+
+        <h4>
+            <small>
+        <span class="glyphicon glyphicon-tint" style="color: #337ab7"  aria-hidden="true"></span> 课程包邮：U盘版全套视频 79元限量包邮寄 解决卡顿烦恼 qq：250285636 </small>
+
+        </h4>
+
+        <h4>
+            <small>
+        <span class="glyphicon glyphicon-tint" style="color: #337ab7"  aria-hidden="true"></span> 院校合作：满20人9折 满30人免费送30人VIP   </small>
+
+        </h4>
+
+
+
+        <h4>
+
+            <small>
+            <span class="glyphicon glyphicon-education" style="color: #337ab7"  aria-hidden="true"></span> 全民学习：
+              每晚8点-10点所有课程免费开放 
+
+          
+            <span id="_d_open"></span>  
+            <span id="_h_open"></span>  
+            <span id="_m_open"></span>  
+            <span id="_s_open"></span>  
+      
+
+            </small>
+        </h4>
+
+        <h4>
+
+            <small>
+            <span class="glyphicon glyphicon-comment" style="color: #337ab7"  aria-hidden="true"></span> 最新功能：
+             <a href="__ROOT__/index/member/vip">  每天上午9点 99元抢注vip会员一年  </a>
+
+          
+            <span id="_d"></span>  
+            <span id="_h"></span>  
+            <span id="_m"></span>  
+            <span id="_s"></span>  
+      
+
+            </small>
+        </h4>
+         
+        
+  </div>
+</div>    
+
+
+  <script type="text/javascript">  
+
+        function countTime() {  
+            //获取当前时间  
+            var date = new Date();  
+            var now = date.getTime();  
+            //设置截止时间  
+            // var str="2018/4/25 9:33:00";
+
+            //获取当前时间年月日
+
+            var y = date.getFullYear();
+            var m = date.getMonth()+1; // 这个函数月份从0开始，所以+1
+            var d = date.getDate();
+            //设置开始时间 每天上午9点 
+            var str=y+"/"+m+"/"+d+" "+"9:00:00";
+
+
+            var endDate = new Date(str); 
+            var end = endDate.getTime();  
+            
+            //时间差  
+            var leftTime = end-now; 
+            //定义变量 d,h,m,s保存倒计时的时间  
+            var d,h,m,s;  
+
+            // document.getElementById("_d").innerHTML = leftTime/1000/60%60 + "--" +d+"天";   
+            // document.getElementById("_d").innerHTML = str + "--" +d+"天";   
+
+
+                d = Math.floor(leftTime/1000/60/60/24);  
+                h = Math.floor(leftTime/1000/60/60%24);  
+                m = Math.floor(leftTime/1000/60%60);  
+                s = Math.floor(leftTime/1000%60);  
+
+            if (leftTime>=0) {  
+                
+
+                //将倒计时赋值到div中  
+                // document.getElementById("_d").innerHTML = d+"天";  
+                document.getElementById("_h").innerHTML = h+"小时";  
+                document.getElementById("_m").innerHTML = m+"分";  
+                document.getElementById("_s").innerHTML = s+"秒后开放";  
+
+            }
+
+            else if (leftTime/1000/60 >= -15){
+                document.getElementById("_s").innerHTML = "进行中 ...";
+            }  
+            else{
+
+                // 将倒计时赋值到div中  
+                // 用Math.abs负数转正数
+                document.getElementById("_d").innerHTML = Math.abs(d)+"天";  
+                document.getElementById("_h").innerHTML = Math.abs(h)+"小时";  
+                document.getElementById("_m").innerHTML = Math.abs(m)+"分";  
+                document.getElementById("_s").innerHTML = Math.abs(s)+"秒后开放";  
+            }  
+            
+            //递归每秒调用countTime方法，显示动态时间效果  
+            setTimeout(countTime,1000);  
+  
+        }  
+
+        // 设置每天晚上8点-10点课程免费提示
+        function countTime_open() {  
+            //获取当前时间  
+            var date = new Date();  
+            var now = date.getTime();  
+            //设置截止时间  
+            // var str="2018/4/25 9:33:00";
+
+            //获取当前时间年月日
+
+            var y = date.getFullYear();
+            var m = date.getMonth()+1; // 这个函数月份从0开始，所以+1
+            var d = date.getDate();
+            //设置开始时间 每晚8点开始
+            var str=y+"/"+m+"/"+d+" "+"20:00:00";
+
+
+            var endDate = new Date(str); 
+            var end = endDate.getTime();  
+            
+            //时间差  
+            var leftTime = end-now; 
+            //定义变量 d,h,m,s保存倒计时的时间  
+            var d,h,m,s;  
+
+            // document.getElementById("_d").innerHTML = leftTime/1000/60%60 + "--" +d+"天";   
+            // document.getElementById("_d").innerHTML = str + "--" +d+"天";   
+
+
+                d = Math.floor(leftTime/1000/60/60/24);  
+                h = Math.floor(leftTime/1000/60/60%24);  
+                m = Math.floor(leftTime/1000/60%60);  
+                s = Math.floor(leftTime/1000%60);  
+
+            if (leftTime>=0) {  
+                
+
+                //将倒计时赋值到div中  
+                // document.getElementById("_d").innerHTML = d+"天";  
+                document.getElementById("_h_open").innerHTML = h+"小时";  
+                document.getElementById("_m_open").innerHTML = m+"分";  
+                document.getElementById("_s_open").innerHTML = s+"秒后开始";  
+
+            }
+
+            else if (leftTime/1000/60 >= -120){
+                document.getElementById("_s_open").innerHTML = "所有课程开放中...";
+            }  
+            else{
+
+                // 将倒计时赋值到div中  
+                // 用Math.abs负数转正数
+                document.getElementById("_d_open").innerHTML = Math.abs(d)+"天";  
+                document.getElementById("_h_open").innerHTML = Math.abs(h)+"小时";  
+                document.getElementById("_m_open").innerHTML = Math.abs(m)+"分";  
+                document.getElementById("_s_open").innerHTML = Math.abs(s)+"秒后开始";  
+            }  
+            
+            //递归每秒调用countTime方法，显示动态时间效果  
+            setTimeout(countTime_open,1000);  
+  
+        }  
+    </script>  
+  
+
+
+
+        
+
+
+        <style>
+            .table-hover td{
+                vertical-align:middle;/** 设置垂直方向居中 */
+            }
+        </style>
+
+<p>&nbsp;</p>
+        <h5>
+            
+              <small>
+
+ <span class="glyphicon glyphicon-fire" style="color: #337ab7"  aria-hidden="true"></span> 
+                        <a href="__ROOT__/index/index/index">{:lang('热门课程')}</a> &nbsp;&nbsp;&nbsp;
+
+
+
+                        <a href="__ROOT__/index/index/news"><span class="glyphicon glyphicon-sort-by-order-alt" aria-hidden="true"></span></a>
+                        <a href="__ROOT__/index/index/news">{:lang('最新课程')}</a> &nbsp;&nbsp;&nbsp;
+
+
+
+                        <a href="__ROOT__/index/index/all"><span class="glyphicon glyphicon-sort-by-order" aria-hidden="true"</small>
+                        <a href="__ROOT__/index/index/all">{:lang('全部课程')}</a></small> &nbsp;&nbsp;&nbsp;
+        </h5>
+
+
+        <table class="table table-striped table-hover " >
+            <thead style="display: none;">
+            <tr>
+                 
+                <th > 
+
+                            
+            
+           
+          <!--   <small>
+
+                <a href="__ROOT__/index/index/index"><span class="glyphicon glyphicon-fire" style="color: palevioletred;" aria-hidden="true"></span></a>
+                <a href="__ROOT__/index/index/index">{:lang('热门课程')}</a> &nbsp;&nbsp;&nbsp;
+
+
+
+                <a href="__ROOT__/index/index/news"><span class="glyphicon glyphicon-sort-by-order-alt" aria-hidden="true"></span></a>
+                <a href="__ROOT__/index/index/news">{:lang('最新课程')}</a> &nbsp;&nbsp;&nbsp;
+
+
+
+                <a href="__ROOT__/index/index/all"><span class="glyphicon glyphicon-sort-by-order" aria-hidden="true"</small>
+                <a href="__ROOT__/index/index/all">{:lang('全部课程')}</a></small> &nbsp;&nbsp;&nbsp; -->
+
+
+            <!-- {$Think.cookie.phone?'':'<a href="__ROOT__/index/index/login ">登录后可保存学习进度</a>';} -->
+
+      
+
+
+                </th>
+                <th>   <!-- {$Think.cookie.vip?'学习进度':'<a href="__ROOT__/index/index/view/id/105 ">价格</a>';} --> {:lang('价格')}
+                 
+                </th>
+                <th> {:lang('播放')}/{:lang('购买')}</th>
+            </tr>
+            </thead>
+
+            <tbody>
+
+             
+            {volist name='show' id='user'}
+
+ 
+            <tr>
+                 
+                <td style="vertical-align:middle;"><a href="__ROOT__/index/index/view/id/{$user.id} ">{$user.title|mb_substr=0,50,'utf-8' }</a>
+                    <small style="color: #ccc;font-size: x-small ">{$user.page_view}次学习  {$user.update_time} 更新</small>
+
+                </td>
+                <td style="vertical-align:middle;min-width: 78px;">
+                    {if condition="$Think.cookie.vip>0"}
+                     
+                    {else /}
+                    <!-- 非VIP显示价格 --><small>
+                    {if condition="$user.price>0" }<p class="text-muted">{$user.price}元/年</p> {else /}<p class="text-muted">免费课</p>   {/if}</small>
+
+
+                    {/if}
+
+                </td>
+                <td style="vertical-align:middle;">
+ 
+                     
+                            <a href="__ROOT__/index/index/view/id/{$user.id}" class="btn btn-success" target="_blank">
+
+                                立即学习
+                            </a>
+
+ 
+
+
+                </td>
+            </tr>
+
+ 
+
+
+            {/volist}
+
+ 
+
+            </tbody>
+        </table>
+         {$show->render()}
+
+    </div>
+    <div class="col-md-4 col-lg-3">
+
+        <!--签到功能-->
+        <div class="btn-group btn-group-justified " style="padding-bottom: 20px;">
+            <a class="btn btn-success btn-registration"  style="font-size: 12px;"style="font-size: 12px;" onclick="public_ajax('{$Think.server.script_name}/index/member/registration/',1);">
+            点此处签到<br>签到有好礼</a>
+            <a class="btn btn-primary" href="__ROOT__/index/member/registration" style="font-size: 12px;">{:date("Y年m月d日")}<br>
+                今日已有{$registration_count}人签到</a>
+        </div>
+
+
+        <!--简易即时聊天-->
+        <div class="panel panel-default">
+            <div class="panel-heading">  <span class="glyphicon glyphicon-volume-up" aria-hidden="true"></span> 大家正在说 ··· <small><span class="badge" style="background-color: #a7a7a7;display: none">666 </span></small></div>
+
+
+            <div class="panel-body">
+                <span id="bbs" style="display: none">666999</span>
+
+                <div class="bss_content"  id="bss_content" name="bss_content" style="margin-bottom: 10px;height:280px;max-height:300px;overflow-y:auto;overflow-x:hidden;word-wrap:break-word;">
+
+                    <span id="bbs_index">
+
+                    {volist name='bbs' id='user'}
+
+                    <div   class=" col-xs-12 col-sm-12 col-md-12 " style="padding: 0px;    border-bottom: 1px solid #eee;    margin-bottom: 10px; ">
+
+
+                        <div class="media" >
+                            <div class="media-left" >
+                                <a href="#">
+                                    <img class="media-object img-circle"    src="__STATIC__/images/user/user ({:rand(1,25)}).jpg" data-holder-rendered="true" style="width: 48px; height: 48px;">
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                <small><a href="#">{$user.phone|substr=0,3}****{$user.phone|substr=7,4}</a>
+                                    :{$user.title}</small>
+                                <h5> <small> {$user.create_time} {$user.sort.city}  {$user.foot.browser} </small></h5>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+
+
+
+
+                    {/volist}
+
+
+                        </span>
+
+                </div>
+
+
+
+                <div class="form-group input-group field-feed-content required">
+                    <textarea id="feed-content" class="form-control" name="Feed[content]" placeholder="我想说..." aria-required="true"></textarea>
+                    <span class="input-group-btn"><button type="submit" class="btn btn-success" onclick="bbs(document.getElementById('feed-content').value,111)" style="height: 54px;width: 54px;">发布</button></span>
+                </div>
+
+
+
+
+            </div>
+
+        </div>
+
+
+        <!--在线会员-->
+        <div class="panel panel-default">
+            <div class="panel-heading"> <span class="glyphicon glyphicon-user" aria-hidden="true"></span> 24h内在线同学  <span class="badge" style="background-color: #a7a7a7;">{:count($online)}</span>  </div>
+            <div class="panel-body">
+                {volist name='$online' id='user' key="k"}
+                <div class="col-xs-12 col-sm-12 col-md-12 " style="padding: 0px;">
+
+
+                    <div class="media" >
+                        <div class="media-left" >
+                            <a href="#">
+                                <img class="media-object img-circle"    src="__STATIC__/images/user/user ({:rand(1,25)}).jpg" data-holder-rendered="true" style="width: 64px; height: 64px;">
+                            </a>
+                        </div>
+                        <div class="media-body">
+                            <small><a href="#">{$user.phone|substr=0,3}****{$user.phone|substr=7,4}</a>
+                                NO.<span style="color: #D8582B;font-weight: bold;">{$k}</span></small>
+                            <h5> <small>最后在线时间：<span style="color: #D8582B;font-weight: bold;">{$user.update_time}</span></small></h5>
+                            <h5><small>累计在线：<span style="color: #D8582B;font-weight: bold;">{$user.online_time}</span>分钟</small></h5>
+                        </div>
+                    </div>
+
+
+                    <hr>
+
+
+                </div>
+
+
+
+                {/volist}
+
+            </div>
+        </div>
+
+
+
+        <div class="list-group">
+            <a href="__ROOT__/#section-1" class="list-group-item list-group-item-success">第一季 零基础入门 ThinkPHP5 简易BBS留言板 </a>
+            <a href="__ROOT__/#section-2" class="list-group-item list-group-item-info">第二季 实战 ThinkPHP5 简易SHOP商城 </a>
+            <a href="__ROOT__/index.php?page=2#section-3" class="list-group-item list-group-item-success">第三季 提高 ThinkPHP5 AJAX入门 及商城提高 </a>
+            <a href="__ROOT__/index.php?page=2#section-4" class="list-group-item list-group-item-info">第四季 ThinkPHP5 模型关联入门  及商城扩展 </a>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                课程交流QQ群:298491343
+            </div>
+            <div class="panel-footer"><img class="img-rounded" style="width: 100%" src="__STATIC__/images/qqgroup_189250799.png"></div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                VIP专属QQ群:423922212
+            </div>
+            <div class="panel-footer text-center">
+                <img class="img-rounded" style="width: 100%" src="__STATIC__/images/vipqqgroup_423922212.jpg">
+                <h5><small>加群验证码 : {$Think.cookie.vip>0?'1206':'**** VIP会员可见'}</small></h5>
+            </div>
+        </div>
+
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+                微信打赏：
+            </div>
+            <div class="panel-footer"><img class="img-rounded" style="width: 100%" src="__STATIC__/images/wechat.png"></div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                支付宝打赏：
+            </div>
+            <div class="panel-footer"><img class="img-rounded" style="width: 100%" src="__STATIC__/images/alipay.jpg"></div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                有疑问 联系我
+            </div>
+            <div class="panel-footer text-center">
+
+
+                <img class="img-circle"  style="width: 30%" src="__STATIC__/images/tom.jpg">
+                <h5><small>ThinkPHP5 Lecturer</small></h5>
+                <img class="img-rounded" style="width: 100%" src="__STATIC__/images/qq_250285636.jpg">
+                <img class="img-rounded" style="width: 100%" src="__STATIC__/images/wechat_18210787405.png">
+            </div>
+        </div>
+
+
+
+        <!-- 在线打赏 -->
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <span class="glyphicon glyphicon-jpy" style="color: goldenrod" aria-hidden="true"></span> 在线打赏：
+            </div>
+            <div class="panel-footer">
+
+
+                <form method=post class="form-horizontal" action="">
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-3 control-label" style="color: #777;">选择金额</label>
+                        <div class="col-sm-9">
+                           
+
+                            <select class="form-control" id="WIDtotal_fee" name="WIDtotal_fee">
+                            <option value ="1" >￥ 1</option>
+                            <option value ="9" selected="selected">￥ 9</option>
+                            <option value ="19" >￥ 19</option>
+                            <option value ="29" >￥ 29</option>
+                            <option value ="39" >￥ 39</option>
+                            <option value ="49" >￥ 49</option>
+                            <option value ="59" >￥ 59</option>
+                            <option value ="69" >￥ 69</option>
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword3" class="col-sm-3 control-label" style="color: #777;">赞赏留言</label>
+                        <div class="col-sm-9">
+                            <textarea class="form-control" rows="3" name="WIDsubject" id="WIDsubject"  value="" placeholder="留言内容(选填)"></textarea>
+                             
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+
+                            
+
+                            <button class="btn btn-danger"    type="button"    style="    margin-bottom:  5px;" name="code65"    onclick="ajaxModelPay(document.getElementById('WIDtotal_fee').value,'37','打赏：' + document.getElementById('WIDsubject').value + '','{$Think.cookie.phone}{:time()}')" />开始打赏</button>
+ 
+                        </div>
+                    </div>
+       
+
+                </form>
+
+            </div>
+        </div>
+
+
+
+
+
+
+    </div>
+</div>
+
+<script>
+ 
+
+
+    // 评论功能的ajax函数
+    function bbs(t,id)
+    {
+        t = t.trim();
+
+
+
+        var xmlhttp;
+
+        if (t.length==0)
+        {
+            document.getElementById("titleChat").innerHTML="";
+            document.getElementById("feed-content").innerHTML="";
+            return;
+
+        }
+
+
+        if (window.XMLHttpRequest)
+        {
+            // IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+            xmlhttp=new XMLHttpRequest();
+        }
+        else
+        {
+            // IE6, IE5 浏览器执行代码
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange=function()
+        {
+            if (xmlhttp.readyState==4 && xmlhttp.status==200)
+            {
+
+
+                // document.getElementById("bbs").innerHTML=xmlhttp.responseText+document.getElementById("bbs").innerHTML;
+                document.getElementById("bbs").innerHTML=document.getElementById("bbs").innerHTML+xmlhttp.responseText;
+                // document.getElementById("chat").innerHTML=document.getElementById("chat").innerHTML+xmlhttp.responseText;
+                // document.getElementById("bbs_index").innerHTML=xmlhttp.responseText+document.getElementById("bbs_index").innerHTML;
+                document.getElementById("bbs_index").innerHTML=document.getElementById("bbs_index").innerHTML+xmlhttp.responseText;
+                // document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight;
+                // document.getElementById('bbs_index').scrollTop = document.getElementById('bbs_index').scrollHeight;
+                document.getElementById('bss_content').scrollTop = document.getElementById('bss_content').scrollHeight;
+
+            }
+        }
+        xmlhttp.open("POST","{$Think.server.script_name}/index/bbs/add/",true);
+        // xmlhttp.open("GET","/index/bbs/add/title/"+t+"/shop/"+id,true);
+        xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+        // xmlhttp.send("t=Bill&lname=Gates");
+        xmlhttp.send("title="+t+"&shop="+id);
+        // xmlhttp.send();
+        bbs_song("ask_song");
+
+        // 发送完成后清空内容
+        // document.getElementById('titleChat').value ="";
+        // document.getElementById('feed-content').innerText="";
+        document.getElementById("feed-content").value='';
+        // 发送完成后禁止再次点击发送按钮
+        // document.getElementById("sendChat").disabled= true;
+        // document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight;
+
+        // $('#chat').scrollTop( $('#chat')[0].scrollHeight );
+        // var content = document.getElementById('chat');
+        // content.scrollTop = content.scrollHeight;
+
+    }
+</script>
+
+    {include file="index/footer" /}

@@ -1,0 +1,86 @@
+{include file="index/header" /}
+
+ <div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">{$list.0.title}  </h3>
+  </div>
+  <div class="panel-body">
+
+
+    <video width="50%"  controls="controls"  poster="__STATIC__/thinkphp5.jpg"  id="myVideo">
+
+  <source src="{$list.0.address}" type="video/mp4" />
+ Your brows
+ </video>
+
+      <script type="text/javascript" charset="utf-8" src="__STATIC__/ueditor/ueditor.parse.js"> </script>
+
+      <script>
+          $(function(){
+              uParse('#content',{rootPath:'__STATIC__/ueditor';initialFrameWidth: null});
+          });
+
+      </script>
+
+
+
+
+    <p>排序：{$list.0.sort}</p>
+    <p>播放地址：{$list.0.address}</p>
+    <p>购买内容：{$list.0.product}</p>
+    <p>标签：{$list.0.label}</p>
+    <p>价格：{$list.0.price}</p>
+
+
+      <div id="content">
+          {$list.0.content}
+      </div>
+  </div>
+
+
+
+
+  <!-- List group -->
+  <ul class="list-group">
+    <li class="list-group-item">{$list.0.create_time |date="y-m-d h:i",###}</li>
+
+  </ul>
+</div>
+
+<!--  <div class="panel panel-default">
+  <div class="panel-body">
+    <p class="text-center"><strong>{$list.0.title}</strong></p>
+    <p class="text-center">{$list.0.create_time |date="y-m-d h:i",###}</p>
+    {$list.0.content|default="这家伙很懒，什么也没留下"|}
+  </div>
+</div>  -->
+
+
+    <nav aria-label="...">
+      <ul class="pager">
+        <!-- 上一页 -->
+        {if condition="$up neq ''"}
+            <li class="previous"><a href="{$up}"><span aria-hidden="true">&larr;</span> 上一页</a></li>
+        {else /}
+            <li class="previous disabled"><span aria-hidden="true">&larr; 没有了</span> </li>
+        {/if}
+        <!-- 下一页 -->
+        {if condition="$next neq ''"}
+            <li class="next"><a href="{$next}"><span aria-hidden="true">&larr;</span> 下一页</a></li>
+        {else /}
+            <li class="next disabled"><span aria-hidden="true">&larr; 没有了</span> </li>
+        {/if}
+      </ul>
+    </nav>
+
+
+  <div class="panel panel-default">
+  <div class="panel-heading">扫码访问当前留言</div>
+  <div class="panel-body">
+    <img src="http://pan.baidu.com/share/qrcode?w=150&h=150&url= {$Request.root.true}/{$Request.path}" />
+  </div>
+</div>
+
+  {include file="index/footer" /}
+
+

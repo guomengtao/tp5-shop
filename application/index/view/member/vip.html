@@ -1,0 +1,172 @@
+{include file="index/header" /}
+
+<div class="page-header">
+    <h1>
+<img    src="__STATIC__/images/single_member.png" data-holder-rendered="true" style="width: 38px; height: 38px;">
+         
+    VIP会员  </h1>
+</div>
+<div class="panel panel-default">
+    <div class="panel-body"> 
+       <h3>
+            <small>
+        <span class="glyphicon glyphicon-volume-up"  aria-hidden="true"></span> 新功能：
+         <a href="__ROOT__/index/member/vip">  每天上午9点99元抢注vip会员一年  </a>
+        
+  <script type="text/javascript">  
+
+        function countTime() {  
+            //获取当前时间  
+            var date = new Date();  
+            var now = date.getTime();  
+            //设置截止时间  
+            // var str="2018/4/25 9:33:00";
+
+            //获取当前时间年月日
+
+            var y = date.getFullYear();
+            var m = date.getMonth()+1; // 这个函数月份从0开始，所以+1
+            var d = date.getDate();
+            
+            //设置开始时间 每天上午9点 
+            var str=y+"/"+m+"/"+d+" "+"09:00:00";
+
+
+            var endDate = new Date(str); 
+            var end = endDate.getTime();  
+            
+            //时间差  
+            var leftTime = end-now; 
+            //定义变量 d,h,m,s保存倒计时的时间  
+            var d,h,m,s;  
+
+            // document.getElementById("_d").innerHTML = leftTime/1000/60%60 + "--" +d+"天";   
+            // document.getElementById("_d").innerHTML = str + "--" +d+"天";   
+
+
+                d = Math.floor(leftTime/1000/60/60/24);  
+                h = Math.floor(leftTime/1000/60/60%24);  
+                m = Math.floor(leftTime/1000/60%60);  
+                s = Math.floor(leftTime/1000%60);  
+
+            if (leftTime>=0) {  
+                
+
+                //将倒计时赋值到div中  
+                // document.getElementById("_d").innerHTML = d+"天";  
+                document.getElementById("_h").innerHTML = h+"小时";  
+                document.getElementById("_m").innerHTML = m+"分";  
+                document.getElementById("_s").innerHTML = s+"秒"; 
+                secondkill.style.display="none"; 
+
+            }
+
+            else if (leftTime/1000/60 >= -15){
+                document.getElementById("_h").innerHTML = "";  
+                document.getElementById("_m").innerHTML = "";  
+                document.getElementById("_s").innerHTML = "进行中 ...";
+                secondkill.style.display="block"; 
+            }  
+            else{
+
+                // 将倒计时赋值到div中  
+                // 用Math.abs负数转正数
+                document.getElementById("_d").innerHTML = Math.abs(d)+"天";  
+                document.getElementById("_h").innerHTML = Math.abs(h)+"小时";  
+                document.getElementById("_m").innerHTML = Math.abs(m)+"分";  
+                document.getElementById("_s").innerHTML = Math.abs(s)+"秒";  
+                secondkill.style.display="none"; 
+            }  
+            
+            //递归每秒调用countTime方法，显示动态时间效果  
+            setTimeout(countTime,1000);  
+  
+        }  
+    </script>  
+  
+      
+        <span id="_d"></span>  
+        <span id="_h"></span>  
+        <span id="_m"></span>  
+        <span id="_s"></span>  
+      
+
+
+        </h3> <p> &nbsp;</p>
+         
+        <ul class="nav nav-pills" role="tablist">
+            <li role="presentation" class="active"  ><a href="#">您好！<span class="badge">{$Think.cookie.phone} </span></a></li>
+             <li role="presentation" class="active" style="display: none;"><a href="#">VIP有效期： <span class="badge">{$user.start_time} </span></a></li>
+            <li role="presentation"><a href="#">最新开始日期 <span class="badge">{$user.start_time|date="Y-m-d h:i",###} </span></a></li>
+            <li role="presentation"><a href="#">最新到期日期 <span class="badge">{$user.expiration_time|date="Y-m-d h:i",###}</span></a></li>
+            <a   href="__ROOT__/index/member/invite" id="btn" class="btn btn-default" target="_blank"  >邀请好友  获赠VIP天数</a>
+
+        </ul>
+        
+
+        
+
+    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading">开通/增加VIP会员：</div>
+    <div class="panel-body">
+
+         
+
+
+        {if condition="$Think.cookie.admin>=1"}
+        <button     style="line-height: 50px;    margin-bottom: 10px;" type="button" class="btn btn-danger "   
+                         onclick="ajaxModelPay('0.01','105','抢购开通VIP12个月  {:date("y年m月d日 H:i:s")}','99{$Think.cookie.phone}{:time()}')" >99元365天  VIP会员      </button>
+
+         {/if}
+
+
+         <button style="display: none;" id="secondkill" style="line-height: 50px;    margin-bottom: 10px;" type="button" class="btn btn-danger "   
+                 onclick="ajaxModelPay('19.9','105','抢购开通VIP300天  {:date("y年m月d日 H:i:s")}','99{$Think.cookie.phone}{:time()}')" >99元300天  VIP会员 抢购进行中...    </button>
+
+
+        <p></p>
+        
+  
+
+        <button style="line-height: 50px;    margin-bottom: 10px;" type="button" class="btn btn-danger "   
+         onclick="ajaxModelPay('9.9','105','开通VIP30天  {:date("y年m月d日 H:i:s")}','9.9{$Think.cookie.phone}{:time()}')" >9.9元30天  VIP会员    </button>
+
+        
+
+
+          <button style="line-height: 50px;    margin-bottom: 10px;" type="button" class="btn btn-warning"
+         onclick="ajaxModelPay('99','105','开通VIP365天  {:date("y年m月d日 H:i:s")}','99{$Think.cookie.phone}{:time()}')" >99元/365天 VIP</button>
+
+
+        
+
+
+        
+
+ 
+
+
+    </div>
+</div>
+
+
+
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">VIP说明：</div>
+    <div class="panel-body">
+         
+        <h5><small>  刚上线 各种奖励 bug 逐步开发中...</small></h5>
+      
+        <h5><small>  活动保留一切解释权</small></h5>
+
+    </div>
+</div>
+
+
+ 
+
+{include file="index/footer" /}

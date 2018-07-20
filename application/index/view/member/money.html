@@ -1,0 +1,69 @@
+{include file="index/header" /}
+
+<div class="page-header">
+    <h1>我的积分/金币 <small> 邀请一个会员注册可以获得100金币和积分</small></h1>
+</div>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <ul class="nav nav-pills" role="tablist">
+            <li role="presentation" class="active"><a href="#">总积分 <span class="badge">{$integral} 分</span></a></li>
+            <li role="presentation"><a href="#">金币 <span class="badge">{$money} 个</span></a></li>
+            <li role="presentation"><a href="#">已消费金币 <span class="badge">{$integral-$money} 个</span></a></li>
+
+        </ul>
+    </div>
+</div>
+
+
+
+
+
+
+{if condition="$list"}
+<div class="panel panel-default">
+    <div class="panel-heading">获得积分/金币明细：</div>
+    <div class="panel-body">
+        <table class="table table-hover ">
+            <thead>
+            <tr  ><th > ID</th><th > 类型 </th><th > 积分/金币 </th><th> 说明 </th><th > 日期</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            {volist name='list' id='user'}
+
+            <tr  ><th> {$user.id} </th><th > {$user.money<0?'消费金币':'获得积分和金币'} </th> <th> {$user.money}个 </th><th> {$user.content} </th><th> {$user.create_time} </th> </tr>
+
+            {/volist}
+            </tbody>
+        </table><!-- {$list->total()} -->
+        {$list->render()}
+    </div></div>
+{/if}
+
+<div class="panel panel-default">
+    <div class="panel-heading">积分/金币说明：</div>
+    <div class="panel-body">
+        <h5><small>  刚上线 各种奖励 bug 逐步开发中...</small></h5>
+        <h5><small>  10个金币可以兑换1节课程</small></h5>
+        <h5><small>  评论课程奖励1个积分和金币</small></h5>
+        <h5><small>  活动保留一切解释权</small></h5>
+
+    </div>
+</div>
+
+
+<script>
+
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+    function myCopy(){
+        var ele = document.getElementById("text");
+        ele.select();
+        document.execCommand("Copy");
+        document.getElementById("bt").innerHTML = " 已复制";
+    }
+</script>
+
+{include file="index/footer" /}

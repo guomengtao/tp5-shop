@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ueditor demo</title>
+</head>
+
+<body><button onclick="getText()">获得当前选中的文本</button>
+    <!-- 加载编辑器的容器 -->
+    <script id="container" name="content" type="text/plain">
+        这里写你的初始化内容
+    </script>
+    <!-- 配置文件 -->
+    <script type="text/javascript" src="ueditor.config.js"></script>
+    <!-- 编辑器源码文件 -->
+    <script type="text/javascript" src="ueditor.all.js"></script>
+    <!-- 实例化编辑器 -->
+    <script type="text/javascript">
+        var ue = UE.getEditor('container');
+
+        function getText() {
+        //当你点击按钮时编辑区域已经失去了焦点，如果直接用getText将不会得到内容，所以要在选回来，然后取得内容
+        var range = UE.getEditor('editor').selection.getRange();
+        range.select();
+        var txt = UE.getEditor('editor').selection.getText();
+        alert(txt)
+    
+    }
+    </script>
+    
+</body>
+
+</html>

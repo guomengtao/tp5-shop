@@ -1,0 +1,573 @@
+{include file="index/header" /}
+
+
+
+
+ <div class="page-header">
+          
+            <h2 style="color: #337ab7;"><span class="glyphicon glyphicon-th" aria-hidden="true"></span> 最新动态 
+
+
+<!--  div层延时消失  -->
+<script>
+function operate()
+{
+    document.getElementById('div_test').style.display="";
+    setTimeout("disappeare()",2000);
+}
+function disappeare(){
+    document.getElementById('div_test').style.display="none";
+}
+
+setTimeout("operate()",4000);//2秒，可以改动
+</script>
+ 
+<input type="button" class="btn btn-default" onclick="javascript:operate()" value="点击更新"/>
+
+
+<div id="div_test" style="display:none;color:white;line-height:50px;position:absolute;z-index:100;left:50%;top:50%;margin-left:-75px;text-align:center;width:150px;height:50px;background-color:#666;font-size:12px;">
+    恭喜你，操作成功！
+</div>
+ 
+
+ <!-- <div id="divbox" style=" border:2px #CCC solid; width:400px; height:200px; margin:150px auto;"></div> -->
+<!-- <script language="javascript"> -->
+<!-- function codefans(){
+var box=document.getElementById("divbox");
+box.style.display="none"; 
+} -->
+<!-- // setTimeout("codefans()",2000);//2秒，可以改动 -->
+<!-- </script> -->
+
+
+
+            </h2>
+
+
+        </div>
+ 
+
+
+
+<div class="row">
+
+
+
+     <!-- 分割线 第一个 -->
+    
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+       
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <span class="glyphicon glyphicon-signal" aria-hidden="true"></span>
+            短信最新动态</div>
+            <div class="panel-body">
+                {volist name='sms' id='user' key="k"}
+                 
+                 <div   class=" col-xs-12 col-sm-12 col-md-12 " style="padding: 0px;    border-bottom: 1px solid #eee;    margin-bottom: 10px;padding-bottom: 10px;  ">
+
+
+                        <div class="media" >
+                            <div class="media-left" >
+                                <a href="#">
+                                    <img class="media-object img-thumbnail"    src="__STATIC__/images/user/user ({:rand(1,25)}).jpg" data-holder-rendered="true" style="width: 48px; height: 48px;">
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                
+
+
+                                    <small><a href="{:url('index/member/home', ['user_id' => $user.id])}">{$user.phone|substr=0,3}****{$user.phone|substr=7,4}</a> 
+                                获取短信<span style="color: #D8582B;font-weight: bold;"> </span></small>
+                                 
+                                <h5> <small>时间：<span style="color: #D8582B;font-weight: bold;">{$user.create_time}</span>  </small></h5>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+                {/volist}
+
+            </div>
+        </div>      
+    </div>
+
+    <!-- 分割线 第二个-->
+
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+       
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                <span class="glyphicon glyphicon-th" aria-hidden="true"></span> 积分最新动态</div>
+            <div class="panel-body">
+                {volist name='money_add' id='user' key="k"}
+                 
+                 <div   class=" col-xs-12 col-sm-12 col-md-12 " style="padding: 0px;    border-bottom: 1px solid #eee;    margin-bottom: 10px;padding-bottom: 10px;  ">
+
+
+                        <div class="media" >
+                            <div class="media-left" >
+                                <a href="#">
+                                    <img class="media-object img-thumbnail"    src="__STATIC__/images/user/user ({:rand(1,25)}).jpg" data-holder-rendered="true" style="width: 48px; height: 48px;">
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                
+
+
+                                    <small><a href="{:url('index/member/home', ['user_id' => $user.id])}">{$user.phone|substr=0,3}****{$user.phone|substr=7,4}</a> 
+                                <span style="color: #D8582B;font-weight: bold;">+{$user.money} </span>积分</small>
+                                 
+                                <h5> <small>时间： <span style="color: #D8582B;font-weight: bold;">{$user.create_time}</span></small></h5>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+                {/volist}
+
+            </div>
+        </div>      
+    </div>
+
+
+    <!-- 分割线 第三个-->
+   
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+       
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>  最新签到</div>
+            <div class="panel-body">
+                {volist name='registration' id='user' key="k"}
+
+                <div   class=" col-xs-12 col-sm-12 col-md-12 " style="padding: 0px;    border-bottom: 1px solid #eee;    margin-bottom: 10px;padding-bottom: 10px; ">
+
+
+                        <div class="media" >
+                            <div class="media-left" >
+                                <a href="#">
+                                    <img class="media-object img-thumbnail"    src="__STATIC__/images/user/user ({:rand(1,25)}).jpg" data-holder-rendered="true" style="width: 48px; height: 48px;">
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                
+
+
+                                    <small><a href="{:url('index/member/home', ['user_id' => $user.id])}">{$user.phone|substr=0,3}****{$user.phone|substr=7,4}</a> 
+                                NO.<span style="color: #D8582B;font-weight: bold;">{$k}</span></small>
+                                 
+                                <h5> <small>时间： <span style="color: #D8582B;font-weight: bold;">{$user.create_time}</span></small></h5>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+                {/volist}
+
+            </div>
+        </div>      
+    </div> 
+
+    <!-- 分割线 第四个-->
+
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+       
+        <div class="panel panel-primary">
+            <div class="panel-heading"><span class="glyphicon glyphicon-flag" aria-hidden="true"></span>   财富最新动态</div>
+            <div class="panel-body">
+                {volist name='money' id='user' key="k"}
+                 
+                 <div   class=" col-xs-12 col-sm-12 col-md-12 " style="padding: 0px;    border-bottom: 1px solid #eee;    margin-bottom: 10px;padding-bottom: 10px;  ">
+
+
+                        <div class="media" >
+                            <div class="media-left" >
+                                <a href="#">
+                                    <img class="media-object img-thumbnail"    src="__STATIC__/images/user/user ({:rand(1,25)}).jpg" data-holder-rendered="true" style="width: 48px; height: 48px;">
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                
+
+
+                                    <small><a href="{:url('index/member/home', ['user_id' => $user.id])}">{$user.phone|substr=0,3}****{$user.phone|substr=7,4}</a> 
+                                <span style="color: #D8582B;font-weight: bold;">￥{$user.money}</span> 金币</small>
+                                <h5> <small>内容 <span style="color: #D8582B;font-weight: bold;">
+
+                                     <!--截取中文字符串-->
+                                    {:mb_substr($user.content,0,16,'utf-8');}
+
+                                    <!--判断是否加省略号-->
+                                    {:mb_strlen($user.content,'utf-8') >=18?'...':''}
+
+
+
+
+
+
+
+
+
+
+
+                                </span></small></h5>
+                                <h5> <small>时间 <span style="color: #D8582B;font-weight: bold;">{$user.create_time}</span></small></h5>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+                {/volist}
+            </div>
+        </div>      
+    </div>
+
+    
+
+    <!-- 分割线 第五个-->
+
+
+
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+       
+        <div class="panel panel-primary">
+            <div class="panel-heading"><span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>   最新留言</div>
+            <div class="panel-body">
+                {volist name='new_message' id='user' key="k"}
+
+                <div   class=" col-xs-12 col-sm-12 col-md-12 " style="padding: 0px;    border-bottom: 1px solid #eee;    margin-bottom: 10px;padding-bottom: 10px; ">
+
+
+                        <div class="media" >
+                            <div class="media-left" >
+                                <a href="#">
+                                    <img class="media-object img-thumbnail"    src="__STATIC__/images/user/user ({:rand(1,25)}).jpg" data-holder-rendered="true" style="width: 48px; height: 48px;">
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                
+
+
+                                    <small><a href="#">{$user.phone|substr=0,3}****{$user.phone|substr=7,4}</a>
+                                NO.<span style="color: #D8582B;font-weight: bold;">{$k}</span></small>
+                                <h5> <small>时间 <span style="color: #D8582B;font-weight: bold;">{$user.create_time}</span></small></h5>
+                                <h5> <small>内容 <span style="color: #D8582B;font-weight: bold;">{$user.title}</span></small></h5>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+
+                
+
+
+
+                {/volist}
+            </div>
+        </div>      
+    </div> 
+    
+    <!-- 分割线 第六个-->
+
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+       
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span> 上课最新动态</div>
+            <div class="panel-body">
+                {volist name='leraning_time' id='user' key="k"}
+
+                <div   class=" col-xs-12 col-sm-12 col-md-12 " style="padding: 0px;    border-bottom: 1px solid #eee;    margin-bottom: 10px;padding-bottom: 10px; ">
+
+
+                        <div class="media" >
+                            <div class="media-left" >
+                                <a href="#">
+                                    <img class="media-object img-thumbnail"    src="__STATIC__/images/user/user ({:rand(1,25)}).jpg" data-holder-rendered="true" style="width: 48px; height: 48px;">
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                
+
+
+                                    <small><a href="{:url('index/member/home', ['user_id' => $user.id])}">{$user.phone|substr=0,3}****{$user.phone|substr=7,4}</a> 
+                                课程ID.<span style="color: #D8582B;font-weight: bold;">{$user.shop}</span></small>
+                                <h5><small>学习进度：<span style="color: #D8582B;font-weight: bold;"> {:floor($user.title/60/60)} </span>小时<span style="color: #D8582B;font-weight: bold;"> {:floor($user.title/60 % 60)} </span>分</small></h5>
+                                <h5><small>时间：<span style="color: #D8582B;font-weight: bold;"> {$user.update_time} </span></small></h5>
+                            </div>
+                        </div>
+
+
+                    </div>          
+
+
+
+                {/volist}
+
+            </div>
+        </div>      
+    </div>
+
+    <!-- 分割线 第七个-->
+
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+       
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>  最新订单</div>
+            <div class="panel-body">
+                {volist name='total_fee' id='user' key="k"}
+
+                <div   class=" col-xs-12 col-sm-12 col-md-12 " style="padding: 0px;    border-bottom: 1px solid #eee;    margin-bottom: 10px;padding-bottom: 10px; ">
+
+
+                        <div class="media" >
+                            <div class="media-left" >
+                                <a href="#">
+                                    <img class="media-object img-thumbnail"    src="__STATIC__/images/user/user ({:rand(1,25)}).jpg" data-holder-rendered="true" style="width: 48px; height: 48px;">
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                
+
+
+                                    <small><a href="{:url('index/member/home', ['user_id' => $user.id])}">{$user.phone|substr=0,3}****{$user.phone|substr=7,4}</a> 
+                                <span style="color: #D8582B;font-weight: bold;">￥{$user.total_fee}</span></small>
+                                <h5><small> 时间<span style="color: #D8582B;font-weight: bold;"> {$user.create_time} </span></small></h5>
+                                <h5><small><span style="color: #D8582B;font-weight: bold;"> 
+
+
+                                     {if condition="$user.body==135"}
+                                        签到
+                                    {elseif condition="$user.body==135"}
+
+                                     {else /}
+                                        {$user.body}
+                                        {$user.subject}
+                                    {/if} 
+                            </span></small></h5>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+
+                
+
+
+
+                {/volist}
+            </div>
+        </div>      
+    </div>
+
+<!-- 分割线 第八个-->
+
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+       
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>  会员最新访问动态</div>
+            <div class="panel-body">
+                {volist name='footprint_phone' id='user' key="k"}
+
+                <div   class=" col-xs-12 col-sm-12 col-md-12 " style="padding: 0px;    border-bottom: 1px solid #eee;    margin-bottom: 10px;padding-bottom: 10px; ">
+
+
+                        <div class="media" >
+                            <div class="media-left" >
+                                <a href="#">
+                                    <img class="media-object img-thumbnail"    src="__STATIC__/images/user/user ({:rand(1,25)}).jpg" data-holder-rendered="true" style="width: 48px; height: 48px;">
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                
+
+
+                                    <small><a href="{:url('index/member/home', ['user_id' => $user.id])}">{$user.phone|substr=0,3}****{$user.phone|substr=7,4}</a> 
+                                <span style="color: #D8582B;font-weight: bold;">￥66</span></small>
+                                <h5><small> 时间<span style="color: #D8582B;font-weight: bold;"> {$user.create_time} </span></small></h5>
+                                <h5><small><span style="color: #D8582B;font-weight: bold;"> {$user.pathinfo}
+                            </span></small></h5>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+
+                
+
+
+
+                {/volist}
+            </div>
+        </div>      
+    </div>
+     
+     <!-- 分割线 第九个-->
+
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+       
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>  课程访问最新动态</div>
+            <div class="panel-body">
+                {volist name='pathinfo' id='user' key="k"}
+
+                <div   class=" col-xs-12 col-sm-12 col-md-12 " style="padding: 0px;    border-bottom: 1px solid #eee;    margin-bottom: 10px;padding-bottom: 10px; ">
+
+
+                        <div class="media" >
+                            <div class="media-left" >
+                                <a href="#">
+                                    <img class="media-object img-thumbnail"    src="__STATIC__/images/user/user ({:rand(1,25)}).jpg" data-holder-rendered="true" style="width: 48px; height: 48px;">
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                
+
+
+                                    <small><a href="{:url('index/member/home', ['user_id' => $user.id])}">{$user.phone|substr=0,3}****{$user.phone|substr=7,4}</a> 
+                                <span style="color: #D8582B;font-weight: bold;">￥66</span></small>
+                                <h5><small> 时间<span style="color: #D8582B;font-weight: bold;"> {$user.create_time} </span></small></h5>
+                                <h5><small><span style="color: #D8582B;font-weight: bold;"> {$user.pathinfo}
+                            </span></small></h5>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+
+                
+
+
+
+                {/volist}
+            </div>
+        </div>      
+    </div>
+     
+
+    
+
+
+
+</div>
+
+<!-- 独立的 第十个-->
+
+    
+       
+        <div class="panel panel-default">
+            <div class="panel-heading">
+            <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
+        最新搜索</div>
+            <div class="panel-body">
+                {volist name='search' id='user' key="k"}
+                 
+                 <div   class=" col-xs-12 col-sm-12 col-md-12 " style="padding: 0px;    border-bottom: 1px solid #eee;    margin-bottom: 10px;padding-bottom: 10px;  ">
+
+
+                        <div class="media" >
+                            <div class="media-left" >
+                                <a href="#">
+                                    <img class="media-object img-thumbnail"    src="__STATIC__/images/user/user ({:rand(1,25)}).jpg" data-holder-rendered="true" style="width: 48px; height: 48px;">
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                
+
+
+                                    <small><a href="{:url('index/member/home', ['user_id' => $user.id])}">{:urldecode($user.url)}</a> 
+                                NO.<span style="color: #D8582B;font-weight: bold;">{$k}</span></small>
+                                <h5> <small><span style="color: #D8582B;font-weight: bold;">{:urldecode($user.url)}</span></small></h5>
+                                <h5>时间： <small><span style="color: #D8582B;font-weight: bold;">{$user.create_time}</span>  </h5>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+                {/volist}
+            </div>
+        </div>      
+     
+
+<!-- 独立的 第十1个-->
+
+    
+       
+        <div class="panel panel-default">
+            <div class="panel-heading">
+            <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
+        来路域名最新动态</div>
+            <div class="panel-body">
+                {volist name='domain' id='user' key="k"}
+                 
+                 <div   class=" col-xs-12 col-sm-12 col-md-12 " style="padding: 0px;    border-bottom: 1px solid #eee;    margin-bottom: 10px;padding-bottom: 10px;  ">
+
+
+                        <div class="media" >
+                            <div class="media-left" >
+                                <a href="#">
+                                    <img class="media-object img-thumbnail"    src="__STATIC__/images/user/user ({:rand(1,25)}).jpg" data-holder-rendered="true" style="width: 48px; height: 48px;">
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                
+
+
+                                    <small><a href="{:url('index/member/home', ['user_id' => $user.id])}">{$user.phone|substr=0,3}****{$user.phone|substr=7,4}</a> 
+                                NO.<span style="color: #D8582B;font-weight: bold;">{$k}</span></small>
+                                <h5> <small><span style="color: #D8582B;font-weight: bold;">{$user.domain}</span></small></h5>
+                                <h5>时间： <small><span style="color: #D8582B;font-weight: bold;">{$user.create_time}</span>  </h5>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+                {/volist}
+            </div>
+        </div>      
+     
+
+
+
+
+ 
+
+<div class="panel panel-default">
+    <div class="panel-heading">提示：</div>
+    <div class="panel-body">
+        <h5><small> 希望大家相互学习，共同进步。^_^ </small></h5>
+
+        <h5><small> 刚开发好，还有许多BUG,欢迎提意见。  </small></h5>
+
+<h5><small> 统计各种排名 各种最新动态  </small></h5>
+    </div>
+</div>
+ 
+ 
+
+
+{include file="index/footer" /}

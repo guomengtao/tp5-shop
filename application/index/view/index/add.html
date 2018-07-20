@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Jack</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tp5简易留言板</title>
+  
+  <link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css">  
+  <script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+ 
+</head>
+<body>
+  <div  class="container">   
+<h2><a href="{$Think.server.script_name}">Tp5-简易商城</a></h2>
+ 
+<p>发布课程</p><br>
+ 
+ <form  action="" method="post">
+  <div class="form-group" >
+    <!-- <label for="exampleInputName2">留言标题title:</label> -->
+    <input type="text" class="form-control" id="title" name="title" value="" placeholder="请输入课程标题" maxlength="100">
+     
+  </div>
+  <div class="form-group">
+    <!-- <label for="exampleInputPassword1">留言内容content:</label> -->
+   <textarea class="form-control" rows="3"  id="content" name="content"  value="" placeholder="请输入课程内容"></textarea>
+  </div>
+   
+
+  
+
+  
+  <button type="submit" id="btn" class="btn btn-primary"  >发布课程</button>
+</form>
+ 
+ 
+ </div>
+  
+ </body>
+ </html>

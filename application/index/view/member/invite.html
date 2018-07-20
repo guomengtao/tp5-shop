@@ -1,0 +1,89 @@
+{include file="index/header" /}
+
+<div class="page-header">
+  <h1>邀请注册 <small> 邀请同学一起来学习吧~ </small></h1>
+</div>
+       <div class="panel panel-default">
+  <div class="panel-body">
+         <ul class="nav nav-pills" role="tablist">
+      <li role="presentation" class="active"><a href="/index/member/money">已经邀请的人数 <span class="badge">{$invite} 人</span></a></li>
+        <li role="presentation"><a href="/index/member/money">总共获得积分/金币 <span class="badge">{$integral} 分</span></a></li>
+        <li role="presentation"><a href="/index/member/money">剩余金币 <span class="badge">{$money} 分</span></a></li>
+    </ul>
+  </div>
+</div>
+
+
+  <div class="panel panel-default">
+  <div class="panel-body">
+        <div class="input-group">
+      <span class="input-group-addon">您的邀请链接是:</span>
+      <input type="text" id="text" class="form-control" aria-label="Amount (to the nearest dollar)" value="{if condition='$Think.cookie.phone'}{$Request.root.true}/index/index/register/invite/{$id}
+      {else /}登录后获得邀请专属邀请链接{/if}
+      ">
+      <span class="input-group-addon" onclick="myCopy()"  id="bt" data-toggle="tooltip" data-placement="top" title="复制">Copy</span>
+    </div>
+    <h5><small>分享邀请链接到QQ好友 微信好友 QQ群 微博 博客 论坛 网站 均可! <a href="/index/index/register/invite/{$id}" target="_blank">预览您的邀请地址</a> </small></h5>
+  </div>
+</div>
+
+
+
+
+
+
+<div class="panel panel-default">
+  <div class="panel-heading">您的专属邀请二维码：</div>
+  <div class="panel-body">
+    <img src="http://bshare.optimix.asia/barCode?site=weixin&url={$Request.root.true}/index/index/login/invite/{$id}" />
+
+
+ <h5><small>分享您的专属邀请二维码，到QQ好友 微信好友 QQ群 微博 博客 论坛 网站 均可!</small></h5>
+  </div>
+</div>
+{if condition="$invite"}
+<div class="panel panel-default">
+  <div class="panel-heading">已邀请同学：</div>
+  <div class="panel-body">
+          <table class="table table-hover ">
+            <thead>
+              <tr  ><th > ID</th><th > 用户名</th><th > 接受邀请时间</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {volist name='list' id='user'}
+
+              <tr  ><th> {$user.id} </th><th> {$user.phone|substr=0,3}****{$user.phone|substr=7,4} </th> <th> {$user.create_time} </th> </tr>
+              {/volist}
+            </tbody>
+           </table><!-- {$list->total()} -->
+           {$list->render()}
+</div></div>
+{/if}
+
+<!-- <div class="panel panel-default">
+  <div class="panel-heading">活动说明：</div>
+  <div class="panel-body">
+     <h5><small> 每邀请一个会员都可获得1张兑换券,可以兑换任意一节课程！邀请<br><br>
+      获得兑换券后，前往兑换页面，点击兑换按钮，即可完成兑换。</small></h5>
+
+
+  </div>
+</div> -->
+
+
+ <script>
+
+  $(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+    function myCopy(){
+        var ele = document.getElementById("text");
+        ele.select();
+        document.execCommand("Copy");
+        document.getElementById("bt").innerHTML = " 已复制";
+    }
+</script>
+
+{include file="index/footer" /}

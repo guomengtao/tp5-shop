@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>{:lang('Tp5简易商城')}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style type="text/css">
+    body,button, input, select, textarea,h1 ,h2, h3, h4, h5, h6 { font-family: Microsoft YaHei,'宋体' , Tahoma, Helvetica, Arial, "\5b8b\4f53", sans-serif;}
+
+    .btn {
+
+      margin-bottom: 5px ;
+    }
+
+    .syntaxhighlighter td.code {
+      padding: 9.5px 0 9.5px 9.5px!important;
+    }
+  </style>
+
+  <script>
+      var _width = $(window).width();
+      if(_width > 1000){
+
+          // alert(_width);//浏览器时下窗口文档body的总宽度 包括border padding margin
+
+          $(function () {
+              $(".dropdown").mouseover(function () {
+                  $(this).addClass("open");
+              });
+
+              $(".dropdown").mouseleave(function(){
+                  $(this).removeClass("open");
+              })
+
+          })
+      }
+
+
+
+  </script>
+</head>
+
+<!-- 设置view播放页为全屏 -->
+{if condition="($Request.module=='index') AND ($Request.controller=='Index') AND ($Request.action=='view')" }
+     <body  style="padding-top:52px;background-color: black;">
+     {else /} 
+             <body  style="padding-top:70px;">
+{/if}
+ 
+
+
+  <nav class="navbar navbar-inverse navbar-fixed-top" style="border-radius: 0px;">
+      
+          {if condition="($Think.cookie.screen==0)"}
+            <div class="container">
+          {else /}
+            <div class="container-fluid">
+          {/if}
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="__ROOT__/">ThinkPHP5</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+
+              {if condition="$Request.url == '__ROOT__/index/member/news'"}
+                  <li class="active" data-placement="bottom" title="Tooltip on bottom">
+               {else/}
+                <li >
+              {/if}
+
+      
+              <a href="__ROOT__/index/member/news">{:lang('最新动态')}<span class="sr-only">(current)</span></a></li>
+           
+                {if condition="$Request.url == '__ROOT__/index/member/top'"}
+                  <li class="active" data-placement="bottom" title="Tooltip on bottom">
+               {else/}
+                <li >
+              {/if}
+
+
+                  <a href="__ROOT__/index/member/top">{:lang('榜上有名')}
+               
+            </a>
+                </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{:lang('实战入门')} <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                
+                <li><a href="__ROOT__/index/bbs/show">学员评论</a></li>
+                <li><a href="__ROOT__/index/ajax/ajaxrun">最新学员</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="__ROOT__/index/member/learning">正在上课学员</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="__ROOT__/index/member/registration">签到排行</a></li>
+                <li><a href="__ROOT__/index/member/top">排行榜</a></li>
+
+                <li><a href="__ROOT__/index/member/tip">打赏</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="__ROOT__/index/member/footprint">网站统计</a></li>
+                <li><a href="{:url('index/member/tip','appointment=1')}">预约录课</a></li>
+              </ul>
+            </li>
+          </ul>
+          <form class="navbar-form navbar-left" action="__ROOT__/index/index/like">
+            <div class="form-group">
+              <input type="text" class="form-control" name="search" placeholder="search" value="{$Think.get.search}">
+            </div>
+            <button type="submit" class="btn btn-default" style="    margin-bottom: 0px">{:lang('搜索课程')}</button>
+          </form>
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              {if condition="$Think.cookie.phone"} <a href="__ROOT__/index/member/vip">
+                {if condition="$Think.cookie.figureurl_qq_2"}
+ <img class="img-circle"  style="width: 18px; height: 18px;" src="{$Think.cookie.figureurl_qq_2}"> 
+ {$Think.cookie.nickname} 
+                {/if}
+ 
+                {if condition="$Think.cookie.vip"}
+             <!--  <img    src="__STATIC__/images/single_member.png" data-holder-rendered="true" style="width: 38px; height: 38px;">
+
+              <img    src="__STATIC__/images/vip3.png" data-holder-rendered="true" style="width: 38px; height: 38px;"> -->
+              <img    src="__STATIC__/images/vip4.png" data-holder-rendered="true" style="width: 18px; height: 18px;">
+
+              <!-- <span class="glyphicon glyphicon-king" style="color: goldenrod" aria-hidden="true"></span> -->
+              {/if}
+
+              {$Think.cookie.phone}  
+
+
+              
+            </a>
+
+
+
+
+              {else /} 
+              <a href="__ROOT__/index/index/login">登录</a> 
+              {/if}
+
+</li>
+
+             
+
+              {if condition="$Request.url == '__ROOT__/index/index/register'"}
+                  <li class="active" data-placement="bottom" title="Tooltip on bottom">
+               {else/}
+                <li >
+              {/if}
+
+              {if condition="$Think.cookie.phone<=0"}  
+
+              <!-- <a href="https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=100556678&redirect_uri=http://open.gaoxueya.com/index/api/qq&scope=get_user_info" target="_black">QQ快捷登陆</a>  -->
+              <a href="__ROOT__/index/index/register">注册</a> 
+              {/if}
+
+            </li>
+
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-bell" style="color: 3goldenrod" aria-hidden="true"></span>
+   <span class="badge" style="background-color: goldenrod">80</span> </a>
+              <ul class="dropdown-menu">
+                <li><a href="__ROOT__/index/member/vip">新消息 - 开发中</a>
+<br>
+                  <a href="__ROOT__/index/member/vip">VIP中心</a>
+                </li>
+                <li><a href="__ROOT__/index/index/order">我的订单</a></li>
+                <li><a href="__ROOT__/index/member/diary">学习进度</a></li>
+                <li><a href="__ROOT__/index/member/invite">邀请注册</a></li>
+                <li><a href="__ROOT__/index/member/money">
+                  <span class="glyphicon glyphicon-jpy" style="color: goldenrod" aria-hidden="true"></span> 我的积分</a></li>
+                  
+                <li role="separator" class="divider"></li>
+
+                <!--<li><a onclick="ajaxModelPay('0.1','135','签到{$Think.cookie.phone}{:date("y年m月d日 H:i:s")}','135{$Think.cookie.phone}{:time()}') href="" >签到</a></li>-->
+                <li>{if condition="$Think.cookie.phone"} <a href="__ROOT__/index/index/login/logout/1">退出登录</a>
+                  {else /} 
+                  <!-- <a href="__ROOT__/index/index/login">登录/注册</a> -->
+                  <a href="{:url('/index/index/login')}">登录/注册</a>
+                {/if}</li>
+              </ul>
+            </li>
+
+
+
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">会员中心<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="__ROOT__/index/member/vip">VIP中心</a></li>
+                <li><a href="__ROOT__/index/index/order">我的订单</a></li>
+                <li><a href="__ROOT__/index/member/diary">学习进度</a></li>
+                <li><a href="__ROOT__/index/member/invite">邀请注册</a></li>
+                <li><a href="__ROOT__/index/member/money">
+                  <span class="glyphicon glyphicon-jpy" style="color: goldenrod" aria-hidden="true"></span> 我的积分</a></li>
+                  
+                <li role="separator" class="divider"></li>
+
+                <!--<li><a onclick="ajaxModelPay('0.1','135','签到{$Think.cookie.phone}{:date("y年m月d日 H:i:s")}','135{$Think.cookie.phone}{:time()}') href="" >签到</a></li>-->
+                <li>{if condition="$Think.cookie.phone"} <a href="__ROOT__/index/index/login/logout/1">退出登录</a>
+                  {else /} 
+                  <!-- <a href="__ROOT__/index/index/login">登录/注册</a> -->
+                  <a href="{:url('/index/index/login')}">登录/注册</a>
+                {/if}</li>
+              </ul>
+            </li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+
+<!-- 设置view播放页为全屏 -->
+{if condition="($Request.module=='index') AND ($Request.controller=='Index') AND ($Request.action=='view')" }
+        {if condition="($Think.cookie.screen==0)"}
+            <div class="container">
+          {else /}
+            <div class="container-fluid">
+          {/if}
+     {else /} 
+          {if condition="($Think.cookie.screen==0)"}
+            <div class="container">
+          {else /}
+            <div class="container-fluid">
+          {/if}
+             
+{/if}
+  
+
+  <!--<div class="page-header">-->
+  <!--<h3><a href="{$Think.server.script_name}">Tp5简易商城</a><small>  入门视频课</small></h3>-->
+  <!--</div>  -->
+
+
+    {if condition="$Think.session.total_fee<='0'" }
+
+{if condition="($Request.module=='index') AND ($Request.controller=='Index') AND ($Request.action=='index')" }
+  <ol class="breadcrumb">
+  <li class="active">
+    {if condition="($Request.module=='index') AND ($Request.controller=='Index') AND ($Request.action=='index')" }
+      标签
+     
+    {else /}
+       <a href="{:url('index/index/index')}">首页</a>
+    {/if}
+
+  </li>
+
+ 
+
+  <li><a href="__ROOT__/index/index/like?search=数据库">数据库</a></li>
+  <li><a href="__ROOT__/index/index/like?search=模型">模型</a></li>
+  <li><a href="__ROOT__/index/index/like?search=分页">分页</a></li>
+  <li><a href="__ROOT__/index/index/like?search=支付宝">支付宝</a></li>
+  <li><a href="__ROOT__/index/index/like?search=签到">签到</a></li>
+  <li><a href="__ROOT__/index/index/like?search=微博">微博登录</a></li>
+  <li><a href="__ROOT__/index/index/like?search=API">API</a></li>
+  <li><a href="__ROOT__/index/index/like?search=短信">短信</a></li>
+  <li><a href="__ROOT__/index/index/like?search=商城">商城</a></li>
+  <li><a href="__ROOT__/index/index/like?search=ajax">Ajax</a></li>
+  <li><a href="__ROOT__/index/index/like?search=上传">上传</a></li>
+  <li><a href="__ROOT__/index/index/like?search=演示">演示</a></li>
+  <li><a href="__ROOT__/index/index/like?search=Bootstrap">Bootstrap</a></li>
+  <li><a href="__ROOT__/index/index/like?search=二维码">二维码</a></li>
+
+  </ol>
+{/if}
+
+
+    <!--VIP用户免广告-->
+    {if condition="($Think.cookie.vip>=10000000) AND ($Request.host<>'localhost') AND ($Think.cookie.phone<>'')"} old 
+
+    <div class="panel panel-default hidden-xs"  >
+  <div class="panel-body">
+    <div class="alert alert-default  "   style="height: 280px;">
+
+
+      
+      <button style="display: none" type="button" class="btn btn-default  "  onclick="ajaxModelPay('32','105','开通VIP会员 月卡 32元{$Think.cookie.phone}','105{$Think.cookie.phone}{:time()}')" >
+        <!-- 开通VIP 无广告 -->
+      </button>
+    </div>
+
+ 
+ 
+     </div> </div>
+    
+{/if}
+
+<div class="row  "  >
+   
+  <div class="col-md-12"> 
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-8644709060035439",
+          enable_page_level_ads: true
+     });
+</script>
+ 
+  </div>
+  
+</div>
+
+     
+
+
+
+      
+     
+
+
+    {/if}
+
+
+<!-- 以下是快速注册功能 -->
+<!-- 新会员，可以快速通过短信验证码登录 -->
+<!-- 登录后提示设置密码，暂不设置，下次需要通过找回密码功能重置 -->
+<!-- 注册后激励 -->
+
+<!-- 老会员，在输入完成手机后，自动判断是否是老会员，老会员自动更改设置为输入密码登录 -->
+
+{if condition="$Think.cookie.phone==1"} 
+   <h4>注册送VIP</h4>
+
+   <form  action="{:url('index/index/login')}" method="post" name="myform">
+
+                          
+                         
+                      
+
+                         <div class="form-group " >
+                              <label  >手机号:</label>
+                             <input type="text" class="form-control" id="tel182" name="phone" value="{$Request.param.phone}" placeholder="请输入手机号" maxlength="100" autocomplete="on" >
+                         </div>
+
+                        <!--  <div class="form-group">
+                             <label for="exampleInputPassword1">密码:</label>
+                             <input type="text" class="form-control"  name="password" id="exampleInputPassword1" placeholder="请输入密码" >
+                         </div> -->
+
+
+                         <div class="row">
+
+                             <div class="col-lg-6" style="margin-bottom: 10px;">
+                                 <div class="input-group">
+                                     <input type="text" class="form-control"  name="rand" placeholder="请输入验证码">
+                                     <span class="input-group-btn">
+                             <button class="btn btn-default"  id="sms" type="button" onclick="public_login(document.getElementById('tel182').value)">获取验证码</button>
+                                </span>
+                                 </div><!-- /input-group -->
+                             </div><!-- /.col-lg-6 -->
+                         </div><!-- /.row -->
+
+                         <div class="form-group form-inline" >
+                              
+
+                             <button class="btn btn-default"  id="sms" type="button" onclick="public_ajax('{$Think.server.script_name}/index/member/public_login/')">提交ajax验证</button>
+
+                         <small> <span id="txtHint"></span>  </small>
+
+                         </div>
+
+                         {if condition="$Think.session.total_fee>'0'" } <small>.</small>{/if}
+                         <input type="hidden" class="form-control" id="login" name="login" value="2" placeholder="标记切换卡是第二个">
+
+  </form>
+
+ 
+{/if}
+ 

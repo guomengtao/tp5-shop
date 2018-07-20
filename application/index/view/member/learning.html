@@ -1,0 +1,77 @@
+{include file="index/header" /}
+
+<div class="page-header">
+    <h1>正在学习中学员 <small> 展示正在学习同学</small></h1>
+</div>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <ul class="nav nav-pills" role="tablist">
+            <li role="presentation" class="active"><a href="#">上课总数 <span class="badge">{$list->total()} 课</span></a></li>
+            <li role="presentation"><a href="#">已获得学习鼓励红包 <span class="badge">{$invite} 个</span></a></li>
+            <li role="presentation"><a href="#">已领取红包 <span class="badge">0 个</span></a></li>
+            <li role="presentation"><a href="__ROOT__/index/member/diary">查看我的学习进度</a></li>
+
+        </ul>
+    </div>
+</div>
+
+
+
+
+
+
+{if condition="$list"}
+<div class="panel panel-default">
+    <div class="panel-heading">正在上课明细：</div>
+    <div class="panel-body">
+        <div class="table-responsive">
+        <table class="table table-hover ">
+            <thead>
+            <tr  ><th > 学员ID</th><th > 课程ID</th><th> 课程长度 </th><th> 已学习进度 </th><th> 已学次数 </th><th > 第一次学习日期</th><th > 最新学习日期</th> <th > 金币</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            {volist name='list' id='user'}
+
+            <tr  ><th>{$user.phone|substr=0,3}****{$user.phone|substr=7,4} </th><th> <a href="__ROOT__/index/index/view/id/{$user.shop}">{$user.shop}</a> </th> <th> {$user.age|date="i:s",###}分 </th><th> {$user.title|date="i:s",###}分
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em;width: {$user.title/$user.age*100}%"  >
+                        {:round($user.title/$user.age*100)}%
+                    </div>
+                </div>
+            </th><th> {$user.status+1} </th><th> {$user.create_time} </th><th> {$user.update_time} </th><th> {$user.status?'<a href="__ROOT__/index/member/diary">金币2个</a>':''} </th> </tr>
+
+            {/volist}
+            </tbody>
+        </table>
+        </div>
+        {$list->render()}
+    </div></div>
+{/if}
+
+<div class="panel panel-default">
+    <div class="panel-heading">提示：</div>
+    <div class="panel-body">
+        <h5><small> 希望大家相互学习，共同进步。^_^ </small></h5>
+
+        <h5><small> 刚开发好，还有许多BUG,欢迎提意见。统计数据仅供参考。 </small></h5>
+
+    </div>
+</div>
+
+
+<script>
+
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+    function myCopy(){
+        var ele = document.getElementById("text");
+        ele.select();
+        document.execCommand("Copy");
+        document.getElementById("bt").innerHTML = " 已复制";
+    }
+</script>
+
+{include file="index/footer" /}

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>后台管理 - Tp5简易商城</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	 {css href="__CSS__/shop.css" /}
+</head>
+<body>
+     
+    
+    <nav class="navbar navbar-inverse " style=" border-radius: 0px;margin-bottom: 10px;">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="__ROOT__/admin">商城后台</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+       <!--  <li class="{$Request.action=='add'?'active':'' } "><a href="__ROOT__/admin/index/add">发布商品 <span class="sr-only">(current)</span></a></li>
+        <li class="{$Request.action=='show'?'active':'' } "><a href="__ROOT__/admin/index/show">管理商品</a></li> -->
+         <li class="
+         
+         
+           {$Request.action=='show'?'active':'' }
+         {$Request.action=='add'?'active':'' } 
+        
+        
+        
+          ">
+          <!-- {$Request.controller=='Index'?'active':'' } -->
+          <!-- {$Request.controller=='Index'?'active':'' } -->
+
+
+         <!-- {$Request.controller=='Articles'?'active':'' } -->
+          <!-- {$Request.controller=='News'?'active':'' } -->
+
+         {if condition="($Request.module=='admin') AND ($Request.controller=='Index') AND ($Request.action=='index')" }
+        active
+    {/if}
+
+
+          <a href="__ROOT__/admin/index/show">内容管理 </a></li>
+          <li class="{$Request.action=='view'?'active':'' } "><a href="__ROOT__/admin/index/view">系统设置</a></li> -->
+        <li  class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">会员管理 <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">One more separated link</a></li>
+          </ul>
+        </li>
+      </ul>
+      <form class="navbar-form navbar-left">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="输入产品名称">
+        </div>
+        <button type="submit" class="btn btn-default">搜索商品</button>
+      </form>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="active"> <a href="__ROOT__/index/index/index" target="_blank">预览首页</a>
+ </li>
+        <li>{if condition="$Think.cookie.phone==18210787405"} <a href="__ROOT__/admin/index/login">{$Think.cookie.phone} 管理员您好！</a>
+{else /} <script>window.location.href="__ROOT__/admin/index/login"</script>
+{/if}</li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">退出 <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+<!-- 这个是全局容器 -->
+<div class="container-fluid">
+ <!-- 以下是左右两侧 -->
+
+<div class="row">
+  <!-- 左侧 -->
+  <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
+
+    <!-- 折叠开始 -->
+<div class="panel-group" id="accordion">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" 
+           href="#collapseOne">
+          菜单
+        </a>
+      </h4>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse">
+      <div class="panel-body">
+        常用功能
+      </div>
+    </div>
+  </div>
+ 
+   
+</div>
+    <!-- 折叠结束 -->
+    <div class="list-group">
+         <a href="#" class="list-group-item disabled">
+          内容管理
+        </a>
+        <a href="__ROOT__/admin/index/show" class="list-group-item {$Request.action=='show'?'disabled':'' } ">
+          商品管理 {$Request.action} --{$Request.action=='show'?'disabled':'' } 
+        </a>
+        <a href="__ROOT__/admin/index/add" class="list-group-item {$Request.action=='add'?'disabled':'' } ">添加商品</a>
+        <a href="__ROOT__/admin/index/show" class="list-group-item">商品列表</a>
+        <a href="#" class="list-group-item   ">商品分类</a>
+        <a href="#" class="list-group-item  ">商品统计</a>
+</div>
+<div class="list-group">
+  <a href="" class="list-group-item disabled">
+    订单管理
+  </a>
+  <a href="__ROOT__/admin/index/view/id/37" class="list-group-item">订单列表</a>
+  <a href="#" class="list-group-item">支付记录</a>
+  <a href="#" class="list-group-item">支付设置</a>
+  <a href="#" class="list-group-item">订单统计</a>
+</div>
+<div class="list-group">
+  <a href="#" class="list-group-item disabled">
+    会员管理  
+  </a>
+  <a href="#" class="list-group-item">添加会员</a>
+  <a href="#" class="list-group-item">会员列表</a>
+  <a href="#" class="list-group-item">会员管理</a>
+  <a href="#" class="list-group-item">会员统计</a>
+</div>
+</div>
+<!-- 右侧 -->
+  <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10">
+
+
+<ol class="breadcrumb">
+  <li><a href="__ROOT__/admin">首页</a></li>
+  <li><a href="__ROOT__/admin">后台首页</a></li>
+  <li class="active">后台介绍</li>
+</ol>

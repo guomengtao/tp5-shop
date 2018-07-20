@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Jack</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Tp5简易留言板</title>
+	
+  <link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css">  
+  <script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+	 
+</head>
+<body>
+  <div  class="container">   
+<h2><a href="{$Think.server.script_name}/index/bbs/show/">Tp5简易留言板</a></h2>
+   
+
+ <div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">{$list.0.title}  </h3>
+  </div>
+  <div class="panel-body">
+    {$list.0.content|default="这家伙很懒，什么也没留下"|}
+  </div>
+  <!-- List group -->
+  <ul class="list-group">
+    <li class="list-group-item">{$list.0.create_time |date="y-m-d h:i",###}</li>
+    
+  </ul>
+</div>
+
+<!--  <div class="panel panel-default">
+  <div class="panel-body">
+    <p class="text-center"><strong>{$list.0.title}</strong></p>
+    <p class="text-center">{$list.0.create_time |date="y-m-d h:i",###}</p>
+    {$list.0.content|default="这家伙很懒，什么也没留下"|}
+  </div>
+</div>  -->
+ 
+
+    <nav aria-label="...">
+      <ul class="pager">
+        <!-- 上一页 -->
+        {if condition="$up neq ''"} 
+            <li class="previous"><a href="{$up}"><span aria-hidden="true">&larr;</span> 上一页</a></li>
+        {else /} 
+            <li class="previous disabled"><span aria-hidden="true">&larr; 没有了</span> </li>
+        {/if}
+        <!-- 下一页 -->
+        {if condition="$next neq ''"} 
+            <li class="next"><a href="{$next}"><span aria-hidden="true">&larr;</span> 下一页</a></li>
+        {else /} 
+            <li class="next disabled"><span aria-hidden="true">&larr; 没有了</span> </li>
+        {/if}
+      </ul>
+    </nav>
+  
+
+  <div class="panel panel-default">
+  <div class="panel-heading">扫码访问当前留言</div>
+  <div class="panel-body">
+    <img src="http://pan.baidu.com/share/qrcode?w=150&h=150&url= {$Request.root.true}/{$Request.path}" /> 
+  </div>
+</div>
+ 
+ 
+
+
+ </div>
+
+
+ </body>
+ </html>

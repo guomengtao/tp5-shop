@@ -1,0 +1,38 @@
+{include file="index/header" /}
+   <p>最新留言：<a href="https://api.weibo.com/oauth2/authorize?client_id=2078783153&response_type=code&redirect_uri=http://open.gaoxueya.com/tp5/public/index/api/weibo">微博登录</a></p>
+	 
+<table class="table table-bordered table-hover ">
+<thead>
+<tr  ><th > 姓名</th> <th > 用户评论</th><th > 电子邮箱</th><th > 课堂笔记/评论</th><th > 用户</th><th > 发布时间</th>
+</tr>
+</thead>
+
+<tbody>
+{volist name='list' id='user'}
+<tr  ><th>
+
+    {user.userinfo.name}
+
+     [{$user.id}]</th><th>
+</th><th> {$user.profile.email}  <td> <a href="{$Think.server.script_name}/index/index/view/id/{$user.age} ">{$user.title|mb_substr=0,20,'utf-8' }</a></td><td>  {$user.phone|substr=0,3}****{$user.phone|substr=7,4}</td><td>  {$user.create_time}</td> </tr>
+{/volist}
+</tbody>
+</table>
+{$list->render()}
+ 
+ 
+<form action="{$Think.server.script_name}/index/bbs/add" method="post">
+  <div class="form-group" >
+    <!-- <label for="exampleInputName2">留言标题title:</label> -->
+    <input type="text" class="form-control" id="title" name="title" value="" placeholder="请输入留言标题" maxlength="100">
+     
+  </div>
+  <div class="form-group">
+    <!-- <label for="exampleInputPassword1">留言内容content:</label> -->
+   <textarea class="form-control" rows="3"  id="content" name="content"  value="" placeholder="请输入留言内容"></textarea>
+  </div>
+  <button type="submit" class="btn btn-primary" >发布留言</button>
+
+</form>
+
+{include file="index/footer" /}

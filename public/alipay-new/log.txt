@@ -1,0 +1,2 @@
+2017-11-08 13:39:46  {"product_code":"FAST_INSTANT_TRADE_PAY","body":"","subject":"测试","total_amount":"0.01","out_trade_no":"2017118133941197"}
+2017-11-08 13:40:04  {"product_code":"FAST_INSTANT_TRADE_PAY","body":"","subject":"测试","total_amount":"0.01","out_trade_no":"2017118133941197"}
