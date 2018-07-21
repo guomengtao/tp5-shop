@@ -37,21 +37,16 @@
             <!-- {:version_compare(PHP_VERSION,'5.9.0', '<')} -->
 
 
-            {if condition="version_compare(PHP_VERSION,'5.4.0', '>=')"}
+              {if condition="version_compare(PHP_VERSION,'5.4.0', '>=')"}
                  
                 <span class="glyphicon glyphicon-ok" style="color: green" aria-hidden="true"></span>
 
                
                 <a class="btn btn-success" href="#" role="button">合格</a> 
 
-                {if condition="$install_lock==1"}
-                  <div class="alert alert-danger alert-dismissible" role="alert">
-                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                  <strong>Warning!</strong> 已安装过，如需再次安装，请删除application目录下的install.lock文件
-                </div>
-                {else /}
+                
                 <a class="btn btn-success" href="{:url('/')}index/index/install//step/2" role="button">下一步</a>
-                {/if}
+                 
                  
             {else /}
                 不合格 <span class="glyphicon glyphicon-remove" style="color: red" aria-hidden="true"></span>  
@@ -64,21 +59,6 @@
                   <strong>Warning!</strong> 请升级PHP版本  >= 5.4.0
                 </div>
             {/if}
-
-
-
-        
-        
-  
- 
-  
-
-
-  {else /}
-        不合格  
-
-        提示:请升级您的php版本 PHP >= 5.4.0
-  {/if}
 
  
 
