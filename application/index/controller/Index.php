@@ -26,7 +26,8 @@ class Index extends \think\Controller
         public function install666(){
 
           
-          // 测试一下提交到代码库
+          // 在线安装 第一步 安装环境监测
+
           return view();
         }
 
