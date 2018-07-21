@@ -37,7 +37,7 @@
             <!-- {:version_compare(PHP_VERSION,'5.9.0', '<')} -->
 
 
-              {if condition="version_compare(PHP_VERSION,'5.6.0', '>=')"}
+              {if condition="version_compare(PHP_VERSION,'5.4.0', '>=')"}
                  
                 <span class="glyphicon glyphicon-ok" style="color: green" aria-hidden="true"></span>
 
@@ -116,6 +116,20 @@
         
  
 
+
+    </div>
+</div>
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">安装成功：</div>
+    <div class="panel-body">
+         
+        <h3>   管理员 账号： admin 密码： admin </h3>
+      
+        <h3>  前台登录 <a class="btn btn-success" href="#" role="button">前台登录</a>   丨  后台登录地址  <a class="btn btn-success" href="#" role="button">后台登录</a> </h3>
+
+        <h5><small> 如需 <a   href="{:url('/')}index/index/install/step/1" role="button">重新安装</a>，请删除根application文件夹下的 install.lock 文件。</small></h5>
 
     </div>
 </div>
