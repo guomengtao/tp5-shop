@@ -34,9 +34,19 @@ class Index extends \think\Controller
           $password          = input('password');
           // $step              = input('step');
 
+
+          // 判断是否存在安装锁文件
+          $install_lock = ROOT_PATH . 'application' . DS .'install.lock';
+          if (file_exists($install_lock)) {
+            $install_lock = 1;
+            
+          }
+
+
+
           // 409课 在线安装 第二步 填写数据库信息 判断数据连接是否成功
 
-          if (Request::instance()->isPost()) {
+          if (Request::instance()->isPost() and  $install_lock <> 1) {
 
              // 测试填写的数据库信息是否正确，不正确 thinkphp5的调试模式会报错
              $conn = mysqli_connect( 
@@ -148,18 +158,30 @@ class Index extends \think\Controller
 
         // dump("导入成功！");
 
-        //重定向到安装成功结果页
-        $this->redirect('index/install666', ['step' => 10]);
-
+      
         $conn->close();
         $conn = null;
 
-        
+        // 创建安装锁文件
+        $myfile = fopen($install_lock, "w") or die("Unable to open file!");
+        $txt = "install_lock\n";
+        fwrite($myfile, $txt);
+        $txt = "提示：安装成功，如需再次安装，请删除此文件\n";
+        fwrite($myfile, $txt);
+        fclose($myfile);
 
-     
+
+
+
+        //重定向到安装成功结果页
+        $this->redirect('index/install', ['step' => 10]);
+
 
 
         }
+
+          
+          $this->assign('install_lock', $install_lock);
 
           return view();
         }
@@ -174,7 +196,7 @@ class Index extends \think\Controller
            
 
            
-
+          // 是否存在安装锁文件
           $install_lock = ROOT_PATH . 'application' . DS .'install.lock';
           if (file_exists($install_lock)) {
             $install_lock = 1;
@@ -293,7 +315,7 @@ class Index extends \think\Controller
         $conn->close();
         $conn = null;
 
-
+        // 创建安装锁文件
         $myfile = fopen($install_lock, "w") or die("Unable to open file!");
         $txt = "install_lock\n";
         fwrite($myfile, $txt);
