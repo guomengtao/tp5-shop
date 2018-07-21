@@ -24,6 +24,8 @@
 
     </div>
 </div>
+
+{if condition="$Request.param.step<=1"}
 <div class="panel panel-default">
     <div class="panel-heading">第一步 ：</div>
     <div class="panel-body">
@@ -45,7 +47,7 @@
                 <a class="btn btn-success" href="#" role="button">合格</a> 
 
                 
-                <a class="btn btn-success" href="{:url('/')}index/index/install/step/2" role="button">下一步</a>
+                <a class="btn btn-success" href="{:url('/')}index/index/install666/step/2" role="button">下一步</a>
                  
                  
             {else /}
@@ -66,7 +68,9 @@
     </div>
 </div>
 
+{/if}
 
+ {if condition="$Request.param.step==2"}
 <div class="panel panel-default">
     <div class="panel-heading">第二步 填写数据库信息：</div>
     <div class="panel-body">
@@ -120,7 +124,9 @@
     </div>
 </div>
 
-
+{/if}
+ 
+ {if condition="$Request.param.step>=10"}
 <div class="panel panel-default">
     <div class="panel-heading">安装成功：</div>
     <div class="panel-body">
@@ -129,11 +135,11 @@
       
         <h3>  前台登录 <a class="btn btn-success" href="#" role="button">前台登录</a>   丨  后台登录地址  <a class="btn btn-success" href="#" role="button">后台登录</a> </h3>
 
-        <h5><small> 如需 <a   href="{:url('/')}index/index/install/step/1" role="button">重新安装</a>，请删除根application文件夹下的 install.lock 文件。</small></h5>
+        <h5><small> 如需 <a   href="{:url('/')}index/index/install666/step/1" role="button">重新安装</a>，请删除根application文件夹下的 install.lock 文件。</small></h5>
 
     </div>
 </div>
-
+ {/if}
 
 <div class="panel panel-default">
     <div class="panel-heading">安装初始化说明：</div>
@@ -147,6 +153,5 @@
 </div>
 
 
- 
 
  

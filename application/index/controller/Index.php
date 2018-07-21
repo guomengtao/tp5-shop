@@ -32,7 +32,7 @@ class Index extends \think\Controller
           $database          = input('database');
           $username          = input('username');
           $password          = input('password');
-          $step              = input('step');
+          // $step              = input('step');
 
           // 409课 在线安装 第二步 填写数据库信息 判断数据连接是否成功
 
@@ -146,7 +146,10 @@ class Index extends \think\Controller
             }
         }
 
-        dump("导入成功！");
+        // dump("导入成功！");
+
+        //重定向到安装成功结果页
+        $this->redirect('index/install666', ['step' => 10]);
 
         $conn->close();
         $conn = null;
