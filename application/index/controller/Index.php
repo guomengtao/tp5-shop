@@ -26,7 +26,31 @@ class Index extends \think\Controller
         public function install666(){
 
           
-          // 在线安装 第一步 安装环境监测 第一步
+          
+
+          $hostname          = input('hostname');
+          $database          = input('database');
+          $username          = input('username');
+          $password          = input('password');
+          $step              = input('step');
+
+          // 409课 在线安装 第二步 填写数据库信息 判断数据连接是否成功
+
+          if (Request::instance()->isPost()) {
+
+             // 测试填写的数据库信息是否正确，不正确 thinkphp5的调试模式会报错
+             $conn = mysqli_connect( 
+               $hostname, /* The host to connect to 连接MySQL地址 */  
+               $username, /* The user to connect as 连接MySQL用户名 */
+               $password, /* The password to use 连接MySQL密码 */  
+               $database);/* The default database to query 连接数据库名称*/
+
+
+ 
+     
+
+
+        }
 
           return view();
         }
@@ -174,11 +198,12 @@ class Index extends \think\Controller
 
 
 
-}
+        }
 
           
           $this->assign('install_lock', $install_lock);
           return view();
+
         }
 
 
