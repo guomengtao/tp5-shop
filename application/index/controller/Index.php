@@ -25,7 +25,7 @@ class Index extends \think\Controller
         
         public function install666(){
 
-          
+          // set_time_limit(0);
           
 
           $hostname          = input('hostname');
@@ -112,6 +112,44 @@ class Index extends \think\Controller
               // $txt = "Minnie Mouse\n";
               // fwrite($myfile, $txt);
               fclose($myfile); 
+
+
+
+        // 开始执行读取sql命令步骤
+        // 读取文件内容
+        $sql_file = ROOT_PATH . 't966.sql';
+        $_sql = file_get_contents($sql_file);
+         
+        $_arr = explode(';', $_sql);
+
+
+   
+
+        // 过滤掉数组里的空值
+        $_arr = array_filter($_arr);
+ 
+
+        //执行sql语句
+        foreach ($_arr as $_value) {
+            // $conn->query($_value.';');
+
+            
+            if ($conn->query($_value.';') === TRUE) {
+                // echo $_value . "    --- > ok <br>";
+                // ob_flush();
+                 // flush();  
+                // sleep(1);   
+            } else {
+                // echo  $_value  ."Error: " .$conn->error . "<br><br>";
+                 // flush();  
+                 //  sleep(1);   
+            }
+        }
+
+        dump("导入成功！");
+
+        $conn->close();
+        $conn = null;
 
         
 
