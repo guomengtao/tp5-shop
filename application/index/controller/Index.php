@@ -174,7 +174,7 @@ class Index extends \think\Controller
 
 
         //重定向到安装成功结果页
-        $this->redirect('index/install', ['step' => 10]);
+        $this->redirect('index/install666', ['step' => 10]);
 
 
 

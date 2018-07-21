@@ -46,8 +46,14 @@
                
                 <a class="btn btn-success" href="#" role="button">合格</a> 
 
-                
+                {if condition="$install_lock==1"}
+                  <div class="alert alert-danger alert-dismissible" role="alert">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <strong>Warning!</strong> 已安装过，如需再次安装，请删除application目录下的install.lock文件
+                </div>
+                {else /}
                 <a class="btn btn-success" href="{:url('/')}index/index/install666/step/2" role="button">下一步</a>
+                {/if}
                  
                  
             {else /}
