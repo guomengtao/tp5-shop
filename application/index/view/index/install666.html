@@ -37,7 +37,7 @@
             <!-- {:version_compare(PHP_VERSION,'5.9.0', '<')} -->
 
 
-              {if condition="version_compare(PHP_VERSION,'5.4.0', '>=')"}
+              {if condition="version_compare(PHP_VERSION,'5.6.0', '>=')"}
                  
                 <span class="glyphicon glyphicon-ok" style="color: green" aria-hidden="true"></span>
 
@@ -45,7 +45,7 @@
                 <a class="btn btn-success" href="#" role="button">合格</a> 
 
                 
-                <a class="btn btn-success" href="{:url('/')}index/index/install//step/2" role="button">下一步</a>
+                <a class="btn btn-success" href="{:url('/')}index/index/install/step/2" role="button">下一步</a>
                  
                  
             {else /}
@@ -67,11 +67,62 @@
 </div>
 
 
+<div class="panel panel-default">
+    <div class="panel-heading">第二步 填写数据库信息：</div>
+    <div class="panel-body">
 
+         
+             <form  action="" method="post" name="myformlogin">
+
+
+                         <div class="form-group " >
+                              <label  >连接MySQL数据库地址:</label>
+                             <input type="text" class="form-control"    name="hostname" value="{$Request.param.hostname|default='localhost'}"  placeholder="请输入数据库地址" maxlength="100" autocomplete="on" value="localhost">
+                          </div>
+
+
+                          <div class="form-group " >
+                              <label  >数据库用户名:</label>
+                             <input type="text" class="form-control"   name="username" value="{$Request.param.username|default='root'}" placeholder="请输入数据库用户名" maxlength="100" autocomplete="on"  >
+                          </div>
+                          
+
+                         <div class="form-group">
+                              
+                             <label for="exampleInputPassword1">数据库密码：</label>
+                             <input type="text" class="form-control" name="password"   placeholder="请输入数据库密码" autocomplete="on" value="{$Request.param.password|default='cVDEPmrRdVZswVWB'}" >
+                         </div>
+
+
+                         <div class="form-group " >
+                              <label  >数据库名:</label>
+                             <input type="text" class="form-control"    name="database" value="{$Request.param.database|default='demo'}"  placeholder="请输入数据库名" maxlength="100" autocomplete="on" value="root">
+                          </div>
+
+
+ 
+ 
+
+
+                      
+                         <button type="submit" id="btngoto" class="btn btn-primary"  >提交，导入sql数据表</button>
+ 
+
+         
+                         
+
+                     </form>
+
+        
+ 
+
+
+    </div>
+</div>
 
 
 <div class="panel panel-default">
-    <div class="panel-heading">VIP说明：</div>
+    <div class="panel-heading">安装初始化说明：</div>
     <div class="panel-body">
          
         <h5><small>  刚上线 各种奖励 bug 逐步开发中...</small></h5>
