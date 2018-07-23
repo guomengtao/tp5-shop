@@ -3,36 +3,21 @@ branches: {
   }
 fileChange:
   /application:
-    newFile: !uuid '47a0d49be1c0aacc0ef159df7cd23d0a2f6b0782'
-    oldFile: !uuid '770ab76a4735ac10a35715c044a8bd84d91e7297'
+    newFile: !uuid '2d01fb63e31313907e85b8c798ea934ac078423a'
+    oldFile: !uuid '47a0d49be1c0aacc0ef159df7cd23d0a2f6b0782'
   /application/admin:
-    newFile: !uuid '653c255b84764e6e4792a5ddfea70efdf2d8dd7a'
-    oldFile: !uuid '16af7e83639b30902b38f71e80f933a97d3728f5'
+    newFile: !uuid '038b00d955bf97a735ff91fd40ba491eefb039bc'
+    oldFile: !uuid '653c255b84764e6e4792a5ddfea70efdf2d8dd7a'
   /application/admin/view:
-    newFile: !uuid '20c2eaced3f9fa0246368183c869ba58ed206090'
-    oldFile: !uuid '68dd799cd67be92ce00986d8633c3218b0653260'
+    newFile: !uuid 'b01a2ac38a7648891b1a3d877b37cd7e002d3b9f'
+    oldFile: !uuid '20c2eaced3f9fa0246368183c869ba58ed206090'
   /application/admin/view/index:
-    newFile: !uuid '9b43abfc49bd3534d793979065e6206bcff6dd67'
-    oldFile: !uuid 'd7288451e453f891aaa40a0fd6d3564333dd788f'
-  /application/admin/view/index/305课 tp5 菜单默认选中高亮 一对多header 源码.html:
-    newFile: null
-    oldFile: !uuid 'df63fcbad6f412df12d7c6e6063ca81b69b1db59'
+    newFile: !uuid 'bf1b2eedd168971ffa0391a828ef469028b8dab4'
+    oldFile: !uuid '9b43abfc49bd3534d793979065e6206bcff6dd67'
   /application/admin/view/index/loginlaravel.html:
-    newFile: !uuid 'd10e4f5b2575dd46abec1330023e7892e24797c5'
-    oldFile: !uuid '81b5fcaa0285a146b1c8e42b4a159f351808aec2'
-  /application/index:
-    newFile: !uuid '398abfdf446ee45f6ddb5d0372e687a5dea88b4c'
-    oldFile: !uuid 'b3603fcec09f30f326e62d13fd7e468ae28c9f90'
-  /application/index/view:
-    newFile: !uuid '4e3e1685b2d436503cda5d730c90c1c359d3dfd8'
-    oldFile: !uuid '39b1e7c175c5535d4fb9380c8796f1dfab2b3fd1'
-  /application/index/view/index:
-    newFile: !uuid '0bdd6d66bda7619259c5a7d5dba5b5aaa52fe335'
-    oldFile: !uuid 'c329ec1ad01c1317c5eac79ea4213a54d2dccb45'
-  /application/index/view/index/footer.html:
-    newFile: !uuid 'a48de2b31094b6c418765fa54d34940f5e8cac26'
-    oldFile: !uuid 'e52c4857d020d7f79ec35e25d0dac4548f5943ee'
-gitCommitId: !uuid '3d22c7b6dd10f2c51e027fead894dd88c785f370'
+    newFile: !uuid 'a56f3a7496805a90e4ce86dd8a0ae98ee3288dca'
+    oldFile: !uuid 'd10e4f5b2575dd46abec1330023e7892e24797c5'
+gitCommitId: !uuid '6c05b71f0abe6bed659cfe9899f323df469e1f9c'
 renames: {
   }
-revisionId: 23
+revisionId: 24
