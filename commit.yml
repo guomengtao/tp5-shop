@@ -3,42 +3,30 @@ branches: {
   }
 fileChange:
   /application:
-    newFile: !uuid '54df3993262cc429348ef623ee1ae8e1de093537'
-    oldFile: !uuid 'b99a5f2dede8fe322155654dabe45e5c017bcd94'
-  /application/index:
-    newFile: !uuid 'd895189ac8444bf91492324604073e7b86951fa1'
-    oldFile: !uuid '398abfdf446ee45f6ddb5d0372e687a5dea88b4c'
-  /application/index/controller:
-    newFile: !uuid '45d8fe4868268caaf8ff47db39b911097f2e8c31'
-    oldFile: !uuid '73c5448b352baca116b11de7e673ab08ca0dcbb3'
-  /application/index/controller/Index.php:
-    newFile: !uuid '35fdf6d2209d5fe0c4ead6718b6effa1b8ecc590'
-    oldFile: !uuid 'c43544266e6c12e9ea1a4726cd42f0185dbfad8a'
-  /application/index/view:
-    newFile: !uuid '965604ddf92186b0748db32738dcef489b4db80c'
-    oldFile: !uuid '4e3e1685b2d436503cda5d730c90c1c359d3dfd8'
-  /application/index/view/index:
-    newFile: !uuid '9ae970dc14e8df93c86337183ce803f19f43ac51'
-    oldFile: !uuid '0bdd6d66bda7619259c5a7d5dba5b5aaa52fe335'
-  /application/index/view/index/66666.html:
-    newFile: null
-    oldFile: !uuid 'd060068e540dbc8429bde33aac517848133445c7'
-  /application/index/view/index/footer - Copy.html:
-    newFile: null
-    oldFile: !uuid '2049a5e02671fd69f155cc24180302a6e3d7f01d'
-  /application/index/view/index/index - Copy.html:
-    newFile: null
-    oldFile: !uuid '25049d2325a15c1f84ae441d2bdb14c911f5b41c'
-  /application/index/view/index/install.html:
-    newFile: !uuid '5d935197d375f9740b13b82cb4362faa0fcd3a1b'
-    oldFile: !uuid '4a6480965b8b022ed7924e988008227888d501d7'
-  /application/index/view/index/view_old.html:
-    newFile: null
-    oldFile: !uuid '4d0692e60ba356c468053d798b8fdd07b05bd2c8'
-  /t966.sql:
-    newFile: !uuid 'b32bdd009cc239e02ae104bdf29ac69c78321eaa'
-    oldFile: !uuid '191596036d2cb619044c914ff4de4d0dbf4f7c3b'
-gitCommitId: !uuid 'd671d067d582ff3b45ca8a0ccc862727a25e3ee2'
+    newFile: !uuid 'aeb8f09e8f55ac8367cf42378aba89e7bb4f0f3c'
+    oldFile: !uuid '54df3993262cc429348ef623ee1ae8e1de093537'
+  /application/admin:
+    newFile: !uuid 'f5d7bfc070a3e4f95e05c9d86c8d77e37f3e4f79'
+    oldFile: !uuid 'fb19223d25d15bd97150d5bffc5e5530f8b2f03c'
+  /application/admin/view:
+    newFile: !uuid '5a3f7cdc1434e2a84663da59e4d274e5bdd8c4e6'
+    oldFile: !uuid 'eb8523c3ad48d2e529cee2a85f804a2789727604'
+  /application/admin/view/index:
+    newFile: !uuid 'd6ebd9168da190265838a7ee5573e0a35b5ed96d'
+    oldFile: !uuid '9a60ae50e0e5150062d82eda224109926227a3a1'
+  /application/admin/view/index/footer.html:
+    newFile: !uuid '1cafb6885ee8f06f1e7442297efc310680a0f4d1'
+    oldFile: !uuid '8af4e3a8f8f830e10547dc6270379070fef001a0'
+  /application/admin/view/index/header.html:
+    newFile: !uuid '7c8e224fda5b80ee7f2939e0029f6b04acb5f837'
+    oldFile: !uuid 'df63fcbad6f412df12d7c6e6063ca81b69b1db59'
+  /application/admin/view/index/index.html:
+    newFile: !uuid 'c6bc7c168e3b8571097d68190d3fcee9d22a4b68'
+    oldFile: !uuid 'c0b8544a15d9231b43777f077f5404b27733f128'
+  /安装流程.txt:
+    newFile: !uuid 'c40a28655b40a5f0a9b455be2be7711373bf6817'
+    oldFile: null
+gitCommitId: !uuid 'f6444f9aeaf7ad26be4fcd87b848217565068b2a'
 renames: {
   }
-revisionId: 28
+revisionId: 29
