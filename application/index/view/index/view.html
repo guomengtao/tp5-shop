@@ -97,7 +97,7 @@
 
 
 <div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-10" style="padding: 0px;">
+    <div class="col-xs-12 col-sm-12 col-md-12" style="padding: 0px;">
 
         <!--价格等于0元或者已经购买的播放-->
         {if condition="($order >=1) OR ($list.price == 0)"}
@@ -111,18 +111,20 @@
         </div>
         {/if}
 
-        {if condition="$list.address"}
+        {if condition="$list.address==''"}
 
 
         <video    controls="controls"  poster="__STATIC__/thinkphp5.jpg"  id="myVideo" autoplay="autoplay"  style="width:100%; height:100%; object-fit: fill" >
 
             
              
-            <source src="http://open.gaoxueya.com/static/video/thinkphp5%20({$list.sort}).mp4#t={$t}" type="video/mp4" />
+            <source src="http://open.gaoxueya.com/static/video/thinkphp5%20({$list.sort}).mp4#t={$t}" type="video/mp4">
              
             Your brows
         </video>
 
+
+ 
 
         <!--管理调制视频进度功能-->
 
@@ -264,7 +266,7 @@
 
 
     </div> <!--这个是左侧播放器的结束部分-->
-<div class="col-xs-12 col-sm-12 col-md-2">
+<div class="col-xs-12 col-sm-12 col-md-3" style="display: none">
  <h3>课程</h3>
 <div class="row">
      {if condition="$up neq ''"}
