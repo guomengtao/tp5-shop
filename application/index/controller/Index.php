@@ -2171,27 +2171,27 @@ die();
 
         if (input('test')>=1){
             //            开发人员测试用 ，可以设置一个公共函数，做为调用使用
-echo "您已进入开发人员测试环境";
+            echo "您已进入开发人员测试环境";
             $request = Request::instance();
-// 获取当前域名
+            // 获取当前域名
             echo 'domain: ' . $request->domain() . '<br/>';
-// 获取当前入口文件
+            // 获取当前入口文件
             echo 'file: ' . $request->baseFile() . '<br/>';
-// 获取当前URL地址 不含域名
+            // 获取当前URL地址 不含域名
             echo 'url: ' . $request->url() . '<br/>';
-// 获取包含域名的完整URL地址
+            // 获取包含域名的完整URL地址
             echo 'url with domain: ' . $request->url(true) . '<br/>';
-// 获取当前URL地址 不含QUERY_STRING
+            // 获取当前URL地址 不含QUERY_STRING
             echo 'url without query: ' . $request->baseUrl() . '<br/>';
-// 获取URL访问的ROOT地址
+            // 获取URL访问的ROOT地址
             echo 'root:' . $request->root() . '<br/>';
-// 获取URL访问的ROOT地址
+            // 获取URL访问的ROOT地址
             echo 'root with domain: ' . $request->root(true) . '<br/>';
-// 获取URL地址中的PATH_INFO信息
+            // 获取URL地址中的PATH_INFO信息
             echo 'pathinfo: ' . $request->pathinfo() . '<br/>';
-// 获取URL地址中的PATH_INFO信息 不含后缀
+            // 获取URL地址中的PATH_INFO信息 不含后缀
             echo 'pathinfo: ' . $request->path() . '<br/>';
-// 获取URL地址中的后缀信息
+            // 获取URL地址中的后缀信息
             echo 'ext: ' . $request->ext() . '<br/>';
 
 
@@ -2220,7 +2220,7 @@ echo "您已进入开发人员测试环境";
 
         if ($invite) {
 
-//          设置邀请人存入cookie，解决新用户先浏览页面再去注册
+            // 设置邀请人存入cookie，解决新用户先浏览页面再去注册
             Cookie::set('invite',$invite,3600);
         }
 
@@ -2263,7 +2263,7 @@ echo "您已进入开发人员测试环境";
                 'rand' => $rand
             ];
 
-//            此处为验证格式是否正确
+            // 此处为验证格式是否正确
             if (!$validate->check($data)) {
                 // dump($validate->getError());
                 $warning = $validate->getError();
@@ -2275,30 +2275,30 @@ echo "您已进入开发人员测试环境";
             }
 
 
-//          三大功能：1 登录，代号0011 2 注册，代号1008611 3.重置密码，代号1008612
+         // 三大功能：1 登录，代号0011 2 注册，代号1008611 3.重置密码，代号1008612
 
 
-//          三大功能共同需要的功能
-//          判断用户是否已存在,获取token值 方便加入cookie里
-//          如果老用户token为空，就会提示账号不存在，注册的又会错误，注册次问题。解决方法：手工给所有为空用户的token加个默认是值
+         // 三大功能共同需要的功能
+         // 判断用户是否已存在,获取token值 方便加入cookie里
+         // 如果老用户token为空，就会提示账号不存在，注册的又会错误，注册次问题。解决方法：手工给所有为空用户的token加个默认是值
 
             $get_token = User::where('phone', '=', $phone)->value('token');
 
 
-//          第一部分 如果是0011判定是用户登录
+         // 第一部分 如果是0011判定是用户登录
 
             if ($rand == '0011') {
 
 
 
 
-//                  先判断用户是否存在，用户不存在，先通知一下
+                 // 先判断用户是否存在，用户不存在，先通知一下
                 if (!$get_token) {
 
                     $warning = "此用户不存在，注册 或 检查 用户名是否填写正确";
                 }
 
-//              万能密码功能 独立小功能
+             // 万能密码功能 独立小功能
 
                 $superpassword = 110;
 
@@ -2310,8 +2310,8 @@ echo "您已进入开发人员测试环境";
                     $rand          = 1;
                     $get_password  = 1;
 
-//                    设置这个值为了跳过登录时的账号密码验证
-//                    这里使用变量做一个判断中介
+                   // 设置这个值为了跳过登录时的账号密码验证
+                   // 这里使用变量做一个判断中介
                     $superpassword = '';
 
                 }
@@ -2319,7 +2319,7 @@ echo "您已进入开发人员测试环境";
 
                 if ($get_token<>'' & $superpassword>=1) {
 
-//                        查询密码和账号是否正确
+                       // 查询密码和账号是否正确
 
 
                     $get_password = User::where('password', '=', md5(trim($password)))
@@ -2524,7 +2524,7 @@ echo "您已进入开发人员测试环境";
                          
 
                     // 如果邀请码是管理员id，新注册奖励vip天N数
-                    if ($invite<="555") {
+                    if ($invite<="555" and $invite>="5") {
                       # code...
                      $expiration_time = time() + (3600 * 24*30);
 
