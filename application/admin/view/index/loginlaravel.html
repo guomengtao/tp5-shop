@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>后台登录</title>
   <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
   <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -69,24 +69,26 @@
         </style>
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
+        <div class="flex-center position-ref full-height ">
              
                 <div class="top-right links">
                     
-                        <a href="{{ url('/home') }}">Home</a>
+                        <a href="{:url('/index')}">首页</a>
                      
-                        <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('register') }}">Register</a>
+                        <a href="{:url('/index/index/login')}">Login</a>
+                        <a href="{:url('/index/index/register')}">Register</a>
                      
                 </div>
              
 
             <div class="content">
-                <div class="panel panel-default">
-  <div class="panel-heading">
-    <h3 class="panel-title">后台登录</h3>
-  </div>
-  <div class="panel-body">
+
+
+                <div class="panel panel-default ">
+              <div class="panel-heading">
+                <h3 class="panel-title">后台登录</h3>
+              </div>
+              <div class="panel-body">
                 <form class="form-horizontal">
               <div class="form-group">
                 <!-- <label for="inputEmail3" class="col-sm-2 control-label">管理员</label> -->
@@ -106,41 +108,27 @@
                 </div>
               </div>
             </form>
-            <div class="send"> 发布</div>
-  </div>
-</div>
-                <div class="title m-b-md">
-                    Laravel , I did it ! :>
+             
+            </div>
+          </div>
+
+                  <!-- 默认lavravel框 -->
+                   <div class="title m-b-md" style="display: none">
+                     
                     <div class="panel panel-default">
-  <div class="panel-heading">
-    <h3 class="panel-title">Panel title</h3>
-  </div>
-  <div class="panel-body">
-    Panel content2016
-  <script>
-      var ws = new WebSocket("ws://127.6.0.1:8282");
+                    <div class="panel-heading">
+                      <h3 class="panel-title">Panel title</h3>
+                    </div>
+                    <div class="panel-body">
+                      Panel content2016
+                   
+                    </div>
+                  </div>
 
-      ws.onmessage = function (e) {
-          // body...
-          console.log(e);
-      }
-      $(".send").click(function(){
 
-        ws.send("你们好！！");
-      })
-      
-  </script>
-  </div>
-</div>
                 </div>
 
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
+                 
             </div>
         </div>
     </body>
