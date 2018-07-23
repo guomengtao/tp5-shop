@@ -3,25 +3,91 @@ namespace app\admin\controller;
 
 use think\Db;
 use think\Request;
+use app\index\model\User;
 use app\index\model\Shop;
+use think\Cookie;
 
 class Index extends \think\Controller
 {
     public  function  login(){
 
 
+        $warning      = "";
+        $get_password = "";
 
-         if (Request::instance()->isPost()) {
+        // 登录功能
+        if (Request::instance()->isPost()) {
 
-                    $phone      = input('phone');
+            $phone      = input('phone');
+            $password   = input('password');
 
-                    $password   = input('password');
+            $get_token = User::where('phone', '=', $phone)->value('token');
 
-                    dump($phone);
-                    dump($password);
+             // 先判断用户是否存在，用户不存在，先通知一下
+            if (!$get_token) {
+
+                    $warning = "此管理员不存在";
+            }
+
+            if ($get_token<>'') {
+
+                    // 查询密码和账号是否正确
+                    $get_password = User::where('password', '=', md5(trim($password)))
+                        ->where('phone', $phone)
+                        ->count();
+
+                    if (!$get_password) {
+
+                     // 此处可以加一个Session或者数据库加一个记录，记录密码错误次数
+                        $warning = "密码不正确";
+
+                       // 多设置一个直接停止，有用户先支付后逻辑错
+                        $this->assign('warning', $warning);
+                         ;
+
+                        return  view('loginlaravel');
+
+                    }
+            }
+
+                // 确认账号密码一致开始登录操作
+
+                if ($get_password == 1) {
+
+
+                    $user_id = User::where('phone', '=', $phone)->value('id');
+
+                    // 设置Cookie 有效期为 秒
+                    Cookie::set('phone', $phone, 3600000);
+                    Cookie::set('token', $get_token, 3600000);
+                    Cookie::set('user_id', $user_id, 3600000);
+
+                    // 判断用户的token是否存在，不存在的用户给补上
+                    // 此处如果不加判断，每次都更新，就会实现限制用户只能同时登录一个浏览器或者设备
+                    if (!$get_token) {
+                        User::where('phone', $phone)
+                            ->update(['token' => $token]);
+                        Cookie::set('token', $token, 3600000);
+                    }
+ 
+
+                   // 设置管理方便区分管理员
+                    if ($phone=="18210787405") {
+                        Cookie::set('admin', 1, 3600000);
+                        // 跳转之前再加一个验证是否是管理员身份  此处略
+                        return $this->success('管理员您好^_^', 'admin/index/index');
+                    } else {
+                        return $this->success('普通用户，登录成功^_^', 'index/index/index');
+                    }
+
+                }
+
+
+
 
         }
 
+        $this->assign('warning', $warning);
 
         return  view('loginlaravel');
     }

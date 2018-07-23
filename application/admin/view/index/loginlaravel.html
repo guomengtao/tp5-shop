@@ -69,6 +69,32 @@
         </style>
     </head>
     <body>
+
+         <!--  div层延时消失 弹出提示  -->
+        <script>
+
+        // 弹出提示开关
+        {if condition="$warning<>''" }
+        window.onload = operate;//不要括号
+        {/if}  
+
+        function operate()
+        {
+            document.getElementById('div_test').style.display="";
+            setTimeout("disappeare()",2000);
+        }
+        function disappeare(){
+            document.getElementById('div_test').style.display="none";
+        }
+
+        
+        </script>
+
+
+        <div id="div_test" style="display:none;color:white;line-height:50px;position:absolute;z-index:100;left:50%;top:40%;margin-left:-75px;text-align:center;width:150px;height:50px;background-color:#666;font-size:12px; ">
+             {$warning|default='操作成功'}
+        </div>
+
         <div class="flex-center position-ref full-height ">
              
                 <div class="top-right links">
