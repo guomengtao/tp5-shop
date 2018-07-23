@@ -22,172 +22,13 @@ use think\captcha\Captcha;
 
 class Index extends \think\Controller
 {
-        
-        public function install666(){
-
-          // set_time_limit(0);
-          
-
-          $hostname          = input('hostname');
-          $database          = input('database');
-          $username          = input('username');
-          $password          = input('password');
-          // $step              = input('step');
-
-
-          // 判断是否存在安装锁文件
-          $install_lock = ROOT_PATH . 'application' . DS .'install.lock';
-          if (file_exists($install_lock)) {
-            $install_lock = 1;
-            
-          }
-
-
-
-          // 409课 在线安装 第二步 填写数据库信息 判断数据连接是否成功
-
-          if (Request::instance()->isPost() and  $install_lock <> 1) {
-
-             // 测试填写的数据库信息是否正确，不正确 thinkphp5的调试模式会报错
-             $conn = mysqli_connect( 
-               $hostname, /* The host to connect to 连接MySQL地址 */  
-               $username, /* The user to connect as 连接MySQL用户名 */
-               $password, /* The password to use 连接MySQL密码 */  
-               $database);/* The default database to query 连接数据库名称*/
-
-                
-
-              // 设置读取数据库配置文件路径
-              $database_file = ROOT_PATH . 'application' . DS . 'database.php';
-              // 通过覆盖方式，直接重新复制配置文件里的内容
-              $myfile = fopen($database_file, "w") or die("Unable to open file!");
-              $txt = "<?php
-              // +----------------------------------------------------------------------
-              // | ThinkPHP [ WE CAN DO IT JUST THINK ]
-              // +----------------------------------------------------------------------
-              // | Copyright (c) 2006~2016 http://thinkphp.cn All rights reserved.
-              // +----------------------------------------------------------------------
-              // | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
-              // +----------------------------------------------------------------------
-              // | Author: liu21st <liu21st@gmail.com>
-              // +----------------------------------------------------------------------
-
-              return [
-                  // 数据库类型
-                  'type'            => 'mysql',
-                  // 服务器地址
-                  'hostname'        => '".$hostname."',
-                  // 数据库名
-                  'database'        => '".$database."',
-                  // 用户名
-                  'username'        => '".$username."',
-                  // 密码
-                  'password'        => '".$password."',
-                  // 端口
-                  'hostport'        => '',
-                  // 连接dsn
-                  'dsn'             => '',
-                  // 数据库连接参数
-                  'params'          => [],
-                  // 数据库编码默认采用utf8
-                  'charset'         => 'utf8',
-                  // 数据库表前缀
-                  'prefix'          => 'think_',
-                  // 数据库调试模式
-                  'debug'           => true,
-                  // 数据库部署方式:0 集中式(单一服务器),1 分布式(主从服务器)
-                  'deploy'          => 0,
-                  // 数据库读写是否分离 主从式有效
-                  'rw_separate'     => false,
-                  // 读写分离后 主服务器数量
-                  'master_num'      => 1,
-                  // 指定从服务器序号
-                  'slave_no'        => '',
-                  // 是否严格检查字段是否存在
-                  'fields_strict'   => true,
-                  // 数据集返回类型
-                  'resultset_type'  => 'array',
-                  // 自动写入时间戳字段
-                  'auto_timestamp'  => false,
-                  // 时间字段取出后的默认时间格式
-                  'datetime_format' => 'Y-m-d H:i:s',
-                  // 是否需要进行SQL性能分析
-                  'sql_explain'     => false,
-              ];
-              ";
-
-              fwrite($myfile, $txt);
-              // $txt = "Minnie Mouse\n";
-              // fwrite($myfile, $txt);
-              // $txt = "Minnie Mouse\n";
-              // fwrite($myfile, $txt);
-              fclose($myfile); 
-
-
-
-        // 开始执行读取sql命令步骤
-        // 读取文件内容
-        $sql_file = ROOT_PATH . 't966.sql';
-        $_sql = file_get_contents($sql_file);
-         
-        $_arr = explode(';', $_sql);
-
-
-   
-
-        // 过滤掉数组里的空值
-        $_arr = array_filter($_arr);
  
 
-        //执行sql语句
-        foreach ($_arr as $_value) {
-            // $conn->query($_value.';');
-
-            
-            if ($conn->query($_value.';') === TRUE) {
-                // echo $_value . "    --- > ok <br>";
-                // ob_flush();
-                 // flush();  
-                // sleep(1);   
-            } else {
-                // echo  $_value  ."Error: " .$conn->error . "<br><br>";
-                 // flush();  
-                 //  sleep(1);   
-            }
-        }
-
-        // dump("导入成功！");
-
-      
-        $conn->close();
-        $conn = null;
-
-        // 创建安装锁文件
-        $myfile = fopen($install_lock, "w") or die("Unable to open file!");
-        $txt = "install_lock\n";
-        fwrite($myfile, $txt);
-        $txt = "提示：安装成功，如需再次安装，请删除此文件\n";
-        fwrite($myfile, $txt);
-        fclose($myfile);
-
-
-
-
-        //重定向到安装成功结果页
-        $this->redirect('index/install666', ['step' => 10]);
-
-
-
-        }
-
-          
-          $this->assign('install_lock', $install_lock);
-
-          return view();
-        }
-
         public function install(){
+
           set_time_limit(0);
+          
+
           $hostname          = input('hostname');
           $database          = input('database');
           $username          = input('username');
@@ -202,6 +43,14 @@ class Index extends \think\Controller
             $install_lock = 1;
             
           }
+
+          // 增加一个第二步的已安装判断，方便查看
+          if (Request::instance()->isPost() and  $install_lock == 1) {
+            header('Content-Type:text/plain;charset=utf-8');
+            echo "已安装installed! delllet application/install.lock file " ;
+            die();
+          }
+
          
         if (Request::instance()->isPost() and  $install_lock <> 1) {
 
@@ -294,24 +143,39 @@ class Index extends \think\Controller
 
         // 过滤掉数组里的空值
         $_arr = array_filter($_arr);
- 
 
+        header("content-Type: text/html; charset=Utf-8");
+
+ 
+         
+         
         //执行sql语句
         foreach ($_arr as $_value) {
             // $conn->query($_value.';');
 
             
             if ($conn->query($_value.';') === TRUE) {
-                echo $_value . "    --- > ok <br>";
-                 // flush();  
-                // sleep(1);   
+               
+                echo $_value . "    --- > ok  ";
+                ob_flush();
+                flush();  
+                sleep(1);   
             } else {
-                echo  $_value  ."Error: " .$conn->error . "<br><br>";
-                 flush();  
-                  sleep(1);   
+                echo  $_value  ." Error: " .$conn->error . "  ";
+                ob_flush();
+                flush();  
+                sleep(1);
+                echo "<script>alert('导入sql，注意先清空数据库。防止冲突')</script>";
+                die();
+
+                   
+   
             }
         }
 
+
+
+         
         $conn->close();
         $conn = null;
 
@@ -322,6 +186,9 @@ class Index extends \think\Controller
         $txt = "提示：安装成功，如需再次安装，请删除此文件\n";
         fwrite($myfile, $txt);
         fclose($myfile);
+
+
+        $this->success('安装成功', url('/index/index/install/step/12'));
 
 
         //重定向到安装成功结果页
