@@ -8,6 +8,21 @@ use app\index\model\Shop;
 class Index extends \think\Controller
 {
     public  function  login(){
+
+
+
+         if (Request::instance()->isPost()) {
+
+                    $phone      = input('phone');
+
+                    $password   = input('password');
+
+                    dump($phone);
+                    dump($password);
+
+        }
+
+
         return  view('loginlaravel');
     }
     public  function  t(){
