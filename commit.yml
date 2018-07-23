@@ -2,28 +2,10 @@
 branches: {
   }
 fileChange:
-  /application:
-    newFile: !uuid 'b99a5f2dede8fe322155654dabe45e5c017bcd94'
-    oldFile: !uuid 'c8acae7255b201bd8e87a5ffce0f71c774f9cbe7'
-  /application/admin:
-    newFile: !uuid 'fb19223d25d15bd97150d5bffc5e5530f8b2f03c'
-    oldFile: !uuid '23aa632d9ddb0836fa5cae084b03997c6a18a50c'
-  /application/admin/controller:
-    newFile: !uuid '47a09084fd710a0b7aa2b1861f01c6753c13b9af'
-    oldFile: !uuid '7217e8d4538d9cc57ff7cee306edb1caacce235e'
-  /application/admin/controller/Index.php:
-    newFile: !uuid '47a4fa7dc6ebd9bb00791ff45b661080618579d4'
-    oldFile: !uuid '5f3b3bb26b87ff7a884fb876c0d1239220b35e83'
-  /application/admin/view:
-    newFile: !uuid 'eb8523c3ad48d2e529cee2a85f804a2789727604'
-    oldFile: !uuid '491a51791310221298a3fffd387e9e8aabf44459'
-  /application/admin/view/index:
-    newFile: !uuid '9a60ae50e0e5150062d82eda224109926227a3a1'
-    oldFile: !uuid 'de8e26f02007012aa9572d6319b3af18a96758a1'
-  /application/admin/view/index/loginlaravel.html:
-    newFile: !uuid '275cc85db518f4d73445f49e84ea2b917e659240'
-    oldFile: !uuid '5ea2bf2f8e025cd2376f0e38b0e5307d009a8c6b'
-gitCommitId: !uuid '74a67627f669c3d3542f778e20ff5a8df5c64af0'
+  /t966.sql:
+    newFile: !uuid '191596036d2cb619044c914ff4de4d0dbf4f7c3b'
+    oldFile: !uuid '8fa59113be929d60f3c59c53bd67c8db883276c9'
+gitCommitId: !uuid '34dafbc6e77999d2879bba1e51ac5ff79136c0cd'
 renames: {
   }
-revisionId: 26
+revisionId: 27
