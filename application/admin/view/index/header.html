@@ -11,7 +11,9 @@
 	 {css href="__CSS__/shop.css" /}
 </head>
 <body>
-     
+
+{if condition="$Think.cookie.phone neq 18210787405"}   <script>window.location.href="__ROOT__/admin/index/login"</script>
+{/if} 
     
     <nav class="navbar navbar-inverse " style=" border-radius: 0px;margin-bottom: 10px;">
   <div class="container-fluid">
@@ -40,20 +42,11 @@
         
         
           ">
-          <!-- {$Request.controller=='Index'?'active':'' } -->
-          <!-- {$Request.controller=='Index'?'active':'' } -->
+    
 
 
-         <!-- {$Request.controller=='Articles'?'active':'' } -->
-          <!-- {$Request.controller=='News'?'active':'' } -->
-
-         {if condition="($Request.module=='admin') AND ($Request.controller=='Index') AND ($Request.action=='index')" }
-        active
-    {/if}
-
-
-          <a href="__ROOT__/admin/index/show">内容管理 </a></li>
-          <li class="{$Request.action=='view'?'active':'' } "><a href="__ROOT__/admin/index/view">系统设置</a></li> -->
+          <a href="{:url('/admin/index/show')}">内容管理 </a></li>
+          <li class="{$Request.action=='view'?'active':'' } "><a href="#">系统设置</a></li> -->
         <li  class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">会员管理 <span class="caret"></span></a>
           <ul class="dropdown-menu">
@@ -80,13 +73,13 @@
 {else /} <script>window.location.href="__ROOT__/admin/index/login"</script>
 {/if}</li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">退出 <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">设置 <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="#">Action</a></li>
             <li><a href="#">Another action</a></li>
             <li><a href="#">Something else here</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
+            <li><a href="{:url('/index/index/login/logout/1')}">退出登录</a></li>
           </ul>
         </li>
       </ul>
@@ -123,14 +116,16 @@
 </div>
     <!-- 折叠结束 -->
     <div class="list-group">
-         <a href="#" class="list-group-item disabled">
+       
+        <a href="#" class="list-group-item disabled">
           内容管理
         </a>
+         <a href="__ROOT__/admin/index/show" class="list-group-item">商品列表</a>
         <a href="__ROOT__/admin/index/show" class="list-group-item {$Request.action=='show'?'disabled':'' } ">
-          商品管理 {$Request.action} --{$Request.action=='show'?'disabled':'' } 
+          商品管理 
         </a>
         <a href="__ROOT__/admin/index/add" class="list-group-item {$Request.action=='add'?'disabled':'' } ">添加商品</a>
-        <a href="__ROOT__/admin/index/show" class="list-group-item">商品列表</a>
+        
         <a href="#" class="list-group-item   ">商品分类</a>
         <a href="#" class="list-group-item  ">商品统计</a>
 </div>
