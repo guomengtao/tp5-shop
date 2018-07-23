@@ -2,31 +2,10 @@
 branches: {
   }
 fileChange:
-  /application:
-    newFile: !uuid 'aeb8f09e8f55ac8367cf42378aba89e7bb4f0f3c'
-    oldFile: !uuid '54df3993262cc429348ef623ee1ae8e1de093537'
-  /application/admin:
-    newFile: !uuid 'f5d7bfc070a3e4f95e05c9d86c8d77e37f3e4f79'
-    oldFile: !uuid 'fb19223d25d15bd97150d5bffc5e5530f8b2f03c'
-  /application/admin/view:
-    newFile: !uuid '5a3f7cdc1434e2a84663da59e4d274e5bdd8c4e6'
-    oldFile: !uuid 'eb8523c3ad48d2e529cee2a85f804a2789727604'
-  /application/admin/view/index:
-    newFile: !uuid 'd6ebd9168da190265838a7ee5573e0a35b5ed96d'
-    oldFile: !uuid '9a60ae50e0e5150062d82eda224109926227a3a1'
-  /application/admin/view/index/footer.html:
-    newFile: !uuid '1cafb6885ee8f06f1e7442297efc310680a0f4d1'
-    oldFile: !uuid '8af4e3a8f8f830e10547dc6270379070fef001a0'
-  /application/admin/view/index/header.html:
-    newFile: !uuid '7c8e224fda5b80ee7f2939e0029f6b04acb5f837'
-    oldFile: !uuid 'df63fcbad6f412df12d7c6e6063ca81b69b1db59'
-  /application/admin/view/index/index.html:
-    newFile: !uuid 'c6bc7c168e3b8571097d68190d3fcee9d22a4b68'
-    oldFile: !uuid 'c0b8544a15d9231b43777f077f5404b27733f128'
-  /安装流程.txt:
-    newFile: !uuid 'c40a28655b40a5f0a9b455be2be7711373bf6817'
-    oldFile: null
-gitCommitId: !uuid 'f6444f9aeaf7ad26be4fcd87b848217565068b2a'
+  /README.md:
+    newFile: !uuid '00aa5a164080e918aad2ff91d236f9da343664e5'
+    oldFile: !uuid '37b2f540b1d7f4386686bf46fd38ccebf4ef2930'
+gitCommitId: !uuid '4a9279d8657dfd2fcdc0dd5e09c54d8d3dd77b74'
 renames: {
   }
-revisionId: 29
+revisionId: 30
