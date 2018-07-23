@@ -2,8 +2,30 @@ ThinkPHP 5.0 简易商城系统 thinkphp5mall
 
 [查看在线演示](http://www.open.gaoxueya.com)
 
+thinkphp5mall结合bootstrap3实现从商品在线购买到后台商品的基本功能，最近开发了在线安装功能，直接访问index/index/install页面，快速安装体验，请整理的常用demo数据。是ThinkPHP5 框架思路的实战应用实例，其主要特性包括：
+
+
+
+ + 标签，通过标签快速分类及搜索  
+ + 数据库 增删改查
+ + 模型 增删改查 时间戳 简单关联查询
+ + 分页 使用方法 复杂分页实现
+ + 支付宝 支付接口整合 
+ + 签到 扫码签到 和自动签到两种方式
+ + 微博登录 qq登录 两种直接接口的实现
+ + API 接口
+ + 短信 接口 短信注册 登录 找回密码等
+ + 商城 订单管理 游客购买
+ + Ajax 无刷新发短信 留言 在线聊天功能
+ + 上传 图片 视频 文件等
+ + 点赞功能 实现
+ + Bootstrap3  作为主要界面实现 
+ + 二维码 接口实现
+ + 路由 的简单设置使用入门
+
 ===============
 
+以下是thinkphp5自己的介绍 ^_^
 
 [![Total Downloads](https://poser.pugx.org/topthink/think/downloads)](https://packagist.org/packages/topthink/think)
 [![Latest Stable Version](https://poser.pugx.org/topthink/think/v/stable)](https://packagist.org/packages/topthink/think)
