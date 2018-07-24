@@ -3674,8 +3674,12 @@ echo "生成成功";
             // 点赞数量的统计查询
 
             $likes = likes::where('data_id','=',$bbs[$k]['id'])->count();
+            $on = likes::where('data_id','=',$bbs[$k]['id'])
+                ->where('user_id','=',$user_id)
+                ->count();
             // dump($likes);die();
             $bbs[$k]['likes'] = $likes;
+            $bbs[$k]['on']    = $on;
 
          }
 
@@ -3702,8 +3706,14 @@ echo "生成成功";
             // 利用此循环，顺便加入点赞数量的统计查询
 
             $likes = likes::where('data_id','=',$talk[$k]['id'])->count();
+
+            $on = likes::where('data_id','=',$bbs[$k]['id'])
+                ->where('user_id','=',$user_id)
+                ->count();
+
             // dump($likes);die();
             $talk[$k]['likes'] = $likes;
+            $talk[$k]['on']    = $on;
 
 
 
