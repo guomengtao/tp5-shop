@@ -789,7 +789,7 @@ obj.onkeyup=function(){
                 // document.getElementById("bbs").innerHTML=xmlhttp.responseText+document.getElementById("bbs").innerHTML;
                 document.getElementById("chat").innerHTML=document.getElementById("chat").innerHTML+'<h5 class="text-center"><small>'+xmlhttp.responseText+'</small></h5>';
                 // 实现跳转到div的最下面
-                document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight;
+                // document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight;
                 if (xmlhttp.responseText != "您此次似乎没连续看完整节课程,连续看完才能学的扎实哦^_^"){
                     $('#myModal').modal('show');
                 }
@@ -852,7 +852,7 @@ obj.onkeyup=function(){
                 document.getElementById("bbs_index").innerHTML=document.getElementById("bbs_index").innerHTML+xmlhttp.responseText;
                 // document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight;
                 // document.getElementById('bbs_index').scrollTop = document.getElementById('bbs_index').scrollHeight;
-                document.getElementById('bss_content').scrollTop = document.getElementById('bss_content').scrollHeight;
+                // document.getElementById('bss_content').scrollTop = document.getElementById('bss_content').scrollHeight;
 
             }
         }
@@ -869,7 +869,7 @@ obj.onkeyup=function(){
         // 发送完成后清空内容
         document.getElementById('titleChat').value ="";
         document.getElementById('title_homework').innerText="";
-        document.getElementById("sendChat").value='';
+        // document.getElementById("sendChat").value='';
         // 发送完成后禁止再次点击发送按钮
         // document.getElementById("sendChat").disabled= true;
         // document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight;
@@ -924,7 +924,7 @@ obj.onkeyup=function(){
         // 发送完成后清空内容
         document.getElementById('titleChat').value ="";
         // 发送完成后禁止再次点击发送按钮
-        document.getElementById("sendChat").disabled= true;
+        // document.getElementById("sendChat").disabled= true;
         // document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight;
 
         // $('#chat').scrollTop( $('#chat')[0].scrollHeight );

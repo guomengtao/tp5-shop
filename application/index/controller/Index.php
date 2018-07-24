@@ -1813,7 +1813,7 @@ die();
                         return $this->success('管理员您好^_^', 'admin/index/index');
                     } else {
 
-                        return redirect()->restore();
+                        // return redirect()->restore();
                         return $this->success('登录成功^_^', 'index');
                     }
 
@@ -3664,7 +3664,7 @@ echo "生成成功";
         $bbs = Data::where('shop','=',$id)
             ->where('phone','<>','15966982315')
             ->order('id', 'desc')
-            ->limit(50)
+            ->limit(100)
             ->select();
             // ->paginate(30);
 
@@ -3724,7 +3724,7 @@ echo "生成成功";
             $talk[$k]['on']    = $on;
 
              // 删除点赞数量少的
-            if ($likes<=0) {
+            if ($likes<=2) {
               # code...
               unset($talk[$k]);
             }  

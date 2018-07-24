@@ -193,7 +193,7 @@ function like_none(){
  
             // 如果是首页或者播放页需要的功能
 
-            document.getElementById('bss_content').scrollTop = document.getElementById('bss_content').scrollHeight;
+            // document.getElementById('bss_content').scrollTop = document.getElementById('bss_content').scrollHeight;
 
             // 更新缓存
             public_ajax("{$Think.server.script_name}/index/index/index/");
@@ -206,7 +206,7 @@ function like_none(){
 
           // 如果是首页或者播放页需要的功能
 
-            document.getElementById('bss_content').scrollTop = document.getElementById('bss_content').scrollHeight;
+            // document.getElementById('bss_content').scrollTop = document.getElementById('bss_content').scrollHeight;
 
            // 播放页独立的加载ajax事件
            // 注意多个setTimeout执行性一个的问题
@@ -450,7 +450,7 @@ function like_none(){
 
 
                     document.getElementById("bbs_index").innerHTML=document.getElementById("bbs_index").innerHTML + xmlhttp.responseText;
-                    document.getElementById('bss_content').scrollTop = document.getElementById('bss_content').scrollHeight;
+                    // document.getElementById('bss_content').scrollTop = document.getElementById('bss_content').scrollHeight;
 
                     // document.getElementById("bbs_index").innerHTML=xmlhttp.responseText+document.getElementById("bbs_index").innerHTML;
                     document.getElementById("bbs").innerHTML=document.getElementById("bbs").innerHTML+xmlhttp.responseText;
