@@ -258,22 +258,26 @@ function like_none(){
         // 如果是点赞单独处理
         if (url.substring(-1,36)=='/index.php/index/index/view/data_id/'){
 
-            // 动画效果
+            {if condition="$Think.cookie.phone==''"}
+               return window.location.href='/index/index/login';
+            {/if}
 
-            
+
+            // 动画效果
+     
             
  
             // 增加签到次数
-            like = "like_" + url.substring(36);
+            like_num = "like_" + url.substring(36);
 
-            like_zero = document.getElementById(like).innerHTML;
+            like_zero = document.getElementById(like_num).innerHTML;
 
             // 处理默认为 赞的情况
              if(like_zero=="赞"){
                 // alert(like_zero);
                 like_zero = 0;
              }
-            document.getElementById(like).innerHTML=parseInt(like_zero)+1;
+            
 
 
             
@@ -283,40 +287,30 @@ function like_none(){
 
             like_color = document.getElementById(like).style.color;
 
-            alert(like_color);//100px
-
-            // if (like_color==='red') {
-            //     document.getElementById(like).style.color="blue";
-            // }
-            // else
-            // {
-            //     document.getElementById(like).style.color="red";
-            // }
+ 
            
  
             if (like_color==='rgb(0, 132, 255)') {
                 document.getElementById(like).style.color="rgb(133, 144, 166)";
+
+                document.getElementById(like_num).innerHTML=parseInt(like_zero)-1;
+
             }
             else
             {
                 document.getElementById(like).style.color="rgb(0, 132, 255)";
-                // 点在css3动画显示
-                like_a = "like_a_" + url.substring(36);
-                // alert(like_a);
-                like_animation(like_a);
-            }
+                document.getElementById(like_num).innerHTML=parseInt(like_zero)+1;
 
-            //             if (like_color==='#0084ff') {
-            //     document.getElementById(like).style.color="#8590a6";
-            // }
-            // else
-            // {
-            //     document.getElementById(like).style.color="#0084ff";
-            // }
+                    // 点在css3动画显示
+                    like_a = "like_a_" + url.substring(36);
+                    // alert(like_a);
+                    like_animation(like_a);
+            }
+ 
            
 
 
-            
+
         } 
         // t = t.trim();
         var xmlhttp;

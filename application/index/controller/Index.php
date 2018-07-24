@@ -3337,19 +3337,35 @@ echo "生成成功";
         if ($data_id) {
 
           if ($user_id<=1) {
-            # code...
+            # 没有登录禁止点赞
             return redirect('index/index/login')->remember();
-
-            dump("6");
+ 
             die();
 
           }
 
-          // 有点赞的记录点赞信息
+          // 判断是否点赞
+
+          $like_count_user =  Likes::where('data_id','=',$data_id)
+               ->where('user_id','=',$user_id)
+               ->count();
+
+
+          if ($like_count_user) {
+            # 有点赞软删除
+
+            // 删除状态为0的数据
+            Likes::destroy(['data_id' => $data_id,'user_id' => $user_id]);
+
+          } else {
+            # 没有点赞创建
           $Likes               = new Likes;
           $Likes->data_id      = $data_id;
           $Likes->user_id      = $user_id;
           $Likes->save();
+
+          }
+
 
 
 
@@ -3435,7 +3451,7 @@ echo "生成成功";
         $red_packet_count = $red_packet_count - $red_packet_pay;
 
 
-//        设置领取红包的起始度
+       // 设置领取红包的起始度
         if ($red_packet_count>=5){
 
             $list['red_packet_count'] = $red_packet_count;
@@ -3475,7 +3491,7 @@ echo "生成成功";
             // 判断是否学习完成本课
             $learn_count    =  Video::where('phone', $user)
                 ->where('shop','=', $id)
-//                ->where('status','>=', 1)
+               // ->where('status','>=', 1)
                 ->value('status');
 
             $list['learn_count'] = $learn_count;
@@ -3574,7 +3590,7 @@ echo "生成成功";
 
 
 
-//            此处处理ajax调用统一结束
+           // 此处处理ajax调用统一结束
             return "";
         }
 
