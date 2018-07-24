@@ -1663,6 +1663,10 @@ die();
 
             // 设置Cookie 有效期为 秒
             Cookie::set('phone','',1);
+            Cookie::set('user_id','',1);
+            Cookie::set('vip','',1);
+            Cookie::set('token','',1);
+            Cookie::set('admin','',1);
             // $warning ="退出成功";
             return $this->success('退出成功^_^','login');
 
@@ -1671,7 +1675,7 @@ die();
         if (Request::instance()->isPost()) {
 
 
-          dump($code);
+          // dump($code);
           // if (!captcha_check($code)) {
           //     $this->error('验证码错误');
           // } else {
@@ -1803,9 +1807,13 @@ die();
                         Cookie::set('admin', 1, 3600000);
                     }
                     if ($admin) {
+
+                        return redirect()->restore();
                         // 跳转之前再加一个验证是否是管理员身份  此处略
                         return $this->success('管理员您好^_^', 'admin/index/index');
                     } else {
+
+                        return redirect()->restore();
                         return $this->success('登录成功^_^', 'index');
                     }
 
@@ -3328,18 +3336,31 @@ echo "生成成功";
 
         if ($data_id) {
 
+          if ($user_id<=1) {
+            # code...
+            return redirect('index/index/login')->remember();
+
+            dump("6");
+            die();
+
+          }
+
           // 有点赞的记录点赞信息
           $Likes               = new Likes;
           $Likes->data_id      = $data_id;
-          $Likes->user_id      = $user_id?$user_id:'1';
+          $Likes->user_id      = $user_id;
           $Likes->save();
+
+
+
 
 
           // return $this->redirect('http://www.tp5.com/index/index/view/id/168');
 
           
-          // echo "感谢您，点赞成功！~";die();
-          return $this->success('感谢您，点赞成功！~');
+          echo "ok "; 
+          echo "感谢您，点赞成功！~";die();
+          // return $this->success('感谢您，点赞成功！~');
 
 
 
@@ -3486,7 +3507,7 @@ echo "生成成功";
 
 
             if(!$list['data_len']){
-//                return "评论满10字本课来领取";
+               // return "评论满10字本课来领取";
             }
 
 
@@ -3507,17 +3528,17 @@ echo "生成成功";
 
                 if (!$red_packet_lesson){
 
-                    // 红包订单语句
-//                    $order = Order::create([
-//                        'phone'                   =>  $user,
-//                        'body'                    =>  $id,
-//                        'rand'                    =>  188666,
-//                        'subject'                 =>  "完成课程".$id."获得一个红包",
-//                        'total_fee'               =>  $total_fee,
-//                        'buyer_id'                =>  188666,
-//                        'buyer_email'             =>  $user,
-//                        'out_trade_no'            =>  188666,
-//                    ]);
+                   // 红包订单语句
+                   // $order = Order::create([
+                   //     'phone'                   =>  $user,
+                   //     'body'                    =>  $id,
+                   //     'rand'                    =>  188666,
+                   //     'subject'                 =>  "完成课程".$id."获得一个红包",
+                   //     'total_fee'               =>  $total_fee,
+                   //     'buyer_id'                =>  188666,
+                   //     'buyer_email'             =>  $user,
+                   //     'out_trade_no'            =>  188666,
+                   // ]);
 
 
                     $order                    = new Order;
@@ -3531,7 +3552,7 @@ echo "生成成功";
                     $order->out_trade_no      = '188666';
                     $order->save();
                     // 获取自增ID
-//                    echo $order->id;
+                   // echo $order->id;
 
 
 
@@ -3630,6 +3651,7 @@ echo "生成成功";
 
         }
 
+        // 查询全部评论
         $bbs = Data::where('shop','=',$id)
             ->where('phone','<>','15966982315')
             ->order('id', 'desc')
@@ -3637,11 +3659,12 @@ echo "生成成功";
             ->select();
             // ->paginate(30);
 
-        //      查询最新的聊天信息
+        // 查询热门评论
         $talk = Data::with('sort','foot')
+            ->where('phone','<>','15966982315')
             ->where('shop','=',$id)
             ->order('id', 'desc')
-            ->limit(100)
+            ->limit(10)
             ->select();
 
 
@@ -3689,7 +3712,7 @@ echo "生成成功";
 
       // 实现聊天最新的在最下面
       // 因为tp5分页默认返回的是对象是多维数组，暂时取消时候tp5分页
-      $talk = array_reverse($talk);
+      // $talk = array_reverse($talk);
        
       // 实现按照点赞排序
       $flag = array();  
