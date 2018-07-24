@@ -275,15 +275,48 @@ function like_none(){
              }
             document.getElementById(like).innerHTML=parseInt(like_zero)+1;
 
+
+            
+
             // 设置点赞图标换颜色
             like = "like_icon_" + url.substring(36);
-           document.getElementById(like).style.color="#0084ff";
+
+            like_color = document.getElementById(like).style.color;
+
+            alert(like_color);//100px
+
+            // if (like_color==='red') {
+            //     document.getElementById(like).style.color="blue";
+            // }
+            // else
+            // {
+            //     document.getElementById(like).style.color="red";
+            // }
+           
+ 
+            if (like_color==='rgb(0, 132, 255)') {
+                document.getElementById(like).style.color="rgb(133, 144, 166)";
+            }
+            else
+            {
+                document.getElementById(like).style.color="rgb(0, 132, 255)";
+                // 点在css3动画显示
+                like_a = "like_a_" + url.substring(36);
+                // alert(like_a);
+                like_animation(like_a);
+            }
+
+            //             if (like_color==='#0084ff') {
+            //     document.getElementById(like).style.color="#8590a6";
+            // }
+            // else
+            // {
+            //     document.getElementById(like).style.color="#0084ff";
+            // }
+           
 
 
-            // 点在css3动画显示
-            like_a = "like_a_" + url.substring(36);
-            // alert(like_a);
-            like_animation(like_a);
+            
         } 
         // t = t.trim();
         var xmlhttp;
