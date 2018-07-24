@@ -3353,25 +3353,18 @@ echo "生成成功";
 
           if ($like_count_user) {
             # 有点赞软删除
-
-            // 删除状态为0的数据
             Likes::destroy(['data_id' => $data_id,'user_id' => $user_id]);
 
           } else {
             # 没有点赞创建
-          $Likes               = new Likes;
-          $Likes->data_id      = $data_id;
-          $Likes->user_id      = $user_id;
-          $Likes->save();
+            $Likes               = new Likes;
+            $Likes->data_id      = $data_id;
+            $Likes->user_id      = $user_id;
+            $Likes->save();
 
           }
 
 
-
-
-
-
-          // return $this->redirect('http://www.tp5.com/index/index/view/id/168');
 
           
           echo "ok "; 
@@ -3676,11 +3669,9 @@ echo "生成成功";
             // ->paginate(30);
 
         // 查询热门评论
-        $talk = Data::with('sort','foot')
-            ->where('phone','<>','15966982315')
+        $talk = Data::where('phone','<>','15966982315')
             ->where('shop','=',$id)
             ->order('id', 'desc')
-            ->limit(10)
             ->select();
 
 
@@ -3726,15 +3717,28 @@ echo "生成成功";
             $on = likes::where('data_id','=',$bbs[$k]['id'])
                 ->where('user_id','=',$user_id)
                 ->count();
+           
 
-            // dump($likes);die();
+            
             $talk[$k]['likes'] = $likes;
             $talk[$k]['on']    = $on;
+
+             // 删除点赞数量少的
+            if ($likes<=0) {
+              # code...
+              unset($talk[$k]);
+            }  
 
 
 
 
        }
+      
+      // 重置删除后的数组
+      $talk = array_values($talk);
+
+      $talk = array_slice($talk,0,9);
+        
 
       // 实现聊天最新的在最下面
       // 因为tp5分页默认返回的是对象是多维数组，暂时取消时候tp5分页
@@ -3743,11 +3747,11 @@ echo "生成成功";
       // 实现按照点赞排序
       $flag = array();  
   
-      foreach($bbs as $v){  
+      foreach($talk as $v){  
           $flag[] = $v['likes'];  
       }  
         
-      array_multisort($flag, SORT_DESC, $bbs);
+      array_multisort($flag, SORT_DESC, $talk);
 
   
  
