@@ -376,7 +376,7 @@ class Bbs extends \think\Controller
 
             $gethtml = '
                 <div class="row" style="margin-top: 10px;">
-                        <div class="col-xs-2 col-md-2 text-center "><img class="img-circle"  style="width: 40px"  src="http://open.gaoxueya.com/static/images/user.jpg" /><h5><small>'.$phone_short.'</small></h5></div>
+                        <div class="col-xs-2 col-md-2 text-center "><img class="media-object img-circle"  style="width: 34px"  src="http://open.gaoxueya.com/static/images/user.jpg" /><h5><small>'.$phone_short.'</small></h5></div>
                         <div class="col-xs-8 col-md-8">
                             <div style=" float: left;border-radius:5px ;border: 1px solid transparent;border-color: #ddd;padding: 10px 15px;word-wrap: break-word;max-width: 250px;">'.$new_data_title.'</div>
                         </div>
@@ -389,7 +389,7 @@ class Bbs extends \think\Controller
                         <div class="media" >
                             <div class="media-left" >
                                 <a href="#">
-                                    <img class="media-object img-thumbnail"    src="http://open.gaoxueya.com/static/images/user/user (10).jpg" data-holder-rendered="true" style="width: 48px; height: 48px;">
+                                    <img class="media-object img-circle"    src="http://open.gaoxueya.com/static/images/user/user (10).jpg" data-holder-rendered="true" style="width: 34px; height: 34px;">
                                 </a>
                             </div>
                             <div class="media-body">
@@ -493,7 +493,7 @@ class Bbs extends \think\Controller
                         <div class="media" >
                             <div class="media-left" >
                                 <a href="#">
-                                    <img class="media-object img-thumbnail"    src="http://open.gaoxueya.com/static/images/user/user (16).jpg" data-holder-rendered="true" style="width: 48px; height: 48px;">
+                                    <img class="media-object img-circle"    src="http://open.gaoxueya.com/static/images/user/user (16).jpg" data-holder-rendered="true" style="width: 34px; height: 34px;">
                                 </a>
                             </div>
                             <div class="media-body">

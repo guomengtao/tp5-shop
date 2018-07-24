@@ -207,7 +207,7 @@
         <div class="panel panel-default" > 
             <div class="panel-heading">
 
-                <span style="color: darkgreen" class="glyphicon glyphicon-globe" aria-hidden="true"></span>      {$talk[0]['id']?'精彩评论':'发布评论'}
+                <span  class="glyphicon glyphicon-edit" aria-hidden="true"></span>      {$talk[0]['id']?'精彩评论':'发布评论'}
             </div>
             <div class="panel-body" >
 
@@ -274,15 +274,14 @@
 
 
 </div>
-                <div class="input-group"  >
-                    <input id="titleChat" name="title" type="text" class="form-control" placeholder="写评论...">
 
+                <div class="form-group input-group field-feed-content required">
+                    <textarea id="titleChat" name="title"  class="form-control"  placeholder="写评论..." aria-required="true"></textarea>
+                    <span class="input-group-btn"><button type="submit" class="btn btn-success" onclick="bbs(document.getElementById('titleChat').value,{$list.id})" style="height: 54px;width: 54px;">发布</button></span>
+                </div>
 
-
-
-                    <span class="input-group-btn">
-        <button onclick="bbs(document.getElementById('titleChat').value,{$list.id})" class="btn btn-default" type="button" id="sendChat" disabled="disabled">发送</button>
-
+                 
+                    
 
 
 
@@ -327,8 +326,7 @@ obj.onkeyup=function(){
     }
 }
 </script>
-                    </span>
-                </div><!-- /input-group -->
+                    
 
                 <div class="btn-group"  style="margin-top: 15px;width: 100% ;display: none">
                     <button onclick="bbs('这个课讲的太好了！，我收藏了',{$list.id})" type="button" class="btn btn-default" aria-label="Left Align"><span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span></button>
@@ -464,10 +462,18 @@ obj.onkeyup=function(){
 
                 <h6><small>{$user.phone|substr=0,3}****{$user.phone|substr=7,4}</small></h6>
                 {:nl2br($user.title)}
-                <h6><small>{$user.create_time} 
-                    <a href="{:url('index/index/view','data_id='.$user.id)}">点赞 {$user.likes}</a>
+                 
 
-                </small></h6>
+                <h5> <small> {$user.create_time}   <!--  <a href="{:url('index/index/view','data_id='.$user.id)}">点赞:{$user.likes}</a> -->
+
+                                   <span onclick='public_ajax("{$Think.server.script_name}/index/index/view/all/1/data_id/{$user.id}",0)' style="position: relative;">  
+                                    <span id="like_icon_all_{$user.id}" style="color: {$user.on?'#0084ff':'#8590a6'}; fill: currentColor;"> 
+    <svg viewBox="0 0 20 18" xmlns="http://www.w3.org/2000/svg" class="likeicon" width="13" height="16" aria-hidden="true" style="height: 16px; width: 13px;"><title></title><g><path d="M.718 7.024c-.718 0-.718.63-.718.63l.996 9.693c0 .703.718.65.718.65h1.45c.916 0 .847-.65.847-.65V7.793c-.09-.88-.853-.79-.846-.79l-2.446.02zm11.727-.05S13.2 5.396 13.6 2.89C13.765.03 11.55-.6 10.565.53c-1.014 1.232 0 2.056-4.45 5.83C5.336 6.965 5 8.01 5 8.997v6.998c-.016 1.104.49 2 1.99 2h7.586c2.097 0 2.86-1.416 2.86-1.416s2.178-5.402 2.346-5.91c1.047-3.516-1.95-3.704-1.95-3.704l-5.387.007z"></path></g></svg>
+ </span> <span id="like_all_{$user.id}">{$user.likes?$user.likes:"赞"}</span>  
+                                   <!-- {$user.likes?$user.likes:"赞"} --><span id="like_a_all_{$user.id}" style="position:absolute;left:0px;top:0px;z-index:-20;color: red ;animation:mylike 2s;display:none ">+1</span>
+
+                               </span>   回复
+                                    <!--   {$user.sort.city}  {$user.foot.browser} --> </small></h5>
             </td></tr>
 
             {/volist}

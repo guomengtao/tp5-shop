@@ -255,16 +255,76 @@ function like_none(){
     // 获取返回的音效，独立返回到页面的，以防止重复音量
     function public_ajax(url,t)
     {
-        // 如果是点赞单独处理
+        // 如果是点赞单独处理，全部点赞
+        if (url.substring(-1,42)=='/index.php/index/index/view/all/1/data_id/'){
+
+            {if condition="$Think.cookie.phone==''"}
+               return window.location.href='/index/index/login';
+            {/if}
+
+            
+
+
+              
+            
+ 
+            // 增加签到次数
+            like_num = "like_all_" + url.substring(42);
+
+            like_zero = document.getElementById(like_num).innerHTML;
+
+            // 处理默认为 赞的情况
+             if(like_zero=="赞"){
+                // alert(like_zero);
+                like_zero = 0;
+             }
+
+ 
+             
+
+            
+
+            // 设置点赞图标换颜色
+            like = "like_icon_all_" + url.substring(42);
+ 
+            like_color = document.getElementById(like).style.color;
+
+ 
+           
+ 
+            if (like_color==='rgb(0, 132, 255)') {
+                document.getElementById(like).style.color="rgb(133, 144, 166)";
+
+                document.getElementById(like_num).innerHTML=parseInt(like_zero)-1;
+
+            }
+            else
+            {
+                document.getElementById(like).style.color="rgb(0, 132, 255)";
+                document.getElementById(like_num).innerHTML=parseInt(like_zero)+1;
+
+                    // 点在css3动画显示
+                    like_a_all_ = "like_a_all_" + url.substring(42);
+                    // alert(like_a);
+                    like_animation(like_a_all_);
+            }
+ 
+           
+
+
+
+        } 
+        // 如果是点赞单独处理,热门点赞
         if (url.substring(-1,36)=='/index.php/index/index/view/data_id/'){
 
             {if condition="$Think.cookie.phone==''"}
                return window.location.href='/index/index/login';
             {/if}
 
+            
 
-            // 动画效果
-     
+
+              
             
  
             // 增加签到次数
@@ -277,7 +337,8 @@ function like_none(){
                 // alert(like_zero);
                 like_zero = 0;
              }
-            
+
+ 
 
 
             
