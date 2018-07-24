@@ -43,13 +43,20 @@
   </script>
 </head>
 
-<!-- 设置view播放页为全屏 -->
-{if condition="($Request.module=='index') AND ($Request.controller=='Index') AND ($Request.action=='view')" }
-     <body  style="padding-top:52px;background-color: black;">
-     {else /} 
-             <body  style="padding-top:70px;">
-{/if}
- 
+
+
+       {if condition="($Think.cookie.screen==0)"}
+              
+                         <body  style="padding-top:70px;">
+            
+        {else /}
+             <!-- 设置view播放页为全屏 -->
+            {if condition="($Request.module=='index') AND ($Request.controller=='Index') AND ($Request.action=='view')" }
+                 <body  style="padding-top:52px;background-color: black;">
+                 {else /} 
+                         <body  style="padding-top:70px;background-color: none;">
+            {/if}
+         {/if}
 
 
   <nav class="navbar navbar-inverse navbar-fixed-top" style="border-radius: 0px;">

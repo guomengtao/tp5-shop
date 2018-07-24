@@ -30,7 +30,7 @@
 
 
 <div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-12" style="padding: 0px;">
+    <div class="col-xs-12 col-sm-12 col-md-12" style="padding: 0px;display: {$list.address?'none':''}">
 
         <!--价格等于0元或者已经购买的播放-->
         {if condition="($order >=1) OR ($list.price == 0)"}
@@ -121,11 +121,7 @@
         {else /}
 
         {if condition="$list.address"}
-<!--         <p><video width="100%"  controls="controls"  poster="__STATIC__/thinkphp5.jpg"  id="myVideo12">
-
-            <source src="#" type="video/mp4" />
-        </video></p>
- -->
+ 
 <div style="width: 100%;height: 50vw;">
  <div style=" width: 300px;
     height: 140px;
@@ -200,8 +196,49 @@
 
     </div> <!--这个是左侧播放器的结束部分-->
 <div class="col-xs-12 col-sm-12 col-md-12"  >
- <h3>课程</h3>
-   
+ 
+
+ <div class="media" >
+                            <div class="media-left" >
+                                <a href="#">
+                                    <img class="media-object img-circle"    src="__STATIC__/images/user/user ({:rand(1,25)}).jpg" data-holder-rendered="true" style="width: 48px; height: 48px;">
+                                </a>
+                            </div>
+                            <div class="media-body">
+                        <h5><a href="#">18210787405</a></h5>
+                                <small>发布于：{$list.create_time}</small> 
+                            </div>
+                            <div class="media-right" >
+                                 <a class="btn btn-default" href="#" role="button">关注</a>
+                            </div>
+                        </div>
+
+
+ <h4>{$list.title}</h4>
+ <h5>{$list.content}</h5>
+   <div class="panel panel-default" style="display: none">
+    <div class="panel-heading">本课介绍</div>
+    <div class="panel-body">
+
+
+        <p>{$list.content}</p>
+        <p>价格：{$list.price}    日期：{$list.create_time} 标签：
+            {foreach name="list.label" item="vo" }
+
+            <a class="btn btn-default btn-xs" href="__ROOT__/index/index/like?search={$vo}" role="button">{$vo}</a>
+
+
+            {/foreach}
+             IP:{$Request.ip} 学习 会员：{$list.play_count}人</p>
+        
+
+
+
+
+
+    </div>
+
+</div>
 
 
         <div class="panel panel-default" > 
@@ -262,18 +299,7 @@
                         </span>
 
                 </div>
-<div style="margin-bottom: 10px">
 
-
-    <span onclick="bbs('[rose]',{$list.id})" style="border-radius:100px;border:0px solid #a1a1a1;padding:0px 10px;color: #a1a1a1"><img    src="__STATIC__/images/[rose].png" data-holder-rendered="true" style="width: 28px; height: 28px;"></span>
-    <!-- <span onclick="bbs('[thumb]',{$list.id})" style="border-radius:100px;border:0px solid #a1a1a1;padding:0px 10px;color: #a1a1a1"><img    src="__STATIC__/images/[thumb].png" data-holder-rendered="true" style="width: 28px; height: 28px;"></span> -->
-    <span onclick="bbs('[bq]',{$list.id})" style="border-radius:100px;border:0px solid #a1a1a1;padding:0px 10px;color: #a1a1a1"><img    src="__STATIC__/images/[bq].png" data-holder-rendered="true" style="width: 28px; height: 28px;"></span>
-
-    <span onclick="bbs('666666',{$list.id})" style="border-radius:100px;border:1px solid #a1a1a1;padding:0px 10px;color: #a1a1a1">666</span>
-    <span onclick="bbs('顶一个',{$list.id})" style="border-radius:100px;border:1px solid #a1a1a1;padding:0px 10px;color: #a1a1a1">顶</span>
-
-
-</div>
 
                 <div class="form-group input-group field-feed-content required">
                     <textarea id="titleChat" name="title"  class="form-control"  placeholder="写评论..." aria-required="true"></textarea>
@@ -281,7 +307,18 @@
                 </div>
 
                  
-                    
+           <div style="margin-bottom: 10px">
+
+
+    <span onclick="bbs('[rose]',{$list.id})" style="border-radius:100px;border:0px solid #a1a1a1;padding:0px 10px;color: #a1a1a1"><img    src="__STATIC__/images/[rose].png" data-holder-rendered="true" style="width: 18px; height: 18px;"></span>
+    <!-- <span onclick="bbs('[thumb]',{$list.id})" style="border-radius:100px;border:0px solid #a1a1a1;padding:0px 10px;color: #a1a1a1"><img    src="__STATIC__/images/[thumb].png" data-holder-rendered="true" style="width: 28px; height: 28px;"></span> -->
+    <span onclick="bbs('[bq]',{$list.id})" style="border-radius:100px;border:0px solid #a1a1a1;padding:0px 10px;color: #a1a1a1"><img    src="__STATIC__/images/[bq].png" data-holder-rendered="true" style="width: 18px; height: 18px;"></span>
+
+    <span onclick="bbs('666666',{$list.id})" style="border-radius:100px;border:1px solid #a1a1a1;padding:0px 10px;color: #a1a1a1">666</span>
+    <span onclick="bbs('顶一个',{$list.id})" style="border-radius:100px;border:1px solid #a1a1a1;padding:0px 10px;color: #a1a1a1">顶</span>
+
+
+</div>         
 
 
 
@@ -348,7 +385,7 @@ obj.onkeyup=function(){
     </div> <!--这个是右侧聊天的结束部分-->
 </div>
 <!--以上是提示购买的结束-->
-<div class="page-header">
+<div class="page-header" style="display: none">
     <h3>{$list.title} <small>{$list.page_view} 次</small> </h3>
     <div class="btn-toolbar" role="toolbar">
 
@@ -373,29 +410,7 @@ obj.onkeyup=function(){
     {/if}
 </div>
 
-<div class="panel panel-default">
-    <div class="panel-heading">本课介绍</div>
-    <div class="panel-body">
 
-
-        <p>{$list.content}</p>
-        <p>价格：{$list.price}    日期：{$list.create_time} 标签：
-            {foreach name="list.label" item="vo" }
-
-            <a class="btn btn-default btn-xs" href="__ROOT__/index/index/like?search={$vo}" role="button">{$vo}</a>
-
-
-            {/foreach}
-             IP:{$Request.ip} 学习 会员：{$list.play_count}人</p>
-        
-
-
-
-
-
-    </div>
-
-</div>
 
 
 

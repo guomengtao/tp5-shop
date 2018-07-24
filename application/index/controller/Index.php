@@ -3755,7 +3755,7 @@ echo "生成成功";
 
   
  
-
+      // dump($list);
 
         // return Cookie::get('t'.$id);
         $this->assign('up',$up);
