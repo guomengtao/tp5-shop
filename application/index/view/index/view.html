@@ -276,7 +276,7 @@
                                   {if condition="$user.age >=100"}
                                 <div class="form-group input-group field-feed-content required" style="background-color:  #f4f4f4;padding: 10px;color: #555555">
 
-                                     @{$user.phone|substr=0,3}****{$user.phone|substr=7,4}:{$user.r_title}
+                                     @{$user.r_phone|substr=0,3}****{$user.r_phone|substr=7,4}:{$user.r_title}
                  
                                 </div>
 
@@ -519,7 +519,7 @@ obj.onkeyup=function(){
                 {if condition="$user.age >=100"}
                                 <div class="form-group input-group field-feed-content required" style="background-color:  #f4f4f4;padding: 10px;color: #555555">
 
-                                     @{$user.phone|substr=0,3}****{$user.phone|substr=7,4}:{$user.r_title}
+                                     @{$user.r_phone|substr=0,3}****{$user.r_phone|substr=7,4}:{$user.r_title}
                  
                                 </div>
 
