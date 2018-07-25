@@ -273,7 +273,7 @@
                                         
 
                                 </small>
-                                <h5> <small> {$user.create_time}  
+                                <h5> <small> {$user.create_time} +{$user.age} +
 
                                    <span onclick='public_ajax("{$Think.server.script_name}/index/index/view/data_id/{$user.id}",0)' style="position: relative;">  
                                     <span id="like_icon_{$user.id}" style="color: {$user.on?'#0084ff':'#8590a6'}; fill: currentColor;"> 
@@ -491,9 +491,17 @@ obj.onkeyup=function(){
 
 
                 <h6><small>{$user.phone|substr=0,3}****{$user.phone|substr=7,4}</small></h6>
-                {:nl2br($user.title)}
-                 
+                
+                                 
+                {if condition="$user.age >=1"}
+                                <div class="form-group input-group field-feed-content required" style="background-color:  #f4f4f4;padding: 10px;color: #555555">
 
+                                     回复的id {$user.age}  @{$Request.param.r_phone}:{$Request.param.r_title}
+                 
+                                </div>
+
+                {/if}
+                {:nl2br($user.title)}
                 <h5> <small> {$user.create_time}   <!--  <a href="{:url('index/index/view','data_id='.$user.id)}">点赞:{$user.likes}</a> -->
 
                                    <span onclick='public_ajax("{$Think.server.script_name}/index/index/view/all/1/data_id/{$user.id}",0)' style="position: relative;">  
@@ -502,7 +510,7 @@ obj.onkeyup=function(){
  </span> <span id="like_all_{$user.id}">{$user.likes?$user.likes:"赞"}</span>  
                                    <!-- {$user.likes?$user.likes:"赞"} --><span id="like_a_all_{$user.id}" style="position:absolute;left:0px;top:0px;z-index:-20;color: red ;animation:mylike 2s;display:none ">+1</span>
 
-                               </span>   <a href="{:url('/')}index/index/view/data_id/{$user.id}/reply/1/id/{$list.id}/r_phone/{$user.phone|substr=0,3}****{$user.phone|substr=7,4}/r_title/{$user.title}">回复</a>
+                               </span>   <a href="{:url('/')}index/index/view/data_id/{$user.id}/reply/1/id/{$list.id}/r_phone/{$user.phone|substr=0,3}****{$user.phone|substr=7,4}/r_title/{$user.title}">回复</a> 
                                     <!--   {$user.sort.city}  {$user.foot.browser} --> </small></h5>
             </td></tr>
 
