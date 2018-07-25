@@ -268,12 +268,24 @@
                                 </a>
                             </div>
                             <div class="media-body">
+
+
+
                                 <small><a href="#">{$user.phone|substr=0,3}****{$user.phone|substr=7,4}</a>
+
+                                  {if condition="$user.age >=1"}
+                                <div class="form-group input-group field-feed-content required" style="background-color:  #f4f4f4;padding: 10px;color: #555555">
+
+                                     @{$user.phone|substr=0,3}****{$user.phone|substr=7,4}:{$user.r_title}
+                 
+                                </div>
+
+                               {/if}
                                     :{$user.title}
                                         
 
                                 </small>
-                                <h5> <small> {$user.create_time} +{$user.age} +
+                                <h5> <small> {$user.create_time}  
 
                                    <span onclick='public_ajax("{$Think.server.script_name}/index/index/view/data_id/{$user.id}",0)' style="position: relative;">  
                                     <span id="like_icon_{$user.id}" style="color: {$user.on?'#0084ff':'#8590a6'}; fill: currentColor;"> 
@@ -496,7 +508,7 @@ obj.onkeyup=function(){
                 {if condition="$user.age >=1"}
                                 <div class="form-group input-group field-feed-content required" style="background-color:  #f4f4f4;padding: 10px;color: #555555">
 
-                                     回复的id {$user.age}  @{$Request.param.r_phone}:{$Request.param.r_title}
+                                     @{$user.phone|substr=0,3}****{$user.phone|substr=7,4}:{$user.r_title}
                  
                                 </div>
 

@@ -3689,6 +3689,19 @@ echo "生成成功";
             $bbs[$k]['likes'] = $likes;
             $bbs[$k]['on']    = $on;
 
+
+            if ($bbs[$k]['age']>=1) {
+                # 如果属于回复，查出来回的谁的评论
+
+              $data = Data::get($bbs[$k]['age']);
+               
+              $bbs[$k]['r_phone']    = $data->phone;
+              $bbs[$k]['r_title']    = $data->title;
+
+ 
+
+              }  
+
          }
 
 
@@ -3724,11 +3737,27 @@ echo "生成成功";
             $talk[$k]['likes'] = $likes;
             $talk[$k]['on']    = $on;
 
+            if ($talk[$k]['age']>=1) {
+                # 如果属于回复，查出来回的谁的评论
+
+              $data = Data::get($talk[$k]['age']);
+               
+              $talk[$k]['r_phone']    = $data->phone;
+              $talk[$k]['r_title']    = $data->title;
+
+ 
+
+              }
+
              // 删除点赞数量少的
             if ($likes<=2) {
               # code...
               unset($talk[$k]);
-            }  
+            }
+
+
+
+ 
 
 
 
