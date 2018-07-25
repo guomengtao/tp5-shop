@@ -303,7 +303,7 @@
  
                 </div>
 
-{if condition="$list.id >=1"}
+{if condition="$Request.param.reply >=1"}
                 <div class="form-group input-group field-feed-content required" style="background-color:  #e3e3e3;padding: 10px">
 
                      回复 @{$Request.param.r_phone}:{$Request.param.r_title}
@@ -315,8 +315,8 @@
  
                 <div class="form-group input-group field-feed-content required">
 
-                    <textarea id="titleChat" name="title"  class="form-control"  placeholder="写评论..." aria-required="true"></textarea>
-                    <span class="input-group-btn"><button type="submit" class="btn btn-success" onclick="bbs(document.getElementById('titleChat').value,{$list.id})" style="height: 54px;width: 54px;">发布</button></span>
+                    <textarea id="titleChat" name="title"  class="form-control"  placeholder="{$Request.param.data_id?'写回复内容':'写评论'}..." aria-required="true"></textarea>
+                    <span class="input-group-btn"><button type="submit" class="btn btn-success" onclick="bbs(document.getElementById('titleChat').value,{$list.id},{$Request.param.data_id})" style="height: 54px;width: 54px;">发布</button></span>
 
  
                 </div>
@@ -502,7 +502,7 @@ obj.onkeyup=function(){
  </span> <span id="like_all_{$user.id}">{$user.likes?$user.likes:"赞"}</span>  
                                    <!-- {$user.likes?$user.likes:"赞"} --><span id="like_a_all_{$user.id}" style="position:absolute;left:0px;top:0px;z-index:-20;color: red ;animation:mylike 2s;display:none ">+1</span>
 
-                               </span>   回复
+                               </span>   <a href="{:url('/')}index/index/view/data_id/{$user.id}/reply/1/id/{$list.id}/r_phone/{$user.phone|substr=0,3}****{$user.phone|substr=7,4}/r_title/{$user.title}">回复</a>
                                     <!--   {$user.sort.city}  {$user.foot.browser} --> </small></h5>
             </td></tr>
 
@@ -842,9 +842,11 @@ obj.onkeyup=function(){
 <script>
 
     // 评论功能的ajax函数
-    function bbs(t,id)
+    function bbs(t,id,data_id)
     {
         t = t.trim();
+
+         
 
 
 
@@ -884,13 +886,21 @@ obj.onkeyup=function(){
                 // document.getElementById('bbs_index').scrollTop = document.getElementById('bbs_index').scrollHeight;
                 // document.getElementById('bss_content').scrollTop = document.getElementById('bss_content').scrollHeight;
 
+                // 如果是回复评论，回复后取消url的传值，刷新页面
+                        if (data_id>=1) 
+                    {
+                        window.location.href="{$Think.server.script_name}/index/index/view/id/" +id 
+                    }
+
+
             }
         }
         xmlhttp.open("POST","{$Think.server.script_name}/index/bbs/add/",true);
         // xmlhttp.open("GET","/index/bbs/add/title/"+t+"/shop/"+id,true);
         xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
         // xmlhttp.send("t=Bill&lname=Gates");
-        xmlhttp.send("title="+t+"&shop="+id);
+        
+        xmlhttp.send("title="+t+"&shop="+id+"&age="+data_id);
         // xmlhttp.send();
         bbs_song("ask_song");
 

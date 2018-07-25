@@ -125,12 +125,13 @@ class Bbs extends \think\Controller
         $title           = trim(input('title'));
         $content         = input('param.content');
         $shop            = input('param.shop');
+        $age             = input('age');
         $phone           = Cookie::get('phone');
         $online_time     = Cookie::get('online_time');
         $new_data_title  = "";
         $captcha         = input("captcha");
 
-
+            // dump($status);die();
         if($shop==2){
 
             if (!$title) {
@@ -450,9 +451,10 @@ class Bbs extends \think\Controller
 
              // 模型的 静态方法
             $user = Data::create([
-                'title'   =>  $title,
-                'shop' =>  $shop,
-                'phone' =>  $phone,
+                'title'      =>  $title,
+                'shop'       =>  $shop,
+                'phone'      =>  $phone,
+                'age'        =>  $age,
                 'session_id' =>  session_id()
             ]);
 

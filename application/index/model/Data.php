@@ -55,10 +55,7 @@ class Data extends model
         return "30";
     }
 
-     public function setAgeAttr($value)
-    {
-        return "30";
-    }
+ 
 
     public function setTitleAttr($value)
     {
