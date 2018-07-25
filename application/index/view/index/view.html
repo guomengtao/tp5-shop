@@ -273,16 +273,17 @@
                                         
 
                                 </small>
-                                <h5> <small> {$user.create_time}   <!--  <a href="{:url('index/index/view','data_id='.$user.id)}">点赞:{$user.likes}</a> -->
+                                <h5> <small> {$user.create_time}  
 
                                    <span onclick='public_ajax("{$Think.server.script_name}/index/index/view/data_id/{$user.id}",0)' style="position: relative;">  
                                     <span id="like_icon_{$user.id}" style="color: {$user.on?'#0084ff':'#8590a6'}; fill: currentColor;"> 
     <svg viewBox="0 0 20 18" xmlns="http://www.w3.org/2000/svg" class="likeicon" width="13" height="16" aria-hidden="true" style="height: 16px; width: 13px;"><title></title><g><path d="M.718 7.024c-.718 0-.718.63-.718.63l.996 9.693c0 .703.718.65.718.65h1.45c.916 0 .847-.65.847-.65V7.793c-.09-.88-.853-.79-.846-.79l-2.446.02zm11.727-.05S13.2 5.396 13.6 2.89C13.765.03 11.55-.6 10.565.53c-1.014 1.232 0 2.056-4.45 5.83C5.336 6.965 5 8.01 5 8.997v6.998c-.016 1.104.49 2 1.99 2h7.586c2.097 0 2.86-1.416 2.86-1.416s2.178-5.402 2.346-5.91c1.047-3.516-1.95-3.704-1.95-3.704l-5.387.007z"></path></g></svg>
  </span> <span id="like_{$user.id}">{$user.likes?$user.likes:"赞"}</span>  
-                                   <!-- {$user.likes?$user.likes:"赞"} --><span id="like_a_{$user.id}" style="position:absolute;left:0px;top:0px;z-index:-20;color: red ;animation:mylike 2s;display:none ">+1</span>
+                                  
+                                  <span id="like_a_{$user.id}" style="position:absolute;left:0px;top:0px;z-index:-20;color: red ;animation:mylike 2s;display:none ">+1</span>
 
-                               </span>   回复
-                                    <!--   {$user.sort.city}  {$user.foot.browser} --> </small></h5>
+                               </span>   <a href="{:url('/')}index/index/view/data_id/{$user.id}/reply/1">回复</a>                                    <!--   {$user.sort.city}  {$user.foot.browser} --> </small></h5>
+                               
                             </div>
                         </div>
 
@@ -295,15 +296,29 @@
 
                     {/volist}
 
+  
+
 
                         </span>
-
+ 
                 </div>
 
 
+                <div class="form-group input-group field-feed-content required" style="background-color:  #e3e3e3;padding: 10px">
+
+                     @182****7406:人的天才只是火花，要想使它成熊熊火焰，哪就只有学习！学习
+ 
+                </div>
+
+
+
+ 
                 <div class="form-group input-group field-feed-content required">
+
                     <textarea id="titleChat" name="title"  class="form-control"  placeholder="写评论..." aria-required="true"></textarea>
                     <span class="input-group-btn"><button type="submit" class="btn btn-success" onclick="bbs(document.getElementById('titleChat').value,{$list.id})" style="height: 54px;width: 54px;">发布</button></span>
+
+ 
                 </div>
 
                  
