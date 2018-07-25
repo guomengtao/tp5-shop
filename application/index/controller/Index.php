@@ -3333,8 +3333,9 @@ echo "生成成功";
         $user                = Cookie::get('phone');
         $user_id             = Cookie::get('user_id');
         $data_id             = input('data_id');
+        $reply               = input('reply');
 
-        if ($data_id) {
+        if ($data_id and $reply=='') {
 
           if ($user_id<=1) {
             # 没有登录禁止点赞

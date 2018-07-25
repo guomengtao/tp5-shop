@@ -282,7 +282,7 @@
                                   
                                   <span id="like_a_{$user.id}" style="position:absolute;left:0px;top:0px;z-index:-20;color: red ;animation:mylike 2s;display:none ">+1</span>
 
-                               </span>   <a href="{:url('/')}index/index/view/data_id/{$user.id}/reply/1">回复</a>                                    <!--   {$user.sort.city}  {$user.foot.browser} --> </small></h5>
+                               </span>   <a href="{:url('/')}index/index/view/data_id/{$user.id}/reply/1/id/{$list.id}/r_phone/{$user.phone|substr=0,3}****{$user.phone|substr=7,4}/r_title/{$user.title}">回复</a>                                    <!--   {$user.sort.city}  {$user.foot.browser} --> </small></h5>
                                
                             </div>
                         </div>
@@ -303,14 +303,14 @@
  
                 </div>
 
-
+{if condition="$list.id >=1"}
                 <div class="form-group input-group field-feed-content required" style="background-color:  #e3e3e3;padding: 10px">
 
-                     @182****7406:人的天才只是火花，要想使它成熊熊火焰，哪就只有学习！学习
+                     回复 @{$Request.param.r_phone}:{$Request.param.r_title}
  
                 </div>
 
-
+{/if}
 
  
                 <div class="form-group input-group field-feed-content required">
