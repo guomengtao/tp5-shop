@@ -294,8 +294,19 @@
                                   
                                   <span id="like_a_{$user.id}" style="position:absolute;left:0px;top:0px;z-index:-20;color: red ;animation:mylike 2s;display:none ">+1</span>
 
-                               </span>   <a href="{:url('/')}index/index/view/data_id/{$user.id}/reply/1/id/{$list.id}/r_phone/{$user.phone|substr=0,3}****{$user.phone|substr=7,4}/r_title/{$user.title}">回复</a>                                    <!--   {$user.sort.city}  {$user.foot.browser} --> </small></h5>
+                               </span>   <a href="{:url('/')}index/index/view/data_id/{$user.id}/reply/1/id/{$list.id}/r_phone/{$user.phone|substr=0,3}****{$user.phone|substr=7,4}/r_title/{$user.title}">回复</a>  <span onclick="reply_show(reply_{$user.id})">快捷回复</span>
+
+                                                                   <!--   {$user.sort.city}  {$user.foot.browser} --> </small></h5>
                                
+
+                                               <div id="reply_{$user.id}" class="form-group input-group field-feed-content required" style="display: none">
+
+                    <textarea id="titleChat_{$user.id}" name="title"  class="form-control"  placeholder="写回复" aria-required="true"></textarea>
+                    <span class="input-group-btn"><button type="submit" class="btn btn-success" onclick="bbs(document.getElementById('titleChat_{$user.id}').value,{$list.id},{$user.id})" style="height: 54px;width: 54px;">发布</button></span>
+
+ 
+                </div>
+
                             </div>
                         </div>
 
