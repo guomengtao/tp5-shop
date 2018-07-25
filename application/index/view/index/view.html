@@ -273,7 +273,7 @@
 
                                 <small><a href="#">{$user.phone|substr=0,3}****{$user.phone|substr=7,4}</a>
 
-                                  {if condition="$user.age >=1"}
+                                  {if condition="$user.age >=100"}
                                 <div class="form-group input-group field-feed-content required" style="background-color:  #f4f4f4;padding: 10px;color: #555555">
 
                                      @{$user.phone|substr=0,3}****{$user.phone|substr=7,4}:{$user.r_title}
@@ -294,7 +294,7 @@
                                   
                                   <span id="like_a_{$user.id}" style="position:absolute;left:0px;top:0px;z-index:-20;color: red ;animation:mylike 2s;display:none ">+1</span>
 
-                               </span>   <a href="{:url('/')}index/index/view/data_id/{$user.id}/reply/1/id/{$list.id}/r_phone/{$user.phone|substr=0,3}****{$user.phone|substr=7,4}/r_title/{$user.title}">回复</a>  <span onclick="document.getElementById('reply_{$user.id}').style.display = '' ">快捷回复</span>
+                               </span>   <a style="display: none" href="{:url('/')}index/index/view/data_id/{$user.id}/reply/1/id/{$list.id}/r_phone/{$user.phone|substr=0,3}****{$user.phone|substr=7,4}/r_title/{$user.title}">回复</a>    <a href = "javascript:void(0);"  onclick="document.getElementById('reply_{$user.id}').style.display = '' " >回复</a>
 
                                                                    <!--   {$user.sort.city}  {$user.foot.browser} --> </small></h5>
                                
@@ -516,7 +516,7 @@ obj.onkeyup=function(){
                 <h6><small>{$user.phone|substr=0,3}****{$user.phone|substr=7,4}</small></h6>
                 
                                  
-                {if condition="$user.age >=1"}
+                {if condition="$user.age >=100"}
                                 <div class="form-group input-group field-feed-content required" style="background-color:  #f4f4f4;padding: 10px;color: #555555">
 
                                      @{$user.phone|substr=0,3}****{$user.phone|substr=7,4}:{$user.r_title}
@@ -533,8 +533,23 @@ obj.onkeyup=function(){
  </span> <span id="like_all_{$user.id}">{$user.likes?$user.likes:"赞"}</span>  
                                    <!-- {$user.likes?$user.likes:"赞"} --><span id="like_a_all_{$user.id}" style="position:absolute;left:0px;top:0px;z-index:-20;color: red ;animation:mylike 2s;display:none ">+1</span>
 
-                               </span>   <a href="{:url('/')}index/index/view/data_id/{$user.id}/reply/1/id/{$list.id}/r_phone/{$user.phone|substr=0,3}****{$user.phone|substr=7,4}/r_title/{$user.title}">回复</a> 
-                                    <!--   {$user.sort.city}  {$user.foot.browser} --> </small></h5>
+                               </span>   <a href = "javascript:void(0);"  onclick="document.getElementById('reply_all_{$user.id}').style.display = '' " >回复</a>
+
+                                                                     </small></h5>
+                               
+
+                                               <div id="reply_all_{$user.id}" class="form-group input-group field-feed-content required" style="display: none">
+
+                    <textarea id="titleChat_all_{$user.id}" name="title"  class="form-control"  placeholder="写回复" aria-required="true"></textarea>
+                    <span class="input-group-btn"><button type="submit" class="btn btn-success" onclick="bbs(document.getElementById('titleChat_all_{$user.id}').value,{$list.id},{$user.id})" style="height: 54px;width: 54px;">发布</button></span>
+
+ 
+                </div>
+
+
+
+
+
             </td></tr>
 
             {/volist}
