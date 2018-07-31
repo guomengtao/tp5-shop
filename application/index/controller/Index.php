@@ -3728,7 +3728,7 @@ echo "生成成功";
 
             $likes = likes::where('data_id','=',$talk[$k]['id'])->count();
 
-            $on = likes::where('data_id','=',$bbs[$k]['id'])
+            $on = likes::where('data_id','=',$talk[$k]['id'])
                 ->where('user_id','=',$user_id)
                 ->count();
            
