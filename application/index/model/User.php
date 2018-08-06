@@ -16,8 +16,7 @@ class User extends model
     protected $update = ['name'];
 
 
-
-    
+ 
 
     protected function scopeAgetom($query)
     {
@@ -46,8 +45,14 @@ class User extends model
 
     public function profile()
     {
-        return $this->hasOne('Profile','phone','phone');
+        return $this->hasOne('Profile');
     }
+
+    public function userProfile()
+    {
+        return $this->hasOne('userProfile');
+    }
+
     public function userinfo()
     {
         return $this->hasOne('Userinfo','phone','phone');

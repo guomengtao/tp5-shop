@@ -2921,22 +2921,20 @@ echo "生成成功";
     public function index(){
 
 
-        // 查询24小时内在线用户
+      // 查询指定用户的关联邮箱
+      $user = User::get(394);
+       
+      // 输出Profile关联模型的email属性
+      echo $user->userProfile->email;
 
-       // 查询24小时内在线用户
-            // $online  = User::whereTime('update_time','-24 hours')
-            //     ->order('update_time', 'desc')
-            //     ->select();
-            
-          // 查找年龄大于20的10个用户
-        $online = User::scope('agetom')->select();
+      // 已用户表为主，查询关联表邮箱为指定值的用户
+      // $user = User::hasWhere('profile',['email'=>'393@qq.com'])->find();
+      // echo $user->name;
 
-                // 查找年龄大于20的10个用户
-             // $online  =  User::scope('ageAbove', 0)->select();
-             // $online  =  User::scope('age')->select();
 
-echo "123";
-                dump($online);die();
+ 
+
+ die();
 
 
 
