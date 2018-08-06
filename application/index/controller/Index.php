@@ -2921,7 +2921,7 @@ echo "生成成功";
     public function index(){
 
                //权限认证
-          // $auth = new \Auth\Auth();
+          $auth = new \Auth\Auth();
 
 
  
@@ -2934,8 +2934,8 @@ echo "生成成功";
            参数1：Admin/Article/Add 假设我现在请求 Admin模块下Article控制器的Add方法
            参数2： 1 为当前请求的会员ID
        */
-        // $check = $auth->check('Home/add','2');
-        // dump($check); //返回值true,代表有此权限
+        $check = $auth->check('Home/add','2');
+        dump($check); //返回值true,代表有此权限
 
 
     // 切换全屏和窄屏功能

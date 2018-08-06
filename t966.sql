@@ -1,11 +1,57 @@
+-- phpMyAdmin SQL Dump
+-- version phpStudy 2014
+-- http://www.phpmyadmin.net
+--
+-- 主机: localhost
+-- 生成日期: 2018 �?08 �?06 �?13:03
+-- 服务器版本: 5.5.47
+-- PHP 版本: 5.5.30
+
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
+
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
 
+--
+-- 数据库: `demo`
+--
+
+DELIMITER $$
+--
+-- 存储过程
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `gogo`()
+BEGIN
+          INSERT INTO  `tom`.`think_userinfo` (
+        `id` ,
+`name`
+)
+VALUES (
+    NULL ,  '666'
+);
+     END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_query`()
+BEGIN  
+     SELECT * FROM `think_userinfo` WHERE 1;  
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `test`()
+BEGIN 
+          SELECT * FROM `think_userinfo` WHERE 1; 
+     END$$
+
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `think_article`
+--
 
 CREATE TABLE IF NOT EXISTS `think_article` (
   `id` mediumint(8) NOT NULL AUTO_INCREMENT,
@@ -38,6 +84,12 @@ CREATE TABLE IF NOT EXISTS `think_article` (
   KEY `hide` (`hide`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=277 ;
 
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `think_article_tag`
+--
+
 CREATE TABLE IF NOT EXISTS `think_article_tag` (
   `tid` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `tagname` varchar(60) NOT NULL DEFAULT '',
@@ -45,6 +97,84 @@ CREATE TABLE IF NOT EXISTS `think_article_tag` (
   PRIMARY KEY (`tid`),
   KEY `tagname` (`tagname`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=56 ;
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `think_auth_group`
+--
+
+CREATE TABLE IF NOT EXISTS `think_auth_group` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `title` char(100) NOT NULL DEFAULT '',
+  `status` tinyint(1) NOT NULL DEFAULT '1',
+  `rules` char(80) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+--
+-- 转存表中的数据 `think_auth_group`
+--
+
+INSERT INTO `think_auth_group` (`id`, `title`, `status`, `rules`) VALUES
+(1, '管理组', 1, '1,2'),
+(2, '信息录入部门', 1, '2');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `think_auth_group_access`
+--
+
+CREATE TABLE IF NOT EXISTS `think_auth_group_access` (
+  `uid` mediumint(8) unsigned NOT NULL,
+  `group_id` mediumint(8) unsigned NOT NULL,
+  UNIQUE KEY `uid_group_id` (`uid`,`group_id`),
+  KEY `uid` (`uid`),
+  KEY `group_id` (`group_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `think_auth_group_access`
+--
+
+INSERT INTO `think_auth_group_access` (`uid`, `group_id`) VALUES
+(1, 1),
+(2, 2);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `think_auth_rule`
+--
+
+CREATE TABLE IF NOT EXISTS `think_auth_rule` (
+  `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
+  `name` char(80) NOT NULL DEFAULT '',
+  `title` char(20) NOT NULL DEFAULT '',
+  `type` tinyint(1) NOT NULL DEFAULT '1',
+  `status` tinyint(1) NOT NULL DEFAULT '1',
+  `condition` char(100) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+
+--
+-- 转存表中的数据 `think_auth_rule`
+--
+
+INSERT INTO `think_auth_rule` (`id`, `name`, `title`, `type`, `status`, `condition`) VALUES
+(1, 'Admin/Article/Add', '列表', 1, 1, ''),
+(2, 'Home/add', '添加', 1, 1, ''),
+(3, 'Home/edit', '编辑', 1, 0, ''),
+(4, 'Home/delete', '删除', 1, 0, ''),
+(5, 'Admin/Article/Added', '增加文章的权限', 1, 1, '');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `think_config`
+--
 
 CREATE TABLE IF NOT EXISTS `think_config` (
   `id` int(8) unsigned NOT NULL AUTO_INCREMENT,
@@ -71,11 +201,21 @@ CREATE TABLE IF NOT EXISTS `think_config` (
   KEY `phone_2` (`phone`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
+--
+-- 转存表中的数据 `think_config`
+--
+
 INSERT INTO `think_config` (`id`, `appid`, `appkey`, `my_url`, `username`, `password`, `name`, `phone`, `email`, `invite`, `token`, `online_time`, `start_time`, `expiration_time`, `delete_time`, `rand`, `ip`, `create_time`, `update_time`) VALUES
 (1, 100112288, 'ac07166c888888887beec4e423a6bc46', 'http://open.gaoxueya.com/index/api/qq', 'qq', NULL, 'qq', 0, '0', NULL, NULL, NULL, NULL, NULL, NULL, 0, '', 0, 0),
 (2, 1460956555, '5ac13fe8888888888d62b90e33673d03', 'http://open.gaoxueya.com/index/api/weibo', 'weibo', NULL, 'weibo', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '', 0, 0),
 (3, 1, '1', 'http://api.chanyoo.cn/utf8/interface/send_sms.aspx', 'usernaem', '65569MdN', 'sms', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '', 0, 0),
 (4, 20880066666666889, 'ynsongdft999999996wfpoz9j7h', 'http://open.gaoxueya.com/index/api/jack', NULL, '3', 'alipay', NULL, 'rinuo@vip.qq.com', NULL, NULL, NULL, NULL, NULL, NULL, 0, '', 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `think_data`
+--
 
 CREATE TABLE IF NOT EXISTS `think_data` (
   `id` int(8) unsigned NOT NULL AUTO_INCREMENT,
@@ -92,7 +232,11 @@ CREATE TABLE IF NOT EXISTS `think_data` (
   `create_time` int(11) NOT NULL,
   `update_time` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2078 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2174 ;
+
+--
+-- 转存表中的数据 `think_data`
+--
 
 INSERT INTO `think_data` (`id`, `name`, `shop`, `phone`, `status`, `title`, `age`, `ip`, `session_id`, `delete_time`, `content`, `create_time`, `update_time`) VALUES
 (2072, '127.0.0.1', 111, 15966982315, 0, '发个说说', 0, '127.0.0.1', 'c7ihudnqcpm3ls69qpc6tukbj3', NULL, NULL, 1532257622, 1532257622),
@@ -100,7 +244,103 @@ INSERT INTO `think_data` (`id`, `name`, `shop`, `phone`, `status`, `title`, `age
 (2074, '127.0.0.1', 111, 15966982315, 0, '我来学习了', 0, '127.0.0.1', 'c7ihudnqcpm3ls69qpc6tukbj3', NULL, NULL, 1532259047, 1532259047),
 (2075, '127.0.0.1', 111, 15966982315, 0, '我们一定要给自己提出这样的任务：第一，学习，第二是学习，第三还是学习。', 0, '127.0.0.1', 'c7ihudnqcpm3ls69qpc6tukbj3', NULL, NULL, 1532259280, 1532259280),
 (2076, '127.0.0.1', 111, 15966982315, 0, '书山有路勤为径,学海无涯苦作舟。', 0, '127.0.0.1', 'c7ihudnqcpm3ls69qpc6tukbj3', NULL, NULL, 1532259309, 1532259309),
-(2077, '127.0.0.1', 111, 15966982315, 0, '不渴望能够一跃千里,只希望每天能够前进一步。', 0, '127.0.0.1', 'c7ihudnqcpm3ls69qpc6tukbj3', NULL, NULL, 1532259322, 1532259322);
+(2077, '127.0.0.1', 111, 15966982315, 0, '不渴望能够一跃千里,只希望每天能够前进一步。', 0, '127.0.0.1', 'c7ihudnqcpm3ls69qpc6tukbj3', NULL, NULL, 1532259322, 1532259322),
+(2078, '127.0.0.1', 43, 15966982315, 0, '1', 0, '127.0.0.1', '1gg5se310kk4ho53sl9vvi4or4', NULL, NULL, 1532342446, 1532342446),
+(2079, '127.0.0.1', 43, 15966982315, 0, '2', 0, '127.0.0.1', '1gg5se310kk4ho53sl9vvi4or4', NULL, NULL, 1532342448, 1532342448),
+(2080, '127.0.0.1', 43, 15966982315, 0, '3', 0, '127.0.0.1', '1gg5se310kk4ho53sl9vvi4or4', NULL, NULL, 1532342450, 1532342450),
+(2081, '127.0.0.1', 43, 15966982315, 0, '4', 0, '127.0.0.1', '1gg5se310kk4ho53sl9vvi4or4', NULL, NULL, 1532342454, 1532342454),
+(2082, '127.0.0.1', 43, 15966982315, 0, '5', 0, '127.0.0.1', '1gg5se310kk4ho53sl9vvi4or4', NULL, NULL, 1532342456, 1532342456),
+(2083, '127.0.0.1', 43, 15966982315, 0, '6', 0, '127.0.0.1', '1gg5se310kk4ho53sl9vvi4or4', NULL, NULL, 1532342458, 1532342458),
+(2084, '127.0.0.1', 43, 15966982315, 0, '65', 0, '127.0.0.1', '1gg5se310kk4ho53sl9vvi4or4', NULL, NULL, 1532342459, 1532342459),
+(2085, '127.0.0.1', 43, 15966982315, 0, '65', 0, '127.0.0.1', '1gg5se310kk4ho53sl9vvi4or4', NULL, NULL, 1532342461, 1532342461),
+(2086, '127.0.0.1', 43, 18210787406, 0, '学习知识要善于思考，思考，再思考', 0, '127.0.0.1', '1gg5se310kk4ho53sl9vvi4or4', NULL, NULL, 1532342563, 1532342563),
+(2087, '127.0.0.1', 43, 18210787406, 0, '在寻求真理的长河中，唯有学习，不断地学习，勤奋地学习，有创造性地学习，才能越重山跨峻岭。', 0, '127.0.0.1', '1gg5se310kk4ho53sl9vvi4or4', NULL, NULL, 1532342578, 1532342578),
+(2088, '127.0.0.1', 43, 18210787406, 0, '我们全都要从前辈和同辈学习到一些东西。就连最大的天才，如果想单凭他所特有的内在自我去对付一切，他也决不会有多大成就。', 0, '127.0.0.1', '1gg5se310kk4ho53sl9vvi4or4', NULL, NULL, 1532342589, 1532342589),
+(2089, '127.0.0.1', 43, 18210787406, 0, '现在，我怕的并不是那艰苦严峻的生活，而是不能再学习和认识我迫切想了解的世界。对我来说，不学习，毋宁死。', 0, '127.0.0.1', '1gg5se310kk4ho53sl9vvi4or4', NULL, NULL, 1532342602, 1532342602),
+(2090, '127.0.0.1', 43, 18210787406, 0, '人的天才只是火花，要想使它成熊熊火焰，哪就只有学习！学习。', 0, '127.0.0.1', '1gg5se310kk4ho53sl9vvi4or4', NULL, NULL, 1532342616, 1532342616),
+(2091, '127.0.0.1', 43, 18210787406, 0, '只要愿意学习，就一定能够学会', 0, '127.0.0.1', '1gg5se310kk4ho53sl9vvi4or4', NULL, NULL, 1532342625, 1532342625),
+(2092, '127.0.0.1', 43, 18210787406, 0, '天才不能使人不必工作，不能代替劳动。要发展天才，必须长时间地学习和高度紧张地工作。人越有天才，他面临的任务也就越复杂，越重要。', 0, '127.0.0.1', '1gg5se310kk4ho53sl9vvi4or4', NULL, NULL, 1532342632, 1532342632),
+(2093, '127.0.0.1', 43, 18210787406, 0, '谁在装束和发型上用尽心思，谁就没有精力用于学习；谁只注意修饰外表的美丽，谁就无法得到内在的美丽。', 0, '127.0.0.1', '1gg5se310kk4ho53sl9vvi4or4', NULL, NULL, 1532342652, 1532342652),
+(2094, '127.0.0.1', 43, 15966982315, 0, '好好学习', 0, '127.0.0.1', 'ejubn7qnbtsrigcm71t6ugm125', NULL, NULL, 1532403865, 1532403865),
+(2095, '127.0.0.1', 43, 15966982315, 0, '天天向上', 0, '127.0.0.1', 'ejubn7qnbtsrigcm71t6ugm125', NULL, NULL, 1532405169, 1532405169),
+(2096, '127.0.0.1', 38, 18210787405, 0, '123', 0, '127.0.0.1', 'ejubn7qnbtsrigcm71t6ugm125', NULL, NULL, 1532411148, 1532411148),
+(2097, '127.0.0.1', 43, 18210787406, 0, '学习thinkphp5', 0, '127.0.0.1', 'ebp9bjv0r236amg7glgmqbr6e5', NULL, NULL, 1532418578, 1532418578),
+(2098, '127.0.0.1', 43, 18210787406, 0, '好好学习吧', 0, '127.0.0.1', 'ebp9bjv0r236amg7glgmqbr6e5', NULL, NULL, 1532420157, 1532420157),
+(2099, '127.0.0.1', 43, 18210787405, 0, '呵呵', 0, '127.0.0.1', 'ejubn7qnbtsrigcm71t6ugm125', NULL, NULL, 1532420200, 1532420200),
+(2100, '127.0.0.1', 43, 18210787406, 0, '大的评论框', 0, '127.0.0.1', 'ebp9bjv0r236amg7glgmqbr6e5', NULL, NULL, 1532420593, 1532420593),
+(2101, '127.0.0.1', 43, 18210787405, 0, '改成了圆形头像', 0, '127.0.0.1', 'ejubn7qnbtsrigcm71t6ugm125', NULL, NULL, 1532423899, 1532423899),
+(2102, '127.0.0.1', 38, 18210787405, 0, '士大夫', 0, '127.0.0.1', '9gqpbp26fpvhdn8brt6aeps987', NULL, NULL, 1532426433, 1532426433),
+(2103, '127.0.0.1', 38, 18210787405, 0, '666', 0, '127.0.0.1', '9gqpbp26fpvhdn8brt6aeps987', NULL, NULL, 1532426444, 1532426444),
+(2104, '127.0.0.1', 38, 18210787405, 0, '自行车', 0, '127.0.0.1', '9gqpbp26fpvhdn8brt6aeps987', NULL, NULL, 1532426453, 1532426453),
+(2105, '127.0.0.1', 38, 18210787405, 0, '顶一个', 0, '127.0.0.1', '9gqpbp26fpvhdn8brt6aeps987', NULL, NULL, 1532426582, 1532426582),
+(2106, '127.0.0.1', 38, 18210787405, 0, '士大夫', 0, '127.0.0.1', '9gqpbp26fpvhdn8brt6aeps987', NULL, NULL, 1532426713, 1532426713),
+(2107, '127.0.0.1', 38, 18210787405, 0, '是的', 0, '127.0.0.1', '9gqpbp26fpvhdn8brt6aeps987', NULL, NULL, 1532426745, 1532426745),
+(2108, '127.0.0.1', 38, 18210787405, 0, '123', 0, '127.0.0.1', '9gqpbp26fpvhdn8brt6aeps987', NULL, NULL, 1532426927, 1532426927),
+(2109, '127.0.0.1', 38, 18210787405, 0, '电饭锅', 0, '127.0.0.1', '9gqpbp26fpvhdn8brt6aeps987', NULL, NULL, 1532426949, 1532426949),
+(2110, '127.0.0.1', 38, 18210787405, 0, '3', 0, '127.0.0.1', '9gqpbp26fpvhdn8brt6aeps987', NULL, NULL, 1532426976, 1532426976),
+(2111, '127.0.0.1', 38, 18210787405, 0, '[rose]', 0, '127.0.0.1', '9gqpbp26fpvhdn8brt6aeps987', NULL, NULL, 1532427011, 1532427011),
+(2112, '127.0.0.1', 38, 18210787405, 0, '333', 0, '127.0.0.1', '9gqpbp26fpvhdn8brt6aeps987', NULL, NULL, 1532427019, 1532427019),
+(2113, '127.0.0.1', 43, 18210787405, 0, '的地方', 0, '127.0.0.1', '9gqpbp26fpvhdn8brt6aeps987', NULL, NULL, 1532427229, 1532427229),
+(2114, '127.0.0.1', 43, 18210787405, 0, '[rose]', 0, '127.0.0.1', '9gqpbp26fpvhdn8brt6aeps987', NULL, NULL, 1532427333, 1532427333),
+(2115, '127.0.0.1', 43, 18210787405, 0, '士大夫', 0, '127.0.0.1', '9gqpbp26fpvhdn8brt6aeps987', NULL, NULL, 1532427811, 1532427811),
+(2116, '127.0.0.1', 43, 18210787405, 0, '士大夫士大夫', 0, '127.0.0.1', '9gqpbp26fpvhdn8brt6aeps987', NULL, NULL, 1532427833, 1532427833),
+(2117, '127.0.0.1', 43, 18210787405, 0, '是的发', 0, '127.0.0.1', '9gqpbp26fpvhdn8brt6aeps987', NULL, NULL, 1532427923, 1532427923),
+(2118, '127.0.0.1', 43, 18210787405, 0, '666666', 0, '127.0.0.1', '9gqpbp26fpvhdn8brt6aeps987', NULL, NULL, 1532428127, 1532428127),
+(2119, '127.0.0.1', 43, 18210787405, 0, '123', 0, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532483915, 1532483915),
+(2120, '127.0.0.1', 43, 18210787405, 0, '456789', 0, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532493029, 1532493029),
+(2121, '127.0.0.1', 43, 18210787405, 0, '123', 0, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532493040, 1532493040),
+(2122, '127.0.0.1', 43, 18210787405, 0, '是是是', 0, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532493070, 1532493070),
+(2123, '127.0.0.1', 43, 18210787405, 127, '是是是', 0, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532494229, 1532494229),
+(2124, '127.0.0.1', 43, 18210787405, 127, '77777777777', 0, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532494320, 1532494320),
+(2125, '127.0.0.1', 43, 18210787405, 127, '123', 0, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532495284, 1532495284),
+(2126, '127.0.0.1', 43, 18210787405, 127, '456', 0, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532495303, 1532495303),
+(2127, '127.0.0.1', 43, 18210787405, 127, '456', 0, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532495432, 1532495432),
+(2128, '127.0.0.1', 43, 18210787405, 127, '333', 0, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532495442, 1532495442),
+(2129, '127.0.0.1', 43, 18210787405, 127, '5555', 0, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532495502, 1532495502),
+(2130, '127.0.0.1', 43, 18210787405, 0, '23456', 0, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532495514, 1532495514),
+(2131, '127.0.0.1', 43, 18210787405, 0, '333', 0, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532495571, 1532495571),
+(2132, '127.0.0.1', 43, 18210787405, 127, '12306', 0, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532496266, 1532496266),
+(2133, '127.0.0.1', 43, 18210787405, 127, '10086', 0, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532496401, 1532496401),
+(2134, '127.0.0.1', 43, 18210787405, 127, '123123', 0, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532496668, 1532496668),
+(2135, '127.0.0.1', 43, 18210787405, 20, '10086', 0, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532496865, 1532496865),
+(2136, '127.0.0.1', 43, 18210787405, 127, '10086', 0, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532496892, 1532496892),
+(2137, '127.0.0.1', 43, 18210787405, 0, 'asdf', 0, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532496979, 1532496979),
+(2138, '127.0.0.1', 43, 18210787405, 127, 'adf', 0, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532496989, 1532496989),
+(2139, '127.0.0.1', 43, 18210787405, 0, '111', 0, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532497065, 1532497065),
+(2140, '127.0.0.1', 43, 18210787405, 127, '66', 0, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532497104, 1532497104),
+(2141, '127.0.0.1', 43, 18210787405, 127, '10086', 0, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532497125, 1532497125),
+(2142, '127.0.0.1', 43, 18210787405, 127, '1112', 0, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532497154, 1532497154),
+(2143, '127.0.0.1', 43, 18210787405, 10, '1112', 0, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532497182, 1532497182),
+(2144, '127.0.0.1', 43, 18210787405, 0, '123', 0, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532497288, 1532497288),
+(2145, '127.0.0.1', 43, 18210787405, 127, '11117', 0, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532497318, 1532497318),
+(2146, '127.0.0.1', 43, 18210787405, 10, '1118', 0, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532497402, 1532497402),
+(2147, '127.0.0.1', 43, 18210787405, 19, '1118', 0, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532497419, 1532497419),
+(2148, '127.0.0.1', 43, 18210787405, 127, '1118', 0, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532497452, 1532497452),
+(2149, '127.0.0.1', 43, 18210787405, 126, '1118', 0, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532497469, 1532497469),
+(2165, '127.0.0.1', 43, 18210787407, 0, '说的好', 2088, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532525795, 1532525795),
+(2164, '127.0.0.1', 43, 18210787407, 0, '我来回复你', 2160, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532525753, 1532525753),
+(2163, '127.0.0.1', 43, 18210787407, 0, '测试', 2086, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532525216, 1532525216),
+(2162, '127.0.0.1', 43, 18210787407, 0, '我来演示回复显示', 2158, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532523867, 1532523867),
+(2156, '127.0.0.1', 43, 18210787405, 0, 'xuexi', 2090, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532497799, 1532497799),
+(2157, '127.0.0.1', 43, 18210787405, 0, '666', 0, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532497860, 1532497860),
+(2158, '127.0.0.1', 43, 18210787405, 0, 'xuexi xuexi', 2090, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532497898, 1532497898),
+(2159, '127.0.0.1', 43, 18210787405, 0, '111222', 2086, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532519175, 1532519175),
+(2160, '127.0.0.1', 43, 18210787405, 0, '我来顶一下', 2086, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532521160, 1532521160),
+(2161, '127.0.0.1', 43, 18210787405, 0, '我来评论', 0, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532521216, 1532521216),
+(2166, '127.0.0.1', 43, 18210787407, 0, '好的', 2165, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532527569, 1532527569),
+(2167, '127.0.0.1', 43, 18210787407, 0, '我更新首页为讨论', 0, '127.0.0.1', 'o92j57h4osh9ct188ic0qlt8o5', NULL, NULL, 1533468929, 1533468929),
+(2168, '127.0.0.1', 43, 18210787407, 0, '没有看到最新的聊天呢', 0, '127.0.0.1', 'o92j57h4osh9ct188ic0qlt8o5', NULL, NULL, 1533469031, 1533469031),
+(2169, '127.0.0.1', 43, 18210787407, 0, '这里护肤', 2168, '127.0.0.1', 'o92j57h4osh9ct188ic0qlt8o5', NULL, NULL, 1533471947, 1533471947),
+(2170, '127.0.0.1', 54, 18210787407, 0, '这个来自54奥', 0, '127.0.0.1', 'o92j57h4osh9ct188ic0qlt8o5', NULL, NULL, 1533472330, 1533472330),
+(2171, '127.0.0.1', 54, 18210787407, 0, '1', 2170, '127.0.0.1', 'o92j57h4osh9ct188ic0qlt8o5', NULL, NULL, 1533472498, 1533472498),
+(2172, '127.0.0.1', 54, 18210787407, 0, '123', 2170, '127.0.0.1', 'o92j57h4osh9ct188ic0qlt8o5', NULL, NULL, 1533472519, 1533472519),
+(2173, '127.0.0.1', 54, 18210787407, 0, '13', 2172, '127.0.0.1', 'o92j57h4osh9ct188ic0qlt8o5', NULL, NULL, 1533473357, 1533473357);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `think_footprint`
+--
 
 CREATE TABLE IF NOT EXISTS `think_footprint` (
   `id` int(8) unsigned NOT NULL AUTO_INCREMENT,
@@ -124,7 +364,771 @@ CREATE TABLE IF NOT EXISTS `think_footprint` (
   `create_time` int(11) NOT NULL,
   `update_time` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=gbk AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=gbk AUTO_INCREMENT=749 ;
+
+--
+-- 转存表中的数据 `think_footprint`
+--
+
+INSERT INTO `think_footprint` (`id`, `phone`, `lesson`, `referer`, `domain`, `browser`, `pathinfo`, `address`, `url`, `product`, `os`, `mobile`, `status`, `title`, `age`, `ip`, `delete_time`, `content`, `create_time`, `update_time`) VALUES
+(1, 18210787405, NULL, 'www.tp5.com/index/index/install/step/10.html', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/member/invite', '', '/index/member/invite', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532334769, 1532334769),
+(2, 18210787405, NULL, 'www.tp5.com/index/member/invite', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532335112, 1532335112),
+(3, 18210787405, NULL, 'www.tp5.com/admin/index/show', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532336908, 1532336908),
+(4, 0, NULL, 'www.tp5.com/index/index/login/logout/1.html', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/login', '', '/index/index/login.html', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532337216, 1532337216),
+(5, 18210787405, NULL, 'www.tp5.com/admin/index/index.html', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/index', '', '/index/index/index', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532337806, 1532337806),
+(6, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532339335, 1532339335),
+(7, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532339348, 1532339348),
+(8, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/39', '', '/index/index/view/id/39', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532339847, 1532339847),
+(9, 0, NULL, 'www.tp5.com/index/index/login/logout/1', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/login', '', '/index/index/login.html', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532339863, 1532339863),
+(10, 0, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/38', '', '/index/index/view/id/38', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532339868, 1532339868),
+(11, 0, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/38', '', '/index/index/view/id/38', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532339987, 1532339987),
+(12, 0, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/38', '', '/index/index/view/id/38', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532340053, 1532340053),
+(13, 0, NULL, 'www.tp5.com/index/index/view/id/38', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532340120, 1532340120),
+(14, 0, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532340122, 1532340122),
+(15, 0, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532340181, 1532340181),
+(16, 0, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532340189, 1532340189),
+(17, 0, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/38', '', '/index/index/view/id/38', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532340192, 1532340192),
+(18, 0, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/38', '', '/index/index/view/id/38', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532340231, 1532340231),
+(19, 0, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/38', '', '/index/index/view/id/38', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532340244, 1532340244),
+(20, 0, NULL, 'www.tp5.com/index/index/view/id/38', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532340351, 1532340351),
+(21, 0, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/38', '', '/index/index/view/id/38', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532340486, 1532340486),
+(22, 0, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/38', '', '/index/index/view/id/38', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532340571, 1532340571),
+(23, 0, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/38', '', '/index/index/view/id/38', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532340706, 1532340706),
+(24, 0, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/38', '', '/index/index/view/id/38', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532340720, 1532340720),
+(25, 0, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/38', '', '/index/index/view/id/38', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532340761, 1532340761),
+(26, 0, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/38', '', '/index/index/view/id/38', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532341169, 1532341169),
+(27, 0, NULL, 'www.tp5.com/index/index/view/id/38', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532341177, 1532341177),
+(28, 0, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532341190, 1532341190),
+(29, 0, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532341223, 1532341223),
+(30, 0, NULL, '', '', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532342374, 1532342374),
+(31, 0, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/38', '', '/index/index/view/id/38', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532342380, 1532342380),
+(32, 0, NULL, 'www.tp5.com/index/index/view/id/38', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532342387, 1532342387),
+(33, 0, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/41', '', '/index/index/view/id/41', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532342389, 1532342389),
+(34, 0, NULL, 'www.tp5.com/index/index/view/id/38', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532342400, 1532342400),
+(35, 0, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532342403, 1532342403),
+(36, 0, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532342434, 1532342434),
+(37, 0, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/login', '', '/index/index/login', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532342474, 1532342474),
+(38, 18210787406, NULL, 'www.tp5.com/index/index/login', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/index', '', '/index/index/index.html', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532342487, 1532342487),
+(39, 18210787406, NULL, 'www.tp5.com/index/index/index.html', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532342492, 1532342492),
+(40, 18210787406, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/bbs/show', '', '/index/bbs/show', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532342499, 1532342499),
+(41, 18210787406, NULL, 'www.tp5.com/index/bbs/show', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/111', '', '/index.php/index/index/view/id/111', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532342505, 1532342505),
+(42, 18210787406, NULL, 'www.tp5.com/index.php/index/index/view/id/111', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532342520, 1532342520),
+(43, 18210787406, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532342525, 1532342525),
+(44, 18210787406, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532342655, 1532342655),
+(45, 18210787406, NULL, 'www.tp5.com/index/index/view/data_id/2088.html', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532342712, 1532342712),
+(46, 18210787406, NULL, 'www.tp5.com/index/index/view/data_id/2088.html', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532343233, 1532343233),
+(47, 0, NULL, 'www.tp5.com/index/index/login/logout/1', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/login', '', '/index/index/login.html', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532343241, 1532343241),
+(48, 0, NULL, 'www.tp5.com/index/index/login.html', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532343246, 1532343246),
+(49, 0, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532343252, 1532343252),
+(50, 0, NULL, 'www.tp5.com/index/index/view/data_id/2088.html', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532343263, 1532343263),
+(51, 0, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/login', '', '/index/index/login', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532343418, 1532343418),
+(52, 18210787405, NULL, 'www.tp5.com/index/index/login', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/index', '', '/index/index/index.html', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532343432, 1532343432),
+(53, 0, NULL, 'www.tp5.com/index/index/login/logout/1', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/login', '', '/index/index/login.html', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532343444, 1532343444),
+(54, 0, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532343451, 1532343451),
+(55, 0, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532343518, 1532343518),
+(56, 0, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532343565, 1532343565),
+(57, 0, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/login', '', '/index/index/login.html', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532343694, 1532343694),
+(58, 18210787406, NULL, 'www.tp5.com/index/index/login.html', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/index', '', '/index/index/index.html', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532343718, 1532343718),
+(59, 0, NULL, 'www.tp5.com/index/index/login/logout/1', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/login', '', '/index/index/login.html', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532343867, 1532343867),
+(60, 0, NULL, 'www.tp5.com/index/index/login.html', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532343869, 1532343869),
+(61, 0, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532343872, 1532343872),
+(62, 0, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/login', '', '/index/index/login.html', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532343879, 1532343879),
+(63, 18210787406, NULL, 'www.tp5.com/index/index/view/data_id/2088.html', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/login', '', '/index/index/login.html', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532343892, 1532343892),
+(64, 18210787406, NULL, 'www.tp5.com/index/index/login.html', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532343982, 1532343982),
+(65, 18210787406, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532343987, 1532343987),
+(66, 18210787406, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532344000, 1532344000),
+(67, 18210787406, NULL, '', '', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532344824, 1532344824),
+(68, 18210787406, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532344832, 1532344832),
+(69, 18210787406, NULL, '', '', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532394185, 1532394185),
+(70, 18210787406, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532394197, 1532394197),
+(71, 18210787406, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532394267, 1532394267),
+(72, 0, NULL, 'www.tp5.com/index/index/login/logout/1', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/login', '', '/index/index/login.html', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532394287, 1532394287),
+(73, 0, NULL, 'www.tp5.com/index/index/login.html', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532394289, 1532394289),
+(74, 0, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/38', '', '/index/index/view/id/38', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532394291, 1532394291),
+(75, 0, NULL, 'www.tp5.com/index/index/login.html', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532394296, 1532394296),
+(76, 0, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532394299, 1532394299),
+(77, 0, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/login', '', '/index/index/login.html', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532394306, 1532394306),
+(78, 18210787406, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/login', '', '/index/index/login.html', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532394350, 1532394350),
+(79, 18210787406, NULL, 'www.tp5.com/index/index/login.html', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532394352, 1532394352),
+(80, 18210787406, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532394358, 1532394358),
+(81, 18210787406, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532394380, 1532394380),
+(82, 0, NULL, 'www.tp5.com/index/index/login/logout/1', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/login', '', '/index/index/login.html', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532394397, 1532394397),
+(83, 0, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532394404, 1532394404),
+(84, 0, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/login', '', '/index/index/login.html', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532394410, 1532394410),
+(85, 0, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532394412, 1532394412),
+(86, 0, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532395695, 1532395695),
+(87, 0, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532396528, 1532396528),
+(88, 0, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532396677, 1532396677),
+(89, 0, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532396756, 1532396756),
+(90, 0, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532402776, 1532402776),
+(91, 0, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532403183, 1532403183),
+(92, 0, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532403704, 1532403704),
+(93, 0, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532403769, 1532403769),
+(94, 0, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532403780, 1532403780),
+(95, 0, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532403839, 1532403839),
+(96, 0, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532403867, 1532403867),
+(97, 0, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532403957, 1532403957),
+(98, 0, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532403966, 1532403966),
+(99, 0, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532404037, 1532404037),
+(100, 0, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532404056, 1532404056),
+(101, 0, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532404067, 1532404067),
+(102, 0, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532404079, 1532404079),
+(103, 0, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532404293, 1532404293),
+(104, 0, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532404321, 1532404321),
+(105, 0, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532404360, 1532404360),
+(106, 0, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532405177, 1532405177),
+(107, 0, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532405218, 1532405218),
+(108, 0, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532405287, 1532405287),
+(109, 0, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532406620, 1532406620),
+(110, 0, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532407111, 1532407111),
+(111, 0, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532407193, 1532407193),
+(112, 0, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532407992, 1532407992),
+(113, 0, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532408044, 1532408044),
+(114, 0, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532408165, 1532408165),
+(115, 0, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532408222, 1532408222),
+(116, 0, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532408241, 1532408241),
+(117, 0, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532408247, 1532408247),
+(118, 0, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/login', '', '/index/index/login', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532408255, 1532408255),
+(119, 18210787405, NULL, '', '', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532408589, 1532408589),
+(120, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532408658, 1532408658),
+(121, 18210787405, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/data_id/2087', '', '/index.php/index/index/view/data_id/2087', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532408918, 1532408918),
+(122, 18210787405, NULL, '', '', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532409389, 1532409389),
+(123, 18210787405, NULL, '', '', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532409418, 1532409418),
+(124, 18210787405, NULL, '', '', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532409424, 1532409424),
+(125, 18210787405, NULL, '', '', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532409459, 1532409459),
+(126, 18210787405, NULL, '', '', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532410211, 1532410211),
+(127, 18210787405, NULL, '', '', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532410281, 1532410281),
+(128, 18210787405, NULL, '', '', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532410357, 1532410357),
+(129, 18210787405, NULL, '', '', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532410464, 1532410464),
+(130, 18210787405, NULL, '', '', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532410530, 1532410530),
+(131, 18210787405, NULL, '', '', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532410666, 1532410666),
+(132, 18210787405, NULL, '', '', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532410741, 1532410741),
+(133, 18210787405, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/data_id/2093', '', '/index.php/index/index/view/data_id/2093', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532410798, 1532410798),
+(134, 18210787405, NULL, '', '', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532410847, 1532410847),
+(135, 18210787405, NULL, '', '', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532410914, 1532410914),
+(136, 18210787405, NULL, '', '', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532411105, 1532411105),
+(137, 18210787405, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532411132, 1532411132),
+(138, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/38', '', '/index/index/view/id/38', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532411154, 1532411154),
+(139, 18210787405, NULL, 'www.tp5.com/index/index/view/id/38', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532411202, 1532411202),
+(140, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532411207, 1532411207),
+(141, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532411303, 1532411303),
+(142, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532411779, 1532411779),
+(143, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532411840, 1532411840),
+(144, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532412095, 1532412095),
+(145, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532412220, 1532412220),
+(146, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532412453, 1532412453),
+(147, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532412491, 1532412491),
+(148, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532412613, 1532412613),
+(149, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532413446, 1532413446),
+(150, 0, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532413727, 1532413727),
+(151, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532413859, 1532413859),
+(152, 0, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532413865, 1532413865),
+(153, 0, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/login', '', '/index/index/login', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532413870, 1532413870),
+(154, 0, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532413938, 1532413938),
+(155, 0, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/login', '', '/index/index/login', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532413943, 1532413943),
+(156, 0, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532413948, 1532413948),
+(157, 0, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/login', '', '/index/index/login', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532413952, 1532413952),
+(158, 0, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532413960, 1532413960),
+(159, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532413971, 1532413971),
+(160, 0, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532414517, 1532414517),
+(161, 0, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/login', '', '/index/index/login', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532414521, 1532414521),
+(162, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532414527, 1532414527),
+(163, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532414537, 1532414537),
+(164, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532414542, 1532414542),
+(165, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532414558, 1532414558),
+(166, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532414568, 1532414568),
+(167, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532414580, 1532414580),
+(168, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532414589, 1532414589),
+(169, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532414598, 1532414598),
+(170, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532414616, 1532414616),
+(171, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532414683, 1532414683),
+(172, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532414962, 1532414962),
+(173, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532414997, 1532414997),
+(174, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532415017, 1532415017),
+(175, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532415036, 1532415036),
+(176, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532415051, 1532415051),
+(177, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532415071, 1532415071),
+(178, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532415086, 1532415086),
+(179, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532415421, 1532415421),
+(180, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532415431, 1532415431),
+(181, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532415483, 1532415483),
+(182, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532415496, 1532415496),
+(183, 18210787406, NULL, '', '', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532415860, 1532415860),
+(184, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532415902, 1532415902),
+(185, 18210787406, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532415918, 1532415918),
+(186, 18210787406, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532415927, 1532415927),
+(187, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532415939, 1532415939),
+(188, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532416378, 1532416378),
+(189, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532416415, 1532416415),
+(190, 18210787406, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532416443, 1532416443),
+(191, 18210787406, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532416453, 1532416453),
+(192, 18210787406, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532416478, 1532416478),
+(193, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532416493, 1532416493),
+(194, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532416765, 1532416765),
+(195, 18210787406, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532417282, 1532417282),
+(196, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532417299, 1532417299),
+(197, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532417684, 1532417684),
+(198, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532417714, 1532417714),
+(199, 18210787406, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532417825, 1532417825),
+(200, 18210787406, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532417871, 1532417871),
+(201, 18210787406, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532417888, 1532417888),
+(202, 18210787406, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532417901, 1532417901),
+(203, 18210787406, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532417939, 1532417939),
+(204, 18210787406, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532417950, 1532417950),
+(205, 18210787406, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532417973, 1532417973),
+(206, 18210787406, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532418006, 1532418006),
+(207, 18210787406, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532418027, 1532418027),
+(208, 18210787406, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532418082, 1532418082),
+(209, 18210787406, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532418130, 1532418130),
+(210, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532418166, 1532418166),
+(211, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532418183, 1532418183),
+(212, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532418202, 1532418202),
+(213, 18210787406, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532418286, 1532418286),
+(214, 18210787406, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532418420, 1532418420),
+(215, 18210787406, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532418447, 1532418447),
+(216, 18210787406, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532418551, 1532418551),
+(217, 18210787406, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532418790, 1532418790),
+(218, 18210787406, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532418807, 1532418807),
+(219, 18210787406, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532418836, 1532418836),
+(220, 18210787406, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532418851, 1532418851),
+(221, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532419303, 1532419303),
+(222, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532419345, 1532419345),
+(223, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532419374, 1532419374),
+(224, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532419464, 1532419464),
+(225, 18210787405, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532420245, 1532420245),
+(226, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532420322, 1532420322),
+(227, 18210787406, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532420413, 1532420413);
+INSERT INTO `think_footprint` (`id`, `phone`, `lesson`, `referer`, `domain`, `browser`, `pathinfo`, `address`, `url`, `product`, `os`, `mobile`, `status`, `title`, `age`, `ip`, `delete_time`, `content`, `create_time`, `update_time`) VALUES
+(228, 18210787406, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532420512, 1532420512),
+(229, 18210787406, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532420575, 1532420575),
+(230, 18210787406, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532420697, 1532420697),
+(231, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532420762, 1532420762),
+(232, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532420774, 1532420774),
+(233, 18210787406, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532420817, 1532420817),
+(234, 18210787406, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532420831, 1532420831),
+(235, 18210787406, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532421034, 1532421034),
+(236, 18210787406, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532421093, 1532421093),
+(237, 18210787406, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532421128, 1532421128),
+(238, 18210787406, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532421997, 1532421997),
+(239, 18210787406, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532422233, 1532422233),
+(240, 18210787406, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532422283, 1532422283),
+(241, 18210787406, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532422319, 1532422319),
+(242, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532422339, 1532422339),
+(243, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532422355, 1532422355),
+(244, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532422382, 1532422382),
+(245, 18210787406, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532422457, 1532422457),
+(246, 18210787406, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532422481, 1532422481),
+(247, 18210787406, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532422490, 1532422490),
+(248, 18210787406, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532422762, 1532422762),
+(249, 18210787406, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532422773, 1532422773),
+(250, 18210787406, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532422822, 1532422822),
+(251, 18210787406, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532422847, 1532422847),
+(252, 18210787406, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532422932, 1532422932),
+(253, 18210787406, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532423163, 1532423163),
+(254, 18210787406, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532423227, 1532423227),
+(255, 18210787406, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532423247, 1532423247),
+(256, 18210787406, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532423284, 1532423284),
+(257, 18210787406, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532423291, 1532423291),
+(258, 18210787406, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532423314, 1532423314),
+(259, 18210787406, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532423334, 1532423334),
+(260, 18210787406, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532423409, 1532423409),
+(261, 18210787406, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532423419, 1532423419),
+(262, 18210787406, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532423425, 1532423425),
+(263, 18210787406, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532423781, 1532423781),
+(264, 18210787406, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532423795, 1532423795),
+(265, 18210787406, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532423832, 1532423832),
+(266, 18210787406, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532424122, 1532424122),
+(267, 0, NULL, 'www.tp5.com/index/index/login/logout/1', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/login', '', '/index/index/login.html', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532424169, 1532424169),
+(268, 0, NULL, 'www.tp5.com/index/index/login.html', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/register', '', '/index/index/register', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532424176, 1532424176),
+(269, 18210787407, NULL, 'www.tp5.com/index/index/register', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/index', '', '/index/index/index.html', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532424196, 1532424196),
+(270, 18210787407, NULL, 'www.tp5.com/index/index/index.html', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532424204, 1532424204),
+(271, 18210787407, NULL, 'www.tp5.com/index/index/index.html', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532424222, 1532424222),
+(272, 18210787407, NULL, 'www.tp5.com/index/index/index.html', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532424234, 1532424234),
+(273, 18210787407, NULL, 'www.tp5.com/index/index/index.html', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532424250, 1532424250),
+(274, 0, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/login', '', '/index/index/login', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532424291, 1532424291),
+(275, 18210787407, NULL, '', '', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532424308, 1532424308),
+(276, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532424314, 1532424314),
+(277, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532424323, 1532424323),
+(278, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532424339, 1532424339),
+(279, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532424368, 1532424368),
+(280, 18210787405, NULL, '', '', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532425108, 1532425108),
+(281, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532425302, 1532425302),
+(282, 0, NULL, '', '', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532425361, 1532425361),
+(283, 0, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/login', '', '/index/index/login', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532425376, 1532425376),
+(284, 0, NULL, '', '', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532425378, 1532425378),
+(285, 0, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/login', '', '/index/index/login', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532425444, 1532425444),
+(286, 0, NULL, 'www.tp5.com/index/index/login', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532425488, 1532425488),
+(287, 18210787405, NULL, '', '', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532426010, 1532426010),
+(288, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/38', '', '/index/index/view/id/38', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532426015, 1532426015),
+(289, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/38', '', '/index/index/view/id/38', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532426447, 1532426447),
+(290, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/38', '', '/index/index/view/id/38', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532426574, 1532426574),
+(291, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/38', '', '/index/index/view/id/38', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532426662, 1532426662),
+(292, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/38', '', '/index/index/view/id/38', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532426704, 1532426704),
+(293, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/38', '', '/index/index/view/id/38', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532426740, 1532426740),
+(294, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/38', '', '/index/index/view/id/38', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532426920, 1532426920),
+(295, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/38', '', '/index/index/view/id/38', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532426967, 1532426967),
+(296, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/38', '', '/index/index/view/id/38', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532427007, 1532427007),
+(297, 18210787405, NULL, '', '', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532427173, 1532427173),
+(298, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532427192, 1532427192),
+(299, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532427231, 1532427231),
+(300, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532427253, 1532427253),
+(301, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532427813, 1532427813),
+(302, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532427828, 1532427828),
+(303, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532427836, 1532427836),
+(304, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532427926, 1532427926),
+(305, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532428050, 1532428050),
+(306, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532428073, 1532428073),
+(307, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532428121, 1532428121),
+(308, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532428171, 1532428171),
+(309, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532428197, 1532428197),
+(310, 18210787405, NULL, '', '', 'Chrome(65.0.3325.181)', 'index/index/view/id/375', '', '/index/index/view/id/375', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532428477, 1532428477),
+(311, 18210787405, NULL, '', '', 'Chrome(65.0.3325.181)', 'index/index/view/id/300', '', '/index/index/view/id/300', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532428722, 1532428722),
+(312, 18210787405, NULL, '', '', 'Chrome(65.0.3325.181)', 'index/index/view/id/300', '', '/index/index/view/id/300', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532428735, 1532428735),
+(313, 18210787405, NULL, '', '', 'Chrome(65.0.3325.181)', 'index/index/view/id/300', '', '/index/index/view/id/300', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532428739, 1532428739),
+(314, 18210787405, NULL, '', '', 'Chrome(65.0.3325.181)', 'index/index/view/id/300', '', '/index/index/view/id/300', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532428858, 1532428858),
+(315, 18210787405, NULL, 'www.tp5.com/admin/index/show.html', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/index', '', '/index/index/index', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532428930, 1532428930),
+(316, 18210787405, NULL, 'www.tp5.com/index/index/index', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/38', '', '/index/index/view/id/38', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532428936, 1532428936),
+(317, 18210787405, NULL, '', '', 'Chrome(65.0.3325.181)', 'index/index/view/id/300', '', '/index/index/view/id/300', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532428941, 1532428941),
+(318, 18210787405, NULL, '', '', 'Chrome(65.0.3325.181)', 'index/index/view/id/300', '', '/index/index/view/id/300', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532428998, 1532428998),
+(319, 18210787405, NULL, '', '', 'Chrome(65.0.3325.181)', 'index/index/view/id/375', '', '/index/index/view/id/375', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532429024, 1532429024),
+(320, 18210787405, NULL, '', '', 'Chrome(65.0.3325.181)', 'index/index/view/id/375', '', '/index/index/view/id/375', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532429039, 1532429039),
+(321, 18210787405, NULL, '', '', 'Chrome(65.0.3325.181)', 'index/index/view/id/375', '', '/index/index/view/id/375', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532429044, 1532429044),
+(322, 18210787405, NULL, '', '', 'Chrome(65.0.3325.181)', 'index/index/view/id/375', '', '/index/index/view/id/375', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532429061, 1532429061),
+(323, 18210787405, NULL, '', '', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532429632, 1532429632),
+(324, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/39', '', '/index/index/view/id/39', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532429641, 1532429641),
+(325, 18210787405, NULL, '', '', 'Chrome(65.0.3325.181)', 'index/index/view/id/375', '', '/index/index/view/id/375', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532429648, 1532429648),
+(326, 18210787405, NULL, '', '', 'Chrome(65.0.3325.181)', 'index/index/view/id/375', '', '/index/index/view/id/375', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532429822, 1532429822),
+(327, 18210787405, NULL, 'www.tp5.com/index/index/view/id/375', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532429830, 1532429830),
+(328, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/39', '', '/index/index/view/id/39', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532429834, 1532429834),
+(329, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/39', '', '/index/index/view/id/39', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532429859, 1532429859),
+(330, 18210787405, NULL, '', '', 'Chrome(65.0.3325.181)', 'index/index/view/id/375', '', '/index/index/view/id/375', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532429865, 1532429865),
+(331, 18210787405, NULL, '', '', 'Chrome(65.0.3325.181)', 'index/index/view/id/375', '', '/index/index/view/id/375', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532429923, 1532429923),
+(332, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/39', '', '/index/index/view/id/39', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532429931, 1532429931),
+(333, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/39', '', '/index/index/view/id/39', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532430093, 1532430093),
+(334, 18210787405, NULL, '', '', 'Chrome(65.0.3325.181)', 'index/index/view/id/375', '', '/index/index/view/id/375', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532430112, 1532430112),
+(335, 18210787405, NULL, '', '', 'Chrome(65.0.3325.181)', 'index/index/view/id/375', '', '/index/index/view/id/375', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532430143, 1532430143),
+(336, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/39', '', '/index/index/view/id/39', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532430166, 1532430166),
+(337, 18210787405, NULL, '', '', 'Chrome(65.0.3325.181)', 'index/index/view/id/375', '', '/index/index/view/id/375', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532430193, 1532430193),
+(338, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/39', '', '/index/index/view/id/39', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532430222, 1532430222),
+(339, 18210787405, NULL, '', '', 'Chrome(65.0.3325.181)', 'index/index/view/id/375', '', '/index/index/view/id/375', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532430229, 1532430229),
+(340, 18210787405, NULL, '', '', 'Chrome(65.0.3325.181)', 'index/index/view/id/375', '', '/index/index/view/id/375', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532430322, 1532430322),
+(341, 18210787405, NULL, '', '', 'Chrome(65.0.3325.181)', 'index/index/view/id/375', '', '/index/index/view/id/375', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532430336, 1532430336),
+(342, 18210787405, NULL, '', '', 'Chrome(65.0.3325.181)', 'index/index/view/id/375', '', '/index/index/view/id/375', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532430451, 1532430451),
+(343, 18210787405, NULL, '', '', 'Chrome(65.0.3325.181)', 'index/index/view/id/375', '', '/index/index/view/id/375', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532430729, 1532430729),
+(344, 18210787405, NULL, '', '', 'Chrome(65.0.3325.181)', 'index/index/view/id/375', '', '/index/index/view/id/375', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532430767, 1532430767),
+(345, 18210787405, NULL, '', '', 'Chrome(65.0.3325.181)', 'index/index/view/id/375', '', '/index/index/view/id/375', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532430801, 1532430801),
+(346, 18210787405, NULL, '', '', 'Chrome(65.0.3325.181)', 'index/index/view/id/375', '', '/index/index/view/id/375', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532430821, 1532430821),
+(347, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/39', '', '/index/index/view/id/39', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532430854, 1532430854),
+(348, 18210787405, NULL, '', '', 'Chrome(65.0.3325.181)', 'index/index/view/id/375', '', '/index/index/view/id/375', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532430867, 1532430867),
+(349, 18210787405, NULL, '', '', 'Chrome(65.0.3325.181)', 'index/index/view/id/375', '', '/index/index/view/id/375', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532430920, 1532430920),
+(350, 18210787405, NULL, '', '', 'Chrome(65.0.3325.181)', 'index/index/view/id/375', '', '/index/index/view/id/375', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532430929, 1532430929),
+(351, 18210787405, NULL, '', '', 'Chrome(65.0.3325.181)', 'index/index/view/id/375', '', '/index/index/view/id/375', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532430960, 1532430960),
+(352, 18210787405, NULL, '', '', 'Chrome(65.0.3325.181)', 'index/index/view/id/375', '', '/index/index/view/id/375', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532431225, 1532431225),
+(353, 18210787405, NULL, '', '', 'Chrome(65.0.3325.181)', 'index/index/view/id/375', '', '/index/index/view/id/375', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532431394, 1532431394),
+(354, 18210787405, NULL, '', '', 'Chrome(65.0.3325.181)', 'index/index/view/id/375', '', '/index/index/view/id/375', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532431428, 1532431428),
+(355, 18210787405, NULL, '', '', 'Chrome(65.0.3325.181)', 'index/index/view/id/375', '', '/index/index/view/id/375', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532431473, 1532431473),
+(356, 18210787405, NULL, '', '', 'Chrome(65.0.3325.181)', 'index/index/view/id/375', '', '/index/index/view/id/375', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532431503, 1532431503),
+(357, 18210787405, NULL, '', '', 'Chrome(65.0.3325.181)', 'index/index/view/id/375', '', '/index/index/view/id/375', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532431520, 1532431520),
+(358, 18210787405, NULL, '', '', 'Chrome(65.0.3325.181)', 'index/index/view/id/375', '', '/index/index/view/id/375', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532431560, 1532431560),
+(359, 18210787405, NULL, '', '', 'Chrome(65.0.3325.181)', 'index/index/view/id/375', '', '/index/index/view/id/375', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532431577, 1532431577),
+(360, 18210787405, NULL, '', '', 'Chrome(65.0.3325.181)', 'index/index/view/id/375', '', '/index/index/view/id/375', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532431604, 1532431604),
+(361, 18210787405, NULL, 'www.tp5.com/index/index/view/id/375', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/299', '', '/index/index/view/id/299', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532431657, 1532431657),
+(362, 18210787405, NULL, 'www.tp5.com/index/index/view/id/299', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532431662, 1532431662),
+(363, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/39', '', '/index/index/view/id/39', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532431666, 1532431666),
+(364, 18210787405, NULL, 'www.tp5.com/index/index/view/id/299', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532431676, 1532431676),
+(365, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/39', '', '/index/index/view/id/39', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532431916, 1532431916),
+(366, 18210787405, NULL, '', '', 'Chrome(65.0.3325.181)', 'index/index/view/id/375', '', '/index/index/view/id/375', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532431926, 1532431926),
+(367, 18210787405, NULL, '', '', 'Chrome(65.0.3325.181)', 'index/index/view/id/375', '', '/index/index/view/id/375', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532432124, 1532432124),
+(368, 18210787405, NULL, 'www.tp5.com/index/index/view/id/375', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532432253, 1532432253),
+(369, 18210787405, NULL, '', '', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532479533, 1532479533),
+(370, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/39', '', '/index/index/view/id/39', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532480297, 1532480297),
+(371, 18210787405, NULL, 'www.tp5.com/index/index/view/id/39', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532480355, 1532480355),
+(372, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532480359, 1532480359),
+(373, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532480377, 1532480377),
+(374, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532482080, 1532482080),
+(375, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532482103, 1532482103),
+(376, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532482139, 1532482139),
+(377, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532482229, 1532482229),
+(378, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532482469, 1532482469),
+(379, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532482492, 1532482492),
+(380, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532482514, 1532482514),
+(381, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532482552, 1532482552),
+(382, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532482593, 1532482593),
+(383, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532482632, 1532482632),
+(384, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532482672, 1532482672),
+(385, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532482688, 1532482688),
+(386, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532482721, 1532482721),
+(387, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532482752, 1532482752),
+(388, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532482774, 1532482774),
+(389, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532482798, 1532482798),
+(390, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532482813, 1532482813),
+(391, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532482826, 1532482826),
+(392, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532482893, 1532482893),
+(393, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532482940, 1532482940),
+(394, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532483022, 1532483022),
+(395, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532483314, 1532483314),
+(396, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532483345, 1532483345),
+(397, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532483469, 1532483469),
+(398, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532483494, 1532483494),
+(399, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532483603, 1532483603),
+(400, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532483635, 1532483635),
+(401, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532483662, 1532483662),
+(402, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532483698, 1532483698),
+(403, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532483733, 1532483733),
+(404, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532483779, 1532483779),
+(405, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532483801, 1532483801),
+(406, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532483812, 1532483812),
+(407, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532483860, 1532483860),
+(408, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532483959, 1532483959),
+(409, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532483993, 1532483993),
+(410, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532484025, 1532484025),
+(411, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532484046, 1532484046),
+(412, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532484080, 1532484080),
+(413, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532484121, 1532484121),
+(414, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532484175, 1532484175),
+(415, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532484243, 1532484243),
+(416, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532484304, 1532484304),
+(417, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532484338, 1532484338),
+(418, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532484403, 1532484403),
+(419, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532484424, 1532484424),
+(420, 18210787405, NULL, '', '', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532487197, 1532487197),
+(421, 18210787405, NULL, '', '', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532487275, 1532487275),
+(422, 0, NULL, '', '', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532487285, 1532487285),
+(423, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532487841, 1532487841),
+(424, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532488055, 1532488055),
+(425, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532489073, 1532489073),
+(426, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532489176, 1532489176),
+(427, 18210787405, NULL, '', '', 'Chrome(65.0.3325.181)', 'index/index/view/data_id/2087/reply/1/id/43', '', '/index/index/view/data_id/2087/reply/1/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532489305, 1532489305),
+(428, 18210787405, NULL, 'www.tp5.com/index/index/view/data_id/2087/reply/1/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/data_id/2086/reply/1/id/43', '', '/index/index/view/data_id/2086/reply/1/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532489315, 1532489315),
+(429, 18210787405, NULL, 'www.tp5.com/index/index/view/data_id/2087/reply/1/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/data_id/2086/reply/1/id/43', '', '/index/index/view/data_id/2086/reply/1/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532489745, 1532489745),
+(430, 18210787405, NULL, 'www.tp5.com/index/index/view/data_id/2087/reply/1/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/data_id/2086/reply/1/id/43', '', '/index/index/view/data_id/2086/reply/1/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532489778, 1532489778),
+(431, 18210787405, NULL, '', '', 'Chrome(65.0.3325.181)', 'index/index/view/data_id/2086/reply/0/id/43', '', '/index/index/view/data_id/2086/reply/0/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532489817, 1532489817),
+(432, 18210787405, NULL, '', '', 'Chrome(65.0.3325.181)', 'index/index/view/data_id/2086/reply/1/id/43', '', '/index/index/view/data_id/2086/reply/1/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532489823, 1532489823),
+(433, 18210787405, NULL, '', '', 'Chrome(65.0.3325.181)', 'index/index/view/data_id/2086/reply/1/id/43', '', '/index/index/view/data_id/2086/reply/1/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532489980, 1532489980),
+(434, 18210787405, NULL, 'www.tp5.com/index/index/view/data_id/2086/reply/1/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/data_id/2086/reply/1/id/43/r_phone/182****7406/r_title/学习知识要善于思考，思考，再思考', '', '/index/index/view/data_id/2086/reply/1/id/43/r_phone/182****7406/r_title/%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E8%A6%81%E5%96%84%E4%BA%8E%E6%80%9D%E8%80%83%EF%BC%8C%E6%80%9D%E8%80%83%EF%BC%8C%E5%86%8D%E6%80%9D%E8%80%83', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532489993, 1532489993),
+(435, 18210787405, NULL, 'www.tp5.com/index/index/view/data_id/2086/reply/1/id/43/r_phone/182****7406/r_title/%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E8%A6%81%E5%96%84%E4%BA%8E%E6%80%9D%E8%80%83%EF%BC%8C%E6%80%9D%E8%80%83%EF%BC%8C%E5%86%8D%E6%80%9D%E8%80%83', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/data_id/2088/reply/1/id/43/r_phone/182****7406/r_title/我们全都要从前辈和同辈学习到一些东西。就连最大的天才，如果想单凭他所特有的内在自我去对付一切，他也决不会有多大成就。', '', '/index/index/view/data_id/2088/reply/1/id/43/r_phone/182****7406/r_title/%E6%88%91%E4%BB%AC%E5%85%A8%E9%83%BD%E8%A6%81%E4%BB%8E%E5%89%8D%E8%BE%88%E5%92%8C%E5%90%8C%E8%BE%88%E5%AD%A6%E4%B9%A0%E5%88%B0%E4%B8%80%E4%BA%9B%E4%B8%9C%E8%A5%BF%E3%80%82%E5%B0%B1%E8%BF%9E%E6%9C%80%E5%A4%A7%E7%9A%84%E5%A4%A9%E6%89%8D%EF%BC%8C%E5%A6%82%E6%9E%9C%E6%83%B3%E5%8D%95%E5%87%AD%E4%BB%96%E6%89%80%E7%89%B9%E6%9C%89%E7%9A%84%E5%86%85%E5%9C%A8%E8%87%AA%E6%88%91%E5%8E%BB%E5%AF%B9%E4%BB%98%E4%B8%80%E5%88%87%EF%BC%8C%E4%BB%96%E4%B9%9F%E5%86%B3%E4%B8%8D%E4%BC%9A%E6%9C%89%E5%A4%9A%E5%A4%A7%E6%88%90%E5%B0%B1%E3%80%82', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532490003, 1532490003),
+(436, 18210787405, NULL, 'www.tp5.com/index/index/view/data_id/2088/reply/1/id/43/r_phone/182****7406/r_title/%E6%88%91%E4%BB%AC%E5%85%A8%E9%83%BD%E8%A6%81%E4%BB%8E%E5%89%8D%E8%BE%88%E5%92%8C%E5%90%8C%E8%BE%88%E5%AD%A6%E4%B9%A0%E5%88%B0%E4%B8%80%E4%BA%9B%E4%B8%9C%E8%A5%BF%E3%80%82%E5%B0%B1%E8%BF%9E%E6%9C%80%E5%A4%A7%E7%9A%84%E5%A4%A9%E6%89%8D%EF%BC%8C%E5%A6%82%E6%9E%9C%E6%83%B3%E5%8D%95%E5%87%AD%E4%BB%96%E6%89%80%E7%89%B9%E6%9C%89%E7%9A%84%E5%86%85%E5%9C%A8%E8%87%AA%E6%88%91%E5%8E%BB%E5%AF%B9%E4%BB%98%E4%B8%80%E5%88%87%EF%BC%8C%E4%BB%96%E4%B9%9F%E5%86%B3%E4%B8%8D%E4%BC%9A%E6%9C%89%E5%A4%9A%E5%A4%A7%E6%88%90%E5%B0%B1%E3%80%82', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/data_id/2086/reply/1/id/43/r_phone/182****7406/r_title/学习知识要善于思考，思考，再思考', '', '/index/index/view/data_id/2086/reply/1/id/43/r_phone/182****7406/r_title/%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E8%A6%81%E5%96%84%E4%BA%8E%E6%80%9D%E8%80%83%EF%BC%8C%E6%80%9D%E8%80%83%EF%BC%8C%E5%86%8D%E6%80%9D%E8%80%83', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532490215, 1532490215),
+(437, 18210787405, NULL, 'www.tp5.com/index/index/view/data_id/2086/reply/1/id/43/r_phone/182****7406/r_title/%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E8%A6%81%E5%96%84%E4%BA%8E%E6%80%9D%E8%80%83%EF%BC%8C%E6%80%9D%E8%80%83%EF%BC%8C%E5%86%8D%E6%80%9D%E8%80%83', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/data_id/2088/reply/1/id/43/r_phone/182****7406/r_title/我们全都要从前辈和同辈学习到一些东西。就连最大的天才，如果想单凭他所特有的内在自我去对付一切，他也决不会有多大成就。', '', '/index/index/view/data_id/2088/reply/1/id/43/r_phone/182****7406/r_title/%E6%88%91%E4%BB%AC%E5%85%A8%E9%83%BD%E8%A6%81%E4%BB%8E%E5%89%8D%E8%BE%88%E5%92%8C%E5%90%8C%E8%BE%88%E5%AD%A6%E4%B9%A0%E5%88%B0%E4%B8%80%E4%BA%9B%E4%B8%9C%E8%A5%BF%E3%80%82%E5%B0%B1%E8%BF%9E%E6%9C%80%E5%A4%A7%E7%9A%84%E5%A4%A9%E6%89%8D%EF%BC%8C%E5%A6%82%E6%9E%9C%E6%83%B3%E5%8D%95%E5%87%AD%E4%BB%96%E6%89%80%E7%89%B9%E6%9C%89%E7%9A%84%E5%86%85%E5%9C%A8%E8%87%AA%E6%88%91%E5%8E%BB%E5%AF%B9%E4%BB%98%E4%B8%80%E5%88%87%EF%BC%8C%E4%BB%96%E4%B9%9F%E5%86%B3%E4%B8%8D%E4%BC%9A%E6%9C%89%E5%A4%9A%E5%A4%A7%E6%88%90%E5%B0%B1%E3%80%82', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532490223, 1532490223);
+INSERT INTO `think_footprint` (`id`, `phone`, `lesson`, `referer`, `domain`, `browser`, `pathinfo`, `address`, `url`, `product`, `os`, `mobile`, `status`, `title`, `age`, `ip`, `delete_time`, `content`, `create_time`, `update_time`) VALUES
+(438, 18210787405, NULL, 'www.tp5.com/index/index/view/data_id/2088/reply/1/id/43/r_phone/182****7406/r_title/%E6%88%91%E4%BB%AC%E5%85%A8%E9%83%BD%E8%A6%81%E4%BB%8E%E5%89%8D%E8%BE%88%E5%92%8C%E5%90%8C%E8%BE%88%E5%AD%A6%E4%B9%A0%E5%88%B0%E4%B8%80%E4%BA%9B%E4%B8%9C%E8%A5%BF%E3%80%82%E5%B0%B1%E8%BF%9E%E6%9C%80%E5%A4%A7%E7%9A%84%E5%A4%A9%E6%89%8D%EF%BC%8C%E5%A6%82%E6%9E%9C%E6%83%B3%E5%8D%95%E5%87%AD%E4%BB%96%E6%89%80%E7%89%B9%E6%9C%89%E7%9A%84%E5%86%85%E5%9C%A8%E8%87%AA%E6%88%91%E5%8E%BB%E5%AF%B9%E4%BB%98%E4%B8%80%E5%88%87%EF%BC%8C%E4%BB%96%E4%B9%9F%E5%86%B3%E4%B8%8D%E4%BC%9A%E6%9C%89%E5%A4%9A%E5%A4%A7%E6%88%90%E5%B0%B1%E3%80%82', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/data_id/2086/reply/1/id/43/r_phone/182****7406/r_title/学习知识要善于思考，思考，再思考', '', '/index/index/view/data_id/2086/reply/1/id/43/r_phone/182****7406/r_title/%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E8%A6%81%E5%96%84%E4%BA%8E%E6%80%9D%E8%80%83%EF%BC%8C%E6%80%9D%E8%80%83%EF%BC%8C%E5%86%8D%E6%80%9D%E8%80%83', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532490670, 1532490670),
+(439, 18210787405, NULL, 'www.tp5.com/index/index/view/data_id/2086/reply/1/id/43/r_phone/182****7406/r_title/%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E8%A6%81%E5%96%84%E4%BA%8E%E6%80%9D%E8%80%83%EF%BC%8C%E6%80%9D%E8%80%83%EF%BC%8C%E5%86%8D%E6%80%9D%E8%80%83', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/data_id/2088/reply/1/id/43/r_phone/182****7406/r_title/我们全都要从前辈和同辈学习到一些东西。就连最大的天才，如果想单凭他所特有的内在自我去对付一切，他也决不会有多大成就。', '', '/index/index/view/data_id/2088/reply/1/id/43/r_phone/182****7406/r_title/%E6%88%91%E4%BB%AC%E5%85%A8%E9%83%BD%E8%A6%81%E4%BB%8E%E5%89%8D%E8%BE%88%E5%92%8C%E5%90%8C%E8%BE%88%E5%AD%A6%E4%B9%A0%E5%88%B0%E4%B8%80%E4%BA%9B%E4%B8%9C%E8%A5%BF%E3%80%82%E5%B0%B1%E8%BF%9E%E6%9C%80%E5%A4%A7%E7%9A%84%E5%A4%A9%E6%89%8D%EF%BC%8C%E5%A6%82%E6%9E%9C%E6%83%B3%E5%8D%95%E5%87%AD%E4%BB%96%E6%89%80%E7%89%B9%E6%9C%89%E7%9A%84%E5%86%85%E5%9C%A8%E8%87%AA%E6%88%91%E5%8E%BB%E5%AF%B9%E4%BB%98%E4%B8%80%E5%88%87%EF%BC%8C%E4%BB%96%E4%B9%9F%E5%86%B3%E4%B8%8D%E4%BC%9A%E6%9C%89%E5%A4%9A%E5%A4%A7%E6%88%90%E5%B0%B1%E3%80%82', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532490700, 1532490700),
+(440, 18210787405, NULL, 'www.tp5.com/index/index/view/data_id/2088/reply/1/id/43/r_phone/182****7406/r_title/%E6%88%91%E4%BB%AC%E5%85%A8%E9%83%BD%E8%A6%81%E4%BB%8E%E5%89%8D%E8%BE%88%E5%92%8C%E5%90%8C%E8%BE%88%E5%AD%A6%E4%B9%A0%E5%88%B0%E4%B8%80%E4%BA%9B%E4%B8%9C%E8%A5%BF%E3%80%82%E5%B0%B1%E8%BF%9E%E6%9C%80%E5%A4%A7%E7%9A%84%E5%A4%A9%E6%89%8D%EF%BC%8C%E5%A6%82%E6%9E%9C%E6%83%B3%E5%8D%95%E5%87%AD%E4%BB%96%E6%89%80%E7%89%B9%E6%9C%89%E7%9A%84%E5%86%85%E5%9C%A8%E8%87%AA%E6%88%91%E5%8E%BB%E5%AF%B9%E4%BB%98%E4%B8%80%E5%88%87%EF%BC%8C%E4%BB%96%E4%B9%9F%E5%86%B3%E4%B8%8D%E4%BC%9A%E6%9C%89%E5%A4%9A%E5%A4%A7%E6%88%90%E5%B0%B1%E3%80%82', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/data_id/2090/reply/1/id/43/r_phone/182****7406/r_title/人的天才只是火花，要想使它成熊熊火焰，哪就只有学习！学习。', '', '/index/index/view/data_id/2090/reply/1/id/43/r_phone/182****7406/r_title/%E4%BA%BA%E7%9A%84%E5%A4%A9%E6%89%8D%E5%8F%AA%E6%98%AF%E7%81%AB%E8%8A%B1%EF%BC%8C%E8%A6%81%E6%83%B3%E4%BD%BF%E5%AE%83%E6%88%90%E7%86%8A%E7%86%8A%E7%81%AB%E7%84%B0%EF%BC%8C%E5%93%AA%E5%B0%B1%E5%8F%AA%E6%9C%89%E5%AD%A6%E4%B9%A0%EF%BC%81%E5%AD%A6%E4%B9%A0%E3%80%82', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532490763, 1532490763),
+(441, 18210787405, NULL, '', '', 'Chrome(65.0.3325.181)', 'index/index/view/data_id/2090/reply/0/id/43/r_phone/182****7406/r_title/人的天才只是火花，要想使它成熊熊火焰，哪就只有学习！学习。', '', '/index/index/view/data_id/2090/reply/0/id/43/r_phone/182****7406/r_title/%E4%BA%BA%E7%9A%84%E5%A4%A9%E6%89%8D%E5%8F%AA%E6%98%AF%E7%81%AB%E8%8A%B1%EF%BC%8C%E8%A6%81%E6%83%B3%E4%BD%BF%E5%AE%83%E6%88%90%E7%86%8A%E7%86%8A%E7%81%AB%E7%84%B0%EF%BC%8C%E5%93%AA%E5%B0%B1%E5%8F%AA%E6%9C%89%E5%AD%A6%E4%B9%A0%EF%BC%81%E5%AD%A6%E4%B9%A0%E3%80%82', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532490803, 1532490803),
+(442, 18210787405, NULL, 'www.tp5.com/index/index/view/data_id/2090/reply/0/id/43/r_phone/182****7406/r_title/%E4%BA%BA%E7%9A%84%E5%A4%A9%E6%89%8D%E5%8F%AA%E6%98%AF%E7%81%AB%E8%8A%B1%EF%BC%8C%E8%A6%81%E6%83%B3%E4%BD%BF%E5%AE%83%E6%88%90%E7%86%8A%E7%86%8A%E7%81%AB%E7%84%B0%EF%BC%8C%E5%93%AA%E5%B0%B1%E5%8F%AA%E6%9C%89%E5%AD%A6%E4%B9%A0%EF%BC%81%E5%AD%A6%E4%B9%A0%E3%80%82', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/data_id/2088/reply/1/id/43/r_phone/182****7406/r_title/我们全都要从前辈和同辈学习到一些东西。就连最大的天才，如果想单凭他所特有的内在自我去对付一切，他也决不会有多大成就。', '', '/index/index/view/data_id/2088/reply/1/id/43/r_phone/182****7406/r_title/%E6%88%91%E4%BB%AC%E5%85%A8%E9%83%BD%E8%A6%81%E4%BB%8E%E5%89%8D%E8%BE%88%E5%92%8C%E5%90%8C%E8%BE%88%E5%AD%A6%E4%B9%A0%E5%88%B0%E4%B8%80%E4%BA%9B%E4%B8%9C%E8%A5%BF%E3%80%82%E5%B0%B1%E8%BF%9E%E6%9C%80%E5%A4%A7%E7%9A%84%E5%A4%A9%E6%89%8D%EF%BC%8C%E5%A6%82%E6%9E%9C%E6%83%B3%E5%8D%95%E5%87%AD%E4%BB%96%E6%89%80%E7%89%B9%E6%9C%89%E7%9A%84%E5%86%85%E5%9C%A8%E8%87%AA%E6%88%91%E5%8E%BB%E5%AF%B9%E4%BB%98%E4%B8%80%E5%88%87%EF%BC%8C%E4%BB%96%E4%B9%9F%E5%86%B3%E4%B8%8D%E4%BC%9A%E6%9C%89%E5%A4%9A%E5%A4%A7%E6%88%90%E5%B0%B1%E3%80%82', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532490891, 1532490891),
+(443, 18210787405, NULL, '', '', 'Chrome(65.0.3325.181)', 'index/index/view/data_id/2088/reply/0/id/43/r_phone/182****7406/r_title/我们全都要从前辈和同辈学习到一些东西。就连最大的天才，如果想单凭他所特有的内在自我去对付一切，他也决不会有多大成就。', '', '/index/index/view/data_id/2088/reply/0/id/43/r_phone/182****7406/r_title/%E6%88%91%E4%BB%AC%E5%85%A8%E9%83%BD%E8%A6%81%E4%BB%8E%E5%89%8D%E8%BE%88%E5%92%8C%E5%90%8C%E8%BE%88%E5%AD%A6%E4%B9%A0%E5%88%B0%E4%B8%80%E4%BA%9B%E4%B8%9C%E8%A5%BF%E3%80%82%E5%B0%B1%E8%BF%9E%E6%9C%80%E5%A4%A7%E7%9A%84%E5%A4%A9%E6%89%8D%EF%BC%8C%E5%A6%82%E6%9E%9C%E6%83%B3%E5%8D%95%E5%87%AD%E4%BB%96%E6%89%80%E7%89%B9%E6%9C%89%E7%9A%84%E5%86%85%E5%9C%A8%E8%87%AA%E6%88%91%E5%8E%BB%E5%AF%B9%E4%BB%98%E4%B8%80%E5%88%87%EF%BC%8C%E4%BB%96%E4%B9%9F%E5%86%B3%E4%B8%8D%E4%BC%9A%E6%9C%89%E5%A4%9A%E5%A4%A7%E6%88%90%E5%B0%B1%E3%80%82', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532490909, 1532490909),
+(444, 18210787405, NULL, 'www.tp5.com/index/index/view/data_id/2088/reply/1/id/43/r_phone/182****7406/r_title/%E6%88%91%E4%BB%AC%E5%85%A8%E9%83%BD%E8%A6%81%E4%BB%8E%E5%89%8D%E8%BE%88%E5%92%8C%E5%90%8C%E8%BE%88%E5%AD%A6%E4%B9%A0%E5%88%B0%E4%B8%80%E4%BA%9B%E4%B8%9C%E8%A5%BF%E3%80%82%E5%B0%B1%E8%BF%9E%E6%9C%80%E5%A4%A7%E7%9A%84%E5%A4%A9%E6%89%8D%EF%BC%8C%E5%A6%82%E6%9E%9C%E6%83%B3%E5%8D%95%E5%87%AD%E4%BB%96%E6%89%80%E7%89%B9%E6%9C%89%E7%9A%84%E5%86%85%E5%9C%A8%E8%87%AA%E6%88%91%E5%8E%BB%E5%AF%B9%E4%BB%98%E4%B8%80%E5%88%87%EF%BC%8C%E4%BB%96%E4%B9%9F%E5%86%B3%E4%B8%8D%E4%BC%9A%E6%9C%89%E5%A4%9A%E5%A4%A7%E6%88%90%E5%B0%B1%E3%80%82', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/data_id/2090/reply/1/id/43/r_phone/182****7406/r_title/人的天才只是火花，要想使它成熊熊火焰，哪就只有学习！学习。', '', '/index/index/view/data_id/2090/reply/1/id/43/r_phone/182****7406/r_title/%E4%BA%BA%E7%9A%84%E5%A4%A9%E6%89%8D%E5%8F%AA%E6%98%AF%E7%81%AB%E8%8A%B1%EF%BC%8C%E8%A6%81%E6%83%B3%E4%BD%BF%E5%AE%83%E6%88%90%E7%86%8A%E7%86%8A%E7%81%AB%E7%84%B0%EF%BC%8C%E5%93%AA%E5%B0%B1%E5%8F%AA%E6%9C%89%E5%AD%A6%E4%B9%A0%EF%BC%81%E5%AD%A6%E4%B9%A0%E3%80%82', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532492461, 1532492461),
+(445, 18210787405, NULL, 'www.tp5.com/index/index/view/data_id/2088/reply/1/id/43/r_phone/182****7406/r_title/%E6%88%91%E4%BB%AC%E5%85%A8%E9%83%BD%E8%A6%81%E4%BB%8E%E5%89%8D%E8%BE%88%E5%92%8C%E5%90%8C%E8%BE%88%E5%AD%A6%E4%B9%A0%E5%88%B0%E4%B8%80%E4%BA%9B%E4%B8%9C%E8%A5%BF%E3%80%82%E5%B0%B1%E8%BF%9E%E6%9C%80%E5%A4%A7%E7%9A%84%E5%A4%A9%E6%89%8D%EF%BC%8C%E5%A6%82%E6%9E%9C%E6%83%B3%E5%8D%95%E5%87%AD%E4%BB%96%E6%89%80%E7%89%B9%E6%9C%89%E7%9A%84%E5%86%85%E5%9C%A8%E8%87%AA%E6%88%91%E5%8E%BB%E5%AF%B9%E4%BB%98%E4%B8%80%E5%88%87%EF%BC%8C%E4%BB%96%E4%B9%9F%E5%86%B3%E4%B8%8D%E4%BC%9A%E6%9C%89%E5%A4%9A%E5%A4%A7%E6%88%90%E5%B0%B1%E3%80%82', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/data_id/2090/reply/1/id/43/r_phone/182****7406/r_title/人的天才只是火花，要想使它成熊熊火焰，哪就只有学习！学习。', '', '/index/index/view/data_id/2090/reply/1/id/43/r_phone/182****7406/r_title/%E4%BA%BA%E7%9A%84%E5%A4%A9%E6%89%8D%E5%8F%AA%E6%98%AF%E7%81%AB%E8%8A%B1%EF%BC%8C%E8%A6%81%E6%83%B3%E4%BD%BF%E5%AE%83%E6%88%90%E7%86%8A%E7%86%8A%E7%81%AB%E7%84%B0%EF%BC%8C%E5%93%AA%E5%B0%B1%E5%8F%AA%E6%9C%89%E5%AD%A6%E4%B9%A0%EF%BC%81%E5%AD%A6%E4%B9%A0%E3%80%82', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532492755, 1532492755),
+(446, 18210787405, NULL, 'www.tp5.com/index/index/view/data_id/2090/reply/1/id/43/r_phone/182****7406/r_title/%E4%BA%BA%E7%9A%84%E5%A4%A9%E6%89%8D%E5%8F%AA%E6%98%AF%E7%81%AB%E8%8A%B1%EF%BC%8C%E8%A6%81%E6%83%B3%E4%BD%BF%E5%AE%83%E6%88%90%E7%86%8A%E7%86%8A%E7%81%AB%E7%84%B0%EF%BC%8C%E5%93%AA%E5%B0%B1%E5%8F%AA%E6%9C%89%E5%AD%A6%E4%B9%A0%EF%BC%81%E5%AD%A6%E4%B9%A0%E3%80%82', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/data_id/2119/reply/1/id/43/r_phone/182****7405/r_title/123', '', '/index/index/view/data_id/2119/reply/1/id/43/r_phone/182****7405/r_title/123', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532492761, 1532492761),
+(447, 18210787405, NULL, 'www.tp5.com/index/index/view/data_id/2119/reply/1/id/43/r_phone/182****7405/r_title/123', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/data_id/2088/reply/1/id/43/r_phone/182****7406/r_title/我们全都要从前辈和同辈学习到一些东西。就连最大的天才，如果想单凭他所特有的内在自我去对付一切，他也决不会有多大成就。', '', '/index/index/view/data_id/2088/reply/1/id/43/r_phone/182****7406/r_title/%E6%88%91%E4%BB%AC%E5%85%A8%E9%83%BD%E8%A6%81%E4%BB%8E%E5%89%8D%E8%BE%88%E5%92%8C%E5%90%8C%E8%BE%88%E5%AD%A6%E4%B9%A0%E5%88%B0%E4%B8%80%E4%BA%9B%E4%B8%9C%E8%A5%BF%E3%80%82%E5%B0%B1%E8%BF%9E%E6%9C%80%E5%A4%A7%E7%9A%84%E5%A4%A9%E6%89%8D%EF%BC%8C%E5%A6%82%E6%9E%9C%E6%83%B3%E5%8D%95%E5%87%AD%E4%BB%96%E6%89%80%E7%89%B9%E6%9C%89%E7%9A%84%E5%86%85%E5%9C%A8%E8%87%AA%E6%88%91%E5%8E%BB%E5%AF%B9%E4%BB%98%E4%B8%80%E5%88%87%EF%BC%8C%E4%BB%96%E4%B9%9F%E5%86%B3%E4%B8%8D%E4%BC%9A%E6%9C%89%E5%A4%9A%E5%A4%A7%E6%88%90%E5%B0%B1%E3%80%82', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532493157, 1532493157),
+(448, 18210787405, NULL, 'www.tp5.com/index/index/view/data_id/2088/reply/1/id/43/r_phone/182****7406/r_title/%E6%88%91%E4%BB%AC%E5%85%A8%E9%83%BD%E8%A6%81%E4%BB%8E%E5%89%8D%E8%BE%88%E5%92%8C%E5%90%8C%E8%BE%88%E5%AD%A6%E4%B9%A0%E5%88%B0%E4%B8%80%E4%BA%9B%E4%B8%9C%E8%A5%BF%E3%80%82%E5%B0%B1%E8%BF%9E%E6%9C%80%E5%A4%A7%E7%9A%84%E5%A4%A9%E6%89%8D%EF%BC%8C%E5%A6%82%E6%9E%9C%E6%83%B3%E5%8D%95%E5%87%AD%E4%BB%96%E6%89%80%E7%89%B9%E6%9C%89%E7%9A%84%E5%86%85%E5%9C%A8%E8%87%AA%E6%88%91%E5%8E%BB%E5%AF%B9%E4%BB%98%E4%B8%80%E5%88%87%EF%BC%8C%E4%BB%96%E4%B9%9F%E5%86%B3%E4%B8%8D%E4%BC%9A%E6%9C%89%E5%A4%9A%E5%A4%A7%E6%88%90%E5%B0%B1%E3%80%82', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/data_id/2122/reply/1/id/43/r_phone/182****7405/r_title/是是是', '', '/index/index/view/data_id/2122/reply/1/id/43/r_phone/182****7405/r_title/%E6%98%AF%E6%98%AF%E6%98%AF', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532493406, 1532493406),
+(449, 18210787405, NULL, 'www.tp5.com/index/index/view/data_id/2088/reply/1/id/43/r_phone/182****7406/r_title/%E6%88%91%E4%BB%AC%E5%85%A8%E9%83%BD%E8%A6%81%E4%BB%8E%E5%89%8D%E8%BE%88%E5%92%8C%E5%90%8C%E8%BE%88%E5%AD%A6%E4%B9%A0%E5%88%B0%E4%B8%80%E4%BA%9B%E4%B8%9C%E8%A5%BF%E3%80%82%E5%B0%B1%E8%BF%9E%E6%9C%80%E5%A4%A7%E7%9A%84%E5%A4%A9%E6%89%8D%EF%BC%8C%E5%A6%82%E6%9E%9C%E6%83%B3%E5%8D%95%E5%87%AD%E4%BB%96%E6%89%80%E7%89%B9%E6%9C%89%E7%9A%84%E5%86%85%E5%9C%A8%E8%87%AA%E6%88%91%E5%8E%BB%E5%AF%B9%E4%BB%98%E4%B8%80%E5%88%87%EF%BC%8C%E4%BB%96%E4%B9%9F%E5%86%B3%E4%B8%8D%E4%BC%9A%E6%9C%89%E5%A4%9A%E5%A4%A7%E6%88%90%E5%B0%B1%E3%80%82', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/data_id/2122/reply/1/id/43/r_phone/182****7405/r_title/是是是', '', '/index/index/view/data_id/2122/reply/1/id/43/r_phone/182****7405/r_title/%E6%98%AF%E6%98%AF%E6%98%AF', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532493532, 1532493532),
+(450, 18210787405, NULL, 'www.tp5.com/index/index/view/data_id/2088/reply/1/id/43/r_phone/182****7406/r_title/%E6%88%91%E4%BB%AC%E5%85%A8%E9%83%BD%E8%A6%81%E4%BB%8E%E5%89%8D%E8%BE%88%E5%92%8C%E5%90%8C%E8%BE%88%E5%AD%A6%E4%B9%A0%E5%88%B0%E4%B8%80%E4%BA%9B%E4%B8%9C%E8%A5%BF%E3%80%82%E5%B0%B1%E8%BF%9E%E6%9C%80%E5%A4%A7%E7%9A%84%E5%A4%A9%E6%89%8D%EF%BC%8C%E5%A6%82%E6%9E%9C%E6%83%B3%E5%8D%95%E5%87%AD%E4%BB%96%E6%89%80%E7%89%B9%E6%9C%89%E7%9A%84%E5%86%85%E5%9C%A8%E8%87%AA%E6%88%91%E5%8E%BB%E5%AF%B9%E4%BB%98%E4%B8%80%E5%88%87%EF%BC%8C%E4%BB%96%E4%B9%9F%E5%86%B3%E4%B8%8D%E4%BC%9A%E6%9C%89%E5%A4%9A%E5%A4%A7%E6%88%90%E5%B0%B1%E3%80%82', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/data_id/2122/reply/1/id/43/r_phone/182****7405/r_title/是是是', '', '/index/index/view/data_id/2122/reply/1/id/43/r_phone/182****7405/r_title/%E6%98%AF%E6%98%AF%E6%98%AF', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532494309, 1532494309),
+(451, 18210787405, NULL, 'www.tp5.com/index/index/view/data_id/2088/reply/1/id/43/r_phone/182****7406/r_title/%E6%88%91%E4%BB%AC%E5%85%A8%E9%83%BD%E8%A6%81%E4%BB%8E%E5%89%8D%E8%BE%88%E5%92%8C%E5%90%8C%E8%BE%88%E5%AD%A6%E4%B9%A0%E5%88%B0%E4%B8%80%E4%BA%9B%E4%B8%9C%E8%A5%BF%E3%80%82%E5%B0%B1%E8%BF%9E%E6%9C%80%E5%A4%A7%E7%9A%84%E5%A4%A9%E6%89%8D%EF%BC%8C%E5%A6%82%E6%9E%9C%E6%83%B3%E5%8D%95%E5%87%AD%E4%BB%96%E6%89%80%E7%89%B9%E6%9C%89%E7%9A%84%E5%86%85%E5%9C%A8%E8%87%AA%E6%88%91%E5%8E%BB%E5%AF%B9%E4%BB%98%E4%B8%80%E5%88%87%EF%BC%8C%E4%BB%96%E4%B9%9F%E5%86%B3%E4%B8%8D%E4%BC%9A%E6%9C%89%E5%A4%9A%E5%A4%A7%E6%88%90%E5%B0%B1%E3%80%82', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/data_id/2122/reply/1/id/43/r_phone/182****7405/r_title/是是是', '', '/index/index/view/data_id/2122/reply/1/id/43/r_phone/182****7405/r_title/%E6%98%AF%E6%98%AF%E6%98%AF', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532494349, 1532494349),
+(452, 18210787405, NULL, 'www.tp5.com/index/index/view/data_id/2088/reply/1/id/43/r_phone/182****7406/r_title/%E6%88%91%E4%BB%AC%E5%85%A8%E9%83%BD%E8%A6%81%E4%BB%8E%E5%89%8D%E8%BE%88%E5%92%8C%E5%90%8C%E8%BE%88%E5%AD%A6%E4%B9%A0%E5%88%B0%E4%B8%80%E4%BA%9B%E4%B8%9C%E8%A5%BF%E3%80%82%E5%B0%B1%E8%BF%9E%E6%9C%80%E5%A4%A7%E7%9A%84%E5%A4%A9%E6%89%8D%EF%BC%8C%E5%A6%82%E6%9E%9C%E6%83%B3%E5%8D%95%E5%87%AD%E4%BB%96%E6%89%80%E7%89%B9%E6%9C%89%E7%9A%84%E5%86%85%E5%9C%A8%E8%87%AA%E6%88%91%E5%8E%BB%E5%AF%B9%E4%BB%98%E4%B8%80%E5%88%87%EF%BC%8C%E4%BB%96%E4%B9%9F%E5%86%B3%E4%B8%8D%E4%BC%9A%E6%9C%89%E5%A4%9A%E5%A4%A7%E6%88%90%E5%B0%B1%E3%80%82', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/data_id/2122/reply/1/id/43/r_phone/182****7405/r_title/是是是', '', '/index/index/view/data_id/2122/reply/1/id/43/r_phone/182****7405/r_title/%E6%98%AF%E6%98%AF%E6%98%AF', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532495277, 1532495277),
+(453, 18210787405, NULL, 'www.tp5.com/index/index/view/data_id/2119/reply/1/id/43/r_phone/182****7405/r_title/123', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/data_id/2088/reply/1/id/43/r_phone/182****7406/r_title/我们全都要从前辈和同辈学习到一些东西。就连最大的天才，如果想单凭他所特有的内在自我去对付一切，他也决不会有多大成就。', '', '/index/index/view/data_id/2088/reply/1/id/43/r_phone/182****7406/r_title/%E6%88%91%E4%BB%AC%E5%85%A8%E9%83%BD%E8%A6%81%E4%BB%8E%E5%89%8D%E8%BE%88%E5%92%8C%E5%90%8C%E8%BE%88%E5%AD%A6%E4%B9%A0%E5%88%B0%E4%B8%80%E4%BA%9B%E4%B8%9C%E8%A5%BF%E3%80%82%E5%B0%B1%E8%BF%9E%E6%9C%80%E5%A4%A7%E7%9A%84%E5%A4%A9%E6%89%8D%EF%BC%8C%E5%A6%82%E6%9E%9C%E6%83%B3%E5%8D%95%E5%87%AD%E4%BB%96%E6%89%80%E7%89%B9%E6%9C%89%E7%9A%84%E5%86%85%E5%9C%A8%E8%87%AA%E6%88%91%E5%8E%BB%E5%AF%B9%E4%BB%98%E4%B8%80%E5%88%87%EF%BC%8C%E4%BB%96%E4%B9%9F%E5%86%B3%E4%B8%8D%E4%BC%9A%E6%9C%89%E5%A4%9A%E5%A4%A7%E6%88%90%E5%B0%B1%E3%80%82', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532495286, 1532495286),
+(454, 18210787405, NULL, 'www.tp5.com/index/index/view/data_id/2088/reply/1/id/43/r_phone/182****7406/r_title/%E6%88%91%E4%BB%AC%E5%85%A8%E9%83%BD%E8%A6%81%E4%BB%8E%E5%89%8D%E8%BE%88%E5%92%8C%E5%90%8C%E8%BE%88%E5%AD%A6%E4%B9%A0%E5%88%B0%E4%B8%80%E4%BA%9B%E4%B8%9C%E8%A5%BF%E3%80%82%E5%B0%B1%E8%BF%9E%E6%9C%80%E5%A4%A7%E7%9A%84%E5%A4%A9%E6%89%8D%EF%BC%8C%E5%A6%82%E6%9E%9C%E6%83%B3%E5%8D%95%E5%87%AD%E4%BB%96%E6%89%80%E7%89%B9%E6%9C%89%E7%9A%84%E5%86%85%E5%9C%A8%E8%87%AA%E6%88%91%E5%8E%BB%E5%AF%B9%E4%BB%98%E4%B8%80%E5%88%87%EF%BC%8C%E4%BB%96%E4%B9%9F%E5%86%B3%E4%B8%8D%E4%BC%9A%E6%9C%89%E5%A4%9A%E5%A4%A7%E6%88%90%E5%B0%B1%E3%80%82', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/data_id/2086/reply/1/id/43/r_phone/182****7406/r_title/学习知识要善于思考，思考，再思考', '', '/index/index/view/data_id/2086/reply/1/id/43/r_phone/182****7406/r_title/%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E8%A6%81%E5%96%84%E4%BA%8E%E6%80%9D%E8%80%83%EF%BC%8C%E6%80%9D%E8%80%83%EF%BC%8C%E5%86%8D%E6%80%9D%E8%80%83', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532495294, 1532495294),
+(455, 18210787405, NULL, 'www.tp5.com/index/index/view/data_id/2119/reply/1/id/43/r_phone/182****7405/r_title/123', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/data_id/2088/reply/1/id/43/r_phone/182****7406/r_title/我们全都要从前辈和同辈学习到一些东西。就连最大的天才，如果想单凭他所特有的内在自我去对付一切，他也决不会有多大成就。', '', '/index/index/view/data_id/2088/reply/1/id/43/r_phone/182****7406/r_title/%E6%88%91%E4%BB%AC%E5%85%A8%E9%83%BD%E8%A6%81%E4%BB%8E%E5%89%8D%E8%BE%88%E5%92%8C%E5%90%8C%E8%BE%88%E5%AD%A6%E4%B9%A0%E5%88%B0%E4%B8%80%E4%BA%9B%E4%B8%9C%E8%A5%BF%E3%80%82%E5%B0%B1%E8%BF%9E%E6%9C%80%E5%A4%A7%E7%9A%84%E5%A4%A9%E6%89%8D%EF%BC%8C%E5%A6%82%E6%9E%9C%E6%83%B3%E5%8D%95%E5%87%AD%E4%BB%96%E6%89%80%E7%89%B9%E6%9C%89%E7%9A%84%E5%86%85%E5%9C%A8%E8%87%AA%E6%88%91%E5%8E%BB%E5%AF%B9%E4%BB%98%E4%B8%80%E5%88%87%EF%BC%8C%E4%BB%96%E4%B9%9F%E5%86%B3%E4%B8%8D%E4%BC%9A%E6%9C%89%E5%A4%9A%E5%A4%A7%E6%88%90%E5%B0%B1%E3%80%82', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532495304, 1532495304),
+(456, 18210787405, NULL, 'www.tp5.com/index/index/view/data_id/2119/reply/1/id/43/r_phone/182****7405/r_title/123', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/data_id/2088/reply/1/id/43/r_phone/182****7406/r_title/我们全都要从前辈和同辈学习到一些东西。就连最大的天才，如果想单凭他所特有的内在自我去对付一切，他也决不会有多大成就。', '', '/index/index/view/data_id/2088/reply/1/id/43/r_phone/182****7406/r_title/%E6%88%91%E4%BB%AC%E5%85%A8%E9%83%BD%E8%A6%81%E4%BB%8E%E5%89%8D%E8%BE%88%E5%92%8C%E5%90%8C%E8%BE%88%E5%AD%A6%E4%B9%A0%E5%88%B0%E4%B8%80%E4%BA%9B%E4%B8%9C%E8%A5%BF%E3%80%82%E5%B0%B1%E8%BF%9E%E6%9C%80%E5%A4%A7%E7%9A%84%E5%A4%A9%E6%89%8D%EF%BC%8C%E5%A6%82%E6%9E%9C%E6%83%B3%E5%8D%95%E5%87%AD%E4%BB%96%E6%89%80%E7%89%B9%E6%9C%89%E7%9A%84%E5%86%85%E5%9C%A8%E8%87%AA%E6%88%91%E5%8E%BB%E5%AF%B9%E4%BB%98%E4%B8%80%E5%88%87%EF%BC%8C%E4%BB%96%E4%B9%9F%E5%86%B3%E4%B8%8D%E4%BC%9A%E6%9C%89%E5%A4%9A%E5%A4%A7%E6%88%90%E5%B0%B1%E3%80%82', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532495435, 1532495435),
+(457, 18210787405, NULL, 'www.tp5.com/index/index/view/data_id/2088/reply/1/id/43/r_phone/182****7406/r_title/%E6%88%91%E4%BB%AC%E5%85%A8%E9%83%BD%E8%A6%81%E4%BB%8E%E5%89%8D%E8%BE%88%E5%92%8C%E5%90%8C%E8%BE%88%E5%AD%A6%E4%B9%A0%E5%88%B0%E4%B8%80%E4%BA%9B%E4%B8%9C%E8%A5%BF%E3%80%82%E5%B0%B1%E8%BF%9E%E6%9C%80%E5%A4%A7%E7%9A%84%E5%A4%A9%E6%89%8D%EF%BC%8C%E5%A6%82%E6%9E%9C%E6%83%B3%E5%8D%95%E5%87%AD%E4%BB%96%E6%89%80%E7%89%B9%E6%9C%89%E7%9A%84%E5%86%85%E5%9C%A8%E8%87%AA%E6%88%91%E5%8E%BB%E5%AF%B9%E4%BB%98%E4%B8%80%E5%88%87%EF%BC%8C%E4%BB%96%E4%B9%9F%E5%86%B3%E4%B8%8D%E4%BC%9A%E6%9C%89%E5%A4%9A%E5%A4%A7%E6%88%90%E5%B0%B1%E3%80%82', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index.php/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532495443, 1532495443),
+(458, 18210787405, NULL, 'www.tp5.com/index.php/index/index/view/data_id/2090/reply/1/id/43/r_phone/182****7406/r_title/%E4%BA%BA%E7%9A%84%E5%A4%A9%E6%89%8D%E5%8F%AA%E6%98%AF%E7%81%AB%E8%8A%B1%EF%BC%8C%E8%A6%81%E6%83%B3%E4%BD%BF%E5%AE%83%E6%88%90%E7%86%8A%E7%86%8A%E7%81%AB%E7%84%B0%EF%BC%8C%E5%93%AA%E5%B0%B1%E5%8F%AA%E6%9C%89%E5%AD%A6%E4%B9%A0%EF%BC%81%E5%AD%A6%E4%B9%A0%E3%80%82', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index.php/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532495503, 1532495503),
+(459, 18210787405, NULL, 'www.tp5.com/index.php/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/data_id/2086/reply/1/id/43/r_phone/182****7406/r_title/学习知识要善于思考，思考，再思考', '', '/index.php/index/index/view/data_id/2086/reply/1/id/43/r_phone/182****7406/r_title/%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E8%A6%81%E5%96%84%E4%BA%8E%E6%80%9D%E8%80%83%EF%BC%8C%E6%80%9D%E8%80%83%EF%BC%8C%E5%86%8D%E6%80%9D%E8%80%83', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532496235, 1532496235),
+(460, 18210787405, NULL, 'www.tp5.com/index.php/index/index/view/data_id/2086/reply/1/id/43/r_phone/182****7406/r_title/%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E8%A6%81%E5%96%84%E4%BA%8E%E6%80%9D%E8%80%83%EF%BC%8C%E6%80%9D%E8%80%83%EF%BC%8C%E5%86%8D%E6%80%9D%E8%80%83', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index.php/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532496268, 1532496268),
+(461, 18210787405, NULL, 'www.tp5.com/index.php/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/data_id/2086/reply/1/id/43/r_phone/182****7406/r_title/学习知识要善于思考，思考，再思考', '', '/index.php/index/index/view/data_id/2086/reply/1/id/43/r_phone/182****7406/r_title/%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E8%A6%81%E5%96%84%E4%BA%8E%E6%80%9D%E8%80%83%EF%BC%8C%E6%80%9D%E8%80%83%EF%BC%8C%E5%86%8D%E6%80%9D%E8%80%83', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532496332, 1532496332),
+(462, 18210787405, NULL, 'www.tp5.com/index.php/index/index/view/data_id/2086/reply/1/id/43/r_phone/182****7406/r_title/%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E8%A6%81%E5%96%84%E4%BA%8E%E6%80%9D%E8%80%83%EF%BC%8C%E6%80%9D%E8%80%83%EF%BC%8C%E5%86%8D%E6%80%9D%E8%80%83', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/data_id/2088/reply/1/id/43/r_phone/182****7406/r_title/我们全都要从前辈和同辈学习到一些东西。就连最大的天才，如果想单凭他所特有的内在自我去对付一切，他也决不会有多大成就。', '', '/index.php/index/index/view/data_id/2088/reply/1/id/43/r_phone/182****7406/r_title/%E6%88%91%E4%BB%AC%E5%85%A8%E9%83%BD%E8%A6%81%E4%BB%8E%E5%89%8D%E8%BE%88%E5%92%8C%E5%90%8C%E8%BE%88%E5%AD%A6%E4%B9%A0%E5%88%B0%E4%B8%80%E4%BA%9B%E4%B8%9C%E8%A5%BF%E3%80%82%E5%B0%B1%E8%BF%9E%E6%9C%80%E5%A4%A7%E7%9A%84%E5%A4%A9%E6%89%8D%EF%BC%8C%E5%A6%82%E6%9E%9C%E6%83%B3%E5%8D%95%E5%87%AD%E4%BB%96%E6%89%80%E7%89%B9%E6%9C%89%E7%9A%84%E5%86%85%E5%9C%A8%E8%87%AA%E6%88%91%E5%8E%BB%E5%AF%B9%E4%BB%98%E4%B8%80%E5%88%87%EF%BC%8C%E4%BB%96%E4%B9%9F%E5%86%B3%E4%B8%8D%E4%BC%9A%E6%9C%89%E5%A4%9A%E5%A4%A7%E6%88%90%E5%B0%B1%E3%80%82', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532496374, 1532496374),
+(463, 18210787405, NULL, 'www.tp5.com/index.php/index/index/view/data_id/2088/reply/1/id/43/r_phone/182****7406/r_title/%E6%88%91%E4%BB%AC%E5%85%A8%E9%83%BD%E8%A6%81%E4%BB%8E%E5%89%8D%E8%BE%88%E5%92%8C%E5%90%8C%E8%BE%88%E5%AD%A6%E4%B9%A0%E5%88%B0%E4%B8%80%E4%BA%9B%E4%B8%9C%E8%A5%BF%E3%80%82%E5%B0%B1%E8%BF%9E%E6%9C%80%E5%A4%A7%E7%9A%84%E5%A4%A9%E6%89%8D%EF%BC%8C%E5%A6%82%E6%9E%9C%E6%83%B3%E5%8D%95%E5%87%AD%E4%BB%96%E6%89%80%E7%89%B9%E6%9C%89%E7%9A%84%E5%86%85%E5%9C%A8%E8%87%AA%E6%88%91%E5%8E%BB%E5%AF%B9%E4%BB%98%E4%B8%80%E5%88%87%EF%BC%8C%E4%BB%96%E4%B9%9F%E5%86%B3%E4%B8%8D%E4%BC%9A%E6%9C%89%E5%A4%9A%E5%A4%A7%E6%88%90%E5%B0%B1%E3%80%82', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index.php/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532496403, 1532496403),
+(464, 18210787405, NULL, 'www.tp5.com/index.php/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/data_id/2086/reply/1/id/43/r_phone/182****7406/r_title/学习知识要善于思考，思考，再思考', '', '/index.php/index/index/view/data_id/2086/reply/1/id/43/r_phone/182****7406/r_title/%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E8%A6%81%E5%96%84%E4%BA%8E%E6%80%9D%E8%80%83%EF%BC%8C%E6%80%9D%E8%80%83%EF%BC%8C%E5%86%8D%E6%80%9D%E8%80%83', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532496510, 1532496510),
+(465, 18210787405, NULL, 'www.tp5.com/index.php/index/index/view/data_id/2086/reply/1/id/43/r_phone/182****7406/r_title/%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E8%A6%81%E5%96%84%E4%BA%8E%E6%80%9D%E8%80%83%EF%BC%8C%E6%80%9D%E8%80%83%EF%BC%8C%E5%86%8D%E6%80%9D%E8%80%83', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index.php/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532496670, 1532496670),
+(466, 18210787405, NULL, '', '', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532496951, 1532496951),
+(467, 18210787405, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532496956, 1532496956),
+(468, 18210787405, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/data_id/2090/reply/1/id/43/r_phone/182****7406/r_title/人的天才只是火花，要想使它成熊熊火焰，哪就只有学习！学习。', '', '/index/index/view/data_id/2090/reply/1/id/43/r_phone/182****7406/r_title/%E4%BA%BA%E7%9A%84%E5%A4%A9%E6%89%8D%E5%8F%AA%E6%98%AF%E7%81%AB%E8%8A%B1%EF%BC%8C%E8%A6%81%E6%83%B3%E4%BD%BF%E5%AE%83%E6%88%90%E7%86%8A%E7%86%8A%E7%81%AB%E7%84%B0%EF%BC%8C%E5%93%AA%E5%B0%B1%E5%8F%AA%E6%9C%89%E5%AD%A6%E4%B9%A0%EF%BC%81%E5%AD%A6%E4%B9%A0%E3%80%82', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532496980, 1532496980),
+(469, 18210787405, NULL, 'www.tp5.com/index/index/view/data_id/2090/reply/1/id/43/r_phone/182****7406/r_title/%E4%BA%BA%E7%9A%84%E5%A4%A9%E6%89%8D%E5%8F%AA%E6%98%AF%E7%81%AB%E8%8A%B1%EF%BC%8C%E8%A6%81%E6%83%B3%E4%BD%BF%E5%AE%83%E6%88%90%E7%86%8A%E7%86%8A%E7%81%AB%E7%84%B0%EF%BC%8C%E5%93%AA%E5%B0%B1%E5%8F%AA%E6%9C%89%E5%AD%A6%E4%B9%A0%EF%BC%81%E5%AD%A6%E4%B9%A0%E3%80%82', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index.php/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532496991, 1532496991),
+(470, 18210787405, NULL, 'www.tp5.com/index/index/view/data_id/2090/reply/1/id/43/r_phone/182****7406/r_title/%E4%BA%BA%E7%9A%84%E5%A4%A9%E6%89%8D%E5%8F%AA%E6%98%AF%E7%81%AB%E8%8A%B1%EF%BC%8C%E8%A6%81%E6%83%B3%E4%BD%BF%E5%AE%83%E6%88%90%E7%86%8A%E7%86%8A%E7%81%AB%E7%84%B0%EF%BC%8C%E5%93%AA%E5%B0%B1%E5%8F%AA%E6%9C%89%E5%AD%A6%E4%B9%A0%EF%BC%81%E5%AD%A6%E4%B9%A0%E3%80%82', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index.php/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532497033, 1532497033),
+(471, 18210787405, NULL, 'www.tp5.com/index/index/view/data_id/2090/reply/1/id/43/r_phone/182****7406/r_title/%E4%BA%BA%E7%9A%84%E5%A4%A9%E6%89%8D%E5%8F%AA%E6%98%AF%E7%81%AB%E8%8A%B1%EF%BC%8C%E8%A6%81%E6%83%B3%E4%BD%BF%E5%AE%83%E6%88%90%E7%86%8A%E7%86%8A%E7%81%AB%E7%84%B0%EF%BC%8C%E5%93%AA%E5%B0%B1%E5%8F%AA%E6%9C%89%E5%AD%A6%E4%B9%A0%EF%BC%81%E5%AD%A6%E4%B9%A0%E3%80%82', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index.php/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532497047, 1532497047),
+(472, 18210787405, NULL, 'www.tp5.com/index.php/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/data_id/2090/reply/1/id/43/r_phone/182****7406/r_title/人的天才只是火花，要想使它成熊熊火焰，哪就只有学习！学习。', '', '/index.php/index/index/view/data_id/2090/reply/1/id/43/r_phone/182****7406/r_title/%E4%BA%BA%E7%9A%84%E5%A4%A9%E6%89%8D%E5%8F%AA%E6%98%AF%E7%81%AB%E8%8A%B1%EF%BC%8C%E8%A6%81%E6%83%B3%E4%BD%BF%E5%AE%83%E6%88%90%E7%86%8A%E7%86%8A%E7%81%AB%E7%84%B0%EF%BC%8C%E5%93%AA%E5%B0%B1%E5%8F%AA%E6%9C%89%E5%AD%A6%E4%B9%A0%EF%BC%81%E5%AD%A6%E4%B9%A0%E3%80%82', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532497070, 1532497070),
+(473, 18210787405, NULL, 'www.tp5.com/index.php/index/index/view/data_id/2090/reply/1/id/43/r_phone/182****7406/r_title/%E4%BA%BA%E7%9A%84%E5%A4%A9%E6%89%8D%E5%8F%AA%E6%98%AF%E7%81%AB%E8%8A%B1%EF%BC%8C%E8%A6%81%E6%83%B3%E4%BD%BF%E5%AE%83%E6%88%90%E7%86%8A%E7%86%8A%E7%81%AB%E7%84%B0%EF%BC%8C%E5%93%AA%E5%B0%B1%E5%8F%AA%E6%9C%89%E5%AD%A6%E4%B9%A0%EF%BC%81%E5%AD%A6%E4%B9%A0%E3%80%82', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index.php/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532497106, 1532497106),
+(474, 18210787405, NULL, 'www.tp5.com/index.php/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/data_id/2088/reply/1/id/43/r_phone/182****7406/r_title/我们全都要从前辈和同辈学习到一些东西。就连最大的天才，如果想单凭他所特有的内在自我去对付一切，他也决不会有多大成就。', '', '/index.php/index/index/view/data_id/2088/reply/1/id/43/r_phone/182****7406/r_title/%E6%88%91%E4%BB%AC%E5%85%A8%E9%83%BD%E8%A6%81%E4%BB%8E%E5%89%8D%E8%BE%88%E5%92%8C%E5%90%8C%E8%BE%88%E5%AD%A6%E4%B9%A0%E5%88%B0%E4%B8%80%E4%BA%9B%E4%B8%9C%E8%A5%BF%E3%80%82%E5%B0%B1%E8%BF%9E%E6%9C%80%E5%A4%A7%E7%9A%84%E5%A4%A9%E6%89%8D%EF%BC%8C%E5%A6%82%E6%9E%9C%E6%83%B3%E5%8D%95%E5%87%AD%E4%BB%96%E6%89%80%E7%89%B9%E6%9C%89%E7%9A%84%E5%86%85%E5%9C%A8%E8%87%AA%E6%88%91%E5%8E%BB%E5%AF%B9%E4%BB%98%E4%B8%80%E5%88%87%EF%BC%8C%E4%BB%96%E4%B9%9F%E5%86%B3%E4%B8%8D%E4%BC%9A%E6%9C%89%E5%A4%9A%E5%A4%A7%E6%88%90%E5%B0%B1%E3%80%82', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532497291, 1532497291),
+(475, 18210787405, NULL, 'www.tp5.com/index.php/index/index/view/data_id/2088/reply/1/id/43/r_phone/182****7406/r_title/%E6%88%91%E4%BB%AC%E5%85%A8%E9%83%BD%E8%A6%81%E4%BB%8E%E5%89%8D%E8%BE%88%E5%92%8C%E5%90%8C%E8%BE%88%E5%AD%A6%E4%B9%A0%E5%88%B0%E4%B8%80%E4%BA%9B%E4%B8%9C%E8%A5%BF%E3%80%82%E5%B0%B1%E8%BF%9E%E6%9C%80%E5%A4%A7%E7%9A%84%E5%A4%A9%E6%89%8D%EF%BC%8C%E5%A6%82%E6%9E%9C%E6%83%B3%E5%8D%95%E5%87%AD%E4%BB%96%E6%89%80%E7%89%B9%E6%9C%89%E7%9A%84%E5%86%85%E5%9C%A8%E8%87%AA%E6%88%91%E5%8E%BB%E5%AF%B9%E4%BB%98%E4%B8%80%E5%88%87%EF%BC%8C%E4%BB%96%E4%B9%9F%E5%86%B3%E4%B8%8D%E4%BC%9A%E6%9C%89%E5%A4%9A%E5%A4%A7%E6%88%90%E5%B0%B1%E3%80%82', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index.php/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532497320, 1532497320),
+(476, 18210787405, NULL, 'www.tp5.com/index.php/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/data_id/2090/reply/1/id/43/r_phone/182****7406/r_title/人的天才只是火花，要想使它成熊熊火焰，哪就只有学习！学习。', '', '/index.php/index/index/view/data_id/2090/reply/1/id/43/r_phone/182****7406/r_title/%E4%BA%BA%E7%9A%84%E5%A4%A9%E6%89%8D%E5%8F%AA%E6%98%AF%E7%81%AB%E8%8A%B1%EF%BC%8C%E8%A6%81%E6%83%B3%E4%BD%BF%E5%AE%83%E6%88%90%E7%86%8A%E7%86%8A%E7%81%AB%E7%84%B0%EF%BC%8C%E5%93%AA%E5%B0%B1%E5%8F%AA%E6%9C%89%E5%AD%A6%E4%B9%A0%EF%BC%81%E5%AD%A6%E4%B9%A0%E3%80%82', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532497776, 1532497776),
+(477, 18210787405, NULL, 'www.tp5.com/index.php/index/index/view/data_id/2090/reply/1/id/43/r_phone/182****7406/r_title/%E4%BA%BA%E7%9A%84%E5%A4%A9%E6%89%8D%E5%8F%AA%E6%98%AF%E7%81%AB%E8%8A%B1%EF%BC%8C%E8%A6%81%E6%83%B3%E4%BD%BF%E5%AE%83%E6%88%90%E7%86%8A%E7%86%8A%E7%81%AB%E7%84%B0%EF%BC%8C%E5%93%AA%E5%B0%B1%E5%8F%AA%E6%9C%89%E5%AD%A6%E4%B9%A0%EF%BC%81%E5%AD%A6%E4%B9%A0%E3%80%82', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index.php/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532497800, 1532497800),
+(478, 18210787405, NULL, 'www.tp5.com/index.php/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/data_id/2090/reply/1/id/43/r_phone/182****7406/r_title/人的天才只是火花，要想使它成熊熊火焰，哪就只有学习！学习。', '', '/index.php/index/index/view/data_id/2090/reply/1/id/43/r_phone/182****7406/r_title/%E4%BA%BA%E7%9A%84%E5%A4%A9%E6%89%8D%E5%8F%AA%E6%98%AF%E7%81%AB%E8%8A%B1%EF%BC%8C%E8%A6%81%E6%83%B3%E4%BD%BF%E5%AE%83%E6%88%90%E7%86%8A%E7%86%8A%E7%81%AB%E7%84%B0%EF%BC%8C%E5%93%AA%E5%B0%B1%E5%8F%AA%E6%9C%89%E5%AD%A6%E4%B9%A0%EF%BC%81%E5%AD%A6%E4%B9%A0%E3%80%82', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532497877, 1532497877),
+(479, 18210787405, NULL, 'www.tp5.com/index.php/index/index/view/data_id/2090/reply/1/id/43/r_phone/182****7406/r_title/%E4%BA%BA%E7%9A%84%E5%A4%A9%E6%89%8D%E5%8F%AA%E6%98%AF%E7%81%AB%E8%8A%B1%EF%BC%8C%E8%A6%81%E6%83%B3%E4%BD%BF%E5%AE%83%E6%88%90%E7%86%8A%E7%86%8A%E7%81%AB%E7%84%B0%EF%BC%8C%E5%93%AA%E5%B0%B1%E5%8F%AA%E6%9C%89%E5%AD%A6%E4%B9%A0%EF%BC%81%E5%AD%A6%E4%B9%A0%E3%80%82', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index.php/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532497899, 1532497899),
+(480, 18210787405, NULL, 'www.tp5.com/index.php/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/data_id/2090/reply/1/id/43/r_phone/182****7406/r_title/人的天才只是火花，要想使它成熊熊火焰，哪就只有学习！学习。', '', '/index.php/index/index/view/data_id/2090/reply/1/id/43/r_phone/182****7406/r_title/%E4%BA%BA%E7%9A%84%E5%A4%A9%E6%89%8D%E5%8F%AA%E6%98%AF%E7%81%AB%E8%8A%B1%EF%BC%8C%E8%A6%81%E6%83%B3%E4%BD%BF%E5%AE%83%E6%88%90%E7%86%8A%E7%86%8A%E7%81%AB%E7%84%B0%EF%BC%8C%E5%93%AA%E5%B0%B1%E5%8F%AA%E6%9C%89%E5%AD%A6%E4%B9%A0%EF%BC%81%E5%AD%A6%E4%B9%A0%E3%80%82', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532518488, 1532518488),
+(481, 18210787405, NULL, 'www.tp5.com/index.php/index/index/view/data_id/2090/reply/1/id/43/r_phone/182****7406/r_title/%E4%BA%BA%E7%9A%84%E5%A4%A9%E6%89%8D%E5%8F%AA%E6%98%AF%E7%81%AB%E8%8A%B1%EF%BC%8C%E8%A6%81%E6%83%B3%E4%BD%BF%E5%AE%83%E6%88%90%E7%86%8A%E7%86%8A%E7%81%AB%E7%84%B0%EF%BC%8C%E5%93%AA%E5%B0%B1%E5%8F%AA%E6%9C%89%E5%AD%A6%E4%B9%A0%EF%BC%81%E5%AD%A6%E4%B9%A0%E3%80%82', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/data_id/2086/reply/1/id/43/r_phone/182****7406/r_title/学习知识要善于思考，思考，再思考', '', '/index.php/index/index/view/data_id/2086/reply/1/id/43/r_phone/182****7406/r_title/%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E8%A6%81%E5%96%84%E4%BA%8E%E6%80%9D%E8%80%83%EF%BC%8C%E6%80%9D%E8%80%83%EF%BC%8C%E5%86%8D%E6%80%9D%E8%80%83', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532519094, 1532519094),
+(482, 18210787405, NULL, 'www.tp5.com/index.php/index/index/view/data_id/2086/reply/1/id/43/r_phone/182****7406/r_title/%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E8%A6%81%E5%96%84%E4%BA%8E%E6%80%9D%E8%80%83%EF%BC%8C%E6%80%9D%E8%80%83%EF%BC%8C%E5%86%8D%E6%80%9D%E8%80%83', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index.php/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532519177, 1532519177),
+(483, 18210787405, NULL, 'www.tp5.com/index.php/index/index/view/data_id/2086/reply/1/id/43/r_phone/182****7406/r_title/%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E8%A6%81%E5%96%84%E4%BA%8E%E6%80%9D%E8%80%83%EF%BC%8C%E6%80%9D%E8%80%83%EF%BC%8C%E5%86%8D%E6%80%9D%E8%80%83', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index.php/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532519486, 1532519486),
+(484, 18210787405, NULL, 'www.tp5.com/index.php/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/data_id/2088/reply/1/id/43/r_phone/182****7406/r_title/我们全都要从前辈和同辈学习到一些东西。就连最大的天才，如果想单凭他所特有的内在自我去对付一切，他也决不会有多大成就。', '', '/index.php/index/index/view/data_id/2088/reply/1/id/43/r_phone/182****7406/r_title/%E6%88%91%E4%BB%AC%E5%85%A8%E9%83%BD%E8%A6%81%E4%BB%8E%E5%89%8D%E8%BE%88%E5%92%8C%E5%90%8C%E8%BE%88%E5%AD%A6%E4%B9%A0%E5%88%B0%E4%B8%80%E4%BA%9B%E4%B8%9C%E8%A5%BF%E3%80%82%E5%B0%B1%E8%BF%9E%E6%9C%80%E5%A4%A7%E7%9A%84%E5%A4%A9%E6%89%8D%EF%BC%8C%E5%A6%82%E6%9E%9C%E6%83%B3%E5%8D%95%E5%87%AD%E4%BB%96%E6%89%80%E7%89%B9%E6%9C%89%E7%9A%84%E5%86%85%E5%9C%A8%E8%87%AA%E6%88%91%E5%8E%BB%E5%AF%B9%E4%BB%98%E4%B8%80%E5%88%87%EF%BC%8C%E4%BB%96%E4%B9%9F%E5%86%B3%E4%B8%8D%E4%BC%9A%E6%9C%89%E5%A4%9A%E5%A4%A7%E6%88%90%E5%B0%B1%E3%80%82', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532519499, 1532519499),
+(485, 18210787405, NULL, 'www.tp5.com/index.php/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/data_id/2088/reply/1/id/43/r_phone/182****7406/r_title/我们全都要从前辈和同辈学习到一些东西。就连最大的天才，如果想单凭他所特有的内在自我去对付一切，他也决不会有多大成就。', '', '/index.php/index/index/view/data_id/2088/reply/1/id/43/r_phone/182****7406/r_title/%E6%88%91%E4%BB%AC%E5%85%A8%E9%83%BD%E8%A6%81%E4%BB%8E%E5%89%8D%E8%BE%88%E5%92%8C%E5%90%8C%E8%BE%88%E5%AD%A6%E4%B9%A0%E5%88%B0%E4%B8%80%E4%BA%9B%E4%B8%9C%E8%A5%BF%E3%80%82%E5%B0%B1%E8%BF%9E%E6%9C%80%E5%A4%A7%E7%9A%84%E5%A4%A9%E6%89%8D%EF%BC%8C%E5%A6%82%E6%9E%9C%E6%83%B3%E5%8D%95%E5%87%AD%E4%BB%96%E6%89%80%E7%89%B9%E6%9C%89%E7%9A%84%E5%86%85%E5%9C%A8%E8%87%AA%E6%88%91%E5%8E%BB%E5%AF%B9%E4%BB%98%E4%B8%80%E5%88%87%EF%BC%8C%E4%BB%96%E4%B9%9F%E5%86%B3%E4%B8%8D%E4%BC%9A%E6%9C%89%E5%A4%9A%E5%A4%A7%E6%88%90%E5%B0%B1%E3%80%82', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532519549, 1532519549),
+(486, 18210787405, NULL, 'www.tp5.com/index.php/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/data_id/2088/reply/1/id/43/r_phone/182****7406/r_title/我们全都要从前辈和同辈学习到一些东西。就连最大的天才，如果想单凭他所特有的内在自我去对付一切，他也决不会有多大成就。', '', '/index.php/index/index/view/data_id/2088/reply/1/id/43/r_phone/182****7406/r_title/%E6%88%91%E4%BB%AC%E5%85%A8%E9%83%BD%E8%A6%81%E4%BB%8E%E5%89%8D%E8%BE%88%E5%92%8C%E5%90%8C%E8%BE%88%E5%AD%A6%E4%B9%A0%E5%88%B0%E4%B8%80%E4%BA%9B%E4%B8%9C%E8%A5%BF%E3%80%82%E5%B0%B1%E8%BF%9E%E6%9C%80%E5%A4%A7%E7%9A%84%E5%A4%A9%E6%89%8D%EF%BC%8C%E5%A6%82%E6%9E%9C%E6%83%B3%E5%8D%95%E5%87%AD%E4%BB%96%E6%89%80%E7%89%B9%E6%9C%89%E7%9A%84%E5%86%85%E5%9C%A8%E8%87%AA%E6%88%91%E5%8E%BB%E5%AF%B9%E4%BB%98%E4%B8%80%E5%88%87%EF%BC%8C%E4%BB%96%E4%B9%9F%E5%86%B3%E4%B8%8D%E4%BC%9A%E6%9C%89%E5%A4%9A%E5%A4%A7%E6%88%90%E5%B0%B1%E3%80%82', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532519663, 1532519663),
+(487, 18210787405, NULL, 'www.tp5.com/index.php/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/data_id/2088/reply/1/id/43/r_phone/182****7406/r_title/我们全都要从前辈和同辈学习到一些东西。就连最大的天才，如果想单凭他所特有的内在自我去对付一切，他也决不会有多大成就。', '', '/index.php/index/index/view/data_id/2088/reply/1/id/43/r_phone/182****7406/r_title/%E6%88%91%E4%BB%AC%E5%85%A8%E9%83%BD%E8%A6%81%E4%BB%8E%E5%89%8D%E8%BE%88%E5%92%8C%E5%90%8C%E8%BE%88%E5%AD%A6%E4%B9%A0%E5%88%B0%E4%B8%80%E4%BA%9B%E4%B8%9C%E8%A5%BF%E3%80%82%E5%B0%B1%E8%BF%9E%E6%9C%80%E5%A4%A7%E7%9A%84%E5%A4%A9%E6%89%8D%EF%BC%8C%E5%A6%82%E6%9E%9C%E6%83%B3%E5%8D%95%E5%87%AD%E4%BB%96%E6%89%80%E7%89%B9%E6%9C%89%E7%9A%84%E5%86%85%E5%9C%A8%E8%87%AA%E6%88%91%E5%8E%BB%E5%AF%B9%E4%BB%98%E4%B8%80%E5%88%87%EF%BC%8C%E4%BB%96%E4%B9%9F%E5%86%B3%E4%B8%8D%E4%BC%9A%E6%9C%89%E5%A4%9A%E5%A4%A7%E6%88%90%E5%B0%B1%E3%80%82', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532519699, 1532519699),
+(488, 18210787405, NULL, 'www.tp5.com/index.php/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/data_id/2088/reply/1/id/43/r_phone/182****7406/r_title/我们全都要从前辈和同辈学习到一些东西。就连最大的天才，如果想单凭他所特有的内在自我去对付一切，他也决不会有多大成就。', '', '/index.php/index/index/view/data_id/2088/reply/1/id/43/r_phone/182****7406/r_title/%E6%88%91%E4%BB%AC%E5%85%A8%E9%83%BD%E8%A6%81%E4%BB%8E%E5%89%8D%E8%BE%88%E5%92%8C%E5%90%8C%E8%BE%88%E5%AD%A6%E4%B9%A0%E5%88%B0%E4%B8%80%E4%BA%9B%E4%B8%9C%E8%A5%BF%E3%80%82%E5%B0%B1%E8%BF%9E%E6%9C%80%E5%A4%A7%E7%9A%84%E5%A4%A9%E6%89%8D%EF%BC%8C%E5%A6%82%E6%9E%9C%E6%83%B3%E5%8D%95%E5%87%AD%E4%BB%96%E6%89%80%E7%89%B9%E6%9C%89%E7%9A%84%E5%86%85%E5%9C%A8%E8%87%AA%E6%88%91%E5%8E%BB%E5%AF%B9%E4%BB%98%E4%B8%80%E5%88%87%EF%BC%8C%E4%BB%96%E4%B9%9F%E5%86%B3%E4%B8%8D%E4%BC%9A%E6%9C%89%E5%A4%9A%E5%A4%A7%E6%88%90%E5%B0%B1%E3%80%82', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532520759, 1532520759),
+(489, 18210787405, NULL, 'www.tp5.com/index.php/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/data_id/2088/reply/1/id/43/r_phone/182****7406/r_title/我们全都要从前辈和同辈学习到一些东西。就连最大的天才，如果想单凭他所特有的内在自我去对付一切，他也决不会有多大成就。', '', '/index.php/index/index/view/data_id/2088/reply/1/id/43/r_phone/182****7406/r_title/%E6%88%91%E4%BB%AC%E5%85%A8%E9%83%BD%E8%A6%81%E4%BB%8E%E5%89%8D%E8%BE%88%E5%92%8C%E5%90%8C%E8%BE%88%E5%AD%A6%E4%B9%A0%E5%88%B0%E4%B8%80%E4%BA%9B%E4%B8%9C%E8%A5%BF%E3%80%82%E5%B0%B1%E8%BF%9E%E6%9C%80%E5%A4%A7%E7%9A%84%E5%A4%A9%E6%89%8D%EF%BC%8C%E5%A6%82%E6%9E%9C%E6%83%B3%E5%8D%95%E5%87%AD%E4%BB%96%E6%89%80%E7%89%B9%E6%9C%89%E7%9A%84%E5%86%85%E5%9C%A8%E8%87%AA%E6%88%91%E5%8E%BB%E5%AF%B9%E4%BB%98%E4%B8%80%E5%88%87%EF%BC%8C%E4%BB%96%E4%B9%9F%E5%86%B3%E4%B8%8D%E4%BC%9A%E6%9C%89%E5%A4%9A%E5%A4%A7%E6%88%90%E5%B0%B1%E3%80%82', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532520895, 1532520895),
+(490, 18210787405, NULL, 'www.tp5.com/index.php/index/index/view/data_id/2088/reply/1/id/43/r_phone/182****7406/r_title/%E6%88%91%E4%BB%AC%E5%85%A8%E9%83%BD%E8%A6%81%E4%BB%8E%E5%89%8D%E8%BE%88%E5%92%8C%E5%90%8C%E8%BE%88%E5%AD%A6%E4%B9%A0%E5%88%B0%E4%B8%80%E4%BA%9B%E4%B8%9C%E8%A5%BF%E3%80%82%E5%B0%B1%E8%BF%9E%E6%9C%80%E5%A4%A7%E7%9A%84%E5%A4%A9%E6%89%8D%EF%BC%8C%E5%A6%82%E6%9E%9C%E6%83%B3%E5%8D%95%E5%87%AD%E4%BB%96%E6%89%80%E7%89%B9%E6%9C%89%E7%9A%84%E5%86%85%E5%9C%A8%E8%87%AA%E6%88%91%E5%8E%BB%E5%AF%B9%E4%BB%98%E4%B8%80%E5%88%87%EF%BC%8C%E4%BB%96%E4%B9%9F%E5%86%B3%E4%B8%8D%E4%BC%9A%E6%9C%89%E5%A4%9A%E5%A4%A7%E6%88%90%E5%B0%B1%E3%80%82', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/data_id/2086/reply/1/id/43/r_phone/182****7406/r_title/学习知识要善于思考，思考，再思考', '', '/index.php/index/index/view/data_id/2086/reply/1/id/43/r_phone/182****7406/r_title/%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E8%A6%81%E5%96%84%E4%BA%8E%E6%80%9D%E8%80%83%EF%BC%8C%E6%80%9D%E8%80%83%EF%BC%8C%E5%86%8D%E6%80%9D%E8%80%83', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532521136, 1532521136),
+(491, 18210787405, NULL, 'www.tp5.com/index.php/index/index/view/data_id/2086/reply/1/id/43/r_phone/182****7406/r_title/%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E8%A6%81%E5%96%84%E4%BA%8E%E6%80%9D%E8%80%83%EF%BC%8C%E6%80%9D%E8%80%83%EF%BC%8C%E5%86%8D%E6%80%9D%E8%80%83', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index.php/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532521162, 1532521162),
+(492, 18210787405, NULL, 'www.tp5.com/index.php/index/index/view/data_id/2086/reply/1/id/43/r_phone/182****7406/r_title/%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E8%A6%81%E5%96%84%E4%BA%8E%E6%80%9D%E8%80%83%EF%BC%8C%E6%80%9D%E8%80%83%EF%BC%8C%E5%86%8D%E6%80%9D%E8%80%83', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index.php/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532521220, 1532521220),
+(493, 18210787405, NULL, 'www.tp5.com/index.php/index/index/view/data_id/2086/reply/1/id/43/r_phone/182****7406/r_title/%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E8%A6%81%E5%96%84%E4%BA%8E%E6%80%9D%E8%80%83%EF%BC%8C%E6%80%9D%E8%80%83%EF%BC%8C%E5%86%8D%E6%80%9D%E8%80%83', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index.php/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532521307, 1532521307),
+(494, 18210787405, NULL, 'www.tp5.com/index.php/index/index/view/data_id/2086/reply/1/id/43/r_phone/182****7406/r_title/%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E8%A6%81%E5%96%84%E4%BA%8E%E6%80%9D%E8%80%83%EF%BC%8C%E6%80%9D%E8%80%83%EF%BC%8C%E5%86%8D%E6%80%9D%E8%80%83', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index.php/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532521741, 1532521741),
+(495, 18210787405, NULL, 'www.tp5.com/index.php/index/index/view/data_id/2086/reply/1/id/43/r_phone/182****7406/r_title/%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E8%A6%81%E5%96%84%E4%BA%8E%E6%80%9D%E8%80%83%EF%BC%8C%E6%80%9D%E8%80%83%EF%BC%8C%E5%86%8D%E6%80%9D%E8%80%83', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index.php/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532521873, 1532521873),
+(496, 18210787405, NULL, 'www.tp5.com/index.php/index/index/view/data_id/2086/reply/1/id/43/r_phone/182****7406/r_title/%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E8%A6%81%E5%96%84%E4%BA%8E%E6%80%9D%E8%80%83%EF%BC%8C%E6%80%9D%E8%80%83%EF%BC%8C%E5%86%8D%E6%80%9D%E8%80%83', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index.php/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532522842, 1532522842),
+(497, 18210787405, NULL, 'www.tp5.com/index.php/index/index/view/data_id/2086/reply/1/id/43/r_phone/182****7406/r_title/%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E8%A6%81%E5%96%84%E4%BA%8E%E6%80%9D%E8%80%83%EF%BC%8C%E6%80%9D%E8%80%83%EF%BC%8C%E5%86%8D%E6%80%9D%E8%80%83', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index.php/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532523195, 1532523195),
+(498, 18210787405, NULL, 'www.tp5.com/index.php/index/index/view/data_id/2086/reply/1/id/43/r_phone/182****7406/r_title/%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E8%A6%81%E5%96%84%E4%BA%8E%E6%80%9D%E8%80%83%EF%BC%8C%E6%80%9D%E8%80%83%EF%BC%8C%E5%86%8D%E6%80%9D%E8%80%83', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index.php/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532523220, 1532523220),
+(499, 18210787405, NULL, 'www.tp5.com/index.php/index/index/view/data_id/2086/reply/1/id/43/r_phone/182****7406/r_title/%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E8%A6%81%E5%96%84%E4%BA%8E%E6%80%9D%E8%80%83%EF%BC%8C%E6%80%9D%E8%80%83%EF%BC%8C%E5%86%8D%E6%80%9D%E8%80%83', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index.php/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532523242, 1532523242),
+(500, 18210787405, NULL, 'www.tp5.com/index.php/index/index/view/data_id/2086/reply/1/id/43/r_phone/182****7406/r_title/%E5%AD%A6%E4%B9%A0%E7%9F%A5%E8%AF%86%E8%A6%81%E5%96%84%E4%BA%8E%E6%80%9D%E8%80%83%EF%BC%8C%E6%80%9D%E8%80%83%EF%BC%8C%E5%86%8D%E6%80%9D%E8%80%83', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index.php/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532523339, 1532523339),
+(501, 0, NULL, 'www.tp5.com/index/index/login/logout/1', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/login', '', '/index/index/login.html', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532523398, 1532523398);
+INSERT INTO `think_footprint` (`id`, `phone`, `lesson`, `referer`, `domain`, `browser`, `pathinfo`, `address`, `url`, `product`, `os`, `mobile`, `status`, `title`, `age`, `ip`, `delete_time`, `content`, `create_time`, `update_time`) VALUES
+(502, 18210787406, NULL, 'www.tp5.com/index/index/login.html', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/index', '', '/index/index/index.html', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532523411, 1532523411),
+(503, 18210787406, NULL, 'www.tp5.com/index/index/index.html', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532523416, 1532523416),
+(504, 0, NULL, 'www.tp5.com/index/index/login/logout/1', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/login', '', '/index/index/login.html', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532523434, 1532523434),
+(505, 18210787407, NULL, 'www.tp5.com/index/index/login.html', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/index', '', '/index/index/index.html', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532523446, 1532523446),
+(506, 18210787407, NULL, 'www.tp5.com/index/index/index.html', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532523451, 1532523451),
+(507, 18210787407, NULL, 'www.tp5.com/index/index/index.html', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532523636, 1532523636),
+(508, 18210787407, NULL, 'www.tp5.com/index/index/index.html', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532523649, 1532523649),
+(509, 18210787407, NULL, 'www.tp5.com/index/index/index.html', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532523709, 1532523709),
+(510, 18210787407, NULL, 'www.tp5.com/index/index/index.html', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532523756, 1532523756),
+(511, 18210787407, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/data_id/2158/reply/1/id/43/r_phone/182****7405/r_title/xuexi xuexi', '', '/index/index/view/data_id/2158/reply/1/id/43/r_phone/182****7405/r_title/xuexi%20xuexi', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532523829, 1532523829),
+(512, 18210787407, NULL, 'www.tp5.com/index/index/view/data_id/2158/reply/1/id/43/r_phone/182****7405/r_title/xuexi%20xuexi', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index.php/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532523869, 1532523869),
+(513, 18210787407, NULL, 'www.tp5.com/index/index/view/data_id/2158/reply/1/id/43/r_phone/182****7405/r_title/xuexi%20xuexi', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index.php/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532523906, 1532523906),
+(514, 18210787407, NULL, 'www.tp5.com/index/index/view/data_id/2158/reply/1/id/43/r_phone/182****7405/r_title/xuexi%20xuexi', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index.php/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532524454, 1532524454),
+(515, 18210787407, NULL, 'www.tp5.com/index/index/view/data_id/2158/reply/1/id/43/r_phone/182****7405/r_title/xuexi%20xuexi', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index.php/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532524537, 1532524537),
+(516, 18210787407, NULL, 'www.tp5.com/index/index/view/data_id/2158/reply/1/id/43/r_phone/182****7405/r_title/xuexi%20xuexi', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index.php/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532524563, 1532524563),
+(517, 18210787407, NULL, 'www.tp5.com/index/index/view/data_id/2158/reply/1/id/43/r_phone/182****7405/r_title/xuexi%20xuexi', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index.php/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532525196, 1532525196),
+(518, 18210787407, NULL, '', '', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index.php/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532525247, 1532525247),
+(519, 18210787407, NULL, 'www.tp5.com/index.php/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index.php/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532525755, 1532525755),
+(520, 18210787407, NULL, 'www.tp5.com/index.php/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index.php/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532525797, 1532525797),
+(521, 18210787407, NULL, 'www.tp5.com/index.php/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index.php/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532526007, 1532526007),
+(522, 18210787407, NULL, 'www.tp5.com/index.php/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index.php/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532526339, 1532526339),
+(523, 18210787407, NULL, 'www.tp5.com/index.php/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index.php/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532526372, 1532526372),
+(524, 18210787407, NULL, 'www.tp5.com/index.php/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index.php/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532526442, 1532526442),
+(525, 18210787407, NULL, 'www.tp5.com/index.php/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index.php/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532526550, 1532526550),
+(526, 18210787407, NULL, 'www.tp5.com/index.php/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532526849, 1532526849),
+(527, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532526852, 1532526852),
+(528, 18210787407, NULL, '', '', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532527449, 1532527449),
+(529, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532527454, 1532527454),
+(530, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532527557, 1532527557),
+(531, 18210787407, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index.php/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532527570, 1532527570),
+(532, 18210787407, NULL, '', '', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533002618, 1533002618),
+(533, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/member/invite', '', '/index/member/invite', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533002749, 1533002749),
+(534, 18210787407, NULL, '', '', 'Chrome(65.0.3325.181)', 'index/index/register/invite/395', '', '/index/index/register/invite/395', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533002759, 1533002759),
+(535, 18210787407, NULL, 'www.tp5.com/index/index/register/invite/395', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533002887, 1533002887),
+(536, 18210787407, NULL, '', '', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533004897, 1533004897),
+(537, 18210787407, NULL, '', '', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533005096, 1533005096),
+(538, 18210787407, NULL, '', '', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533342823, 1533342823),
+(539, 18210787407, NULL, '', '', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533342935, 1533342935),
+(540, 18210787407, NULL, '', '', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533343138, 1533343138),
+(541, 18210787407, NULL, '', '', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533343154, 1533343154),
+(542, 18210787407, NULL, '', '', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533343220, 1533343220),
+(543, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/42', '', '/index/index/view/id/42', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533343396, 1533343396),
+(544, 18210787407, NULL, 'www.tp5.com/index/index/view/id/42', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533343499, 1533343499),
+(545, 18210787407, NULL, 'www.tp5.com/index/index/view/id/42', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533343535, 1533343535),
+(546, 18210787407, NULL, 'www.tp5.com/index/index/view/id/42', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533343671, 1533343671),
+(547, 18210787407, NULL, 'www.tp5.com/index/index/view/id/42', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533343786, 1533343786),
+(548, 18210787407, NULL, 'www.tp5.com/index/index/view/id/42', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533343888, 1533343888),
+(549, 18210787407, NULL, 'www.tp5.com/index/index/view/id/42', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533344118, 1533344118),
+(550, 18210787407, NULL, 'www.tp5.com/index/index/view/id/42', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533344146, 1533344146),
+(551, 18210787407, NULL, 'www.tp5.com/index/index/view/id/42', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533344212, 1533344212),
+(552, 18210787407, NULL, 'www.tp5.com/index/index/view/id/42', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533344354, 1533344354),
+(553, 18210787407, NULL, 'www.tp5.com/index/index/view/id/42', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533344422, 1533344422),
+(554, 18210787407, NULL, 'www.tp5.com/index/index/view/id/42', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533344445, 1533344445),
+(555, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533345413, 1533345413),
+(556, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/374', '', '/index/index/view/id/374', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533345445, 1533345445),
+(557, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533345455, 1533345455),
+(558, 18210787407, NULL, '', '', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533463073, 1533463073),
+(559, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/374', '', '/index/index/view/id/374', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533463078, 1533463078),
+(560, 18210787407, NULL, 'www.tp5.com/index/index/view/id/374', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533463096, 1533463096),
+(561, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/38', '', '/index/index/view/id/38', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533463100, 1533463100),
+(562, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/38', '', '/index/index/view/id/38', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533463285, 1533463285),
+(563, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/38', '', '/index/index/view/id/38', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533463351, 1533463351),
+(564, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/38', '', '/index/index/view/id/38', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533463375, 1533463375),
+(565, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/38', '', '/index/index/view/id/38', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533463401, 1533463401),
+(566, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/38', '', '/index/index/view/id/38', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533463451, 1533463451),
+(567, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/38', '', '/index/index/view/id/38', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533463456, 1533463456),
+(568, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/38', '', '/index/index/view/id/38', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533463483, 1533463483),
+(569, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/38', '', '/index/index/view/id/38', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533463579, 1533463579),
+(570, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/38', '', '/index/index/view/id/38', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533463683, 1533463683),
+(571, 18210787407, NULL, 'www.tp5.com/index/index/view/id/38', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533463764, 1533463764),
+(572, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533463767, 1533463767),
+(573, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533464029, 1533464029),
+(574, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533464179, 1533464179),
+(575, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533464197, 1533464197),
+(576, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533464264, 1533464264),
+(577, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533464295, 1533464295),
+(578, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533464369, 1533464369),
+(579, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533464415, 1533464415),
+(580, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533464459, 1533464459),
+(581, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533464499, 1533464499),
+(582, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533464582, 1533464582),
+(583, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533464633, 1533464633),
+(584, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533464653, 1533464653),
+(585, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533464668, 1533464668),
+(586, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533464685, 1533464685),
+(587, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533464726, 1533464726),
+(588, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533464808, 1533464808),
+(589, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533464870, 1533464870),
+(590, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533464888, 1533464888),
+(591, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533464912, 1533464912),
+(592, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533464926, 1533464926),
+(593, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533464958, 1533464958),
+(594, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533464970, 1533464970),
+(595, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533465036, 1533465036),
+(596, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533465240, 1533465240),
+(597, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533465258, 1533465258),
+(598, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533465336, 1533465336),
+(599, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533465365, 1533465365),
+(600, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533465476, 1533465476),
+(601, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533465490, 1533465490),
+(602, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533465556, 1533465556),
+(603, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533465625, 1533465625),
+(604, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533465636, 1533465636),
+(605, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533465673, 1533465673),
+(606, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533465684, 1533465684),
+(607, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533465742, 1533465742),
+(608, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533465761, 1533465761),
+(609, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533465811, 1533465811),
+(610, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533465868, 1533465868),
+(611, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533465886, 1533465886),
+(612, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533466126, 1533466126),
+(613, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533466142, 1533466142),
+(614, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533466155, 1533466155),
+(615, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533466212, 1533466212),
+(616, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533466275, 1533466275),
+(617, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533466301, 1533466301),
+(618, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533466327, 1533466327),
+(619, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533466352, 1533466352),
+(620, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533466373, 1533466373),
+(621, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533466436, 1533466436),
+(622, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533466487, 1533466487),
+(623, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533466517, 1533466517),
+(624, 18210787407, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533466556, 1533466556),
+(625, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/38', '', '/index/index/view/id/38', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533466559, 1533466559),
+(626, 18210787407, NULL, 'www.tp5.com/index/index/view/id/38', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533466568, 1533466568),
+(627, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533466572, 1533466572),
+(628, 18210787407, NULL, 'www.tp5.com/index/index/view/id/38', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533466576, 1533466576),
+(629, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/50', '', '/index/index/view/id/50', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533466582, 1533466582),
+(630, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/50', '', '/index/index/view/id/50', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533466888, 1533466888),
+(631, 18210787407, NULL, 'www.tp5.com/index/index/view/id/50', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533466938, 1533466938),
+(632, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533466944, 1533466944),
+(633, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533466983, 1533466983),
+(634, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533467037, 1533467037),
+(635, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533467054, 1533467054),
+(636, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533467066, 1533467066),
+(637, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533467140, 1533467140),
+(638, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533467173, 1533467173),
+(639, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533467191, 1533467191),
+(640, 18210787407, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533467226, 1533467226),
+(641, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533467337, 1533467337),
+(642, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533467357, 1533467357),
+(643, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533467383, 1533467383),
+(644, 18210787407, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533467658, 1533467658),
+(645, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533468187, 1533468187),
+(646, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533468365, 1533468365),
+(647, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533468457, 1533468457),
+(648, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533468479, 1533468479),
+(649, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533468547, 1533468547),
+(650, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533468649, 1533468649),
+(651, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533468807, 1533468807),
+(652, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533468851, 1533468851),
+(653, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533468870, 1533468870),
+(654, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533468878, 1533468878),
+(655, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533468891, 1533468891),
+(656, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533468908, 1533468908),
+(657, 18210787407, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533468931, 1533468931),
+(658, 18210787407, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533468937, 1533468937),
+(659, 18210787407, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533468963, 1533468963),
+(660, 18210787407, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533468995, 1533468995),
+(661, 18210787407, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533468998, 1533468998),
+(662, 18210787407, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533469001, 1533469001),
+(663, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533469011, 1533469011),
+(664, 18210787407, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533469032, 1533469032),
+(665, 18210787407, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533469050, 1533469050),
+(666, 18210787407, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533469053, 1533469053),
+(667, 18210787407, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533469092, 1533469092),
+(668, 18210787407, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533469314, 1533469314),
+(669, 18210787407, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533469368, 1533469368),
+(670, 18210787407, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533469397, 1533469397),
+(671, 18210787407, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533469446, 1533469446),
+(672, 18210787407, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533469468, 1533469468),
+(673, 18210787407, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533469471, 1533469471),
+(674, 18210787407, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533469516, 1533469516),
+(675, 18210787407, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533469518, 1533469518),
+(676, 18210787407, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533469555, 1533469555),
+(677, 18210787407, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533469655, 1533469655),
+(678, 18210787407, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533469658, 1533469658),
+(679, 18210787407, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533469660, 1533469660),
+(680, 18210787407, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533469663, 1533469663),
+(681, 18210787407, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533469666, 1533469666),
+(682, 18210787407, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533469689, 1533469689),
+(683, 18210787407, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533469693, 1533469693),
+(684, 18210787407, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533469707, 1533469707),
+(685, 18210787407, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533469763, 1533469763),
+(686, 18210787407, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533469823, 1533469823),
+(687, 18210787407, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533469878, 1533469878),
+(688, 18210787407, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533469891, 1533469891),
+(689, 18210787407, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533469909, 1533469909),
+(690, 18210787407, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533469943, 1533469943),
+(691, 18210787407, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533470329, 1533470329),
+(692, 18210787407, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533470332, 1533470332),
+(693, 18210787407, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533470336, 1533470336),
+(694, 18210787407, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533470938, 1533470938),
+(695, 18210787407, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533470999, 1533470999),
+(696, 18210787407, NULL, '', '', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533471046, 1533471046),
+(697, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533471060, 1533471060),
+(698, 18210787407, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533471100, 1533471100),
+(699, 18210787407, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533471704, 1533471704),
+(700, 18210787407, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533471714, 1533471714),
+(701, 18210787407, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533471718, 1533471718),
+(702, 18210787407, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533471749, 1533471749),
+(703, 18210787407, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533471776, 1533471776),
+(704, 18210787407, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533471791, 1533471791),
+(705, 18210787407, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533471864, 1533471864),
+(706, 18210787407, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index.php/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533471948, 1533471948),
+(707, 18210787407, NULL, 'www.tp5.com/index.php/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533471957, 1533471957),
+(708, 18210787407, NULL, 'www.tp5.com/index.php/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533471994, 1533471994),
+(709, 18210787407, NULL, 'www.tp5.com/index.php/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533471999, 1533471999),
+(710, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533472168, 1533472168),
+(711, 18210787407, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533472179, 1533472179),
+(712, 18210787407, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/bbs/show', '', '/index/bbs/show', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533472220, 1533472220),
+(713, 18210787407, NULL, 'www.tp5.com/index/bbs/show', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index.php/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533472228, 1533472228),
+(714, 18210787407, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533472239, 1533472239),
+(715, 18210787407, NULL, 'www.tp5.com/index/bbs/show', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/43', '', '/index.php/index/index/view/id/43', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533472265, 1533472265),
+(716, 18210787407, NULL, 'www.tp5.com/index.php/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/bbs/show', '', '/index/bbs/show', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533472271, 1533472271),
+(717, 18210787407, NULL, 'www.tp5.com/index/index/view/id/43', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533472298, 1533472298),
+(718, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/54', '', '/index/index/view/id/54', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533472320, 1533472320),
+(719, 18210787407, NULL, 'www.tp5.com/index/index/view/id/54', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533472332, 1533472332),
+(720, 18210787407, NULL, 'www.tp5.com/index/index/view/id/54', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533472490, 1533472490),
+(721, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/index', '', '/index.php/index/index/index', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533472499, 1533472499),
+(722, 18210787407, NULL, 'www.tp5.com/index.php/index/index/index', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/index', '', '/index.php/index/index/index', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533472520, 1533472520),
+(723, 18210787407, NULL, 'www.tp5.com/index.php/index/index/index', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/index', '', '/index.php/index/index/index', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533472629, 1533472629),
+(724, 18210787407, NULL, 'www.tp5.com/index.php/index/index/index', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/index', '', '/index.php/index/index/index', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533472657, 1533472657),
+(725, 18210787407, NULL, 'www.tp5.com/index.php/index/index/index', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/54', '', '/index.php/index/index/view/id/54', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533472667, 1533472667),
+(726, 18210787407, NULL, 'www.tp5.com/index.php/index/index/index', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/index', '', '/index.php/index/index/index', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533472671, 1533472671),
+(727, 18210787407, NULL, 'www.tp5.com/index.php/index/index/index', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/index', '', '/index.php/index/index/index', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533472682, 1533472682);
+INSERT INTO `think_footprint` (`id`, `phone`, `lesson`, `referer`, `domain`, `browser`, `pathinfo`, `address`, `url`, `product`, `os`, `mobile`, `status`, `title`, `age`, `ip`, `delete_time`, `content`, `create_time`, `update_time`) VALUES
+(728, 18210787407, NULL, 'www.tp5.com/index/bbs/show', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533472967, 1533472967),
+(729, 18210787407, NULL, 'www.tp5.com/index.php/index/index/index', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533473343, 1533473343),
+(730, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', '', '', '/index.php/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533473358, 1533473358),
+(731, 18210787407, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533473484, 1533473484),
+(732, 18210787407, NULL, '', '', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533526491, 1533526491),
+(733, 18210787407, NULL, '', '', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533526598, 1533526598),
+(734, 18210787407, NULL, '', '', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533529157, 1533529157),
+(735, 18210787407, NULL, '', '', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533529269, 1533529269),
+(736, 18210787407, NULL, '', '', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533529311, 1533529311),
+(737, 18210787407, NULL, '', '', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533529347, 1533529347),
+(738, 18210787407, NULL, '', '', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533529799, 1533529799),
+(739, 18210787407, NULL, '', '', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533529946, 1533529946),
+(740, 18210787407, NULL, '', '', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533529959, 1533529959),
+(741, 18210787407, NULL, '', '', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533529974, 1533529974),
+(742, 18210787407, NULL, '', '', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533529998, 1533529998),
+(743, 18210787407, NULL, '', '', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533530010, 1533530010),
+(744, 18210787407, NULL, '', '', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533530022, 1533530022),
+(745, 18210787407, NULL, '', '', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533530905, 1533530905),
+(746, 18210787407, NULL, '', '', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533530986, 1533530986),
+(747, 18210787407, NULL, '', '', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533531116, 1533531116),
+(748, 18210787407, NULL, '', '', 'Chrome(65.0.3325.181)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1533531598, 1533531598);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `think_ipinfo`
+--
 
 CREATE TABLE IF NOT EXISTS `think_ipinfo` (
   `id` int(8) unsigned NOT NULL AUTO_INCREMENT,
@@ -151,6 +1155,12 @@ CREATE TABLE IF NOT EXISTS `think_ipinfo` (
   UNIQUE KEY `ip` (`ip`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=gbk AUTO_INCREMENT=2073 ;
 
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `think_likes`
+--
+
 CREATE TABLE IF NOT EXISTS `think_likes` (
   `id` int(8) unsigned NOT NULL AUTO_INCREMENT,
   `phone` bigint(11) DEFAULT NULL,
@@ -163,7 +1173,125 @@ CREATE TABLE IF NOT EXISTS `think_likes` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `phone` (`phone`),
   KEY `phone_2` (`phone`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=400 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=107 ;
+
+--
+-- 转存表中的数据 `think_likes`
+--
+
+INSERT INTO `think_likes` (`id`, `phone`, `user_id`, `data_id`, `delete_time`, `ip`, `create_time`, `update_time`) VALUES
+(1, NULL, 393, 2093, 1532415493, '127.0.0.1', 1532414970, 1532415493),
+(2, NULL, 393, 2093, 1532415493, '127.0.0.1', 1532415004, 1532415493),
+(3, NULL, 393, 2093, 1532415493, '127.0.0.1', 1532415041, 1532415493),
+(4, NULL, 393, 2090, 1532427960, '127.0.0.1', 1532415055, 1532427960),
+(5, NULL, 393, 2093, 1532415493, '127.0.0.1', 1532415396, 1532415493),
+(6, NULL, 393, 2092, 1532416409, '127.0.0.1', 1532415400, 1532416409),
+(7, NULL, 393, 2091, 1532416408, '127.0.0.1', 1532415416, 1532416408),
+(8, NULL, 393, 2093, 1532415493, '127.0.0.1', 1532415455, 1532415493),
+(9, NULL, 393, 2092, 1532416409, '127.0.0.1', 1532415456, 1532416409),
+(10, NULL, 393, 2091, 1532416408, '127.0.0.1', 1532415458, 1532416408),
+(11, NULL, 393, 2090, 1532427960, '127.0.0.1', 1532415459, 1532427960),
+(12, NULL, 393, 2089, 1532415490, '127.0.0.1', 1532415460, 1532415490),
+(13, NULL, 393, 2091, 1532416408, '127.0.0.1', 1532415517, 1532416408),
+(14, NULL, 393, 2090, 1532427960, '127.0.0.1', 1532415518, 1532427960),
+(15, NULL, 394, 2093, 1532423794, '127.0.0.1', 1532415849, 1532423794),
+(16, NULL, 394, 2092, 1532423853, '127.0.0.1', 1532415923, 1532423853),
+(17, NULL, 394, 2091, NULL, '127.0.0.1', 1532415924, 1532415924),
+(18, NULL, 394, 2090, 1532423823, '127.0.0.1', 1532415925, 1532423823),
+(19, NULL, 394, 2087, 1532423813, '127.0.0.1', 1532415936, 1532423813),
+(20, NULL, 393, 2087, 1532489214, '127.0.0.1', 1532416411, 1532489214),
+(21, NULL, 394, 2092, 1532423853, '127.0.0.1', 1532416474, 1532423853),
+(22, NULL, 394, 2088, 1532423813, '127.0.0.1', 1532418161, 1532423813),
+(23, NULL, 394, 2086, 1532422245, '127.0.0.1', 1532418162, 1532422245),
+(24, NULL, 393, 2088, 1532427962, '127.0.0.1', 1532418180, 1532427962),
+(25, NULL, 393, 2090, 1532427960, '127.0.0.1', 1532418198, 1532427960),
+(26, NULL, 394, 2100, 1532423789, '127.0.0.1', 1532421124, 1532423789),
+(27, NULL, 394, 2100, 1532423789, '127.0.0.1', 1532421138, 1532423789),
+(28, NULL, 394, 2093, 1532423794, '127.0.0.1', 1532422238, 1532423794),
+(29, NULL, 394, 2086, NULL, '127.0.0.1', 1532422246, 1532422246),
+(30, NULL, 394, 2099, 1532423790, '127.0.0.1', 1532422254, 1532423790),
+(31, NULL, 394, 2098, 1532423791, '127.0.0.1', 1532422256, 1532423791),
+(32, NULL, 394, 2097, 1532423792, '127.0.0.1', 1532422289, 1532423792),
+(33, NULL, 394, 2097, 1532423792, '127.0.0.1', 1532422324, 1532423792),
+(34, NULL, 393, 2097, 1532424098, '127.0.0.1', 1532422347, 1532424098),
+(35, NULL, 393, 2099, 1532428057, '127.0.0.1', 1532422353, 1532428057),
+(36, NULL, 394, 2100, 1532423789, '127.0.0.1', 1532423371, 1532423789),
+(37, NULL, 394, 2099, 1532423790, '127.0.0.1', 1532423416, 1532423790),
+(38, NULL, 394, 2098, 1532423791, '127.0.0.1', 1532423762, 1532423791),
+(39, NULL, 394, 2099, 1532423790, '127.0.0.1', 1532423771, 1532423790),
+(40, NULL, 394, 2098, 1532423791, '127.0.0.1', 1532423775, 1532423791),
+(41, NULL, 394, 2093, 1532423794, '127.0.0.1', 1532423777, 1532423794),
+(42, NULL, 394, 2087, NULL, '127.0.0.1', 1532424137, 1532424137),
+(43, NULL, 394, 2088, NULL, '127.0.0.1', 1532424146, 1532424146),
+(44, NULL, 394, 2099, NULL, '127.0.0.1', 1532424151, 1532424151),
+(45, NULL, 394, 2090, NULL, '127.0.0.1', 1532424156, 1532424156),
+(46, NULL, 395, 2099, NULL, '127.0.0.1', 1532424322, 1532424322),
+(47, NULL, 395, 2100, NULL, '127.0.0.1', 1532424331, 1532424331),
+(48, NULL, 395, 2101, NULL, '127.0.0.1', 1532424332, 1532424332),
+(49, NULL, 395, 2098, NULL, '127.0.0.1', 1532424334, 1532424334),
+(50, NULL, 395, 2097, NULL, '127.0.0.1', 1532424334, 1532424334),
+(51, NULL, 395, 2093, NULL, '127.0.0.1', 1532424337, 1532424337),
+(52, NULL, 395, 2092, NULL, '127.0.0.1', 1532424338, 1532424338),
+(53, NULL, 395, 2090, NULL, '127.0.0.1', 1532424350, 1532424350),
+(54, NULL, 395, 2087, NULL, '127.0.0.1', 1532424351, 1532424351),
+(55, NULL, 395, 2086, 1533466451, '127.0.0.1', 1532424353, 1533466451),
+(56, NULL, 395, 2088, NULL, '127.0.0.1', 1532424354, 1532424354),
+(57, NULL, 393, 2087, 1532489214, '127.0.0.1', 1532427212, 1532489214),
+(58, NULL, 393, 2101, 1532427219, '127.0.0.1', 1532427217, 1532427219),
+(59, NULL, 393, 2101, NULL, '127.0.0.1', 1532427220, 1532427220),
+(60, NULL, 393, 2113, 1532427375, '127.0.0.1', 1532427235, 1532427375),
+(61, NULL, 393, 2099, 1532428057, '127.0.0.1', 1532427369, 1532428057),
+(62, NULL, 393, 2113, NULL, '127.0.0.1', 1532427377, 1532427377),
+(63, NULL, 393, 2092, NULL, '127.0.0.1', 1532427805, 1532427805),
+(64, NULL, 393, 2115, NULL, '127.0.0.1', 1532427820, 1532427820),
+(65, NULL, 393, 2116, NULL, '127.0.0.1', 1532427858, 1532427858),
+(66, NULL, 393, 2117, 1532428179, '127.0.0.1', 1532427931, 1532428179),
+(67, NULL, 393, 2117, 1532428179, '127.0.0.1', 1532427935, 1532428179),
+(68, NULL, 393, 2099, 1532428057, '127.0.0.1', 1532428056, 1532428057),
+(69, NULL, 393, 2087, 1532489214, '127.0.0.1', 1532428078, 1532489214),
+(70, NULL, 393, 2117, 1532428179, '127.0.0.1', 1532428130, 1532428179),
+(71, NULL, 393, 2117, 1532428179, '127.0.0.1', 1532428131, 1532428179),
+(72, NULL, 393, 2118, 1532428203, '127.0.0.1', 1532428175, 1532428203),
+(73, NULL, 393, 2117, NULL, '127.0.0.1', 1532428180, 1532428180),
+(74, NULL, 393, 2118, NULL, '127.0.0.1', 1532428204, 1532428204),
+(75, NULL, 393, 2090, NULL, '127.0.0.1', 1532480373, 1532480373),
+(76, NULL, 393, 2088, NULL, '127.0.0.1', 1532489065, 1532489065),
+(77, NULL, 393, 2087, 1532489214, '127.0.0.1', 1532489066, 1532489214),
+(78, NULL, 393, 2086, NULL, '127.0.0.1', 1532489068, 1532489068),
+(79, NULL, 393, 2160, NULL, '127.0.0.1', 1532523381, 1532523381),
+(80, NULL, 393, 2159, NULL, '127.0.0.1', 1532523388, 1532523388),
+(81, NULL, 393, 2158, NULL, '127.0.0.1', 1532523389, 1532523389),
+(82, NULL, 393, 2157, NULL, '127.0.0.1', 1532523391, 1532523391),
+(83, NULL, 393, 2161, NULL, '127.0.0.1', 1532523393, 1532523393),
+(84, NULL, 394, 2160, NULL, '127.0.0.1', 1532523424, 1532523424),
+(85, NULL, 394, 2161, NULL, '127.0.0.1', 1532523425, 1532523425),
+(86, NULL, 394, 2159, NULL, '127.0.0.1', 1532523426, 1532523426),
+(87, NULL, 394, 2158, NULL, '127.0.0.1', 1532523427, 1532523427),
+(88, NULL, 394, 2157, NULL, '127.0.0.1', 1532523428, 1532523428),
+(89, NULL, 395, 2160, 1533466447, '127.0.0.1', 1532523457, 1533466447),
+(90, NULL, 395, 2159, 1532523902, '127.0.0.1', 1532523646, 1532523902),
+(91, NULL, 395, 2158, 1532523903, '127.0.0.1', 1532523647, 1532523903),
+(92, NULL, 395, 2159, NULL, '127.0.0.1', 1533344143, 1533344143),
+(93, NULL, 395, 2157, NULL, '127.0.0.1', 1533344442, 1533344442),
+(94, NULL, 395, 2166, NULL, '127.0.0.1', 1533464037, 1533464037),
+(95, NULL, 395, 2165, NULL, '127.0.0.1', 1533464042, 1533464042),
+(96, NULL, 395, 2146, NULL, '127.0.0.1', 1533465502, 1533465502),
+(97, NULL, 395, 2161, NULL, '127.0.0.1', 1533465804, 1533465804),
+(98, NULL, 395, 2160, 1533466447, '127.0.0.1', 1533466441, 1533466447),
+(99, NULL, 395, 2160, 1533466447, '127.0.0.1', 1533466445, 1533466447),
+(100, NULL, 395, 2160, NULL, '127.0.0.1', 1533466448, 1533466448),
+(101, NULL, 395, 2086, NULL, '127.0.0.1', 1533466452, 1533466452),
+(102, NULL, 395, 2164, NULL, '127.0.0.1', 1533466997, 1533466997),
+(103, NULL, 395, 2168, 1533471713, '127.0.0.1', 1533471011, 1533471713),
+(104, NULL, 395, 2172, 1533472679, '127.0.0.1', 1533472678, 1533472679),
+(105, NULL, 395, 2171, NULL, '127.0.0.1', 1533472680, 1533472680),
+(106, NULL, 395, 2170, NULL, '127.0.0.1', 1533472681, 1533472681);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `think_money`
+--
 
 CREATE TABLE IF NOT EXISTS `think_money` (
   `id` int(8) unsigned NOT NULL AUTO_INCREMENT,
@@ -183,13 +1311,25 @@ CREATE TABLE IF NOT EXISTS `think_money` (
   `create_time` int(11) NOT NULL,
   `update_time` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=gbk AUTO_INCREMENT=335 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=gbk AUTO_INCREMENT=337 ;
+
+--
+-- 转存表中的数据 `think_money`
+--
 
 INSERT INTO `think_money` (`id`, `phone`, `lesson`, `sort`, `address`, `product`, `label`, `money`, `status`, `title`, `age`, `ip`, `delete_time`, `content`, `create_time`, `update_time`) VALUES
 (331, 15966982315, NULL, NULL, NULL, NULL, NULL, '10', 0, NULL, 30, NULL, NULL, '邀请了会员182****7405注册奖励', 1532316134, 1532316134),
 (332, 18210787405, NULL, NULL, NULL, NULL, NULL, '10', 0, NULL, 30, NULL, NULL, '新注册获得奖励', 1532316134, 1532316134),
 (333, 15966982315, NULL, NULL, NULL, NULL, NULL, '10', 0, NULL, 30, NULL, NULL, '邀请了会员182****7406注册奖励', 1532316699, 1532316699),
-(334, 18210787406, NULL, NULL, NULL, NULL, NULL, '10', 0, NULL, 30, NULL, NULL, '新注册获得奖励', 1532316699, 1532316699);
+(334, 18210787406, NULL, NULL, NULL, NULL, NULL, '10', 0, NULL, 30, NULL, NULL, '新注册获得奖励', 1532316699, 1532316699),
+(335, 15966982315, NULL, NULL, NULL, NULL, NULL, '10', 0, NULL, 30, NULL, NULL, '邀请了会员182****7407注册奖励', 1532424196, 1532424196),
+(336, 18210787407, NULL, NULL, NULL, NULL, NULL, '10', 0, NULL, 30, NULL, NULL, '新注册获得奖励', 1532424196, 1532424196);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `think_order`
+--
 
 CREATE TABLE IF NOT EXISTS `think_order` (
   `id` int(8) unsigned NOT NULL AUTO_INCREMENT,
@@ -209,12 +1349,35 @@ CREATE TABLE IF NOT EXISTS `think_order` (
   `subject` text NOT NULL COMMENT '商品名称',
   `out_trade_no` text NOT NULL COMMENT '唯一订单号',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=721 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=734 ;
+
+--
+-- 转存表中的数据 `think_order`
+--
 
 INSERT INTO `think_order` (`id`, `name`, `status`, `phone`, `age`, `delete_time`, `rand`, `ip`, `create_time`, `update_time`, `buyer_email`, `buyer_id`, `total_fee`, `body`, `subject`, `out_trade_no`) VALUES
 (718, '127.0.0.1', 0, 15555553306, 20, NULL, 1, '127.0.0.1', 1532161353, 1532161353, '', 0, '0.00', '135', '签到', ''),
 (719, '127.0.0.1', 0, 18210787405, 20, NULL, 1, '127.0.0.1', 1532316136, 1532316136, '', 0, '0.00', '135', '签到', ''),
-(720, '127.0.0.1', 0, 18210787406, 20, NULL, 1, '127.0.0.1', 1532316702, 1532316702, '', 0, '0.00', '135', '签到', '');
+(720, '127.0.0.1', 0, 18210787406, 20, NULL, 1, '127.0.0.1', 1532316702, 1532316702, '', 0, '0.00', '135', '签到', ''),
+(721, '127.0.0.1', 0, 18210787406, 20, NULL, 2, '127.0.0.1', 1532394190, 1532394190, '', 0, '0.00', '135', '签到', ''),
+(722, '127.0.0.1', 0, 18210787405, 20, NULL, 2, '127.0.0.1', 1532408591, 1532408591, '', 0, '0.00', '135', '签到', ''),
+(723, '127.0.0.1', 0, 18210787407, 20, NULL, 1, '127.0.0.1', 1532424201, 1532424201, '', 0, '0.00', '135', '签到', ''),
+(724, '127.0.0.1', 0, 18210787405, 20, NULL, 3, '127.0.0.1', 1532479537, 1532479537, '', 0, '0.00', '135', '签到', ''),
+(725, '127.0.0.1', 0, 18210787405, 20, NULL, NULL, '127.0.0.1', 1532479537, 1532479537, '18210787405', 18210787405, '0.00', '105', '增加VIP会员：1天', '135001'),
+(726, '127.0.0.1', 0, 18210787406, 20, NULL, 3, '127.0.0.1', 1532523414, 1532523414, '', 0, '0.00', '135', '签到', ''),
+(727, '127.0.0.1', 0, 18210787406, 20, NULL, NULL, '127.0.0.1', 1532523414, 1532523414, '18210787406', 18210787406, '0.00', '105', '增加VIP会员：1天', '135001'),
+(728, '127.0.0.1', 0, 18210787407, 20, NULL, 2, '127.0.0.1', 1532523448, 1532523448, '', 0, '0.00', '135', '签到', ''),
+(729, '127.0.0.1', 0, 18210787407, 20, NULL, 1, '127.0.0.1', 1533002623, 1533002623, '', 0, '0.00', '135', '签到', ''),
+(730, '127.0.0.1', 0, 18210787407, 20, NULL, 1, '127.0.0.1', 1533342827, 1533342827, '', 0, '0.00', '135', '签到', ''),
+(731, '127.0.0.1', 0, 18210787407, 20, NULL, 2, '127.0.0.1', 1533463077, 1533463077, '', 0, '0.00', '135', '签到', ''),
+(732, '127.0.0.1', 0, 18210787407, 20, NULL, 3, '127.0.0.1', 1533526497, 1533526497, '', 0, '0.00', '135', '签到', ''),
+(733, '127.0.0.1', 0, 18210787407, 20, NULL, NULL, '127.0.0.1', 1533526498, 1533526498, '18210787407', 18210787407, '0.00', '105', '增加VIP会员：1天', '135001');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `think_shop`
+--
 
 CREATE TABLE IF NOT EXISTS `think_shop` (
   `id` int(8) unsigned NOT NULL AUTO_INCREMENT,
@@ -235,6 +1398,10 @@ CREATE TABLE IF NOT EXISTS `think_shop` (
   `update_time` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=gbk AUTO_INCREMENT=376 ;
+
+--
+-- 转存表中的数据 `think_shop`
+--
 
 INSERT INTO `think_shop` (`id`, `name`, `lesson`, `sort`, `address`, `product`, `label`, `price`, `status`, `title`, `age`, `page_view`, `delete_time`, `content`, `create_time`, `update_time`) VALUES
 (38, '117.136.37.167', '', 1, '', '', '', '0.00', 0, '1课 tp5入门 第一课 课程概述 案例演示', 30, 924, NULL, '', 1510799689, 1532244537),
@@ -501,7 +1668,7 @@ INSERT INTO `think_shop` (`id`, `name`, `lesson`, `sort`, `address`, `product`, 
 (297, '183.48.246.9', '', 240, '', '', '每节课前10名会员观看直接免费 功能思路', '0.10', 0, '240课 每节课前10名会员观看直接免费 功能 思路', 30, 31, NULL, '', 1520819400, 1531816512),
 (298, '183.48.246.9', '', 241, '', '', '每节课前10名会员观看直接免费 功能 核心代码common', '0.10', 0, '241课 每节课前10名会员观看直接免费 功能 核心代码common', 30, 45, NULL, '', 1520819424, 1531816654),
 (299, '112.14.72.196', '', 1008610086, '', '', 'U盘thinkphp5视频教程包邮', '0.10', 0, 'U盘版thinkphp5视频教程[包邮]', 30, 89, NULL, '', 1520844156, 1532062182),
-(300, '66.249.69.46', '', 1008610086, '', '', 'google', '0.10', 0, 'google', 30, 2, NULL, '', 1521021570, 1524086711),
+(300, '127.0.0.1', '', 1008610086, '3', '', 'google', '0.10', 0, 'google', 30, 2, NULL, '', 1521021570, 1532428924),
 (301, '157.55.39.41', '', 110, '', '', 'AJAX URL 动态变量 传值  ', '0.10', 0, '110课 AJAX页面URL动态变量传值 入门', 30, 23, NULL, '', 1521084749, 1529638463),
 (302, '66.249.79.110', '', 251, '', '', '现金红包 Ajax  领取红包无刷新反馈', '0.10', 0, '251课 现金红包 Ajax配合领取红包无刷新反馈', 30, 24, NULL, '', 1521094756, 1528727294),
 (303, '207.46.13.214', '', 252, '', '', '现金红包  演示', '0.10', 0, '252课 现金红包 基本完善演示', 30, 36, NULL, '', 1521094910, 1528680018),
@@ -528,7 +1695,7 @@ INSERT INTO `think_shop` (`id`, `name`, `lesson`, `sort`, `address`, `product`, 
 (356, '180.160.2.190', '', 306, '', '', '抢购 秒杀 ', '0.10', 0, '306课 Tp5 简易抢购秒杀功能实现', 30, 2, NULL, '', 1527579671, 1530708680),
 (354, '47.98.62.203', '', 304, '', '', ' 菜单 默认 选中 高亮', '0.10', 0, '304课 tp5 设置当前菜单默认选中高亮', 30, 4, NULL, '', 1527579613, 1531880087),
 (345, '40.77.167.140', '', 295, '', '', '双语 多语言 ', '0.10', 0, '295课 双语 多语言 增加多种语言流程', 30, 7, NULL, '', 1523240679, 1531762959),
-(375, '117.136.38.131', '', 10086163, '', '', '', '0.10', 0, '网易云课堂上传课程步骤', 30, 41, NULL, '', 1528617393, 1531297518),
+(375, '127.0.0.1', '', 10086163, '56', '', '', '0.10', 0, '网易云课堂上传课程步骤', 30, 41, NULL, '<p><span style="color: rgb(51, 51, 51); font-family: arial; font-size: 13px; background-color: rgb(255, 255, 255);">您提供美文摘抄、唯美句子、经典</span><span style="color: rgb(204, 0, 0); font-family: arial; font-size: 13px; background-color: rgb(255, 255, 255);">文章</span><span style="color: rgb(51, 51, 51); font-family: arial; font-size: 13px; background-color: rgb(255, 255, 255);">、摘抄美文、小清新、精品文摘、娱乐集实用和深度于一体。每日推荐:微笑,也是一种力量,会给人带来自信</span></p>', 1528617393, 1532430956),
 (322, '157.55.39.94', '', 272, '', '', '查找 网站很慢 实例', '0.10', 0, '272课 查找一个网站很慢的语句的 实例', 30, 2, NULL, '', 1523088833, 1529194718),
 (323, '157.55.39.211', '', 273, '', '', 'Trace跟踪调试 SQL调试 ', '0.10', 0, '273课 Trace跟踪调试和SQL调试 实例', 30, 6, NULL, '', 1523089139, 1531312186),
 (324, '157.55.39.210', '', 274, '', '', 'Trace调试SQL调试跟踪调试', '0.10', 0, '274课 Trace跟踪调试和SQL调试 开启方法', 30, 1, NULL, '', 1523089268, 1531572923),
@@ -578,6 +1745,12 @@ INSERT INTO `think_shop` (`id`, `name`, `lesson`, `sort`, `address`, `product`, 
 (373, '112.14.72.196', '', 323, '', '', '聊天表情 回复', '0.10', 0, '323课 Tp5 简易实现聊天表情的发布 展示和回复时显示', 30, 9, NULL, '', 1527580168, 1532062232),
 (374, '113.195.228.17', '', 324, '', '', 'qq登录 放置 QQ登录 图标', '0.10', 0, '324课 Tp5 开发qq登录 第一课 放置QQ登录图标', 30, 27, NULL, '', 1527580196, 1532052123);
 
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `think_sms`
+--
+
 CREATE TABLE IF NOT EXISTS `think_sms` (
   `id` int(8) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL COMMENT '名称',
@@ -591,6 +1764,12 @@ CREATE TABLE IF NOT EXISTS `think_sms` (
   `update_time` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=749 ;
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `think_user`
+--
 
 CREATE TABLE IF NOT EXISTS `think_user` (
   `id` int(8) unsigned NOT NULL AUTO_INCREMENT,
@@ -612,17 +1791,34 @@ CREATE TABLE IF NOT EXISTS `think_user` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `phone` (`phone`),
   KEY `phone_2` (`phone`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=395 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=396 ;
+
+--
+-- 转存表中的数据 `think_user`
+--
 
 INSERT INTO `think_user` (`id`, `name`, `password`, `status`, `phone`, `age`, `invite`, `token`, `online_time`, `start_time`, `expiration_time`, `delete_time`, `rand`, `ip`, `create_time`, `update_time`) VALUES
-(393, '', 'e10adc3949ba59abbe56e057f20f883e', 0, 18210787405, 0, NULL, '07490ac61585fce5fdced600b3f78cd4', NULL, 1532316133, 1534908133, NULL, 1, '', 1532316133, 1532316133),
-(394, '127.0.0.1', 'e10adc3949ba59abbe56e057f20f883e', 0, 18210787406, 0, NULL, '829fba1be9ca4a31f5952fe20dccd5d0', 45, NULL, NULL, NULL, 0, '', 1532316699, 1532325309);
+(393, '127.0.0.1', 'e10adc3949ba59abbe56e057f20f883e', 0, 18210787405, 0, NULL, '07490ac61585fce5fdced600b3f78cd4', 963, 1532316133, 1534994533, NULL, 1, '', 1532316133, 1532523210),
+(394, '127.0.0.1', 'e10adc3949ba59abbe56e057f20f883e', 0, 18210787406, 0, NULL, '829fba1be9ca4a31f5952fe20dccd5d0', 231, 1532523414, 1532609814, NULL, 1, '', 1532316699, 1532424100),
+(395, '127.0.0.1', 'e10adc3949ba59abbe56e057f20f883e', 0, 18210787407, 0, NULL, '557156df0010ae5bcd3be0021f1c56d6', 459, 1533526497, 1533612897, NULL, 1, '', 1532424196, 1533531733);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `think_userinfo`
+--
 
 CREATE TABLE IF NOT EXISTS `think_userinfo` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` text NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=gbk AUTO_INCREMENT=17998 ;
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `think_user_qq`
+--
 
 CREATE TABLE IF NOT EXISTS `think_user_qq` (
   `id` int(8) unsigned NOT NULL AUTO_INCREMENT,
@@ -645,6 +1841,12 @@ CREATE TABLE IF NOT EXISTS `think_user_qq` (
   UNIQUE KEY `phone` (`phone`),
   KEY `phone_2` (`phone`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=25 ;
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `think_video`
+--
 
 CREATE TABLE IF NOT EXISTS `think_video` (
   `id` int(8) unsigned NOT NULL AUTO_INCREMENT,
