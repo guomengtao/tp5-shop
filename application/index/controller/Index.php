@@ -44,7 +44,7 @@ class Index extends \think\Controller
         // dump($check); //返回值true,代表有此权限
 
 
-
+        // echo "123456";
 
 
 
@@ -2920,11 +2920,10 @@ echo "生成成功";
 
     public function index(){
 
-               //权限认证
+          //权限认证
           $auth = new \Auth\Auth();
 
 
- 
  
         /*
        验证单个条件
@@ -2934,8 +2933,29 @@ echo "生成成功";
            参数1：Admin/Article/Add 假设我现在请求 Admin模块下Article控制器的Add方法
            参数2： 1 为当前请求的会员ID
        */
-        $check = $auth->check('Home/add','2');
-        dump($check); //返回值true,代表有此权限
+
+        // $check = $auth->check('Admin/Article/Added','10086');
+        // $check = $auth->check('Admin/Article/Added,Home/add','10086');
+          // $check =   $auth->check('Admin/Article/Added,Home/add',10086,'and'); 
+
+        // dump($check); //返回值true,代表有此权限
+
+
+
+        $request = Request::instance();
+
+        if (!$auth->check($request->module() . '/' . $request->controller() . '/' . $request->action(), Cookie::get('user_id'))) {// 第一个参数是规则名称,第二个参数是用户UID
+        // if (!$auth->check($request->module() . '/' . $request->controller() . '/' . $request->action(), 100867)) {// 第一个参数是规则名称,第二个参数是用户UID
+            /* return array('status'=>'error','msg'=>'有权限！');*/
+            $this->error('你没有权限');
+        }
+        // else{
+
+        //   echo "管理员您好";
+        //   // $this->success('恭喜您，你有权限');
+
+        // }
+
 
 
     // 切换全屏和窄屏功能
