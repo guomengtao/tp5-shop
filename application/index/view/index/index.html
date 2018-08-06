@@ -75,352 +75,142 @@
 
 
 
-<div class="page-header"  >
-    <h2><a href="{$Think.server.script_name}">{:lang('Tp5简易商城')}</a><small>  
-        {:lang('入门视频课')}   
-<a href="__ROOT__/index/index/index/lang/zh-cn">{:lang('中文')}</a>
-<a href="__ROOT__/index/index/index/lang/en-us">{:lang('English')}</a> 
-<a href="__ROOT__/index/index/index/screen/1">全屏</a> 
-<a href="__ROOT__/index/index/index/screen/0">窄屏</a> 
-<!-- <a href="__ROOT__/index/index/index/lang/thai">{:lang('บทความภาษาไทย')}</a> 
-<a href="__ROOT__/index/index/index/lang/fayu">{:lang('Français')}</a>  -->
-</small>
-    </h2> 
- 
-  
- 
-</div>
+
 <!-- {:lang('hh')}  {:lang('代码')}
 {$Think.lang.hh} -->
 <div class="row">
     <div class="col-md-8 col-lg-9" >
- 
- 
- 
-        <!-- 签到免费学习活动提示功能 -->
 
-        <div class="alert alert-info alert-dismissible" role="alert"  >
+         <!--提示-->
+        <div class="alert alert-info alert-dismissible" role="alert">
+
+             点赞功能上线，欢迎大家体验 ^_^
+        </div>
 
 
-            {if condition="$registration_count < 10"}
+        <div class="page-header"  >
+            <h2><a href="{$Think.server.script_name}">{:lang('Tp5简易商城')}</a><small>  
+                {:lang('入门视频课')}   
+        <a href="__ROOT__/index/index/index/lang/zh-cn">{:lang('中文')}</a>
+        <a href="__ROOT__/index/index/index/lang/en-us">{:lang('English')}</a> 
+        <a href="__ROOT__/index/index/index/screen/1">全屏</a> 
+        <a href="__ROOT__/index/index/index/screen/0">窄屏</a> 
+        <!-- <a href="__ROOT__/index/index/index/lang/thai">{:lang('บทความภาษาไทย')}</a> 
+        <a href="__ROOT__/index/index/index/lang/fayu">{:lang('Français')}</a>  -->
+        </small>
+            </h2> 
+         
+          
+         
+        </div>
 
-            <div class="progress">
-                <div class="progress-bar  progress-bar-striped " role="progressbar"
-                     aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"
-                     style="min-width: 15em;width: {:round($registration_count/10*100)}%">
-                    加{$registration_count-$registration_count+10-$registration_count}人签到解锁 
+
+         <!--简易即时聊天-->
+        <div class="panel panel-default">
+            <div class="panel-heading">  <span class="glyphicon glyphicon-option-vertical" aria-hidden="true"></span> 学习交流  <small><span class="badge" style="background-color: #a7a7a7;display: none">666 </span></small></div>
+
+
+            <div class="panel-body">
+                <span id="bbs" style="display: none">666999</span>
+
+                <div class="bss_content"  id="bss_content" name="bss_content" style="margin-bottom: 10px; word-wrap:break-word;">
+
+                    <span id="bbs_index">
+
+                    {volist name='bbs' id='user'}
+
+                    <div   class=" col-xs-12 col-sm-12 col-md-12 " style="padding: 0px;    border-bottom: 1px solid #eee;    margin-bottom: 10px; ">
+
+
+                        <div class="media" >
+                            <div class="media-left" >
+                                <a href="#">
+                                    <img class="media-object img-circle"    src="__STATIC__/images/user/user ({:rand(1,25)}).jpg" data-holder-rendered="true" style="width: 28px; height: 28px;">
+                                </a>
+                            </div>
+
+                            <div class="media-body">
+
+                                <!-- 点赞左右结构 -->
+                                <div class="row">
+                                  <div class="col-xs-6 col-md-8">
+                                        <small><a href="#">{$user.phone|substr=0,3}****{$user.phone|substr=7,4}</a></small>
+                                  </div>
+                                  <div class="col-xs-3  col-md-1 pull-right"> 
+                                        <span onclick='public_ajax("{$Think.server.script_name}/index/index/view/data_id/{$user.id}",0)' style="position: relative;">  
+                                                <small><span id="like_{$user.id}"  style="color: #555; font-size: 12px">{$user.likes?$user.likes:"赞"}</span> </small>
+                                                                    <span id="like_icon_{$user.id}" style="color: {$user.on?'#0084ff':'#8590a6'}; fill: currentColor;"> 
+                                            <svg viewBox="0 0 20 18" xmlns="http://www.w3.org/2000/svg" class="likeicon" width="13" height="16" aria-hidden="true" style="height: 16px; width: 13px;"><title></title><g><path d="M.718 7.024c-.718 0-.718.63-.718.63l.996 9.693c0 .703.718.65.718.65h1.45c.916 0 .847-.65.847-.65V7.793c-.09-.88-.853-.79-.846-.79l-2.446.02zm11.727-.05S13.2 5.396 13.6 2.89C13.765.03 11.55-.6 10.565.53c-1.014 1.232 0 2.056-4.45 5.83C5.336 6.965 5 8.01 5 8.997v6.998c-.016 1.104.49 2 1.99 2h7.586c2.097 0 2.86-1.416 2.86-1.416s2.178-5.402 2.346-5.91c1.047-3.516-1.95-3.704-1.95-3.704l-5.387.007z"></path></g></svg>
+                                            </span>  
+                                                                  
+                                                                  <span id="like_a_{$user.id}" style="position:absolute;left:0px;top:0px;z-index:-20;color: red ;animation:mylike 2s;display:none ">+1</span>
+
+                                                               </span>
+                                  </div>
+                                </div>
+
+                                                                <small> 
+
+                                                                  {if condition="$user.age >=100"}
+                                                                <div class="form-group input-group field-feed-content required" style="background-color:  #f4f4f4;padding: 10px;color: #555555">
+
+                                                                     @{$user.r_phone|substr=0,3}****{$user.r_phone|substr=7,4}:{$user.r_title}
+                                                 
+                                                                </div>
+
+                                                               {/if}
+                                                                    <a href="{:url('/')}index/index/view/id/{$user.shop}"> {$user.title}</a>
+                                                                        
+
+                                                                </small>
+                                                                <h5> <small> {$user.create_time}  
+
+                                                                       <a href = "javascript:void(0);"  onclick="document.getElementById('reply_{$user.id}').style.display = '' " >回复</a>
+
+                                                                                                   <!--   {$user.sort.city}  {$user.foot.browser} --> </small></h5>
+                                                               
+
+                                                                               <div id="reply_{$user.id}" class="form-group input-group field-feed-content required" style="display: none">
+
+                                                    <textarea id="titleChat_{$user.id}" name="title"  class="form-control"  placeholder="写回复" aria-required="true"></textarea>
+                                                    <span class="input-group-btn"><button type="submit" class="btn btn-success" onclick="bbs(document.getElementById('titleChat_{$user.id}').value,{$user.shop},{$user.id})" style="height: 54px;width: 54px;">发布</button></span>
+
+                                 
+                                                </div>
+
+                            </div>
+                             
+                        </div>
+
+
+
+                    </div>
+
+
+
+
+                    {/volist}
+
+
+                        </span>
+
                 </div>
+
+
+
+ 
+
+
+
+
             </div>
 
-
-
-            即将免费解锁所有课程，已{$registration_count}人  
-
-
-             <a class="btn btn-success btn-registration"  style="font-size: 12px;"style="font-size: 12px;" onclick="public_ajax('{$Think.server.script_name}/index/member/registration/',1);">
-                        2.0版点击直接ajax签到成功 </a> （VIP会员登录自动签到）
-
-
-
-            <a class="btn btn-success btn-registration"  style="font-size: 12px;"style="font-size: 12px;" onclick="ajaxModelPay('0.1','135','签到{$Think.cookie.phone}{:date("y年m月d日 H:i:s")}','135{$Think.cookie.phone}{:time()}') ">
-            1.0版扫码支付1毛签到 </a>
-
-
-           
-
-
-            
-
-
-
-
-
-
-
-            {else/}
-            今日已有{$registration_count}人签到 ，所有课程免费中~~~
-            {/if}
         </div>
-        <!--签到功能 这个地方计划只是最小页面显示，方便手机登录是快速签到-->
-        <div class="btn-group btn-group-justified   hidden-lg  hidden-md" style="padding-bottom: 20px;">
-
-            <a class="btn btn-success btn-registration"  style="font-size: 12px;"style="font-size: 12px;" onclick="public_ajax('{$Think.server.script_name}/index/member/registration/',1);">
-            点此处签到<br>签到有好礼</a>
-            <a class="btn btn-primary" href="__ROOT__/index/member/registration" style="font-size: 12px;">{:date("Y年m月d日")}<br>
-                今日已有{$registration_count}人签到</a>
-        </div>
-
-
-
-
-
-
-
-
-
-        <!--课程章节开始的位置-->
-
-    <!--     <h5>
-            
-           
-            <small>
-
-                <a href="__ROOT__/index/index/index"><span class="glyphicon glyphicon-fire" style="color: palevioletred;" aria-hidden="true"></span></a>
-                <a href="__ROOT__/index/index/index">热门课程</a> 
-
-
-
-                <a href="__ROOT__/index/index/news"><span class="glyphicon glyphicon-sort-by-order-alt" aria-hidden="true"></span></a>
-                <a href="__ROOT__/index/index/news">最新课程</a> 
-
-
-
-                <a href="__ROOT__/index/index/all"><span class="glyphicon glyphicon-sort-by-order" aria-hidden="true"</small>
-                <a href="__ROOT__/index/index/all">全部课程</a></small>
-
-
-            {$Think.cookie.phone?'':'<a href="__ROOT__/index/index/login ">登录后可保存学习进度</a>';}
-
-        </h5> -->
-
-<div class="panel panel-default">
-  <div class="panel-body">
-
-
-
-        <h4 style="display: none">
-            <small>
-        <span class="glyphicon glyphicon-volume-up" style="color: #337ab7"   aria-hidden="true"></span> 活动推荐： 
-         <a href="__ROOT__/index/index/register"> 新会员免费获得66天VIP会员 </a></small>
-         </h4>
-
  
-
-
-        <h4 style="display: none">
-            <small>
-        <span class="glyphicon glyphicon-tint" style="color: #337ab7"  aria-hidden="true"></span> 回馈活动：免费送VIP会员 困难家庭 残障人士 女程序员 海外学员 资源置换 等等     </small>
-
-        </h4>
-
-        <h4 style="display: none">
-            <small>
-        <span class="glyphicon glyphicon-tint" style="color: #337ab7"  aria-hidden="true"></span> 获取佣金：<a href="https://m.study.163.com/promotion/invite?invitingCode=HS9OK5" target="_blank" >  成为课程推广员，同时获取佣金 </a></small>
-
-        </h4>
-
-                <h4>
-            <small>
-        <span class="glyphicon glyphicon-tint" style="color: #337ab7"  aria-hidden="true"></span> 课程源码：<a href="https://jq.qq.com/?_wv=1027&k=5OjhBDy" target="_blank" > 点击加群  - 文件获取课程源码下载地址 群号298491343[新群] </a></small> 
-
-        </h4>
  
-
-                        <h4>
-            <small>
-        <span class="glyphicon glyphicon-tint" style="color: #337ab7"  aria-hidden="true"></span> 联系方式：<a href="tencent://message/?Menu=yes&uin=250285636&Service=300&sigT=45a1e5847943b64c6ff3990f8a9e644d2b31356cb0b4ac6b24663a3c8dd0f8aa12a595b1714f9d45" target="_blank" > Q我 250285636 </a> 或者  <a href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=250285636&website=open.gaoxueya.com" target="_blank" > 点击加我qq 250285636 </a> 手机微信18210787405</small>
-
-        </h4>
-
-        <h4>
-            <small>
-        <span class="glyphicon glyphicon-tint" style="color: #337ab7"  aria-hidden="true"></span> 课程推荐：新录制的[<a href="https://study.163.com/course/introduction/1005224025.htm?share=2&shareId=400000000336019" target="_blank" >  Laravel5.6 零基础入门课 </a> ] 请大家多多支持 鼓励</small>
-
-        </h4>
-
-        <h4 style="display: none">
-      
-            <small>
-        <span class="glyphicon glyphicon-tint" style="color: #337ab7"  aria-hidden="true"></span> 腾讯课堂：<a href="https://ke.qq.com/course/package/9509?flowToken=1002207" target="_blank" >  ThinkPHP5简易商城 4季 打包 </a> </small>
-
-        </h4>
-
-        <h4 style="display: none">
-            <small>
-        <span class="glyphicon glyphicon-tint" style="color: #337ab7"  aria-hidden="true"></span> 腾讯课堂：<a href="https://ke.qq.com/course/294322?flowToken=1002208" target="_blank" >  ThinkPHP5零基础入门课 </a> </small>
-
-        </h4>
-
-        <h4 >
-            <small>
-        <span class="glyphicon glyphicon-tint" style="color: #337ab7"  aria-hidden="true"></span> 课程包邮：<a href="__ROOT__/index/index/view/id/299" target="_blank" >  U盘版全套视频 79元限量包邮寄 解决卡顿烦恼 </a>  </small>
-
-        </h4>
-
+  
  
-
-
-
-        <h4 style="display: none">
-
-            <small>
-            <span class="glyphicon glyphicon-education" style="color: #337ab7"  aria-hidden="true"></span> 全民学习：
-              每晚8点-10点所有课程免费开放 
-
-          
-            <span id="_d_open"></span>  
-            <span id="_h_open"></span>  
-            <span id="_m_open"></span>  
-            <span id="_s_open"></span>  
-      
-
-            </small>
-        </h4>
-
-        <h4 style="display: none">
-
-            <small>
-            <span class="glyphicon glyphicon-comment" style="color: #337ab7"  aria-hidden="true"></span> 最新功能：
-             <a href="__ROOT__/index/member/vip">  每天上午9点 19.9元抢注vip会员300天  </a>
-
-          
-            <span id="_d"></span>  
-            <span id="_h"></span>  
-            <span id="_m"></span>  
-            <span id="_s"></span>  
-      
-
-            </small>
-        </h4>
-         
-        
-  </div>
-</div>    
-
-
-  <script type="text/javascript">  
-
-        function countTime() {  
-            //获取当前时间  
-            var date = new Date();  
-            var now = date.getTime();  
-            //设置截止时间  
-            // var str="2018/4/25 9:33:00";
-
-            //获取当前时间年月日
-
-            var y = date.getFullYear();
-            var m = date.getMonth()+1; // 这个函数月份从0开始，所以+1
-            var d = date.getDate();
-            //设置开始时间 每天上午9点 
-            var str=y+"/"+m+"/"+d+" "+"9:00:00";
-
-
-            var endDate = new Date(str); 
-            var end = endDate.getTime();  
-            
-            //时间差  
-            var leftTime = end-now; 
-            //定义变量 d,h,m,s保存倒计时的时间  
-            var d,h,m,s;  
-
-            // document.getElementById("_d").innerHTML = leftTime/1000/60%60 + "--" +d+"天";   
-            // document.getElementById("_d").innerHTML = str + "--" +d+"天";   
-
-
-                d = Math.floor(leftTime/1000/60/60/24);  
-                h = Math.floor(leftTime/1000/60/60%24);  
-                m = Math.floor(leftTime/1000/60%60);  
-                s = Math.floor(leftTime/1000%60);  
-
-            if (leftTime>=0) {  
-                
-
-                //将倒计时赋值到div中  
-                // document.getElementById("_d").innerHTML = d+"天";  
-                document.getElementById("_h").innerHTML = h+"小时";  
-                document.getElementById("_m").innerHTML = m+"分";  
-                document.getElementById("_s").innerHTML = s+"秒后开放";  
-
-            }
-
-            else if (leftTime/1000/60 >= -15){
-                document.getElementById("_s").innerHTML = "进行中 ...";
-            }  
-            else{
-
-                // 将倒计时赋值到div中  
-                // 用Math.abs负数转正数
-                document.getElementById("_d").innerHTML = Math.abs(d)+"天";  
-                document.getElementById("_h").innerHTML = Math.abs(h)+"小时";  
-                document.getElementById("_m").innerHTML = Math.abs(m)+"分";  
-                document.getElementById("_s").innerHTML = Math.abs(s)+"秒后开放";  
-            }  
-            
-            //递归每秒调用countTime方法，显示动态时间效果  
-            setTimeout(countTime,1000);  
-  
-        }  
-
-        // 设置每天晚上8点-10点课程免费提示
-        function countTime_open() {  
-            //获取当前时间  
-            var date = new Date();  
-            var now = date.getTime();  
-            //设置截止时间  
-            // var str="2018/4/25 9:33:00";
-
-            //获取当前时间年月日
-
-            var y = date.getFullYear();
-            var m = date.getMonth()+1; // 这个函数月份从0开始，所以+1
-            var d = date.getDate();
-            //设置开始时间 每晚8点开始
-            var str=y+"/"+m+"/"+d+" "+"20:00:00";
-
-
-            var endDate = new Date(str); 
-            var end = endDate.getTime();  
-            
-            //时间差  
-            var leftTime = end-now; 
-            //定义变量 d,h,m,s保存倒计时的时间  
-            var d,h,m,s;  
-
-            // document.getElementById("_d").innerHTML = leftTime/1000/60%60 + "--" +d+"天";   
-            // document.getElementById("_d").innerHTML = str + "--" +d+"天";   
-
-
-                d = Math.floor(leftTime/1000/60/60/24);  
-                h = Math.floor(leftTime/1000/60/60%24);  
-                m = Math.floor(leftTime/1000/60%60);  
-                s = Math.floor(leftTime/1000%60);  
-
-            if (leftTime>=0) {  
-                
-
-                //将倒计时赋值到div中  
-                // document.getElementById("_d").innerHTML = d+"天";  
-                document.getElementById("_h_open").innerHTML = h+"小时";  
-                document.getElementById("_m_open").innerHTML = m+"分";  
-                document.getElementById("_s_open").innerHTML = s+"秒后开始";  
-
-            }
-
-            else if (leftTime/1000/60 >= -120){
-                document.getElementById("_s_open").innerHTML = "所有课程开放中...";
-            }  
-            else{
-
-                // 将倒计时赋值到div中  
-                // 用Math.abs负数转正数
-                document.getElementById("_d_open").innerHTML = Math.abs(d)+"天";  
-                document.getElementById("_h_open").innerHTML = Math.abs(h)+"小时";  
-                document.getElementById("_m_open").innerHTML = Math.abs(m)+"分";  
-                document.getElementById("_s_open").innerHTML = Math.abs(s)+"秒后开始";  
-            }  
-            
-            //递归每秒调用countTime方法，显示动态时间效果  
-            setTimeout(countTime_open,1000);  
-  
-        }  
-    </script>  
-  
-
-
-
-        
-
+ 
 
         <style>
             .table-hover td{
@@ -428,7 +218,7 @@
             }
         </style>
 
-<p>&nbsp;</p>
+ 
         <h5>
             
               <small>
@@ -449,42 +239,7 @@
 
 
         <table class="table table-striped table-hover " >
-            <thead style="display: none;">
-            <tr>
-                 
-                <th > 
-
-                            
-            
-           
-          <!--   <small>
-
-                <a href="__ROOT__/index/index/index"><span class="glyphicon glyphicon-fire" style="color: palevioletred;" aria-hidden="true"></span></a>
-                <a href="__ROOT__/index/index/index">{:lang('热门课程')}</a> &nbsp;&nbsp;&nbsp;
-
-
-
-                <a href="__ROOT__/index/index/news"><span class="glyphicon glyphicon-sort-by-order-alt" aria-hidden="true"></span></a>
-                <a href="__ROOT__/index/index/news">{:lang('最新课程')}</a> &nbsp;&nbsp;&nbsp;
-
-
-
-                <a href="__ROOT__/index/index/all"><span class="glyphicon glyphicon-sort-by-order" aria-hidden="true"</small>
-                <a href="__ROOT__/index/index/all">{:lang('全部课程')}</a></small> &nbsp;&nbsp;&nbsp; -->
-
-
-            <!-- {$Think.cookie.phone?'':'<a href="__ROOT__/index/index/login ">登录后可保存学习进度</a>';} -->
-
-      
-
-
-                </th>
-                <th>   <!-- {$Think.cookie.vip?'学习进度':'<a href="__ROOT__/index/index/view/id/105 ">价格</a>';} --> {:lang('价格')}
-                 
-                </th>
-                <th> {:lang('播放')}/{:lang('购买')}</th>
-            </tr>
-            </thead>
+ 
 
             <tbody>
 
@@ -536,81 +291,44 @@
         </div>
 
 
-        <!--简易即时聊天-->
-        <div class="panel panel-default">
-            <div class="panel-heading">  <span class="glyphicon glyphicon-volume-up" aria-hidden="true"></span> 大家正在说 ··· <small><span class="badge" style="background-color: #a7a7a7;display: none">666 </span></small></div>
+          <div class="panel panel-default">
+          <div class="panel-body">
+         
 
+                 <h4>
+                    <small>
+                <span class="glyphicon glyphicon-tint" style="color: #337ab7"  aria-hidden="true"></span> 课程源码：<a href="https://jq.qq.com/?_wv=1027&k=5OjhBDy" target="_blank" > 点击加群  - 文件获取课程源码下载地址 群号298491343[新群] </a></small> 
 
-            <div class="panel-body">
-                <span id="bbs" style="display: none">666999</span>
+                </h4>
+         
+         
 
-                <div class="bss_content"  id="bss_content" name="bss_content" style="margin-bottom: 10px;height:280px;max-height:300px;overflow-y:auto;overflow-x:hidden;word-wrap:break-word;">
+                <h4>
+                    <small>
+                <span class="glyphicon glyphicon-tint" style="color: #337ab7"  aria-hidden="true"></span> 课程推荐：新录制的[<a href="https://study.163.com/course/introduction/1005224025.htm?share=2&shareId=400000000336019" target="_blank" >  Laravel5.6 零基础入门课 </a> ] 请大家多多支持 鼓励</small>
 
-                    <span id="bbs_index">
+                </h4>
 
-                    {volist name='bbs' id='user'}
+                <h4  >
+              
+                    <small>
+                <span class="glyphicon glyphicon-tint" style="color: #337ab7"  aria-hidden="true"></span> 腾讯课堂：<a href="https://ke.qq.com/course/package/9509?flowToken=1002207" target="_blank" >  ThinkPHP5简易商城 4季 打包 </a> </small>
 
-                    <div   class=" col-xs-12 col-sm-12 col-md-12 " style="padding: 0px;    border-bottom: 1px solid #eee;    margin-bottom: 10px; ">
+                </h4>
 
+         
 
-                        <div class="media" >
-                            <div class="media-left" >
-                                <a href="#">
-                                    <img class="media-object img-circle"    src="__STATIC__/images/user/user ({:rand(1,25)}).jpg" data-holder-rendered="true" style="width: 48px; height: 48px;">
-                                </a>
-                            </div>
-                            <div class="media-body">
-                                <small><a href="#">{$user.phone|substr=0,3}****{$user.phone|substr=7,4}</a>
-                                    :{$user.title}</small>
-                                <h5> <small> {$user.create_time}  </small></h5>
-                            </div>
-                        </div>
+                <h4 >
+                    <small>
+                <span class="glyphicon glyphicon-tint" style="color: #337ab7"  aria-hidden="true"></span> 课程包邮：<a href="__ROOT__/index/index/view/id/299" target="_blank" >  U盘版全套视频 79元限量包邮寄 解决卡顿烦恼 </a>  </small>
 
+                </h4>
 
-
-                    </div>
-
-
-
-
-                    {/volist}
-
-
-                        </span>
-
-                </div>
+           </div>
+        </div> 
 
 
 
-                <div class="form-group input-group field-feed-content required">
-                    <textarea id="feed-content" class="form-control" name="Feed[content]" placeholder="我想说..." aria-required="true"></textarea>
-                    <span class="input-group-btn"><button type="submit" class="btn btn-success" onclick="bbs(document.getElementById('feed-content').value,111)" style="height: 54px;width: 54px;">发布</button></span>
-                </div>
-
-
-
-
-            </div>
-
-        </div>
-
-
-        <div class="panel panel-default">
-    <div class="panel-heading">赞助商</div>
-    <div class="panel-body text-center">
-          
-        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <script>
-             (adsbygoogle = window.adsbygoogle || []).push({
-                  google_ad_client: "ca-pub-8644709060035439",
-                  enable_page_level_ads: true
-             });
-        </script>
-
-        
-
-        </div>
-    </div>
 
 
         <!--在线会员-->
@@ -672,6 +390,18 @@
                 <img class="img-rounded" style="width: 100%" src="__STATIC__/images/vipqqgroup_423922212.jpg">
                 <h5><small>加群验证码 : {$Think.cookie.vip>0?'1206':'**** VIP会员可见'}</small></h5>
             </div>
+        </div>
+
+
+        <div class="panel panel-default">
+            <div class="panel-heading">赞助商</div>
+            <div class="panel-body text-center">
+                  
+                虚位以待
+
+                
+
+             </div>
         </div>
 
 
@@ -767,7 +497,7 @@
 
 
     // 评论功能的ajax函数
-    function bbs(t,id)
+    function bbs(t,id,data_id)
     {
         t = t.trim();
 
@@ -807,7 +537,13 @@
                 document.getElementById("bbs_index").innerHTML=document.getElementById("bbs_index").innerHTML+xmlhttp.responseText;
                 // document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight;
                 // document.getElementById('bbs_index').scrollTop = document.getElementById('bbs_index').scrollHeight;
-                document.getElementById('bss_content').scrollTop = document.getElementById('bss_content').scrollHeight;
+                // document.getElementById('bss_content').scrollTop = document.getElementById('bss_content').scrollHeight;
+
+                // 如果是回复评论，回复后取消url的传值，刷新页面
+                        if (data_id>=1) 
+                    {
+                        window.location.href="{$Think.server.script_name}/" 
+                    }
 
             }
         }
@@ -815,14 +551,14 @@
         // xmlhttp.open("GET","/index/bbs/add/title/"+t+"/shop/"+id,true);
         xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
         // xmlhttp.send("t=Bill&lname=Gates");
-        xmlhttp.send("title="+t+"&shop="+id);
+        xmlhttp.send("title="+t+"&shop="+id+"&age="+data_id);
         // xmlhttp.send();
         bbs_song("ask_song");
 
         // 发送完成后清空内容
         // document.getElementById('titleChat').value ="";
         // document.getElementById('feed-content').innerText="";
-        document.getElementById("feed-content").value='';
+        // document.getElementById("feed-content").value='';
         // 发送完成后禁止再次点击发送按钮
         // document.getElementById("sendChat").disabled= true;
         // document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight;

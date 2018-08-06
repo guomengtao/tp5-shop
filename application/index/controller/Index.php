@@ -22,7 +22,33 @@ use think\captcha\Captcha;
 
 class Index extends \think\Controller
 {
+  
+
+        public function _initialize(){
+
+            //权限认证
+          // $auth = new \Auth\Auth();
+
+
  
+  
+        /*
+       验证单个条件
+       验证 会员id 为 1 的 小红是否有 增加信息的权限
+
+       check方法中的参数解释：
+           参数1：Admin/Article/Add 假设我现在请求 Admin模块下Article控制器的Add方法
+           参数2： 1 为当前请求的会员ID
+       */
+        // $check = $auth->check('Home/add/','2');
+        // dump($check); //返回值true,代表有此权限
+
+
+
+
+
+
+        }
 
         public function install(){
 
@@ -2399,7 +2425,7 @@ die();
                          
 
                     // 如果邀请码是管理员id，新注册奖励vip天N数
-                    if ($invite<="555" and $invite>="5") {
+                    if ($invite<>"2" ) {
                       # code...
                      $expiration_time = time() + (3600 * 24*30);
 
@@ -2894,6 +2920,23 @@ echo "生成成功";
 
     public function index(){
 
+               //权限认证
+          // $auth = new \Auth\Auth();
+
+
+ 
+ 
+        /*
+       验证单个条件
+       验证 会员id 为 1 的 小红是否有 增加信息的权限
+
+       check方法中的参数解释：
+           参数1：Admin/Article/Add 假设我现在请求 Admin模块下Article控制器的Add方法
+           参数2： 1 为当前请求的会员ID
+       */
+        // $check = $auth->check('Home/add','2');
+        // dump($check); //返回值true,代表有此权限
+
 
     // 切换全屏和窄屏功能
     if (input('screen') == "1") {
@@ -2977,7 +3020,7 @@ echo "生成成功";
       if (!cache('shop_show_'.$page)) {
 
           // 这个用来控制ajax的更新频率 
-          cache('index_ajax', 1, 600);
+          cache('index_ajax', 1, 2);
  
             // 查询24小时内在线用户
             $online  = User::whereTime('update_time','-24 hours')
@@ -2989,8 +3032,37 @@ echo "生成成功";
             // 查询最新的聊天信息
             $bbs = Data::with('sort','foot')
                     ->order('id', 'desc')
-                    ->limit(30)
+                    ->where('phone','<>','15966982315')
+                    ->limit(10)
                     ->select();
+
+             foreach($bbs as $k=>$v){
+
+
+                // 点赞数量的统计查询
+
+                $likes = likes::where('data_id','=',$bbs[$k]['id'])->count();
+                $on = likes::where('data_id','=',$bbs[$k]['id'])
+                    ->where('user_id','=',Cookie::get('user_id'))
+                    ->count();
+                // dump($likes);die();
+                $bbs[$k]['likes'] = $likes;
+                $bbs[$k]['on']    = $on;
+
+
+                if ($bbs[$k]['age']>=100) {
+                    # 如果属于回复，查出来回的谁的评论
+
+                  $data = Data::get($bbs[$k]['age']);
+                   
+                  $bbs[$k]['r_phone']    = $data->phone;
+                  $bbs[$k]['r_title']    = $data->title;
+
+     
+
+                  }  
+
+            }
             
           // 查询今天有多少人签到了
             $registration_count  = Order::whereTime('create_time', 'today')
@@ -3002,29 +3074,11 @@ echo "生成成功";
 
       
 
-          foreach($bbs as $k=>$v){
+         
 
-             $title = $bbs[$k]['title'];
+          // $bbs = array_reverse($bbs);
 
-              // 三个表情的统一转换
-              if($title == "[thumb]"){
-                  $title = '<img    src="/static/images/[thumb].png" data-holder-rendered="true" style="width: 28px; height: 28px;">';
-              }
-
-              if($title == "[rose]"){
-                  $title = '<img    src="/static/images/[rose].png" data-holder-rendered="true" style="width: 28px; height: 28px;">';
-              }
-              if($title == "[bq]"){
-                  $title = '<img    src="/static/images/[bq].png" data-holder-rendered="true" style="width: 28px; height: 28px;">';
-              }
-
-              $bbs[$k]['title'] = $title;
-
-         }
-
-          $bbs = array_reverse($bbs);
-
-          cache('bbs', $bbs, 0);
+          cache('bbs', $bbs, 2);
 
 
            
@@ -3046,7 +3100,7 @@ echo "生成成功";
                 
             }
 
-          cache('shop_show_'.$page, $show, 0);
+          cache('shop_show_'.$page, $show, 1);
       }
 
 
