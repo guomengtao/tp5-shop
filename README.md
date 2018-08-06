@@ -1,6 +1,6 @@
-ThinkPHP 5.0 简易商城系统 thinkphp5mall
+ThinkPHP 5.0 简易商城系统 ThinkPHP5Mall
 
-[查看在线演示](http://www.open.gaoxueya.com)
+[查看在线演示](http://open.gaoxueya.com)
 
 thinkphp5mall结合bootstrap3实现从商品在线购买到后台商品的基本功能，最近开发了在线安装功能，直接访问index/index/install页面，快速安装体验，请整理的常用demo数据。是ThinkPHP5 框架思路的实战应用实例，其主要特性包括：
 
@@ -22,6 +22,7 @@ thinkphp5mall结合bootstrap3实现从商品在线购买到后台商品的基本
  + Bootstrap3  作为主要界面实现 
  + 二维码 接口实现
  + 路由 的简单设置使用入门
+ + AUTH 的简单设置使用入门 新增
 
 ===============
 
