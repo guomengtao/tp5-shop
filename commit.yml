@@ -3,24 +3,27 @@ branches: {
   }
 fileChange:
   /application:
-    newFile: !uuid 'a89fd1edf1f19d61403dc858ebec6aa6abb67e93'
-    oldFile: !uuid '7e993f1325ca0748eb8b3ecdf5d5fadfd87fb148'
+    newFile: !uuid '0da34ec7732e63710ab0bc327fb0ac64840a178a'
+    oldFile: !uuid 'a89fd1edf1f19d61403dc858ebec6aa6abb67e93'
   /application/index:
-    newFile: !uuid '1b90dbb2daf15e162e82690f1a48d2527a4a79c7'
-    oldFile: !uuid '85a992424b286f6801b6b107ce134a0c3ded092a'
+    newFile: !uuid '44e8c21bd951d55862a7d82977b9b2a9e7b2081d'
+    oldFile: !uuid '1b90dbb2daf15e162e82690f1a48d2527a4a79c7'
   /application/index/controller:
-    newFile: !uuid 'f6f5ae22d5e3dd5973497477656a48893435a3fc'
-    oldFile: !uuid '54aa8f096534d9bfee40461eb0374cafd577e151'
+    newFile: !uuid '4469d660308918e4dd9e49446334e4131e9424c5'
+    oldFile: !uuid 'f6f5ae22d5e3dd5973497477656a48893435a3fc'
   /application/index/controller/Index.php:
-    newFile: !uuid '117a244a8fed62b93b3bce891428d4e13dcc7c10'
-    oldFile: !uuid '623bb6fa1788b4d3f639b0fcd11dccda89b79346'
+    newFile: !uuid '5985460e51da5f2fe0f567c5618d2e79be626082'
+    oldFile: !uuid '117a244a8fed62b93b3bce891428d4e13dcc7c10'
   /application/index/model:
-    newFile: !uuid '78c84cf724499c3ef863b0fb6c938e17b5d3ce5e'
-    oldFile: !uuid '8fc7e71b220aec5a17e4315a7db54704f62c9e3f'
+    newFile: !uuid 'bef7a2b90d5d43f19aa7572ea61dd0510ea6f771'
+    oldFile: !uuid '78c84cf724499c3ef863b0fb6c938e17b5d3ce5e'
+  /application/index/model/Profile.php:
+    newFile: !uuid '0b265fc4b04c35616ebc4b1affbf79a3a7d6c98b'
+    oldFile: !uuid '88976a405c978b051a18da1173d9b77084bf1242'
   /application/index/model/User.php:
-    newFile: !uuid '72265db59a769c855b4d2949668a5f6e9542da37'
-    oldFile: !uuid 'f6595da649efb32b930ff910f03c4d5c0ffbe17a'
-gitCommitId: !uuid '3b8b5d94696aebcc643b5515adede938fe79deed'
+    newFile: !uuid 'a9273371bfdde3ff3d5decf0b833ec2cbffeaa69'
+    oldFile: !uuid '72265db59a769c855b4d2949668a5f6e9542da37'
+gitCommitId: !uuid '6a603775c71bf78e79b127b8e8d0631ed08799e3'
 renames: {
   }
-revisionId: 55
+revisionId: 56
