@@ -2920,8 +2920,29 @@ echo "生成成功";
 
     public function index(){
 
-          //权限认证
-          $auth = new \Auth\Auth();
+
+        // 查询24小时内在线用户
+
+       // 查询24小时内在线用户
+            // $online  = User::whereTime('update_time','-24 hours')
+            //     ->order('update_time', 'desc')
+            //     ->select();
+            
+          // 查找年龄大于20的10个用户
+        $online = User::scope('agetom')->select();
+
+                // 查找年龄大于20的10个用户
+             // $online  =  User::scope('ageAbove', 0)->select();
+             // $online  =  User::scope('age')->select();
+
+echo "123";
+                dump($online);die();
+
+
+
+
+       //权限认证
+       $auth = new \Auth\Auth();
 
 
  
