@@ -3,24 +3,37 @@ branches: {
   }
 fileChange:
   /application:
-    newFile: !uuid '0f1fdf64e3e144aceef5a111aed6fb55effb6331'
-    oldFile: !uuid '6cb0a5a8a83adebf7f258f18f20c5e68ca7ab8dc'
+    newFile: !uuid 'fefce32d4c9a97c225833d06e9843e9bb6f5e9b3'
+    oldFile: !uuid '0f1fdf64e3e144aceef5a111aed6fb55effb6331'
   /application/index:
-    newFile: !uuid '7dde45e8a8d5dd9382a3f811785aac87e4143876'
-    oldFile: !uuid 'c07a54e8e11ca3ffc42980194860bc776ee5d5dc'
+    newFile: !uuid '95ba935c6f15e2600344e38e426392557c201b4a'
+    oldFile: !uuid '7dde45e8a8d5dd9382a3f811785aac87e4143876'
   /application/index/controller:
-    newFile: !uuid '8f385765aa06cf6eecf295a87ee8eb71a7ca074c'
-    oldFile: !uuid '4469d660308918e4dd9e49446334e4131e9424c5'
+    newFile: !uuid '4de0d0337a844c833818ae53c96009679aff7ef2'
+    oldFile: !uuid '8f385765aa06cf6eecf295a87ee8eb71a7ca074c'
   /application/index/controller/Index.php:
-    newFile: !uuid '63ac3a54c7cd16a226a97280356bda48be217260'
-    oldFile: !uuid '5985460e51da5f2fe0f567c5618d2e79be626082'
-  /t966.sql:
-    newFile: !uuid 'dd0c3bd5092eec9c37321b49525c4b06e1d1a1a4'
-    oldFile: !uuid '67e97800569a778b03d5d1987866935c593ff399'
-  /安装流程.txt:
-    newFile: !uuid '8ec3d4c66c0173169b9054ad14e49ce4dc4049d0'
-    oldFile: !uuid 'c40a28655b40a5f0a9b455be2be7711373bf6817'
-gitCommitId: !uuid 'beb652998f489d0cc082fe9a79240802eb4a591c'
-renames: {
-  }
-revisionId: 59
+    newFile: !uuid '127ee8a8f95479bc07632760c47bf0f44ac4f9c6'
+    oldFile: !uuid '63ac3a54c7cd16a226a97280356bda48be217260'
+  /application/index/model:
+    newFile: !uuid '9a05f89ba13bb6ca9ebfeea459e31371b94e0975'
+    oldFile: !uuid '0f8afa885e65987893c213e506ec32e579397510'
+  /application/index/model/AuthGroupAccess.php:
+    newFile: !uuid 'e3aa6b7576de6d226082691fcc2b16839d97dc7f'
+    oldFile: null
+  /application/index/model/Auth_group_access.php:
+    newFile: null
+    oldFile: !uuid 'd190f8fd4498009c3c26ce03835a2bae42a1c256'
+  /application/index/model/User.php:
+    newFile: !uuid '547592c9832e4f13cec27beb47330b664863fbab'
+    oldFile: !uuid 'a9273371bfdde3ff3d5decf0b833ec2cbffeaa69'
+  /application/index/model/UserProfile.php:
+    newFile: !uuid '9d5a41015a0da0834eeba21a53c4354259d2a270'
+    oldFile: null
+  /application/index/model/User_profile.php:
+    newFile: null
+    oldFile: !uuid '205e3140ab7995248391e7d85f3dcd57aa11002e'
+gitCommitId: !uuid '8428af3ac7bd29419d0416180b058078c3f015c9'
+renames:
+  /application/index/model/AuthGroupAccess.php: /application/index/model/Auth_group_access.php
+  /application/index/model/UserProfile.php: /application/index/model/User_profile.php
+revisionId: 60
