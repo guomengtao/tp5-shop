@@ -3,37 +3,30 @@ branches: {
   }
 fileChange:
   /application:
-    newFile: !uuid 'fefce32d4c9a97c225833d06e9843e9bb6f5e9b3'
-    oldFile: !uuid '0f1fdf64e3e144aceef5a111aed6fb55effb6331'
+    newFile: !uuid '17233f806f2e2081fd5601504c079d7e6b33cbb1'
+    oldFile: !uuid 'fefce32d4c9a97c225833d06e9843e9bb6f5e9b3'
+  /application/config.php:
+    newFile: !uuid '20a128ebbff98f5c10c78650b1b9fed6f211451c'
+    oldFile: !uuid '6353ee5265e067cd317e85fe0781348fe3f13f16'
   /application/index:
-    newFile: !uuid '95ba935c6f15e2600344e38e426392557c201b4a'
-    oldFile: !uuid '7dde45e8a8d5dd9382a3f811785aac87e4143876'
+    newFile: !uuid 'a42e2a973c343e745760e31f5e1c0f195216425a'
+    oldFile: !uuid '95ba935c6f15e2600344e38e426392557c201b4a'
   /application/index/controller:
-    newFile: !uuid '4de0d0337a844c833818ae53c96009679aff7ef2'
-    oldFile: !uuid '8f385765aa06cf6eecf295a87ee8eb71a7ca074c'
+    newFile: !uuid 'f59b19abf4a2802a1971f1f84c34c01c12cf4c12'
+    oldFile: !uuid '4de0d0337a844c833818ae53c96009679aff7ef2'
   /application/index/controller/Index.php:
-    newFile: !uuid '127ee8a8f95479bc07632760c47bf0f44ac4f9c6'
-    oldFile: !uuid '63ac3a54c7cd16a226a97280356bda48be217260'
+    newFile: !uuid 'abb883c9491242786f7575a8b4b810d6e7a57562'
+    oldFile: !uuid '127ee8a8f95479bc07632760c47bf0f44ac4f9c6'
   /application/index/model:
-    newFile: !uuid '9a05f89ba13bb6ca9ebfeea459e31371b94e0975'
-    oldFile: !uuid '0f8afa885e65987893c213e506ec32e579397510'
-  /application/index/model/AuthGroupAccess.php:
-    newFile: !uuid 'e3aa6b7576de6d226082691fcc2b16839d97dc7f'
-    oldFile: null
-  /application/index/model/Auth_group_access.php:
-    newFile: null
-    oldFile: !uuid 'd190f8fd4498009c3c26ce03835a2bae42a1c256'
-  /application/index/model/User.php:
-    newFile: !uuid '547592c9832e4f13cec27beb47330b664863fbab'
-    oldFile: !uuid 'a9273371bfdde3ff3d5decf0b833ec2cbffeaa69'
+    newFile: !uuid 'e58a01c696df8c91a3802e8b38a5b64e941b8264'
+    oldFile: !uuid '9a05f89ba13bb6ca9ebfeea459e31371b94e0975'
+  /application/index/model/Profile.php:
+    newFile: !uuid '50b6cd6660956982fa3fc33ac9ccf24020a7db08'
+    oldFile: !uuid '0b265fc4b04c35616ebc4b1affbf79a3a7d6c98b'
   /application/index/model/UserProfile.php:
-    newFile: !uuid '9d5a41015a0da0834eeba21a53c4354259d2a270'
-    oldFile: null
-  /application/index/model/User_profile.php:
-    newFile: null
-    oldFile: !uuid '205e3140ab7995248391e7d85f3dcd57aa11002e'
-gitCommitId: !uuid '8428af3ac7bd29419d0416180b058078c3f015c9'
-renames:
-  /application/index/model/AuthGroupAccess.php: /application/index/model/Auth_group_access.php
-  /application/index/model/UserProfile.php: /application/index/model/User_profile.php
-revisionId: 60
+    newFile: !uuid '190837026404bbfc6fabdcdcc4c4946b5c2e09d6'
+    oldFile: !uuid '9d5a41015a0da0834eeba21a53c4354259d2a270'
+gitCommitId: !uuid '58715688572d4edc3fb72e186790735f9e17c0ee'
+renames: {
+  }
+revisionId: 61
