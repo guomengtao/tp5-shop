@@ -23,6 +23,11 @@ class Data extends model
         //hasOne('关联模型名','外键名','主键名',['模型别名定义'],'join类型');
     }
 
+    public function shop_title(){
+        return $this->hasOne('Shop','id','shop');
+        //hasOne('关联模型名','外键名','主键名',['模型别名定义'],'join类型');
+    }
+
     public function foot(){
         return $this->hasOne('Footprint','phone','phone');
         //hasOne('关联模型名','外键名','主键名',['模型别名定义'],'join类型');

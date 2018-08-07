@@ -48,6 +48,14 @@ class User extends model
         return $this->hasOne('Profile');
     }
 
+    public function AuthGroupAccess()
+    {
+        return $this->hasOne('AuthGroupAccess','uid');
+    }
+
+
+
+
 
 
     public function apple()

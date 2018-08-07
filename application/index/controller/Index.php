@@ -2924,6 +2924,16 @@ echo "生成成功";
 
     public function index(){
 
+// 查询多条，一对一关联的 foreach写法
+      $list = User::all();
+      
+      foreach($list as $user){
+            // 获取用户关联的profile模型数据
+            dump($user->profile->email);
+        }
+
+ 
+
 
 
  // $user = User::get(393);
@@ -2931,7 +2941,7 @@ echo "生成成功";
 // echo $user->profile->email;
 // echo $user->profile->name;
 
-
+die();
 // $user = User::hasWhere('profile',['email'=>'394@qq.com'])->find();
 // echo $user->name;
 
@@ -2958,13 +2968,22 @@ echo "生成成功";
       // $user = User::get(394);
        
       // 输出Profile关联模型的email属性
-      // echo $user->apple->email;
+      // echo $user->AuthGroupAccess->group_id;
+
+
+
+      // 如果单条数据，不循环，直接get获取
+
+
+ 
 
       // 已用户表为主，查询关联表邮箱为指定值的用户
       // $user = User::hasWhere('profile',['email'=>'393@qq.com'])->find();
-      $user = User::hasWhere('apple',['email'=>'394394100836@vip.qq.com'])->find();
-      echo $user->name;
+      // $user = User::hasWhere('apple',['email'=>'39439410086@vip.qq.com'])->find();
+      // echo $user->name;
 
+
+ 
 
  
 
@@ -3109,8 +3128,11 @@ echo "生成成功";
                     ->limit(10)
                     ->select();
 
-             foreach($bbs as $k=>$v){
 
+            
+
+             foreach($bbs as $k=>$v){
+ 
 
                 // 点赞数量的统计查询
 

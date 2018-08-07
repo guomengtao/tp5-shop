@@ -201,6 +201,9 @@ class Member extends \think\Controller
 
     public function home(){
 
+                 //      调用浏览记录和来路统计功能
+        footprint();
+
         $user_id      = input('user_id');
 
 
