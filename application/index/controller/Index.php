@@ -2942,10 +2942,10 @@ echo "生成成功";
       // 主要关联主键发生的变化
 
       // 17998这里是 profle的主键
-       $user = Profile::get(17998);
+       // $user = Profile::get(17998);
        // echo User::getLastSql();
       // 输出Profile关联模型的email属性
-      echo $user->apple->name;
+      // echo $user->apple->name;
 
 // die();
  
@@ -2958,12 +2958,12 @@ echo "生成成功";
       // $user = User::get(394);
        
       // 输出Profile关联模型的email属性
-      // echo $user->UserProfile->email;
+      // echo $user->apple->email;
 
       // 已用户表为主，查询关联表邮箱为指定值的用户
       // $user = User::hasWhere('profile',['email'=>'393@qq.com'])->find();
-      // $user = User::hasWhere('UserProfile',['email'=>'393@vip.qq.com'])->find();
-      // echo $user->name;
+      $user = User::hasWhere('apple',['email'=>'394394100836@vip.qq.com'])->find();
+      echo $user->name;
 
 
  

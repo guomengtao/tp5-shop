@@ -48,9 +48,9 @@ class User extends model
         return $this->hasOne('Profile');
     }
 
- 
 
-    public function UserProfile()
+
+    public function apple()
     {
         return $this->hasOne('UserProfile');
     }
