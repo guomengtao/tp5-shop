@@ -3,12 +3,24 @@ branches: {
   }
 fileChange:
   /application:
-    newFile: !uuid '6cb0a5a8a83adebf7f258f18f20c5e68ca7ab8dc'
-    oldFile: !uuid '5bda81f4ae08b2dec907ac2074ad08b8af0cb08a'
-  /application/install.lock:
-    newFile: null
-    oldFile: !uuid '926c252d3b220035baf86e175ab3f04ba0e2deaf'
-gitCommitId: !uuid 'bfc31a9a50a89542dd7d849515e49b2ef0777ce6'
+    newFile: !uuid '0f1fdf64e3e144aceef5a111aed6fb55effb6331'
+    oldFile: !uuid '6cb0a5a8a83adebf7f258f18f20c5e68ca7ab8dc'
+  /application/index:
+    newFile: !uuid '7dde45e8a8d5dd9382a3f811785aac87e4143876'
+    oldFile: !uuid 'c07a54e8e11ca3ffc42980194860bc776ee5d5dc'
+  /application/index/controller:
+    newFile: !uuid '8f385765aa06cf6eecf295a87ee8eb71a7ca074c'
+    oldFile: !uuid '4469d660308918e4dd9e49446334e4131e9424c5'
+  /application/index/controller/Index.php:
+    newFile: !uuid '63ac3a54c7cd16a226a97280356bda48be217260'
+    oldFile: !uuid '5985460e51da5f2fe0f567c5618d2e79be626082'
+  /t966.sql:
+    newFile: !uuid 'dd0c3bd5092eec9c37321b49525c4b06e1d1a1a4'
+    oldFile: !uuid '67e97800569a778b03d5d1987866935c593ff399'
+  /安装流程.txt:
+    newFile: !uuid '8ec3d4c66c0173169b9054ad14e49ce4dc4049d0'
+    oldFile: !uuid 'c40a28655b40a5f0a9b455be2be7711373bf6817'
+gitCommitId: !uuid 'beb652998f489d0cc082fe9a79240802eb4a591c'
 renames: {
   }
-revisionId: 58
+revisionId: 59
