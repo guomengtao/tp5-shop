@@ -167,17 +167,16 @@ class Index extends \think\Controller
         //        $password, /* The password to use 连接MySQL密码 */  
         //        $database) or die('打开失败');  
 
-        // 过滤掉数组里的空值
-        $_arr = array_filter($_arr);
-
+         
         header("content-Type: text/html; charset=Utf-8");
-
  
          
          
         //执行sql语句
         foreach ($_arr as $_value) {
             // $conn->query($_value.';');
+
+         
 
             
             if ($conn->query($_value.';') === TRUE) {
@@ -187,13 +186,17 @@ class Index extends \think\Controller
                 flush();  
                 sleep(1);   
             } else {
+
+              // 过滤掉数组里的空值
+
+              if(!$_value) {
                 echo  $_value  ." Error: " .$conn->error . "  ";
                 ob_flush();
                 flush();  
                 sleep(1);
                 echo "<script>alert('导入sql，注意先清空数据库。防止冲突')</script>";
                 die();
-
+              }
                    
    
             }
@@ -2922,10 +2925,10 @@ echo "生成成功";
 
 
       // 查询指定用户的关联邮箱
-      $user = User::get(394);
+      // $user = User::get(394);
        
       // 输出Profile关联模型的email属性
-      echo $user->userProfile->email;
+      // echo $user->userProfile->email;
 
       // 已用户表为主，查询关联表邮箱为指定值的用户
       // $user = User::hasWhere('profile',['email'=>'393@qq.com'])->find();
@@ -2934,13 +2937,13 @@ echo "生成成功";
 
  
 
- die();
+ // die();
 
 
 
 
        //权限认证
-       $auth = new \Auth\Auth();
+       // $auth = new \Auth\Auth();
 
 
  
@@ -2961,13 +2964,13 @@ echo "生成成功";
 
 
 
-        $request = Request::instance();
+        // $request = Request::instance();
 
-        if (!$auth->check($request->module() . '/' . $request->controller() . '/' . $request->action(), Cookie::get('user_id'))) {// 第一个参数是规则名称,第二个参数是用户UID
+        // if (!$auth->check($request->module() . '/' . $request->controller() . '/' . $request->action(), Cookie::get('user_id'))) {// 第一个参数是规则名称,第二个参数是用户UID
         // if (!$auth->check($request->module() . '/' . $request->controller() . '/' . $request->action(), 100867)) {// 第一个参数是规则名称,第二个参数是用户UID
             /* return array('status'=>'error','msg'=>'有权限！');*/
-            $this->error('你没有权限');
-        }
+            // $this->error('你没有权限');
+        // }
         // else{
 
         //   echo "管理员您好";
@@ -3473,23 +3476,23 @@ echo "生成成功";
         if ($page_view) {
  
 
-        	// 查询播放记录条数
-		    $url = "/index/index/view/id/". $page_view;
-		    // $view_count =  1;
-		    $view_count =  Footprint::where('url','=',$url)
-		        ->count();
+          // 查询播放记录条数
+        $url = "/index/index/view/id/". $page_view;
+        // $view_count =  1;
+        $view_count =  Footprint::where('url','=',$url)
+            ->count();
 
-		    $user = Shop::get($page_view);
-			  $user->page_view     = $view_count;
-			  $user->save();
+        $user = Shop::get($page_view);
+        $user->page_view     = $view_count;
+        $user->save();
 
  
-			
+      
  
 
-		    return $view_count;
+        return $view_count;
 
-        	 
+           
 
         }
 

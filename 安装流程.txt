@@ -1,17 +1,29 @@
-���߰�װ˵����
+在线安装说明：
 
-���� �����еĴ��ļ���Ŀ¼�µ� /index/index/install  ֱ�ӵ����һ�����߰�װ���ɡ�
+访问 您运行的此文件的目录下的 三选一
+
+安装路径1：例如你这个源码在 phpstudy的www目录下 请访问
+http://localhost/public/index.php/index/index/install/
+
+安装路径2：例如你这个源码在 phpstudy的www目录下 二级目录下 例如tp5 请访问
+http://localhost/tp5/public/index.php/index/index/install/
+
+安装路径3：例如绑定了域名 请绑定域名目录public 在thinkphp5里默认访问的首页public/index.php 
+http://www.你绑定的域名.com/index.php/index/index/install/
+
+直接点击下一步在线安装即可。
 
 
-�ֹ���װ��
 
-1.�޸����ݿ������ļ�������ݿ��˺������
+手工安装：
 
-2.�����Ŀ¼�µ�t996.sql�ļ�
+1.修改数据库配置文件里的数据库账号密码等
+
+2.导入根目录下的t996.sql文件
 
 
-��������ѯ��qq 250285636
+有疑问咨询我qq 250285636
 
-΢�ţ�18210787105
+微信：18210787105
 
- ������ʾ��http://open.gaoxueya.com
+ 在线演示：http://open.gaoxueya.com
