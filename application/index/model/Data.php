@@ -22,6 +22,10 @@ class Data extends model
         return $this->hasOne('Ipinfo','phone','phone');
         //hasOne('关联模型名','外键名','主键名',['模型别名定义'],'join类型');
     }
+    public function watermelon(){
+        return $this->hasOne('Shop','id','shop')->setEagerlyType(1);
+        //hasOne('关联模型名','外键名','主键名',['模型别名定义'],'join类型');
+    }
 
     public function shop_title(){
         return $this->hasOne('Shop','id','shop');

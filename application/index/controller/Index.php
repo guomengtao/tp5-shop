@@ -2933,13 +2933,13 @@ echo "生成成功";
       //   }
 
 // 关联预载入
- $list = User::with('profile')->select();
+//  $list = User::with('profile')->select();
 
  
-foreach($list as $user){
-    // 获取用户关联的profile模型数据
-    dump($user->profile->email);
-}
+// foreach($list as $user){
+//     // 获取用户关联的profile模型数据
+//     dump($user->profile->email);
+// }
 
  
 
@@ -3131,7 +3131,7 @@ foreach($list as $user){
             
 
             // 查询最新的聊天信息
-            $bbs = Data::with('sort','foot')
+            $bbs = Data::with('sort','foot','watermelon')
                     ->order('id', 'desc')
                     ->where('phone','<>','15966982315')
                     ->limit(10)
