@@ -8,6 +8,7 @@ use app\index\model\Shop;
 use app\index\model\Video;
 use app\index\model\Likes;
 use app\index\model\User;
+use app\index\model\Profile;
 use app\index\model\User_qq;
 use app\index\model\Sms;
 use app\index\model\Order;
@@ -2931,8 +2932,26 @@ echo "生成成功";
 // echo $user->profile->name;
 
 
-$user = User::hasWhere('profile',['email'=>'394@qq.com'])->find();
-echo $user->name;
+// $user = User::hasWhere('profile',['email'=>'394@qq.com'])->find();
+// echo $user->name;
+
+
+
+      // 翻转示例 反过来试试 用profile表为主
+      // user表和profile 是一对一的关系，可以相互翻转
+      // 主要关联主键发生的变化
+
+      // 17998这里是 profle的主键
+       $user = Profile::get(17998);
+       // echo User::getLastSql();
+      // 输出Profile关联模型的email属性
+      echo $user->apple->name;
+
+// die();
+ 
+
+
+
 
 
       // 查询指定用户的关联邮箱

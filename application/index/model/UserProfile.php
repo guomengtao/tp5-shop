@@ -7,6 +7,6 @@ use traits\model\SoftDelete;
 
 class UserProfile extends model
 {
-    
+ 
 
 }
