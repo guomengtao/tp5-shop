@@ -45,6 +45,7 @@ class User extends model
 
     public function profile()
     {
+            // 设置预载入查询方式为JOIN方式
         return $this->hasOne('Profile');
     }
 

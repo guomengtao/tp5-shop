@@ -2925,12 +2925,21 @@ echo "生成成功";
     public function index(){
 
 // 查询多条，一对一关联的 foreach写法
-      $list = User::all();
+      // $list = User::all();
       
-      foreach($list as $user){
-            // 获取用户关联的profile模型数据
-            dump($user->profile->email);
-        }
+      // foreach($list as $user){
+      //       // 获取用户关联的profile模型数据
+      //       dump($user->profile->email);
+      //   }
+
+// 关联预载入
+ $list = User::with('profile')->select();
+
+ 
+foreach($list as $user){
+    // 获取用户关联的profile模型数据
+    dump($user->profile->email);
+}
 
  
 
@@ -2941,7 +2950,7 @@ echo "生成成功";
 // echo $user->profile->email;
 // echo $user->profile->name;
 
-die();
+// die();
 // $user = User::hasWhere('profile',['email'=>'394@qq.com'])->find();
 // echo $user->name;
 
