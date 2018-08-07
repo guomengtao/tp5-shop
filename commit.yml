@@ -3,30 +3,24 @@ branches: {
   }
 fileChange:
   /application:
-    newFile: !uuid '17233f806f2e2081fd5601504c079d7e6b33cbb1'
-    oldFile: !uuid 'fefce32d4c9a97c225833d06e9843e9bb6f5e9b3'
-  /application/config.php:
-    newFile: !uuid '20a128ebbff98f5c10c78650b1b9fed6f211451c'
-    oldFile: !uuid '6353ee5265e067cd317e85fe0781348fe3f13f16'
+    newFile: !uuid '7a1f83f5113de66ab7edcfed49e9f86b1736aec0'
+    oldFile: !uuid '17233f806f2e2081fd5601504c079d7e6b33cbb1'
   /application/index:
-    newFile: !uuid 'a42e2a973c343e745760e31f5e1c0f195216425a'
-    oldFile: !uuid '95ba935c6f15e2600344e38e426392557c201b4a'
+    newFile: !uuid '5165becffefe77cea964e4ee292e3633ff7a7209'
+    oldFile: !uuid 'a42e2a973c343e745760e31f5e1c0f195216425a'
   /application/index/controller:
-    newFile: !uuid 'f59b19abf4a2802a1971f1f84c34c01c12cf4c12'
-    oldFile: !uuid '4de0d0337a844c833818ae53c96009679aff7ef2'
+    newFile: !uuid 'fa29b47810d9ed2b30b44393fed6d41ccc0648b0'
+    oldFile: !uuid 'f59b19abf4a2802a1971f1f84c34c01c12cf4c12'
   /application/index/controller/Index.php:
-    newFile: !uuid 'abb883c9491242786f7575a8b4b810d6e7a57562'
-    oldFile: !uuid '127ee8a8f95479bc07632760c47bf0f44ac4f9c6'
+    newFile: !uuid 'aa230f91d5d1e874017aa6c95e1f79f4022cf7a8'
+    oldFile: !uuid 'abb883c9491242786f7575a8b4b810d6e7a57562'
   /application/index/model:
-    newFile: !uuid 'e58a01c696df8c91a3802e8b38a5b64e941b8264'
-    oldFile: !uuid '9a05f89ba13bb6ca9ebfeea459e31371b94e0975'
-  /application/index/model/Profile.php:
-    newFile: !uuid '50b6cd6660956982fa3fc33ac9ccf24020a7db08'
-    oldFile: !uuid '0b265fc4b04c35616ebc4b1affbf79a3a7d6c98b'
-  /application/index/model/UserProfile.php:
-    newFile: !uuid '190837026404bbfc6fabdcdcc4c4946b5c2e09d6'
-    oldFile: !uuid '9d5a41015a0da0834eeba21a53c4354259d2a270'
-gitCommitId: !uuid '58715688572d4edc3fb72e186790735f9e17c0ee'
+    newFile: !uuid '1768c89a87c19e7142642bee8f802c8d7ade7b26'
+    oldFile: !uuid 'e58a01c696df8c91a3802e8b38a5b64e941b8264'
+  /application/index/model/User.php:
+    newFile: !uuid '1c631ce135bb73d8878f71e50a44fc6c5f3f250a'
+    oldFile: !uuid '547592c9832e4f13cec27beb47330b664863fbab'
+gitCommitId: !uuid 'd8b6ef4e8b1ddcf2d3afa9286562e9688847436a'
 renames: {
   }
-revisionId: 61
+revisionId: 62
