@@ -2924,14 +2924,26 @@ echo "生成成功";
     public function index(){
 
 
+
+ // $user = User::get(393);
+// 输出Profile关联模型的email属性
+// echo $user->profile->email;
+// echo $user->profile->name;
+
+
+$user = User::hasWhere('profile',['email'=>'394@qq.com'])->find();
+echo $user->name;
+
+
       // 查询指定用户的关联邮箱
       // $user = User::get(394);
        
       // 输出Profile关联模型的email属性
-      // echo $user->userProfile->email;
+      // echo $user->UserProfile->email;
 
       // 已用户表为主，查询关联表邮箱为指定值的用户
       // $user = User::hasWhere('profile',['email'=>'393@qq.com'])->find();
+      // $user = User::hasWhere('UserProfile',['email'=>'393@vip.qq.com'])->find();
       // echo $user->name;
 
 

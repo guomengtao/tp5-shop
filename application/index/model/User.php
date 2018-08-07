@@ -48,9 +48,11 @@ class User extends model
         return $this->hasOne('Profile');
     }
 
-    public function userProfile()
+ 
+
+    public function UserProfile()
     {
-        return $this->hasOne('userProfile');
+        return $this->hasOne('UserProfile');
     }
 
     public function userinfo()
