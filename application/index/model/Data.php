@@ -25,8 +25,11 @@ class Data extends model
     }
 
  
-
- 
+    // 测试 查询关联的多条点赞
+    public function likes()
+    {
+        return $this->hasMany('likes','data_id','id');
+    }
 
  
 

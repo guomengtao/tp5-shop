@@ -3026,10 +3026,11 @@ echo "生成成功";
 
 
       // 查询指定用户的关联邮箱
-      // $user = User::get(394);
+      $user = User::get(394);
        
       // 输出Profile关联模型的email属性
-      // echo $user->AuthGroupAccess->group_id;
+      // echo $user->AuthGroupAccess->title;
+      echo $user->AuthGroupAccess->thec->title;
 
 
 
@@ -3149,13 +3150,13 @@ echo "生成成功";
             
 
             // 查询最新的聊天信息
-            $bbs = Data::with('foot,watermelon,user,dataSelf')
+            $bbs = Data::with('foot,watermelon,user,dataSelf,likes')
                     ->order('id', 'desc')
                     ->limit(10)
                     ->select();
 
-
-            
+                   
+ 
 
              foreach($bbs as $k=>$v){
  
