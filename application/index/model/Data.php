@@ -26,12 +26,16 @@ class Data extends model
 
  
     // 测试 查询关联的多条点赞
-    public function likes()
+    public function likesList()
     {
-        return $this->hasMany('likes','data_id','id');
+        return $this->hasMany('likes','data_id');
     }
 
- 
+     public function comments()
+    {
+        return $this->hasMany('Comment','commentable_id');
+        //hasOne('关联模型名','外键名','主键名',['模型别名定义'],'join类型');
+    }
 
     public function shop_title(){
         return $this->hasOne('Shop','id','shop');

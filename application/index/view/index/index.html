@@ -145,6 +145,7 @@
                                     </a></small>
                                   </div>
                                   <div class="col-xs-3  col-md-1 pull-right"> 
+                                     
                                         <span onclick='public_ajax("{$Think.server.script_name}/index/index/view/data_id/{$user.id}",0)' style="position: relative;">  
                                                 <small><span id="like_{$user.id}"  style="color: #555; font-size: 12px">{$user.likes?$user.likes:"赞"}</span> </small>
                                                                     <span id="like_icon_{$user.id}" style="color: {$user.on?'#0084ff':'#8590a6'}; fill: currentColor;"> 
@@ -175,6 +176,9 @@
                                                                 <h5> <small> {$user.watermelon.title}  {$user.create_time}  
 
                                                                        <a href = "javascript:void(0);"  onclick="document.getElementById('reply_{$user.id}').style.display = '' " >回复</a> 
+                                                                {volist name='user.likesList' id='likeslist'}
+                                                                          {$likeslist.user.phone}   
+                                                                  {/volist}
 
                                                                                                    </small></h5>
                                                                

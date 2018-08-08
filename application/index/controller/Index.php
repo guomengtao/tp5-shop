@@ -2989,17 +2989,17 @@ echo "生成成功";
 // 查询评论超过3个的文章
 // $list = Article::has('comments','>',2)->select();
 // 查询评论状态正常的文章
-$list = Article::with('comments')->select();
+// $list = Article::with('comments')->select();
 
 
 
-      foreach($list as $user){
+      // foreach($list as $user){
             // 获取文章的所有评论
-            dump($user->comments);
-        }
+        //     dump($user->comments);
+        // }
 
 
-dump($list);
+// dump($list);
 
 
 
@@ -3185,7 +3185,7 @@ dump($list);
             
 
             // 查询最新的聊天信息
-            $bbs = Data::with('foot,watermelon,user,dataSelf,likes')
+            $bbs = Data::with('foot,watermelon,user,dataSelf,likesList')
                     ->order('id', 'desc')
                     ->limit(10)
                     ->select();
