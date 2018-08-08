@@ -14,6 +14,7 @@ use app\index\model\Sms;
 use app\index\model\Order;
 use app\index\model\Footprint;
 use app\index\model\Data;
+use app\index\model\Article;
 use think\Debug;
 use think\Lang;
 use think\Cookie;
@@ -2971,6 +2972,40 @@ echo "生成成功";
 
     public function index(){
 
+// $article = Article::get(277);
+// 获取文章的所有评论
+// dump($article->comments);
+// 也可以进行条件搜索
+// dump($article->comments()->where('status',1)->select());
+// $article = $article->comments()->where('status',1)->select();
+
+      // $article = Article::get(277);
+// 获取文章的所有评论
+// dump($article);
+// dump($article->comments);
+// 也可以进行条件搜索
+// dump($article->comments()->where('status','')->select());
+
+// 查询评论超过3个的文章
+// $list = Article::has('comments','>',2)->select();
+// 查询评论状态正常的文章
+$list = Article::with('comments')->select();
+
+
+
+      foreach($list as $user){
+            // 获取文章的所有评论
+            dump($user->comments);
+        }
+
+
+dump($list);
+
+
+
+
+
+
 
 
 // $user              =  Cookie::get('user_id');
@@ -3026,11 +3061,11 @@ echo "生成成功";
 
 
       // 查询指定用户的关联邮箱
-      $user = User::get(394);
+      // $user = User::get(394);
        
       // 输出Profile关联模型的email属性
       // echo $user->AuthGroupAccess->title;
-      echo $user->AuthGroupAccess->thec->title;
+      // echo $user->AuthGroupAccess->thec->title;
 
 
 
