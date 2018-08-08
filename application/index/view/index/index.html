@@ -105,12 +105,18 @@
         </div>
 
 
+
+
          <!--简易即时聊天-->
         <div class="panel panel-default">
             <div class="panel-heading">  <span class="glyphicon glyphicon-option-vertical" aria-hidden="true"></span> 学习交流  <a class="pull-right" href="/tutorial">更多</a><small><span class="badge" style="background-color: #a7a7a7;display: none">666 </span></small></div>
 
 
             <div class="panel-body">
+
+                  {volist name='list' id='user'}
+                    {$user.id} {$user.profile.email}
+                  {/volist}
                 <span id="bbs" style="display: none">666999</span>
 
                 <div class="bss_content"  id="bss_content" name="bss_content" style="margin-bottom: 10px; word-wrap:break-word;">

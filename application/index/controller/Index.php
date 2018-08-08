@@ -2933,7 +2933,7 @@ echo "生成成功";
       //   }
 
 // 关联预载入
-//  $list = User::with('profile')->select();
+ $list = User::with('profile')->select();
 
  
 // foreach($list as $user){
@@ -2941,7 +2941,7 @@ echo "生成成功";
 //     dump($user->profile->email);
 // }
 
- 
+  $this->assign('list',$list);
 
 
 
