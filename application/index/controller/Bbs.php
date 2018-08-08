@@ -454,7 +454,6 @@ class Bbs extends \think\Controller
             $user = Data::create([
                 'title'      =>  $title,
                 'shop'       =>  $shop,
-                'phone'      =>  $phone,
                 'user_id'    =>  $user_id,
                 'age'        =>  $age,
                 'session_id' =>  session_id()

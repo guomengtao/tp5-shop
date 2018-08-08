@@ -2922,6 +2922,53 @@ echo "生成成功";
 
     }
 
+    public function auth(){
+
+      //权限认证 示例
+       $auth = new \Auth\Auth();
+
+
+ 
+        /*
+       验证单个条件
+       验证 会员id 为 1 的 小红是否有 增加信息的权限
+
+       check方法中的参数解释：
+           参数1：Admin/Article/Add 假设我现在请求 Admin模块下Article控制器的Add方法
+           参数2： 1 为当前请求的会员ID
+       */
+
+        // $check = $auth->check('Admin/Article/Added','10086');
+        // $check = $auth->check('Admin/Article/Added,Home/add','10086');
+          // $check =   $auth->check('Admin/Article/Added,Home/add',10086,'and'); 
+
+        // dump($check); //返回值true,代表有此权限
+
+
+
+        $request = Request::instance();
+
+        if (!$auth->check($request->module() . '/' . $request->controller() . '/' . $request->action(), Cookie::get('user_id'))) {
+
+        // 第一个参数是规则名称,第二个参数是用户UID
+        
+                if (!$auth->check($request->module() . '/' . $request->controller() . '/' . $request->action(), 100867)) {// 第一个参数是规则名称,第二个参数是用户UID
+                     // return array('status'=>'error','msg'=>'有权限！');
+                    $this->error('你没有权限');
+                }
+                else{
+
+                  echo "管理员您好";
+                //   // $this->success('恭喜您，你有权限');
+
+                }
+        }
+
+
+
+      }
+
+
     public function index(){
 
 
@@ -3006,41 +3053,7 @@ echo "生成成功";
 
 
 
-       //权限认证
-       // $auth = new \Auth\Auth();
-
-
  
-        /*
-       验证单个条件
-       验证 会员id 为 1 的 小红是否有 增加信息的权限
-
-       check方法中的参数解释：
-           参数1：Admin/Article/Add 假设我现在请求 Admin模块下Article控制器的Add方法
-           参数2： 1 为当前请求的会员ID
-       */
-
-        // $check = $auth->check('Admin/Article/Added','10086');
-        // $check = $auth->check('Admin/Article/Added,Home/add','10086');
-          // $check =   $auth->check('Admin/Article/Added,Home/add',10086,'and'); 
-
-        // dump($check); //返回值true,代表有此权限
-
-
-
-        // $request = Request::instance();
-
-        // if (!$auth->check($request->module() . '/' . $request->controller() . '/' . $request->action(), Cookie::get('user_id'))) {// 第一个参数是规则名称,第二个参数是用户UID
-        // if (!$auth->check($request->module() . '/' . $request->controller() . '/' . $request->action(), 100867)) {// 第一个参数是规则名称,第二个参数是用户UID
-            /* return array('status'=>'error','msg'=>'有权限！');*/
-            // $this->error('你没有权限');
-        // }
-        // else{
-
-        //   echo "管理员您好";
-        //   // $this->success('恭喜您，你有权限');
-
-        // }
 
 
 
@@ -3136,9 +3149,8 @@ echo "生成成功";
             
 
             // 查询最新的聊天信息
-            $bbs = Data::with('sort,foot,watermelon,user,dataself')
+            $bbs = Data::with('foot,watermelon,user,dataSelf')
                     ->order('id', 'desc')
-                    ->where('phone','<>','15966982315')
                     ->limit(10)
                     ->select();
 
@@ -3151,11 +3163,16 @@ echo "生成成功";
                 // 点赞数量的统计查询
 
                 $likes = likes::where('data_id','=',$bbs[$k]['id'])->count();
+
+                 $bbs[$k]['likes'] = $likes;
+
+
+                // 查询当前用户有没有点赞
                 $on = likes::where('data_id','=',$bbs[$k]['id'])
                     ->where('user_id','=',Cookie::get('user_id'))
                     ->count();
                 // dump($likes);die();
-                $bbs[$k]['likes'] = $likes;
+               
                 $bbs[$k]['on']    = $on;
 
 
