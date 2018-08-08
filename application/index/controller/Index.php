@@ -2933,7 +2933,7 @@ echo "生成成功";
       //   }
 
 // 关联预载入
- $list = User::with('profile')->select();
+ // $list = User::with('profile')->select();
 
  
 // foreach($list as $user){
@@ -2941,7 +2941,7 @@ echo "生成成功";
 //     dump($user->profile->email);
 // }
 
-  $this->assign('list',$list);
+  // $this->assign('list',$list);
 
 
 
@@ -3131,7 +3131,7 @@ echo "生成成功";
             
 
             // 查询最新的聊天信息
-            $bbs = Data::with('sort','foot','watermelon')
+            $bbs = Data::with('sort,foot,watermelon')
                     ->order('id', 'desc')
                     ->where('phone','<>','15966982315')
                     ->limit(10)
@@ -3220,6 +3220,7 @@ echo "生成成功";
 
 
         $this->assign('show', cache('shop_show_'.$page));
+        // $this->assign('bbs', $bbs);
         $this->assign('bbs', cache('bbs'));
         // $this->assign('user_vip', $user_vip);
         // $this->assign('registration_user',  $registration_user);
