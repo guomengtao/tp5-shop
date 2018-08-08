@@ -2924,6 +2924,11 @@ echo "生成成功";
 
     public function index(){
 
+
+
+// $user              =  Cookie::get('user_id');
+// dump($user);
+
 // 查询多条，一对一关联的 foreach写法
       // $list = User::all();
       
@@ -3131,7 +3136,7 @@ echo "生成成功";
             
 
             // 查询最新的聊天信息
-            $bbs = Data::with('sort,foot,watermelon')
+            $bbs = Data::with('sort,foot,watermelon,user,dataself')
                     ->order('id', 'desc')
                     ->where('phone','<>','15966982315')
                     ->limit(10)
@@ -3154,17 +3159,7 @@ echo "生成成功";
                 $bbs[$k]['on']    = $on;
 
 
-                if ($bbs[$k]['age']>=100) {
-                    # 如果属于回复，查出来回的谁的评论
-
-                  $data = Data::get($bbs[$k]['age']);
-                   
-                  $bbs[$k]['r_phone']    = $data->phone;
-                  $bbs[$k]['r_title']    = $data->title;
-
-     
-
-                  }  
+ 
 
             }
             

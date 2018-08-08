@@ -127,6 +127,7 @@ class Bbs extends \think\Controller
         $shop            = input('param.shop');
         $age             = input('age');
         $phone           = Cookie::get('phone');
+        $user_id         = Cookie::get('user_id');
         $online_time     = Cookie::get('online_time');
         $new_data_title  = "";
         $captcha         = input("captcha");
@@ -454,6 +455,7 @@ class Bbs extends \think\Controller
                 'title'      =>  $title,
                 'shop'       =>  $shop,
                 'phone'      =>  $phone,
+                'user_id'    =>  $user_id,
                 'age'        =>  $age,
                 'session_id' =>  session_id()
             ]);

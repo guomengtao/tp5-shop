@@ -138,7 +138,11 @@
                                 <!-- 点赞左右结构 -->
                                 <div class="row">
                                   <div class="col-xs-6 col-md-8">
-                                        <small><a href="#">{$user.phone|substr=0,3}****{$user.phone|substr=7,4}</a></small>
+                                        <small><a href="{:url('/')}index/member/home/user_id/{$user.user_id}">
+
+                                        {$user.user.phone} {$user.phone|substr=0,3}****{$user.phone|substr=7,4}
+
+                                    </a></small>
                                   </div>
                                   <div class="col-xs-3  col-md-1 pull-right"> 
                                         <span onclick='public_ajax("{$Think.server.script_name}/index/index/view/data_id/{$user.id}",0)' style="position: relative;">  
@@ -153,21 +157,22 @@
                                   </div>
                                 </div>
 
-                                                                <small> 
+                                                                <small>  
 
-                                                                  {if condition="$user.age >=100"}
+                                                                  {if condition="$user.dataself.title"}
                                                                 <div class="form-group input-group field-feed-content required" style="background-color:  #f4f4f4;padding: 10px;color: #555555">
 
-                                                                     @{$user.r_phone|substr=0,3}****{$user.r_phone|substr=7,4}:{$user.r_title}
+                                                                     @{$user.dataself.user_id}:{$user.dataself.title}
                                                  
                                                                 </div>
 
                                                                {/if}
-                                                                    <a href="{:url('/')}index/index/view/id/{$user.shop}"> {$user.title}</a>
+
+                                                                <a href="{:url('/')}index/index/view/id/{$user.shop}"> {$user.title}</a>
                                                                         
 
                                                                 </small>
-                                                                <h5> <small> {$user.watermelon.title}{$user.watermelon.price} {$user.create_time}  
+                                                                <h5> <small> {$user.watermelon.title}  {$user.create_time}  
 
                                                                        <a href = "javascript:void(0);"  onclick="document.getElementById('reply_{$user.id}').style.display = '' " >回复</a> 
 
