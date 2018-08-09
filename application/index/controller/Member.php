@@ -16,6 +16,267 @@ use think\Session;
 
 class Member extends \think\Controller
 {
+        public function start1(){
+
+
+            // 一张卡片有7颗星 
+            // 有6张卡片+1 张大卡 3颗星
+            //限42天内打完 + 3天
+            // 每天打卡点亮一颗星  然后一天只能打一次 没打的不亮 
+            // 打满后要亮 下面显示已获得
+
+
+
+
+        }
+
+            public function start(){
+
+                $user              =  Cookie::get('phone');
+
+
+
+        // ajax 签到调用
+
+        if (request()->isPost()) {
+
+                 $user               =  Cookie::get('phone');
+                 $registration_vip   =  input('registration_vip');
+        
+                 if (!$user) {
+
+                    return "大佬！请登录";
+                     # 没有登录 跳转到登录页面
+                    // redirect('index/index/login')->remember();
+
+                 }
+
+                // 判断今天是否有签到记录
+                $registration_user  = Order::where('phone','=',$user)
+                ->where('body','=',135)
+                ->whereTime('create_time', 'today')
+                ->count();
+
+
+                // 如果是自动签到 已经签到成功不在返回提示
+                if($registration_vip and $registration_user){
+                    return 0;die();
+                }
+
+
+
+                    // 检查昨天是否签到
+                    $rand = Order::where('body', 135)
+                        ->where('phone', $user)
+                        ->whereTime('create_time', 'yesterday')
+                        ->value('rand');
+
+                    $rand = $rand+1;
+
+
+
+                if ($registration_user) {
+                    # 已经签到直接提示
+                     return "已连续签到" . $rand ."天";
+                } 
+
+
+                     
+                    // 生成签到记录订单
+                    $user = Order::create([
+                        'body'     =>  135,
+                        'subject'  =>  "签到",
+                        'total_fee'     =>  0,
+                        'rand'     =>  $rand,
+                        'phone'    =>  $user
+                    ]);
+
+
+
+                    // 设置对应奖励的vip天数 
+                    
+
+
+
+                        if($rand==3){
+                            $add_vip_days = 1;
+                        }elseif ($rand==8){
+                            $add_vip_days = 3;
+                        }elseif ($rand==16){
+                            $add_vip_days = 6;
+                        }elseif ($rand==32){
+                            $add_vip_days = 18;
+                        }elseif ($rand>32){
+                            $add_vip_days = 1;
+                        } else {
+                            $add_vip_days = 0;
+                        }
+
+                                 
+                       // 判断今天是否领取奖励
+                       $rand_today = Order::where('body', 135)
+                        ->where('phone', $user)
+                        ->where('out_trade_no', '135001')
+                        ->whereTime('create_time', 'today')
+                        ->count();
+
+                         
+
+                         
+                        // 如果有奖励，执行奖励vip天数的公用功能
+                        if ($add_vip_days>=1 and $rand_today<=0) {
+                            add_vip_days($add_vip_days,135001);
+                        }
+
+                
+
+                        return "恭喜您，连续签到" . $rand ."天";
+
+        }
+                      
+
+ 
+
+        // 调用浏览记录和来路统计功能
+        footprint();
+
+
+
+
+        //        查询今天签到
+        $list  = Order::where('body','=',135)
+            ->whereTime('create_time', 'today')
+            ->where('phone','=',$user)
+            ->paginate(100);
+
+        //        查询昨天签到
+        $yesterday  = Order::where('body','=',135)
+            ->whereTime('create_time', 'yesterday')
+            ->where('phone','=',$user)
+            ->paginate(100);
+
+
+
+        //        查询前天签到
+        $the_day_before_yesterday  = Order::where('body','=',135)
+            ->whereTime('create_time', '-7 day')
+            ->where('phone','=',$user)
+            ->paginate(100);
+
+        //        查询最近7天签到
+        $list_all  = Order::where('body','=',135)
+           ->where('phone','=',$user)
+            ->whereTime('create_time', '-7 day')
+            ->paginate(100);
+
+
+            // 创建一个45天的数组 
+            $cars=array("Volvo","BMW","Toyota"); 
+            // echo  $cars[0] .   $cars[1] .   $cars[2]  ;
+
+            // $cars[3] = 8;
+
+            
+
+            for ($i=0; $i < 45 ; $i++) { 
+                # code...
+                 $cars[$i] = $i;
+            }
+
+            // dump($cars);
+
+
+            // 二维数组：
+            // $cars=array
+            //   (
+            //   array("Volvo",100,96),
+            //   array("BMW",60,59),
+            //   array("Toyota",110,100)
+            //   );
+            //  dump($cars);
+
+            // die();
+
+
+            // 第一天是他签到开始的第一天
+
+            // 获取签到开始的第一天      
+
+
+            $firstday = '2018-7-29';
+
+
+
+
+
+            for ($i=1; $i < 46 ; $i++) { 
+                # code...
+
+            echo "45天-之第" . $i ."天 ";
+
+
+            echo $firstday. "签到情况 ";
+                 
+            $day_a = $firstday.' 00:00:00';
+            $day_b = $firstday.' 23:59:59';
+
+
+            $everyday  = Order::where('body','=',135)
+            ->where('phone','=',$user)
+            ->where('create_time','between time',[$day_a,$day_b])
+            ->order('id asc')
+            ->count(); 
+
+            // dump($everyday);
+
+            if ($everyday) {
+                # code...
+                echo " 今天签到了，点亮   获得一课星星  ☆   <br> ";
+            }else{
+                 echo " 熄灭代码 <br>";
+            }
+
+            // 下一天 date('Y-m-d',strtotime($date.'-1 day'))
+             // $firstday = $firstday +1;
+             $firstday = date('Y-m-d',strtotime($firstday.'+1 day'));
+
+
+
+
+            }
+
+
+            
+
+
+
+            
+
+
+
+
+
+        //       连续签到排名
+        $list_top  = Order::where('body','=',135)
+            ->where('phone','=',$user)
+            ->order('id desc')
+            ->paginate(50);
+
+
+
+
+        $this->assign('list',$list);
+        $this->assign('list_all',$list_all);
+        $this->assign('list_top',$list_top);
+        $this->assign('yesterday',$yesterday);
+
+        // return view();
+    }
+
+
+
+
+
         public function news(){
 
           

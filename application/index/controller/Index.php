@@ -52,6 +52,7 @@ class Index extends \think\Controller
 
         }
 
+ 
         public function install(){
 
           set_time_limit(0);
