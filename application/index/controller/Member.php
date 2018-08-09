@@ -206,10 +206,10 @@ class Member extends \think\Controller
             $firstday = '2018-7-29';
 
 
+            $allstart =0;
 
 
-
-            for ($i=1; $i < 46 ; $i++) { 
+           for ($i=1; $i < 46 ; $i++) { 
                 # code...
 
             echo "45天-之第" . $i ."天 ";
@@ -232,6 +232,7 @@ class Member extends \think\Controller
             if ($everyday) {
                 # code...
                 echo " 今天签到了，点亮   获得一课星星  ☆   <br> ";
+                $allstart++;
             }else{
                  echo " 熄灭代码 <br>";
             }
@@ -240,10 +241,9 @@ class Member extends \think\Controller
              // $firstday = $firstday +1;
              $firstday = date('Y-m-d',strtotime($firstday.'+1 day'));
 
-
-
-
             }
+
+            echo "您总共获得星星" . $allstart;
 
 
             
