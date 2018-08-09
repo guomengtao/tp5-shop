@@ -3186,21 +3186,17 @@ echo "生成成功";
 
             // 查询最新的聊天信息
             $bbs = Data::with('foot,watermelon,user,dataSelf,likesList')
+                    ->withCount('likeslist')
                     ->order('id', 'desc')
                     ->limit(10)
                     ->select();
 
-                   
  
 
              foreach($bbs as $k=>$v){
  
 
-                // 点赞数量的统计查询
-
-                $likes = likes::where('data_id','=',$bbs[$k]['id'])->count();
-
-                 $bbs[$k]['likes'] = $likes;
+               
 
 
                 // 查询当前用户有没有点赞
