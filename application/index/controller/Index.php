@@ -2972,126 +2972,7 @@ echo "生成成功";
 
     public function index(){
 
-// $article = Article::get(277);
-// 获取文章的所有评论
-// dump($article->comments);
-// 也可以进行条件搜索
-// dump($article->comments()->where('status',1)->select());
-// $article = $article->comments()->where('status',1)->select();
-
-      // $article = Article::get(277);
-// 获取文章的所有评论
-// dump($article);
-// dump($article->comments);
-// 也可以进行条件搜索
-// dump($article->comments()->where('status','')->select());
-
-// 查询评论超过3个的文章
-// $list = Article::has('comments','>',2)->select();
-// 查询评论状态正常的文章
-// $list = Article::with('comments')->select();
-
-
-
-      // foreach($list as $user){
-            // 获取文章的所有评论
-        //     dump($user->comments);
-        // }
-
-
-// dump($list);
-
-
-
-
-
-
-
-
-// $user              =  Cookie::get('user_id');
-// dump($user);
-
-// 查询多条，一对一关联的 foreach写法
-      // $list = User::all();
-      
-      // foreach($list as $user){
-      //       // 获取用户关联的profile模型数据
-      //       dump($user->profile->email);
-      //   }
-
-// 关联预载入
- // $list = User::with('profile')->select();
-
  
-// foreach($list as $user){
-//     // 获取用户关联的profile模型数据
-//     dump($user->profile->email);
-// }
-
-  // $this->assign('list',$list);
-
-
-
- // $user = User::get(393);
-// 输出Profile关联模型的email属性
-// echo $user->profile->email;
-// echo $user->profile->name;
-
-// die();
-// $user = User::hasWhere('profile',['email'=>'394@qq.com'])->find();
-// echo $user->name;
-
-
-
-      // 翻转示例 反过来试试 用profile表为主
-      // user表和profile 是一对一的关系，可以相互翻转
-      // 主要关联主键发生的变化
-
-      // 17998这里是 profle的主键
-       // $user = Profile::get(17998);
-       // echo User::getLastSql();
-      // 输出Profile关联模型的email属性
-      // echo $user->apple->name;
-
-// die();
- 
-
-
-
-
-
-      // 查询指定用户的关联邮箱
-      // $user = User::get(394);
-       
-      // 输出Profile关联模型的email属性
-      // echo $user->AuthGroupAccess->title;
-      // echo $user->AuthGroupAccess->thec->title;
-
-
-
-      // 如果单条数据，不循环，直接get获取
-
-
- 
-
-      // 已用户表为主，查询关联表邮箱为指定值的用户
-      // $user = User::hasWhere('profile',['email'=>'393@qq.com'])->find();
-      // $user = User::hasWhere('apple',['email'=>'39439410086@vip.qq.com'])->find();
-      // echo $user->name;
-
-
- 
-
- 
-
- // die();
-
-
-
-
- 
-
-
 
     // 切换全屏和窄屏功能
     if (input('screen') == "1") {
@@ -3237,16 +3118,10 @@ echo "生成成功";
         
         // 查询产品列表
         $show = Shop::where('sort','>=',0)
+            ->withCount('footprint')
             ->where('sort','<=',1008601)
             ->order('sort', 'asc')
             ->paginate(106);            
-        
-
-            foreach($show as $k=>$v){
-
-                $show[$k]['play_count'] = play_count($show[$k]['id']);
-                
-            }
 
           cache('shop_show_'.$page, $show, 1);
       }
@@ -3533,8 +3408,8 @@ echo "生成成功";
         $id                  = input('id');
         $page_view           = input('page_view');
         $red_packet_get      = input('red_packet_get');
-        $user                = Cookie::get('phone');
         $user_id             = Cookie::get('user_id');
+        $user                = Cookie::get('user_id');
         $data_id             = input('data_id');
         $reply               = input('reply');
 
@@ -3702,7 +3577,7 @@ echo "生成成功";
 
             // 判断是否评论满10个字
 
-            $data_len    =  Data::where('phone', $user)
+            $data_len    =  Data::where('user_id', $user_id)
                 ->where('shop','=', $id)
                 ->order('id desc')
                 ->value('title');
@@ -3819,8 +3694,8 @@ echo "生成成功";
             ->find();
 
         //dump($next);
-        $user  =  Cookie::get('phone');
-        $rand  =  User::where('phone','=',$user) ->whereTime('expiration_time','>=', 'today')->value('rand');
+        
+        $rand  =  User::where('id','=',$user_id) ->whereTime('expiration_time','>=', 'today')->value('rand');
 
 
 
@@ -3866,15 +3741,13 @@ echo "生成成功";
 
         // 查询全部评论
         $bbs = Data::where('shop','=',$id)
-            ->where('phone','<>','15966982315')
             ->order('id', 'desc')
             ->limit(100)
             ->select();
             // ->paginate(30);
 
         // 查询热门评论
-        $talk = Data::where('phone','<>','15966982315')
-            ->where('shop','=',$id)
+        $talk = Data::where('shop','=',$id)
             ->order('id', 'desc')
             ->select();
 
@@ -3898,7 +3771,7 @@ echo "生成成功";
 
               $data = Data::get($bbs[$k]['age']);
                
-              $bbs[$k]['r_phone']    = $data->phone;
+              $bbs[$k]['r_phone']    = $data->id;
               $bbs[$k]['r_title']    = $data->title;
 
  
@@ -3945,7 +3818,7 @@ echo "生成成功";
 
               $data = Data::get($talk[$k]['age']);
                
-              $talk[$k]['r_phone']    = $data->phone;
+              $talk[$k]['r_phone']    = $data->id;
               $talk[$k]['r_title']    = $data->title;
 
  

@@ -234,7 +234,24 @@ function footprint(){
     $mobile     = '';
     $address    = '';
     $browser    = '';
-    $phone      = Cookie::get('phone');
+    $user_id      = Cookie::get('user_id');
+
+
+ $request = Request::instance();
+
+ 
+
+    $goods_id = '';
+
+    $view = $request->module().$request->controller().$request->action();
+ 
+    // 如果是产品详情页，记录一下访问的产品id，$goods_id 
+
+    if ($view == 'indexIndexview') {
+        # code...
+        $goods_id = input('id');
+    }
+
 
 
     if (isset($_SERVER["HTTP_REFERER"])) {
@@ -435,9 +452,9 @@ function footprint(){
         $os = '0';
     }
 
-    if($phone==''){
+    if($user_id==''){
 
-        $phone = '0';
+        $user_id = '0';
 
     }
 
@@ -461,7 +478,8 @@ $data = ['domain' => $domain,
         'url' => $url,
         'os' => $os,
         'ip' => $ip,
-        'phone' => $phone,
+        'user_id' => $user_id,
+        'goods_id' => $goods_id,
         'referer' => $referer,
         'address' => $address,
         'browser' => $browser,

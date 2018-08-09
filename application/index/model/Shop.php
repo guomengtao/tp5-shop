@@ -28,6 +28,10 @@ class Shop extends model
         return $this->hasOne('Footprint','url','id');
         //hasOne('关联模型名','外键名','主键名',['模型别名定义'],'join类型');
     }
+    public function footprint(){
+        return $this->hasMany('Footprint','goods_id','id');
+        //hasOne('关联模型名','外键名','主键名',['模型别名定义'],'join类型');
+    }
 
     public function abc()
     {

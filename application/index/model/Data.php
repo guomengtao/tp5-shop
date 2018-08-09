@@ -54,7 +54,7 @@ class Data extends model
     }
 
     public function foot(){
-        return $this->hasOne('Footprint','phone','phone');
+        return $this->hasOne('Footprint','id','id');
         //hasOne('关联模型名','外键名','主键名',['模型别名定义'],'join类型');
     }
 
@@ -67,7 +67,7 @@ class Data extends model
 
     public function userinfo()
     {
-        return $this->hasOne('Userinfo','phone','phone');
+        return $this->hasOne('Userinfo','id','id');
     }
 
     public function getCreate_timeAttr($value)

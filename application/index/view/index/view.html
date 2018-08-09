@@ -281,7 +281,7 @@
 <!-- 点赞左右结构 -->
 <div class="row">
   <div class="col-xs-6 col-md-8">
-        <small><a href="#">{$user.phone|substr=0,3}****{$user.phone|substr=7,4}</a></small>
+        <small><a href="#">{$user.id|substr=0,3}****{$user.id|substr=7,4}</a></small>
   </div>
   <div class="col-xs-3  col-md-1 pull-right"> 
         <span onclick='public_ajax("{$Think.server.script_name}/index/index/view/data_id/{$user.id}",0)' style="position: relative;">  
@@ -517,7 +517,7 @@ obj.onkeyup=function(){
                                 </a>
   </div>
   <div class="col-xs-6 col-md-9  ">
-    <h6><small>{$user.phone|substr=0,3}****{$user.phone|substr=7,4}</small></h6>
+    <h6><small>{$user.id|substr=0,3}****{$user.id|substr=7,4}</small></h6>
 </div>
   <div class="col-xs-3  col-md-1 pull-right"  >
       <!-- 点赞的功能 -->
