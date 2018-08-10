@@ -3112,7 +3112,7 @@ echo "生成成功";
 
           // $bbs = array_reverse($bbs);
 
-          cache('bbs', $bbs, 2);
+          cache('bbs', $bbs, 200);
 
 
            

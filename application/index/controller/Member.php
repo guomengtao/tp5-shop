@@ -8,6 +8,7 @@ use app\index\model\Shop;
 use app\index\model\Data;
 use app\index\model\User;
 use app\index\model\Video;
+use app\index\model\likes;
 use app\index\model\Order;
 use app\index\model\Money;
 use app\index\model\Footprint;
@@ -472,20 +473,66 @@ class Member extends \think\Controller
 
     public function home(){
 
-                 //      调用浏览记录和来路统计功能
+        //  调用浏览记录和来路统计功能
         footprint();
 
-        $user_id      = input('user_id');
+        
+        $home_id      = input('user_id');
 
 
-             $user  = User::with('ipinfo')
-             ->where('id',$user_id)
+        $user  = User::with('ipinfo')
+             ->where('id',$home_id)
             ->limit(10)
             ->find();
 
+
+        // 更新博客页缓存数据功能
+          if (!cache('update')) {
+
+          // 这个用来控制ajax的更新频率 
+          cache('update', 1, 1);
+ 
+            
+            
+          }  
+
+            // 查询最新的聊天信息
+            $data = Data::with('foot,watermelon,user,dataSelf,likesList')
+                    ->withCount('likeslist')
+                    ->order('id', 'desc')
+                    ->where('user_id',$home_id)
+                    ->paginate(5);
+
+             foreach($data as $k=>$v){
  
 
+               
+
+
+                // 查询当前用户有没有点赞
+                $on = likes::where('data_id','=',$data[$k]['id'])
+                    ->where('user_id','=',Cookie::get('user_id'))
+                    ->count();
+                // dump($likes);die();
+               
+                $data[$k]['on']    = $on;
+
+
+ 
+
+            }
+
+             
+
+                // 每个用户自己的独立聊天缓存数据
+                // 模板里直接读取这个缓存的数组即可
+               cache('data_'.$home_id, $data, 0);
+
+
+            
+
         $this->assign('user',$user);
+        $this->assign('data', cache('data_'.$home_id));
  
 
         return view();
