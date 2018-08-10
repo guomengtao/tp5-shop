@@ -3073,6 +3073,10 @@ echo "生成成功";
                     ->limit(10)
                     ->select();
 
+
+           
+         
+
  
 
              foreach($bbs as $k=>$v){

@@ -215,7 +215,7 @@ class Member extends \think\Controller
             echo "45天-之第" . $i ."天 ";
 
 
-            echo $firstday. "签到情况 ";
+            // echo $firstday. "签到情况 ";
                  
             $day_a = $firstday.' 00:00:00';
             $day_b = $firstday.' 23:59:59';
@@ -227,21 +227,31 @@ class Member extends \think\Controller
             ->order('id asc')
             ->count(); 
 
-            // dump($everyday);
+
+
+            // 设置对应45个session的方式，方便模板里调用。
+                
+                session('s_'.$i,$everyday);
+                echo 'session里的结果'.session('s_'.$i);
 
             if ($everyday) {
                 # code...
-                echo " 今天签到了，点亮   获得一课星星  ☆   <br> ";
+                // echo " 今天签到了，点亮   获得一课星星  ☆   <br> ";
                 $allstart++;
+
+
+
             }else{
-                 echo " 熄灭代码 <br>";
+                 // echo " 熄灭代码 <br>";
             }
+            echo "<br >";
 
             // 下一天 date('Y-m-d',strtotime($date.'-1 day'))
              // $firstday = $firstday +1;
              $firstday = date('Y-m-d',strtotime($firstday.'+1 day'));
 
             }
+
 
             echo "您总共获得星星" . $allstart;
 
@@ -270,7 +280,7 @@ class Member extends \think\Controller
         $this->assign('list_top',$list_top);
         $this->assign('yesterday',$yesterday);
 
-        // return view();
+        return view();
     }
 
 

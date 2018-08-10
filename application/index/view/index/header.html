@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html  >
 <head>
   <meta charset="utf-8">
   <title>{:lang('Tp5简易商城')}</title>
@@ -46,9 +46,24 @@
 
 
        {if condition="($Think.cookie.screen==0)"}
-              
-                         <body  style="padding-top:70px;">
-            
+                          
+
+                          {if condition="($Request.module=='index') AND ($Request.controller=='Member') AND ($Request.action=='home')" }
+                          <!-- 海洋风格 -->
+                          <!-- <body  style="padding-top:70px; background: url(https://img.t.sinajs.cn/t6/skin/skinvip334/images/body_bg_page.jpg?id=1410943047113) no-repeat top center;    background-color: #003442; ">  -->
+                         
+                         <!-- 宇宙卡通风格 -->
+                         <body  style="padding-top:70px; background: url(https://img.t.sinajs.cn/t6/skin/skin054/images/body_bg_page.jpg?id=1410943047113) no-repeat top center;    background-color: #072d58; "> 
+
+
+                          <!-- 水珠风格 -->
+                         <!-- <body  style="padding-top:70px; background: url(https://img.t.sinajs.cn/t6/skin/skin055/images/body_bg_page.jpg?id=1410943047113) no-repeat top center;    background-color: #1f160e; ">
+  -->
+          {else /}
+                          <body  style="padding-top:70px;   ">
+
+           {/if}
+
         {else /}
              <!-- 设置view播放页为全屏 -->
             {if condition="($Request.module=='index') AND ($Request.controller=='Index') AND ($Request.action=='view')" }
@@ -56,13 +71,20 @@
                  {else /} 
                          <body  style="padding-top:70px;background-color: none;">
             {/if}
-         {/if}
+        {/if}
 
 
-  <nav class="navbar navbar-inverse navbar-fixed-top" style="border-radius: 0px;">
+  <nav class="navbar navbar-default navbar-fixed-top" style="border-radius: 0px;border-top: 2px solid #fa7d3c;">
+  <!-- <nav class="navbar navbar-inverse navbar-fixed-top" style="border-radius: 0px;"> -->
       
           {if condition="($Think.cookie.screen==0)"}
-            <div class="container">
+            
+               <!-- 设置view播放页为全屏 2156-->
+            {if condition="($Request.module=='index') AND ($Request.controller=='Member') AND ($Request.action=='home')" }
+                 <div class="container"  >
+                 {else /} 
+                       <div class="container"  >
+            {/if}
           {else /}
             <div class="container-fluid">
           {/if}
@@ -226,16 +248,23 @@
       </div><!-- /.container-fluid -->
     </nav>
 
-<!-- 设置view播放页为全屏 -->
+<!-- 设置view播放页为全屏 1688  -->
 {if condition="($Request.module=='index') AND ($Request.controller=='Index') AND ($Request.action=='view')" }
-        {if condition="($Think.cookie.screen==0)"}
-            <div class="container">
+         {if condition="($Think.cookie.screen==0)"}
+            <div class="container"  >
           {else /}
             <div class="container-fluid">
           {/if}
-     {else /} 
+{elseif condition="($Request.module=='index') AND ($Request.controller=='Member') AND ($Request.action=='home')" /} 
           {if condition="($Think.cookie.screen==0)"}
-            <div class="container">
+            <div class="container"    >
+          {else /}
+            <div class="container-fluid">
+          {/if}
+
+{else /} 
+          {if condition="($Think.cookie.screen==0)"}
+            <div class="container"  >
           {else /}
             <div class="container-fluid">
           {/if}

@@ -1,16 +1,19 @@
 {include file="index/header" /}
 
-
-<div class="row">
-  <div class="col-md-12"> 
-
- <img    class="img-responsive center-block img-circle"    src="__STATIC__/images/user/user ({:rand(1,25)}).jpg" data-holder-rendered="true" style="width: 130px; height: 130px;">
+<!-- 顶部的头像区域 -->
+<div class="row" style="color: white">
+  <div class="col-md-12"  > 
+ 
+ <img    class="img-responsive center-block img-circle" style="   width: 100px; height: 100px;   margin: 48px auto 0;  padding: 4px;     background: rgba(255,255,255,0.3);"   src="__STATIC__/images/user/user ({:rand(1,25)}).jpg" data-holder-rendered="true"  >
 
  <br>
+
+
   <p class="text-center">
-<small>
  
-    <a href="{:url('index/member/home', ['user_id' => $user.id])}">{$user.phone|substr=0,3}****{$user.phone|substr=7,4}</a> 
+ 
+     学习tp5的JACK 
+   相互学习 共同进步 ~ 
  <br>
     {$user.rand? 'VIP' : ''}
 
@@ -35,38 +38,82 @@
   </div>
 </div>
 
+<!-- 主要的左右结构内容 -->
+<div class="row">
 
-<div class="page-header">
-      最新动态
-</div>
-<div class="panel panel-default">
-    <div class="panel-body"> 
+  <!-- 左侧开始 -->
+  <div class="col-xs-12 col-md-4">
+    <div class="panel panel-default">
+        <div class="panel-heading">学习进度：</div>
+        <div class="panel-body">
 
-          最新学习课程
-
+                    在线问答
+        </div>
     </div>
-</div>
-<div class="panel panel-default">
-    <div class="panel-heading">学习进度：</div>
-    <div class="panel-body">
 
-在线问答
-    </div>
-</div>
-
-
-
-
-
-<div class="panel panel-default">
-    <div class="panel-heading">说明：</div>
-    <div class="panel-body">
+    <div class="panel panel-default">
+        <div class="panel-heading">公告：</div>
+        <div class="panel-body">
          
-        <h5><small>  刚上线 各种奖励 bug 逐步开发中...</small></h5>
+           这里加公告这里加公告这里加公告这里加公告这里加公告这里加公告这里加公告这里加公告 
 
 
+        </div>
+
+     </div>
+
+
+  </div> 
+  <!-- 左侧结束 -->
+
+
+  <!-- 右侧开始 -->
+  <div class="col-xs-6 col-md-8">
+
+
+      <div class="panel panel-default">
+      <div class="panel-body">
+        Panel content
+      </div>
+      <div class="panel-footer">Panel footer</div>
     </div>
+
+     <div class="panel panel-default">
+        <div class="panel-heading">公告：</div>
+        <div class="panel-body">
+         
+           这里加公告这里加公告这里加公告这里加公告这里加公告这里加公告这里加公告这里加公告 
+
+
+        </div>
+
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">公告：</div>
+        <div class="panel-body">
+         
+           这里加公告这里加公告这里加公告这里加公告这里加公告这里加公告这里加公告这里加公告 
+
+
+        </div>
+
+      </div>
+
+  </div>
+  <!-- 右侧结束 -->
 </div>
+<!-- 左右结构结束 -->
+
+ 
+
+
+
+
+
+
+
+
 
 
  

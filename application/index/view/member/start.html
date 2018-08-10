@@ -1,0 +1,298 @@
+{include file="index/header" /}
+
+
+
+
+
+
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-9"  >
+        <div class="page-header">
+
+                <!-- 三个模板里的使用演示 -->
+              <h2>  第一天签名结果: {$Think.session.s_1}  </h2>
+               <h2> 第二天签名结果: {$Think.session.s_2?'点亮':'熄灭'} </h2>
+              <h2>  第11天签名结果: {$Think.session.s_11?'点亮':'熄灭'} </h2>
+
+
+            <h2 style="color: #337ac4;"><span class="glyphicon glyphicon-check" aria-hidden="true"></span> 今日签到会员  
+             <small style="text-center"> 今日签到：<span style="color: red">{$list->total()}</span> </small> 
+                <a class="btn btn-success btn-registration"  style="font-size: 12px;"style="font-size: 12px;" onclick="public_ajax('{$Think.server.script_name}/index/member/registration/registratio_vip/1',1);">
+                        点击签到 （会员登录自动签到） </a>
+            </h2>
+        </div>
+ 
+
+        <div class="tabbable" id="tabs-323015">
+            <ul class="nav nav-tabs">
+                <li class="active">
+                    <a href="#panel-862765" data-toggle="tab">今天  <span class="badge">{$list->total()?'已点亮':'未点亮'}</span></a>
+                </li>
+                <li>
+                    <a href="#panel-401557" data-toggle="tab">列表</a>
+                </li>
+                <li>
+                    <a href="#panel-yesterday" data-toggle="tab">昨天 <span class="badge">{$yesterday->total()?'已点亮':'未点亮'}</span></a>
+                </li>
+                <li>
+                    <a href="#panel-three" data-toggle="tab">前天 <span class="badge">{$yesterday->total()?'已点亮':'未点亮'}</span></a>
+                </li>
+                <li>
+                    <a href="#panel-all" data-toggle="tab">最近7天 <span class="badge">{$list_all->total()?'已点亮':'未点亮'}</span></a>
+                </li>
+
+
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" id="panel-862765">
+                    <div class="row" style="padding: 15px">
+
+
+                        {volist name='$list' id='user' key="k"}
+                        <div class="col-xs-12 col-sm-6 col-md-4 " style="padding: 0px;">
+
+
+                            <div class="media" >
+                                <div class="media-left" >
+                                    <a href="#">
+                                        <img class="media-object img-circle"    src="__STATIC__/images/user/user ({:rand(1,25)}).jpg" data-holder-rendered="true" style="width: 64px; height: 64px;">
+                                    </a>
+                                </div>
+                                <div class="media-body">
+                                    <small><a href="{:url('index/member/home', ['user_id' => $user.id])}">{$user.phone|substr=0,3}****{$user.phone|substr=7,4}</a> 
+                                        NO.<span style="color: #D8582B;font-weight: bold;">{$k}</span></small>
+                                    <h5> <small>签到时间：<span style="color: #D8582B;font-weight: bold;">{$user.create_time}</span></small></h5>
+                                    <h5><small>连续签到：<span style="color: #D8582B;font-weight: bold;">{$user.rand}</span>天</small></h5>
+                                </div>
+                            </div>
+
+
+                            <hr>
+
+
+                        </div>
+
+
+
+                        {/volist}
+
+                        {$list->render()}
+                    </div>
+                </div>
+                <div class="tab-pane" id="panel-401557">
+                    <div class="table-responsive">
+                        <table class="table table-hover ">
+                            <thead>
+                            <tr  ><th > ID</th><th > 今日签到排名</th><th > 签到时间</th><th >连续签到天数</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            {volist name='list' id='user' key="k"}
+
+                            <tr  >
+                                <td> {$user.phone|substr=0,3}****{$user.phone|substr=7,4} </td>
+                                <td>  <h5><small>NO.</small><span style="color: tomato">{$k}</span> </h5> </td>
+                                <td> {$user.create_time} </td>
+                                <td> {$user.rand} </td>         </tr>
+
+                            {/volist}
+                            </tbody>
+                        </table>
+                    </div>
+                    {$list->render()}
+                </div>
+                <div class="tab-pane " id="panel-yesterday">
+                    <div class="row" style="padding: 15px">
+
+
+                        {volist name='yesterday' id='user' key="k"}
+                        <div class="col-xs-12 col-sm-6 col-md-4" style="padding: 0px;">
+
+
+                            <div class="media" >
+                                <div class="media-left" >
+                                    <a href="#">
+                                        <img class="media-object img-circle"    src="__STATIC__/images/user/user ({:rand(1,25)}).jpg" data-holder-rendered="true" style="width: 64px; height: 64px;">
+                                    </a>
+                                </div>
+                                <div class="media-body">
+                                    <small><a href="{:url('index/member/home', ['user_id' => $user.id])}">{$user.phone|substr=0,3}****{$user.phone|substr=7,4}</a> 
+                                        NO.<span style="color: #D8582B;font-weight: bold;">{$k}</span></small>
+                                    <h5> <small>签到时间：<span style="color: #D8582B;font-weight: bold;">{$user.create_time}</span></small></h5>
+                                    <h5><small>连续签到：<span style="color: #D8582B;font-weight: bold;">{$user.rand}</span>天</small></h5>
+                                </div>
+                            </div>
+
+
+                            <hr>
+
+
+                        </div>
+
+
+
+                        {/volist}
+
+                        {$list->render()}
+                    </div>
+                </div>
+                <div class="tab-pane " id="panel-all">
+                    <div class="row" style="padding: 15px">
+
+                        {volist name='list_all' id='user' key="k"}
+                        <div class="col-xs-12 col-sm-6 col-md-4" style="padding: 0px;">
+
+
+                            <div class="media" >
+                                <div class="media-left" >
+                                    <a href="#">
+                                        <img class="media-object img-circle"    src="__STATIC__/images/user/user ({:rand(1,25)}).jpg" data-holder-rendered="true" style="width: 64px; height: 64px;">
+                                    </a>
+                                </div>
+                                <div class="media-body">
+                                    <small><a href="{:url('index/member/home', ['user_id' => $user.id])}">{$user.phone|substr=0,3}****{$user.phone|substr=7,4}</a> 
+                                        NO.<span style="color: #D8582B;font-weight: bold;">{$k}</span></small>
+                                    <h5> <small>签到时间：<span style="color: #D8582B;font-weight: bold;">{$user.create_time}</span></small></h5>
+                                    <h5><small>连续签到：<span style="color: #D8582B;font-weight: bold;">{$user.rand}</span>天</small></h5>
+                                </div>
+                            </div>
+
+
+                            <hr>
+
+
+                        </div>
+
+
+
+                        {/volist}
+
+                        {$list->render()}
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 col-md-3">
+        <div class="panel panel-default">
+            <div class="panel-heading">连续签到排名</div>
+            <div class="panel-body">
+                {volist name='list_top' id='user' key="k"}
+                <div class="col-xs-12 col-sm-6 col-md-12" style="padding: 0px;">
+
+
+                    <div class="media" >
+                        <div class="media-left" >
+                            <a href="#">
+                                <img class="media-object img-circle"    src="__STATIC__/images/user/user ({:rand(1,25)}).jpg" data-holder-rendered="true" style="width: 64px; height: 64px;">
+                            </a>
+                        </div>
+                        <div class="media-body">
+                            <small><a href="{:url('index/member/home', ['user_id' => $user.id])}">{$user.phone|substr=0,3}****{$user.phone|substr=7,4}</a> 
+                                NO.<span style="color: #D8582B;font-weight: bold;">{$k}</span></small>
+                            <h5> <small>签到时间：<span style="color: #D8582B;font-weight: bold;">{$user.create_time}</span></small></h5>
+                            <h5><small>连续签到：<span style="color: #D8582B;font-weight: bold;">{$user.rand}</span>天</small></h5>
+                        </div>
+                    </div>
+
+
+                    <hr>
+
+
+                </div>
+
+
+
+                {/volist}
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{if condition="$list"}
+
+{/if}
+
+<div class="panel panel-default">
+    <div class="panel-heading">提示：</div>
+    <div class="panel-body">
+        <h5><small> 希望大家相互学习，共同进步。^_^ </small></h5>
+
+        <h5><small> 刚开发好，还有许多BUG,欢迎提意见。  </small></h5>
+
+<h5><small>  2018年5月16 开始测试所有会员登录自动签到，基本变成连续登录即可获得奖励，无需点击一下  </small></h5>
+    </div>
+</div>
+ 
+
+<!-- Modal 签到成功自动弹出-->
+  {if condition="$Request.param.add_vip_days>=1"}
+ <script>
+     window.onload=function(){
+         $('#myModalok').modal('show');
+     }
+
+ </script>
+ {/if}
+
+<!-- Modal 签到成功-->
+<div class="modal fade" id="myModalok" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">连续签到成功!</h4>
+            </div>
+            <div class="modal-body"><p class="text-center">
+                <span class="glyphicon glyphicon-star" aria-hidden="true" style="font-size: 60px;color: #f0ad4e;"   title="连续签到成功"></span>
+                <span class="glyphicon glyphicon-star" aria-hidden="true" style="font-size: 75px;color: #f0ad4e;"  title="连续签到成功"></span>
+                <span class="glyphicon glyphicon-star" aria-hidden="true" style="font-size: 60px;color: #f0ad4e;"  title="连续签到成功"></span></p>
+
+
+                {if condition="$Request.param.add_vip_days <= 32"}
+
+                <div class="progress">
+                        <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar"
+                             aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"
+                             style="min-width: 8em;width: {:round($Request.param.add_vip_days/32*100)}%">
+                             签到进度{:round($Request.param.add_vip_days/32*100)}%
+                        </div>
+                    </div>
+                    {/if}
+                <h3>您已连续签到<span style="color: #D8582B;font-weight: bold;">{$Request.param.add_vip_days}</span>天 
+
+
+                 {if condition="$Request.param.add_vip_days eq 3"}
+                  获赠VIP<span style="color: #D8582B;font-weight: bold;">1</span>天
+                 {elseif condition="$Request.param.add_vip_days eq 8"/}
+                 获赠VIP<span style="color: #D8582B;font-weight: bold;">3</span>天 
+                {elseif condition="$Request.param.add_vip_days eq 16"/}
+                获赠VIP<span style="color: #D8582B;font-weight: bold;">6</span>天
+                {elseif condition="$Request.param.add_vip_days eq 32"/}
+                获赠VIP<span style="color: #D8582B;font-weight: bold;">18</span>天
+
+                <span style="color: #D8582B;font-weight: bold;">获赠签到达人奖章
+                </span>
+                {elseif condition="$Request.param.add_vip_days > 32"/}
+                获赠VIP<span style="color: #D8582B;font-weight: bold;">1</span>天
+
+
+                 {/if}
+</h3>
+                   
+               
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">我知道了</button>
+                 
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{include file="index/footer" /}
