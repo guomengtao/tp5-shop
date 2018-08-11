@@ -3042,23 +3042,27 @@ echo "生成成功";
 
 
 
-      // 接收ajax刷新缓存操作
-      // 利用缓存增加了一个定时缓存功能，进一步控制缓存频率
-      // if (request()->isPost() and !cache('index_ajax')) {
+      // 接收ajax刷新缓存操作 只允许ajax方式更新缓存
+      // 利用缓存增加了一个定时缓存功能，并且还有一个缓存控制频率
+      // 当ajax请求的时候，并且是设定的周期到期后，才能行。
+      // 优点：通过ajax后台更新，前台用户不会因为每次缓存过期，重新设置缓存的第一次还慢的情况
+
+      
+
        
-      //       cache('shop_show_'.$page, NULL);
-      // }
-
-
-
-
-        
-
-      // if (!cache('shop_show_'.$page)) {
-      if (!cache('index_ajax')) {
+      if (request()->isPost() and !cache('index_ajax')) {
+      // if (!cache('index_ajax')) {
 
           // 这个用来控制ajax的更新频率 
           cache('index_ajax', 1, 600);
+
+          dump("cache");
+
+          // 记录和监控最后一次更新缓存时间 
+
+          cache('index_ajax_upate_index_time', date("Y-m-d H:i:s",time()), 0);
+
+          
  
             // 查询24小时内在线用户
             $online  = User::whereTime('update_time','-24 hours')
