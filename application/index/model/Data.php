@@ -42,9 +42,9 @@ class Data extends model
         //hasOne('关联模型名','外键名','主键名',['模型别名定义'],'join类型');
     }
     public function user(){
-        return $this->belongsTo('User');
+        // return $this->belongsTo('User');
         // return $this->belongsTo('User','user_id','id');
-        // return $this->hasOne('User','id','user_id');
+        return $this->hasOne('User','id','user_id');
         //hasOne('关联模型名','外键名','主键名',['模型别名定义'],'join类型');
     }
     // 关联自己 - 查询回复的哪条留言

@@ -84,7 +84,7 @@
          <!--提示-->
         <div class="alert alert-info alert-dismissible" role="alert">
 
-             点赞功能上线，欢迎大家体验 ^_^ <a class="pull-right" href="/tutorial">更多</a>
+             简易博客上线，欢迎大家体验 ^_^ <a class="pull-right" href="{:url('/')}index/member/home/user_id/69">查看</a>
         </div>
 
 
@@ -109,7 +109,7 @@
 
          <!--简易即时聊天-->
         <div class="panel panel-default">
-            <div class="panel-heading">  <span class="glyphicon glyphicon-option-vertical" aria-hidden="true"></span> 学习交流  <a class="pull-right" href="/tutorial">更多</a><small><span class="badge" style="background-color: #a7a7a7;display: none">666 </span></small></div>
+            <div class="panel-heading">  <span class="glyphicon glyphicon-option-vertical" aria-hidden="true"></span> 学习交流  <a class="pull-right" href="{:url('/')}index/member/home/user_id/69">更多</a><small><span class="badge" style="background-color: #a7a7a7;display: none">666 </span></small></div>
 
 
             <div class="panel-body">
@@ -163,13 +163,13 @@
                                                                   {if condition="$user.dataself.title"}
                                                                 <div class="form-group input-group field-feed-content required" style="background-color:  #f4f4f4;padding: 10px;color: #555555">
 
-                                                                     @ {$user.dataself.user.phone} : {$user.dataself.title}
+                                                                     @ {$user.dataself.user.phone|substr=0,3}****{$user.dataself.user.phone|substr=7,4} : {$user.dataself.title}
                                                  
                                                                 </div>
 
                                                                {/if}
 
-                                                                <a href="{:url('/')}index/index/view/id/{$user.shop}"> {$user.title}</a>
+                                                                <a href="{:url('/')}index/member/home/user_id/{$user.user_id}"> {$user.title}</a>
                                                                         
 
                                                                 </small>

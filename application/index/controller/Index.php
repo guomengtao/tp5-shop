@@ -3044,20 +3044,21 @@ echo "生成成功";
 
       // 接收ajax刷新缓存操作
       // 利用缓存增加了一个定时缓存功能，进一步控制缓存频率
-      if (request()->isPost() and !cache('index_ajax')) {
+      // if (request()->isPost() and !cache('index_ajax')) {
        
-            cache('shop_show_'.$page, NULL);
-      }
+      //       cache('shop_show_'.$page, NULL);
+      // }
 
 
 
 
         
 
-      if (!cache('shop_show_'.$page)) {
+      // if (!cache('shop_show_'.$page)) {
+      if (!cache('index_ajax')) {
 
           // 这个用来控制ajax的更新频率 
-          cache('index_ajax', 1, 2);
+          cache('index_ajax', 1, 600);
  
             // 查询24小时内在线用户
             $online  = User::whereTime('update_time','-24 hours')
@@ -3112,7 +3113,7 @@ echo "生成成功";
 
           // $bbs = array_reverse($bbs);
 
-          cache('bbs', $bbs, 200);
+          cache('bbs', $bbs, 0);
 
 
            
@@ -3128,7 +3129,9 @@ echo "生成成功";
             ->order('sort', 'asc')
             ->paginate(106);            
 
-          cache('shop_show_'.$page, $show, 1);
+          cache('shop_show_'.$page, $show, 0);
+
+
       }
 
 

@@ -49,16 +49,43 @@
                           
 
                           {if condition="($Request.module=='index') AND ($Request.controller=='Member') AND ($Request.action=='home')" }
+
+
+                          <!-- // 随机风格的实现 -->
+
+                           {if condition="rand(1,5) eq 1" }
+
+ 
                           <!-- 海洋风格 -->
-                          <!-- <body  style="padding-top:70px; background: url(https://img.t.sinajs.cn/t6/skin/skinvip334/images/body_bg_page.jpg?id=1410943047113) no-repeat top center;    background-color: #003442; ">  -->
+                          <body  style="padding-top:70px; background: url(https://img.t.sinajs.cn/t6/skin/skinvip334/images/body_bg_page.jpg?id=1410943047113) no-repeat top center;    background-color: #003442; "> 
                          
+                            
+                            {elseif condition="rand(1,5) eq 2"/} 
+
                          <!-- 宇宙卡通风格 -->
                          <body  style="padding-top:70px; background: url(https://img.t.sinajs.cn/t6/skin/skin054/images/body_bg_page.jpg?id=1410943047113) no-repeat top center;    background-color: #072d58; "> 
+                            {elseif condition="rand(1,5) eq 3"/} 
 
+                         <!-- 格子风格 -->
+                         <body  style="padding-top:70px; background: url(https://img.t.sinajs.cn/t6/skin/default/images/body_bg_page.jpg?id=20140928183500) no-repeat top center;    background-color: #d4d5e0; "> 
 
+                            {elseif condition="rand(1,5) eq 4"/} 
+
+                         <!-- 星空风格 -->
+                         <body  style="padding-top:70px; background: url(https://img.t.sinajs.cn/t6/skin/skin050/images/body_bg_page.jpg?id=1410943047113) no-repeat top center;    background-color: #0d3b6c; "> 
+
+                            {else /}
                           <!-- 水珠风格 -->
-                         <!-- <body  style="padding-top:70px; background: url(https://img.t.sinajs.cn/t6/skin/skin055/images/body_bg_page.jpg?id=1410943047113) no-repeat top center;    background-color: #1f160e; ">
-  -->
+                         <body  style="padding-top:70px; background: url(https://img.t.sinajs.cn/t6/skin/skin055/images/body_bg_page.jpg?id=1410943047113) no-repeat top center;    background-color: #1f160e; ">
+
+
+                          {/if}
+
+
+ 
+
+
+
           {else /}
                           <body  style="padding-top:70px;   ">
 
