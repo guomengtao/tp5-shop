@@ -34,7 +34,7 @@ class Bbs extends \think\Controller
 
         // dump($show);
         // 模型写法
-        $show = Data::where('id','>',0)->order('id', 'desc')->paginate(10);
+        $show = Data::with('user')->where('id','>',0)->order('id', 'desc')->paginate(10);
 
         // $show = $show->toArray();
 

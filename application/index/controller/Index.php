@@ -2973,6 +2973,16 @@ echo "生成成功";
 
     public function index(){
 
+
+ 
+
+       return view();
+
+    }
+
+    public function indexgo(){
+
+
  
 
     // 切换全屏和窄屏功能
@@ -3047,20 +3057,30 @@ echo "生成成功";
       // 当ajax请求的时候，并且是设定的周期到期后，才能行。
       // 优点：通过ajax后台更新，前台用户不会因为每次缓存过期，重新设置缓存的第一次还慢的情况
 
+
+
+      // 第一次缓存初始化的问题，限制只有ajax访问，第一次没收生成缓存
+
+      // 解决方法：增加一个缓存同步记录各分页数据，设置为永久有效，如果没有就直接加载。
+
+
       
 
+
+ 
+
        
-      if (request()->isPost() and !cache('index_ajax')) {
-      // if (!cache('index_ajax')) {
+      // if ((request()->isPost() and !cache('shop_show_'.$page)) or !cache('shop_show_make_'.$page)) {
+ 
 
-          // 这个用来控制ajax的更新频率 
-          cache('index_ajax', 1, 600);
 
-          dump("cache");
+
+
+
 
           // 记录和监控最后一次更新缓存时间 
 
-          cache('index_ajax_upate_index_time', date("Y-m-d H:i:s",time()), 0);
+          // cache('index_ajax_upate_index_time', date("Y-m-d H:i:s",time()), 0);
 
           
  
@@ -3068,7 +3088,7 @@ echo "生成成功";
             $online  = User::whereTime('update_time','-24 hours')
                 ->order('update_time', 'desc')
                 ->select();
-            cache('online', $online, 0);
+            // cache('online', $online, 600);
             
 
             // 查询最新的聊天信息
@@ -3108,7 +3128,7 @@ echo "生成成功";
                 ->where('body','=',135)
                 ->where('phone','<>','15966982315')
                 ->count();
-            cache('registration_count', $registration_count, 0);
+            // cache('registration_count', $registration_count, 600);
       
 
       
@@ -3117,7 +3137,7 @@ echo "生成成功";
 
           // $bbs = array_reverse($bbs);
 
-          cache('bbs', $bbs, 0);
+          // cache('bbs', $bbs, 600);
 
 
            
@@ -3133,10 +3153,15 @@ echo "生成成功";
             ->order('sort', 'asc')
             ->paginate(106);            
 
-          cache('shop_show_'.$page, $show, 0);
+
+          // 这个用来控制ajax的更新频率 
+          // 目前用这个来控制频率，因为这个有时候下一页没加载 
+          // 解决下一页没有数据的问题
+          // cache('shop_show_'.$page, $show, 600);
+          // cache('shop_show_make_'.$page, $show, 0);
 
 
-      }
+      // }
 
 
 
@@ -3150,20 +3175,22 @@ echo "生成成功";
  
 
 
-        $this->assign('show', cache('shop_show_'.$page));
-        // $this->assign('bbs', $bbs);
-        $this->assign('bbs', cache('bbs'));
+        // $this->assign('show', cache('shop_show_'.$page));
+        $this->assign('show', $show);
+        $this->assign('bbs', $bbs);
+        // $this->assign('bbs', cache('bbs'));
         // $this->assign('user_vip', $user_vip);
-        // $this->assign('registration_user',  $registration_user);
-        $this->assign('registration_count',  cache('registration_count'));
-        $this->assign('online',  cache('online'));
+        $this->assign('registration_count',  $registration_count);
+        // $this->assign('registration_count',  cache('registration_count'));
+        $this->assign('online',  $online);
+        // $this->assign('online',  cache('online'));
         // $this->assign('date', date('Ymdhis'));
 
 
  
               
         // 渲染模板输出
-        return $this->fetch('index');
+        return $this->fetch();
 
 
 
@@ -3175,6 +3202,7 @@ echo "生成成功";
 
  
         $user              =  Cookie::get('phone');
+        $user_id           =  Cookie::get('user_id');
         $token             =  Cookie::get('token');
 
         //      Cookie加密验证功能
@@ -3228,7 +3256,7 @@ echo "生成成功";
             ->select();
 
 //      查询最新的聊天信息
-        $bbs = Data::with('sort','foot')
+        $bbs = Data::with('foot')
                 ->order('id', 'desc')
                 ->limit(100)
                 ->select();
@@ -3292,7 +3320,7 @@ echo "生成成功";
                 $video_age    = $video->age;
                 $video_status = $video->status;
 //                查询评论次数
-                $data =  Data::where('phone','=',$user)
+                $data =  Data::where('user_id','=',$user_id)
                     ->where('shop','=',$body)
                     ->count();
 

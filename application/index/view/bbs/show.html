@@ -43,7 +43,7 @@
     <tbody>
     {volist name='show' id='user'}
       
-    <tr  ><th> {$user.id} </th> <td> <a href="{$Think.server.script_name}/index/index/view/id/{$user.shop} ">{$user.title|mb_substr=0,20,'utf-8' }</a></td><td>  {$user.phone|substr=0,3}****{$user.phone|substr=7,4}</td><td>  {$user.create_time}</td> </tr>
+    <tr  ><th> {$user.id} </th> <td> <a href="{$Think.server.script_name}/index/index/view/id/{$user.shop} ">{$user.title|mb_substr=0,20,'utf-8' }</a></td><td>  {$user.user.phone|substr=0,3}****{$user.user.phone|substr=7,4}</td><td>  {$user.create_time}</td> </tr>
     {/volist}
     </tbody>
     </table>

@@ -638,54 +638,7 @@ function public_login(str)
 }
 </script>
 
-<!-- 第一次实际运用vue.js实例 -->
-<!-- <script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script> -->
-<!-- 开发环境版本，包含了用帮助的命令行警告 -->
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<div id="app">
- <!--  <p>{{ message }} {{show}}</p> -->
-    
-    <div v-show="show">
-        <div   style="color:white;line-height:50px;position:absolute;z-index:100;left:50%;top:20%;margin-left:-75px;text-align:center;width:150px;height:50px;background-color:green;font-size:12px;">
-             {{message}} 
-        </div>
-
-     </div>
-    
-   <!--  <button @click="handleClick" > check me 1222222</button> -->
-</div>
  
-<script>
-new Vue({
-          el: '#app',
-          data: {
-            message:'vip增加' +{$Request.param.add_vip_days|default=0} + '天',
-            show:{$Request.param.add_vip_days|default=0},
-
-          },
-         methods:{
-            handleClick:function(){
-
-               this.show = !this.show;
-               setInterval(this.handleClicknone, 21000);
-            },
-            handleClicknone:function(){
-               this.show = false;
-               
-            }
-         
-         },
-        mounted: function () {
-            setInterval(this.handleClicknone, 21000);
-                 
-                public_ajax('{$Think.server.script_name}/index/member/registration/registration_vip/1');
-                 
-            
-       }
-
-
-})
-</script>
 
 
 
