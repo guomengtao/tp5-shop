@@ -16,6 +16,7 @@ use app\index\model\Footprint;
 use app\index\model\Data;
 use app\index\model\Article;
 use think\Debug;
+use think\Url;
 use think\Lang;
 use think\Cookie;
 use think\Session;
@@ -2974,8 +2975,21 @@ echo "生成成功";
     public function index(){
 
 
- 
+      // 查询最新的聊天信息
 
+      $talk_new = Data::with('foot,watermelon,user,dataSelf,likesList')
+                    ->withCount('likeslist')
+                    ->order('id', 'desc')
+                    ->limit(10)
+                    ->cache(60)
+                    ->select();
+
+
+
+
+
+
+       $this->assign('talk_new', $talk_new);
        return view();
 
     }
@@ -3070,7 +3084,7 @@ echo "生成成功";
  
 
        
-      // if ((request()->isPost() and !cache('shop_show_'.$page)) or !cache('shop_show_make_'.$page)) {
+      if ((request()->isPost() and !cache('shop_show_'.$page)) or !cache('shop_show_make_'.$page)) {
  
 
 
@@ -3080,7 +3094,7 @@ echo "生成成功";
 
           // 记录和监控最后一次更新缓存时间 
 
-          // cache('index_ajax_upate_index_time', date("Y-m-d H:i:s",time()), 0);
+          cache('index_ajax_upate_index_time', date("Y-m-d H:i:s",time()), 0);
 
           
  
@@ -3088,7 +3102,7 @@ echo "生成成功";
             $online  = User::whereTime('update_time','-24 hours')
                 ->order('update_time', 'desc')
                 ->select();
-            // cache('online', $online, 600);
+            cache('online', $online, 0);
             
 
             // 查询最新的聊天信息
@@ -3111,12 +3125,13 @@ echo "生成成功";
 
 
                 // 查询当前用户有没有点赞
-                $on = likes::where('data_id','=',$bbs[$k]['id'])
-                    ->where('user_id','=',Cookie::get('user_id'))
-                    ->count();
+                // $on = likes::where('data_id','=',$bbs[$k]['id'])
+                //     ->where('user_id','=',Cookie::get('user_id'))
+                //     ->count();
                 // dump($likes);die();
                
-                $bbs[$k]['on']    = $on;
+                // $bbs[$k]['on']    = $on;
+                $bbs[$k]['on']    = 0;
 
 
  
@@ -3128,7 +3143,7 @@ echo "生成成功";
                 ->where('body','=',135)
                 ->where('phone','<>','15966982315')
                 ->count();
-            // cache('registration_count', $registration_count, 600);
+            cache('registration_count', $registration_count, 0);
       
 
       
@@ -3137,7 +3152,7 @@ echo "生成成功";
 
           // $bbs = array_reverse($bbs);
 
-          // cache('bbs', $bbs, 600);
+          cache('bbs', $bbs, 0);
 
 
            
@@ -3157,11 +3172,11 @@ echo "生成成功";
           // 这个用来控制ajax的更新频率 
           // 目前用这个来控制频率，因为这个有时候下一页没加载 
           // 解决下一页没有数据的问题
-          // cache('shop_show_'.$page, $show, 600);
-          // cache('shop_show_make_'.$page, $show, 0);
+          cache('shop_show_'.$page, $show, 600);
+          cache('shop_show_make_'.$page, $show, 0);
 
 
-      // }
+      }
 
 
 
@@ -3175,15 +3190,15 @@ echo "生成成功";
  
 
 
-        // $this->assign('show', cache('shop_show_'.$page));
-        $this->assign('show', $show);
-        $this->assign('bbs', $bbs);
-        // $this->assign('bbs', cache('bbs'));
+        $this->assign('show', cache('shop_show_'.$page));
+        // $this->assign('show', $show);
+        // $this->assign('bbs', $bbs);
+        $this->assign('bbs', cache('bbs'));
         // $this->assign('user_vip', $user_vip);
-        $this->assign('registration_count',  $registration_count);
-        // $this->assign('registration_count',  cache('registration_count'));
-        $this->assign('online',  $online);
-        // $this->assign('online',  cache('online'));
+        // $this->assign('registration_count',  $registration_count);
+        $this->assign('registration_count',  cache('registration_count'));
+        // $this->assign('online',  $online);
+        $this->assign('online',  cache('online'));
         // $this->assign('date', date('Ymdhis'));
 
 
