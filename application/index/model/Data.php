@@ -5,6 +5,7 @@ namespace app\index\model;
 use think\Model;
 use traits\model\SoftDelete;
 use think\Cookie;
+use app\index\model\Likes;
 
 
 class Data extends model 
@@ -37,35 +38,18 @@ class Data extends model
       $talk_new = Data::with('watermelon,user,dataSelf,likesList')
                     ->withCount('likeslist')
                     ->order('id', 'desc')
-                    ->limit(5)
-                    ->select();
+                    ->paginate(5); 
 
         return $talk_new;
-        return "1008611";
+ 
     }
 
-    public static function tom(){
+ 
 
-        // 查询最新的聊天信息
+    public  function foot(){
 
-      $talk_new = Data::with('watermelon,user,dataSelf,likesList')
-                    ->withCount('likeslist')
-                    ->order('id', 'desc')
-                    ->limit(3)
-                    ->select();
-
-     return $talk_new;
-
-         return "10086";
-
-         $this->likes = 10086;
-         return $this;
-    }
-
-    public static function footStatic(){
-
-        
-        return "10086";
+         return $this->hasOne('Footprint');
+         
        
     }
 
@@ -149,43 +133,20 @@ class Data extends model
         return $value;
     }
 
-	public function getTitleAttr($value,$data)
+	public function getTitleAttr($value)
     {
 
 
-        // 查询当前用户有没有点赞
-        $on = likes::where('data_id','=',$data['id'])
-                    ->where('user_id','=',Cookie::get('user_id'))
-                    ->count();
-       return $on;
+       
+       return $value;
         
- 
-         $user_id             = Cookie::get('user_id');
-         return $value;
-
-    	if ($value==1) {
-
-    		return "男d";
-    	}elseif ($value==2) {
-
-    		return "女";
-    	} else{
-
-    		return '666123456';
-
-    	}
-
+  
 
 
     }
     public function getContentAttr($value)
     {
         // $title = [-1=>'删除',0=>'禁用',1=>'正常',2=>'待审核'];
-    	if ($value) {
-    		# code...
-    		return "<>" .$value ;
-
-    	}
         return $value ;
     }
 

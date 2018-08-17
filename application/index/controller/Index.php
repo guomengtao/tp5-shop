@@ -2974,10 +2974,13 @@ echo "生成成功";
 
     public function index(){
 
+        // 调用浏览记录和来路统计功能
+        footprint();
+
           // 是否存在安装锁文件
           $install_lock = ROOT_PATH . 'application' . DS .'install.lock';
           if (!file_exists($install_lock)) {
-              //设置成功后跳转页面的地址，默认的返回页面是$_SERVER['HTTP_REFERER']
+              //在线安装向导
               $this->success('在线安装向导【关闭方法：在application增加一个install.lock】', 'Index/install');
             
           }
@@ -3244,8 +3247,7 @@ echo "生成成功";
             ->select();
 
 //      查询最新的聊天信息
-        $bbs = Data::with('foot')
-                ->order('id', 'desc')
+        $bbs = Data::order('id', 'desc')
                 ->limit(100)
                 ->select();
 

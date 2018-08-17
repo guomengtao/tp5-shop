@@ -256,6 +256,7 @@ function like_none(like_a){
     // 获取返回的音效，独立返回到页面的，以防止重复音量
     function public_ajax(url,t)
     {
+        
         // 如果是点赞单独处理，全部点赞
         if (url.substring(-1,42)=='/index.php/index/index/view/all/1/data_id/'){
 
@@ -335,7 +336,7 @@ function like_none(like_a){
 
             // 处理默认为 赞的情况
              if(like_zero=="赞"){
-                // alert(like_zero);
+                 
                 like_zero = 0;
              }
 
