@@ -2974,6 +2974,14 @@ echo "生成成功";
 
     public function index(){
 
+          // 是否存在安装锁文件
+          $install_lock = ROOT_PATH . 'application' . DS .'install.lock';
+          if (!file_exists($install_lock)) {
+              //设置成功后跳转页面的地址，默认的返回页面是$_SERVER['HTTP_REFERER']
+              $this->success('在线安装向导【关闭方法：在application增加一个install.lock】', 'Index/install');
+            
+          }
+
 
       // 查询最新的聊天信息
       $talk_new = Data::jack();
