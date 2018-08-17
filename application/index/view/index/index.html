@@ -44,8 +44,9 @@
                                 <div class="row">
                                   <div class="col-xs-6 col-md-8">
                                         <small><a href="{:url('/')}index/member/home/user_id/{$user.user_id}">
-
-                                         {$user.user.phone|substr=0,3}****{$user.user.phone|substr=7,4}
+ 
+                                        {$user.on}[是否点赞] {$user.user.phone|substr=0,3}****{$user.user.phone|substr=7,4}
+                                         
 
                                     </a></small>
                                   </div>
