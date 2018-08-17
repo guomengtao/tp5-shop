@@ -2976,21 +2976,12 @@ echo "生成成功";
 
 
       // 查询最新的聊天信息
+      $talk_new = Data::jack();
 
-      $talk_new = Data::with('foot,watermelon,user,dataSelf,likesList')
-                    ->withCount('likeslist')
-                    ->order('id', 'desc')
-                    ->limit(10)
-                    ->cache(60)
-                    ->select();
+ 
 
-
-
-
-
-
-       $this->assign('talk_new', $talk_new);
-       return view();
+      $this->assign('talk_new', $talk_new);
+      return view();
 
     }
 
@@ -3084,7 +3075,7 @@ echo "生成成功";
  
 
        
-      if ((request()->isPost() and !cache('shop_show_'.$page)) or !cache('shop_show_make_'.$page)) {
+      // if ((request()->isPost() and !cache('shop_show_'.$page)) or !cache('shop_show_make_'.$page)) {
  
 
 
@@ -3094,7 +3085,7 @@ echo "生成成功";
 
           // 记录和监控最后一次更新缓存时间 
 
-          cache('index_ajax_upate_index_time', date("Y-m-d H:i:s",time()), 0);
+          // cache('index_ajax_upate_index_time', date("Y-m-d H:i:s",time()), 0);
 
           
  
@@ -3106,37 +3097,14 @@ echo "生成成功";
             
 
             // 查询最新的聊天信息
-            $bbs = Data::with('foot,watermelon,user,dataSelf,likesList')
-                    ->withCount('likeslist')
-                    ->order('id', 'desc')
-                    ->limit(10)
-                    ->select();
+             $bbs = Data::jack();
 
 
            
          
 
  
-
-             foreach($bbs as $k=>$v){
  
-
-               
-
-
-                // 查询当前用户有没有点赞
-                // $on = likes::where('data_id','=',$bbs[$k]['id'])
-                //     ->where('user_id','=',Cookie::get('user_id'))
-                //     ->count();
-                // dump($likes);die();
-               
-                // $bbs[$k]['on']    = $on;
-                $bbs[$k]['on']    = 0;
-
-
- 
-
-            }
             
           // 查询今天有多少人签到了
             $registration_count  = Order::whereTime('create_time', 'today')
@@ -3176,7 +3144,7 @@ echo "生成成功";
           cache('shop_show_make_'.$page, $show, 0);
 
 
-      }
+      // }
 
 
 
@@ -3190,17 +3158,14 @@ echo "生成成功";
  
 
 
-        $this->assign('show', cache('shop_show_'.$page));
-        // $this->assign('show', $show);
-        // $this->assign('bbs', $bbs);
-        $this->assign('bbs', cache('bbs'));
-        // $this->assign('user_vip', $user_vip);
-        // $this->assign('registration_count',  $registration_count);
-        $this->assign('registration_count',  cache('registration_count'));
-        // $this->assign('online',  $online);
-        $this->assign('online',  cache('online'));
-        // $this->assign('date', date('Ymdhis'));
-
+         
+        $this->assign('show', $show);
+        $this->assign('bbs', $bbs);
+        
+        $this->assign('registration_count',  $registration_count);
+        
+        $this->assign('online',  $online);
+        
 
  
               

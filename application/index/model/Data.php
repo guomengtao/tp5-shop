@@ -4,6 +4,9 @@ namespace app\index\model;
 
 use think\Model;
 use traits\model\SoftDelete;
+use think\Cookie;
+
+
 class Data extends model 
 {
 	use SoftDelete;
@@ -16,6 +19,55 @@ class Data extends model
     protected $update = ['name'];
 
 
+    public function getOnAttr($value,$data)
+    {
+        // 查询当前用户有没有点赞
+        $on = likes::where('data_id','=',$data['id'])
+                    ->where('user_id','=',Cookie::get('user_id'))
+                    ->count();
+       return $on;
+    }
+
+
+    public static function jack(){
+
+
+       // 查询最新的聊天信息
+
+      $talk_new = Data::with('watermelon,user,dataSelf,likesList')
+                    ->withCount('likeslist')
+                    ->order('id', 'desc')
+                    ->limit(5)
+                    ->select();
+
+        return $talk_new;
+        return "1008611";
+    }
+
+    public static function tom(){
+
+        // 查询最新的聊天信息
+
+      $talk_new = Data::with('watermelon,user,dataSelf,likesList')
+                    ->withCount('likeslist')
+                    ->order('id', 'desc')
+                    ->limit(3)
+                    ->select();
+
+     return $talk_new;
+
+         return "10086";
+
+         $this->likes = 10086;
+         return $this;
+    }
+
+    public static function footStatic(){
+
+        
+        return "10086";
+       
+    }
 
 
  
@@ -53,10 +105,7 @@ class Data extends model
         //hasOne('关联模型名','外键名','主键名',['模型别名定义'],'join类型');
     }
 
-    public function foot(){
-        return $this->hasOne('Footprint','id','id');
-        //hasOne('关联模型名','外键名','主键名',['模型别名定义'],'join类型');
-    }
+
 
 
     public function ipinfo()
@@ -76,12 +125,12 @@ class Data extends model
     }
     public function setNameAttr($value)
     {
-        return request()->ip();
+        // return request()->ip();
         return "30";
     }
     public function setIpAttr($value)
     {
-        return request()->ip();
+        // return request()->ip();
         return "30";
     }
 
@@ -100,11 +149,19 @@ class Data extends model
         return $value;
     }
 
-	public function getTitleAttr($value)
+	public function getTitleAttr($value,$data)
     {
+
+
+        // 查询当前用户有没有点赞
+        $on = likes::where('data_id','=',$data['id'])
+                    ->where('user_id','=',Cookie::get('user_id'))
+                    ->count();
+       return $on;
         
  
-
+         $user_id             = Cookie::get('user_id');
+         return $value;
 
     	if ($value==1) {
 
@@ -114,7 +171,7 @@ class Data extends model
     		return "女";
     	} else{
 
-    		return $value;
+    		return '666123456';
 
     	}
 
