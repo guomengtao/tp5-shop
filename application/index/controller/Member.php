@@ -497,30 +497,7 @@ class Member extends \think\Controller
           }  
 
             // 查询最新的聊天信息
-            $data = Data::with('foot,watermelon,user,dataSelf,likesList')
-                    ->withCount('likeslist')
-                    ->order('id', 'desc')
-                    ->where('user_id',$home_id)
-                    ->paginate(5);
-
-             foreach($data as $k=>$v){
- 
-
-               
-
-
-                // 查询当前用户有没有点赞
-                $on = likes::where('data_id','=',$data[$k]['id'])
-                    ->where('user_id','=',Cookie::get('user_id'))
-                    ->count();
-                // dump($likes);die();
-               
-                $data[$k]['on']    = $on;
-
-
- 
-
-            }
+            $data = Data::jack();
 
              
 

@@ -38,6 +38,7 @@ class Data extends model
       $talk_new = Data::with('watermelon,user,dataSelf,likesList')
                     ->withCount('likeslist')
                     ->order('id', 'desc')
+                    ->cache(true)
                     ->paginate(5); 
 
         return $talk_new;

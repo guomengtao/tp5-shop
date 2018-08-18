@@ -2977,6 +2977,64 @@ echo "生成成功";
         // 调用浏览记录和来路统计功能
         footprint();
 
+
+        $jack = 6;
+
+
+        try{
+
+          $jack = 6/0;
+
+        }catch(\Exception $e){
+
+          echo 10086;
+
+            return $e->getMessage();
+
+        }
+
+        die();
+
+
+
+
+
+
+        try{
+
+           // 零做被除数 
+           // $mgr = 8/0;  
+
+
+              // 测试填写的数据库信息是否正确，不正确 thinkphp5的调试模式会报错
+         
+
+             $con=mysqli_connect("localhost","root","cVDEPmrRdVZswVWB","demo"); 
+
+            // 检查连接 ，try解决了这个用不上问题
+            if (!$con) 
+            { 
+                die("连接错误: " . mysqli_connect_error()); 
+            } 
+
+             $jack =  $jack*2;
+
+
+
+     
+        }catch(\Exception $e){
+            echo 10086;
+            // return $e->getMessage();
+            $getwrong = $e->getMessage();
+            // return $this->error($e->getMessage());
+        }
+
+
+         
+        die("$jack");
+
+
+
           // 是否存在安装锁文件
           $install_lock = ROOT_PATH . 'application' . DS .'install.lock';
           if (!file_exists($install_lock)) {
@@ -2992,6 +3050,7 @@ echo "生成成功";
  
 
       $this->assign('talk_new', $talk_new);
+      $this->assign('getwrong', $getwrong);
       return view();
 
     }
