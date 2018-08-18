@@ -2978,52 +2978,41 @@ echo "生成成功";
         footprint();
 
 
-        $jack = 6;
+         
+
+
+        // try{
+
+           // die("$jack");
+
+        //   $jack = 6/0;
+
+        // }catch(\Exception $e){
+
+        //   echo 10086;
+
+        //     return $e->getMessage();
+
+        // }
+        // dump($jack);die();
+        // die('$jack');
+
+
+        $getwrong = '';
+
 
 
         try{
 
-          $jack = 6/0;
-
-        }catch(\Exception $e){
-
-          echo 10086;
-
-            return $e->getMessage();
-
-        }
-
-        die();
-
-
-
-
-
-
-        try{
-
-           // 零做被除数 
-           // $mgr = 8/0;  
-
+ 
 
               // 测试填写的数据库信息是否正确，不正确 thinkphp5的调试模式会报错
          
 
-             $con=mysqli_connect("localhost","root","cVDEPmrRdVZswVWB","demo"); 
+             $con=mysqli_connect("localhost","root","cVDEPmrRdVZswVWB456","demo"); 
 
-            // 检查连接 ，try解决了这个用不上问题
-            if (!$con) 
-            { 
-                die("连接错误: " . mysqli_connect_error()); 
-            } 
-
-             $jack =  $jack*2;
-
-
-
-     
         }catch(\Exception $e){
-            echo 10086;
+            // echo 10086;
             // return $e->getMessage();
             $getwrong = $e->getMessage();
             // return $this->error($e->getMessage());
@@ -3031,7 +3020,7 @@ echo "生成成功";
 
 
          
-        die("$jack");
+        // die("$getwrong");
 
 
 
