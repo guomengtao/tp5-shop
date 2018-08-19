@@ -77,19 +77,40 @@ class Index extends \think\Controller
           // 增加一个第二步的已安装判断，方便查看
           if (Request::instance()->isPost() and  $install_lock == 1) {
             header('Content-Type:text/plain;charset=utf-8');
-            echo "已安装installed! delllet application/install.lock file " ;
-            die();
+             return $this->error("已安装,重新安装请删除application/install.lock 文件 ");
+            // echo "已安装installed! delllet application/install.lock file " ;
+            // die();
           }
+
+
 
          
         if (Request::instance()->isPost() and  $install_lock <> 1) {
 
-             // 测试填写的数据库信息是否正确，不正确 thinkphp5的调试模式会报错
-             $conn = mysqli_connect( 
-               $hostname, /* The host to connect to 连接MySQL地址 */  
-               $username, /* The user to connect as 连接MySQL用户名 */
-               $password, /* The password to use 连接MySQL密码 */  
-               $database);/* The default database to query 连接数据库名称*/ 
+             
+
+
+
+
+              try{
+
+                  // 测试填写的数据库信息是否正确，不正确 thinkphp5的调试模式会报错
+                   $conn = mysqli_connect( 
+                     $hostname, /* The host to connect to 连接MySQL地址 */  
+                     $username, /* The user to connect as 连接MySQL用户名 */
+                     $password, /* The password to use 连接MySQL密码 */  
+                     $database);/* The default database to query 连接数据库名称*/  
+
+              }catch(\Exception $e){
+                  // echo 10086;
+                  // return $e->getMessage();
+                  // $getwrong = $e->getMessage();
+                  return $this->error("连接数据库错误，请检查数据库账号密码是否正确。<br/>".$e->getMessage());
+              }
+
+
+              
+
 
               // 设置读取数据库配置文件路径
               $database_file = ROOT_PATH . 'application' . DS . 'database.php';
@@ -162,7 +183,7 @@ class Index extends \think\Controller
         // ob_end_clean();  
 
         //读取文件内容
-        $sql_file = ROOT_PATH . 't966.sql';
+        $sql_file = ROOT_PATH . 't9665.sql';
         $_sql = file_get_contents($sql_file);
          
         $_arr = explode(';', $_sql);
