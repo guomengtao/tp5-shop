@@ -1867,8 +1867,8 @@ die();
                         return $this->success('管理员您好^_^', 'admin/index/index');
                     } else {
 
-                        // return redirect()->restore();
-                        return $this->success('登录成功^_^', 'index');
+                        // return redirect()->restore(); 社交首页
+                        return $this->success('登录成功^_^', 'index/member/myhome');
                     }
 
                 }
@@ -2995,54 +2995,25 @@ echo "生成成功";
 
     public function index(){
 
-        // 调用浏览记录和来路统计功能
-        footprint();
-
-
-         
-
-
-        // try{
-
-           // die("$jack");
-
-        //   $jack = 6/0;
-
-        // }catch(\Exception $e){
-
-        //   echo 10086;
-
-        //     return $e->getMessage();
-
-        // }
-        // dump($jack);die();
-        // die('$jack');
-
-
-        $getwrong = '';
-
-
-
-        try{
+      // 如果用户登录重定向到 社交首页
+      if (Cookie::get('user_id')) {
+        $this->redirect('index/member/myhome');
+      }
 
  
+         // 查询最新的聊天信息
+          $talk_new = Data::jack();
 
-              // 测试填写的数据库信息是否正确，不正确 thinkphp5的调试模式会报错
+ 
          
+ 
 
-             $con=mysqli_connect("localhost","root","cVDEPmrRdVZswVWB456","demo"); 
+          $this->assign('talk_new',  $talk_new);
+          return view();
 
-        }catch(\Exception $e){
-            // echo 10086;
-            // return $e->getMessage();
-            $getwrong = $e->getMessage();
-            // return $this->error($e->getMessage());
-        }
+    }
 
-
-         
-        // die("$getwrong");
-
+    public function indexgo(){
 
 
           // 是否存在安装锁文件
@@ -3052,22 +3023,6 @@ echo "生成成功";
               $this->success('在线安装向导【关闭方法：在application增加一个install.lock】', 'Index/install');
             
           }
-
-
-      // 查询最新的聊天信息
-      $talk_new = Data::jack();
-
- 
-
-      $this->assign('talk_new', $talk_new);
-      $this->assign('getwrong', $getwrong);
-      return view();
-
-    }
-
-    public function indexgo(){
-
-
  
 
     // 切换全屏和窄屏功能

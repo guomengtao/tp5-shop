@@ -18,8 +18,7 @@ class Data extends model
     protected $auto = [];
     protected $insert = ['name','ip'];
     protected $update = ['name'];
-
-
+ 
     public function getOnAttr($value,$data)
     {
         // 查询当前用户有没有点赞
@@ -33,12 +32,11 @@ class Data extends model
     public static function jack(){
 
 
-       // 查询最新的聊天信息
-
-      $talk_new = Data::with('watermelon,user,dataSelf,likesList')
+        // 查询最新的聊天信息
+        $talk_new = Data::with('watermelon,user,dataSelf,likesList,dataselfreply')
                     ->withCount('likeslist')
                     ->order('id', 'desc')
-                    ->cache(true)
+                    // ->cache(60)
                     ->paginate(5); 
 
         return $talk_new;
@@ -87,6 +85,12 @@ class Data extends model
     // 关联自己 - 查询回复的哪条留言
     public function dataself(){
         return $this->hasOne('Data','id','age');
+        //hasOne('关联模型名','外键名','主键名',['模型别名定义'],'join类型');
+    }
+
+    // 关联自己 - 查询回复自己的所有回复
+    public function dataselfreply(){
+        return $this->hasMany('Data','age','id');
         //hasOne('关联模型名','外键名','主键名',['模型别名定义'],'join类型');
     }
 

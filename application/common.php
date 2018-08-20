@@ -34,6 +34,10 @@ use think\Validate;
  * @params string $field 排序的字段
  * @params string $sort 排序顺序标志 SORT_DESC 降序；SORT_ASC 升序
  */
+ function tomy(){
+
+        return 1;
+ }
  function quickLogon()
 {
         // $openid = "1011";
@@ -227,6 +231,9 @@ function add_vip_days($add_vip_days,$out_trade_no){
 function footprint(){
 
     debug('begin');
+
+
+    return 1;
 
     $referer    = '';
     $domain     = '';

@@ -17,19 +17,51 @@ use think\Session;
 
 class Member extends \think\Controller
 {
-        public function start1(){
+        
+
+    public function myhome(){
+
+        //  调用浏览记录和来路统计功能
+        footprint();
+
+        
+        $home_id      = Cookie::get('user_id');
 
 
-            // 一张卡片有7颗星 
-            // 有6张卡片+1 张大卡 3颗星
-            //限42天内打完 + 3天
-            // 每天打卡点亮一颗星  然后一天只能打一次 没打的不亮 
-            // 打满后要亮 下面显示已获得
+        $user  = User::with('ipinfo')
+             ->where('id',$home_id)
+            ->limit(10)
+            ->find();
 
 
+        // 更新博客页缓存数据功能
+          if (!cache('update')) {
+
+          // 这个用来控制ajax的更新频率 
+          cache('update', 1, 1);
+ 
+            
+            
+          }  
+
+            // 查询最新的聊天信息
+            $data = Data::jack();
+
+             
+
+                // 每个用户自己的独立聊天缓存数据
+                // 模板里直接读取这个缓存的数组即可
+               cache('data_'.$home_id, $data, 0);
 
 
-        }
+            
+
+        $this->assign('user',$user);
+        $this->assign('data', cache('data_'.$home_id));
+ 
+
+        return view();
+    }
 
             public function start(){
 

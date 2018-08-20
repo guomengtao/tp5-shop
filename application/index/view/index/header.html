@@ -48,7 +48,7 @@
        {if condition="($Think.cookie.screen==0)"}
                           
 
-                          {if condition="($Request.module=='index') AND ($Request.controller=='Member') AND ($Request.action=='home')" }
+                          {if condition="(($Request.module=='index') AND ($Request.controller=='Member') AND ($Request.action=='home')) or (($Request.module=='index') AND ($Request.controller=='Member') AND ($Request.action=='myhome'))" }
 
 
                           <!-- // 随机风格的实现 -->
@@ -123,7 +123,12 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="{:url('/')}">ThinkPHP5</a>
+           {if condition="$Think.cookie.phone"}
+                 <a class="navbar-brand" href="{:url('/index/member/myhome')}">ThinkPHP5</a>
+             {else/}
+                <a class="navbar-brand" href="{:url('/')}">ThinkPHP5</a>
+            {/if}
+         
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -177,7 +182,7 @@
           </form>
           <ul class="nav navbar-nav navbar-right">
             <li>
-              {if condition="$Think.cookie.phone"} <a href="__ROOT__/index/member/vip">
+              {if condition="$Think.cookie.phone"} <a href="__ROOT__/index/member/myhome">
                 {if condition="$Think.cookie.figureurl_qq_2"}
  <img class="img-circle"  style="width: 18px; height: 18px;" src="{$Think.cookie.figureurl_qq_2}"> 
  {$Think.cookie.nickname} 
@@ -191,8 +196,9 @@
 
               <!-- <span class="glyphicon glyphicon-king" style="color: goldenrod" aria-hidden="true"></span> -->
               {/if}
+              
 
-              {$Think.cookie.phone}  
+              <span class="glyphicon glyphicon-user"  aria-hidden="true"></span> {$Think.cookie.phone}  
 
 
               

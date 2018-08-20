@@ -1,0 +1,274 @@
+{include file="index/header" /}
+
+ 
+ <!-- 主要的左中右结构内容 -->
+<div class="row" style="    margin-top: 254px;">
+
+  <!-- 左侧开始 -->
+  <div class="col-xs-12 col-md-3">
+
+    <!-- 用户信息列表 -->
+    <ul class="list-group">
+      <li class="list-group-item">年龄：18</li>
+      <li class="list-group-item">北京 海淀</li>
+      <li class="list-group-item">爱好 摄影</li>
+      <li class="list-group-item">Porta ac consectetur ac</li>
+      <li class="list-group-item">Vestibulum at eros</li>
+    </ul>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">学习进度 <sapn class="pull-right">更多</sapn>
+</div>
+        <div class="panel-body">
+
+                    在线问答<br>
+    {$user.rand? 'VIP' : ''}
+
+<span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+    {$user.create_time} 加入 
+    
+
+    <span class="glyphicon glyphicon-yen" aria-hidden="true"></span> {$user.online_time} 分钟
+
+    <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+     {$user.ipinfo.city}
+
+     <span class="glyphicon glyphicon-map-marker " aria-hidden="true"></span> 
+    {$user.ipinfo.region}
+
+
+    <span class="glyphicon glyphicon-signal " aria-hidden="true"></span> {$user.ipinfo.isp}
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">公告：</div>
+        <div class="panel-body">
+         
+           这里加公告这里加公告这里加公告这里加公告这里加公告这里加公告这里加公告这里加公告 
+
+
+        </div>
+
+     </div>
+
+
+  </div> 
+  <!-- 左侧结束 -->
+
+
+  <!-- 中间开始 -->
+  <div class="col-xs-12 col-md-6">
+
+
+
+ 
+     
+
+         <!--简易即时聊天-->
+         
+
+                
+                <span id="bbs" style="display: none">666999</span>
+
+                <div class="bss_content"  id="bss_content" name="bss_content" style="margin-bottom: 10px; word-wrap:break-word;">
+
+                    <span id="bbs_index">
+
+                    {volist name='data' id='user'}
+
+
+       <div class="panel panel-default">
+      <div class="panel-body">
+
+                    <div   class=" col-xs-12 col-sm-12 col-md-12 " style="padding: 0px;    border-bottom: 1px solid #eee;    margin-bottom: 10px; ">
+
+
+                        <div class="media" >
+                            <div class="media-left" >
+                                <a href="{:url('/')}index/member/home/user_id/{$user.user_id}">
+                                    <img class="media-object img-circle"    src="__STATIC__/images/user/user ({:rand(1,25)}).jpg" data-holder-rendered="true" style="width: 28px; height: 28px;">
+                                </a>
+                            </div>
+
+                            <div class="media-body">
+
+                                <!-- 点赞左右结构 -->
+                                <div class="row">
+                                  <div class="col-xs-6 col-md-8">
+                                        <small><a href="{:url('/')}index/member/home/user_id/{$user.user_id}">
+
+                                         {$user.user.phone|substr=0,3}****{$user.user.phone|substr=7,4}
+
+                                    </a></small>
+                                  </div>
+                                  <div class="col-xs-3  col-md-1 pull-right"> 
+                                     
+                                        <span onclick='public_ajax("{$Think.server.script_name}/index/index/view/data_id/{$user.id}",0)' style="position: relative;">  
+                                                <small><span id="like_{$user.id}"  style="color: #555; font-size: 12px">{$user.likeslist_count?$user.likeslist_count:"赞"} </span> </small>
+                                                                    <span id="like_icon_{$user.id}" style="color: {$user.on?'#0084ff':'#8590a6'}; fill: currentColor;"> 
+                                            <svg viewBox="0 0 20 18" xmlns="http://www.w3.org/2000/svg" class="likeicon" width="13" height="16" aria-hidden="true" style="height: 16px; width: 13px;"><title></title><g><path d="M.718 7.024c-.718 0-.718.63-.718.63l.996 9.693c0 .703.718.65.718.65h1.45c.916 0 .847-.65.847-.65V7.793c-.09-.88-.853-.79-.846-.79l-2.446.02zm11.727-.05S13.2 5.396 13.6 2.89C13.765.03 11.55-.6 10.565.53c-1.014 1.232 0 2.056-4.45 5.83C5.336 6.965 5 8.01 5 8.997v6.998c-.016 1.104.49 2 1.99 2h7.586c2.097 0 2.86-1.416 2.86-1.416s2.178-5.402 2.346-5.91c1.047-3.516-1.95-3.704-1.95-3.704l-5.387.007z"></path></g></svg>  
+                                            </span>  
+                                                                  
+                                                                  <span id="like_a_{$user.id}" style="position:absolute;left:0px;top:0px;z-index:-20;color: red ;animation:mylike 2s;display:none ">+1</span>
+
+                                                               </span>
+                                  </div>
+                                </div>
+
+                                                                <small>  
+
+                                                                  {if condition="$user.dataself.title"}
+                                                                <div class="form-group input-group field-feed-content required" style="background-color:  #f4f4f4;padding: 10px;color: #555555">
+
+                                                                     @ {$user.dataself.user.phone|substr=0,3}****{$user.dataself.user.phone|substr=7,4} : {$user.dataself.title}
+                                                 
+                                                                </div>
+
+                                                               {/if}
+
+                                                                <a href="{:url('/')}index/index/view/id/{$user.shop}"> {$user.title}</a>
+                                                                        
+
+                                                                </small>
+                                                                <h5> <small> {$user.watermelon.title}  {$user.create_time}  
+
+                                                                       <a href = "javascript:void(0);"  onclick="document.getElementById('reply_{$user.id}').style.display = '' " >回复</a> 
+                                                                {volist name='user.likesList' id='lik'}
+                                                                          <a href="{:url('/')}index/member/home/user_id/{$lik.user_id}">
+                                    <img class="  img-circle"    src="__STATIC__/images/user/user ({:rand(1,25)}).jpg" data-holder-rendered="true" style="width: 16px; height: 16px;">
+                                </a>   
+                                                                  {/volist}
+
+                                                                                                   </small></h5>
+                                                               
+
+                                                                               <div id="reply_{$user.id}" class="form-group input-group field-feed-content required" style="display: none">
+
+                                                    <textarea id="titleChat_{$user.id}" name="title"  class="form-control"  placeholder="写回复" aria-required="true"></textarea>
+                                                    <span class="input-group-btn"><button type="submit" class="btn btn-success" onclick="bbs(document.getElementById('titleChat_{$user.id}').value,{$user.shop},{$user.id})" style="height: 54px;width: 54px;">发布</button></span>
+
+                                 
+                                                </div>
+
+                            </div>
+                             
+                        </div>
+
+
+
+                    </div>
+
+ 
+      </div>
+      <div class="panel-footer  text-center " >Panel footer 丨 收藏  丨点赞丨 收藏  丨点赞</div>
+    </div>
+
+
+                    {/volist}
+
+
+                        </span>
+
+                </div>
+
+
+
+ 
+
+
+    {$data->render()}
+ 
+
+
+     <div class="panel panel-default">
+        <div class="panel-heading">公告：</div>
+        <div class="panel-body">
+         
+           这里加公告这里加公告这里加公告这里加公告这里加公告这里加公告这里加公告这里加公告 
+
+
+        </div>
+
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">公告：</div>
+        <div class="panel-body">
+         
+           这里加公告这里加公告这里加公告这里加公告这里加公告这里加公告这里加公告这里加公告 
+
+
+        </div>
+
+      </div>
+
+  </div>
+  <!-- 中间结束 -->
+
+
+
+
+    <!-- 右侧开始 -->
+  <div class="col-xs-12 col-md-3">
+
+        
+      
+     
+     <div class="panel panel-default" style="   /*background: url(https://img.t.sinajs.cn/t6/skin/skinvip757/images/profile_cover_s.jpg?version=cf6793a7f3cff12c) no-repeat top center; background-color: transparent; */  ">
+  <div class="panel-body text-center ">
+     
+
+<img    class="img-responsive center-block img-circle" style="   width: 100px; height: 100px;   margin: 38px auto 0;  padding: 4px;     background: rgba(255,255,255,0.3);"   src="__STATIC__/images/user/user ({:rand(1,25)}).jpg" data-holder-rendered="true"  >
+
+ 
+
+
+  </div>
+   <div class="panel-footer  text-center " > 关注 58 丨粉丝 999丨 微博 666 </div>
+</div>
+
+
+       
+    
+
+
+
+    <div class="panel panel-default">
+        <div class="panel-heading">公123告：</div>
+        <div class="panel-body">
+         
+           这里加公告这里加公告这里加公告这里加公告这里加公告这里加公告这里加公告这里加公告 
+
+
+        </div>
+
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">公告：</div>
+        <div class="panel-body">
+         
+           这里加公告这里加公告这里加公告这里加公告这里加公告这里加公告这里加公告这里加公告 
+
+
+        </div>
+
+      </div>
+  </div><!-- 右侧结束 -->
+</div>
+<!-- 左右结构结束 -->
+
+ 
+
+
+
+
+
+
+
+
+
+
+ 
+
+{include file="index/footer" /}

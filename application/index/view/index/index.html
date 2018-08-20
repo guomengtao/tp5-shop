@@ -3,7 +3,7 @@
          <!--简易即时聊天--> 
 
         <div class="panel panel-default">
-            <div class="panel-heading">   学习交流  {$getwrong}  </div>
+            <div class="panel-heading">   学习交流   </div>
 
 
             <div class="panel-body">
@@ -53,40 +53,32 @@
                                   </div>
                                 </div>
 
-                                                                <small>  
+                              
 
-                                                                  {if condition="$user.dataself.title"}
-                                                                <div class="form-group input-group field-feed-content required" style="background-color:  #f4f4f4;padding: 10px;color: #555555">
-
-                                                                     @{$user.user.nickname} : {$user.dataself.title}
-                                                 
-                                                                </div>
-
-                                                               {/if}
-
-                                                                <a href="{:url('/')}index/member/home/user_id/{$user.user_id}"> {$user.title}</a>
-                                                                        
-
-                                                                </small>
-                                                                <h5> <small> {$user.watermelon.title}  {$user.create_time}  
-
-                                                                       <a href = "javascript:void(0);"  onclick="document.getElementById('reply_{$user.id}').style.display = '' " >回复</a> 
-                                                                {volist name='user.likesList' id='likeslist'}
-                                                                          <a href="{:url('/')}index/member/home/user_id/{$user.user_id}">
-                                    <img class="  img-circle"    src="__STATIC__/images/user/user ({:rand(1,25)}).jpg" data-holder-rendered="true" style="width: 16px; height: 16px;">
-                                </a>   
-                                                                  {/volist}
-
-                                                                                                   </small></h5>
-                                                               
-
-                                                                               <div id="reply_{$user.id}" class="form-group input-group field-feed-content required" style="display: none">
-
-                                                    <textarea id="titleChat_{$user.id}" name="title"  class="form-control"  placeholder="写回复" aria-required="true"></textarea>
-                                                    <span class="input-group-btn"><button type="submit" class="btn btn-success" onclick="bbs(document.getElementById('titleChat_{$user.id}').value,{$user.shop},{$user.id})" style="height: 54px;width: 54px;">发布</button></span>
+                                            {include file="index/reply" /}                     
 
                                  
-                                                </div>
+                                 
+                                            {foreach name="user.dataselfreply" item="dt"}
+                                            
+                                            {$dt.title} - {$dt.id}
+
+
+                                                {foreach name="dt.dataselfreply" item="vo"}
+                                                      {$vo.id} 
+                                                  {/foreach}
+
+                                                  此处循环不了三级
+
+
+                                                 
+
+
+                                            <br/>
+
+
+                                          {/foreach}
+  
 
                             </div>
                              
