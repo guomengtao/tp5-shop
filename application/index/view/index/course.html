@@ -1,0 +1,44 @@
+ {include file="index/header" /}
+
+ <div class="panel panel-default">
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-md-12"><small>分类：</small>  <a class="btn btn-info btn-xs" href="#" role="button">全部</a> 路由 模型 模型关联 上传 验证码 API 模板 视图  缓存 AUTH</div>
+
+      <div class="col-md-12"><small>付费：</small>  <a class="btn btn-info btn-xs" href="#" role="button">全部</a> 免费 VIP 付费</div>
+
+      <div class="col-md-12"><small>排序：</small>  <a class="btn btn-info btn-xs" href="#" role="button">全部</a> 升序 最新 热门 热评 点赞 </div>
+      
+    </div>
+  </div>
+</div>
+
+
+
+
+ <table class="table  table-hover"  >
+
+
+
+    {volist name='course' id='co'}
+
+
+ <tr  >
+  <td style="vertical-align:middle;"><a href="{:url('index/index/view',['id'=>$co.id])}"  target="_blank">                              {$co.title}</a></td>  </td>
+  <td style="vertical-align:middle;"><a href="{:url('index/index/view',['id'=>$co.id])}" class="btn btn-primary" target="_blank">                              立即学习</a></td>
+ </tr>
+
+      
+
+
+    {/volist}
+
+</table>
+
+
+{$course}
+
+
+  
+ 
+  {include file="index/footer" /}

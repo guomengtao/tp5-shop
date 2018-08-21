@@ -15,6 +15,17 @@ class Shop extends model
     protected $insert = ['name' => "游客",'age' => 17];  
     protected $update = ['name'];
 
+    public static function course(){
+
+         // 查询最新的聊天信息
+        $talk_new = Shop::order('sort', 'asc')
+                    ->where('sort','<', '10086')
+                    ->paginate(15); 
+
+        return $talk_new;
+
+        return 1;
+    }
     public function cha()
     {
         // 这是模型里面

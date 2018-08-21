@@ -6,7 +6,13 @@ use think\Db;
 use app\index\model\User;
 use think\Loader;
 
-class Index extends Controller{
+class Test extends Controller{
+  public function iframe(){
+
+     // return 10086;
+     return view();
+
+  }
   public function index(){
     //1
     /*$res = User::get(2);*/
@@ -20,4 +26,3 @@ class Index extends Controller{
     dump($res);
   }
 }
-?>

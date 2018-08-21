@@ -142,7 +142,7 @@
               {/if}
 
       
-              <a href="__ROOT__/index/member/news">{:lang('最新动态')}<span class="sr-only">(current)</span></a></li>
+              <a href="{:url('index/index/course')}">{:lang('课程表')}<span class="sr-only">(current)</span></a></li>
            
                 {if condition="$Request.url == '__ROOT__/index/member/top'"}
                   <li class="active" data-placement="bottom" title="Tooltip on bottom">
@@ -161,6 +161,7 @@
                 
                 <li><a href="__ROOT__/index/bbs/show">学员评论</a></li>
                 <li><a href="__ROOT__/index/ajax/ajaxrun">最新学员</a></li>
+                <li> <a href="__ROOT__/index/member/news">{:lang('最新动态')}<span class="sr-only">(current)</span></a></li>
                 <li role="separator" class="divider"></li>
                 <li><a href="__ROOT__/index/member/learning">正在上课学员</a></li>
                 <li role="separator" class="divider"></li>

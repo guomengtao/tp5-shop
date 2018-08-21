@@ -56,7 +56,7 @@ class Member extends \think\Controller
 
             
 
-        $this->assign('user',$user);
+        $this->assign('usert',$user);
         $this->assign('data', cache('data_'.$home_id));
  
 
