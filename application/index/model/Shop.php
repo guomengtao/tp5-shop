@@ -19,7 +19,7 @@ class Shop extends model
 
          // 查询最新的聊天信息
         $talk_new = Shop::order('sort', 'asc')
-                    ->where('sort','<', '10086')
+                    // ->where('sort','<', '10086')
                     ->paginate(15); 
 
         return $talk_new;

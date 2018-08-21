@@ -58,7 +58,11 @@ class Index extends \think\Controller
  
         public function course(){
 
+
+ 
           $course = Shop::course();
+
+
 
           $this->assign('course', $course);
 

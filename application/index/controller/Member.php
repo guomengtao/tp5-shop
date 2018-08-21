@@ -24,40 +24,48 @@ class Member extends \think\Controller
         //  调用浏览记录和来路统计功能
         footprint();
 
-        
-        $home_id      = Cookie::get('user_id');
+          // 是否为 POST 请求
+          if (request()->isPost()){
 
 
-        $user  = User::with('ipinfo')
-             ->where('id',$home_id)
-            ->limit(10)
-            ->find();
-
-
-        // 更新博客页缓存数据功能
-          if (!cache('update')) {
-
-          // 这个用来控制ajax的更新频率 
-          cache('update', 1, 1);
  
-            
-            
-          }  
+            $add = Data::add();
+
+ 
+
+            if($add){
+                //设置成功后跳转页面的地址，默认的返回页面是$_SERVER['HTTP_REFERER']
+                $this->success('发布成功');
+            } else {
+                //错误页面的默认跳转页面是返回前一页，通常不需要设置
+                $this->error('请填写内容');
+            }
+
+          }
+
+        
+           $home_id      = Cookie::get('user_id');
+
+
+            $user  = User::with('ipinfo')
+                 ->where('id',$home_id)
+                ->limit(10)
+                ->find();
+
+ 
 
             // 查询最新的聊天信息
             $data = Data::jack();
 
              
 
-                // 每个用户自己的独立聊天缓存数据
-                // 模板里直接读取这个缓存的数组即可
-               cache('data_'.$home_id, $data, 0);
+   
 
 
             
 
         $this->assign('usert',$user);
-        $this->assign('data', cache('data_'.$home_id));
+        $this->assign('data',$data);
  
 
         return view();

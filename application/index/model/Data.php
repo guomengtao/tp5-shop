@@ -29,6 +29,20 @@ class Data extends model
     }
 
 
+    public static function add(){
+
+        if (!trim(input('titleChat_send'))) {
+           return 0;
+
+        }
+        $user           = new Data;
+        $user->title    = input('titleChat_send');
+        $user->user_id  = Cookie::get('user_id');
+        $user->shop     = 150;
+        $user->save();
+        // 获取自增ID
+        return $user->id;
+    }
     public static function jack(){
 
 

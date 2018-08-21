@@ -1,5 +1,6 @@
  
-
+{:str_replace("world","Shanghai","Hello world!")}
+{:str_replace("www","https",$Request.param.url)}
   您现在访问的是：{$Request.param.url} <a href="{:url('index/index/index')}">返回首页</a>   <a href="{:url('index/test/iframe','url=www.taobao.com')}">淘宝</a> 
   <a href="{:url('index/test/iframe','url=www.baidu.com')}">baidu</a> 
   <a href="{:url('index/test/iframe',['url'=>$Request.param.url])}">{$Request.param.url}</a> 
