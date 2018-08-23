@@ -16,7 +16,12 @@ class User extends model
     protected $update = ['name'];
 
 
- 
+     // 测试 查询关联的多条点赞
+    public function myblog()
+    {
+        
+        return $this->hasMany('data');
+    }
 
     protected function scopeAgetom($query)
     {
@@ -28,7 +33,10 @@ class User extends model
         $query->where('age','>',50)->limit(10);
     } 
 
-
+    public function userqq(){
+        return $this->hasOne('userQq');
+        //hasOne('关联模型名','外键名','主键名',['模型别名定义'],'join类型');
+    }
 
 
     protected function scopeAgeAbove($query, $lowest_age)

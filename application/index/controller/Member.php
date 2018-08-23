@@ -28,12 +28,13 @@ class Member extends \think\Controller
           if (request()->isPost()){
 
 
- 
+            
             $add = Data::add();
 
  
 
             if($add){
+                $this->redirect('index/member/myhome');
                 //设置成功后跳转页面的地址，默认的返回页面是$_SERVER['HTTP_REFERER']
                 $this->success('发布成功');
             } else {
@@ -44,18 +45,21 @@ class Member extends \think\Controller
           }
 
         
-           $home_id      = Cookie::get('user_id');
+       
 
-
-            $user  = User::with('ipinfo')
-                 ->where('id',$home_id)
-                ->limit(10)
-                ->find();
+            // 查询当前用户信息
+            $usert  = User::with('ipinfo','userqq')
+                 ->withCount('myblog')
+                 ->where('id',Cookie::get('user_id'))
+                 ->find();
 
  
 
             // 查询最新的聊天信息
             $data = Data::jack();
+
+
+            // dump($data);
 
              
 
@@ -64,7 +68,7 @@ class Member extends \think\Controller
 
             
 
-        $this->assign('usert',$user);
+        $this->assign('usert',$usert);
         $this->assign('data',$data);
  
 

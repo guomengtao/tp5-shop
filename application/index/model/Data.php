@@ -37,6 +37,7 @@ class Data extends model
         }
         $user           = new Data;
         $user->title    = input('titleChat_send');
+        $user->age      = input('reply');
         $user->user_id  = Cookie::get('user_id');
         $user->shop     = 150;
         $user->save();
@@ -49,9 +50,10 @@ class Data extends model
         // 查询最新的聊天信息
         $talk_new = Data::with('watermelon,user,dataSelf,likesList,dataselfreply')
                     ->withCount('likeslist')
+                    ->withCount('dataselfreply')
+                    ->where('age',0)
                     ->order('id', 'desc')
-                    // ->cache(60)
-                    ->paginate(5); 
+                    ->paginate(2,16); 
 
         return $talk_new;
  
@@ -77,8 +79,12 @@ class Data extends model
     // 测试 查询关联的多条点赞
     public function likesList()
     {
+        
         return $this->hasMany('likes','data_id');
     }
+
+ 
+ 
 
      public function comments()
     {
@@ -90,6 +96,7 @@ class Data extends model
         return $this->hasOne('Shop','id','shop');
         //hasOne('关联模型名','外键名','主键名',['模型别名定义'],'join类型');
     }
+
     public function user(){
         // return $this->belongsTo('User');
         // return $this->belongsTo('User','user_id','id');
@@ -104,7 +111,16 @@ class Data extends model
 
     // 关联自己 - 查询回复自己的所有回复
     public function dataselfreply(){
+
+        
         return $this->hasMany('Data','age','id');
+        //hasOne('关联模型名','外键名','主键名',['模型别名定义'],'join类型');
+    } 
+
+       public function good(){
+
+         // return $this->hasMany('likes','data_id');
+        return $this->hasMany('data','age','id');
         //hasOne('关联模型名','外键名','主键名',['模型别名定义'],'join类型');
     }
 
