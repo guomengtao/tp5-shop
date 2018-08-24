@@ -37,7 +37,7 @@ class Data extends model
         }
         $user           = new Data;
         $user->title    = input('titleChat_send');
-        $user->age      = input('reply');
+        $user->age      = input('reply',0);
         $user->user_id  = Cookie::get('user_id');
         $user->shop     = 150;
         $user->save();
@@ -53,7 +53,7 @@ class Data extends model
                     ->withCount('dataselfreply')
                     ->where('age',0)
                     ->order('id', 'desc')
-                    ->paginate(2,16); 
+                    ->paginate(10); 
 
         return $talk_new;
  

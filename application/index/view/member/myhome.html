@@ -142,9 +142,9 @@
                                                                        <a href = "javascript:void(0);"  onclick="document.getElementById('reply_{$user.id}').style.display = document.getElementById('reply_{$user.id}').style.display=='none'?'':'none' ">回复</a> 
                                                                       
                                                                 {volist name='user.likesList' id='lik'}
-                                                                          <a href="{:url('/')}index/member/home/user_id/{$lik.user_id}">
-                                    <img class="  img-circle"    src="__STATIC__/images/user/user ({:rand(1,25)}).jpg" data-holder-rendered="true" style="width: 16px; height: 16px;">
-                                </a>   
+                                                                           {$lik.user_id} {$lik.user.nickname}  <a href="{:url('index/member/home',['user_id'=>$lik.user_id])}">
+                                    <img class="  img-circle"    src="{$lik.user.userqq.figureurl_qq_2?$lik.user.userqq.figureurl_qq_2:'__STATIC__/images/user/user ('.rand(1,25).').jpg'}" data-holder-rendered="true" style="width: 28px; height: 28px;">
+                </a>
                                                                   {/volist}
 
                                                                                                    </small></h5>
@@ -245,46 +245,7 @@
  
 
 
-     <div class="panel panel-default">
-        <div class="panel-heading">分页参数：</div>
-        <div class="panel-body text-center">
-         
-     {$data->total()}总条数
-
-    {$data->currentPage()} 当前页页码
-    {$data->lastPage()} 最后一页 总页数
-     
- <nav aria-label="... ">
-  <ul class="pagination">
-    {if condition="$data->currentPage() >1"}
-    <li  ><a href="{:url('index/member/myhome',['page'=>$data->currentPage()-1])}" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
-    <li  ><a href="{:url('index/member/myhome',['page'=>$data->currentPage()-1])}">{$data->currentPage()-1} <span class="sr-only">(current)</span></a></li>
-    {/if}
-    <li class="active"><a href="#">{$data->currentPage()} <span class="sr-only">(current)</span></a></li>
-
-    {if condition="$data->currentPage() < $data->lastPage()"}
-    <li  ><a href="{:url('index/member/myhome',['page'=>$data->currentPage()+1])}">{$data->currentPage()+1} <span class="sr-only">(current)</span></a></li>
-    <li  ><a href="{:url('index/member/myhome',['page'=>$data->currentPage()+1])}" aria-label="Previous"><span aria-hidden="true">»</span></a></li>
-    {/if}
-  </ul>
-</nav>
-
-
-
-
-<nav aria-label="...">
-  <ul class="pagination">
-    <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
-     <li  ><a href="#"> {$data->currentPage()-1} <span class="sr-only">(current)</span></a></li>
-    <li class="active"><a href="#"> {$data->currentPage()} <span class="sr-only">(current)</span></a></li>
-    <li  ><a href="#"> {$data->currentPage()+1} <span class="sr-only">(current)</span></a></li>
-    <li  ><a href="#" aria-label="Previous"><span aria-hidden="true">» 下一页</span></a></li>
-   </ul>
-</nav>
-
-        </div>
-
-      </div>
+ 
 
       <div class="panel panel-default">
         <div class="panel-heading">公告：</div>
@@ -319,7 +280,7 @@
 
 
   </div>
-   <div class="panel-footer  text-center " > 关注 58 丨粉丝 999丨 随笔 {$usert.myblog_count} </div>
+   <div class="panel-footer  text-center " > 关注 {:count($usert.follow)}  丨粉丝 {:count($usert.fans)} 丨 随笔 {$usert.myblog_count} </div>
 </div>
 
 
@@ -329,20 +290,72 @@
 
 
     <div class="panel panel-default">
-        <div class="panel-heading">公告：</div>
+        <div class="panel-heading">关注  {:count($usert.follow)}：</div>
         <div class="panel-body">
          
-           刚刚新开发 社交首页，功能逐步完善中~~
 
+
+            {volist name='usert.follow' id='fo'}
+                {$fo.data_id} 
+                -
+
+           
+
+                {$fo.followuser.id}
+
+
+
+                                 <a href="{:url('index/member/home',['user_id'=>$user.user_id])}">
+                                    <img class="  img-circle"    src="{$fo.followuser.userqq.figureurl_qq_2?$fo.followuser.userqq.figureurl_qq_2:'__STATIC__/images/user/user ('.rand(1,25).').jpg'}" data-holder-rendered="true" style="width: 28px; height: 28px;">
+                </a>
+ 
+
+
+             {/volist}
 
         </div>
 
       </div>
       <div class="panel panel-default">
-        <div class="panel-heading">公告：</div>
+        <div class="panel-heading">写法一 粉丝 {$usert.fans_count}：</div>
         <div class="panel-body">
          
-           这里加公告这里加公告这里加公告这里加公告这里加公告这里加公告这里加公告这里加公告 
+
+
+            {volist name='usert.fans' id='fo'}
+
+
+                {$fo.user_id} 
+                - {$fo.user.nickname} 
+           
+
+                                  <a href="{:url('index/member/home',['user_id'=>$user.user_id])}">
+                                    <img class="  img-circle"    src="{$fo.user.figureurl_qq_2?$fo.user.figureurl_qq_2:'__STATIC__/images/user/user ('.rand(1,25).').jpg'}" data-holder-rendered="true" style="width: 28px; height: 28px;">
+                </a>
+
+               
+ 
+
+
+             {/volist}
+
+        </div>
+
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">写法二 粉丝 {$usert.fans_count}：</div>
+        <div class="panel-body">
+         
+             {volist name='usert.fans' id='fans'}
+                
+                <h6>{$fans.user_id}-{$fans.fansuser.nickname}</h6>
+                
+                
+ 
+
+
+
+             {/volist}
 
 
         </div>

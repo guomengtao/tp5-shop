@@ -16,11 +16,39 @@ class User extends model
     protected $update = ['name'];
 
 
+
+
+     // 测试 查询单个用户信息模型
+    public static function userselfinfo($id){
+            // 查询当前用户信息
+            
+            $user  = User::with('ipinfo','userqq','fans')
+                     ->withCount('myblog')
+                     ->withCount('fans')
+                     ->where('id',$id)
+                     ->find();
+
+            return $user;
+    }
      // 测试 查询关联的多条点赞
     public function myblog()
     {
         
         return $this->hasMany('data');
+    }
+
+    // 查询关联的多个关注
+    public function follow()
+    {
+        // 查询他关注了用户
+        return $this->hasMany('fans','user_id','id');
+    }
+
+    // 查询关联的多个粉丝fnsa
+    public function fans()
+    {
+        // 查询那些用户关注了他
+        return $this->hasMany('fans','data_id','id');
     }
 
     protected function scopeAgetom($query)

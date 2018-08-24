@@ -9,6 +9,7 @@ use app\index\model\Data;
 use app\index\model\User;
 use app\index\model\Video;
 use app\index\model\likes;
+use app\index\model\Fans;
 use app\index\model\Order;
 use app\index\model\Money;
 use app\index\model\Footprint;
@@ -47,11 +48,8 @@ class Member extends \think\Controller
         
        
 
-            // 查询当前用户信息
-            $usert  = User::with('ipinfo','userqq')
-                 ->withCount('myblog')
-                 ->where('id',Cookie::get('user_id'))
-                 ->find();
+            // 查询指定用户信息
+            $usert  = User::userselfinfo(Cookie::get('user_id'));
 
  
 
