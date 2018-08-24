@@ -28,20 +28,35 @@ class Fans extends model
     // 粉丝
     public function fansuser(){
 
-        return $this->hasOne('User','id','user_id');
+        return $this->hasOne('User','aaaauser_id','id');
          //hasOne('关联模型名','外键名','主键名',['模型别名定义'],'join类型');
     }
     // 关注
     public function followuser(){
 
-        return $this->hasOne('User','id','data_id');
+        return $this->hasOne('User','baabbbid','bbbdata_id');
     }
 
 
-   public function user(){
+   public function userqq(){
         // return $this->hasOne('User');
         // return $this->belongsTo('User','user_id','id');
         return $this->hasOne('UserQq','user_id','user_id');
+        //hasOne('关联模型名','外键名','主键名',['模型别名定义'],'join类型');
+    }
+
+
+    public function user(){
+        // return $this->hasOne('User');
+        // return $this->belongsTo('User','aaaauser_id','id');
+        return $this->hasOne('User','id','user_id');
+        //hasOne('关联模型名','外键名','主键名',['模型别名定义'],'join类型');
+    }
+    // 测试关联点赞表
+    public function likes(){
+        // return $this->hasOne('User');
+        // return $this->belongsTo('User','user_id','id');
+        return $this->hasOne('Likes','user_id','user_id');
         //hasOne('关联模型名','外键名','主键名',['模型别名定义'],'join类型');
     }
 

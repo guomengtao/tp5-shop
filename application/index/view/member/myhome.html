@@ -112,6 +112,8 @@
                                         <small><a href="{:url('/')}index/member/home/user_id/{$user.user_id}">
 
                                         {$user.user.userqq.nickname?$user.user.userqq.nickname:'学员'.$user.user.id}
+                                        
+
 
 
                                           
@@ -326,11 +328,11 @@
 
 
                 {$fo.user_id} 
-                - {$fo.user.nickname} 
+                - {$fo.userqq.nickname} - {$fo.userqq.user_id}- {$fo.userqq.user.userqq.user.nickname}
            
 
-                                  <a href="{:url('index/member/home',['user_id'=>$user.user_id])}">
-                                    <img class="  img-circle"    src="{$fo.user.figureurl_qq_2?$fo.user.figureurl_qq_2:'__STATIC__/images/user/user ('.rand(1,25).').jpg'}" data-holder-rendered="true" style="width: 28px; height: 28px;">
+                                  <a href="{:url('index/member/home',['user_id'=>$fo.user_id])}">
+                                    <img class="  img-circle"    src="{$fo.userqq.figureurl_qq_2?$fo.userqq.figureurl_qq_2:'__STATIC__/images/user/user ('.rand(1,25).').jpg'}" data-holder-rendered="true" style="width: 28px; height: 28px;">
                 </a>
 
                
@@ -348,7 +350,7 @@
          
              {volist name='usert.fans' id='fans'}
                 
-                <h6>{$fans.user_id}-{$fans.fansuser.nickname}</h6>
+                <h6>{$fans.user_id}-{$fans.fansuser.nickname} - {$fans.user.id} - {$fans.likes.id}   </h6>
                 
                 
  
@@ -356,6 +358,15 @@
 
 
              {/volist}
+
+
+以下是fans表：
+ 
+{$fanstt} 
+{$fanstt.id} 
+{$fanstt.user.phone} 
+
+
 
 
         </div>

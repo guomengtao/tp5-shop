@@ -57,15 +57,16 @@ class Member extends \think\Controller
             $data = Data::jack();
 
 
-            // dump($data);
-
-             
-
+            // 测试 直接读取 粉丝表，然后关联user表
+            $fanstt = Fans::get(29);
+            // dump($fanstt);
+ 
    
 
 
             
 
+        $this->assign('fanstt',$fanstt);
         $this->assign('usert',$usert);
         $this->assign('data',$data);
  
