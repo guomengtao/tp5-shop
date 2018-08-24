@@ -28,20 +28,20 @@ class Fans extends model
     // 粉丝
     public function fansuser(){
 
-        return $this->hasOne('User','aaaauser_id','id');
+        return $this->hasMany('User','aaaauser_id','id');
          //hasOne('关联模型名','外键名','主键名',['模型别名定义'],'join类型');
     }
     // 关注
     public function followuser(){
 
-        return $this->hasOne('User','baabbbid','bbbdata_id');
+        return $this->hasMany('UserQq','user_id','follow_id');
     }
 
 
    public function userqq(){
         // return $this->hasOne('User');
         // return $this->belongsTo('User','user_id','id');
-        return $this->hasOne('UserQq','user_id','user_id');
+        return $this->hasMany('UserQq','user_id','user_id');
         //hasOne('关联模型名','外键名','主键名',['模型别名定义'],'join类型');
     }
 

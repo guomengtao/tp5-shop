@@ -297,19 +297,13 @@
          
 
 
-            {volist name='usert.follow' id='fo'}
-                {$fo.data_id} 
-                -
+            {volist name='usert.follow' id='follow'}
 
-           
-
-                {$fo.followuser.id}
-
-
-
-                                 <a href="{:url('index/member/home',['user_id'=>$user.user_id])}">
-                                    <img class="  img-circle"    src="{$fo.followuser.userqq.figureurl_qq_2?$fo.followuser.userqq.figureurl_qq_2:'__STATIC__/images/user/user ('.rand(1,25).').jpg'}" data-holder-rendered="true" style="width: 28px; height: 28px;">
-                </a>
+ 
+ 
+                    <a href="{:url('index/member/home',['user_id'=>$follow.follow_id])}" class="thumbnail">
+                                    <img class="  img-circle"    src="{$follow.followuser.figureurl_qq_2?$follow.followuser.figureurl_qq_2:'__STATIC__/images/user/user ('.rand(1,25).').jpg'}" data-holder-rendered="true" style="width: 28px; height: 28px;">
+                    </a>
  
 
 
@@ -319,7 +313,7 @@
 
       </div>
       <div class="panel panel-default">
-        <div class="panel-heading">写法一 粉丝 {$usert.fans_count}：</div>
+        <div class="panel-heading"> 粉丝 {$usert.fans_count}</div>
         <div class="panel-body">
          
 
@@ -327,13 +321,11 @@
             {volist name='usert.fans' id='fo'}
 
 
-                {$fo.user_id} 
-                - {$fo.userqq.nickname} - {$fo.userqq.user_id}- {$fo.userqq.user.userqq.user.nickname}
-           
+                
 
-                                  <a href="{:url('index/member/home',['user_id'=>$fo.user_id])}">
+                    <a href="{:url('index/member/home',['user_id'=>$fo.user_id])}" class="thumbnail">
                                     <img class="  img-circle"    src="{$fo.userqq.figureurl_qq_2?$fo.userqq.figureurl_qq_2:'__STATIC__/images/user/user ('.rand(1,25).').jpg'}" data-holder-rendered="true" style="width: 28px; height: 28px;">
-                </a>
+                    </a>
 
                
  
@@ -344,32 +336,7 @@
         </div>
 
       </div>
-      <div class="panel panel-default">
-        <div class="panel-heading">写法二 粉丝 {$usert.fans_count}：</div>
-        <div class="panel-body">
-         
-             {volist name='usert.fans' id='fans'}
-                
-                <h6>{$fans.user_id}-{$fans.fansuser.nickname} - {$fans.user.id} - {$fans.likes.id}   </h6>
-                
-                
  
-
-
-
-             {/volist}
-
-
-以下是fans表：
- 
-{$fanstt} 
-{$fanstt.id} 
-{$fanstt.user.phone} 
-
-
-
-
-        </div>
 
       </div>
   </div><!-- 右侧结束 -->

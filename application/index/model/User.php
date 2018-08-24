@@ -4,6 +4,7 @@ namespace app\index\model;
 
 use think\Model;
 use traits\model\SoftDelete;
+use think\Cookie;
 class User extends model 
 {
 	use SoftDelete;
@@ -30,6 +31,16 @@ class User extends model
 
             return $user;
     }
+
+    public function getFollowedAttr($value,$data)
+    {
+        // 查询当前用户有没有 关注
+        $on = Fans::where('follow_id','=',input('user_id'))
+                    ->where('user_id','=',Cookie::get('user_id'))
+                    ->count();
+       return $on;
+    }
+
      // 测试 查询关联的多条点赞
     public function myblog()
     {
@@ -48,7 +59,7 @@ class User extends model
     public function fans()
     {
         // 查询那些用户关注了他
-        return $this->hasMany('fans','data_id','id');
+        return $this->hasMany('fans','follow_id','id');
     }
 
     protected function scopeAgetom($query)

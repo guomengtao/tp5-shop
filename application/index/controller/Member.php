@@ -56,17 +56,12 @@ class Member extends \think\Controller
             // 查询最新的聊天信息
             $data = Data::jack();
 
-
-            // 测试 直接读取 粉丝表，然后关联user表
-            $fanstt = Fans::get(29);
-            // dump($fanstt);
  
    
 
 
             
-
-        $this->assign('fanstt',$fanstt);
+ 
         $this->assign('usert',$usert);
         $this->assign('data',$data);
  
@@ -522,11 +517,13 @@ class Member extends \think\Controller
         
         $home_id      = input('user_id');
 
+        // 改造前
+        // $user  = User::with('ipinfo')
+        //      ->where('id',$home_id)
+        //     ->find();
 
-        $user  = User::with('ipinfo')
-             ->where('id',$home_id)
-            ->limit(10)
-            ->find();
+        // 改造后
+        $user  = User::userselfinfo(input('user_id'));
 
 
         // 更新博客页缓存数据功能
