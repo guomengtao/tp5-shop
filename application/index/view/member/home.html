@@ -4,30 +4,64 @@
 <div class="row" >
 
   <div class="col-md-12 text-center" style="color: white;padding-bottom: 10px" > 
- 
-    <img    class="img-responsive center-block img-circle" style="   width: 100px; height: 100px;   margin: 48px auto 0;  padding: 4px;     background: rgba(255,255,255,0.3);"   src="__STATIC__/images/user/user ({:rand(1,25)}).jpg" data-holder-rendered="true"  >
-
- 
 
 
  
+    <img    class="img-responsive center-block img-circle" style="   width: 100px; height: 100px;   margin: 48px auto 0;  padding: 4px;     background: rgba(255,255,255,0.3);"   src="{$user.userqq.figureurl_qq_2?$user.userqq.figureurl_qq_2:'__STATIC__/images/user/user ('.rand(1,25).').jpg'}" data-holder-rendered="true"  >
+
+ 
+              
+
+
+
+
+ 
  
 
 
-    <h5>学习tp5的JACK</h5>  
+    <h5>学习tp5的JACK     </h5>   
     <h5> 相互学习 共同进步 ~ </h5> 
  
  
-  {$user.followed}
 
-    <a class="btn btn-warning" href="#" role="button" style="border-radius:2px;background: -webkit-linear-gradient(top, #fa7d3c 0%,#f55f10 100%);box-shadow: 0px 1px 2px rgba(0,0,0,0.3);  border-color:  #fa7d3c  "> <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 加关注</a>
+    
 
-  <a class="btn btn-warning" href="#" role="button"  > + 加关注</a>
+ 
+      {if condition="$user.followed"}
+
+      <div class="btn-group">
+  <div class="btn-group">
+    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"  style="border-radius:2px; color: #fff;border-color: #696e78;     box-shadow: 0px 2px 1px rgba(0,0,0,.2);background: -webkit-linear-gradient(top, #696e78 0%,#646973 100%);">
+      <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> 已关注
+      <!-- <span class="caret"></span> -->
+    </button>
+
+     
+
+    <ul class="dropdown-menu">
+      <li  class="disabled"><a href="#">设为特别关注</a></li>
+      <li role="separator" class="divider"></li>
+      <li><a  href="{:url('',['user_id'=>$user.id,'editfollow'=>2 ])}">取消关注</a></li>
+      
+    </ul>
+  </div>
+</div>
+
+         <!--  <a class="btn btn-default"  href="{:url('',['user_id'=>$user.id,'editfollow'=>2 ])}"  role="button" style="border-radius:2px; color: #fff;border-color: #696e78;     box-shadow: 0px 2px 1px rgba(0,0,0,.2);background: -webkit-linear-gradient(top, #696e78 0%,#646973 100%);"> <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>  已关注</a> -->
+
+      {else /}
+
+          <a class="btn btn-warning" href="{:url('',['user_id'=>$user.id,'editfollow'=>1]  )}" role="button" style="border-radius:2px;background: -webkit-linear-gradient(top, #fa7d3c 0%,#f55f10 100%);box-shadow: 0px 1px 2px rgba(0,0,0,0.3);  border-color:  #fa7d3c  "> <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 加关注</a>
+
+       {/if}
+  
+
+ 
 
 
-    <a class="btn btn-default" href="#" role="button" style="border-radius:2px; color: #fff;border-color: #696e78;     box-shadow: 0px 2px 1px rgba(0,0,0,.2);background: -webkit-linear-gradient(top, #696e78 0%,#646973 100%);"> <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>  已关注</a>
+    
 
-    <a class="btn btn-default" href="#" role="button" style="border-radius:2px; color: #fff;border-color: #696e78;     box-shadow: 0px 2px 1px rgba(0,0,0,.2);background: -webkit-linear-gradient(top, #696e78 0%,#646973 100%);"> 私信</a>
+    <a class="btn btn-default disabled"  href="#" role="button" style="border-radius:2px; color: #fff;border-color: #696e78;     box-shadow: 0px 2px 1px rgba(0,0,0,.2);background: -webkit-linear-gradient(top, #696e78 0%,#646973 100%);"> 私信</a>
 
 
      
@@ -83,18 +117,53 @@
     </div>
 
     <div class="panel panel-default">
-        <div class="panel-heading">公告：</div>
+        <div class="panel-heading">他的粉丝：</div>
         <div class="panel-body">
          
-           这里加公告这里加公告这里加公告这里加公告这里加公告这里加公告这里加公告这里加公告 
+           {volist name='user.fans' id='fo'}
 
+
+                 
+                    <a href="{:url('index/member/home',['user_id'=>$fo.user_id])}" class="thumbnail">
+                                    <img class="  img-circle"    src="{$fo.userqq.figureurl_qq_2?$fo.userqq.figureurl_qq_2:'__STATIC__/images/user/user ('.rand(1,25).').jpg'}" data-holder-rendered="true" style="width: 28px; height: 28px;">
+                    </a>
+
+               
+ 
+
+
+             {/volist}
+
+        </div>
+
+     </div>
+
+  <div class="panel panel-default">
+        <div class="panel-heading">他的关注：</div>
+        <div class="panel-body">
+         
+            {volist name='user.follow' id='follow'}
+
+ 
+ 
+                    <a href="{:url('index/member/home',['user_id'=>$follow.follow_id])}" class="thumbnail">
+                                    <img class="  img-circle"    src="{$follow.followuser.figureurl_qq_2?$follow.followuser.figureurl_qq_2:'__STATIC__/images/user/user ('.rand(1,25).').jpg'}" data-holder-rendered="true" style="width: 28px; height: 28px;">
+                    </a>
+ 
+
+
+             {/volist}
 
         </div>
 
      </div>
 
 
-  </div> 
+  </div>
+
+
+
+
   <!-- 左侧结束 -->
 
 

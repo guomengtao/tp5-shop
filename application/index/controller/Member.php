@@ -517,12 +517,8 @@ class Member extends \think\Controller
         
         $home_id      = input('user_id');
 
-        // 改造前
-        // $user  = User::with('ipinfo')
-        //      ->where('id',$home_id)
-        //     ->find();
-
-        // 改造后
+ 
+        // 直接调用统一的自定义方法 查询指定用户信息
         $user  = User::userselfinfo(input('user_id'));
 
 

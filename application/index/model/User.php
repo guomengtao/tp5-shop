@@ -20,6 +20,7 @@ class User extends model
 
 
      // 测试 查询单个用户信息模型
+
     public static function userselfinfo($id){
             // 查询当前用户信息
             
@@ -34,11 +35,56 @@ class User extends model
 
     public function getFollowedAttr($value,$data)
     {
+        
+        // 添加关注
+        if (input('editfollow') == 1) {
+
+
+                    $fanscount = Fans::where('user_id',Cookie::get('user_id'))
+                                    ->where('follow_id',input('user_id'))
+                                    ->count();
+
+
+                    if (!$fanscount) {
+
+                            // 添加关注
+                            $user               = new Fans;
+                            $user->user_id      = Cookie::get('user_id');
+                            $user->follow_id    = input('user_id');
+                            $user->save();
+                    }
+ 
+        }
+        // 取消关注
+        if (input('editfollow') == 2) {
+
+
+                    // 举例 这样数据库方式不支持软删除
+                    // Fans::where('user_id',Cookie::get('user_id'))
+                    //                 ->where('follow_id',input('user_id'))
+                    //                 ->delete();
+
+
+                    // 删除状态为0的数据
+                    Fans::destroy(['user_id' => Cookie::get('user_id'),'follow_id' => input('user_id')]);
+             
+        }
+
+
+
         // 查询当前用户有没有 关注
         $on = Fans::where('follow_id','=',input('user_id'))
                     ->where('user_id','=',Cookie::get('user_id'))
                     ->count();
+       
+
+
+
+
+
+
        return $on;
+
     }
 
      // 测试 查询关联的多条点赞
