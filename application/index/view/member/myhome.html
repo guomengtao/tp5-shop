@@ -144,7 +144,7 @@
                                                                        <a href = "javascript:void(0);"  onclick="document.getElementById('reply_{$user.id}').style.display = document.getElementById('reply_{$user.id}').style.display=='none'?'':'none' ">回复</a> 
                                                                       
                                                                 {volist name='user.likesList' id='lik'}
-                                                                           {$lik.user_id} {$lik.user.nickname}  <a href="{:url('index/member/home',['user_id'=>$lik.user_id])}">
+                                                                           {$lik.user.nickname}   <a href="{:url('index/member/home',['user_id'=>$lik.user_id])}">
                                     <img class="  img-circle"    src="{$lik.user.userqq.figureurl_qq_2?$lik.user.userqq.figureurl_qq_2:'__STATIC__/images/user/user ('.rand(1,25).').jpg'}" data-holder-rendered="true" style="width: 28px; height: 28px;">
                 </a>
                                                                   {/volist}
@@ -167,7 +167,7 @@
                                                
                                                
 
-                                                                    <h5>                                <a href="{:url('/')}index/member/home/user_id/{$user.user_id}">
+                                                                    <h5>                                <a href="{:url('/')}index/member/home/user_id/{$dataself.user_id}">
                                     <img class="  img-circle"    src="{$dataself.user.userqq.figureurl_qq_2?$dataself.user.userqq.figureurl_qq_2:'__STATIC__/images/user/user ('.rand(1,25).').jpg'}" data-holder-rendered="true" style="width: 28px; height: 28px;">
                                 </a>
                                                                      {$dataself.user.userqq.nickname?$dataself.user.userqq.nickname:'学员'.$dataself.user.id}    :{$dataself.title} {$dataself.create_time}</h5>   

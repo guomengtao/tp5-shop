@@ -44,16 +44,27 @@ class Data extends model
         // 获取自增ID
         return $user->id;
     }
-    public static function jack(){
+    public static function jack($user_id=0){
 
+        if ($user_id) {
 
-        // 查询最新的聊天信息
-        $talk_new = Data::with('watermelon,user,dataSelf,likesList,dataselfreply')
+                    // 查询最新的聊天信息
+                    $talk_new = Data::with('watermelon,user,dataSelf,likesList,dataselfreply')
+                    ->withCount('likeslist')
+                    ->withCount('dataselfreply')
+                    ->where('user_id',$user_id)
+                    ->order('id', 'desc')
+                    ->paginate(10); 
+        }else{
+                    // 查询最新的聊天信息
+                    $talk_new = Data::with('watermelon,user,dataSelf,likesList,dataselfreply')
                     ->withCount('likeslist')
                     ->withCount('dataselfreply')
                     ->where('age',0)
                     ->order('id', 'desc')
                     ->paginate(10); 
+        }
+
 
         return $talk_new;
  

@@ -513,39 +513,15 @@ class Member extends \think\Controller
 
         //  调用浏览记录和来路统计功能
         footprint();
-
-        
-        $home_id      = input('user_id');
-
  
         // 直接调用统一的自定义方法 查询指定用户信息
         $user  = User::userselfinfo(input('user_id'));
 
-
-        // 更新博客页缓存数据功能
-          if (!cache('update')) {
-
-          // 这个用来控制ajax的更新频率 
-          cache('update', 1, 1);
- 
-            
-            
-          }  
-
-            // 查询最新的聊天信息
-            $data = Data::jack();
-
-             
-
-                // 每个用户自己的独立聊天缓存数据
-                // 模板里直接读取这个缓存的数组即可
-               cache('data_'.$home_id, $data, 0);
-
-
-            
+        // 查询最新的聊天信息
+        $data = Data::jack(input('user_id'));
 
         $this->assign('user',$user);
-        $this->assign('data', cache('data_'.$home_id));
+        $this->assign('data',$data);
  
 
         return view();
