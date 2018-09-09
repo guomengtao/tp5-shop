@@ -6,7 +6,7 @@ use think\Request;
 use app\index\model\Sms;
 use app\index\model\User;
 use app\index\model\Config;
-use app\index\model\User_qq;
+use app\index\model\UserQq;
 use app\index\model\Order;
 use app\index\model\Shop;
 use alipay\alipaynotify;
@@ -15,6 +15,37 @@ use think\Session;
 
 class Api extends \think\Controller
 {
+    public function login(){
+
+         // 指定json数据输出
+        // return json(['data'=>6,'code'=>1,'message'=>'操作完成']);
+        
+
+        $username = input('username');
+        $password = input('password');
+
+        if (!$username) {
+            # code...
+            return jsonp('abd', 200);
+            return 3;
+        }
+        if (!$password) {
+            # code...
+            return json(['data'=>6,'code'=>404,'message'=>'密码不能为空']);
+            return 4;
+        }
+
+        if ($username=='13034892752' and $password =='123456') {
+            # code...
+            return 200;
+        }else{
+            return 2;
+
+        }
+
+
+
+    }
     public function qq()
     {
         
@@ -165,7 +196,7 @@ class Api extends \think\Controller
 
         // $openid = "1011";
 
-        $user = new User_qq();
+        $user = new UserQq();
         // 查询单个数据
         $user = $user->where('openid', $openid)
             ->where('type', 0)
@@ -176,7 +207,7 @@ class Api extends \think\Controller
         if (!$user) {
             # code.. 
 
-            $user                 = new User_qq;
+            $user                 = new UserQq();
             $user->openid         = $openid;
             $user->nickname       = $user_from_qq->nickname ;
             $user->figureurl_qq_1 = $user_from_qq->figureurl_qq_1 ;
@@ -233,7 +264,7 @@ class Api extends \think\Controller
         // dump($openid);
              
             // 取出主键为 $user->user_id 的数据
-            // 提示从user表里查询主键id是$user->user_id ，这个$user->user_id是用户id从已经绑定的user_qq里面获取
+            // 提示从user表里查询主键id是$user->user_id ，这个$user->user_id是用户id从已经绑定的UserQq里面获取
             // 这个页面大量的用$user 造成了很多混淆，简易改成独立的
             $user = User::get($user->user_id);
 
@@ -983,7 +1014,7 @@ $url = "https://api.weibo.com/oauth2/access_token?client_id=".$app_id."&client_s
   
         $openid = $uid ;
 
-        $user = new User_qq();
+        $user = new UserQq();
         // 查询单个数据
         $user = $user->where('openid', $openid)->where('type', 1)
             ->find();
@@ -993,7 +1024,7 @@ $url = "https://api.weibo.com/oauth2/access_token?client_id=".$app_id."&client_s
         if (!$user) {
             # code.. 
 
-            $user                 = new User_qq;
+            $user                 = new UserQq;
             $user->openid         = $openid;
             $user->nickname       = $data['name'] ;
             $user->figureurl_qq_1 = $data['avatar_large'] ;
@@ -1051,7 +1082,7 @@ $url = "https://api.weibo.com/oauth2/access_token?client_id=".$app_id."&client_s
             // 获取用户账号和 token秘钥            
             // 取出主键为 $user->user_id 的数据
             // 提示从user表里查询主键id是$user->user_id 
-            // 这个$user->user_id是用户id从已经绑定的user_qq里面获取
+            // 这个$user->user_id是用户id从已经绑定的UserQq里面获取
             // 这个页面大量的用$user 造成了很多混淆，简易改成独立的
             $user = User::get($user->user_id);
 

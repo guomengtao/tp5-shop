@@ -9,7 +9,7 @@ use app\index\model\Video;
 use app\index\model\Likes;
 use app\index\model\User;
 use app\index\model\Profile;
-use app\index\model\User_qq;
+use app\index\model\UserQq;
 use app\index\model\Sms;
 use app\index\model\Order;
 use app\index\model\Footprint;
@@ -1973,7 +1973,7 @@ die();
                     $warning = "绑定qq，已经注册和验证码正确开始绑定id:" . $user_id;
 
                     // 直接更新，不考虑此用户已经绑定其他qq。会成为多个qq可以绑定同一个账号状态。
-                    $user = User_qq::get(session('openid_id'));
+                    $user = UserQq::get(session('openid_id'));
                     $user->user_id     = $user_id;
                     $user->save();
 
@@ -1986,6 +1986,7 @@ die();
                     // 设置Cookie 有效期为 秒
                     Cookie::set('phone', $phone, 3600000);
                     Cookie::set('token', $get_token, 3600000);
+                    ookie::set('user_id', $user_id, 36000000);
 
                          
                    // 判断是否是先支付了，再来注册/登录的用户
@@ -2010,7 +2011,7 @@ die();
                 } 
 
 
-//                    没有注册和验证码正确开始入库
+                // 没有注册和验证码正确开始入库
 
                 if($get_token=='' & $rand_test>0){
 
@@ -2101,11 +2102,12 @@ die();
                     $user->saveAll($list);
 
 
-//                     设置Cookie 有效期为 秒
+                    // 设置Cookie 有效期为 秒
                     Cookie::set('phone', $phone, 36000000);
                     Cookie::set('token', $token, 36000000);
+                    Cookie::set('user_id', $user_id, 36000000);
 
-//                  更新用户的用户名
+                    // 更新用户的用户名
                     Session::set('phone', $phone);
 
                     // 非绑定qq是的跳转
@@ -2120,7 +2122,7 @@ die();
                     // 新注册 绑定qq操作 获取刚存入的$user->id
 
                     // 直接更新，不考虑此用户已经绑定其他qq。会成为多个qq可以绑定同一个账号状态。
-                    $user = User_qq::get(session('openid_id'));
+                    $user = UserQq::get(session('openid_id'));
                     $user->user_id     = $user_id;
                     $user->save();
 
@@ -2591,6 +2593,7 @@ echo "生成成功";
 
     public function index(){
 
+ 
       // 如果用户登录重定向到 社交首页
       if (Cookie::get('user_id')) {
         $this->redirect('index/member/myhome');
