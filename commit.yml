@@ -2,31 +2,67 @@
 branches: {
   }
 fileChange:
-  /application:
-    newFile: !uuid '10888b7a8d30470180bcff241a4fcf708ba3e294'
-    oldFile: !uuid '196b3ffa501336dd04cc3ae6cd5fac680f226d1c'
-  /application/index:
-    newFile: !uuid '29e26026152920e155fa714f447e99d11e4d06e5'
-    oldFile: !uuid '9efbfdb644ca7b8ba132226c53508cf6d888309d'
-  /application/index/view:
-    newFile: !uuid '232538e33db441c45263d64a13822fbc4b27946e'
-    oldFile: !uuid '6fcf072b18b6eea704bb3ec2639b70294bd3984b'
-  /application/index/view/member:
-    newFile: !uuid '0cbed6fc442c56caa9e52c6e98f76a8ed94822f3'
-    oldFile: !uuid 'ea8e66b549801063213f61831aba518938088942'
-  /application/index/view/member/vip.html:
-    newFile: !uuid 'de05f55250a0899ddc2d6eb007ac989aa0c94b04'
-    oldFile: !uuid '5441dabd28715ce3993ef1cd0a02ecbad2bed152'
-  /public:
-    newFile: !uuid '2967f22918214525794bdc99aaafb382b134e146'
-    oldFile: !uuid '5060a30442d376b6669c6a67219ae718e5702c62'
-  /public/alipay:
-    newFile: !uuid 'd751a7d4337e5950a097a106980dc27c9a5fd913'
-    oldFile: !uuid 'cc6282321c14b18ebb445b85d9e6d1ac3faaaf40'
-  /public/alipay/alipayapi.php:
-    newFile: !uuid 'f58b6c30b5a4a100f2616ab8404ce52cd763e6b6'
-    oldFile: !uuid 'c552f59c13c16ad91ed05da403f16a686af5a7b3'
-gitCommitId: !uuid '9273d67ea8cb586bef078ccf9f28fba7c3398b79'
+  /extend:
+    newFile: !uuid '682ac07eafd8378df16dcdc3f40c5aa642989955'
+    oldFile: !uuid '00953257363c86f481a3e2331f3f635ab9e8add6'
+  /extend/alipay:
+    newFile: !uuid '2c3945de4c46789bcf227990715df4f7be800bf0'
+    oldFile: null
+  /extend/alipay/alipay_config.php:
+    newFile: !uuid '0882431c0be6960b1004afd661622cd33e511a40'
+    oldFile: null
+  /extend/alipay/alipay_core.function.php:
+    newFile: !uuid 'a93e3eacc44769c3cf41ec5d62bdc79955914f79'
+    oldFile: null
+  /extend/alipay/alipayapi.php:
+    newFile: !uuid 'e3a8640c2100ff55a61cf8f51422fadc220ab8d3'
+    oldFile: null
+  /extend/alipay/alipaymd5function.php:
+    newFile: !uuid '52c6a1468ed2263a30df8e64ceb01b349a7b8fed'
+    oldFile: null
+  /extend/alipay/alipaynotify.php:
+    newFile: !uuid '27c0b5b8a200db3a80e627e5ecd9cb5baf14e924'
+    oldFile: null
+  /extend/alipay/cacert.pem:
+    newFile: !uuid '0a335a95050c19ac2172c75ae73508b32f85cd47'
+    oldFile: null
+  /extend/alipay/function.php:
+    newFile: !uuid 'd5148aa850e160631ba59ed08150108ea635385d'
+    oldFile: null
+  /extend/alipay/index.php:
+    newFile: !uuid '8ebd49d9bb0a208d90b5332213c45b0d2a784d0a'
+    oldFile: null
+  /extend/alipay/lib:
+    newFile: !uuid '66341b1264debb3fed56b6e7dbb6f5d757d825a8'
+    oldFile: null
+  /extend/alipay/lib/alipay_core.function.php:
+    newFile: !uuid 'a93e3eacc44769c3cf41ec5d62bdc79955914f79'
+    oldFile: null
+  /extend/alipay/lib/alipay_md5.function.php:
+    newFile: !uuid '52c6a1468ed2263a30df8e64ceb01b349a7b8fed'
+    oldFile: null
+  /extend/alipay/lib/alipay_notify_class.php:
+    newFile: !uuid '675b9c48f64d909e8258a3a0772a7896d23a353f'
+    oldFile: null
+  /extend/alipay/lib/alipay_submit.class.php:
+    newFile: !uuid '14fec96ef64f8c1247fe96750736e7e98a2a75a1'
+    oldFile: null
+  /extend/alipay/log.txt:
+    newFile: !uuid '636ac94c7927b3741994a8c60c1346dad5850993'
+    oldFile: null
+  /extend/alipay/notify_url.php:
+    newFile: !uuid 'e6e707e5efc9389004fde913df3aec2b5ccba2ce'
+    oldFile: null
+  /extend/alipay/readme.txt:
+    newFile: !uuid 'daae89a52ffa4738a9962e920023bc86990ed853'
+    oldFile: null
+  /extend/alipay/return_url.php:
+    newFile: !uuid '1e6708cbf387d9623d13798d33ec2fb1b325c84c'
+    oldFile: null
+  /extend/alipay/tom.php:
+    newFile: !uuid 'a91259e7b5728ad3865127867652951bef116b46'
+    oldFile: null
+gitCommitId: !uuid '60100a47d450f244176d352948af01769cd76c42'
 renames: {
   }
-revisionId: 106
+revisionId: 107
