@@ -55,6 +55,9 @@ $body = $_GET['WIDbody'];
 
 
 
+
+
+
 //商品展示地址
 $show_url = $_GET['WIDshow_url'];
 //需以http://开头的完整路径，例如：http://www.商户网址.com/myorder.html
@@ -74,7 +77,11 @@ $exter_invoke_ip = "";
 // "qr_pay_mode"   => 4,
 // 以下这个参数意思是UC浏览器判断在手机上的时候唤起支付宝app支付，否则手机访问网页的时候也只显示一个二维码。其它浏览器入谷歌需要，重新申请支付宝手机支付接口
 //                 "app_pay"       => 'Y',
+//支付界面 默认采用第一种扫码方式
 
+$qr_pay_mode2 = isset($_GET['qr_pay_mode']) ? $_GET['qr_pay_mode'] : '1' ;
+ 
+ 
 //构造要请求的参数数组，无需改动
 $parameter = array(
     "service" => "create_direct_pay_by_user",
@@ -88,7 +95,7 @@ $parameter = array(
     "total_fee"	=> $total_fee,
     "body"	=> $body,
     "show_url"           => $show_url,
-    "qr_pay_mode"   => 1,
+    "qr_pay_mode"   => $qr_pay_mode2,
     "anti_phishing_key"	=> $anti_phishing_key,
     "exter_invoke_ip"	=> $exter_invoke_ip,
     "_input_charset"	=> trim(strtolower($alipay_config['input_charset']))

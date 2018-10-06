@@ -119,6 +119,13 @@
         <button     style="line-height: 50px;    margin-bottom: 10px;" type="button" class="btn btn-danger "   
                          onclick="ajaxModelPay('0.01','105','抢购开通VIP12个月  {:date("y年m月d日 H:i:s")}','99{$Think.cookie.phone}{:time()}')" >99元365天  VIP会员      </button>
 
+
+         <h3>发起直接跳转支付宝的支付</h3>
+
+         <a href="__ROOT__/alipay/alipayapi.php?WIDtotal_fee=0.01&WIDsubject=測試支付&WIDout_trade_no={:time()}22&WIDbody=126&WIDshow_url=&qr_pay_mode=5">发起直接跳转支付宝的支付</a>
+          
+
+
          {/if}
 
 
