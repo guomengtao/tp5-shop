@@ -1,6 +1,6 @@
 ThinkPHP 5.0 简易商城系统 thinkphp5mall
 
-[查看在线演示](http://www.open.gaoxueya.com)
+[查看在线演示](http://open.gaoxueya.com)  我的qq：250285636 微信：18210787405
 
 ===============
 
