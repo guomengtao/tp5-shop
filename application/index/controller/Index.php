@@ -30,25 +30,20 @@ class Index extends \think\Controller
 
         public function _initialize(){
 
+
+          // 访问记录
+          // 调用Footprint模型的add()自定义方法
+          Footprint::add();
+
+
+
             //权限认证
           // $auth = new \Auth\Auth();
 
 
  
   
-        /*
-       验证单个条件
-       验证 会员id 为 1 的 小红是否有 增加信息的权限
-
-       check方法中的参数解释：
-           参数1：Admin/Article/Add 假设我现在请求 Admin模块下Article控制器的Add方法
-           参数2： 1 为当前请求的会员ID
-       */
-        // $check = $auth->check('Home/add/','2');
-        // dump($check); //返回值true,代表有此权限
-
-
-        // echo "123456";
+    
 
 
 
@@ -2687,7 +2682,12 @@ echo "生成成功";
          * 
          */
 
-        $qqshow = UserQQ::show(8);
+        $qqshow = UserQQ::show(16);
+        $views_today  = Footprint::views_today();
+
+
+
+        $this->assign('views_today',  $views_today);
         $this->assign('qqshow',  $qqshow);
         return view();
 

@@ -3,8 +3,9 @@
 namespace app\index\model;
 
 use think\Model;
+use think\Cookie;
 use traits\model\SoftDelete;
-
+use think\Request;
 class Footprint extends model
 {
 	use SoftDelete;
@@ -15,6 +16,26 @@ class Footprint extends model
     protected $auto = [];
     protected $insert = ['ip'];
     protected $update = [];
+
+    public static function views_today(){
+
+       return Footprint::whereTime('create_time', 'd')->count();
+
+    }
+    public static function add(){
+
+        $user_id = Cookie::get('user_id');
+
+        $request = Request::instance();
+        $url     = $request->url();
+        $ip      = $request->ip();
+
+        $user         = new Footprint;
+        $user->ip     = $ip;
+        $user->url    = $url;
+        $user->user_id= $user_id;
+        $user->save();
+    }
 
     protected function setIpAttr()
     {

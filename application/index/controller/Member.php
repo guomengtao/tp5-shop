@@ -19,7 +19,10 @@ use think\Session;
 class Member extends \think\Controller
 {
         
-
+    public function _initialize(){
+      // 访问记录
+      Footprint::add();
+    }
     public function myhome(){
 
         //  调用浏览记录和来路统计功能
