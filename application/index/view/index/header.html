@@ -124,7 +124,7 @@
             <span class="icon-bar"></span>
           </button>
            {if condition="$Think.cookie.phone"}
-                 <a class="navbar-brand" href="{:url('/index/member/myhome')}">ThinkPHP5</a>
+                 <a class="navbar-brand" href="{:url('/')}">ThinkPHP5</a>
              {else/}
                 <a class="navbar-brand" href="{:url('/')}">ThinkPHP5</a>
             {/if}
@@ -158,6 +158,7 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{:lang('实战入门')} <span class="caret"></span></a>
               <ul class="dropdown-menu">
+                
                 
                 <li><a href="__ROOT__/index/bbs/show">学员评论</a></li>
                 <li><a href="__ROOT__/index/ajax/ajaxrun">最新学员</a></li>
@@ -210,8 +211,8 @@
 
               {else /} 
 
-              
-              <a href="https://graph.qq.com/oauth2.0/show?which=Login&display=pc&response_type=code&client_id=100556678&redirect_uri=http://open.gaoxueya.com/index/api/qq&scope=get_user_info" target="_black" >QQ快捷登录</a> 
+
+            <!--   <a href="https://graph.qq.com/oauth2.0/show?which=Login&display=pc&response_type=code&client_id=100556678&redirect_uri=http://open.gaoxueya.com/index/api/qq&scope=get_user_info" target="_black" >QQ登录</a>  -->
               <a href="__ROOT__/index/index/login">登录</a> 
               {/if}
 
@@ -233,42 +234,19 @@
 
             </li>
 
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-bell" style="color: 3goldenrod" aria-hidden="true"></span>
-   <span class="badge" style="background-color: goldenrod">80</span> </a>
-              <ul class="dropdown-menu">
-                <li><a href="__ROOT__/index/member/vip">新消息 - 开发中</a>
-<br>
-                  <a href="__ROOT__/index/member/vip">VIP中心</a>
-                </li>
-                <li><a href="__ROOT__/index/index/order">我的订单</a></li>
-                <li><a href="__ROOT__/index/member/diary">学习进度</a></li>
-                <li><a href="__ROOT__/index/member/invite">邀请注册</a></li>
-                <li><a href="__ROOT__/index/member/money">
-                  <span class="glyphicon glyphicon-jpy" style="color: goldenrod" aria-hidden="true"></span> 我的积分</a></li>
-                  
-                <li role="separator" class="divider"></li>
-
-                <!--<li><a onclick="ajaxModelPay('0.1','135','签到{$Think.cookie.phone}{:date("y年m月d日 H:i:s")}','135{$Think.cookie.phone}{:time()}') href="" >签到</a></li>-->
-                <li>{if condition="$Think.cookie.phone"} <a href="__ROOT__/index/index/login/logout/1">退出登录</a>
-                  {else /} 
-                  <!-- <a href="__ROOT__/index/index/login">登录/注册</a> -->
-                  <a href="{:url('/index/index/login')}">登录/注册</a>
-                {/if}</li>
-              </ul>
-            </li>
+ 
 
 
 
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">会员中心<span class="caret"></span></a>
               <ul class="dropdown-menu">
+                <li><a href="__ROOT__/index/member/myhome">发布随笔</a></li>
                 <li><a href="__ROOT__/index/member/vip">VIP中心</a></li>
                 <li><a href="__ROOT__/index/index/order">我的订单</a></li>
                 <li><a href="__ROOT__/index/member/diary">学习进度</a></li>
                 <li><a href="__ROOT__/index/member/invite">邀请注册</a></li>
-                <li><a href="__ROOT__/index/member/money">
-                  <span class="glyphicon glyphicon-jpy" style="color: goldenrod" aria-hidden="true"></span> 我的积分</a></li>
+                <li><a href="__ROOT__/index/member/money">我的积分</a></li>
                   
                 <li role="separator" class="divider"></li>
 

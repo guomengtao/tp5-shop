@@ -15,6 +15,18 @@ class UserQq extends model
     protected $insert = [];
     protected $update = [];
 
+    // 测试 查询单个用户信息模型
+
+    public static function show($row='8'){
+            // 查询当前用户信息
+            $user  = UserQq::where('user_id','not null')
+                    ->order('id', 'desc')
+                    ->limit($row)
+                    ->select();
+
+            return $user;
+    }
+
     public function user(){
         // return $this->hasOne('User');
         // return $this->belongsTo('User','user_id','id');
