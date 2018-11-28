@@ -17,7 +17,7 @@ class UserQq extends model
 
     // 测试 查询单个用户信息模型
 
-    public static function show($row='8'){
+    public static function show($row='16'){
             // 查询当前用户信息
             $user  = UserQq::where('user_id','not null')
                     ->order('id', 'desc')

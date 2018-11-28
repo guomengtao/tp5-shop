@@ -16,16 +16,7 @@ use think\Route;
 
 // 注册路由到index模块的News控制器的read操作
 // Route::rule('tom','index/index/index');
-// Route::rule('bl','index/member/tip?id=5');
+Route::get('u/:user_id','index/member/home',['ext'=>'']);
 
 
-return [
-    '__pattern__' => [
-        'name' => '\w+',
-    ],
-    '[hello]'     => [
-        ':id'   => ['index/hello', ['method' => 'get'], ['id' => '\d+']],
-        ':name' => ['index/hello', ['method' => 'post']],
-    ],
-
-];
+ 

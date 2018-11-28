@@ -184,7 +184,7 @@
           </form>
           <ul class="nav navbar-nav navbar-right">
             <li>
-              {if condition="$Think.cookie.phone"} <a href="__ROOT__/index/member/home/user_id/{$Think.cookie.user_id}">
+              {if condition="$Think.cookie.phone"} <a   href="{:url('index/member/home',['user_id'=>{$Think.cookie.user_id}])}">
                 {if condition="$Think.cookie.figureurl_qq_2"}
  <img class="img-circle"  style="width: 18px; height: 18px;" src="{$Think.cookie.figureurl_qq_2}"> 
  {$Think.cookie.nickname} 
