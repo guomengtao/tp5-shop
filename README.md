@@ -1,9 +1,11 @@
-ThinkPHP 5.0 简易商城系统 thinkphp5mall
+![](https://images.gitee.com/uploads/images/2019/0904/004905_642aef59_1022917.png )
 
-[查看在线演示](http://open.gaoxueya.com)  我的qq：250285636 微信：18210787405
+## ThinkPHP 5.0 简易商城系统 ThinkPHP5Mall
+
+> [查看在线演示](http://open.gaoxueya.com)  我的qq：250285636 微信：18210787405
 
 
-两步安装方式：
+### 两步安装方式：
 
 1.配置数据库:修改数据库配置文件application\database.php里的数据库账号密码等
 
