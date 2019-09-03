@@ -2,12 +2,6 @@ ThinkPHP 5.0 简易商城系统 thinkphp5mall
 
 [查看在线演示](http://open.gaoxueya.com)  我的qq：250285636 微信：18210787405
 
-- [x] Write the press release
-- [ ] Update the website
-- [ ] Contact the media
- 
-`http://www.example.com`
-`http://www.example.com`
 
 两步安装方式：
 
@@ -19,46 +13,6 @@ ThinkPHP 5.0 简易商城系统 thinkphp5mall
 
 
 有疑问欢迎加我微信 18210787405  qq 250285636  一起沟通学习
-[输入链接说明](http://)
- **粗体**  _强调_ 
-
-```[flow]
-st=>start: Start:>http://www.google.com[blank]
-e=>end:>http://www.google.com
-op1=>operation: My Operation
-sub1=>subroutine: My Subroutine
-cond=>condition: Yes
-or No?:>http://www.google.com
-io=>inputoutput: catch something...
-
-st->op1->cond
-cond(yes)->io->e
-cond(no)->sub1(right)->op1
-```
-
-> 这里输入引用文本  
-> tes
 
 
-### 标题
-
- :smile: 
-
-| Syntax | Description |
-| --- | ----------- |
-| Header | Title |
-| Paragraph | Text |
-| Paragraph | Text |
-| Paragraph | Text |
-
-Here's a simple footnote,[^1] and here's a longer one.[^bignote]
-
-[^1]: This is the first footnote.
-
-[^bignote]: Here's one with multiple paragraphs and code.
-
-    Indent paragraphs to include them in the footnote.
-
-    `{ my code }`
-
-    Add as many paragraphs as you like.
+ 
