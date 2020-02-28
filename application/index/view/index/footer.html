@@ -1,14 +1,15 @@
-        {if condition="$Think.cookie.admin>=1"}
-           <!--测试ajax的时候需要保留哦,开发人员测试用-->
-            <div id="getAjaxError"></div>
-        {/if}
+{if condition="$Think.cookie.admin>=1"}
+<!--测试ajax的时候需要保留哦,开发人员测试用-->
+<div id="getAjaxError"></div>
+{/if}
 <!-- Modal 扫码签到支付-->
 <div class="modal fade" id="myModalRegistration" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel"> <span id="ajaxModelTitle"> ajaxModelTitle</span></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel"><span id="ajaxModelTitle"> ajaxModelTitle</span></h4>
             </div>
             <div class="modal-body">
                 <div id="ajaxModelPay">123456</divi>
@@ -21,558 +22,504 @@
 </div>
 <!--全站共用的ajax轮询记录在线时间和查询新消息 目前简单写在页面内容 并且调用底部foot模板的页面才有用-->
 <div id="bbs_song"></div>
-<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1275862484'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s5.cnzz.com/stat.php%3Fid%3D1275862484%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));</script>
-<div id="public_ajax_message" style="display:none;color:white;line-height:50px;position:absolute;z-index:100;left:50%;top:10%;margin-left:-75px;text-align:center;width:150px;height:50px;background-color:#666;font-size:12px;border-radius:50px;animation:myfirst 2s;">
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cspan id='cnzz_stat_icon_1275862484'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s5.cnzz.com/stat.php%3Fid%3D1275862484%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));</script>
+<div id="public_ajax_message"
+     style="display:none;color:white;line-height:50px;position:absolute;z-index:100;left:50%;top:10%;margin-left:-75px;text-align:center;width:150px;height:50px;background-color:#666;font-size:12px;border-radius:50px;animation:myfirst 2s;">
     恭喜你，签到成功！
 </div>
 
 <style type="text/css">
-    @keyframes myfirst
-{
-0%   {background:red;}
-25%  {background:orange;}
-50%  {background:blue;
-width:160px;height:60px;top:50%;
+    @keyframes myfirst {
+        0% {
+            background: red;
+        }
+        25% {
+            background: orange;
+        }
+        50% {
+            background: blue;
+            width: 160px;
+            height: 60px;
+            top: 50%;
 
-}
-100% {background:green;
-left:50%;
+        }
+        100% {
+            background: green;
+            left: 50%;
 
-}
-}
+        }
+    }
 </style>
 <!--  div层延时消失  -->
 <script>
-function public_ajax_message(message)
-{
-    if (message) {
-        document.getElementById("public_ajax_message").innerHTML=message;
+    function public_ajax_message(message) {
+        if (message) {
+            document.getElementById("public_ajax_message").innerHTML = message;
+        }
+        document.getElementById('public_ajax_message').style.display = "";
+        setTimeout("disappeare()", 2000);
     }
-    document.getElementById('public_ajax_message').style.display="";
-    setTimeout("disappeare()",2000);
-}
-function disappeare(){
-    document.getElementById('public_ajax_message').style.display="none";
-}
 
- 
+    function disappeare() {
+        document.getElementById('public_ajax_message').style.display = "none";
+    }
+
+
 </script>
 
 
-
 <style type="text/css">
-    @keyframes mylike
-{
-0%   {font-size: 260%;}
-25%  {}
-50%  {
-font-size: 260%;
- color: orange;
-}
-100% {
-    font-size: 260%;
-    color: red;
-top:-35px;
-z-index:100;
-}
-}
+    @keyframes mylike {
+        0% {
+            font-size: 260%;
+        }
+        25% {
+        }
+        50% {
+            font-size: 260%;
+            color: orange;
+        }
+        100% {
+            font-size: 260%;
+            color: red;
+            top: -35px;
+            z-index: 100;
+        }
+    }
 </style>
 
 
 <!--  点赞层延时消失  -->
 <script>
-function like_animation(like_a)
-{
- 
-    document.getElementById(like_a).style.display="";
-    // setTimeout(like_none(like_a),2000);
-}
-function like_none(like_a){
-    document.getElementById(like_a).style.display="none";
-}
+    function like_animation(like_a) {
 
- 
- 
+        document.getElementById(like_a).style.display = "";
+        // setTimeout(like_none(like_a),2000);
+    }
+
+    function like_none(like_a) {
+        document.getElementById(like_a).style.display = "none";
+    }
+
+
 </script>
 
- 
+
 {if condition="$Think.cookie.admin>=1"}
-    <script type="text/javascript">
-        // 重要，js页面错误检测提示
-        // 解决js有错误是不提示的情况
-        // 仅管理员可见
-        onerror=handleErr
-        var txt=""
-        function handleErr(msg,url,l)
-        {
-            txt="There was an error on this page.\n\n"
-            txt+="Error: " + msg + "\n"
-            txt+="URL: " + url + "\n"
-            txt+="Line: " + l + "\n\n"
-            txt+="Click OK to continue.\n\n"
-            alert(txt)
-            return true
-        }
-    </script>
+<script type="text/javascript">
+    // 重要，js页面错误检测提示
+    // 解决js有错误是不提示的情况
+    // 仅管理员可见
+    onerror = handleErr
+    var txt = ""
+
+    function handleErr(msg, url, l) {
+        txt = "There was an error on this page.\n\n"
+        txt += "Error: " + msg + "\n"
+        txt += "URL: " + url + "\n"
+        txt += "Line: " + l + "\n\n"
+        txt += "Click OK to continue.\n\n"
+        alert(txt)
+        return true
+    }
+</script>
 {/if}
- 
- 
- 
-
-
-
 
 
 <script>
 
 
- 
-
     // 全站默认加载js函数控制 因为window.onload只能有一个
     window.onload = function () {
 
- 
 
-         {if condition="($Request.module=='index') AND ($Request.controller=='Member') AND ($Request.action=='vip') AND ($Request.param.add_vip_days >=1) " }
-  
-            
-            // vip页面通知
-            public_ajax_message("VIP增加 " + {$Request.param.add_vip_days} + " 天");
-       
+        {
+            if condition = "($Request.module=='index') AND ($Request.controller=='Member') AND ($Request.action=='vip') AND ($Request.param.add_vip_days >=1) " }
 
 
-        {/if}
+        // vip页面通知
+        public_ajax_message("VIP增加 " + {$Request.param.add_vip_days} + " 天");
 
 
-        {if condition="($Request.module=='index') AND ($Request.controller=='Member') AND ($Request.action=='vip')" }
-  
+        {
+            /if}
+
+
+            {
+                if condition = "($Request.module=='index') AND ($Request.controller=='Member') AND ($Request.action=='vip')" }
+
             // 抢购vip功能
-             
-
-           
-       
 
 
-        {/if}
+            {
+                /if}
 
-        {if condition="($Request.module=='index') AND ($Request.controller=='Member') AND ($Request.action=='top')" }
-    
-
-        // 更新缓存
-        public_ajax("{$Think.server.script_name}/index/member/top/");
-
- 
-
-        {/if}
-
-        {if condition="($Request.module=='index') AND ($Request.controller=='Member') AND ($Request.action=='like')" }
-    
-
-        // 更新缓存
-        public_ajax("{$Think.server.script_name}/index/index/like/");
-
- 
-
-        {/if}
+                {
+                    if condition = "($Request.module=='index') AND ($Request.controller=='Member') AND ($Request.action=='top')" }
 
 
-      
+                // 更新缓存
+                public_ajax("{$Think.server.script_name}/index/member/top/");
 
 
-        // 记录访问记录 每个页面都执行的 通用功能
-        public_ajax("{$Think.server.script_name}/index/member/footprint_add/");
-        
-        
+                {
+                    /if}
 
-        {if condition="($Request.module=='index') AND ($Request.controller=='Index') AND ($Request.action=='index')"  }
-       
-            // 抢购vip功能
-            // countTime();
-
-            // 每晚10点全民学习
-            // countTime_open();
- 
-            // 如果是首页或者播放页需要的功能
-
-            // document.getElementById('bss_content').scrollTop = document.getElementById('bss_content').scrollHeight;
-
-            // 更新缓存
-            public_ajax("{$Think.server.script_name}/index/index/index/");
-
-        {/if}
+                    {
+                        if condition = "($Request.module=='index') AND ($Request.controller=='Member') AND ($Request.action=='like')" }
 
 
-        {if condition="($Request.module=='index') AND ($Request.controller=='Index') AND ($Request.action=='view')" }
+                    // 更新缓存
+                    public_ajax("{$Think.server.script_name}/index/index/like/");
 
 
-          // 如果是首页或者播放页需要的功能
+                    {
+                        /if}
 
-            // document.getElementById('bss_content').scrollTop = document.getElementById('bss_content').scrollHeight;
 
-           // 播放页独立的加载ajax事件
-           // 注意多个setTimeout执行性一个的问题
+                        // 记录访问记录 每个页面都执行的 通用功能
+                        public_ajax("{$Think.server.script_name}/index/member/footprint_add/");
 
-            // setTimeout("page_view({$list.id})",3000);
-            // setTimeout(function(){ bbs_ask("ask_ajax_welcome",{$list.id}); }, 1000);
 
-            // 设置打开网页后16秒自动发送欢迎词
-    
+                        {
+                            if condition = "($Request.module=='index') AND ($Request.controller=='Index') AND ($Request.action=='index')"  }
 
-        {/if}
+                        // 抢购vip功能
+                        // countTime();
+
+                        // 每晚10点全民学习
+                        // countTime_open();
+
+                        // 如果是首页或者播放页需要的功能
+
+                        // document.getElementById('bss_content').scrollTop = document.getElementById('bss_content').scrollHeight;
+
+                        // 更新缓存
+                        public_ajax("{$Think.server.script_name}/index/index/index/");
+
+                        {
+                            /if}
+
+
+                            {
+                                if condition = "($Request.module=='index') AND ($Request.controller=='Index') AND ($Request.action=='view')" }
+
+
+                            // 如果是首页或者播放页需要的功能
+
+                            // document.getElementById('bss_content').scrollTop = document.getElementById('bss_content').scrollHeight;
+
+                            // 播放页独立的加载ajax事件
+                            // 注意多个setTimeout执行性一个的问题
+
+                            // setTimeout("page_view({$list.id})",3000);
+                            // setTimeout(function(){ bbs_ask("ask_ajax_welcome",{$list.id}); }, 1000);
+
+                            // 设置打开网页后16秒自动发送欢迎词
+
+
+                            {
+                                /if}
 // setTimeout("alert('5 seconds!')",1000);
-       
 
-        
 
-    }
+                            }
 
- 
-{if condition="($Request.module=='index') AND ($Request.controller=='Index') AND ($Request.action=='view')" }
-    //循环执行，每隔10秒钟执行一次 查看是否有新消息
-    window.setInterval(function(){
 
-        bbs_ask("ask_ajax");
+                            {
+                                if condition = "($Request.module=='index') AND ($Request.controller=='Index') AND ($Request.action=='view')" }
+                            //循环执行，每隔10秒钟执行一次 查看是否有新消息
+                            window.setInterval(function () {
 
-        bbs_song("ask_song_ajax");
-        // public_ajax("{$Think.server.script_name}/index/index/index/");
+                                bbs_ask("ask_ajax");
 
-    }, 10000);
-{/if}
+                                bbs_song("ask_song_ajax");
+                                // public_ajax("{$Think.server.script_name}/index/index/index/");
 
-{if condition="($Request.module=='index') AND ($Request.controller=='Index') AND ($Request.action=='index')" }
-    //循环执行，每隔10秒钟执行一次 查看是否有新消息
-    window.setInterval(function(){
+                            }, 10000);
+                            {
+                                /if}
 
-        bbs_ask("ask_ajax");
+                                {
+                                    if condition = "($Request.module=='index') AND ($Request.controller=='Index') AND ($Request.action=='index')" }
+                                //循环执行，每隔10秒钟执行一次 查看是否有新消息
+                                window.setInterval(function () {
 
-        bbs_song("ask_song_ajax");
-        // public_ajax("{$Think.server.script_name}/index/index/index/");
+                                    bbs_ask("ask_ajax");
 
-    }, 10000);
-{/if}
+                                    bbs_song("ask_song_ajax");
+                                    // public_ajax("{$Think.server.script_name}/index/index/index/");
 
+                                }, 10000);
+                                {
+                                    /if}
 
 
-    // 获取返回的音效，独立返回到页面的，以防止重复音量
-    function public_ajax(url,t)
-    {
-        
-        // 如果是点赞单独处理，全部点赞
-        if (url.substring(-1,42)=='/index.php/index/index/view/all/1/data_id/'){
+                                    // 获取返回的音效，独立返回到页面的，以防止重复音量
+                                    function public_ajax(url, t) {
 
-            {if condition="$Think.cookie.phone==''"}
-               return window.location.href='/index/index/login';
-            {/if}
+                                        // 如果是点赞单独处理，全部点赞
+                                        if (url.substring(-1, 42) == '/index.php/index/index/view/all/1/data_id/') {
 
-            
+                                            {
+                                                if condition = "$Think.cookie.phone==''"}
+                                            return window.location.href = '/index/index/login';
+                                            {
+                                                /if}
 
 
-              
-            
- 
-            // 增加签到次数
-            like_num = "like_all_" + url.substring(42);
+                                                // 增加签到次数
+                                                like_num = "like_all_" + url.substring(42);
 
-            like_zero = document.getElementById(like_num).innerHTML;
+                                                like_zero = document.getElementById(like_num).innerHTML;
 
-            // 处理默认为 赞的情况
-             if(like_zero=="赞"){
-                // alert(like_zero);
-                like_zero = 0;
-             }
+                                                // 处理默认为 赞的情况
+                                                if (like_zero == "赞") {
+                                                    // alert(like_zero);
+                                                    like_zero = 0;
+                                                }
 
- 
-             
 
-            
+                                                // 设置点赞图标换颜色
+                                                like = "like_icon_all_" + url.substring(42);
 
-            // 设置点赞图标换颜色
-            like = "like_icon_all_" + url.substring(42);
- 
-            like_color = document.getElementById(like).style.color;
+                                                like_color = document.getElementById(like).style.color;
 
- 
-           
- 
-            if (like_color==='rgb(0, 132, 255)') {
-                document.getElementById(like).style.color="rgb(133, 144, 166)";
 
-                document.getElementById(like_num).innerHTML=parseInt(like_zero)-1;
+                                                if (like_color === 'rgb(0, 132, 255)') {
+                                                    document.getElementById(like).style.color = "rgb(133, 144, 166)";
 
-            }
-            else
-            {
-                document.getElementById(like).style.color="rgb(0, 132, 255)";
-                document.getElementById(like_num).innerHTML=parseInt(like_zero)+1;
+                                                    document.getElementById(like_num).innerHTML = parseInt(like_zero) - 1;
 
-                    // 点在css3动画显示
-                    like_a_all_ = "like_a_all_" + url.substring(42);
-                    // alert(like_a);
-                    like_animation(like_a_all_);
-            }
- 
-           
+                                                } else {
+                                                    document.getElementById(like).style.color = "rgb(0, 132, 255)";
+                                                    document.getElementById(like_num).innerHTML = parseInt(like_zero) + 1;
 
+                                                    // 点在css3动画显示
+                                                    like_a_all_ = "like_a_all_" + url.substring(42);
+                                                    // alert(like_a);
+                                                    like_animation(like_a_all_);
+                                                }
 
 
-        } 
-        // 如果是点赞单独处理,热门点赞
-        if (url.substring(-1,36)=='/index.php/index/index/view/data_id/'){
+                                            }
+                                            // 如果是点赞单独处理,热门点赞
+                                            if (url.substring(-1, 36) == '/index.php/index/index/view/data_id/') {
 
-            {if condition="$Think.cookie.phone==''"}
-               return window.location.href='/index/index/login';
-            {/if}
-
-            
-
-
-              
-            
- 
-            // 增加签到次数
-            like_num = "like_" + url.substring(36);
-
-            like_zero = document.getElementById(like_num).innerHTML;
-
-            // 处理默认为 赞的情况
-             if(like_zero=="赞"){
-                 
-                like_zero = 0;
-             }
-
- 
-
-
-            
-
-            // 设置点赞图标换颜色
-            like = "like_icon_" + url.substring(36);
-
-            like_color = document.getElementById(like).style.color;
-
- 
-           
- 
-            if (like_color==='rgb(0, 132, 255)') {
-
-                 
-                document.getElementById(like).style.color="rgb(133, 144, 166)";
-
-                document.getElementById(like_num).innerHTML=parseInt(like_zero)-1;
-
-            }
-            else
-            {
-                document.getElementById(like).style.color="rgb(0, 132, 255)";
-                document.getElementById(like_num).innerHTML=parseInt(like_zero)+1;
-
-                    // 点在css3动画显示
-                    like_a = "like_a_" + url.substring(36);
-                    // alert(like_a);
-                    like_animation(like_a);
-            }
- 
-           
-
-
-
-        } 
-        // t = t.trim();
-        var xmlhttp;
-        // if (t.length==0)
-        // {
-        //     // document.getElementById("title").innerHTML="";
-        //     return;
-
-        // }
-
-
-        if (window.XMLHttpRequest)
-        {
-            // IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
-            xmlhttp=new XMLHttpRequest();
-        }
-        else
-        {
-            // IE6, IE5 浏览器执行代码
-            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        xmlhttp.onreadystatechange=function()
-        {
-            if (xmlhttp.readyState==4 && xmlhttp.status==200)
-            {
-                // document.getElementById("getAjaxError").innerHTML=xmlhttp.responseText;
-                if (t==1 && xmlhttp.responseText!= '')
-                {
-                    
-                    
-                    document.getElementById("public_ajax_message").innerHTML=xmlhttp.responseText;
-                    public_ajax_message();
-                }
-                
-            }
-        }
-         
-        xmlhttp.open("POST",url,true);
-        // xmlhttp.open("GET","/index/bbs/add/title/"+t+"/shop/"+id,true);
-        xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-        // xmlhttp.send("t=Bill&lname=Gates");
-        xmlhttp.send("title="+url);
-        // xmlhttp.send();
-        // showtime(1);
-    }
-
-    // 获取最新的留言
-    function bbs_ask(t,id)
-    {
-        t = t.trim();
-        var xmlhttp;
-        if (t.length==0)
-        {
-            // document.getElementById("title").innerHTML="";
-            return;
-
-        }
-
-
-        if (window.XMLHttpRequest)
-        {
-            // IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
-            xmlhttp=new XMLHttpRequest();
-        }
-        else
-        {
-            // IE6, IE5 浏览器执行代码
-            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        xmlhttp.onreadystatechange=function()
-        {
-            if (xmlhttp.readyState==4 && xmlhttp.status==200)
-            {
-                if(xmlhttp.responseText)
-                {
-
-
-                    document.getElementById("bbs_index").innerHTML=document.getElementById("bbs_index").innerHTML + xmlhttp.responseText;
-                    // document.getElementById('bss_content').scrollTop = document.getElementById('bss_content').scrollHeight;
-
-                    // document.getElementById("bbs_index").innerHTML=xmlhttp.responseText+document.getElementById("bbs_index").innerHTML;
-                    document.getElementById("bbs").innerHTML=document.getElementById("bbs").innerHTML+xmlhttp.responseText;
-                        // 实现跳转到div的最下面
-
-
-                }
-            }
-        }
-        xmlhttp.open("POST","{$Think.server.script_name}/index/bbs/add/",true);
-        // xmlhttp.open("GET","/index/bbs/add/title/"+t+"/shop/"+id,true);
-        xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-        // xmlhttp.send("t=Bill&lname=Gates");
-        xmlhttp.send("title="+t+"&shop="+id);
-        // xmlhttp.send();
-        // showtime(1);
-
-    }
-
-    // 获取返回的音效，独立返回到页面的，以防止重复音量
-    function bbs_song(t,id)
-    {
-        t = t.trim();
-        var xmlhttp;
-        if (t.length==0)
-        {
-            // document.getElementById("title").innerHTML="";
-            return;
-
-        }
-
-
-        if (window.XMLHttpRequest)
-        {
-            // IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
-            xmlhttp=new XMLHttpRequest();
-        }
-        else
-        {
-            // IE6, IE5 浏览器执行代码
-            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        xmlhttp.onreadystatechange=function()
-        {
-            if (xmlhttp.readyState==4 && xmlhttp.status==200)
-            {
-                document.getElementById("bbs_song").innerHTML=xmlhttp.responseText;
-            }
-        }
-        xmlhttp.open("POST","{$Think.server.script_name}/index/bbs/add/",true);
-        // xmlhttp.open("GET","/index/bbs/add/title/"+t+"/shop/"+id,true);
-        xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-        // xmlhttp.send("t=Bill&lname=Gates");
-        xmlhttp.send("title="+t+"&shop="+id);
-        // xmlhttp.send();
-        // showtime(1);
-
-    }
+                                                {
+                                                    if condition = "$Think.cookie.phone==''"}
+                                                return window.location.href = '/index/index/login';
+                                                {
+                                                    /if}
+
+
+                                                    // 增加签到次数
+                                                    like_num = "like_" + url.substring(36);
+
+                                                    like_zero = document.getElementById(like_num).innerHTML;
+
+                                                    // 处理默认为 赞的情况
+                                                    if (like_zero == "赞") {
+
+                                                        like_zero = 0;
+                                                    }
+
+
+                                                    // 设置点赞图标换颜色
+                                                    like = "like_icon_" + url.substring(36);
+
+                                                    like_color = document.getElementById(like).style.color;
+
+
+                                                    if (like_color === 'rgb(0, 132, 255)') {
+
+
+                                                        document.getElementById(like).style.color = "rgb(133, 144, 166)";
+
+                                                        document.getElementById(like_num).innerHTML = parseInt(like_zero) - 1;
+
+                                                    } else {
+                                                        document.getElementById(like).style.color = "rgb(0, 132, 255)";
+                                                        document.getElementById(like_num).innerHTML = parseInt(like_zero) + 1;
+
+                                                        // 点在css3动画显示
+                                                        like_a = "like_a_" + url.substring(36);
+                                                        // alert(like_a);
+                                                        like_animation(like_a);
+                                                    }
+
+
+                                                }
+                                                // t = t.trim();
+                                                var xmlhttp;
+                                                // if (t.length==0)
+                                                // {
+                                                //     // document.getElementById("title").innerHTML="";
+                                                //     return;
+
+                                                // }
+
+
+                                                if (window.XMLHttpRequest) {
+                                                    // IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+                                                    xmlhttp = new XMLHttpRequest();
+                                                } else {
+                                                    // IE6, IE5 浏览器执行代码
+                                                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                                                }
+                                                xmlhttp.onreadystatechange = function () {
+                                                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                                                        // document.getElementById("getAjaxError").innerHTML=xmlhttp.responseText;
+                                                        if (t == 1 && xmlhttp.responseText != '') {
+
+
+                                                            document.getElementById("public_ajax_message").innerHTML = xmlhttp.responseText;
+                                                            public_ajax_message();
+                                                        }
+
+                                                    }
+                                                }
+
+                                                xmlhttp.open("POST", url, true);
+                                                // xmlhttp.open("GET","/index/bbs/add/title/"+t+"/shop/"+id,true);
+                                                xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                                                // xmlhttp.send("t=Bill&lname=Gates");
+                                                xmlhttp.send("title=" + url);
+                                                // xmlhttp.send();
+                                                // showtime(1);
+                                            }
+
+                                            // 获取最新的留言
+                                            function bbs_ask(t, id) {
+                                                t = t.trim();
+                                                var xmlhttp;
+                                                if (t.length == 0) {
+                                                    // document.getElementById("title").innerHTML="";
+                                                    return;
+
+                                                }
+
+
+                                                if (window.XMLHttpRequest) {
+                                                    // IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+                                                    xmlhttp = new XMLHttpRequest();
+                                                } else {
+                                                    // IE6, IE5 浏览器执行代码
+                                                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                                                }
+                                                xmlhttp.onreadystatechange = function () {
+                                                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                                                        if (xmlhttp.responseText) {
+
+
+                                                            document.getElementById("bbs_index").innerHTML = document.getElementById("bbs_index").innerHTML + xmlhttp.responseText;
+                                                            // document.getElementById('bss_content').scrollTop = document.getElementById('bss_content').scrollHeight;
+
+                                                            // document.getElementById("bbs_index").innerHTML=xmlhttp.responseText+document.getElementById("bbs_index").innerHTML;
+                                                            document.getElementById("bbs").innerHTML = document.getElementById("bbs").innerHTML + xmlhttp.responseText;
+                                                            // 实现跳转到div的最下面
+
+
+                                                        }
+                                                    }
+                                                }
+                                                xmlhttp.open("POST", "{$Think.server.script_name}/index/bbs/add/", true);
+                                                // xmlhttp.open("GET","/index/bbs/add/title/"+t+"/shop/"+id,true);
+                                                xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                                                // xmlhttp.send("t=Bill&lname=Gates");
+                                                xmlhttp.send("title=" + t + "&shop=" + id);
+                                                // xmlhttp.send();
+                                                // showtime(1);
+
+                                            }
+
+                                            // 获取返回的音效，独立返回到页面的，以防止重复音量
+                                            function bbs_song(t, id) {
+                                                t = t.trim();
+                                                var xmlhttp;
+                                                if (t.length == 0) {
+                                                    // document.getElementById("title").innerHTML="";
+                                                    return;
+
+                                                }
+
+
+                                                if (window.XMLHttpRequest) {
+                                                    // IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+                                                    xmlhttp = new XMLHttpRequest();
+                                                } else {
+                                                    // IE6, IE5 浏览器执行代码
+                                                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                                                }
+                                                xmlhttp.onreadystatechange = function () {
+                                                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                                                        document.getElementById("bbs_song").innerHTML = xmlhttp.responseText;
+                                                    }
+                                                }
+                                                xmlhttp.open("POST", "{$Think.server.script_name}/index/bbs/add/", true);
+                                                // xmlhttp.open("GET","/index/bbs/add/title/"+t+"/shop/"+id,true);
+                                                xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                                                // xmlhttp.send("t=Bill&lname=Gates");
+                                                xmlhttp.send("title=" + t + "&shop=" + id);
+                                                // xmlhttp.send();
+                                                // showtime(1);
+
+                                            }
 
 
 </script>
 
-    <script>
-
- 
-
-        // 调用扫码支付模态框
-
-        function ajaxModelPay(t,id,s,trade_no)
-        {
-
-            var xmlhttp;
+<script>
 
 
-            if (window.XMLHttpRequest)
-            {
-                // IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
-                xmlhttp=new XMLHttpRequest();
+    // 调用扫码支付模态框
+
+    function ajaxModelPay(t, id, s, trade_no) {
+
+        var xmlhttp;
+
+
+        if (window.XMLHttpRequest) {
+            // IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // IE6, IE5 浏览器执行代码
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                // alert("ok");
+                // document.getElementById("txtHintOver").innerHTML=xmlhttp.responseText;
+                // document.getElementById("bbs").innerHTML=xmlhttp.responseText+document.getElementById("bbs").innerHTML;
+
+
+                document.getElementById("ajaxModelPay").innerHTML = '开始读取结果';
+                document.getElementById("ajaxModelPay").innerHTML = xmlhttp.responseText;
+                document.getElementById("ajaxModelTitle").innerHTML = s;
+
+                // 把模态框显示出来
+                $('#myModalRegistration').modal('show');
+
+                // 实现跳转到div的最下面
+
+                // document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight;
+                // if (xmlhttp.responseText != "您此次似乎没连续看完整节课程,连续看完才能学的扎实哦^_^"){
+                //     $('#myModal').modal('show');
+                // }
             }
-            else
+
             {
-                // IE6, IE5 浏览器执行代码
-                xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                if condition = "$Think.cookie.admin>=1"}
+            if (xmlhttp.status != 200) {
+
+                document.getElementById("getAjaxError").innerHTML = "请稍后再试 错误：" + xmlhttp.readyState + "状态" + xmlhttp.status;
+
             }
-            xmlhttp.onreadystatechange=function()
             {
-                if (xmlhttp.readyState==4 && xmlhttp.status==200)
-                {
-                    // alert("ok");
-                    // document.getElementById("txtHintOver").innerHTML=xmlhttp.responseText;
-                    // document.getElementById("bbs").innerHTML=xmlhttp.responseText+document.getElementById("bbs").innerHTML;
-
-
-                    document.getElementById("ajaxModelPay").innerHTML='开始读取结果';
-                    document.getElementById("ajaxModelPay").innerHTML=xmlhttp.responseText;
-                    document.getElementById("ajaxModelTitle").innerHTML=s;
-
-                    // 把模态框显示出来
-                    $('#myModalRegistration').modal('show');
-
-                    // 实现跳转到div的最下面
-
-                    // document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight;
-                    // if (xmlhttp.responseText != "您此次似乎没连续看完整节课程,连续看完才能学的扎实哦^_^"){
-                    //     $('#myModal').modal('show');
-                    // }
-                }
-                
-                {if condition="$Think.cookie.admin>=1"}
-                    if (xmlhttp.status!=200)
-                    {
-
-                        document.getElementById("getAjaxError").innerHTML="请稍后再试 错误：" +xmlhttp.readyState+"状态"+xmlhttp.status;
-
-                    }
-                {/if}
+                /if}
             }
-            xmlhttp.open("POST","{$Think.server.script_name}/index/member/ajaxModelPay/total_fee/"+t+"/subject/"+s+"/body/"+id+"/trade_no/"+trade_no,true);
+            xmlhttp.open("POST", "{$Think.server.script_name}/index/member/ajaxModelPay/total_fee/" + t + "/subject/" + s + "/body/" + id + "/trade_no/" + trade_no, true);
             xmlhttp.send();
 
         }
@@ -586,68 +533,56 @@ function like_none(like_a){
         function show_modal() {
             $('#myModalRegistration').modal('show');
         }
-    </script>
-
-    <script>
-function public_login(str)
-{
-
-
-    var xmlhttp;
-  if (str.length==0)
-  {
-      document.getElementById("txtHint").innerHTML="请输入手机号";
-      return;
-  }
-
-  if (str.length!=11)
-  {
-    document.getElementById("txtHint").innerHTML="手机号格式有误";
-    return;
-  }
-
-  // var phone = str.length;
-  //   if(!(/^1[34578]\d{9}$/.test(phone))){
-  //       document.getElementById("txtHint").innerHTML="手机号格式有误";
-  //       return false;
-  //   }
-  if (window.XMLHttpRequest)
-  {
-    // IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
-    xmlhttp=new XMLHttpRequest();
-  }
-  else
-  {
-    // IE6, IE5 浏览器执行代码
-    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-  xmlhttp.onreadystatechange=function()
-  {
-    if (xmlhttp.readyState==4 && xmlhttp.status==200)
-    {
-      document.getElementById("txtHint").innerHTML='开始读取数据';
-      document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
-    }
-      if (xmlhttp.status>200)
-      {
-
-          document.getElementById("txtHint").innerHTML="请稍后再试 错误：" +xmlhttp.readyState+"状态"+xmlhttp.status;
-
-      }
-  }
-  xmlhttp.open("POST","{$Think.server.script_name}/index/api/sms/s/"+str,true);
-  xmlhttp.send();
-  showtime(120);
-}
 </script>
 
- 
+<script>
+    function public_login(str) {
 
+
+        var xmlhttp;
+        if (str.length == 0) {
+            document.getElementById("txtHint").innerHTML = "请输入手机号";
+            return;
+        }
+
+        if (str.length != 11) {
+            document.getElementById("txtHint").innerHTML = "手机号格式有误";
+            return;
+        }
+
+        // var phone = str.length;
+        //   if(!(/^1[34578]\d{9}$/.test(phone))){
+        //       document.getElementById("txtHint").innerHTML="手机号格式有误";
+        //       return false;
+        //   }
+        if (window.XMLHttpRequest) {
+            // IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // IE6, IE5 浏览器执行代码
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("txtHint").innerHTML = '开始读取数据';
+                document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
+            }
+            if (xmlhttp.status > 200) {
+
+                document.getElementById("txtHint").innerHTML = "请稍后再试 错误：" + xmlhttp.readyState + "状态" + xmlhttp.status;
+
+            }
+        }
+        xmlhttp.open("POST", "{$Think.server.script_name}/index/api/sms/s/" + str, true);
+        xmlhttp.send();
+        showtime(120);
+    }
+</script>
 
 
 </div>
-<div> 
- <footer class="bs-docs-footer " style="
+<div>
+    <footer class="bs-docs-footer " style="
     padding-top: 50px;
     padding-bottom: 50px;
     margin-top: 100px;
@@ -655,15 +590,15 @@ function public_login(str)
     color: #99979c;
     text-align: center;
     background-color: #fff">
-  <div class="container">
+        <div class="container">
 
-    <p> Tp5简易商城     
-</p>
+            <p> Tp5简易商城
+            </p>
 
-    
-  </div>
-</footer>
- </div>
 
- </body>
- </html>
+        </div>
+    </footer>
+</div>
+
+</body>
+</html>
