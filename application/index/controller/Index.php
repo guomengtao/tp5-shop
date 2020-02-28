@@ -38,7 +38,7 @@ class Index extends \think\Controller
         Footprint::add();
 
 
-        //权限认证
+        //权限认证 test
         // $auth = new \Auth\Auth();
 
 
