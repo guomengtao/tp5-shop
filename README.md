@@ -1,11 +1,11 @@
-![](https://images.gitee.com/uploads/images/2019/0904/004905_642aef59_1022917.png )
+
 
 ## ThinkPHP 5.0 简易商城系统 ThinkPHP5Mall
 
-> [查看在线演示](http://open.gaoxueya.com)  我的qq：250285636 微信：18210787405
+> [查看在线演示](http://open.gaoxueya.com)  
 
 
-### 两步安装方式：
+### 安装方式：
 
 1.配置数据库:修改数据库配置文件application\database.php里的数据库账号密码等
 
@@ -13,11 +13,16 @@
 
 ===============
 
-
-有疑问欢迎加我微信 18210787405  qq 250285636  一起沟通学习
-
 ## 设置mysql账号密码的存在.env里
 + Mysql账号+密码 
+
+## 最新更新总结
++ 完成了文件从svn到git的对接
++ 建立了新版本v10.00版
++ 增加服务器webhook钩子，通过webhook自动同步更新代码，替掉FTP方式
+有疑问欢迎加我微信 18210787405  qq 250285636  一起沟通学习
+
+
  
 
  从SVN更新为git提交
