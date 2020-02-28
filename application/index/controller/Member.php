@@ -834,25 +834,7 @@ class Member extends \think\Controller
         }
 
 
-        // 每天打赏任意金额领取31天VIP会员
 
-        if ($body == 37) {
-
-            // 判断今天是否领取奖励
-            // $rand_today = Order::where('body', $body)
-            //  ->where('phone', $phone)
-            //  ->where('out_trade_no', '37001')
-            //  ->whereTime('create_time', 'today')
-            //  ->count();
-
-
-            // 如果有奖励，执行奖励vip天数的公用功能
-            // if ($rand_today<=0) {
-            // add_vip_days(31,37001);
-            // }
-
-
-        }
 
 
         // 如果是签到，查询昨天累加的签到天数
