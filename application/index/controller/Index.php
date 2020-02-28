@@ -33,7 +33,7 @@ class Index extends \think\Controller
     {
 
 
-        // 访问记录123456
+        // 访问记录12345
         // 调用Footprint模型的add()自定义方法
         Footprint::add();
 
