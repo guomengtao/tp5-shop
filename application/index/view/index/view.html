@@ -46,8 +46,22 @@
 
         {if condition="$list.address==''"}
 
+ 
+  <div style="width:100%;overflow: hidden;  " id="tovideiframe" >
+      
+ <iframe id="videiframe" style="width:100%; margin-top: -45px; object-fit: fill"  src="//player.bilibili.com/player.html?aid=32556750&cid=57080268&page={$list.sort}&as_wide=1&high_quality=1&danmaku=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe> 
 
-        <video    controls="controls"  poster="__STATIC__/thinkphp5.jpg"  id="myVideo"    style="width:100%; height:100%; object-fit: fill" >
+  </div>
+
+
+
+         
+        <script type="text/javascript">
+        document.getElementById("videiframe").style.height=document.getElementById("videiframe").scrollWidth*0.75+"px";
+        document.getElementById("tovideiframe").style.height=document.getElementById("tovideiframe").scrollWidth*0.75-85+"px";
+        </script>
+ 
+        <video style="display: none"    controls="controls"  poster="__STATIC__/thinkphp5.jpg"  id="myVideo"    style="width:100%; height:100%; object-fit: fill" >
 
             
              
@@ -70,10 +84,10 @@
 
 
 
-        <button id="playPause" type="button" onclick="playPause()"  class="btn btn-default"  >暂停</button>
+        <button id="playPause" type="button" onclick="playPause()"  class="btn btn-default"  style="display: none">暂停</button>
 
         <!--控制播放速度的下拉菜单-->
-        <div class="btn-group dropup">
+        <div class="btn-group dropup" style="display: none">
             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 播放速度 <span class="caret"></span>
             </button>
@@ -99,7 +113,7 @@
             {$list.price}元/年  扫码支付
         </button>
         {/if}
-        <a class="btn btn-default" href="https://jq.qq.com/?_wv=1027&k=5OjhBDy" role="button">下载源码</a>
+        <a class="btn btn-default" href="https://gitee.com/rinuo/tp5" role="button">下载源码</a>
         <a  href="__ROOT__/index/member/tip" id="btn" class="btn btn-danger" target="_blank"  >打赏</a> 
 
         <button onclick="showFull()" type="button" style="display: none">全屏</button>
@@ -429,7 +443,7 @@ obj.onkeyup=function(){
 
 <div class="row">
     {if condition="$up neq ''"}
-    <div class="col-xs-12 col-sm-6 col-md-4">        <a class="btn btn-default btn-block" style="margin-bottom: 10px; text-overflow:ellipsis; white-space:nowrap; overflow:hidden;" href="__ROOT__/index/index/view/id/{$up.id}" role="button">上一课：{$up.title}</a>
+    <div class="col-xs-12 col-sm-6 col-md-4">        <a class="btn btn-default btn-block" style="margin-bottom: 10px; text-overflow:ellipsis; white-space:nowrap; overflow:hidden;" href="{:url('index/index/view',['id'=>$up.id])} " role="button">上一课：{$up.title}</a>
     </div>
     {else}
     <div class="col-xs-12 col-sm-6 col-md-4">        <a class="btn btn-default btn-block" style="margin-bottom: 10px; text-overflow:ellipsis; white-space:nowrap; overflow:hidden;" href="#" role="button">这是第一课</a>
@@ -437,7 +451,7 @@ obj.onkeyup=function(){
     {/if}
     <div class="col-xs-12 col-sm-6 col-md-4">   </div>
     {if condition="$next neq ''"}
-    <div class="col-xs-12 col-sm-6 col-md-4">        <a class="btn btn-default btn-block" style="margin-bottom: 10px; text-overflow:ellipsis; white-space:nowrap; overflow:hidden;" href="__ROOT__/index/index/view/id/{$next.id}" role="button">下一课：{$next.title}</a>
+    <div class="col-xs-12 col-sm-6 col-md-4">        <a class="btn btn-default btn-block" style="margin-bottom: 10px; text-overflow:ellipsis; white-space:nowrap; overflow:hidden;" href="{:url('index/index/view',['id'=>$next.id])} " role="button">下一课：{$next.title}</a>
     </div>
     {else}
     <div class="col-xs-12 col-sm-6 col-md-4">        <a class="btn btn-default btn-block" style="margin-bottom: 10px; text-overflow:ellipsis; white-space:nowrap; overflow:hidden;" href="#" role="button">这是最后一课</a>
@@ -599,7 +613,7 @@ obj.onkeyup=function(){
     </div>
 </div>
 
-<div class="panel panel-default">
+<!-- <div class="panel panel-default">
     <div class="panel-heading">赞助商</div>
     <div class="panel-body text-center">
           
@@ -624,7 +638,7 @@ obj.onkeyup=function(){
  欢迎加入
 
     </div>
-</div>
+</div> -->
 
 
 

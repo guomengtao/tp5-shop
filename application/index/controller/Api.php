@@ -26,7 +26,6 @@ class Api extends \think\Controller
 
         if (!$username) {
             # code...
-            return jsonp('abd', 200);
             return 3;
         }
         if (!$password) {

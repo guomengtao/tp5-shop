@@ -15,16 +15,18 @@ class Shop extends model
     protected $insert = ['name' => "游客",'age' => 17];  
     protected $update = ['name'];
 
-    public static function course(){
+    public static function course($search=''){
 
-         // 查询最新的聊天信息
-        $talk_new = Shop::order('sort', 'asc')
-                    // ->where('sort','<', '10086')
-                    ->paginate(15); 
+        $course =  Shop::where('label|title','like','%'.$search.'%')
+                    ->whereTime('update_time', '<', '2018-11-11')
+                    ->cache(360000)
+                    ->order('sort', 'asc')
+                    ->paginate(15);
 
-        return $talk_new;
+ 
 
-        return 1;
+        return $course;
+ 
     }
     public function cha()
     {

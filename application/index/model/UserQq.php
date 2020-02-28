@@ -21,8 +21,9 @@ class UserQq extends model
             // 查询当前用户信息
             $user  = UserQq::where('user_id','not null')
                     ->order('id', 'desc')
-                    ->limit($row)
-                    ->select();
+                    // ->limit($row)
+                    ->cache(600)
+                    ->paginate(16);
 
             return $user;
     }

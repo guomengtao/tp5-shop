@@ -1,11 +1,30 @@
+-- phpMyAdmin SQL Dump
+-- version phpStudy 2014
+-- http://www.phpmyadmin.net
+--
+-- 主机: localhost
+-- 生成日期: 2018 �?08 �?12 �?09:37
+-- 服务器版本: 5.5.47
+-- PHP 版本: 5.5.30
+
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
+
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
 
+--
+-- 数据库: `demo`
+--
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `think_article`
+--
 
 CREATE TABLE IF NOT EXISTS `think_article` (
   `id` mediumint(8) NOT NULL AUTO_INCREMENT,
@@ -38,8 +57,18 @@ CREATE TABLE IF NOT EXISTS `think_article` (
   KEY `hide` (`hide`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=278 ;
 
+--
+-- 转存表中的数据 `think_article`
+--
+
 INSERT INTO `think_article` (`id`, `title`, `date`, `content`, `excerpt`, `alias`, `author`, `sortid`, `type`, `views`, `tagid`, `attnum`, `top`, `sortop`, `hide`, `checked`, `allow_remark`, `password`, `template`, `status`) VALUES
 (277, '学习thinkphp5模型关联心得体会', 0, '我开始学习模型关联。内容很多', '摘要', '别名', 1, -1, 'blog', 0, '0', 0, 'n', 'n', 'n', 'y', 'y', '', '', '');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `think_article_tag`
+--
 
 CREATE TABLE IF NOT EXISTS `think_article_tag` (
   `tid` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -49,6 +78,12 @@ CREATE TABLE IF NOT EXISTS `think_article_tag` (
   KEY `tagname` (`tagname`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=56 ;
 
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `think_auth_group`
+--
+
 CREATE TABLE IF NOT EXISTS `think_auth_group` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `title` char(100) NOT NULL DEFAULT '',
@@ -57,10 +92,20 @@ CREATE TABLE IF NOT EXISTS `think_auth_group` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
+--
+-- 转存表中的数据 `think_auth_group`
+--
+
 INSERT INTO `think_auth_group` (`id`, `title`, `status`, `rules`) VALUES
 (1, '管理组', 1, '1,2,5'),
 (2, '信息录入部门', 1, '3'),
 (3, '会计', 1, '3');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `think_auth_group_access`
+--
 
 CREATE TABLE IF NOT EXISTS `think_auth_group_access` (
   `uid` mediumint(8) unsigned NOT NULL,
@@ -70,9 +115,19 @@ CREATE TABLE IF NOT EXISTS `think_auth_group_access` (
   KEY `group_id` (`group_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
+--
+-- 转存表中的数据 `think_auth_group_access`
+--
+
 INSERT INTO `think_auth_group_access` (`uid`, `group_id`) VALUES
 (393, 1),
 (394, 3);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `think_auth_rule`
+--
 
 CREATE TABLE IF NOT EXISTS `think_auth_rule` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
@@ -85,12 +140,22 @@ CREATE TABLE IF NOT EXISTS `think_auth_rule` (
   UNIQUE KEY `name` (`name`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
 
+--
+-- 转存表中的数据 `think_auth_rule`
+--
+
 INSERT INTO `think_auth_rule` (`id`, `name`, `title`, `type`, `status`, `condition`) VALUES
 (1, 'Addmin/Article/Ad', '列表', 1, 1, ''),
 (2, 'Home/add', '添加', 1, 1, ''),
 (3, 'Home/edit', '编辑', 1, 1, ''),
 (4, 'Home/delete', '删除', 1, 0, ''),
 (5, 'Index/Index/Index', '增加文章的权限', 1, 1, '');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `think_book`
+--
 
 CREATE TABLE IF NOT EXISTS `think_book` (
   `id` mediumint(8) NOT NULL AUTO_INCREMENT,
@@ -123,6 +188,12 @@ CREATE TABLE IF NOT EXISTS `think_book` (
   KEY `hide` (`hide`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `think_comment`
+--
+
 CREATE TABLE IF NOT EXISTS `think_comment` (
   `id` mediumint(8) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL DEFAULT '' COMMENT '标题',
@@ -154,9 +225,19 @@ CREATE TABLE IF NOT EXISTS `think_comment` (
   KEY `hide` (`hide`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
+--
+-- 转存表中的数据 `think_comment`
+--
+
 INSERT INTO `think_comment` (`id`, `title`, `date`, `content`, `excerpt`, `alias`, `commentable_id`, `sortid`, `commentable_type`, `views`, `tagid`, `attnum`, `top`, `sortop`, `hide`, `checked`, `allow_remark`, `password`, `template`, `status`) VALUES
 (1, '评论标题', 0, '我也来学习了', '', '', 277, -1, 'blog', 0, '0', 0, 'n', 'n', 'n', 'y', 'y', '', '', '1'),
 (2, '', 0, '我是一套评论', '', '', 277, -1, 'blog', 0, '0', 0, 'n', 'n', 'n', 'y', 'y', '', '', '');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `think_config`
+--
 
 CREATE TABLE IF NOT EXISTS `think_config` (
   `id` int(8) unsigned NOT NULL AUTO_INCREMENT,
@@ -183,11 +264,21 @@ CREATE TABLE IF NOT EXISTS `think_config` (
   KEY `phone_2` (`phone`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
+--
+-- 转存表中的数据 `think_config`
+--
+
 INSERT INTO `think_config` (`id`, `appid`, `appkey`, `my_url`, `username`, `password`, `name`, `phone`, `email`, `invite`, `token`, `online_time`, `start_time`, `expiration_time`, `delete_time`, `rand`, `ip`, `create_time`, `update_time`) VALUES
 (1, 100112288, 'ac07166c888888887beec4e423a6bc46', 'http://open.gaoxueya.com/index/api/qq', 'qq', NULL, 'qq', 0, '0', NULL, NULL, NULL, NULL, NULL, NULL, 0, '', 0, 0),
 (2, 1460956555, '5ac13fe8888888888d62b90e33673d03', 'http://open.gaoxueya.com/index/api/weibo', 'weibo', NULL, 'weibo', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '', 0, 0),
 (3, 1, '1', 'http://api.chanyoo.cn/utf8/interface/send_sms.aspx', 'usernaem', '65569MdN', 'sms', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, '', 0, 0),
 (4, 20880066666666889, 'ynsongdft999999996wfpoz9j7h', 'http://open.gaoxueya.com/index/api/jack', NULL, '3', 'alipay', NULL, 'rinuo@vip.qq.com', NULL, NULL, NULL, NULL, NULL, NULL, 0, '', 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `think_data`
+--
 
 CREATE TABLE IF NOT EXISTS `think_data` (
   `id` int(8) unsigned NOT NULL AUTO_INCREMENT,
@@ -196,7 +287,7 @@ CREATE TABLE IF NOT EXISTS `think_data` (
   `shop` int(11) NOT NULL,
   `status` tinyint(2) NOT NULL DEFAULT '0' COMMENT '状态',
   `title` varchar(1000) NOT NULL,
-  `age` int(11) DEFAULT '0',
+  `age` int(11) NOT NULL,
   `ip` text,
   `session_id` text,
   `delete_time` int(11) DEFAULT NULL,
@@ -204,7 +295,11 @@ CREATE TABLE IF NOT EXISTS `think_data` (
   `create_time` int(11) NOT NULL,
   `update_time` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2251 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2185 ;
+
+--
+-- 转存表中的数据 `think_data`
+--
 
 INSERT INTO `think_data` (`id`, `name`, `user_id`, `shop`, `status`, `title`, `age`, `ip`, `session_id`, `delete_time`, `content`, `create_time`, `update_time`) VALUES
 (2072, '127.0.0.1', 394, 111, 0, '发个说说', 0, '127.0.0.1', 'c7ihudnqcpm3ls69qpc6tukbj3', NULL, NULL, 1532257622, 1532257622),
@@ -229,102 +324,95 @@ INSERT INTO `think_data` (`id`, `name`, `user_id`, `shop`, `status`, `title`, `a
 (2091, '127.0.0.1', 394, 43, 0, '只要愿意学习，就一定能够学会', 0, '127.0.0.1', '1gg5se310kk4ho53sl9vvi4or4', NULL, NULL, 1532342625, 1532342625),
 (2092, '127.0.0.1', 394, 43, 0, '天才不能使人不必工作，不能代替劳动。要发展天才，必须长时间地学习和高度紧张地工作。人越有天才，他面临的任务也就越复杂，越重要。', 0, '127.0.0.1', '1gg5se310kk4ho53sl9vvi4or4', NULL, NULL, 1532342632, 1532342632),
 (2093, '127.0.0.1', 394, 43, 0, '谁在装束和发型上用尽心思，谁就没有精力用于学习；谁只注意修饰外表的美丽，谁就无法得到内在的美丽。', 0, '127.0.0.1', '1gg5se310kk4ho53sl9vvi4or4', NULL, NULL, 1532342652, 1532342652),
-(2185, '30', 393, 46, 0, '第一个', 0, '30', 'eejn4jjqad2u0pjdve2dat8tp1', NULL, NULL, 1534665844, 1534665844),
-(2186, '30', 393, 46, 0, '第二个', 2185, '30', 'eejn4jjqad2u0pjdve2dat8tp1', NULL, NULL, 1534665992, 1534665992),
-(2187, '30', 393, 46, 0, '第三个', 2186, '30', 'eejn4jjqad2u0pjdve2dat8tp1', NULL, NULL, 1534665999, 1534665999),
-(2188, '30', 393, 46, 0, '第四个', 2187, '30', 'eejn4jjqad2u0pjdve2dat8tp1', NULL, NULL, 1534666006, 1534666006),
-(2189, '30', 393, 46, 0, '我也是回复的第二个', 2185, '30', 'eejn4jjqad2u0pjdve2dat8tp1', NULL, NULL, 1534666622, 1534666622),
-(2190, '30', 394, 46, 0, '天才不能使人不必工作，不能代替劳动。要发展天才，必须长时间地学习和高度紧张地工作。人越有天才，他面临的任务也就越复杂，越重要', 0, '30', 'k2jgrag15p0a8tdfsaq9dmd3v4', NULL, NULL, 1534752562, 1534752562),
-(2191, '30', 394, 46, 0, '儿童的心灵是敏感的，它是为着接受一切好的东西而敞开的。如果教师诱导儿童学习好榜样，鼓励仿效一切好的行为，那末，儿童身上的所有缺点就会没有痛苦和创伤地不觉得难受地逐渐消失。', 0, '30', 'k2jgrag15p0a8tdfsaq9dmd3v4', NULL, NULL, 1534752606, 1534752606),
-(2192, '30', 393, 0, 0, '666', 0, '30', NULL, NULL, NULL, 1534846370, 1534846370),
-(2193, '30', 393, 0, 0, '888', 0, '30', NULL, NULL, NULL, 1534846379, 1534846379),
-(2194, '30', 393, 155, 0, '', 0, '30', NULL, NULL, NULL, 1534846557, 1534846557),
-(2195, '30', 393, 150, 0, '', 0, '30', NULL, NULL, NULL, 1534846647, 1534846647),
-(2196, '30', 393, 155, 0, '333\r\n', 0, '30', NULL, NULL, NULL, 1534846731, 1534846731),
-(2197, '30', 393, 155, 0, '89', 0, '30', NULL, NULL, NULL, 1534846744, 1534846744),
-(2198, '30', 393, 150, 0, '33\r\n', 0, '30', NULL, NULL, NULL, 1534846809, 1534846809),
-(2199, '30', 393, 150, 0, '123456', 0, '30', NULL, NULL, NULL, 1534847216, 1534847216),
-(2200, '30', 393, 150, 0, '123456', 0, '30', NULL, NULL, NULL, 1534900752, 1534900752),
-(2201, '30', 393, 150, 0, '你好好', 0, '30', NULL, NULL, NULL, 1534906309, 1534906309),
-(2202, '30', 393, 150, 0, '456789', 0, '30', NULL, NULL, NULL, 1534906575, 1534906575),
-(2203, '30', 393, 150, 0, '777888', 0, '30', NULL, NULL, NULL, 1534906612, 1534906612),
-(2204, '30', 393, 150, 0, '666', 0, '30', NULL, NULL, NULL, 1534906842, 1534906842),
-(2205, '30', 393, 150, 0, 'age', 2204, '30', NULL, NULL, NULL, 1534907002, 1534907002),
-(2206, '30', 393, 150, 0, '999000', 2203, '30', NULL, NULL, NULL, 1534907023, 1534907023),
-(2207, '30', 393, 150, 0, '123123', NULL, '30', NULL, NULL, NULL, 1534907093, 1534907093),
-(2208, '30', 393, 150, 0, '456456', 2207, '30', NULL, NULL, NULL, 1534907113, 1534907113),
-(2209, '30', 393, 150, 0, '123456', NULL, '30', NULL, NULL, NULL, 1534907138, 1534907138),
-(2210, '30', 393, 150, 0, '456456', NULL, '30', NULL, NULL, NULL, 1534907226, 1534907226),
-(2211, '30', 393, 150, 0, '123456123456', NULL, '30', NULL, NULL, NULL, 1534907238, 1534907238),
-(2212, '30', 393, 150, 0, '0000000000', 2211, '30', NULL, NULL, NULL, 1534907257, 1534907257),
-(2213, '30', 393, 150, 0, '111999', 2212, '30', NULL, NULL, NULL, 1534908170, 1534908170),
-(2214, '30', 393, 150, 0, '66666', 2212, '30', NULL, NULL, NULL, 1534910354, 1534910354),
-(2215, '30', 393, 150, 0, '第三条', 2212, '30', NULL, NULL, NULL, 1534916781, 1534916781),
-(2216, '30', 394, 150, 0, '我也来回复个', 2212, '30', NULL, NULL, NULL, 1534917315, 1534917315),
-(2217, '30', 394, 150, 0, '评论数量', 2216, '30', NULL, NULL, NULL, 1534917468, 1534917468),
-(2218, '30', 394, 150, 0, '我是第五', 2212, '30', NULL, NULL, NULL, 1534918462, 1534918462),
-(2219, '30', 394, 150, 0, '这是第28呢', NULL, '30', NULL, NULL, NULL, 1534919191, 1534919191),
-(2220, '30', 394, 150, 0, '2929292929', NULL, '30', NULL, NULL, NULL, 1534919347, 1534919347),
-(2221, '30', 394, 150, 0, '我来回复', 2220, '30', NULL, NULL, NULL, 1534919378, 1534919378),
-(2222, '30', 394, 150, 0, '我发个帖子\r\n', NULL, '30', NULL, NULL, NULL, 1534922271, 1534922271),
-(2223, '30', 395, 150, 0, '我也来发个帖子\r\n', NULL, '30', NULL, NULL, NULL, 1534922316, 1534922316),
-(2224, '30', 395, 150, 0, '我来学习', 2222, '30', NULL, NULL, NULL, 1534922724, 1534922724),
-(2225, '30', 395, 150, 0, '哈哈', 2222, '30', NULL, NULL, NULL, 1534922746, 1534922746),
-(2226, '30', 395, 150, 0, '666\r\n', 2203, '30', NULL, NULL, NULL, 1534925498, 1534925498),
-(2227, '30', 395, 150, 0, '12345446', 2203, '30', NULL, NULL, NULL, 1534925511, 1534925511),
-(2228, '30', 395, 150, 0, '123', NULL, '30', NULL, NULL, NULL, 1534985996, 1534985996),
-(2229, '30', 395, 150, 0, '456', NULL, '30', NULL, NULL, NULL, 1534986006, 1534986006),
-(2230, '30', 395, 150, 0, '789', NULL, '30', NULL, NULL, NULL, 1534986015, 1534986015),
-(2231, '30', 395, 150, 0, '0000', NULL, '30', NULL, NULL, NULL, 1534986025, 1534986025),
-(2232, '30', 395, 150, 0, '777', NULL, '30', NULL, NULL, NULL, 1534986040, 1534986040),
-(2233, '30', 395, 150, 0, '111', NULL, '30', NULL, NULL, NULL, 1534986059, 1534986059),
-(2234, '30', 395, 150, 0, '111', NULL, '30', NULL, NULL, NULL, 1534986083, 1534986083),
-(2235, '30', 395, 150, 0, '2222', NULL, '30', NULL, NULL, NULL, 1534986102, 1534986102),
-(2236, '30', 395, 150, 0, '7777777777', NULL, '30', NULL, NULL, NULL, 1534986123, 1534986123),
-(2237, '30', 395, 150, 0, '你好', NULL, '30', NULL, NULL, NULL, 1534986147, 1534986147),
-(2238, '30', 395, 150, 0, '我来好', 2194, '30', NULL, NULL, NULL, 1534993195, 1534993195),
-(2239, '30', 395, 150, 0, '666', 2204, '30', NULL, NULL, NULL, 1534993219, 1534993219),
-(2240, '30', 395, 150, 0, '999', 2204, '30', NULL, NULL, NULL, 1534993232, 1534993232),
-(2241, '30', 395, 150, 0, '999', NULL, '30', NULL, NULL, NULL, 1534993240, 1534993240),
-(2242, '30', 395, 150, 0, '1008611\r\n', NULL, '30', NULL, NULL, NULL, 1534993271, 1534993271),
-(2243, '30', 395, 150, 0, '1236', 0, '30', NULL, NULL, NULL, 1534993489, 1534993489),
-(2244, '30', 395, 150, 0, '55', 1, '30', NULL, NULL, NULL, 1534994644, 1534994644),
-(2245, '30', 395, 150, 0, '1002', 8, '30', NULL, NULL, NULL, 1534994684, 1534994684),
-(2246, '30', 395, 150, 0, '1003', 2204, '30', NULL, NULL, NULL, 1534994694, 1534994694),
-(2247, '30', 395, 150, 0, '6666', 0, '30', NULL, NULL, NULL, 1534994717, 1534994717),
-(2248, '30', 395, 150, 0, '1002', 0, '30', NULL, NULL, NULL, 1534994771, 1534994771),
-(2249, '30', 395, 150, 0, '1002', 2248, '30', NULL, NULL, NULL, 1534994781, 1534994781),
-(2250, '30', 394, 150, 0, '123', 2248, '30', NULL, NULL, NULL, 1535190488, 1535190488);
+(2094, '127.0.0.1', 394, 43, 0, '好好学习', 0, '127.0.0.1', 'ejubn7qnbtsrigcm71t6ugm125', NULL, NULL, 1532403865, 1532403865),
+(2095, '127.0.0.1', 394, 43, 0, '天天向上', 0, '127.0.0.1', 'ejubn7qnbtsrigcm71t6ugm125', NULL, NULL, 1532405169, 1532405169),
+(2096, '127.0.0.1', 394, 38, 0, '123', 0, '127.0.0.1', 'ejubn7qnbtsrigcm71t6ugm125', NULL, NULL, 1532411148, 1532411148),
+(2097, '127.0.0.1', 394, 43, 0, '学习thinkphp5', 0, '127.0.0.1', 'ebp9bjv0r236amg7glgmqbr6e5', NULL, NULL, 1532418578, 1532418578),
+(2098, '127.0.0.1', 394, 43, 0, '好好学习吧', 0, '127.0.0.1', 'ebp9bjv0r236amg7glgmqbr6e5', NULL, NULL, 1532420157, 1532420157),
+(2099, '127.0.0.1', 394, 43, 0, '呵呵', 0, '127.0.0.1', 'ejubn7qnbtsrigcm71t6ugm125', NULL, NULL, 1532420200, 1532420200),
+(2100, '127.0.0.1', 394, 43, 0, '大的评论框', 0, '127.0.0.1', 'ebp9bjv0r236amg7glgmqbr6e5', NULL, NULL, 1532420593, 1532420593),
+(2101, '127.0.0.1', 394, 43, 0, '改成了圆形头像', 0, '127.0.0.1', 'ejubn7qnbtsrigcm71t6ugm125', NULL, NULL, 1532423899, 1532423899),
+(2102, '127.0.0.1', 394, 38, 0, '士大夫', 0, '127.0.0.1', '9gqpbp26fpvhdn8brt6aeps987', NULL, NULL, 1532426433, 1532426433),
+(2103, '127.0.0.1', 394, 38, 0, '666', 0, '127.0.0.1', '9gqpbp26fpvhdn8brt6aeps987', NULL, NULL, 1532426444, 1532426444),
+(2104, '127.0.0.1', 394, 38, 0, '自行车', 0, '127.0.0.1', '9gqpbp26fpvhdn8brt6aeps987', NULL, NULL, 1532426453, 1532426453),
+(2105, '127.0.0.1', 394, 38, 0, '顶一个', 0, '127.0.0.1', '9gqpbp26fpvhdn8brt6aeps987', NULL, NULL, 1532426582, 1532426582),
+(2106, '127.0.0.1', 394, 38, 0, '士大夫', 0, '127.0.0.1', '9gqpbp26fpvhdn8brt6aeps987', NULL, NULL, 1532426713, 1532426713),
+(2107, '127.0.0.1', 394, 38, 0, '是的', 0, '127.0.0.1', '9gqpbp26fpvhdn8brt6aeps987', NULL, NULL, 1532426745, 1532426745),
+(2108, '127.0.0.1', 394, 38, 0, '123', 0, '127.0.0.1', '9gqpbp26fpvhdn8brt6aeps987', NULL, NULL, 1532426927, 1532426927),
+(2109, '127.0.0.1', 394, 38, 0, '电饭锅', 0, '127.0.0.1', '9gqpbp26fpvhdn8brt6aeps987', NULL, NULL, 1532426949, 1532426949),
+(2110, '127.0.0.1', 394, 38, 0, '3', 0, '127.0.0.1', '9gqpbp26fpvhdn8brt6aeps987', NULL, NULL, 1532426976, 1532426976),
+(2111, '127.0.0.1', 394, 38, 0, '[rose]', 0, '127.0.0.1', '9gqpbp26fpvhdn8brt6aeps987', NULL, NULL, 1532427011, 1532427011),
+(2112, '127.0.0.1', 394, 38, 0, '333', 0, '127.0.0.1', '9gqpbp26fpvhdn8brt6aeps987', NULL, NULL, 1532427019, 1532427019),
+(2113, '127.0.0.1', 394, 43, 0, '的地方', 0, '127.0.0.1', '9gqpbp26fpvhdn8brt6aeps987', NULL, NULL, 1532427229, 1532427229),
+(2114, '127.0.0.1', 394, 43, 0, '[rose]', 0, '127.0.0.1', '9gqpbp26fpvhdn8brt6aeps987', NULL, NULL, 1532427333, 1532427333),
+(2115, '127.0.0.1', 394, 43, 0, '士大夫', 0, '127.0.0.1', '9gqpbp26fpvhdn8brt6aeps987', NULL, NULL, 1532427811, 1532427811),
+(2116, '127.0.0.1', 394, 43, 0, '士大夫士大夫', 0, '127.0.0.1', '9gqpbp26fpvhdn8brt6aeps987', NULL, NULL, 1532427833, 1532427833),
+(2117, '127.0.0.1', 394, 43, 0, '是的发', 0, '127.0.0.1', '9gqpbp26fpvhdn8brt6aeps987', NULL, NULL, 1532427923, 1532427923),
+(2118, '127.0.0.1', 394, 43, 0, '666666', 0, '127.0.0.1', '9gqpbp26fpvhdn8brt6aeps987', NULL, NULL, 1532428127, 1532428127),
+(2119, '127.0.0.1', 394, 43, 0, '123', 0, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532483915, 1532483915),
+(2120, '127.0.0.1', 394, 43, 0, '456789', 0, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532493029, 1532493029),
+(2121, '127.0.0.1', 394, 43, 0, '123', 0, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532493040, 1532493040),
+(2122, '127.0.0.1', 394, 43, 0, '是是是', 0, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532493070, 1532493070),
+(2123, '127.0.0.1', 394, 43, 127, '是是是', 0, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532494229, 1532494229),
+(2124, '127.0.0.1', 394, 43, 127, '77777777777', 0, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532494320, 1532494320),
+(2125, '127.0.0.1', 394, 43, 127, '123', 0, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532495284, 1532495284),
+(2126, '127.0.0.1', 394, 43, 127, '456', 0, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532495303, 1532495303),
+(2127, '127.0.0.1', 394, 43, 127, '456', 0, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532495432, 1532495432),
+(2128, '127.0.0.1', 394, 43, 127, '333', 0, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532495442, 1532495442),
+(2129, '127.0.0.1', 394, 43, 127, '5555', 0, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532495502, 1532495502),
+(2130, '127.0.0.1', 394, 43, 0, '23456', 0, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532495514, 1532495514),
+(2131, '127.0.0.1', 394, 43, 0, '333', 0, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532495571, 1532495571),
+(2132, '127.0.0.1', 394, 43, 127, '12306', 0, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532496266, 1532496266),
+(2133, '127.0.0.1', 394, 43, 127, '10086', 0, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532496401, 1532496401),
+(2134, '127.0.0.1', 394, 43, 127, '123123', 0, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532496668, 1532496668),
+(2135, '127.0.0.1', 394, 43, 20, '10086', 0, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532496865, 1532496865),
+(2136, '127.0.0.1', 394, 43, 127, '10086', 0, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532496892, 1532496892),
+(2137, '127.0.0.1', 394, 43, 0, 'asdf', 0, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532496979, 1532496979),
+(2138, '127.0.0.1', 394, 43, 127, 'adf', 0, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532496989, 1532496989),
+(2139, '127.0.0.1', 394, 43, 0, '111', 0, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532497065, 1532497065),
+(2140, '127.0.0.1', 394, 43, 127, '66', 0, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532497104, 1532497104),
+(2141, '127.0.0.1', 394, 43, 127, '10086', 0, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532497125, 1532497125),
+(2142, '127.0.0.1', 394, 43, 127, '1112', 0, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532497154, 1532497154),
+(2143, '127.0.0.1', 394, 43, 10, '1112', 0, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532497182, 1532497182),
+(2144, '127.0.0.1', 394, 43, 0, '123', 0, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532497288, 1532497288),
+(2145, '127.0.0.1', 394, 43, 127, '11117', 0, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532497318, 1532497318),
+(2146, '127.0.0.1', 394, 43, 10, '1118', 0, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532497402, 1532497402),
+(2147, '127.0.0.1', 394, 43, 19, '1118', 0, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532497419, 1532497419),
+(2148, '127.0.0.1', 394, 43, 127, '1118', 0, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532497452, 1532497452),
+(2149, '127.0.0.1', 394, 43, 126, '1118', 0, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532497469, 1532497469),
+(2165, '127.0.0.1', 394, 43, 0, '说的好', 2088, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532525795, 1532525795),
+(2164, '127.0.0.1', 394, 43, 0, '我来回复你', 2160, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532525753, 1532525753),
+(2163, '127.0.0.1', 394, 43, 0, '测试', 2086, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532525216, 1532525216),
+(2162, '127.0.0.1', 394, 43, 0, '我来演示回复显示', 2158, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532523867, 1532523867),
+(2156, '127.0.0.1', 394, 43, 0, 'xuexi', 2090, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532497799, 1532497799),
+(2157, '127.0.0.1', 394, 43, 0, '666', 0, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532497860, 1532497860),
+(2158, '127.0.0.1', 394, 43, 0, 'xuexi xuexi', 2090, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532497898, 1532497898),
+(2159, '127.0.0.1', 394, 43, 0, '111222', 2086, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532519175, 1532519175),
+(2160, '127.0.0.1', 394, 43, 0, '我来顶一下', 2086, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532521160, 1532521160),
+(2161, '127.0.0.1', 394, 43, 0, '我来评论', 0, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532521216, 1532521216),
+(2166, '127.0.0.1', 394, 43, 0, '好的', 2165, '127.0.0.1', 'iq4v9asgptr31isqio6rq7tab0', NULL, NULL, 1532527569, 1532527569),
+(2167, '127.0.0.1', 394, 43, 0, '我更新首页为讨论', 0, '127.0.0.1', 'o92j57h4osh9ct188ic0qlt8o5', NULL, NULL, 1533468929, 1533468929),
+(2168, '127.0.0.1', 394, 43, 0, '没有看到最新的聊天呢', 0, '127.0.0.1', 'o92j57h4osh9ct188ic0qlt8o5', NULL, NULL, 1533469031, 1533469031),
+(2169, '127.0.0.1', 394, 43, 0, '这里护肤', 2168, '127.0.0.1', 'o92j57h4osh9ct188ic0qlt8o5', NULL, NULL, 1533471947, 1533471947),
+(2170, '127.0.0.1', 394, 54, 0, '这个来自54奥', 0, '127.0.0.1', 'o92j57h4osh9ct188ic0qlt8o5', NULL, NULL, 1533472330, 1533472330),
+(2171, '127.0.0.1', 394, 54, 0, '1', 2170, '127.0.0.1', 'o92j57h4osh9ct188ic0qlt8o5', NULL, NULL, 1533472498, 1533472498),
+(2172, '127.0.0.1', 393, 54, 0, '123', 2170, '127.0.0.1', 'o92j57h4osh9ct188ic0qlt8o5', NULL, NULL, 1533472519, 1533472519),
+(2173, '127.0.0.1', 394, 54, 0, '13', 2172, '127.0.0.1', 'o92j57h4osh9ct188ic0qlt8o5', NULL, NULL, 1533473357, 1533473357),
+(2174, '127.0.0.1', 394, 39, 0, '作业', 0, '127.0.0.1', '18odi3mha42g5sgq46pl3ml5q0', NULL, NULL, 1533635493, 1533635493),
+(2177, '127.0.0.1', 394, 39, 0, '123', 2168, '127.0.0.1', 'ou8jh8c6s611b9iqgfohg8gd25', NULL, NULL, 1533708850, 1533708850),
+(2178, '127.0.0.1', 393, 54, 0, '我回复你了', 2170, '127.0.0.1', 'ou8jh8c6s611b9iqgfohg8gd25', NULL, NULL, 1533712895, 1533712895),
+(2179, '127.0.0.1', 393, 54, 0, '123456', 2178, '127.0.0.1', '8f9jgvus49lfdbtr6fip4r0a10', NULL, NULL, 1533957215, 1533957215),
+(2180, '127.0.0.1', 393, 1, 0, '12', 0, '127.0.0.1', '8f9jgvus49lfdbtr6fip4r0a10', NULL, NULL, 1533959727, 1533959727),
+(2181, '127.0.0.1', 393, 1, 0, '23', 0, '127.0.0.1', '8f9jgvus49lfdbtr6fip4r0a10', NULL, NULL, 1533959771, 1533959771),
+(2182, '127.0.0.1', 393, 1, 0, '333', 0, '127.0.0.1', '8f9jgvus49lfdbtr6fip4r0a10', NULL, NULL, 1533959945, 1533959945),
+(2183, '127.0.0.1', 393, 1, 0, '111', 0, '127.0.0.1', '8f9jgvus49lfdbtr6fip4r0a10', NULL, NULL, 1533959975, 1533959975),
+(2184, '127.0.0.1', NULL, 1, 0, '333', 0, '127.0.0.1', '8f9jgvus49lfdbtr6fip4r0a10', NULL, NULL, 1533971479, 1533971479);
 
-CREATE TABLE IF NOT EXISTS `think_fans` (
-  `id` int(8) unsigned NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL,
-  `follow_id` int(11) DEFAULT NULL,
-  `ip` text NOT NULL,
-  `delete_time` int(11) DEFAULT NULL,
-  `create_time` int(11) NOT NULL,
-  `update_time` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=159 ;
+-- --------------------------------------------------------
 
-INSERT INTO `think_fans` (`id`, `user_id`, `follow_id`, `ip`, `delete_time`, `create_time`, `update_time`) VALUES
-(142, 394, 395, '', 1535166621, 1535159540, 1535166621),
-(143, 394, 395, '', 1535166621, 1535159962, 1535166621),
-(144, 394, 395, '', 1535166621, 1535160053, 1535166621),
-(145, 394, 395, '', 1535166621, 1535163588, 1535166621),
-(146, 394, 395, '', 1535166621, 1535164071, 1535166621),
-(147, 394, 395, '', 1535166621, 1535164115, 1535166621),
-(148, 394, 395, '', 1535166621, 1535164123, 1535166621),
-(149, 394, 394, '', 1535166644, 1535164270, 1535166644),
-(150, 394, 394, '', 1535166644, 1535164281, 1535166644),
-(151, 394, 395, '', 1535166621, 1535165558, 1535166621),
-(152, 394, 395, '', 1535166621, 1535166217, 1535166621),
-(153, 394, 395, '', 1535166621, 1535166277, 1535166621),
-(154, 394, 395, '', 1535166621, 1535166297, 1535166621),
-(155, 394, 395, '', 1535166621, 1535166610, 1535166621),
-(156, 394, 394, '', NULL, 1535166651, 1535166651),
-(157, 394, 395, '', NULL, 1535166727, 1535166727),
-(158, 394, 393, '', NULL, 1535166729, 1535166729);
+--
+-- 表的结构 `think_footprint`
+--
 
 CREATE TABLE IF NOT EXISTS `think_footprint` (
   `id` int(8) unsigned NOT NULL AUTO_INCREMENT,
@@ -350,7 +438,11 @@ CREATE TABLE IF NOT EXISTS `think_footprint` (
   `create_time` int(11) NOT NULL,
   `update_time` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=gbk AUTO_INCREMENT=1631 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=gbk AUTO_INCREMENT=1473 ;
+
+--
+-- 转存表中的数据 `think_footprint`
+--
 
 INSERT INTO `think_footprint` (`id`, `user_id`, `goods_id`, `phone`, `lesson`, `referer`, `domain`, `browser`, `pathinfo`, `address`, `url`, `product`, `os`, `mobile`, `status`, `title`, `age`, `ip`, `delete_time`, `content`, `create_time`, `update_time`) VALUES
 (1, 0, 0, 18210787405, NULL, 'www.tp5.com/index/index/install/step/10.html', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/member/invite', '', '/index/member/invite', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1532334769, 1532334769),
@@ -1831,165 +1923,13 @@ INSERT INTO `think_footprint` (`id`, `user_id`, `goods_id`, `phone`, `lesson`, `
 (1469, 0, 0, NULL, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/all/', '', '/index/index/all/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534036340, 1534036340),
 (1470, 0, 0, NULL, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/indexgo/', '', '/index/index/indexgo/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534036349, 1534036349),
 (1471, 0, 0, NULL, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/member/home/user_id/188', '', '/index/member/home/user_id/188', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534036666, 1534036666),
-(1472, 0, 0, NULL, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/all/', '', '/index/index/all/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534036696, 1534036696),
-(1473, 0, 0, NULL, NULL, 'www.tp5.com/index/index/index/index/member/home/user_id/118', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/all', '', '/index/index/all.html', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534122941, 1534122941),
-(1474, 0, 0, NULL, NULL, 'www.tp5.com/index/index/index/index/member/home/user_id/118', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/member/home/user_id/118', '', '/index/member/home/user_id/118.html', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534123126, 1534123126),
-(1475, 0, 0, NULL, NULL, 'www.tp5.com/index/index/index/index/member/home/user_id/118', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/all', '', '/index.php/index/index/all.html', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534123324, 1534123324),
-(1476, 0, 0, NULL, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/member/home/user_id/118.shtml', '', '/index.php/index/member/home/user_id/118.shtml', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534123427, 1534123427),
-(1477, 0, 0, NULL, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/member/home/user_id/118.ss', '', '/index.php/index/member/home/user_id/118.ss', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534123443, 1534123443),
-(1478, 0, 0, NULL, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/member/home/user_id/118.ss', '', '/index.php/index/member/home/user_id/118.ss', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534123476, 1534123476),
-(1479, 0, 0, NULL, NULL, '', '', 'Chrome(65.0.3325.181)', 'index/member/home/user_id/118.333', '', '/index.php/index/member/home/user_id/118.333', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534123484, 1534123484),
-(1480, 0, 0, NULL, NULL, '', '', 'Chrome(65.0.3325.181)', 'index/member/home/user_id/118.zip', '', '/index.php/index/member/home/user_id/118.zip', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534123490, 1534123490),
-(1481, 0, 0, NULL, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/indexgo', '', '/index/index/indexgo.html', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534123920, 1534123920),
-(1482, 0, 0, NULL, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/indexgo', '', '/index/index/indexgo.html', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534123929, 1534123929),
-(1483, 0, 0, NULL, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/indexgo', '', '/index/index/indexgo.html', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534124100, 1534124100),
-(1484, 0, 0, NULL, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/member/home/user_id/118', '', '/index/member/home/user_id/118.html', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534124200, 1534124200),
-(1485, 0, 0, NULL, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/indexgo', '', '/index/index/indexgo.html', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534124228, 1534124228),
-(1486, 0, 0, NULL, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/member/home/user_id/118', '', '/index/member/home/user_id/118.html', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534124978, 1534124978),
-(1487, 0, 0, NULL, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/indexgo', '', '/index/index/indexgo.html', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534126376, 1534126376),
-(1488, 0, 0, NULL, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/indexgo', '', '/index/index/indexgo.html', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534126393, 1534126393),
-(1489, 0, 0, NULL, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/indexgo', '', '/index/index/indexgo.html', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534126400, 1534126400),
-(1490, 0, 0, NULL, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/indexgo', '', '/index/index/indexgo.html', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534126507, 1534126507),
-(1491, 0, 0, NULL, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/indexgo', '', '/index/index/indexgo.html', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534126537, 1534126537),
-(1492, 0, 0, NULL, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/indexgo', '', '/index/index/indexgo.html', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534126545, 1534126545),
-(1493, 0, 0, NULL, NULL, 'www.tp5.com/index/index/indexgo.html', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/login', '', '/index/index/login', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534126564, 1534126564),
-(1494, 0, 0, NULL, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/member/home/user_id/118', '', '/index/member/home/user_id/118.html', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534126571, 1534126571),
-(1495, 0, 0, NULL, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/indexgo', '', '/index/index/indexgo.html', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534126580, 1534126580),
-(1496, 0, 0, NULL, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/indexgo', '', '/index/index/indexgo.html', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534126664, 1534126664),
-(1497, 0, 137, NULL, NULL, 'www.tp5.com/index/index/indexgo.html', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/view/id/137', '', '/index/index/view/id/137', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534127132, 1534127132),
-(1498, 0, 0, NULL, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/member/home/user_id/118', '', '/index/member/home/user_id/118.html', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534127145, 1534127145),
-(1499, 0, 0, NULL, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/indexgo', '', '/index/index/indexgo.html', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534127220, 1534127220),
-(1500, 0, 0, NULL, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/indexgo', '', '/index/index/indexgo.html', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534127234, 1534127234),
-(1501, 0, 0, NULL, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/indexgo', '', '/index/index/indexgo.html', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534127268, 1534127268),
-(1502, 0, 0, NULL, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(68.0.3440.106)', 'index/member/home/user_id/118', '', '/index/member/home/user_id/118.html', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534410241, 1534410241),
-(1503, 0, 0, NULL, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(68.0.3440.106)', 'index/member/home/user_id/394', '', '/index/member/home/user_id/394', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534412091, 1534412091),
-(1504, 0, 0, NULL, NULL, 'www.tp5.com/index/member/home/user_id/394', 'www.tp5.com', 'Chrome(68.0.3440.106)', 'index/index/all', '', '/index/index/all.html', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534412105, 1534412105),
-(1505, 0, 0, NULL, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(68.0.3440.106)', 'index/member/home/user_id/118', '', '/index/member/home/user_id/118.html', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534487626, 1534487626),
-(1506, 0, 0, NULL, NULL, 'www.tp5.com/index/member/home/user_id/118.html', 'www.tp5.com', 'Chrome(68.0.3440.106)', 'index/index/login', '', '/index/index/login', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534487632, 1534487632),
-(1507, 393, 0, NULL, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(68.0.3440.106)', 'index/index/indexgo', '', '/index/index/indexgo.html', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534488262, 1534488262),
-(1508, 393, 0, NULL, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(68.0.3440.106)', 'index/index/indexgo', '', '/index/index/indexgo.html', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534488280, 1534488280),
-(1509, 393, 0, NULL, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(68.0.3440.106)', 'index/index/indexgo', '', '/index/index/indexgo.html', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534488290, 1534488290),
-(1510, 393, 0, NULL, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(68.0.3440.106)', 'index/index/indexgo', '', '/index/index/indexgo.html', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534488570, 1534488570),
-(1511, 393, 0, NULL, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(68.0.3440.106)', 'index/index/indexgo', '', '/index/index/indexgo.html', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534488591, 1534488591),
-(1512, 393, 0, NULL, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(68.0.3440.106)', 'index/index/indexgo', '', '/index/index/indexgo.html', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534488604, 1534488604),
-(1513, 393, 0, NULL, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(68.0.3440.106)', 'index/index/indexgo', '', '/index/index/indexgo.html', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534488643, 1534488643),
-(1514, 393, 0, NULL, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(68.0.3440.106)', 'index/index/indexgo', '', '/index/index/indexgo.html', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534491082, 1534491082),
-(1515, 393, 0, NULL, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(68.0.3440.106)', 'index/index/indexgo', '', '/index/index/indexgo.html', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534491387, 1534491387),
-(1516, 393, 0, NULL, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(68.0.3440.106)', 'index/index/indexgo', '', '/index/index/indexgo.html', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534492272, 1534492272),
-(1517, 393, 0, NULL, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(68.0.3440.106)', 'index/index/indexgo', '', '/index/index/indexgo.html', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534492640, 1534492640),
-(1518, 393, 0, NULL, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(68.0.3440.106)', 'index/index/indexgo', '', '/index/index/indexgo.html', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534492669, 1534492669),
-(1519, 393, 0, NULL, NULL, '', '', 'Chrome(68.0.3440.106)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534500317, 1534500317),
-(1520, 393, 0, NULL, NULL, '', '', 'Chrome(68.0.3440.106)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534500367, 1534500367),
-(1521, 393, 0, NULL, NULL, '', '', 'Chrome(68.0.3440.106)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534501195, 1534501195),
-(1522, 393, 0, NULL, NULL, '', '', 'Chrome(68.0.3440.106)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534501219, 1534501219),
-(1523, 393, 0, NULL, NULL, '', '', 'Chrome(68.0.3440.106)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534501282, 1534501282),
-(1524, 393, 0, NULL, NULL, '', '', 'Chrome(68.0.3440.106)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534501329, 1534501329),
-(1525, 393, 0, NULL, NULL, '', '', 'Chrome(68.0.3440.106)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534501392, 1534501392),
-(1526, 393, 0, NULL, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(68.0.3440.106)', 'index/member/top', '', '/index/member/top', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534501730, 1534501730),
-(1527, 393, 0, NULL, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(68.0.3440.106)', 'index/member/top', '', '/index/member/top', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534501739, 1534501739),
-(1528, 393, 0, NULL, NULL, '', '', 'Chrome(68.0.3440.106)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534502101, 1534502101),
-(1529, 393, 0, NULL, NULL, '', '', 'Chrome(68.0.3440.106)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534502202, 1534502202),
-(1530, 393, 0, NULL, NULL, '', '', 'Chrome(68.0.3440.106)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534503156, 1534503156),
-(1531, 393, 0, NULL, NULL, '', '', 'Chrome(68.0.3440.106)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534503289, 1534503289),
-(1532, 393, 0, NULL, NULL, '', '', 'Chrome(68.0.3440.106)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534503322, 1534503322),
-(1533, 393, 0, NULL, NULL, '', '', 'Chrome(68.0.3440.106)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534503403, 1534503403),
-(1534, 393, 0, NULL, NULL, '', '', 'Chrome(68.0.3440.106)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534503437, 1534503437),
-(1535, 393, 0, NULL, NULL, '', '', 'Chrome(68.0.3440.106)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534503476, 1534503476),
-(1536, 393, 0, NULL, NULL, '', '', 'Chrome(68.0.3440.106)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534503535, 1534503535),
-(1537, 393, 0, NULL, NULL, '', '', 'Chrome(68.0.3440.106)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534503618, 1534503618),
-(1538, 393, 0, NULL, NULL, '', '', 'Chrome(68.0.3440.106)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534503684, 1534503684),
-(1539, 393, 0, NULL, NULL, '', '', 'Chrome(68.0.3440.106)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534503722, 1534503722),
-(1540, 393, 0, NULL, NULL, '', '', 'Chrome(68.0.3440.106)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534503815, 1534503815),
-(1541, 393, 0, NULL, NULL, '', '', 'Chrome(68.0.3440.106)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534503846, 1534503846),
-(1542, 393, 0, NULL, NULL, '', '', 'Chrome(68.0.3440.106)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534503878, 1534503878),
-(1543, 393, 0, NULL, NULL, '', '', 'Chrome(68.0.3440.106)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534503996, 1534503996),
-(1544, 393, 0, NULL, NULL, '', '', 'Chrome(68.0.3440.106)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534504042, 1534504042),
-(1545, 393, 0, NULL, NULL, '', '', 'Chrome(68.0.3440.106)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534504073, 1534504073),
-(1546, 393, 0, NULL, NULL, '', '', 'Chrome(68.0.3440.106)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534504291, 1534504291),
-(1547, 393, 0, NULL, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(68.0.3440.106)', '/', '', '/?page=2', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534504302, 1534504302),
-(1548, 393, 0, NULL, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(68.0.3440.106)', '/', '', '/?page=2', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534504337, 1534504337),
-(1549, 393, 0, NULL, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(68.0.3440.106)', '/', '', '/?page=2', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534504370, 1534504370),
-(1550, 393, 0, NULL, NULL, 'www.tp5.com/?page=2', 'www.tp5.com', 'Chrome(68.0.3440.106)', '/', '', '/?page=3', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534504384, 1534504384),
-(1551, 393, 0, NULL, NULL, 'www.tp5.com/?page=3', 'www.tp5.com', 'Chrome(68.0.3440.106)', '/', '', '/?page=1', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534504399, 1534504399),
-(1552, 393, 0, NULL, NULL, 'www.tp5.com/?page=1', 'www.tp5.com', 'Chrome(68.0.3440.106)', '/', '', '/?page=2', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534504412, 1534504412),
-(1553, 393, 0, NULL, NULL, 'www.tp5.com/?page=2', 'www.tp5.com', 'Chrome(68.0.3440.106)', '/', '', '/?page=1', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534504422, 1534504422),
-(1554, 393, 0, NULL, NULL, 'www.tp5.com/?page=2', 'www.tp5.com', 'Chrome(68.0.3440.106)', '/', '', '/?page=1', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534505000, 1534505000),
-(1555, 393, 0, NULL, NULL, 'www.tp5.com/?page=2', 'www.tp5.com', 'Chrome(68.0.3440.106)', '/', '', '/?page=1', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534505419, 1534505419),
-(1556, 393, 0, NULL, NULL, 'www.tp5.com/?page=2', 'www.tp5.com', 'Chrome(68.0.3440.106)', '/', '', '/?page=1', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534505608, 1534505608),
-(1557, 393, 0, NULL, NULL, 'www.tp5.com/?page=2', 'www.tp5.com', 'Chrome(68.0.3440.106)', '/', '', '/?page=1', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534505737, 1534505737),
-(1558, 393, 0, NULL, NULL, 'www.tp5.com/?page=2', 'www.tp5.com', 'Chrome(68.0.3440.106)', '/', '', '/?page=1', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534505754, 1534505754),
-(1559, 393, 0, NULL, NULL, 'www.tp5.com/?page=2', 'www.tp5.com', 'Chrome(68.0.3440.106)', '/', '', '/?page=1', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534505784, 1534505784),
-(1560, 393, 0, NULL, NULL, 'www.tp5.com/?page=2', 'www.tp5.com', 'Chrome(68.0.3440.106)', '/', '', '/?page=1', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534505876, 1534505876),
-(1561, 393, 0, NULL, NULL, 'www.tp5.com/?page=2', 'www.tp5.com', 'Chrome(68.0.3440.106)', '/', '', '/?page=1', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534506002, 1534506002),
-(1562, 393, 0, NULL, NULL, 'www.tp5.com/?page=2', 'www.tp5.com', 'Chrome(68.0.3440.106)', '/', '', '/?page=1', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534506230, 1534506230),
-(1563, 393, 0, NULL, NULL, 'www.tp5.com/?page=2', 'www.tp5.com', 'Chrome(68.0.3440.106)', '/', '', '/?page=1', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534506235, 1534506235),
-(1564, 393, 0, NULL, NULL, 'www.tp5.com/?page=2', 'www.tp5.com', 'Chrome(68.0.3440.106)', '/', '', '/?page=1', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534506239, 1534506239),
-(1565, 393, 0, NULL, NULL, 'www.tp5.com/?page=2', 'www.tp5.com', 'Chrome(68.0.3440.106)', '/', '', '/?page=1', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534506254, 1534506254),
-(1566, 393, 0, NULL, NULL, 'www.tp5.com/?page=2', 'www.tp5.com', 'Chrome(68.0.3440.106)', '/', '', '/?page=1', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534506260, 1534506260),
-(1567, 393, 0, NULL, NULL, 'www.tp5.com/?page=1', 'www.tp5.com', 'Chrome(68.0.3440.106)', '/', '', '/?page=2', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534506272, 1534506272),
-(1568, 393, 0, NULL, NULL, 'www.tp5.com/?page=2', 'www.tp5.com', 'Chrome(68.0.3440.106)', '/', '', '/?page=1', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534506276, 1534506276),
-(1569, 393, 0, NULL, NULL, 'www.tp5.com/?page=1', 'www.tp5.com', 'Chrome(68.0.3440.106)', '/', '', '/?page=2', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534506280, 1534506280),
-(1570, 393, 0, NULL, NULL, 'www.tp5.com/?page=2', 'www.tp5.com', 'Chrome(68.0.3440.106)', '/', '', '/?page=1', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534506284, 1534506284),
-(1571, 393, 0, NULL, NULL, 'www.tp5.com/?page=1', 'www.tp5.com', 'Chrome(68.0.3440.106)', 'index/member/home/user_id/394', '', '/index/member/home/user_id/394', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534506465, 1534506465),
-(1572, 393, 0, NULL, NULL, '', '', 'Chrome(68.0.3440.106)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534506631, 1534506631),
-(1573, 393, 0, NULL, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(68.0.3440.106)', 'index/index/index', '', '/index/index/index.html', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534506637, 1534506637),
-(1574, 393, 0, NULL, NULL, 'www.tp5.com/index/index/index.html', 'www.tp5.com', 'Chrome(68.0.3440.106)', 'index/index/index', '', '/index/index/index.html', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534506648, 1534506648),
-(1575, 393, 0, NULL, NULL, 'www.tp5.com/index/index/index.html', 'www.tp5.com', 'Chrome(68.0.3440.106)', 'index/index/index', '', '/index/index/index.html', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534506658, 1534506658),
-(1576, 393, 0, NULL, NULL, 'www.tp5.com/index/index/index.html', 'www.tp5.com', 'Chrome(68.0.3440.106)', 'index/index/index', '', '/index/index/index.html', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534506675, 1534506675),
-(1577, 393, 0, NULL, NULL, '', '', 'Chrome(68.0.3440.106)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534506682, 1534506682),
-(1578, 393, 0, NULL, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(68.0.3440.106)', 'index/index/index', '', '/index/index/index.html', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534506691, 1534506691),
-(1579, 393, 0, NULL, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(68.0.3440.106)', 'index/index/index', '', '/index/index/index.html', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534506702, 1534506702),
-(1580, 393, 0, NULL, NULL, 'www.tp5.com/index/index/index.html', 'www.tp5.com', 'Chrome(68.0.3440.106)', 'index/bbs/show', '', '/index/bbs/show', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534506726, 1534506726),
-(1581, 393, 0, NULL, NULL, 'www.tp5.com/index/bbs/show', 'www.tp5.com', 'Chrome(68.0.3440.106)', 'index/bbs/show', '', '/index/bbs/show.html', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534506746, 1534506746),
-(1582, 393, 0, NULL, NULL, 'www.tp5.com/index/bbs/show.html', 'www.tp5.com', 'Chrome(68.0.3440.106)', 'index/bbs/show', '', '/index/bbs/show.html', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534506749, 1534506749),
-(1583, 393, 0, NULL, NULL, 'www.tp5.com/index/bbs/show.html', 'www.tp5.com', 'Chrome(68.0.3440.106)', 'index/bbs/show', '', '/index/bbs/show.html', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534506759, 1534506759),
-(1584, 393, 0, NULL, NULL, 'www.tp5.com/index/bbs/show.html', 'www.tp5.com', 'Chrome(68.0.3440.106)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534506763, 1534506763),
-(1585, 393, 0, NULL, NULL, '', '', 'Chrome(68.0.3440.106)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534554313, 1534554313),
-(1586, 393, 0, NULL, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(68.0.3440.106)', '/', '', '/?page=2', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534554328, 1534554328),
-(1587, 393, 0, NULL, NULL, 'www.tp5.com/?page=2', 'www.tp5.com', 'Chrome(68.0.3440.106)', '/', '', '/?page=3', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534554334, 1534554334),
-(1588, 393, 0, NULL, NULL, 'www.tp5.com/?page=3', 'www.tp5.com', 'Chrome(68.0.3440.106)', '/', '', '/?page=5', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534554340, 1534554340),
-(1589, 393, 0, NULL, NULL, 'www.tp5.com/?page=5', 'www.tp5.com', 'Chrome(68.0.3440.106)', '/', '', '/?page=1', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534554344, 1534554344),
-(1590, 393, 0, NULL, NULL, 'www.tp5.com/?page=1', 'www.tp5.com', 'Chrome(68.0.3440.106)', '/', '', '/?page=2', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534554349, 1534554349),
-(1591, 393, 0, NULL, NULL, 'www.tp5.com/?page=2', 'www.tp5.com', 'Chrome(68.0.3440.106)', '/', '', '/?page=3', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534554352, 1534554352),
-(1592, 393, 0, NULL, NULL, 'www.tp5.com/?page=3', 'www.tp5.com', 'Chrome(68.0.3440.106)', '/', '', '/?page=4', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534554355, 1534554355),
-(1593, 393, 0, NULL, NULL, 'www.tp5.com/?page=4', 'www.tp5.com', 'Chrome(68.0.3440.106)', '/', '', '/?page=5', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534554359, 1534554359),
-(1594, 393, 0, NULL, NULL, 'www.tp5.com/?page=5', 'www.tp5.com', 'Chrome(68.0.3440.106)', 'index/member/home/user_id/394', '', '/index/member/home/user_id/394', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534554426, 1534554426),
-(1595, 393, 0, NULL, NULL, 'www.tp5.com/index/member/home/user_id/394', 'www.tp5.com', 'Chrome(68.0.3440.106)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534554432, 1534554432),
-(1596, 393, 0, NULL, NULL, 'www.tp5.com/index/member/home/user_id/394', 'www.tp5.com', 'Chrome(68.0.3440.106)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534554451, 1534554451),
-(1597, 393, 0, NULL, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(68.0.3440.106)', 'index/member/top', '', '/index/member/top', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534554457, 1534554457),
-(1598, 393, 0, NULL, NULL, 'www.tp5.com/index/member/top', 'www.tp5.com', 'Chrome(68.0.3440.106)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534554464, 1534554464),
-(1599, 393, 0, NULL, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(68.0.3440.106)', 'index/index/like', '', '/index/index/like?search=%E6%94%AF%E4%BB%98%E5%AE%9D', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534554471, 1534554471),
-(1600, 393, 0, NULL, NULL, 'www.tp5.com/index/index/like?search=%E6%94%AF%E4%BB%98%E5%AE%9D', 'www.tp5.com', 'Chrome(68.0.3440.106)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534554477, 1534554477),
-(1601, 393, 0, NULL, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(68.0.3440.106)', 'index/bbs/show', '', '/index/bbs/show', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534554543, 1534554543),
-(1602, 393, 0, NULL, NULL, 'www.tp5.com/index/bbs/show', 'www.tp5.com', 'Chrome(68.0.3440.106)', 'index/bbs/show', '', '/index/bbs/show?page=2', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534554636, 1534554636),
-(1603, 393, 0, NULL, NULL, 'www.tp5.com/index/bbs/show?page=2', 'www.tp5.com', 'Chrome(68.0.3440.106)', 'index/bbs/show', '', '/index/bbs/show?page=1', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534554639, 1534554639),
-(1604, 393, 0, NULL, NULL, 'www.tp5.com/index/bbs/show?page=2', 'www.tp5.com', 'Chrome(68.0.3440.106)', 'index/bbs/show', '', '/index/bbs/show?page=1', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534554703, 1534554703),
-(1605, 393, 0, NULL, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(68.0.3440.106)', '/', '', '/?page=5', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534554748, 1534554748),
-(1606, 393, 0, NULL, NULL, 'www.tp5.com/?page=5', 'www.tp5.com', 'Chrome(68.0.3440.106)', '/', '', '/?page=1', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534554752, 1534554752),
-(1607, 393, 0, NULL, NULL, 'www.tp5.com/?page=1', 'www.tp5.com', 'Chrome(68.0.3440.106)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534556045, 1534556045),
-(1608, 393, 0, NULL, NULL, '', '', 'Chrome(68.0.3440.106)', 'index/index/index', '', '/index/index/index.html', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534556057, 1534556057),
-(1609, 393, 0, NULL, NULL, '', '', 'Chrome(68.0.3440.106)', 'index/index/indexgo', '', '/index/index/indexgo.html', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534556066, 1534556066),
-(1610, 393, 0, NULL, NULL, '', '', 'Chrome(68.0.3440.106)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534557178, 1534557178),
-(1611, 393, 0, NULL, NULL, '', '', 'Chrome(68.0.3440.106)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534560883, 1534560883),
-(1612, 393, 0, NULL, NULL, '', '', 'Chrome(68.0.3440.106)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534575958, 1534575958),
-(1613, 393, 0, NULL, NULL, '', '', 'Chrome(68.0.3440.106)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534576055, 1534576055),
-(1614, 393, 0, NULL, NULL, '', '', 'Chrome(68.0.3440.106)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534577384, 1534577384),
-(1615, 393, 0, NULL, NULL, '', '', 'Chrome(68.0.3440.106)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534591734, 1534591734),
-(1616, 393, 0, NULL, NULL, '', '', 'Chrome(68.0.3440.106)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534591810, 1534591810),
-(1617, 393, 0, NULL, NULL, '', '', 'Chrome(68.0.3440.106)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534591879, 1534591879),
-(1618, 393, 0, NULL, NULL, '', '', 'Chrome(68.0.3440.106)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534591904, 1534591904),
-(1619, 393, 0, NULL, NULL, '', '', 'Chrome(68.0.3440.106)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534591946, 1534591946),
-(1620, 393, 0, NULL, NULL, '', '', 'Chrome(68.0.3440.106)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534591988, 1534591988),
-(1621, 393, 0, NULL, NULL, '', '', 'Chrome(68.0.3440.106)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534592084, 1534592084),
-(1622, 393, 0, NULL, NULL, '', '', 'Chrome(68.0.3440.106)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534592102, 1534592102),
-(1623, 393, 0, NULL, NULL, '', '', 'Chrome(68.0.3440.106)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534592133, 1534592133),
-(1624, 393, 0, NULL, NULL, '', '', 'Chrome(68.0.3440.106)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534592148, 1534592148),
-(1625, 393, 0, NULL, NULL, '', '', 'Chrome(68.0.3440.106)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534592162, 1534592162),
-(1626, 393, 0, NULL, NULL, '', '', 'Chrome(68.0.3440.106)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534592196, 1534592196),
-(1627, 393, 0, NULL, NULL, '', '', 'Chrome(68.0.3440.106)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534642762, 1534642762),
-(1628, 393, 0, NULL, NULL, '', '', 'Chrome(68.0.3440.106)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534647737, 1534647737),
-(1629, 393, 0, NULL, NULL, '', '', 'Chrome(68.0.3440.106)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534662767, 1534662767),
-(1630, 393, 0, NULL, NULL, 'www.tp5.com/index/index/install/step/2', 'www.tp5.com', 'Chrome(68.0.3440.106)', '/', '', '/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534663541, 1534663541);
+(1472, 0, 0, NULL, NULL, 'www.tp5.com/', 'www.tp5.com', 'Chrome(65.0.3325.181)', 'index/index/all/', '', '/index/index/all/', NULL, 'Windows 10', '0', 0, NULL, NULL, '127.0.0.1', NULL, NULL, 1534036696, 1534036696);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `think_ipinfo`
+--
 
 CREATE TABLE IF NOT EXISTS `think_ipinfo` (
   `id` int(8) unsigned NOT NULL AUTO_INCREMENT,
@@ -2016,6 +1956,12 @@ CREATE TABLE IF NOT EXISTS `think_ipinfo` (
   UNIQUE KEY `ip` (`ip`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=gbk AUTO_INCREMENT=2073 ;
 
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `think_likes`
+--
+
 CREATE TABLE IF NOT EXISTS `think_likes` (
   `id` int(8) unsigned NOT NULL AUTO_INCREMENT,
   `phone` bigint(11) DEFAULT NULL,
@@ -2028,23 +1974,27 @@ CREATE TABLE IF NOT EXISTS `think_likes` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `phone` (`phone`),
   KEY `phone_2` (`phone`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=165 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=140 ;
+
+--
+-- 转存表中的数据 `think_likes`
+--
 
 INSERT INTO `think_likes` (`id`, `phone`, `user_id`, `data_id`, `delete_time`, `ip`, `create_time`, `update_time`) VALUES
-(1, NULL, 393, 2093, 1534505634, '127.0.0.1', 1532414970, 1534505634),
-(2, NULL, 393, 2093, 1534505634, '127.0.0.1', 1532415004, 1534505634),
-(3, NULL, 393, 2093, 1534505634, '127.0.0.1', 1532415041, 1534505634),
-(4, NULL, 393, 2090, 1534505744, '127.0.0.1', 1532415055, 1534505744),
-(5, NULL, 393, 2093, 1534505634, '127.0.0.1', 1532415396, 1534505634),
+(1, NULL, 393, 2093, 1532415493, '127.0.0.1', 1532414970, 1532415493),
+(2, NULL, 393, 2093, 1532415493, '127.0.0.1', 1532415004, 1532415493),
+(3, NULL, 393, 2093, 1532415493, '127.0.0.1', 1532415041, 1532415493),
+(4, NULL, 393, 2090, 1532427960, '127.0.0.1', 1532415055, 1532427960),
+(5, NULL, 393, 2093, 1532415493, '127.0.0.1', 1532415396, 1532415493),
 (6, NULL, 393, 2092, 1532416409, '127.0.0.1', 1532415400, 1532416409),
-(7, NULL, 393, 2091, 1534505429, '127.0.0.1', 1532415416, 1534505429),
-(8, NULL, 393, 2093, 1534505634, '127.0.0.1', 1532415455, 1534505634),
+(7, NULL, 393, 2091, 1532416408, '127.0.0.1', 1532415416, 1532416408),
+(8, NULL, 393, 2093, 1532415493, '127.0.0.1', 1532415455, 1532415493),
 (9, NULL, 393, 2092, 1532416409, '127.0.0.1', 1532415456, 1532416409),
-(10, NULL, 393, 2091, 1534505429, '127.0.0.1', 1532415458, 1534505429),
-(11, NULL, 393, 2090, 1534505744, '127.0.0.1', 1532415459, 1534505744),
-(12, NULL, 393, 2089, 1534505753, '127.0.0.1', 1532415460, 1534505753),
-(13, NULL, 393, 2091, 1534505429, '127.0.0.1', 1532415517, 1534505429),
-(14, NULL, 393, 2090, 1534505744, '127.0.0.1', 1532415518, 1534505744),
+(10, NULL, 393, 2091, 1532416408, '127.0.0.1', 1532415458, 1532416408),
+(11, NULL, 393, 2090, 1532427960, '127.0.0.1', 1532415459, 1532427960),
+(12, NULL, 393, 2089, 1532415490, '127.0.0.1', 1532415460, 1532415490),
+(13, NULL, 393, 2091, 1532416408, '127.0.0.1', 1532415517, 1532416408),
+(14, NULL, 393, 2090, 1532427960, '127.0.0.1', 1532415518, 1532427960),
 (15, NULL, 394, 2093, 1532423794, '127.0.0.1', 1532415849, 1532423794),
 (16, NULL, 394, 2092, 1532423853, '127.0.0.1', 1532415923, 1532423853),
 (17, NULL, 394, 2091, NULL, '127.0.0.1', 1532415924, 1532415924),
@@ -2055,7 +2005,7 @@ INSERT INTO `think_likes` (`id`, `phone`, `user_id`, `data_id`, `delete_time`, `
 (22, NULL, 394, 2088, 1532423813, '127.0.0.1', 1532418161, 1532423813),
 (23, NULL, 394, 2086, 1532422245, '127.0.0.1', 1532418162, 1532422245),
 (24, NULL, 393, 2088, 1532427962, '127.0.0.1', 1532418180, 1532427962),
-(25, NULL, 393, 2090, 1534505744, '127.0.0.1', 1532418198, 1534505744),
+(25, NULL, 393, 2090, 1532427960, '127.0.0.1', 1532418198, 1532427960),
 (26, NULL, 394, 2100, 1532423789, '127.0.0.1', 1532421124, 1532423789),
 (27, NULL, 394, 2100, 1532423789, '127.0.0.1', 1532421138, 1532423789),
 (28, NULL, 394, 2093, 1532423794, '127.0.0.1', 1532422238, 1532423794),
@@ -2105,7 +2055,7 @@ INSERT INTO `think_likes` (`id`, `phone`, `user_id`, `data_id`, `delete_time`, `
 (72, NULL, 393, 2118, 1532428203, '127.0.0.1', 1532428175, 1532428203),
 (73, NULL, 393, 2117, NULL, '127.0.0.1', 1532428180, 1532428180),
 (74, NULL, 393, 2118, NULL, '127.0.0.1', 1532428204, 1532428204),
-(75, NULL, 393, 2090, 1534505744, '127.0.0.1', 1532480373, 1534505744),
+(75, NULL, 393, 2090, NULL, '127.0.0.1', 1532480373, 1532480373),
 (76, NULL, 393, 2088, NULL, '127.0.0.1', 1532489065, 1532489065),
 (77, NULL, 393, 2087, 1532489214, '127.0.0.1', 1532489066, 1532489214),
 (78, NULL, 393, 2086, NULL, '127.0.0.1', 1532489068, 1532489068),
@@ -2169,32 +2119,13 @@ INSERT INTO `think_likes` (`id`, `phone`, `user_id`, `data_id`, `delete_time`, `
 (136, NULL, 393, 2174, NULL, '127.0.0.1', 1533891237, 1533891237),
 (137, NULL, 393, 2166, NULL, '127.0.0.1', 1533891628, 1533891628),
 (138, NULL, 393, 2165, NULL, '127.0.0.1', 1533891629, 1533891629),
-(139, NULL, 393, 2169, NULL, '127.0.0.1', 1533895684, 1533895684),
-(140, NULL, 393, 2184, 1534500331, '127.0.0.1', 1534488287, 1534500331),
-(141, NULL, 393, 2184, 1534500331, '127.0.0.1', 1534488588, 1534500331),
-(142, NULL, 393, 2183, 1534501183, '127.0.0.1', 1534500325, 1534501183),
-(143, NULL, 393, 2183, 1534501183, '127.0.0.1', 1534501180, 1534501183),
-(144, NULL, 393, 2183, NULL, '127.0.0.1', 1534501184, 1534501184),
-(145, NULL, 393, 2091, 1534505429, '127.0.0.1', 1534505425, 1534505429),
-(146, NULL, 393, 2089, 1534505753, '127.0.0.1', 1534505440, 1534505753),
-(147, NULL, 393, 2093, 1534505634, '127.0.0.1', 1534505625, 1534505634),
-(148, NULL, 393, 2089, 1534505753, '127.0.0.1', 1534505747, 1534505753),
-(149, NULL, 393, 2089, NULL, '127.0.0.1', 1534505793, 1534505793),
-(150, NULL, 395, 2188, NULL, '127.0.0.1', 1534757619, 1534757619),
-(151, NULL, 395, 2191, NULL, '127.0.0.1', 1534757688, 1534757688),
-(152, NULL, 395, 2190, NULL, '127.0.0.1', 1534757694, 1534757694),
-(153, NULL, 395, 2189, NULL, '127.0.0.1', 1534758003, 1534758003),
-(154, NULL, 393, 2211, 1534909880, '127.0.0.1', 1534909851, 1534909880),
-(155, NULL, 393, 2213, 1534909943, '127.0.0.1', 1534909861, 1534909943),
-(156, NULL, 393, 2211, 1534909880, '127.0.0.1', 1534909875, 1534909880),
-(157, NULL, 393, 2213, 1534909943, '127.0.0.1', 1534909934, 1534909943),
-(158, NULL, 393, 2213, 1534909943, '127.0.0.1', 1534909937, 1534909943),
-(159, NULL, 393, 2213, NULL, '127.0.0.1', 1534909944, 1534909944),
-(160, NULL, 393, 2212, NULL, '127.0.0.1', 1534911555, 1534911555),
-(161, NULL, 395, 2248, NULL, '127.0.0.1', 1535070354, 1535070354),
-(162, NULL, 394, 2248, NULL, '127.0.0.1', 1535070399, 1535070399),
-(163, NULL, 394, 2247, NULL, '127.0.0.1', 1535070771, 1535070771),
-(164, NULL, 394, 2222, NULL, '127.0.0.1', 1535172762, 1535172762);
+(139, NULL, 393, 2169, NULL, '127.0.0.1', 1533895684, 1533895684);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `think_money`
+--
 
 CREATE TABLE IF NOT EXISTS `think_money` (
   `id` int(8) unsigned NOT NULL AUTO_INCREMENT,
@@ -2216,6 +2147,10 @@ CREATE TABLE IF NOT EXISTS `think_money` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=gbk AUTO_INCREMENT=337 ;
 
+--
+-- 转存表中的数据 `think_money`
+--
+
 INSERT INTO `think_money` (`id`, `phone`, `lesson`, `sort`, `address`, `product`, `label`, `money`, `status`, `title`, `age`, `ip`, `delete_time`, `content`, `create_time`, `update_time`) VALUES
 (331, 15966982315, NULL, NULL, NULL, NULL, NULL, '10', 0, NULL, 30, NULL, NULL, '邀请了会员182****7405注册奖励', 1532316134, 1532316134),
 (332, 18210787405, NULL, NULL, NULL, NULL, NULL, '10', 0, NULL, 30, NULL, NULL, '新注册获得奖励', 1532316134, 1532316134),
@@ -2223,6 +2158,12 @@ INSERT INTO `think_money` (`id`, `phone`, `lesson`, `sort`, `address`, `product`
 (334, 18210787406, NULL, NULL, NULL, NULL, NULL, '10', 0, NULL, 30, NULL, NULL, '新注册获得奖励', 1532316699, 1532316699),
 (335, 15966982315, NULL, NULL, NULL, NULL, NULL, '10', 0, NULL, 30, NULL, NULL, '邀请了会员182****7407注册奖励', 1532424196, 1532424196),
 (336, 18210787407, NULL, NULL, NULL, NULL, NULL, '10', 0, NULL, 30, NULL, NULL, '新注册获得奖励', 1532424196, 1532424196);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `think_order`
+--
 
 CREATE TABLE IF NOT EXISTS `think_order` (
   `id` int(8) unsigned NOT NULL AUTO_INCREMENT,
@@ -2243,6 +2184,10 @@ CREATE TABLE IF NOT EXISTS `think_order` (
   `out_trade_no` text NOT NULL COMMENT '唯一订单号',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=744 ;
+
+--
+-- 转存表中的数据 `think_order`
+--
 
 INSERT INTO `think_order` (`id`, `name`, `status`, `phone`, `age`, `delete_time`, `rand`, `ip`, `create_time`, `update_time`, `buyer_email`, `buyer_id`, `total_fee`, `body`, `subject`, `out_trade_no`) VALUES
 (718, '127.0.0.1', 0, 15555553306, 20, NULL, 1, '127.0.0.1', 1532161353, 1532161353, '', 0, '0.00', '135', '签到', ''),
@@ -2272,6 +2217,12 @@ INSERT INTO `think_order` (`id`, `name`, `status`, `phone`, `age`, `delete_time`
 (742, '127.0.0.1', 0, 18210787405, 20, NULL, NULL, '127.0.0.1', 1533862063, 1533862063, '18210787405', 18210787405, '0.00', '105', '增加VIP会员：1天', '135001'),
 (743, '127.0.0.1', 0, 18210787405, 20, NULL, 4, '127.0.0.1', 1533951444, 1533951444, '', 0, '0.00', '135', '签到', '');
 
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `think_profile`
+--
+
 CREATE TABLE IF NOT EXISTS `think_profile` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
@@ -2279,6 +2230,12 @@ CREATE TABLE IF NOT EXISTS `think_profile` (
   `email` text,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=gbk AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `think_shop`
+--
 
 CREATE TABLE IF NOT EXISTS `think_shop` (
   `id` int(8) unsigned NOT NULL AUTO_INCREMENT,
@@ -2299,6 +2256,10 @@ CREATE TABLE IF NOT EXISTS `think_shop` (
   `update_time` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=gbk AUTO_INCREMENT=376 ;
+
+--
+-- 转存表中的数据 `think_shop`
+--
 
 INSERT INTO `think_shop` (`id`, `name`, `lesson`, `sort`, `address`, `product`, `label`, `price`, `status`, `title`, `age`, `page_view`, `delete_time`, `content`, `create_time`, `update_time`) VALUES
 (38, '117.136.37.167', '', 1, '', '', '', '0.00', 0, '1课 tp5入门 第一课 课程概述 案例演示', 30, 924, NULL, '', 1510799689, 1532244537),
@@ -2420,7 +2381,7 @@ INSERT INTO `think_shop` (`id`, `name`, `lesson`, `sort`, `address`, `product`, 
 (147, '110.53.16.94', '', 102, '', '', 'tp5 商城 AJAX 实现原理 分析', '0.10', 0, '102课  ajax 实现原理 分析', 30, 96, NULL, '', 1512225426, 1531550204),
 (148, '47.100.53.146', '', 103, '', '', 'tp5 商城  AJAX  简易', '0.10', 0, '103课  ajax  简易ajax功能实现', 30, 57, NULL, '', 1512225480, 1531544863),
 (149, '171.8.154.242', '', 104, '', '', 'tp5 商城  ajax 原理', '0.10', 0, '104课  ajax 简易ajax功能实现 原理讲解', 30, 55, NULL, '', 1512225537, 1531473107),
-(150, '40.77.167.93', '', 1008693, '', '', '一对一', '0.10', 0, '随笔', 30, 27, NULL, '', 1512634144, 1532207042),
+(150, '40.77.167.93', '', 1008693, '', '', '一对一', '0.10', 0, '【约课】一对一在线课程一节', 30, 27, NULL, '', 1512634144, 1532207042),
 (151, '47.100.51.203', '', 105, '', '', 'AJAX ', '0.10', 0, '105课 ajax 最少代码4行实现讲解', 30, 68, NULL, '', 1512856372, 1530406539),
 (152, '101.132.98.159', '', 106, '', '', 'ajax', '0.10', 0, '106课 ajax增加对不同浏览器的判断', 30, 39, NULL, '', 1512856426, 1531213652),
 (153, '66.249.69.21', '', 107, '', '', 'ajax', '0.10', 0, '107课 ajax 触发 readystate 响应事件', 30, 70, NULL, '', 1512856475, 1530244628),
@@ -2642,6 +2603,12 @@ INSERT INTO `think_shop` (`id`, `name`, `lesson`, `sort`, `address`, `product`, 
 (373, '112.14.72.196', '', 323, '', '', '聊天表情 回复', '0.10', 0, '323课 Tp5 简易实现聊天表情的发布 展示和回复时显示', 30, 9, NULL, '', 1527580168, 1532062232),
 (374, '113.195.228.17', '', 324, '', '', 'qq登录 放置 QQ登录 图标', '0.10', 0, '324课 Tp5 开发qq登录 第一课 放置QQ登录图标', 30, 27, NULL, '', 1527580196, 1532052123);
 
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `think_sms`
+--
+
 CREATE TABLE IF NOT EXISTS `think_sms` (
   `id` int(8) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL COMMENT '名称',
@@ -2656,11 +2623,15 @@ CREATE TABLE IF NOT EXISTS `think_sms` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=749 ;
 
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `think_user`
+--
+
 CREATE TABLE IF NOT EXISTS `think_user` (
   `id` int(8) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL COMMENT '名称',
-  `username` text NOT NULL,
-  `nickname` text NOT NULL,
   `password` text,
   `status` tinyint(2) NOT NULL DEFAULT '0' COMMENT '状态',
   `phone` bigint(11) NOT NULL,
@@ -2680,30 +2651,20 @@ CREATE TABLE IF NOT EXISTS `think_user` (
   KEY `phone_2` (`phone`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=396 ;
 
-INSERT INTO `think_user` (`id`, `name`, `username`, `nickname`, `password`, `status`, `phone`, `age`, `invite`, `token`, `online_time`, `start_time`, `expiration_time`, `delete_time`, `rand`, `ip`, `create_time`, `update_time`) VALUES
-(393, '127.0.0.1', 'sunshine', 'Sunshine', 'e10adc3949ba59abbe56e057f20f883e', 0, 18210787405, 10, NULL, '07490ac61585fce5fdced600b3f78cd4', 4068, 1532316133, 1535080933, NULL, 1, '', 1532316133, 1534744651),
-(394, '127.0.0.1', 'feng', '纳之峰', 'e10adc3949ba59abbe56e057f20f883e', 0, 18210787406, 20, NULL, '829fba1be9ca4a31f5952fe20dccd5d0', 1086, 1533696314, 1533782714, NULL, 1, '', 1532316699, 1535945321),
-(395, '127.0.0.1', 'google', 'o順娸洎嘫灬', 'e10adc3949ba59abbe56e057f20f883e', 0, 18210787407, 55, NULL, '557156df0010ae5bcd3be0021f1c56d6', 585, 1533526497, 1533612897, NULL, 1, '', 1532424196, 1534817745);
+--
+-- 转存表中的数据 `think_user`
+--
 
-CREATE TABLE IF NOT EXISTS `think_user_fans` (
-  `id` int(8) unsigned NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL,
-  `follow_id` int(11) DEFAULT NULL,
-  `ip` text NOT NULL,
-  `delete_time` int(11) DEFAULT NULL,
-  `create_time` int(11) NOT NULL,
-  `update_time` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=132 ;
+INSERT INTO `think_user` (`id`, `name`, `password`, `status`, `phone`, `age`, `invite`, `token`, `online_time`, `start_time`, `expiration_time`, `delete_time`, `rand`, `ip`, `create_time`, `update_time`) VALUES
+(393, '127.0.0.1', 'e10adc3949ba59abbe56e057f20f883e', 0, 18210787405, 10, NULL, '07490ac61585fce5fdced600b3f78cd4', 3501, 1532316133, 1535080933, NULL, 1, '', 1532316133, 1533969439),
+(394, '127.0.0.1', 'e10adc3949ba59abbe56e057f20f883e', 0, 18210787406, 20, NULL, '829fba1be9ca4a31f5952fe20dccd5d0', 933, 1533696314, 1533782714, NULL, 1, '', 1532316699, 1533712663),
+(395, '127.0.0.1', 'e10adc3949ba59abbe56e057f20f883e', 0, 18210787407, 55, NULL, '557156df0010ae5bcd3be0021f1c56d6', 531, 1533526497, 1533612897, NULL, 1, '', 1532424196, 1533536602);
 
-INSERT INTO `think_user_fans` (`id`, `user_id`, `follow_id`, `ip`, `delete_time`, `create_time`, `update_time`) VALUES
-(1, 399, 393, '127.0.0.1', NULL, 1532414970, 1534505634),
-(2, 394, 395, '127.0.0.1', NULL, 1532415004, 1534505634),
-(3, 394, 393, '127.0.0.1', NULL, 1532415041, 1534505634),
-(4, 395, 396, '127.0.0.1', NULL, 1532415055, 1534505744),
-(5, 393, 394, '127.0.0.1', NULL, 1532415396, 1534505634),
-(9, 395, 392, '127.0.0.1', NULL, 1532415456, 1532416409),
-(131, 395, 394, '127.0.0.1', NULL, 1533888830, 1533890174);
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `think_user_profile`
+--
 
 CREATE TABLE IF NOT EXISTS `think_user_profile` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -2712,6 +2673,12 @@ CREATE TABLE IF NOT EXISTS `think_user_profile` (
   `email` text,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=gbk AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `think_user_qq`
+--
 
 CREATE TABLE IF NOT EXISTS `think_user_qq` (
   `id` int(8) unsigned NOT NULL AUTO_INCREMENT,
@@ -2733,11 +2700,13 @@ CREATE TABLE IF NOT EXISTS `think_user_qq` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `phone` (`phone`),
   KEY `phone_2` (`phone`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=27 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=25 ;
 
-INSERT INTO `think_user_qq` (`id`, `type`, `nickname`, `openid`, `figureurl_qq_2`, `phone`, `year`, `invite`, `gender`, `start_time`, `figureurl_qq_1`, `delete_time`, `user_id`, `ip`, `create_time`, `update_time`) VALUES
-(25, 0, '我的qq网名', NULL, 'http://thirdqq.qlogo.cn/qqapp/100556678/537770203713756DC8D596C2E97BC5B8/100', NULL, 2000, NULL, '男', NULL, NULL, NULL, 395, NULL, 0, 0),
-(26, 0, 'tp5_qq网名', NULL, 'http://thirdqq.qlogo.cn/qqapp/100556678/4F595A725A6FA2069417C2A5787B35B1/100', NULL, 1990, NULL, '女', NULL, NULL, NULL, 393, NULL, 0, 0);
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `think_video`
+--
 
 CREATE TABLE IF NOT EXISTS `think_video` (
   `id` int(8) unsigned NOT NULL AUTO_INCREMENT,

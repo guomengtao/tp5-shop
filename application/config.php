@@ -8,6 +8,7 @@
 // +----------------------------------------------------------------------
 // | Author: liu21st <liu21st@gmail.com>
 // +----------------------------------------------------------------------
+use think\Env;
 
 return [
     // +----------------------------------------------------------------------
@@ -17,9 +18,9 @@ return [
     // 应用命名空间
     'app_namespace'          => 'app',
     // 应用调试模式
-    'app_debug'              => true,
+    'app_debug'              => Env::get('app.debug', false),
     // 应用Trace
-    'app_trace'              => true,
+    'app_trace'              => Env::get('app.trace', false),
     // 应用模式状态
     'app_status'             => '',
     // 是否支持多模块
@@ -142,8 +143,7 @@ return [
         'taglib_end'   => '}',
     ],
 
-    // 视图输出字符串内容替换
-    'view_replace_str'       => [],
+     'view_replace_str'  =>  [],
     // 默认跳转页面对应的模板文件
     'dispatch_success_tmpl'  => THINK_PATH . 'tpl' . DS . 'dispatch_jump.tpl',
     'dispatch_error_tmpl'    => THINK_PATH . 'tpl' . DS . 'dispatch_jump.tpl',

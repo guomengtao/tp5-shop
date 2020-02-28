@@ -19,7 +19,12 @@ class Footprint extends model
 
     public static function views_today(){
 
-       return Footprint::whereTime('create_time', 'd')->count();
+       return Footprint::whereTime('create_time', 'today')->cache(3600)->count();
+
+    }
+    public static function views_yesterday(){
+
+       return Footprint::whereTime('create_time', 'yesterday')->cache(7200)->count();
 
     }
     public static function add(){

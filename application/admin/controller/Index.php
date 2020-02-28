@@ -9,7 +9,81 @@ use think\Cookie;
 
 class Index extends \think\Controller
 {
-    public  function  login(){
+    public  function  tom(){
+
+        $im = imagecreatetruecolor(100, 100);
+
+ 
+// 将背景设为红色
+$red = imagecolorallocate($im, 255, 0, 0);
+imagefill($im, 90, 90, $red);
+
+header('Content-type: image/jpg');
+imagepng($im);
+imagedestroy($im);
+
+die();
+
+    //         if(extension_loaded('gd')){
+    //     echo '可以使用gd<br>';
+    //     foreach(gd_info() as $cate=>$value){
+    //         echo "$cate:$value<br>";
+    //     }
+    // }
+    // else{
+    //     echo '没有安装gd扩展';
+    // }
+    // die();
+    	$im = imagecreatetruecolor(100, 100);
+
+ 
+// 将背景设为红色
+$red = imagecolorallocate($im, 255, 0, 0);
+imagefill($im, 90, 90, $red);
+
+header('Content-type: image/png');
+imagepng($im);
+imagedestroy($im);
+
+die();
+
+    	header("Content-type: image/png");
+
+//创建图像
+$im = @imagecreate(200, 50) or die("创建图像资源失败");
+
+//图片背景颜色
+$bg = imagecolorallocate($im, 255, 255, 255);
+
+//文字颜色
+$text_color = imagecolorallocate($im, 0, 0, 255);
+
+//水平画一行字，要输出中文等需要 TTF 字体支持的请使用 magettftext() 函数
+imagestring($im, 5, 0, 0, "Hello world!", $text_color);
+
+//以PNG格式输出图像
+imagepng($im);
+
+//销毁图像资源
+imagedestroy($im);
+
+die();
+
+    	// dump(gd_info());
+    	// die();
+		 // echo phpinfo();
+		 // die();
+  header ('Content-Type: image/png');
+$im = @imagecreatetruecolor(120, 20)
+      or die('Cannot Initialize new GD image stream');
+$text_color = imagecolorallocate($im, 233, 14, 91);
+imagestring($im, 1, 5, 5,  'A Simple Text String', $text_color);
+imagepng($im);
+imagedestroy($im);
+
+die();
+    	echo "ok";
+}    public  function  login(){
 
 
         $warning      = "";

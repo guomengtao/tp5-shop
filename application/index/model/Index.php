@@ -30,20 +30,25 @@ class Index extends \think\Controller
 
         public function _initialize(){
 
-
-          // 访问记录
-          // 调用Footprint模型的add()自定义方法
-          Footprint::add();
-
-
-
             //权限认证
           // $auth = new \Auth\Auth();
 
 
  
   
-    
+        /*
+       验证单个条件
+       验证 会员id 为 1 的 小红是否有 增加信息的权限
+
+       check方法中的参数解释：
+           参数1：Admin/Article/Add 假设我现在请求 Admin模块下Article控制器的Add方法
+           参数2： 1 为当前请求的会员ID
+       */
+        // $check = $auth->check('Home/add/','2');
+        // dump($check); //返回值true,代表有此权限
+
+
+        // echo "123456";
 
 
 
@@ -1125,24 +1130,36 @@ die();
     }
     public function like()
     {
- 
+        // 调用浏览记录和来路统计功能
+        footprint();
+     
         
 
         $search   = input('search');
 
-        $show = Shop::course($search);
+        // 两种情况可以执行 1. 第一次搜索的次 2. ajax每天更新一次
+        // ajax控制每天只能执行一次的方法，每个词都加一个对应的缓存，设置为24小时有效
+        if (request()->isPost() and !cache('s_ajax_'.$search)) {
+       
+            cache('online_time', NULL);
+        }
 
-        $show123  =  Shop::where('label|title','like','%'.$search.'%')->cache(3)->order('sort', 'asc')->paginate(10);
+
+        if (!cache('s_'.$search)) {
+
+          $show  =  Shop::where('label|title','like','%'.$search.'%')->order('sort', 'asc')->paginate(10);
  
-      
+          cache('s_'.$search, $show, 0);
+
+          // 设置一个对应的词记录24小时 86400000秒，作用，控制频率
+          cache('s_ajax_'.$search, $show, 86400000);
+        }
 
 
-        $this->assign('show', $show);
+        $this->assign('show', cache('s_'.$search));
         $this->assign('date', date('Ymdhis'));
         // 渲染模板输出
         return $this->fetch();
-
- 
 
 
 
@@ -2670,14 +2687,7 @@ echo "生成成功";
          * 
          */
 
-        $qqshow = UserQQ::show(16);
-        $views_today      = Footprint::views_today();
-        $views_yesterday  = Footprint::views_yesterday();
-
-
-
-        $this->assign('views_today',  $views_today);
-        $this->assign('views_yesterday',  $views_yesterday);
+        $qqshow = UserQQ::show(8);
         $this->assign('qqshow',  $qqshow);
         return view();
 
@@ -3401,10 +3411,8 @@ echo "生成成功";
 
 
         // 查询数据 - 上一页
-      
- 
-        $sort = isset($list['sort']) ? $list['sort'] : 0;
-        // $sort = $list['sort'] ;
+
+        $sort = $list['sort'];
         $up = Shop::where('sort','<', $sort )
             ->order('sort', 'desc')
             ->limit(1)
