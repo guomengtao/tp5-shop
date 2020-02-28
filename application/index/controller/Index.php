@@ -31,7 +31,7 @@ class Index extends \think\Controller
         public function _initialize(){
 
 
-          // 访问记录
+          // 访问记录123
           // 调用Footprint模型的add()自定义方法
           // Footprint::add();
 

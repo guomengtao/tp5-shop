@@ -1,4 +1,4 @@
-
+﻿
 安装两步：
 
 1.配置数据库:修改数据库配置文件application\database.php里的数据库账号密码等
@@ -11,3 +11,5 @@
 
 
  在线演示：http://open.gaoxueya.com
+
+123
