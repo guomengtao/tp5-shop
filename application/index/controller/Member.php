@@ -1095,8 +1095,6 @@ class Member extends \think\Controller
         Cookie::set('footprint', '', 20);
 
 
-        // dump($data);
-
     }
 
     public function footprint()
