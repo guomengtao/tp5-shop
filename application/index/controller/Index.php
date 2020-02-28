@@ -41,7 +41,6 @@ class Index extends \think\Controller
         //权限认证 test
         // $auth = new \Auth\Auth();
 
-
     }
 
 
@@ -128,6 +127,7 @@ class Index extends \think\Controller
         die();
 
     }
+
 
     public function sms()
     {

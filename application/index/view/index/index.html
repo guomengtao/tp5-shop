@@ -1,79 +1,84 @@
- {include file="index/header" /}
-
+{include file="index/header" /}
 
 
 <div class="panel panel-default">
-  <div class="panel-heading">课程推荐</div>
-  <div class="panel-body">
-     <p><a href="https://ke.qq.com/course/package/13307?tuin=eeb0e44"> ThinkhPHP5入门课10季课程包</a>  </p>
-    <p> <a href="https://study.163.com/course/introduction.htm?courseId=1005224025&share=2&shareId=400000000336019"> Laravel5.6 零基础入门</a> </p> 
+    <div class="panel-heading">课程推荐</div>
+    <div class="panel-body">
+        <p><a href="https://ke.qq.com/course/package/13307?tuin=eeb0e44"> ThinkhPHP5入门课10季课程包</a></p>
+        <p><a href="https://study.163.com/course/introduction.htm?courseId=1005224025&share=2&shareId=400000000336019">
+            Laravel5.6 零基础入门</a></p>
 
-    <p> <a href="https://study.163.com/course/courseMain.htm?courseId=1006385075&share=2&shareId=400000000336019"> FastAdmin入门[ThinkhPHP5后台框架]</a> </p>
+        <p><a href="https://study.163.com/course/courseMain.htm?courseId=1006385075&share=2&shareId=400000000336019">
+            FastAdmin入门[ThinkhPHP5后台框架]</a></p>
 
-<a href="{:url('index/member/footprint')}"><span class="badge">今日访问：{$views_today} 次</span></a>
-<a href="{:url('index/member/footprint')}"><span class="badge">昨日：{$views_yesterday} 次</span></a>
-我的QQ：250285636 我的微信：18210787405
+        <a href="{:url('index/member/footprint')}"><span class="badge">今日访问：{$views_today} 次</span></a>
+        <a href="{:url('index/member/footprint')}"><span class="badge">昨日：{$views_yesterday} 次</span></a>
+
+        更新：通过phpstorm优化了代码结构，通过git+webhook自动更新到服务器
+
+        相互学习 共同进步 ！
+
+        <h4>最新动态：优化各种BUG中</h4>
 
 
-相互学习 共同进步 ！
-
-<h4>最新动态：优化各种BUG中</h4> 
-
-
-
-  </div>
+    </div>
 </div>
 
 <div class="panel panel-default">
-  <div class="panel-heading">本站源码 __root__ __ROOT__</div>
-  <div class="panel-body">
-     <p><a href="https://gitee.com/rinuo/tp5" target="_blank"> git码云 https://gitee.com/rinuo/tp5</a>  </p>
-  </div>
+    <div class="panel-heading">本站源码 __root__ __ROOT__</div>
+    <div class="panel-body">
+        <p><a href="https://gitee.com/rinuo/tp5" target="_blank"> git码云 https://gitee.com/rinuo/tp5</a></p>
+    </div>
 </div>
 
- <header class="col-xs-12 text-center infoheader">
+<header class="col-xs-12 text-center infoheader">
     <h2>ThinkMall已注册同学600+ 快来加入我们吧！</h2>
     <p>我们全都要从前辈和同辈学习到一些东西。就连最大的天才，如果想单凭他所特有的内在自我去对付一切，他也决不会有多大成就。 —— 歌德</p>
-  </header>
+</header>
 
 
 <div class="row">
-	  {volist name='qqshow' id='user' key="k"}
-	  	
-	  
-      <div class="col-sm-6 col-md-3">
+    {volist name='qqshow' id='user' key="k"}
+
+
+    <div class="col-sm-6 col-md-3">
         <div class="thumbnail text-center">
-        	<img class="img-responsive center-block img-circle" style="   width: 100px; height: 100px;   margin: 48px auto 0;  padding: 4px;     background: rgba(255,255,255,0.3);" src="{$user.figureurl_qq_2}" data-holder-rendered="true">
- 
-          <div class="caption  text-left">
-            <h3 style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{$user.nickname} <small> ID:{$user.user_id}</small></h3>
-            <p> 
-            	
-            	<span class="label label-default">{$user.gender}</span>
-            	<span class="label label-default">{$user.year}</span>
-            	<span class="label label-default">{$user.update_time}</span>
-            </p> 
-            <p><a href="{:url('index/member/home',['user_id'=>$user.user_id])}" class="btn btn-primary" role="button">主页</a> <a class="btn btn-warning" href="{:url('index/member/home',['user_id'=>$user.user_id,'editfollow'=>1]  )}" role="button" style="border-radius:2px;background: -webkit-linear-gradient(top, #fa7d3c 0%,#f55f10 100%);box-shadow: 0px 1px 2px rgba(0,0,0,0.3);  border-color:  #fa7d3c  "> <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 加关注</a></p>
-          </div>
+            <img class="img-responsive center-block img-circle"
+                 style="   width: 100px; height: 100px;   margin: 48px auto 0;  padding: 4px;     background: rgba(255,255,255,0.3);"
+                 src="{$user.figureurl_qq_2}" data-holder-rendered="true">
+
+            <div class="caption  text-left">
+                <h3 style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{$user.nickname} <small>
+                    ID:{$user.user_id}</small></h3>
+                <p>
+
+                    <span class="label label-default">{$user.gender}</span>
+                    <span class="label label-default">{$user.year}</span>
+                    <span class="label label-default">{$user.update_time}</span>
+                </p>
+                <p><a href="{:url('index/member/home',['user_id'=>$user.user_id])}" class="btn btn-primary"
+                      role="button">主页</a> <a class="btn btn-warning"
+                                              href="{:url('index/member/home',['user_id'=>$user.user_id,'editfollow'=>1]  )}"
+                                              role="button"
+                                              style="border-radius:2px;background: -webkit-linear-gradient(top, #fa7d3c 0%,#f55f10 100%);box-shadow: 0px 1px 2px rgba(0,0,0,0.3);  border-color:  #fa7d3c  ">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 加关注</a></p>
+            </div>
         </div>
-      </div>
-      {/volist}
-
-       
-      
-{$qqshow->render()}
-
- </div>
+    </div>
+    {/volist}
 
 
+    {$qqshow->render()}
+
+</div>
 
 
-
-
- 
 <footer class="col-xs-12 text-center infoheader">
     <p>Copyright ©2018 ThinkMall </p>
-    <p><script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1275862484'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s5.cnzz.com/stat.php%3Fid%3D1275862484%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));</script></p>
+    <p>
+        <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+        document.write(unescape("%3Cspan id='cnzz_stat_icon_1275862484'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s5.cnzz.com/stat.php%3Fid%3D1275862484%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));</script>
+    </p>
 </footer>
  
 
