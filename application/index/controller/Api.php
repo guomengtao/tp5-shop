@@ -13,71 +13,71 @@ use app\index\model\Shop;
 use alipay\alipaynotify;
 use think\Cookie;
 use think\Session;
-use QL\QueryList;
+// use QL\QueryList;
 
 class Api extends \think\Controller
 {
-    public function cai()
-    {
-        // 设置采集规则
-        // 采集规则
-        $rules = array(
-            // 'catalog' => array('.breadcrumbs-container>li:nth-child(2)>a','href'),
-            'word' => array('.inner', 'text'),
-            // 'url'  => array('.panel-body>.yd-tags>a', 'href'),
-
-        );
-
-        $ql = QueryList::rules($rules);
-
-
-        $this->qlWeb(0, $ql);
-    }
-
-    /**
-     * 采集外部的网址
-     * @param $id
-     * @param $ql
-     *
-     */
-    public function qlWeb($page, $ql)
-    {
-        // 采集quWord示例
-        $ip = "117.89.35.58";
-        $page = $ip;
-        // 从本地目录读取方式，解决文件名带.php无法正确访问问题
-        $url = "https://www.ipip.net/ip/" . $page;
-        // $url = get($url);
-
-
-        // 开始采集
-        $data    = $ql->get($url)->query()->getData();
-        $dataall = $data->all();
-
-        dump($dataall);
-        // echo $page . '-' . count($dataall) . "\n";
-
-
-
-
-
-
-
-
-
-        // 释放Document内存占用
-        $ql->destruct();
-
-        // $page = $page + 1;
-
-        // 继续递归查询
-
-        // if ($page < 489) {
-        //
-        //     $this->qlWeb($page, $ql);
-        // }
-
-    }
+    // public function cai()
+    // {
+    //     // 设置采集规则
+    //     // 采集规则
+    //     $rules = array(
+    //         // 'catalog' => array('.breadcrumbs-container>li:nth-child(2)>a','href'),
+    //         'word' => array('.inner', 'text'),
+    //         // 'url'  => array('.panel-body>.yd-tags>a', 'href'),
+    //
+    //     );
+    //
+    //     $ql = QueryList::rules($rules);
+    //
+    //
+    //     $this->qlWeb(0, $ql);
+    // }
+    //
+    // /**
+    //  * 采集外部的网址
+    //  * @param $id
+    //  * @param $ql
+    //  *
+    //  */
+    // public function qlWeb($page, $ql)
+    // {
+    //     // 采集quWord示例
+    //     $ip = "117.89.35.58";
+    //     $page = $ip;
+    //     // 从本地目录读取方式，解决文件名带.php无法正确访问问题
+    //     $url = "https://www.ipip.net/ip/" . $page;
+    //     // $url = get($url);
+    //
+    //
+    //     // 开始采集
+    //     $data    = $ql->get($url)->query()->getData();
+    //     $dataall = $data->all();
+    //
+    //     dump($dataall);
+    //     // echo $page . '-' . count($dataall) . "\n";
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //     // 释放Document内存占用
+    //     $ql->destruct();
+    //
+    //     // $page = $page + 1;
+    //
+    //     // 继续递归查询
+    //
+    //     // if ($page < 489) {
+    //     //
+    //     //     $this->qlWeb($page, $ql);
+    //     // }
+    //
+    // }
 
     public function login()
     {
