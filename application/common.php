@@ -1,4 +1,5 @@
 <?php
+
 namespace app\index\controller;
 // +----------------------------------------------------------------------
 // | ThinkPHP [ WE CAN DO IT JUST THINK ]
@@ -11,7 +12,6 @@ namespace app\index\controller;
 // +----------------------------------------------------------------------
 
 // 应用公共文件
-
 
 
 use app\index\model\Money;
@@ -34,59 +34,60 @@ use think\Validate;
  * @params string $field 排序的字段
  * @params string $sort 排序顺序标志 SORT_DESC 降序；SORT_ASC 升序
  */
- function tomy(){
-
-        return 1;
- }
- function quickLogon()
+function tomy()
 {
-        // $openid = "1011";
 
-        $user = new User_qq();
+    return 1;
+}
+
+function quickLogon()
+{
+    // $openid = "1011";
+
+    $user = new User_qq();
+    // 查询单个数据
+    $user = $user->where('openid', $openid)
+        ->find();
+
+
+    // 没登记openID的先登记
+    if (!$user) {
+        # code..
+
+        $user                 = new User_qq;
+        $user->openid         = $openid;
+        $user->nickname       = $user_from_qq->nickname;
+        $user->figureurl_qq_1 = $user_from_qq->figureurl_qq_1;
+        $user->figureurl_qq_2 = $user_from_qq->figureurl_qq_2;
+        $user->gender         = $user_from_qq->gender;
+        $user->year           = $user_from_qq->year;
+        $user->save();
+
+        // return "创建成功！";
+
         // 查询单个数据
         $user = $user->where('openid', $openid)
             ->find();
 
+    } else {
 
-        // 没登记openID的先登记
-        if (!$user) {
-            # code.. 
-
-            $user                 = new User_qq;
-            $user->openid         = $openid;
-            $user->nickname       = $user_from_qq->nickname ;
-            $user->figureurl_qq_1 = $user_from_qq->figureurl_qq_1 ;
-            $user->figureurl_qq_2 = $user_from_qq->figureurl_qq_2 ;
-            $user->gender         = $user_from_qq->gender ;
-            $user->year           = $user_from_qq->year ;
-            $user->save();
-
-            // return "创建成功！";
-
-            // 查询单个数据
-            $user = $user->where('openid', $openid)
-            ->find();
-
-        }else{
-
-            // 如果已经存在就更新，保持数据最新  暂时不更新
-        }
+        // 如果已经存在就更新，保持数据最新  暂时不更新
+    }
 
 
-
-        // 记录昵称和头像，页面展示
-        cookie('nickname', $user_from_qq->nickname, 3600000);
-        cookie('figureurl_qq_2', $user_from_qq->figureurl_qq_2, 3600000); 
+    // 记录昵称和头像，页面展示
+    cookie('nickname', $user_from_qq->nickname, 3600000);
+    cookie('figureurl_qq_2', $user_from_qq->figureurl_qq_2, 3600000);
     return "ok123456";
 }
 
- function get_user_id($phone)
+function get_user_id($phone)
 {
     $user_id = User::where('phone', '=', $phone)->value('id');
     return $user_id;
 }
 
- function arraySequence($array, $field, $sort = 'SORT_DESC')
+function arraySequence($array, $field, $sort = 'SORT_DESC')
 {
     $arrSort = array();
     foreach ($array as $uniqid => $row) {
@@ -100,10 +101,11 @@ use think\Validate;
 
 
 // 验证课程播放少于10次
-function play_count($shop){
+function play_count($shop)
+{
 
     // 查询播放记录条数
-    $play_count =  Video::where('shop','=',$shop)
+    $play_count = Video::where('shop', '=', $shop)
         ->count();
 
     return $play_count;
@@ -126,7 +128,8 @@ function play_count($shop){
 
 
 // 验证是否达到所有课程免费的功能
-function all_lesson_free(){
+function all_lesson_free()
+{
 
 
 //    说明：
@@ -134,53 +137,51 @@ function all_lesson_free(){
 //
 //
 //    例如 每日签到满10人
-    $all_lesson_free    =  0;
+    $all_lesson_free = 0;
 
 
-        //        查询今天有多少人签到了
-        $registration_count  = Order::whereTime('create_time', 'today')
-        ->where('body','=',135)
-        ->where('phone','<>','15966982315')
+    //        查询今天有多少人签到了
+    $registration_count = Order::whereTime('create_time', 'today')
+        ->where('body', '=', 135)
+        ->where('phone', '<>', '15966982315')
         ->count();
 
 
-        if ( $registration_count >=10) {
-           return 1;
-        }
+    if ($registration_count >= 10) {
+        return 1;
+    }
 
 
-        // 简易全民学习功能  每晚8点-10点免费开放
-        // date_default_timezone_set("Asia/Shanghai");
+    // 简易全民学习功能  每晚8点-10点免费开放
+    // date_default_timezone_set("Asia/Shanghai");
 
-        // 判断当前是几点几分 915是9点15
-        $secondkill = intval (date("Hi"));
-         
-        if ($secondkill > "2000" && $secondkill < "2200") {
-          // code
-          return 0;
-        }
+    // 判断当前是几点几分 915是9点15
+    $secondkill = intval(date("Hi"));
 
-
-
-
+    if ($secondkill > "2000" && $secondkill < "2200") {
+        // code
         return 0;
+    }
+
+
+    return 0;
 
 }
 
 // 增加会员vip天数功能
 
-function add_vip_days($add_vip_days,$out_trade_no){
+function add_vip_days($add_vip_days, $out_trade_no)
+{
 
 
-    $phone      = Cookie::get('phone');
+    $phone = Cookie::get('phone');
 
     // 首先查询他的到期日期大于现在
 
     // 处理没有登录先付款的情况
-    if (!$phone){
-        $phone='15966982315';
+    if (!$phone) {
+        $phone = '15966982315';
     }
-
 
 
     // 把时间增加上 ，忽略开始日期字段
@@ -191,8 +192,7 @@ function add_vip_days($add_vip_days,$out_trade_no){
         ->whereTime('expiration_time', '>=', '-1 minute')
         ->value('expiration_time');
 
-        $add_vip_days_time = $add_vip_days *3600 *24;
-
+    $add_vip_days_time = $add_vip_days * 3600 * 24;
 
 
     // 判断是否过期
@@ -203,7 +203,7 @@ function add_vip_days($add_vip_days,$out_trade_no){
         User::where('phone', $phone)
             ->update(['expiration_time' => $expiration_time, 'rand' => 1]);
     } else {
-        $expiration_time = time() + $add_vip_days_time ;
+        $expiration_time = time() + $add_vip_days_time;
 
         User::where('phone', $phone)
             ->update(['expiration_time' => $expiration_time, 'start_time' => time(), 'rand' => 1]);
@@ -212,46 +212,44 @@ function add_vip_days($add_vip_days,$out_trade_no){
 
     // 写入订单
     $order = Order::create([
-    'phone'                    =>  $phone,
-    'body'                     =>  105,
-    'subject'                  =>  "增加VIP会员：".$add_vip_days."天",
-    'total_fee'                =>  0,
-    'buyer_id'                 =>  $phone,
-    'buyer_email'              =>  $phone,
-    'out_trade_no'             =>  $out_trade_no,
+        'phone'        => $phone,
+        'body'         => 105,
+        'subject'      => "增加VIP会员：" . $add_vip_days . "天",
+        'total_fee'    => 0,
+        'buyer_id'     => $phone,
+        'buyer_email'  => $phone,
+        'out_trade_no' => $out_trade_no,
     ]);
-
-
-
 
 
 }
 
 //功能浏览次数和来路
-function footprint(){
+function footprint()
+{
 
     debug('begin');
 
 
-    return 1;
-
-    $referer    = '';
-    $domain     = '';
-    $pathinfo   = '';
-    $mobile     = '';
-    $address    = '';
-    $browser    = '';
-    $user_id      = Cookie::get('user_id');
 
 
- $request = Request::instance();
+    $referer  = '';
+    $domain   = '';
+    $pathinfo = '';
+    $mobile   = '';
+    $address  = '';
+    $browser  = '';
+    $user_id  = Cookie::get('user_id');
+    $user_id  = isset($user_id) ? $user_id : 0;
 
- 
+
+    $request = Request::instance();
+
 
     $goods_id = '';
 
-    $view = $request->module().$request->controller().$request->action();
- 
+    $view = $request->module() . $request->controller() . $request->action();
+
     // 如果是产品详情页，记录一下访问的产品id，$goods_id 
 
     if ($view == 'indexIndexview') {
@@ -260,25 +258,23 @@ function footprint(){
     }
 
 
-
     if (isset($_SERVER["HTTP_REFERER"])) {
 
 //        统计来路功能
-        $se = 0;
+        $se  = 0;
         $url = $_SERVER["HTTP_REFERER"]; //获取完整的来路URL
 
 
-        $str = str_replace("http://","",$url); //去掉http://
-        $strdomain = explode("/",$str); // 以“/”分开成数组
-        $domain = $strdomain[0]; //取第一个“/”以前的字符
-        if(strstr($domain,'baidu.com')){
+        $str       = str_replace("http://", "", $url); //去掉http://
+        $strdomain = explode("/", $str); // 以“/”分开成数组
+        $domain    = $strdomain[0]; //取第一个“/”以前的字符
+        if (strstr($domain, 'baidu.com')) {
             $se = 1;
-        }
-        else if(strstr($domain,'google.cn')){
+        } else if (strstr($domain, 'google.cn')) {
             $se = 1;
         }
 
-        $referer  = $str;
+        $referer = $str;
 
 
     }
@@ -293,13 +289,11 @@ function footprint(){
     $ip = $request->ip();
 
 // 判断是否是手机
-    if(Request::instance()->isMobile()){
-        $mobile    = 1;
-    }else{
-        $mobile    = 0;
+    if (Request::instance()->isMobile()) {
+        $mobile = 1;
+    } else {
+        $mobile = 0;
     }
-
-
 
 
 //    获取是什么浏览器和浏览器的版本号
@@ -320,7 +314,7 @@ function footprint(){
         preg_match("/OPR\/([\d\.]+)/", $sys, $opera);
         $exp[0] = "Opera";
         $exp[1] = $opera[1];
-    } elseif(stripos($sys, "Edge") > 0) {
+    } elseif (stripos($sys, "Edge") > 0) {
         //win10 Edge浏览器 添加了chrome内核标记 在判断Chrome之前匹配
         preg_match("/Edge\/([\d\.]+)/", $sys, $Edge);
         $exp[0] = "Edge";
@@ -329,142 +323,85 @@ function footprint(){
         preg_match("/Chrome\/([\d\.]+)/", $sys, $google);
         $exp[0] = "Chrome";
         $exp[1] = $google[1];  //获取google chrome的版本号
-    } elseif(stripos($sys,'rv:')>0 && stripos($sys,'Gecko')>0){
+    } elseif (stripos($sys, 'rv:') > 0 && stripos($sys, 'Gecko') > 0) {
         preg_match("/rv:([\d\.]+)/", $sys, $IE);
         $exp[0] = "IE";
         $exp[1] = $IE[1];
-    }else {
+    } else {
         $exp[0] = "未知浏览器";
         $exp[1] = "";
     }
-    $browser =  $exp[0].'('.$exp[1].')';
-
+    $browser = $exp[0] . '(' . $exp[1] . ')';
 
 
     $agent = $_SERVER['HTTP_USER_AGENT'];
-    $os = false;
+    $os    = false;
 
-    if (preg_match('/win/i', $agent) && strpos($agent, '95'))
-    {
+    if (preg_match('/win/i', $agent) && strpos($agent, '95')) {
         $os = 'Windows 95';
-    }
-    else if (preg_match('/win 9x/i', $agent) && strpos($agent, '4.90'))
-    {
+    } else if (preg_match('/win 9x/i', $agent) && strpos($agent, '4.90')) {
         $os = 'Windows ME';
-    }
-    else if (preg_match('/win/i', $agent) && preg_match('/98/i', $agent))
-    {
+    } else if (preg_match('/win/i', $agent) && preg_match('/98/i', $agent)) {
         $os = 'Windows 98';
-    }
-    else if (preg_match('/win/i', $agent) && preg_match('/nt 6.0/i', $agent))
-    {
+    } else if (preg_match('/win/i', $agent) && preg_match('/nt 6.0/i', $agent)) {
         $os = 'Windows Vista';
-    }
-    else if (preg_match('/win/i', $agent) && preg_match('/nt 6.1/i', $agent))
-    {
+    } else if (preg_match('/win/i', $agent) && preg_match('/nt 6.1/i', $agent)) {
         $os = 'Windows 7';
-    }
-    else if (preg_match('/win/i', $agent) && preg_match('/nt 6.2/i', $agent))
-    {
+    } else if (preg_match('/win/i', $agent) && preg_match('/nt 6.2/i', $agent)) {
         $os = 'Windows 8';
-    }else if(preg_match('/win/i', $agent) && preg_match('/nt 10.0/i', $agent))
-    {
+    } else if (preg_match('/win/i', $agent) && preg_match('/nt 10.0/i', $agent)) {
         $os = 'Windows 10';#添加win10判断
-    }else if (preg_match('/win/i', $agent) && preg_match('/nt 5.1/i', $agent))
-    {
+    } else if (preg_match('/win/i', $agent) && preg_match('/nt 5.1/i', $agent)) {
         $os = 'Windows XP';
-    }
-    else if (preg_match('/win/i', $agent) && preg_match('/nt 5/i', $agent))
-    {
+    } else if (preg_match('/win/i', $agent) && preg_match('/nt 5/i', $agent)) {
         $os = 'Windows 2000';
-    }
-    else if (preg_match('/win/i', $agent) && preg_match('/nt/i', $agent))
-    {
+    } else if (preg_match('/win/i', $agent) && preg_match('/nt/i', $agent)) {
         $os = 'Windows NT';
-    }
-    else if (preg_match('/win/i', $agent) && preg_match('/32/i', $agent))
-    {
+    } else if (preg_match('/win/i', $agent) && preg_match('/32/i', $agent)) {
         $os = 'Windows 32';
-    }
-    else if (preg_match('/linux/i', $agent))
-    {
+    } else if (preg_match('/linux/i', $agent)) {
         $os = 'Linux';
-    }
-    else if (preg_match('/unix/i', $agent))
-    {
+    } else if (preg_match('/unix/i', $agent)) {
         $os = 'Unix';
-    }
-    else if (preg_match('/sun/i', $agent) && preg_match('/os/i', $agent))
-    {
+    } else if (preg_match('/sun/i', $agent) && preg_match('/os/i', $agent)) {
         $os = 'SunOS';
-    }
-    else if (preg_match('/ibm/i', $agent) && preg_match('/os/i', $agent))
-    {
+    } else if (preg_match('/ibm/i', $agent) && preg_match('/os/i', $agent)) {
         $os = 'IBM OS/2';
-    }
-    else if (preg_match('/Mac/i', $agent) && preg_match('/PC/i', $agent))
-    {
+    } else if (preg_match('/Mac/i', $agent) && preg_match('/PC/i', $agent)) {
         $os = 'Macintosh';
-    }
-    else if (preg_match('/PowerPC/i', $agent))
-    {
+    } else if (preg_match('/PowerPC/i', $agent)) {
         $os = 'PowerPC';
-    }
-    else if (preg_match('/AIX/i', $agent))
-    {
+    } else if (preg_match('/AIX/i', $agent)) {
         $os = 'AIX';
-    }
-    else if (preg_match('/HPUX/i', $agent))
-    {
+    } else if (preg_match('/HPUX/i', $agent)) {
         $os = 'HPUX';
-    }
-    else if (preg_match('/NetBSD/i', $agent))
-    {
+    } else if (preg_match('/NetBSD/i', $agent)) {
         $os = 'NetBSD';
-    }
-    else if (preg_match('/BSD/i', $agent))
-    {
+    } else if (preg_match('/BSD/i', $agent)) {
         $os = 'BSD';
-    }
-    else if (preg_match('/OSF1/i', $agent))
-    {
+    } else if (preg_match('/OSF1/i', $agent)) {
         $os = 'OSF1';
-    }
-    else if (preg_match('/IRIX/i', $agent))
-    {
+    } else if (preg_match('/IRIX/i', $agent)) {
         $os = 'IRIX';
-    }
-    else if (preg_match('/FreeBSD/i', $agent))
-    {
+    } else if (preg_match('/FreeBSD/i', $agent)) {
         $os = 'FreeBSD';
-    }
-    else if (preg_match('/teleport/i', $agent))
-    {
+    } else if (preg_match('/teleport/i', $agent)) {
         $os = 'teleport';
-    }
-    else if (preg_match('/flashget/i', $agent))
-    {
+    } else if (preg_match('/flashget/i', $agent)) {
         $os = 'flashget';
-    }
-    else if (preg_match('/webzip/i', $agent))
-    {
+    } else if (preg_match('/webzip/i', $agent)) {
         $os = 'webzip';
-    }
-    else if (preg_match('/offline/i', $agent))
-    {
+    } else if (preg_match('/offline/i', $agent)) {
         $os = 'offline';
-    }
-    else
-    {
+    } else {
         $os = '0';
     }
 
-    if($user_id==''){
+    if ($user_id == '') {
 
         $user_id = '0';
 
     }
-
 
 
     // $user             = new Footprint;
@@ -479,23 +416,23 @@ function footprint(){
     // $user->browser    = $browser;
     // $user->save();
 
-$data = ['domain' => $domain, 
-        'mobile' => $mobile,
-        'pathinfo' => $pathinfo,
-        'url' => $url,
-        'os' => $os,
-        'ip' => $ip,
-        'user_id' => $user_id,
-        'goods_id' => $goods_id,
-        'referer' => $referer,
-        'address' => $address,
-        'browser' => $browser,
-        'create_time' => time(),
-        'update_time' => time()
-        ];
+    $data = ['domain'      => $domain,
+             'mobile'      => $mobile,
+             'pathinfo'    => $pathinfo,
+             'url'         => $url,
+             'os'          => $os,
+             'ip'          => $ip,
+             'user_id'     => $user_id,
+             'goods_id'    => $goods_id,
+             'referer'     => $referer,
+             'address'     => $address,
+             'browser'     => $browser,
+             'create_time' => time(),
+             'update_time' => time()
+    ];
 
-Cookie::set('footprint',$data,20); 
-return "";
+    Cookie::set('footprint', $data, 20);
+    return "";
 
 
     // 添加单条数据
@@ -514,7 +451,6 @@ return "";
     // 获取自增ID
 
 
-
 //    以下是ip地址单独写入一个库，方便后期对此ip信息的记录
 //    获取上面刚插入的ip地址
     // $ip = $user->ip;
@@ -523,7 +459,6 @@ return "";
 //    判断这个ip地址是否已经存在
 
     // $user_ip = Ipinfo::where('ip', $ip)->count();
-
 
 
     // if($user_ip){
@@ -548,25 +483,24 @@ return "";
 
 
 //功能浏览次数和来路 - 在聊天窗口返回时用
-function footprinttalk(){
+function footprinttalk()
+{
 
-    $referer    = '';
-    $domain     = '';
-    $pathinfo   = '';
-    $mobile     = '';
-    $address    = '';
-    $browser    = '';
-    $phone      = Cookie::get('phone');
+    $referer  = '';
+    $domain   = '';
+    $pathinfo = '';
+    $mobile   = '';
+    $address  = '';
+    $browser  = '';
+    $phone    = Cookie::get('phone');
 
 
     $request = Request::instance();
 
 // 判断是否是手机
-    if(Request::instance()->isMobile()){
-        $mobile    = "来自手机";
+    if (Request::instance()->isMobile()) {
+        $mobile = "来自手机";
     }
-
-
 
 
 //    获取是什么浏览器和浏览器的版本号
@@ -587,7 +521,7 @@ function footprinttalk(){
         preg_match("/OPR\/([\d\.]+)/", $sys, $opera);
         $exp[0] = "Opera";
         $exp[1] = $opera[1];
-    } elseif(stripos($sys, "Edge") > 0) {
+    } elseif (stripos($sys, "Edge") > 0) {
         //win10 Edge浏览器 添加了chrome内核标记 在判断Chrome之前匹配
         preg_match("/Edge\/([\d\.]+)/", $sys, $Edge);
         $exp[0] = "Edge";
@@ -596,137 +530,81 @@ function footprinttalk(){
         preg_match("/Chrome\/([\d\.]+)/", $sys, $google);
         $exp[0] = "Chrome";
         $exp[1] = $google[1];  //获取google chrome的版本号
-    } elseif(stripos($sys,'rv:')>0 && stripos($sys,'Gecko')>0){
+    } elseif (stripos($sys, 'rv:') > 0 && stripos($sys, 'Gecko') > 0) {
         preg_match("/rv:([\d\.]+)/", $sys, $IE);
         $exp[0] = "IE";
         $exp[1] = $IE[1];
-    }else {
+    } else {
         $exp[0] = "未知浏览器";
         $exp[1] = "";
     }
-    $browser =  $exp[0].'('.$exp[1].')';
-
+    $browser = $exp[0] . '(' . $exp[1] . ')';
 
 
     $agent = $_SERVER['HTTP_USER_AGENT'];
-    $os = false;
+    $os    = false;
 
-    if (preg_match('/win/i', $agent) && strpos($agent, '95'))
-    {
+    if (preg_match('/win/i', $agent) && strpos($agent, '95')) {
         $os = 'Windows 95';
-    }
-    else if (preg_match('/win 9x/i', $agent) && strpos($agent, '4.90'))
-    {
+    } else if (preg_match('/win 9x/i', $agent) && strpos($agent, '4.90')) {
         $os = 'Windows ME';
-    }
-    else if (preg_match('/win/i', $agent) && preg_match('/98/i', $agent))
-    {
+    } else if (preg_match('/win/i', $agent) && preg_match('/98/i', $agent)) {
         $os = 'Windows 98';
-    }
-    else if (preg_match('/win/i', $agent) && preg_match('/nt 6.0/i', $agent))
-    {
+    } else if (preg_match('/win/i', $agent) && preg_match('/nt 6.0/i', $agent)) {
         $os = 'Windows Vista';
-    }
-    else if (preg_match('/win/i', $agent) && preg_match('/nt 6.1/i', $agent))
-    {
+    } else if (preg_match('/win/i', $agent) && preg_match('/nt 6.1/i', $agent)) {
         $os = 'Windows 7';
-    }
-    else if (preg_match('/win/i', $agent) && preg_match('/nt 6.2/i', $agent))
-    {
+    } else if (preg_match('/win/i', $agent) && preg_match('/nt 6.2/i', $agent)) {
         $os = 'Windows 8';
-    }else if(preg_match('/win/i', $agent) && preg_match('/nt 10.0/i', $agent))
-    {
+    } else if (preg_match('/win/i', $agent) && preg_match('/nt 10.0/i', $agent)) {
         $os = 'Windows 10';#添加win10判断
-    }else if (preg_match('/win/i', $agent) && preg_match('/nt 5.1/i', $agent))
-    {
+    } else if (preg_match('/win/i', $agent) && preg_match('/nt 5.1/i', $agent)) {
         $os = 'Windows XP';
-    }
-    else if (preg_match('/win/i', $agent) && preg_match('/nt 5/i', $agent))
-    {
+    } else if (preg_match('/win/i', $agent) && preg_match('/nt 5/i', $agent)) {
         $os = 'Windows 2000';
-    }
-    else if (preg_match('/win/i', $agent) && preg_match('/nt/i', $agent))
-    {
+    } else if (preg_match('/win/i', $agent) && preg_match('/nt/i', $agent)) {
         $os = 'Windows NT';
-    }
-    else if (preg_match('/win/i', $agent) && preg_match('/32/i', $agent))
-    {
+    } else if (preg_match('/win/i', $agent) && preg_match('/32/i', $agent)) {
         $os = 'Windows 32';
-    }
-    else if (preg_match('/linux/i', $agent))
-    {
+    } else if (preg_match('/linux/i', $agent)) {
         $os = 'Linux';
-    }
-    else if (preg_match('/unix/i', $agent))
-    {
+    } else if (preg_match('/unix/i', $agent)) {
         $os = 'Unix';
-    }
-    else if (preg_match('/sun/i', $agent) && preg_match('/os/i', $agent))
-    {
+    } else if (preg_match('/sun/i', $agent) && preg_match('/os/i', $agent)) {
         $os = 'SunOS';
-    }
-    else if (preg_match('/ibm/i', $agent) && preg_match('/os/i', $agent))
-    {
+    } else if (preg_match('/ibm/i', $agent) && preg_match('/os/i', $agent)) {
         $os = 'IBM OS/2';
-    }
-    else if (preg_match('/Mac/i', $agent) && preg_match('/PC/i', $agent))
-    {
+    } else if (preg_match('/Mac/i', $agent) && preg_match('/PC/i', $agent)) {
         $os = 'Macintosh';
-    }
-    else if (preg_match('/PowerPC/i', $agent))
-    {
+    } else if (preg_match('/PowerPC/i', $agent)) {
         $os = 'PowerPC';
-    }
-    else if (preg_match('/AIX/i', $agent))
-    {
+    } else if (preg_match('/AIX/i', $agent)) {
         $os = 'AIX';
-    }
-    else if (preg_match('/HPUX/i', $agent))
-    {
+    } else if (preg_match('/HPUX/i', $agent)) {
         $os = 'HPUX';
-    }
-    else if (preg_match('/NetBSD/i', $agent))
-    {
+    } else if (preg_match('/NetBSD/i', $agent)) {
         $os = 'NetBSD';
-    }
-    else if (preg_match('/BSD/i', $agent))
-    {
+    } else if (preg_match('/BSD/i', $agent)) {
         $os = 'BSD';
-    }
-    else if (preg_match('/OSF1/i', $agent))
-    {
+    } else if (preg_match('/OSF1/i', $agent)) {
         $os = 'OSF1';
-    }
-    else if (preg_match('/IRIX/i', $agent))
-    {
+    } else if (preg_match('/IRIX/i', $agent)) {
         $os = 'IRIX';
-    }
-    else if (preg_match('/FreeBSD/i', $agent))
-    {
+    } else if (preg_match('/FreeBSD/i', $agent)) {
         $os = 'FreeBSD';
-    }
-    else if (preg_match('/teleport/i', $agent))
-    {
+    } else if (preg_match('/teleport/i', $agent)) {
         $os = 'teleport';
-    }
-    else if (preg_match('/flashget/i', $agent))
-    {
+    } else if (preg_match('/flashget/i', $agent)) {
         $os = 'flashget';
-    }
-    else if (preg_match('/webzip/i', $agent))
-    {
+    } else if (preg_match('/webzip/i', $agent)) {
         $os = 'webzip';
-    }
-    else if (preg_match('/offline/i', $agent))
-    {
+    } else if (preg_match('/offline/i', $agent)) {
         $os = 'offline';
-    }
-    else
-    {
+    } else {
         $os = '未知操作系统';
     }
 
-    if($phone==''){
+    if ($phone == '') {
 
         $phone = '15966982315';
 
@@ -745,62 +623,63 @@ function footprinttalk(){
 
 //echo "okl";
 
-    return $request->ip().' '.$address.' '.$mobile.' '.$os.' '.$browser;
+    return $request->ip() . ' ' . $address . ' ' . $mobile . ' ' . $os . ' ' . $browser;
 
 
 }
 
 // 验证用户是否token功能
-function token(){
-        $user            =  Cookie::get('phone');
-        $token           =  Cookie::get('token');
-        // dump($token);
-        if ($user) {
-            
-            // 判断是否其他浏览器或者设备登录（设置每次登录修改token时有效）
-            // 判断Cookie里的token的否正确
-            $token_count = User::where('phone','=',$user )
-                                ->where('token','=',$token )
-                                ->count();
-            if ( $token_count<=0) {
+function token()
+{
+    $user  = Cookie::get('phone');
+    $token = Cookie::get('token');
+    // dump($token);
+    if ($user) {
 
-                Cookie::set('phone','',36000000);
-                Cookie::set('token','',36000000);
-                $user    =  "";
-                $token =  "";
+        // 判断是否其他浏览器或者设备登录（设置每次登录修改token时有效）
+        // 判断Cookie里的token的否正确
+        $token_count = User::where('phone', '=', $user)
+            ->where('token', '=', $token)
+            ->count();
+        if ($token_count <= 0) {
 
-            }
+            Cookie::set('phone', '', 36000000);
+            Cookie::set('token', '', 36000000);
+            $user  = "";
+            $token = "";
+
         }
+    }
 }
 
 //人性化时间显示
-function formatTime($time){
+function formatTime($time)
+{
     return $time;
-    $rtime = date("m月d日 H:i",$time);
-    $htime = date("H:i",$time);
-    $year  = date("Y")-date("Y",$time);
+    $rtime = date("m月d日 H:i", $time);
+    $htime = date("H:i", $time);
+    $year  = date("Y") - date("Y", $time);
     $time  = time() - $time;
 
-    if ($time < 60){
+    if ($time < 60) {
         $str = '刚刚';
-    }elseif($time < 60 * 60){
-        $min = floor($time/60);
-        $str = $min.'分钟前';
-    }elseif($time < 60 * 60 * 24){
-        $h = floor($time/(60*60));
-        $str = $h.'小时前 ';
-    }elseif($time < 60 * 60 * 24 * 3){
-        $d = floor($time/(60*60*24));
-        if($d==1){
-            $str = '昨天 '.$rtime;
-        }else{
-            $str = '前天 '.$rtime;
+    } elseif ($time < 60 * 60) {
+        $min = floor($time / 60);
+        $str = $min . '分钟前';
+    } elseif ($time < 60 * 60 * 24) {
+        $h   = floor($time / (60 * 60));
+        $str = $h . '小时前 ';
+    } elseif ($time < 60 * 60 * 24 * 3) {
+        $d = floor($time / (60 * 60 * 24));
+        if ($d == 1) {
+            $str = '昨天 ' . $rtime;
+        } else {
+            $str = '前天 ' . $rtime;
         }
-    }elseif($year >0){
+    } elseif ($year > 0) {
         $str = $rtime;
-    }
-    else{
-        $str = date("Y年m月d日 H:i",$time);
+    } else {
+        $str = date("Y年m月d日 H:i", $time);
     }
     return $str;
 }

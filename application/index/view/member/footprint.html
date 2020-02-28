@@ -1,15 +1,12 @@
 {include file="index/header" /}
 
 
-
-
-
-
 <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-9">
         <div class="page-header">
-            <h2 style="color: #337ab7;"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> 网站概况 访问明细 <small style="text-center"> 今日IP：<span style="color: red">{$yesterday->total()}</span> </small> </h2>
-             
+            <h2 style="color: #337ab7;"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> 网站概况 访问明细
+                <small> 今日IP：<span style="color: red">{$yesterday->total()}</span> </small></h2>
+
         </div>
         <div class="tabbable" id="tabs-323015">
             <ul class="nav nav-tabs">
@@ -32,30 +29,35 @@
                     <div class="table-responsive">
                         <table class="table table-hover ">
                             <thead>
-                            <tr  ><th > 时间</th><th > 用户</th><th >地区</th><th > 课堂</th>
+                            <tr>
+                                <th> 时间</th>
+                                <th> 用户</th>
+                                <th>地区</th>
+                                <th> 课堂</th>
                             </tr>
                             </thead>
 
                             <tbody>
                             {volist name='list' id='user' key="k"}
 
-                            <tr  >
-                                <td> {$user.create_time} </td>
-                                <td>  {$user.phone|substr=0,3}****{$user.phone|substr=7,4} </td>
+                            <tr>
+                                <td> {$user.create_time}</td>
+                                <td> {$user.phone|substr=0,3}****{$user.phone|substr=7,4}</td>
                                 <td> {$user.address}</td>
-                                <td> {$user.url} </td>
+                                <td> {$user.url}</td>
                             </tr>
-                            <tr><td colspan="4"> <h5><small>
+                            <tr>
+                                <td colspan="4"><h5><small>
 
-                                操作系统:{$user.os}
+                                    操作系统:{$user.os}
 
 
+                                    手机访问：{$user.mobile}
 
-                                手机访问：{$user.mobile}
+                                    浏览器：{$user.browser} 来路：{$user.referer}
 
-                                浏览器：{$user.browser}  来路：{$user.referer}
-
-                            </small></h5>  </td></tr>
+                                </small></h5></td>
+                            </tr>
                             {/volist}
                             </tbody>
                         </table>
@@ -66,29 +68,35 @@
                     <div class="table-responsive">
                         <table class="table table-hover ">
                             <thead>
-                            <tr  ><th > 时间</th><th > IP</th><th >地区</th><th > 课堂</th>
+                            <tr>
+                                <th> 时间</th>
+                                <th> IP</th>
+                                <th>地区</th>
+                                <th> 课堂</th>
                             </tr>
                             </thead>
 
                             <tbody>
                             {volist name='yesterday' id='user' key="k"}
 
-                            <tr  >
-                                <td> {$user.create_time} </td>
-                                <td> {$user.ip} </td>
-                                <td> {$user.address} </td>
-                                <td> {$user.url} </td>         </tr>
-                            <tr><td colspan="4"> <h5><small>
+                            <tr>
+                                <td> {$user.create_time}</td>
+                                <td> {$user.ip}</td>
+                                <td> {$user.address}</td>
+                                <td> {$user.url}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="4"><h5><small>
 
-                                操作系统:{$user.os}
+                                    操作系统:{$user.os}
 
 
+                                    手机访问：{$user.mobile}
 
-                                手机访问：{$user.mobile}
+                                    浏览器：{$user.browser} 来路：{$user.referer}
 
-                                浏览器：{$user.browser}  来路：{$user.referer}
-
-                            </small></h5>  </td></tr>
+                                </small></h5></td>
+                            </tr>
                             {/volist}
                             </tbody>
                         </table>
@@ -99,36 +107,41 @@
                     <div class="table-responsive">
                         <table class="table table-hover ">
                             <thead>
-                            <tr  ><th > 时间</th><th > 用户/ip</th><th >地区</th><th > 课堂</th>
+                            <tr>
+                                <th> 时间</th>
+                                <th> 用户/ip</th>
+                                <th>地区</th>
+                                <th> 课堂</th>
                             </tr>
                             </thead>
 
                             <tbody>
                             {volist name='list_all' id='user' key="k"}
 
-                            <tr  >
-                                <td> {$user.create_time} </td>
-                                <td>  <h5><small>
+                            <tr>
+                                <td> {$user.create_time}</td>
+                                <td><h5><small>
                                     {if condition="$user.phone==15966982315"}
                                     新访客
                                     {else /}
                                     {$user.phone|substr=0,3}****{$user.phone|substr=7,4}:
                                     {/if} {$user.ip}
-                                </small></h5> </td>
+                                </small></h5></td>
                                 <td> {$user.address}</td>
-                                <td> {$user.url} </td>
+                                <td> {$user.url}</td>
                             </tr>
-                            <tr><td colspan="4"> <h5><small>
+                            <tr>
+                                <td colspan="4"><h5><small>
 
-                                操作系统:{$user.os}
+                                    操作系统:{$user.os}
 
 
+                                    手机访问：{$user.mobile}
 
-                                手机访问：{$user.mobile}
+                                    浏览器：{$user.browser} 来路：{$user.referer}
 
-                                浏览器：{$user.browser}  来路：{$user.referer}
-
-                            </small></h5>  </td></tr>
+                                </small></h5></td>
+                            </tr>
 
                             {/volist}
                             </tbody>
@@ -148,17 +161,21 @@
                 <div class="col-xs-12 col-sm-6 col-md-12" style="padding: 0px;">
 
 
-                    <div class="media" >
-                        <div class="media-left" >
+                    <div class="media">
+                        <div class="media-left">
                             <a href="#">
-                                <img class="media-object img-thumbnail"    src="__STATIC__/images/user/user ({:rand(1,25)}).jpg" data-holder-rendered="true" style="width: 64px; height: 64px;">
+                                <img class="media-object img-thumbnail"
+                                     src="__STATIC__/images/user/user ({:rand(1,25)}).jpg" data-holder-rendered="true"
+                                     style="width: 64px; height: 64px;">
                             </a>
                         </div>
                         <div class="media-body">
                             <small><a href="#">{$user.phone|substr=0,3}****{$user.phone|substr=7,4}</a>
                                 NO.<span style="color: #D8582B;font-weight: bold;">{$k}</span></small>
-                            <h5> <small>签到时间：<span style="color: #D8582B;font-weight: bold;">{$user.create_time}</span></small></h5>
-                            <h5><small>连续签到：<span style="color: #D8582B;font-weight: bold;">{$user.url}</span>天</small></h5>
+                            <h5><small>签到时间：<span
+                                    style="color: #D8582B;font-weight: bold;">{$user.create_time}</span></small></h5>
+                            <h5><small>连续签到：<span style="color: #D8582B;font-weight: bold;">{$user.url}</span>天</small>
+                            </h5>
                         </div>
                     </div>
 
@@ -167,7 +184,6 @@
 
 
                 </div>
-
 
 
                 {/volist}
@@ -190,8 +206,6 @@
 
     </div>
 </div>
-
-
 
 
 {include file="index/footer" /}
