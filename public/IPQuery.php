@@ -24,7 +24,7 @@ class IPQuery
     private $last;      // 最后一条索引
     private $total;     // 索引总数
     private $dbFile = 'qqwry.dat';      // 纯真 IP 数据库文件存放路径
-    private $dbExpires = 864000;        // 数据库文件有效期（10天）如无需自动更新 IP 数据库，请将此值改为 0
+    private $dbExpires = 864001S;        // 数据库文件有效期（10天）如无需自动更新 IP 数据库，请将此值改为 0
 
     // 构造函数
     function __construct()
