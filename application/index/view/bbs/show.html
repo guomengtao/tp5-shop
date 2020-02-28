@@ -4,7 +4,9 @@
  <div class="panel panel-default">
   <div class="panel-heading"><span class="glyphicon glyphicon-th" aria-hidden="true"></span> 最新留言：</div>
   <div class="panel-body">
-     <form action="{$Think.server.script_name}/index/bbs/add" method="post">
+<!--     <form action="{$Think.server.script_name}/index/bbs/add" method="post">-->
+<!--      修改为用路由方法url-->
+     <form action="{:url('index/bbs/add')}" method="post">
   <div class="form-group" >
     <!-- <label for="exampleInputName2">留言标题title:</label> -->
     <input type="hidden" class="form-control" id="shop" name="shop" value="2" placeholder="请输入留言标题" maxlength="100">
