@@ -2,10 +2,22 @@
 branches: {
   }
 fileChange:
-  /README.md:
-    newFile: !uuid '054a37a32e6cc820749cb9a47b2aeba91e474f99'
-    oldFile: !uuid '59457f09cf0168599f55cc6a83ce77e577dd5abc'
-gitCommitId: !uuid '9273ab2df9cb72cb28d3b6a6d1be165f4d94424c'
+  /application:
+    newFile: !uuid 'ac5a12816ae96441d166cb65cbb8dfbecde63a13'
+    oldFile: !uuid '45a6320ad192f971160d5f43f652636f40755eab'
+  /application/index:
+    newFile: !uuid 'aeb28980f2caee69977e9eaf13b0a478533942a8'
+    oldFile: !uuid 'c8fd96fb91600e28abc7fbcfa5b1799205267fdc'
+  /application/index/controller:
+    newFile: !uuid '70775d0433db8f2c6a8e0138eeefeb02d803a6fa'
+    oldFile: !uuid 'a82eae2b11750ed89335e573364baacc48292300'
+  /application/index/controller/Index.php:
+    newFile: !uuid '577bde3057e19ed35270555ff52902a191a23f41'
+    oldFile: !uuid 'd835f1f3d280493113f916d47c68a24f5d121148'
+  /安装流程.txt:
+    newFile: !uuid '83098a824500c8d428cb5343ef8cfc848ad51a60'
+    oldFile: !uuid '3e7ffc9bb3bc485761fd94b1367ed7063ee6b437'
+gitCommitId: !uuid '4374f3982cdadbefa8e62df9540f9c890ab211c2'
 renames: {
   }
-revisionId: 123
+revisionId: 124
