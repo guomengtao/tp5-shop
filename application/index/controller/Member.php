@@ -1103,7 +1103,7 @@ class Member extends \think\Controller
 
         footprint();
 
-        //        查询会员学习记录
+        // 查询会员学习记录
         $list = Footprint::whereTime('create_time', 'today')
             ->order('id desc,create_time')
             ->group('phone')
