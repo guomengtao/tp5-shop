@@ -7,7 +7,7 @@ namespace app\index\controller;
  * Class webHook 自动pull，替换FTP方式
  * @package app\index\controller
  */
-class webHook
+class WebHook
 {
     public function run()
     {
