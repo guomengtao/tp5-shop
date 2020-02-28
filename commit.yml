@@ -3,21 +3,48 @@ branches: {
   }
 fileChange:
   /application:
-    newFile: !uuid '7a7cc0ab1cb7939ef75f52c7dbf970596370997d'
-    oldFile: !uuid '8f25cfd03d7d47768216a07bf05c4c233578f354'
+    newFile: !uuid '8f7e22e9996fbc06c1f2b105e1b63e5320ff7603'
+    oldFile: !uuid '7a7cc0ab1cb7939ef75f52c7dbf970596370997d'
   /application/index:
-    newFile: !uuid '086d8fca3387eff59c49c53d2dae2e32a8e16816'
-    oldFile: !uuid '003f394f308f1c8481db726679ef90302ce790be'
+    newFile: !uuid 'bb7d1ba0f88f0a255f6c101fa581c1d7b99a9d63'
+    oldFile: !uuid '086d8fca3387eff59c49c53d2dae2e32a8e16816'
+  /application/index/controller:
+    newFile: !uuid 'c0821f2aaf9ad2e05a40d3985e6a31b70ad06ea8'
+    oldFile: !uuid 'cde6b955f4ea36c27e9779c38f13e56acb8cee70'
+  /application/index/controller/Bbs.php:
+    newFile: !uuid '529de27abe6989d81095713fd59695dd8ed3cc0e'
+    oldFile: !uuid '321cf35fc7c83d6a80c3a07085e39ecae567acf1'
+  /application/index/controller/Index.php:
+    newFile: !uuid 'b538953fe059d9c20989140d787bc32969cb3a82'
+    oldFile: !uuid '4a144a4642157f85bc7686ccce91b8efe8560133'
   /application/index/view:
-    newFile: !uuid '71b9b5532e74766cd79e6c8e1d94083dd56cafbe'
-    oldFile: !uuid '344df13f304e7382ec059d7d7a8b9eba6658709a'
+    newFile: !uuid 'a69471961f2cc10e1336bf974204d0f2b8d28db8'
+    oldFile: !uuid '71b9b5532e74766cd79e6c8e1d94083dd56cafbe'
   /application/index/view/index:
-    newFile: !uuid '10e298a9361e47dfcd84c3b2c52f8018f03a88a5'
-    oldFile: !uuid 'ce70b520c5375dd2f4966b8e1611e4ddcd901edc'
+    newFile: !uuid '708bb472b5843c2ef0765cec76e66d4103ec99a6'
+    oldFile: !uuid '10e298a9361e47dfcd84c3b2c52f8018f03a88a5'
   /application/index/view/index/index.html:
-    newFile: !uuid '389ce6e2ca1392dea4e0256a5e6ff300ffa6b151'
-    oldFile: !uuid 'ece1ae6a53f9c32b1da7d7086ecbb7053bc1b7d2'
-gitCommitId: !uuid '0044acc7807b87199c84d6f3e0cab9f16624a550'
+    newFile: !uuid 'd2a6a9af33ffd56cf0609ed31f06e3830f0e7930'
+    oldFile: !uuid '389ce6e2ca1392dea4e0256a5e6ff300ffa6b151'
+  /application/index/view/index/install666.html:
+    newFile: null
+    oldFile: !uuid '28fa331f9c1fab13f4292e93244fbdf69bf79e21'
+  /vendor:
+    newFile: !uuid 'a787bed9a50ffdc030c88543162ec29328e39dea'
+    oldFile: !uuid '9d0ef245c6908808ba62ea59b9a5c34d9d0ffe93'
+  /vendor/topthink:
+    newFile: !uuid '17b9b3eaf9badbab51bb650529d1795463835e75'
+    oldFile: !uuid '177a63db6e4eaa77258aff8b4047b10cb3628976'
+  /vendor/topthink/think-captcha:
+    newFile: !uuid '7438632df9258374d80b42a429cb2e2562bb8d7c'
+    oldFile: !uuid 'e1cab9ae657f49ad17542d8a7f0fad0e77c60ef6'
+  /vendor/topthink/think-captcha/src:
+    newFile: !uuid '2e257d9aff69c9a695c3e3be618dc311cf369891'
+    oldFile: !uuid 'd290f42e781ba58819e533bbd6192c1660a8ec0a'
+  /vendor/topthink/think-captcha/src/CaptchaController.php:
+    newFile: !uuid '72709c438c855b482aa29706c58c9a527a887d01'
+    oldFile: !uuid '8a0535d8228e98d5dea430156ae73f169b5a92fe'
+gitCommitId: !uuid '6889d89350c6ca877b9d6786a86f5110c287c0f7'
 renames: {
   }
-revisionId: 137
+revisionId: 138
