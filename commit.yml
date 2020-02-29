@@ -2,22 +2,22 @@
 branches: {
   }
 fileChange:
-  /vendor:
-    newFile: !uuid 'fbb90e6d7239f2f5f75a074132a3157cf0fa8ec8'
-    oldFile: !uuid 'd5ce252b6bd7de349b76f8f2333ca3da8a53184e'
-  /vendor/topthink:
-    newFile: !uuid '3aeedc1f182ba7231bda9d54efd18b8c47d8e6b2'
-    oldFile: !uuid '17b9b3eaf9badbab51bb650529d1795463835e75'
-  /vendor/topthink/think-captcha:
-    newFile: !uuid '5244285555ba6a76a51ee0d281088eab7dd5bd3e'
-    oldFile: !uuid '7438632df9258374d80b42a429cb2e2562bb8d7c'
-  /vendor/topthink/think-captcha/src:
-    newFile: !uuid 'a1c81a8c9cb46739bb1d3b399d19b07c280efef3'
-    oldFile: !uuid '2e257d9aff69c9a695c3e3be618dc311cf369891'
-  /vendor/topthink/think-captcha/src/CaptchaController.php:
-    newFile: !uuid '63bb799bd2c4501357deb389c754692ecdcf4c45'
-    oldFile: !uuid '72709c438c855b482aa29706c58c9a527a887d01'
-gitCommitId: !uuid '33ec1258a74ec768491ecd443bc2ab5dbda402dd'
+  /application:
+    newFile: !uuid '7ee889e423665bd4f3667ff13e99e8d2e31d972f'
+    oldFile: !uuid 'c12471501617637f3c17e1a386cd07677b613424'
+  /application/index:
+    newFile: !uuid 'd8e146702900be452945818df6b65dfcd12c0078'
+    oldFile: !uuid '87b9d6c4fe9b0837d75bc63787b1655dce910897'
+  /application/index/view:
+    newFile: !uuid '4a142ed68c5afd93d90338537c49fe333a7bf82c'
+    oldFile: !uuid '73aa1240f6b48fba0593890c1fb43abe38c4ce57'
+  /application/index/view/index:
+    newFile: !uuid 'b8119723265fb0907e2685192c93b6a59ad7841a'
+    oldFile: !uuid 'b646af73d20ee6f72a8ac923939fb514c6bc7079'
+  /application/index/view/index/index.html:
+    newFile: !uuid 'd2a6a9af33ffd56cf0609ed31f06e3830f0e7930'
+    oldFile: !uuid '37f65e0ca2709144921574d5fd7acdfacd2db04b'
+gitCommitId: !uuid 'd343f1e67e6b703584ad85a1cce42b34dbe3fc01'
 renames: {
   }
-revisionId: 154
+revisionId: 155
