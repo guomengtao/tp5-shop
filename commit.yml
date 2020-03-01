@@ -3,30 +3,21 @@ branches: {
   }
 fileChange:
   /application:
-    newFile: !uuid '60fa19dfd2f20006666397a7ce8f7698340c45ef'
-    oldFile: !uuid '4685cdd4bfcf559ce054ba7e82efbb95840f6315'
+    newFile: !uuid '8cc6b1f74e40ad92d6bc7928640418b6db0fd2a5'
+    oldFile: !uuid '60fa19dfd2f20006666397a7ce8f7698340c45ef'
   /application/index:
-    newFile: !uuid 'eb742fc5f98420a5bf9db38b98e886cba0a7bf6b'
-    oldFile: !uuid '59b160a50c41c108de46f0682fe3314245643e01'
+    newFile: !uuid 'e284ef18f2d61557f814d0388540ff6f0fc2f4f3'
+    oldFile: !uuid 'eb742fc5f98420a5bf9db38b98e886cba0a7bf6b'
   /application/index/view:
-    newFile: !uuid '3ec7bc92159a285a07c2370938e2b59b2b9b793e'
-    oldFile: !uuid 'b33e3bea1160d5b4939617ef7553f31ae5ddcff6'
-  /application/index/view/bbs:
-    newFile: !uuid '8615f18a16e26da0d18537e0ca11b9c1ce98568e'
-    oldFile: !uuid 'fa2418390787b7015b525344ef29f65ec8bb9563'
-  /application/index/view/bbs/show.html:
-    newFile: !uuid '1e281d0729d5c5a639bf0f7ddb7474faacc1ed89'
-    oldFile: !uuid '446b05f683470ad9fc25efdd6ba438cc9720c588'
+    newFile: !uuid '08cc085c2826a1f44e8c49892885a79e67e6594d'
+    oldFile: !uuid '3ec7bc92159a285a07c2370938e2b59b2b9b793e'
   /application/index/view/index:
-    newFile: !uuid 'fbc7ac3cb63a54a2e91c21272b6d85545bdc42af'
-    oldFile: !uuid 'b434191fc3e7d49485fcdc0bb27194ce454e05f0'
-  /application/index/view/index/footer.html:
-    newFile: !uuid '42670613772adbeb4a8c2e21c48a2e1055dac734'
-    oldFile: !uuid 'f65d12fb274579c0277e1b78adc20f3f25db2248'
+    newFile: !uuid '5bf2fa6eba60503a7e01d5e90e22facab57b89ae'
+    oldFile: !uuid 'fbc7ac3cb63a54a2e91c21272b6d85545bdc42af'
   /application/index/view/index/index.html:
-    newFile: !uuid 'a763bb97f9669cc4a195c4ec2957f51afe22abdf'
-    oldFile: !uuid 'f06c07a10303123147eea9dcb03d303c7fec34d0'
-gitCommitId: !uuid '1344e8737b9bba2b923c6a338ca661da6cb302b1'
+    newFile: !uuid 'faa15e58a31fc81dbf07985c0cc8b90c06b6d5da'
+    oldFile: !uuid 'a763bb97f9669cc4a195c4ec2957f51afe22abdf'
+gitCommitId: !uuid '17127ce976b5807966ad303e3eedc00b3a72b365'
 renames: {
   }
-revisionId: 159
+revisionId: 160
