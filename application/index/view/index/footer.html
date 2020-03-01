@@ -134,16 +134,14 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1275862484'%3E%3C/span%3E%3C
     window.onload = function () {
 
 
-        {
-            if condition = "($Request.module=='index') AND ($Request.controller=='Member') AND ($Request.action=='vip') AND ($Request.param.add_vip_days >=1) " }
+        {if condition = "($Request.module=='index') AND ($Request.controller=='Member') AND ($Request.action=='vip') AND ($Request.param.add_vip_days >=1) " }
 
 
         // vip页面通知
-        public_ajax_message("VIP增加 " + {$Request.param.add_vip_days} + " 天");
+        // public_ajax_message("VIP增加 " + {$Request.param.add_vip_days} + " 天");
 
 
-        {
-            /if}
+        {/if}
 
 
             {
@@ -308,7 +306,8 @@ document.write(unescape("%3Cspan id='cnzz_stat_icon_1275862484'%3E%3C/span%3E%3C
                                                 {
                                                     if condition = "$Think.cookie.phone==''"}
                                                 return window.location.href = '/index/index/login';
-                                                {/if}
+                                                {
+                                                    /if}
 
 
                                                     // 增加签到次数
