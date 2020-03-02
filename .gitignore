@@ -6,3 +6,4 @@ thinkphp
 *.env
 runtime/
 alipay-new/
+log.txt
