@@ -259,7 +259,6 @@ return [
         'zhSet'    => '学习',
         'imageH'   => '0',
         'imageW'   => '0',
-        'fontttf'  => '2.ttf',
         'codeSet'  => 'tp',
 
 

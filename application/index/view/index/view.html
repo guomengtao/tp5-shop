@@ -604,12 +604,19 @@ obj.onkeyup=function(){
 <div class="panel panel-default">
     <div class="panel-heading">扫码观看当前课程</div>
     <div class="panel-body text-center">
-        <img src="http://bshare.optimix.asia/barCode?site=weixin&url= {$Request.root.true}/{$Request.path}" />
-        <!-- 最近几天发现百度这个二维码接口失效了，换了一个接口 -->
-        <!-- 假如使用过这个接口印刷的名片等纸质材料，可能影响很大 -->
-        <!-- 总结，临时使用还可以，长期使用还需要学习一个独立稳定的方式 -->
-        <!-- <img src="http://pan.baidu.com/share/qrcode?w=200&h=200&url= {$Request.root.true}/{$Request.path}" /> -->
-        
+        <div id="qrcode"></div>
+        <script>
+
+            //生成前景色为红色背景色为白色的二维码
+            jQuery('#qrcode').qrcode({
+                render: "canvas", //也可以替换为table
+                foreground: "#337ab7",
+                background: "#fff",
+                width: 200,
+                height: 200,
+                text: "http://open.gaoxueya.com/index/index/view/id/{$list.id}"
+            });
+        </script>
     </div>
 </div>
 

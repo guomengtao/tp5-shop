@@ -20,8 +20,9 @@
             <li>实现了简单的 微博登录 短信登录 微博登录 支付宝支付</li>
 
             <li>本站源码
-                <a href="https://gitee.com/rinuo/tp5/repository/archive/master.zip" target="_blank" data-type="full" class="btn btn-success btn-download">
-                         <span class="glyphicon glyphicon-save" aria-hidden="true"></span> 立即下载</a>
+                <a href="https://gitee.com/rinuo/tp5/repository/archive/master.zip" target="_blank" data-type="full"
+                   class="btn btn-success btn-download">
+                    <span class="glyphicon glyphicon-save" aria-hidden="true"></span> 立即下载</a>
                 <a href="https://gitee.com/rinuo/tp5" target="_blank"> git码云 https://gitee.com/rinuo/tp5</a>
             </li>
         </ul>
@@ -65,7 +66,20 @@
             <li>待整理 ... ...</li>
 
         </ul>
+        <h4>手机扫码访问本站</h4>
+        <div id="qrcode"></div>
+        <script>
 
+            //生成前景色为红色背景色为白色的二维码
+            jQuery('#qrcode').qrcode({
+                render: "canvas", //也可以替换为table
+                foreground: "#337ab7",
+                background: "#fff",
+                width: 64,
+                height: 64,
+                text: "http://open.gaoxueya.com/"
+            });
+        </script>
 
     </div>
 </div>
@@ -115,7 +129,3 @@
     </p>
 </footer>
  
-
- 
-
-   
