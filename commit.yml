@@ -2,19 +2,22 @@
 branches: {
   }
 fileChange:
-  /.gitignore:
-    newFile: !uuid '19aa1ae45438687f2355fd8188d5e4cf4ea30453'
-    oldFile: !uuid 'c95b6c9032ab33342b1e64ad54bdbdf742a1003a'
-  /public:
-    newFile: !uuid '2d80afa9b74eaa84077dba71a5ba08cbaff73273'
-    oldFile: !uuid 'f475e03c2d1e6f85ae959bd42e459ce44f50775f'
-  /public/alipay:
-    newFile: !uuid '755c1162d2d3739e6a9a5c9e242f22901139dd38'
-    oldFile: !uuid '54a5dfea3586d4ecb4bf7647e218eff4ea45050e'
-  /public/alipay/.gitignore:
-    newFile: !uuid '89547ba39b26fc94bdd3f1651e9ec3152873fcd6'
-    oldFile: null
-gitCommitId: !uuid '7e151ea5d8ca14722560ba77cc8c08344109a700'
+  /thinkphp:
+    newFile: !uuid 'e0ed047d205fb98834f588014cd8e72c79fb7ba4'
+    oldFile: !uuid 'ef31849d1072b28997b065d5b5ffa1eeb26d0a90'
+  /thinkphp/library:
+    newFile: !uuid '6ec913f21ccee96c9b892691253473da4018cb0f'
+    oldFile: !uuid '2645d9fe1a4f33cdd738fad2ef3bd73125796e41'
+  /thinkphp/library/traits:
+    newFile: !uuid '03dc3aea0414b6de2bcea27d986381becb93fde9'
+    oldFile: !uuid '8438edea1a012212a0288ca0d4cdfcd0478bdf2b'
+  /thinkphp/library/traits/controller:
+    newFile: !uuid '0e74d9bc8a1499c7192fdcbf89b53958d7c3bbee'
+    oldFile: !uuid '24f3c8d8f6ff6baa5f30a269f3bb4152fc4370be'
+  /thinkphp/library/traits/controller/Jump.php:
+    newFile: !uuid '384bdc0cd0782fbbf10a17d7f378b50bbe0fbadd'
+    oldFile: !uuid '08fe8c9f8c48ec7f6816e0dcbabb739c26529c3f'
+gitCommitId: !uuid '8aae6bc225c5d32147f927ba31a784e4c88d2e17'
 renames: {
   }
-revisionId: 165
+revisionId: 166
