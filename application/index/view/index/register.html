@@ -232,12 +232,15 @@ function update_p(num,t) {
                          <div class="form-group form-inline" >
                              <button type="submit" id="btngo" class="btn btn-primary"  >{:session('openid_id')?'绑定账号': '提交注册'} </button>
 
-                         <small><a href="https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=100556678&redirect_uri=http://open.gaoxueya.com/index/api/qq&scope=get_user_info" target="_blank"  >
- <img src="http://qzonestyle.gtimg.cn/qzone/vas/opensns/res/img/Connect_logo_4.png">  </a> 
-<a href="https://api.weibo.com/oauth2/authorize?client_id=1460932055&response_type=code&redirect_uri=http://open.gaoxueya.com/index/api/weibo" target="_blank"  >
-  <img src="http://timg.sjs.sinajs.cn/t4/appstyle/widget/images/loginButton/loginButton_24.png">
+                         <div> <h4>使用第三方账号登录</h4><a href="https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=100556678&redirect_uri=http://open.gaoxueya.com/index/api/qq&scope=get_user_info"
+   target="_blank">
+
+    <img src="__STATIC__/images/ico_login_qq.png" title="使用QQ帐号登录"></a>
+<a href="https://api.weibo.com/oauth2/authorize?client_id=1460932055&response_type=code&redirect_uri=http://open.gaoxueya.com/index/api/weibo"
+   target="_blank" style="padding:16px">
+    <img src="__STATIC__/images/ico_login_32_32_weibo.png" title="使用微博帐号登录">
 </a>
-  <span id="txtHint"></span>  {if condition="($Think.session.total_fee>'0')  AND ($Think.session.body <> 1008612) " } 请注册/登录保存您的订单!{/if}</small>
+  <span id="txtHint"></span>  {if condition="($Think.session.total_fee>'0')  AND ($Think.session.body <> 1008612) " } 请注册/登录保存您的订单!{/if}</div>
 
                          </div>
 
