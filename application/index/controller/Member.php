@@ -753,7 +753,7 @@ class Member extends \think\Controller
     public function ajaxModelPay()
     {
 
-// 价格 total_fee
+        // 价格 total_fee
 // 主题描述 subject
 // 产品id body
 // 唯一订单号 trade_no
@@ -788,7 +788,6 @@ class Member extends \think\Controller
 
     public function payReturn()
     {
-//        return "payReturn";
 
 
 //        验证时否有支付的Session
@@ -798,8 +797,6 @@ class Member extends \think\Controller
             return "1";
             die();
         } else {
-//            dump(Session::get('total_fee'));
-//            sleep(5);
         }
 
 
@@ -822,19 +819,13 @@ class Member extends \think\Controller
         // 查询价格是否篡改,大于等于的情况可以通过
 
         $map['id'] = $body;
-//                $map['price'] = $total_fee;
 
         $price = Shop::where($map)
             ->value('price');
         if ($total_fee >= $price) {
-//                     return "ok";
         } else {
             $body = 40;
-//                     return "价格不一致";
         }
-
-
-
 
 
         // 如果是签到，查询昨天累加的签到天数
