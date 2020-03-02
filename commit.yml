@@ -2,34 +2,25 @@
 branches: {
   }
 fileChange:
-  /application:
-    newFile: !uuid '1bd25f0155558904f409c449cf9253b3f7f281d4'
-    oldFile: !uuid 'd119e7a74c67863d964c7c2ef16ce65a4b1fec4a'
-  /application/index:
-    newFile: !uuid '1f3ff7fde7b07714cd092c8cbcd2c571c520dc8a'
-    oldFile: !uuid '893494f11ff6c6904ce61b8fb729fd0a9a4935cb'
-  /application/index/view:
-    newFile: !uuid 'aaf69dcd0a2ceb3ea2a335a92e0bf6b3e45a747e'
-    oldFile: !uuid 'b712428b5b3cbb2b9b0b3fd64fc82649ad07dabe'
-  /application/index/view/index:
-    newFile: !uuid 'a41c0d74ab3538940ce9598e202c3134315892db'
-    oldFile: !uuid '1a88cb7b591c187eb33a8c04b905919b54216156'
-  /application/index/view/index/header.html:
-    newFile: !uuid '56def64f11a9b0714670f5b5b64d4de8270846ff'
-    oldFile: !uuid '7e5c6108525b0d773491df7454a2962f005166f7'
-  /application/index/view/index/login.html:
-    newFile: !uuid '7502d9f2c59dc99d950dd5683b2f82874d82223b'
-    oldFile: !uuid 'e7d971e0a0a02a358c38929e70a7ff4193f66757'
-  /application/index/view/index/register.html:
-    newFile: !uuid '5a3811a560846ead058298a86e31cff3e7633daa'
-    oldFile: !uuid '34ed0268f58d21dd5d2f470d5188fb71c6839707'
   /public:
-    newFile: !uuid '91cb9f99821b3d01ab592f651d1a937f2382938d'
-    oldFile: !uuid 'e1ba154df5b42d1cf59876c2bcb0f1e567f9f644'
-  /public/favicon.ico:
-    newFile: !uuid '5953360612768a25f5259d8e8d7c99cadb709571'
+    newFile: !uuid '3caf8eddbab05694ab9ebcee1e1b7d7f022376c9'
+    oldFile: !uuid '91cb9f99821b3d01ab592f651d1a937f2382938d'
+  /public/static:
+    newFile: !uuid '04e5bca36d1c3ab2265bffb0c5081ab80b9f6d9d'
+    oldFile: !uuid '611a22c0cd9b460026a1393f2817bb04585f6f98'
+  /public/static/.gitignore:
+    newFile: !uuid 'b722e9e13efe92c42cb81327fd1f1438a255e922'
+    oldFile: !uuid 'c96a04f008ee21e260b28f7701595ed59e2839e3'
+  /public/static/images:
+    newFile: !uuid '0d560f2231f3fde374c8db5c734c6a6c6179d528'
+    oldFile: !uuid '9dca3fb4b679db57c91779779fcff1a410b3bbc9'
+  /public/static/images/ico_login_32_32_weibo.png:
+    newFile: !uuid 'be0a7c0f9eaa8f436315f43bc6ed12630b9f76e5'
     oldFile: null
-gitCommitId: !uuid '04b7aeb44dae202d05f43ff084cc9748ee25038b'
+  /public/static/images/ico_login_qq.png:
+    newFile: !uuid '095881520f901a0e5ed452c309b9fd723c57440e'
+    oldFile: null
+gitCommitId: !uuid 'f988dd3af65470a9f8b067a3e035926290e5594f'
 renames: {
   }
-revisionId: 169
+revisionId: 170
