@@ -2,22 +2,13 @@
 branches: {
   }
 fileChange:
-  /thinkphp:
-    newFile: !uuid 'e0ed047d205fb98834f588014cd8e72c79fb7ba4'
-    oldFile: !uuid 'ef31849d1072b28997b065d5b5ffa1eeb26d0a90'
-  /thinkphp/library:
-    newFile: !uuid '6ec913f21ccee96c9b892691253473da4018cb0f'
-    oldFile: !uuid '2645d9fe1a4f33cdd738fad2ef3bd73125796e41'
-  /thinkphp/library/traits:
-    newFile: !uuid '03dc3aea0414b6de2bcea27d986381becb93fde9'
-    oldFile: !uuid '8438edea1a012212a0288ca0d4cdfcd0478bdf2b'
-  /thinkphp/library/traits/controller:
-    newFile: !uuid '0e74d9bc8a1499c7192fdcbf89b53958d7c3bbee'
-    oldFile: !uuid '24f3c8d8f6ff6baa5f30a269f3bb4152fc4370be'
-  /thinkphp/library/traits/controller/Jump.php:
-    newFile: !uuid '384bdc0cd0782fbbf10a17d7f378b50bbe0fbadd'
-    oldFile: !uuid '08fe8c9f8c48ec7f6816e0dcbabb739c26529c3f'
-gitCommitId: !uuid '8aae6bc225c5d32147f927ba31a784e4c88d2e17'
+  /public:
+    newFile: !uuid 'e1ba154df5b42d1cf59876c2bcb0f1e567f9f644'
+    oldFile: !uuid '2d80afa9b74eaa84077dba71a5ba08cbaff73273'
+  /public/index.php:
+    newFile: !uuid '6b7ec30e0f2a31842df31e99dfc7a7a3ae74b8a2'
+    oldFile: !uuid 'd07b7f3189f89f469e5cd60cdd3f48273a84ffe8'
+gitCommitId: !uuid '02e1ec5013c6068aec69fa16cba683cb54d7a61e'
 renames: {
   }
-revisionId: 166
+revisionId: 167
