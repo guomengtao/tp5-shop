@@ -257,8 +257,8 @@ return [
         'useImgBg' => false,
         'bg'       => [255, 255, 255],
         'zhSet'    => '学习',
-        'imageH'   => '30',
-        'imageW'   => '100',
+        'imageH'   => '0',
+        'imageW'   => '0',
         'fontttf'  => '2.ttf',
         'codeSet'  => 'tp',
 
