@@ -1124,7 +1124,7 @@ class Member extends \think\Controller
 
             if (!$user) {
                 //错误页面的默认跳转页面是返回前一页，通常不需要设置
-                $this->error('新增失败', 'Index/index/login', 'tom', 5);
+                $this->error('请登录', 'Index/index/login', 'tom', 5);
                 return "请登录";
                 # 没有登录 跳转到登录页面
                 // redirect('index/index/login')->remember();
