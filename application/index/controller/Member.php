@@ -1116,15 +1116,16 @@ class Member extends \think\Controller
 
 
         // ajax 签到调用
-
-        if (request()->isPost()) {
+        $registration_run = input('registration_run');
+        if ($registration_run) {
 
             $user             = Cookie::get('phone');
             $registration_vip = input('registration_vip');
 
             if (!$user) {
-
-                return "大佬！请登录";
+                //错误页面的默认跳转页面是返回前一页，通常不需要设置
+                $this->error('新增失败', 'Index/index/login', 'tom', 5);
+                return "请登录";
                 # 没有登录 跳转到登录页面
                 // redirect('index/index/login')->remember();
 
@@ -1155,7 +1156,9 @@ class Member extends \think\Controller
 
             if ($registration_user) {
                 # 已经签到直接提示
-                return "已连续签到" . $rand . "天";
+                $msg = "已连续签到" . $rand . "天";
+                return  $this->success($msg);
+                // return "已连续签到" . $rand . "天";
             }
 
 
@@ -1200,8 +1203,10 @@ class Member extends \think\Controller
                 add_vip_days($add_vip_days, 135001);
             }
 
-
-            return "恭喜您，连续签到" . $rand . "天";
+            $msg = "恭喜您，连续签到" . $rand . "天";
+            //设置成功后跳转页面的地址，默认的返回页面是$_SERVER['HTTP_REFERER']
+            return  $this->success($msg );
+            // return "恭喜您，连续签到" . $rand . "天";
 
         }
 
