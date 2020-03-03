@@ -172,7 +172,7 @@ class Bbs extends \think\Controller
             'title'   => $title,
             'user_id' => $user_id,
         ]);
-
+ 
 
         return $this->success('恭喜您留言成功^_^', 'bbs/show');
 

@@ -25,6 +25,18 @@ class Member extends \think\Controller
         // 访问记录
         Footprint::add();
     }
+    public function  skin(){
+        /**
+         * 开发皮肤模板
+         * 老看一个配色方案感觉审美疲劳
+         * 但是又不能影响基本的配色方案
+         * 所以开发一个自定义的配色方案，默认的不换，但是可以选择换风格
+         * 实现思路
+         * 头部调用一个动态地址的css样式文件，实现不同几个风格的选择
+         * 前台用户选择了某个风格后，后台数据库记录一下
+         * 前台显示这个css的时候，先去查查这个用户对应的风格的css文件
+         */
+    }
 
     public function myhome()
     {
