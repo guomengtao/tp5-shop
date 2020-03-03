@@ -41,11 +41,11 @@ class Member extends \think\Controller
          * 1.head里加个cookie获取
          * 2.会员登录里一起读取skin的数值
          */
-        $id      = input('id');
+        $param      = input('param');
         $user_id = Cookie::get('user_id');
 
         // 有效期十年
-        Cookie::set('skin', $id, 315360000);
+        Cookie::set('skin', $param, 315360000);
 
         // 如果登录了可以记录下载
         // 保存用户表里通过用户登录的时候加载
