@@ -1,0 +1,48 @@
+/*模仿的360网盘后台导航条的颜色*/
+
+
+/*主要的颜色变量名*/
+:root {
+    --boss: #2ac38a;
+}
+
+/*主导航条的大背景色*/
+.navbar-inverse {
+    background-color: var(--boss);
+    border-color: var(--boss);
+}
+
+/*导航条里菜单的链接文字颜色*/
+.navbar-inverse .navbar-nav > li > a {
+    color: #ffffff;
+}
+
+/*标志brand文字的颜色*/
+.navbar-inverse .navbar-brand {
+    color: #ffffff;
+}
+
+/*导航条鼠标经过背景*/
+.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:focus, .navbar-inverse .navbar-nav > .open > a:hover {
+    color: #fff;
+    background-color: #1fb375;
+|
+}
+
+
+/*下拉菜单的鼠标经过背景色*/
+.dropdown-menu > li > a:hover {
+    color: var(--boss);
+    text-decoration: none;
+    background-color: rgba(42, 195, 138, .1);
+}
+
+/*全局链接颜色*/
+a {
+    color: var(--boss);
+}
+
+a:focus, a:hover {
+    color: var(--boss);
+    text-decoration: underline;
+}
