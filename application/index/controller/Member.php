@@ -25,7 +25,9 @@ class Member extends \think\Controller
         // 访问记录
         Footprint::add();
     }
-    public function  skin(){
+
+    public function skin()
+    {
         /**
          * 开发皮肤模板
          * 老看一个配色方案感觉审美疲劳
@@ -39,6 +41,18 @@ class Member extends \think\Controller
          * 1.head里加个cookie获取
          * 2.会员登录里一起读取skin的数值
          */
+        $id      = input('id');
+        $user_id = Cookie::get('user_id');
+
+        // 有效期十年
+        Cookie::set('skin', $id, 315360000);
+
+        // 如果登录了可以记录下载
+        // 保存用户表里通过用户登录的时候加载
+        if ($user_id) {
+            // 代码略
+        }
+         return $this->success('设置成功^_^');
     }
 
     public function myhome()
@@ -55,7 +69,7 @@ class Member extends \think\Controller
 
 
             if ($add) {
-                $this->redirect('index/member/myhome');
+                $this->redirect('index / member / myhome');
                 //设置成功后跳转页面的地址，默认的返回页面是$_SERVER['HTTP_REFERER']
                 $this->success('发布成功');
             } else {
@@ -98,13 +112,13 @@ class Member extends \think\Controller
 
                 return "大佬！请登录";
                 # 没有登录 跳转到登录页面
-                // redirect('index/index/login')->remember();
+                // redirect('index / index / login')->remember();
 
             }
 
             // 判断今天是否有签到记录
-            $registration_user = Order::where('phone', '=', $user)
-                ->where('body', '=', 135)
+            $registration_user = Order::where('phone', ' = ', $user)
+                ->where('body', ' = ', 135)
                 ->whereTime('create_time', 'today')
                 ->count();
 
@@ -183,28 +197,28 @@ class Member extends \think\Controller
 
 
         //        查询今天签到
-        $list = Order::where('body', '=', 135)
+        $list = Order::where('body', ' = ', 135)
             ->whereTime('create_time', 'today')
-            ->where('phone', '=', $user)
+            ->where('phone', ' = ', $user)
             ->paginate(100);
 
         //        查询昨天签到
-        $yesterday = Order::where('body', '=', 135)
+        $yesterday = Order::where('body', ' = ', 135)
             ->whereTime('create_time', 'yesterday')
-            ->where('phone', '=', $user)
+            ->where('phone', ' = ', $user)
             ->paginate(100);
 
 
         //        查询前天签到
-        $the_day_before_yesterday = Order::where('body', '=', 135)
-            ->whereTime('create_time', '-7 day')
-            ->where('phone', '=', $user)
+        $the_day_before_yesterday = Order::where('body', ' = ', 135)
+            ->whereTime('create_time', ' - 7 day')
+            ->where('phone', ' = ', $user)
             ->paginate(100);
 
         //        查询最近7天签到
-        $list_all = Order::where('body', '=', 135)
-            ->where('phone', '=', $user)
-            ->whereTime('create_time', '-7 day')
+        $list_all = Order::where('body', ' = ', 135)
+            ->where('phone', ' = ', $user)
+            ->whereTime('create_time', ' - 7 day')
             ->paginate(100);
 
 
@@ -240,7 +254,7 @@ class Member extends \think\Controller
         // 获取签到开始的第一天
 
 
-        $firstday = '2018-7-29';
+        $firstday = '2018 - 7 - 29';
 
 
         $allstart = 0;
@@ -258,8 +272,8 @@ class Member extends \think\Controller
             $day_b = $firstday . ' 23:59:59';
 
 
-            $everyday = Order::where('body', '=', 135)
-                ->where('phone', '=', $user)
+            $everyday = Order::where('body', ' = ', 135)
+                ->where('phone', ' = ', $user)
                 ->where('create_time', 'between time', [$day_a, $day_b])
                 ->order('id asc')
                 ->count();
@@ -281,9 +295,9 @@ class Member extends \think\Controller
             }
             echo "<br >";
 
-            // 下一天 date('Y-m-d',strtotime($date.'-1 day'))
+            // 下一天 date('Y - m - d',strtotime($date.' - 1 day'))
             // $firstday = $firstday +1;
-            $firstday = date('Y-m-d', strtotime($firstday . '+1 day'));
+            $firstday = date('Y - m - d', strtotime($firstday . ' + 1 day'));
 
         }
 
@@ -292,8 +306,8 @@ class Member extends \think\Controller
 
 
         //       连续签到排名
-        $list_top = Order::where('body', '=', 135)
-            ->where('phone', '=', $user)
+        $list_top = Order::where('body', ' = ', 135)
+            ->where('phone', ' = ', $user)
             ->order('id desc')
             ->paginate(50);
 
@@ -342,8 +356,8 @@ class Member extends \think\Controller
 // die();
 
         //  在线时间排名
-        $online_time = User::where('phone', '<>', '15966982315')
-            ->where('phone', '=', $phone)
+        $online_time = User::where('phone', ' <> ', '15966982315')
+            ->where('phone', ' = ', $phone)
             ->order('online_time desc')
             ->where('phone', $eq, $phone)
             ->limit(10)
@@ -359,8 +373,8 @@ class Member extends \think\Controller
 
 
         //  金币排行榜
-        $money = Money::where('phone', '<>', '15966982315')
-            ->where('phone', '<>', '0')
+        $money = Money::where('phone', ' <> ', '15966982315')
+            ->where('phone', ' <> ', '0')
             ->field('id,phone,content, money,create_time')
             ->order('id desc')
             ->where('phone', $eq, $phone)
@@ -368,9 +382,9 @@ class Member extends \think\Controller
             ->select();
 
         //  积分排行榜 
-        $money_add = Money::where('phone', '<>', '15966982315')
-            ->where('phone', '<>', '0')
-            ->where('money', '>', '0')
+        $money_add = Money::where('phone', ' <> ', '15966982315')
+            ->where('phone', ' <> ', '0')
+            ->where('money', ' > ', '0')
             ->where('phone', $eq, $phone)
             ->field('id,phone, money,create_time')
             ->order('id desc')
@@ -382,7 +396,7 @@ class Member extends \think\Controller
         $pathinfo = Footprint::field('id,phone,create_time,pathinfo')
             ->order('id desc')
             ->where('phone', $eq, $phone)
-            ->where('pathinfo', 'like', '%' . 'index/index/view' . '%')
+            ->where('pathinfo', 'like', ' % ' . 'index / index / view' . ' % ')
             ->limit(10)
             // ->fetchSql(true)
             ->select();
@@ -391,7 +405,7 @@ class Member extends \think\Controller
         $search = Footprint::field('id,url,create_time')
             ->order('id desc')
             ->where('phone', $eq, $phone)
-            ->where('pathinfo', '=', 'index/index/like')
+            ->where('pathinfo', ' = ', 'index / index / like')
             ->limit(10)
             // ->fetchSql(true)
             ->select();
@@ -401,13 +415,13 @@ class Member extends \think\Controller
         $domain = Footprint::
         field('id,phone,referer as domain,create_time')
             ->order('id desc')
-            // ->where('pathinfo','like','%'.'index/index/view'.'%')
-            // ->where('domain','like','%'.'com'.'%')
-            ->where('domain', '<>', 'open.gaoxueya.com')
-            ->where('domain', '<>', 'www.tp5.com')
+            // ->where('pathinfo','like',' % '.'index / index / view'.' % ')
+            // ->where('domain','like',' % '.'com'.' % ')
+            ->where('domain', ' <> ', 'open . gaoxueya . com')
+            ->where('domain', ' <> ', 'www . tp5 . com')
             ->where('phone', $eq, $phone)
-            ->where('domain', '<>', '')
-            ->where('domain', '<>', 'blank')
+            ->where('domain', ' <> ', '')
+            ->where('domain', ' <> ', 'blank')
             ->limit(10)
             ->select();
 
@@ -417,8 +431,8 @@ class Member extends \think\Controller
         field('id,phone,pathinfo,create_time')
             ->where('phone', $eq, $phone)
             ->order('id desc')
-            ->where('phone', '<>', '15966982315')
-            ->where('pathinfo', '<>', 'index/member/news')
+            ->where('phone', ' <> ', '15966982315')
+            ->where('pathinfo', ' <> ', 'index / member / news')
             ->limit(10)
             ->select();
 
@@ -433,7 +447,7 @@ class Member extends \think\Controller
         //  最新订单
         $total_fee = Order::
         field('id,phone,body,total_fee,subject,create_time')
-            ->where('phone', '<>', '15966982315')
+            ->where('phone', ' <> ', '15966982315')
             ->where('phone', $eq, $phone)
             // ->whereTime('create_time', 'today')
             ->order('id desc')
@@ -442,12 +456,12 @@ class Member extends \think\Controller
 
 
         //  最新签到
-        $registration = Order::where('body', '=', 135)
+        $registration = Order::where('body', ' = ', 135)
 //            ->group('phone')
             ->field('id,phone,create_time')
             ->where('phone', $eq, $phone)
             ->order('id desc')
-            ->where('phone', '<>', '15966982315')
+            ->where('phone', ' <> ', '15966982315')
             ->limit(10)
             ->select();
 
@@ -508,18 +522,18 @@ class Member extends \think\Controller
 
         $appointment = input('appointment');
 
-        $list = Order::where('body', '=', 37)
+        $list = Order::where('body', ' = ', 37)
             ->field('id,phone, total_fee,create_time,subject')
-            ->where('phone', '<>', '15966982315')
+            ->where('phone', ' <> ', '15966982315')
             ->order('id desc')
             ->paginate(15);
 
 
         //  打赏排名
-        $total_fee = Order::where('body', '=', 37)
+        $total_fee = Order::where('body', ' = ', 37)
             ->group('phone')
             ->field('id,phone, sum(`total_fee`) as total_feecount,create_time,subject')
-            ->where('phone', '<>', '15966982315')
+            ->where('phone', ' <> ', '15966982315')
             // ->whereTime('create_time', 'today')
             ->order('total_feecount desc')
             ->limit(10)
@@ -527,9 +541,9 @@ class Member extends \think\Controller
 
 
         //  打赏总金额
-        $total_fee_count = Order::where('body', '=', 37)
+        $total_fee_count = Order::where('body', ' = ', 37)
             // ->field('total_fee')
-            // ->where('phone','<>','15966982315')
+            // ->where('phone',' <> ','15966982315')
             ->sum('total_fee');
 
 
@@ -555,18 +569,18 @@ class Member extends \think\Controller
 
 
         //  打赏列表
-        $list = Order::where('body', '=', 37)
+        $list = Order::where('body', ' = ', 37)
             ->field('id,phone, total_fee,create_time,subject')
-            ->where('phone', '<>', '15966982315')
+            ->where('phone', ' <> ', '15966982315')
             ->order('id desc')
             ->paginate(15);
 
 
         //  打赏排名
-        $total_fee = Order::where('body', '=', 37)
+        $total_fee = Order::where('body', ' = ', 37)
             ->group('phone')
             ->field('id,phone, sum(`total_fee`) as total_feecount,create_time,subject')
-            ->where('phone', '<>', '15966982315')
+            ->where('phone', ' <> ', '15966982315')
             // ->whereTime('create_time', 'today')
             ->order('total_feecount desc')
             ->limit(10)
@@ -574,9 +588,9 @@ class Member extends \think\Controller
 
 
         //  打赏总金额
-        $total_fee_count = Order::where('body', '=', 37)
+        $total_fee_count = Order::where('body', ' = ', 37)
             // ->field('total_fee')
-            // ->where('phone','<>','15966982315')
+            // ->where('phone',' <> ','15966982315')
             ->sum('total_fee');
 
 
@@ -615,12 +629,12 @@ class Member extends \think\Controller
             dump("没有用缓存" . $cach_time);
 
             // 设置缓存数据
-            // cache('date',  date('y-m-d h:i:s',time()), $cach_time);
+            // cache('date',  date('y - m - d h:i:s',time()), $cach_time);
             // dump(cache('date'));
 
 
             //  在线时间排名
-            $online_time = User::where('phone', '<>', '15966982315')
+            $online_time = User::where('phone', ' <> ', '15966982315')
                 ->order('online_time desc')
                 ->limit(10)
                 ->select();
@@ -638,8 +652,8 @@ class Member extends \think\Controller
 
             //  金币排行榜
             $money = Money::group('phone')
-                ->where('phone', '<>', '15966982315')
-                ->where('phone', '<>', '0')
+                ->where('phone', ' <> ', '15966982315')
+                ->where('phone', ' <> ', '0')
                 ->field('id,phone, sum(`money`) as money')
                 ->order('money desc')
                 ->limit(10)
@@ -648,9 +662,9 @@ class Member extends \think\Controller
 
             //  积分排行榜
             $money_add = Money::group('phone')
-                ->where('phone', '<>', '15966982315')
-                ->where('phone', '<>', '0')
-                ->where('money', '>', '0')
+                ->where('phone', ' <> ', '15966982315')
+                ->where('phone', ' <> ', '0')
+                ->where('money', ' > ', '0')
                 ->field('id,phone, sum(`money`) as money')
                 ->order('money desc')
                 ->limit(10)
@@ -662,7 +676,7 @@ class Member extends \think\Controller
             $pathinfo = Footprint::group('pathinfo')
                 ->field('id,phone, count(`pathinfo`) as pathinfocount,Now(),pathinfo')
                 ->order('pathinfocount desc')
-                ->where('pathinfo', 'like', '%' . 'index/index/view' . '%')
+                ->where('pathinfo', 'like', ' % ' . 'index / index / view' . ' % ')
                 ->limit(10)
                 // ->fetchSql(true)
                 ->select();
@@ -673,7 +687,7 @@ class Member extends \think\Controller
             $search = Footprint::group('url')
                 ->field('id,count(`url`) as urlcount,url')
                 ->order('urlcount desc')
-                ->where('pathinfo', '=', 'index/index/like')
+                ->where('pathinfo', ' = ', 'index / index / like')
                 ->limit(10)
                 ->select();
             cache('search', $search, $cach_time);
@@ -684,8 +698,8 @@ class Member extends \think\Controller
             $domain = Footprint::group('domain')
                 ->field('id,phone, count(`domain`) as domaincount,domain')
                 ->order('domaincount desc')
-                // ->where('pathinfo','like','%'.'index/index/view'.'%')
-                ->where('domain', 'like', '%' . 'com' . '%')
+                // ->where('pathinfo','like',' % '.'index / index / view'.' % ')
+                ->where('domain', 'like', ' % ' . 'com' . ' % ')
                 ->limit(10)
                 ->select();
             cache('domain', $domain, $cach_time);
@@ -695,15 +709,15 @@ class Member extends \think\Controller
             $footprint_phone = Footprint::group('phone')
                 ->field('id,phone, count(`phone`) as phonecount')
                 ->order('phonecount desc')
-                ->where('phone', '<>', '15966982315')
+                ->where('phone', ' <> ', '15966982315')
                 ->limit(10)
                 ->select();
             cache('footprint_phone', $footprint_phone, $cach_time);
 
 
             //  连续签到排名
-            $list_top = Order::where('body', '=', 135)
-                ->where('phone', '<>', '15966982315')
+            $list_top = Order::where('body', ' = ', 135)
+                ->where('phone', ' <> ', '15966982315')
                 ->whereTime('create_time', 'today')
                 ->order('rand desc')
                 ->limit(10)
@@ -711,10 +725,10 @@ class Member extends \think\Controller
             cache('list_top', $list_top, $cach_time);
 
             //  打赏排名
-            $total_fee = Order::where('body', '=', 37)
+            $total_fee = Order::where('body', ' = ', 37)
                 ->group('phone')
                 ->field('id,phone, sum(`total_fee`) as total_feecount')
-                ->where('phone', '<>', '15966982315')
+                ->where('phone', ' <> ', '15966982315')
                 // ->whereTime('create_time', 'today')
                 ->order('total_feecount desc')
                 ->limit(10)
@@ -723,11 +737,11 @@ class Member extends \think\Controller
 
 
             //  访问次数榜
-            $registration = Order::where('body', '=', 135)
+            $registration = Order::where('body', ' = ', 135)
                 ->group('phone')
                 ->field('id,phone, count(`phone`) as phonecount')
                 ->order('phonecount desc')
-                ->where('phone', '<>', '15966982315')
+                ->where('phone', ' <> ', '15966982315')
                 ->limit(10)
                 ->select();
             cache('registration', $registration, $cach_time);
@@ -738,7 +752,7 @@ class Member extends \think\Controller
                 ->group('invite')
                 ->field('id,invite, count(`invite`) as invitecount,phone')
                 ->order('invitecount desc')
-                ->where('invite', '<>', '0')
+                ->where('invite', ' <> ', '0')
                 ->limit(10)
                 ->select();
             cache('invite', $invite, $cach_time);
@@ -849,7 +863,7 @@ class Member extends \think\Controller
 
             // 判断今天是否有签到记录
             $rand_today = Order::where('body', $body)
-                ->where('phone', '<>', '15966982315')
+                ->where('phone', ' <> ', '15966982315')
                 ->whereTime('create_time', 'today')
                 ->count();
 
@@ -944,7 +958,7 @@ class Member extends \think\Controller
 
             // //设置增加vip天数,先查询vip到期日期
             // $expiration_time  = User::where('phone', $phone)
-            //     ->whereTime('create_time','>=', 'today')
+            //     ->whereTime('create_time',' >= ', 'today')
             //     ->value('expiration_time');
 
 //                    设置开始日期，过期的从今天开始算。
@@ -989,18 +1003,18 @@ class Member extends \think\Controller
 
 
                 //    跳出模态框架
-                exit('<script>top.location.href="../index/login/login/2/"</script>');
+                exit(' < script>top . location . href = "../index/login/login/2/" </script > ');
 
                 //           重定向方式
-                $this->redirect('index/login', ['login' => '2']);
+                $this->redirect('index / login', ['login' => '2']);
             }
 
             //    跳出模态框架,测试模态框内没有获取jq判断，直接跳出到页面外部操作
-            exit('<script>top.location.href="../index/login/"</script>');
+            exit(' < script>top . location . href = "../index/login/" </script > ');
 
-            $this->redirect('index/login', ['login' => '0']);
-//            exit('<script>top.location.href="../index/login/</script>');
-//            exit('<script>top.location.href="../index/view/id/'.$body.'"</script>');
+            $this->redirect('index / login', ['login' => '0']);
+//            exit(' < script>top . location . href = "../index/login/</script>');
+//            exit('<script>top.location.href=" ../index / view / id / '.$body.'"</script>');
         }
 
         //重定向到用户购买的商品结果页面
@@ -1016,40 +1030,40 @@ class Member extends \think\Controller
 //        注册并订单入库后返回到首页
         if ($body == 1008611) {
             //    跳出模态框架
-            exit('<script>top.location.href="../index/index/login/221/' . $body . '"</script>');
+            exit('<script>top.location.href=" ../index / index / login / 221 / ' . $body . '"</script>');
         }
 
 
 //        注册并订单入库后返回到首页
         if ($body == 1008611 or $body == 1008611) {
             //    跳出模态框架
-            exit('<script>top.location.href="../index/index/login/221/' . $body . $phone . '"</script>');
+            exit('<script>top.location.href=" ../index / index / login / 221 / ' . $body . $phone . '"</script>');
         }
 
 
         //        135是签到的，签到后跳转到签到排名
         if ($body == 135) {
             //    跳出模态框架
-            exit('<script>top.location.href="../member/registration/login/135/add_vip_days/' . $rand . '"</script>');
+            exit('<script>top.location.href=" ../member / registration / login / 135 / add_vip_days / ' . $rand . '"</script>');
         }
 
 
         //        105是开通vip，跳转到vip页面
         if ($body == 105) {
             //    跳出模态框架
-            exit('<script>top.location.href="../member/vip/add_vip_days/' . $add_vip_days . '"</script>');
+            exit('<script>top.location.href=" ../member / vip / add_vip_days / ' . $add_vip_days . '"</script>');
         }
 
         //  37是打赏，打赏后跳转到打赏排名
         if ($body == 37) {
             //    跳出模态框架
-            exit('<script>top.location.href="../member/tips/login/23021/add_vip_days/' . $rand . '"</script>');
+            exit('<script>top.location.href=" ../member / tips / login / 23021 / add_vip_days / ' . $rand . '"</script>');
         }
 
         // 如果大于100811的商品上面没有特别指定就跳转到首页 不过这里没给明显的提示
         if ($body >= 1008811) {
             //    跳出模态框架
-            exit('<script>top.location.href="../index/index/login/232/' . $body . '"</script>');
+            exit('<script>top.location.href=" ../index / index / login / 232 / ' . $body . '"</script>');
         }
 
 
@@ -1058,7 +1072,7 @@ class Member extends \think\Controller
 //        如果没登录，重置密码时先做记录，不重置付款状态，跳转回来重新入库。
 
 
-        exit('<script>top.location.href="../index/view/id/' . $body . '"</script>');
+        exit('<script>top.location.href=" ../index / view / id / ' . $body . '"</script>');
 
     }
 
@@ -1172,7 +1186,7 @@ class Member extends \think\Controller
             if ($registration_user) {
                 # 已经签到直接提示
                 $msg = "已连续签到" . $rand . "天";
-                return  $this->success($msg);
+                return $this->success($msg);
                 // return "已连续签到" . $rand . "天";
             }
 
@@ -1220,7 +1234,7 @@ class Member extends \think\Controller
 
             $msg = "恭喜您，连续签到" . $rand . "天";
             //设置成功后跳转页面的地址，默认的返回页面是$_SERVER['HTTP_REFERER']
-            return  $this->success($msg );
+            return $this->success($msg);
             // return "恭喜您，连续签到" . $rand . "天";
 
         }
@@ -1306,9 +1320,9 @@ class Member extends \think\Controller
         $time2 = $expiration_time;
 
 
-        $time1 = strtotime(date("Y-m-d H:i:s"));                              //获取当前时间
+        $time1 = strtotime(date("Y - m - d H:i:s"));                              //获取当前时间
         $time2 = strtotime($expiration_time);                              //五一放假时间
-        $time3 = strtotime("2017-5-5");                              //端午放假时间
+        $time3 = strtotime("2017 - 5 - 5");                              //端午放假时间
 
         $sub1 = ceil(($time2 - $time1) / 3600);                            //（60秒*60分）秒/小时
         $sub2 = ceil(($time3 - $time1) / 86400);                           //（60秒*60分*24小时）秒/天
@@ -1320,7 +1334,7 @@ class Member extends \think\Controller
         $vip_day = 1;
 
         // 简易抢购vip判断功能，赋值语句 
-        // date_default_timezone_set("Asia/Shanghai");
+        // date_default_timezone_set("Asia / Shanghai");
 
         // 判断当前是几点几分 915是9点15
         $secondkill = intval(date("Hi"));
@@ -1377,7 +1391,7 @@ class Member extends \think\Controller
     public function fgetcsv()
     {
         $phone = Cookie::get('phone');
-        $file  = fopen("tom666" . $phone . ".csv", "r");
+        $file  = fopen("tom666" . $phone . " . csv", "r");
         while (!feof($file)) {
             dump(fgetcsv($file));
         }
@@ -1387,9 +1401,9 @@ class Member extends \think\Controller
 
     public function fputcsv()
     {
-        header("content-type:text/html; charset=utf-8");
+        header("content - type:text / html; charset = utf - 8");
 
-//      $line = array(1,'学习—中文乱码',12345,'vb200',iconv("UTF-8", "GB2312//IGNORE", "学习—中文乱码"));
+//      $line = array(1,'学习—中文乱码',12345,'vb200',iconv("UTF - 8", "GB2312//IGNORE", "学习—中文乱码"));
         $line = array(1, '学习—中文乱码', 12345, 'vb200', '学习中文乱码');
 
         foreach ($line as &$value) {
