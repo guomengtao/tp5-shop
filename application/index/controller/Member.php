@@ -52,7 +52,11 @@ class Member extends \think\Controller
         if ($user_id) {
             // 代码略
         }
-         return $this->success('设置成功^_^');
+        //重定向 不用提示
+        return $this->redirect('Index/index/index');
+
+        // 提示
+        // return $this->success('设置成功^_^', 'index/index', 0);
     }
 
     public function myhome()
