@@ -695,6 +695,8 @@ class Api extends \think\Controller
         $rand = rand(1000, 9999); //取随机四位数字
         $cha  = $my_url . '?username=' . $username . '&password=' . $password .'&mobile='. $tom.'&content=验证码：' . $rand . '【高血压】' ;
 
+        echo $cha;
+        die();
         $fp = file_get_contents($cha);
 
 
