@@ -693,13 +693,14 @@ class Api extends \think\Controller
         header("content-type:text/html; charset=utf-8");
         $tom  = input('s');
         $rand = rand(1000, 9999); //取随机四位数字
-        $cha  = $my_url . '?username=' . $username . '&password=' . $password .'&mobile='. $tom.'&content=验证码：' . $rand . '【高血压】' ;
+        $cha  = $my_url . '?username=' . $username . '&password=' . $password . '&mobile=' . $tom . '&content=验证码：' . $rand . '【高血压】';
 
-        // echo $cha;
-        // die();
+        echo $cha;
+
         $fp = file_get_contents($cha);
 
 
+        die();
 
         //转xml为数组形式
         $xml  = simplexml_load_string($fp);
