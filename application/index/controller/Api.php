@@ -660,9 +660,10 @@ class Api extends \think\Controller
         header("content-type:text/html; charset=utf-8");
         $tom  = input('s');
         $rand = rand(1000, 9999); //取随机四位数字
-        $cha  = $my_url . '?username=' . $username . '&password=' . $password . '&mobile=' . $tom . '&content=验证码：' . $rand . '【高血压】';
+        $cha  = 'http://api.chanyoo.net/sendsms?username=' . '?username=' . $username . '&password=' . $password . '&mobile=' . $tom . '&content=验证码：' . $rand . '【高血压】';
 
         dump($cha);
+        // $url = 'http://api.chanyoo.net/sendsms?username='.$usename.'&password='.$password.'&mobile='.$mobile.'&content='.$content.'';
 
         $this->sendSMS($cha);
         // $fp = file_get_contents("$cha");
@@ -708,7 +709,9 @@ class Api extends \think\Controller
 
     public function sendSMS($url)
     {
-
+        if (function_exists('file_get_contents')) {
+            $result = file_get_contents($url);
+        } else {
             $ch      = curl_init();
             $timeout = 5;
             curl_setopt($ch, CURLOPT_URL, $url);
@@ -716,7 +719,7 @@ class Api extends \think\Controller
             curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
             $result = curl_exec($ch);
             curl_close($ch);
-        
+        }
         $result = json_decode($result, true);
         return $result['result'];
     }
