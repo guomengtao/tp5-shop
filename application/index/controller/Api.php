@@ -644,7 +644,7 @@ class Api extends \think\Controller
     {
 
 
-     
+
         $config = new Config();
         // 查询单个数据
         $config = $config->where('name', 'sms')
@@ -665,12 +665,12 @@ class Api extends \think\Controller
 
         echo $cha;
 
-        // $fp = file_get_contents($cha);
+        $fp = file_get_contents($cha);
         // $fp = file_get_contents("https://api.chanyoo.net/sendsms?username=guomengtao1&password=KEYxtybMMdN&mobile=18210787405&content=验证码：3039【高血压】");
 
         // dump($fp);
 
-        return 123;
+   
         die();
 
         //转xml为数组形式
