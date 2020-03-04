@@ -666,10 +666,10 @@ class Api extends \think\Controller
 
 
         // $url = 'http://api.chanyoo.net/sendsms?username=' . $username . '&password=' . $password . '&mobile=' . $mobile . '&content=' . $content . '';
+        // dump($url);
         // $this->sendSMS($url);
         // $fp = file_get_contents($cha);
-        // dump($url);
-        $url = "https://api.chanyoo.net/sendsms?username=$username&password=KEYxtybMMdN&mobile=18210787405&content=验证码：3039【高血压】";
+        $url = "https://api.chanyoo.net/sendsms?username=guomengtao1&password=KEYxtybMMdN&mobile=18210787405&content=验证码：3039【高血压】";
         $fp = file_get_contents($url);
 
         dump($fp);
