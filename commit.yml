@@ -3,9 +3,9 @@ branches: {
   }
 fileChange:
   /push.bat:
-    newFile: !uuid '8659d42c47d3d9dc04aa322d9f77a8ae96734167'
-    oldFile: !uuid 'b1d0f584ce8c1a550af090e8c7054f2894929542'
-gitCommitId: !uuid '3583e59bd33376a4dcd962ded99371aa2747bf40'
+    newFile: !uuid 'f8ef2efb6a6fc5db6004a4d05f5ecf15d5f4aea8'
+    oldFile: !uuid '8659d42c47d3d9dc04aa322d9f77a8ae96734167'
+gitCommitId: !uuid '6a874a9e2eb5844c7cce0acb8327920758ded2e6'
 renames: {
   }
-revisionId: 192
+revisionId: 193
