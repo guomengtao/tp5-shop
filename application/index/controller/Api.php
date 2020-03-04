@@ -696,11 +696,12 @@ class Api extends \think\Controller
         $cha  = $my_url . '?username=' . $username . '&password=' . $password . '&mobile=' . $tom . '&content=验证码：' . $rand . '【高血压】';
 
         echo $cha;
-        // die();
+
         $fp = file_get_contents($cha);
 
+        dump($fp);
 
-
+die();
 
         //转xml为数组形式
         $xml  = simplexml_load_string($fp);
