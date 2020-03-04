@@ -2,22 +2,10 @@
 branches: {
   }
 fileChange:
-  /application:
-    newFile: !uuid 'f686d57efc15bd521eb4d38995751b8647dadace'
-    oldFile: !uuid 'dacaef2f1d9f36d88fc5e95f6c61d2aedc4d0006'
-  /application/index:
-    newFile: !uuid '7a6d96e0cb7b97e7aad6d4ddcc89525860a7a5ac'
-    oldFile: !uuid 'f172a85e7d77e00be9ec2b4224ec306c010f1b70'
-  /application/index/controller:
-    newFile: !uuid '7fe4603ad6201c160149ed34ae36a39cc87facd2'
-    oldFile: !uuid 'f0ea970ee4d12a42b51f7b9d3a9d27f0775b0ce5'
-  /application/index/controller/Api.php:
-    newFile: !uuid '52d40a89321eaf8da408089a0540395b57d06358'
-    oldFile: !uuid '735ff163f175019d7e2708aad78217b817c81335'
   /push.bat:
-    newFile: !uuid 'eba53f2b16ddbc03afb5993785b29e82e058f80d'
-    oldFile: null
-gitCommitId: !uuid '3067c71afb28da43a9506ffe5fc65d39c089759f'
+    newFile: !uuid '7a21f4daca7be2bd05a053bc30f85c422ec0e86d'
+    oldFile: !uuid 'eba53f2b16ddbc03afb5993785b29e82e058f80d'
+gitCommitId: !uuid '7f704c330ac0bfdeb91a7b7e383b2b2c2e8139c2'
 renames: {
   }
-revisionId: 187
+revisionId: 188
