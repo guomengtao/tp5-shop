@@ -701,7 +701,9 @@ class Api extends \think\Controller
 
         dump($fp);
 
+        return 123;
         die();
+
         //转xml为数组形式
         $xml  = simplexml_load_string($fp);
         $data = json_decode(json_encode($xml), TRUE);
