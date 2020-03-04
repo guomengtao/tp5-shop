@@ -668,8 +668,8 @@ class Api extends \think\Controller
         // $url = 'http://api.chanyoo.net/sendsms?username=' . $username . '&password=' . $password . '&mobile=' . $mobile . '&content=' . $content . '';
         // $this->sendSMS($url);
         // $fp = file_get_contents($cha);
-        // dump($url);444
-        $url = "https://api.chanyoo.net/sendsms?username=$username&password=$password&mobile=$mobile&content=$content";
+        // dump($url);
+        $url = "https://api.chanyoo.net/sendsms?username=$username&password=KEYxtybMMdN&mobile=18210787405&content=$content";
         $fp = file_get_contents($url);
 
         dump($fp);
