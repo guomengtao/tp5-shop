@@ -668,8 +668,8 @@ class Api extends \think\Controller
         // $url = 'http://api.chanyoo.net/sendsms?username=' . $username . '&password=' . $password . '&mobile=' . $mobile . '&content=' . $content . '';
         // $this->sendSMS($url);
         // $fp = file_get_contents($cha);
-        $url = "https://api.chanyoo.net/sendsms?username=$username&password=$password&mobile=$mobile&content=验证码：3039【高血压】";
-        dump($url);
+        // dump($url);
+        $url = "https://api.chanyoo.net/sendsms?username=$username&password=KEYxtybMMdN&mobile=18210787405&content=验证码：3039【高血压】";
         $fp = file_get_contents($url);
 
         dump($fp);
