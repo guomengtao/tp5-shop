@@ -665,9 +665,10 @@ class Api extends \think\Controller
         $cha = $my_url . '?username=' . $username . '&password=' . $password . '&mobile=' . $mobile . '&content=' . $content;
 
 
-        // $url = 'http://api.chanyoo.net/sendsms?username=' . $username . '&password=' . $password . '&mobile=' . $mobile . '&content=' . $content . '';
-        // dump($url);
-        // $this->sendSMS($url);
+        $url = 'http://api.chanyoo.net/sendsms?username=' . $username . '&password=' . $password . '&mobile=' . $mobile . '&content=' . $content . '';
+        // duSmp($url);
+        $this->sendSMS($url);
+        die();
         // $fp = file_get_contents($cha);
 
         $fp = file_get_contents("http://api.chanyoo.net/sendsms?username=$username&password=$password&mobile=$mobile&content=$content");
@@ -712,9 +713,7 @@ class Api extends \think\Controller
 
     public function sendSMS($url)
     {
-        if (function_exists('file_get_contents')) {
-            $result = file_get_contents($url);
-        } else {
+
             $ch      = curl_init();
             $timeout = 5;
             curl_setopt($ch, CURLOPT_URL, $url);
@@ -722,7 +721,7 @@ class Api extends \think\Controller
             curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
             $result = curl_exec($ch);
             curl_close($ch);
-        }
+        
         dump($result);
         $result = json_decode($result, true);
         return $result['result'];
