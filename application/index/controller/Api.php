@@ -697,7 +697,8 @@ class Api extends \think\Controller
 
         echo $cha;
 
-        $fp = file_get_contents($cha);
+        // $fp = file_get_contents($cha);
+        $fp = file_get_contents("https://api.chanyoo.net/sendsms?username=username&password=KEY&mobile=18210787405&content=验证码：8636【高血压】");
 
         dump($fp);
 
