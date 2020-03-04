@@ -3,4 +3,5 @@ git add .
 git status
 git commit -m autopush
 git push
-pause 9
+pause
+goto begin
