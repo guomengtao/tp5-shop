@@ -1,4 +1,4 @@
-：loop
+:loop
 git status
 git add .
 git status
