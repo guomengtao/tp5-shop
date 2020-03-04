@@ -1,267 +1,276 @@
- {include file="index/header" /}
+{include file="index/header" /}
 <script>
-function showHint(str)
-{
+    function showHint(str) {
 
 
-    var xmlhttp;
-  if (str.length==0)
-  {
-      document.getElementById("txtHint").innerHTML="请输入手机号";
-      return;
-  }
+        var xmlhttp;
+        if (str.length == 0) {
+            document.getElementById("txtHint").innerHTML = "请输入手机号";
+            return;
+        }
 
-  if (str.length!=11)
-  {
-    document.getElementById("txtHint").innerHTML="手机号格式有误";
-    return;
-  }
+        if (str.length != 11) {
+            document.getElementById("txtHint").innerHTML = "手机号格式有误";
+            return;
+        }
 
-  // var phone = str.length;
-  //   if(!(/^1[34578]\d{9}$/.test(phone))){
-  //       document.getElementById("txtHint").innerHTML="手机号格式有误";
-  //       return false;
-  //   }
-  if (window.XMLHttpRequest)
-  {
-    // IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
-    xmlhttp=new XMLHttpRequest();
-  }
-  else
-  {
-    // IE6, IE5 浏览器执行代码
-    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-  xmlhttp.onreadystatechange=function()
-  {
-    if (xmlhttp.readyState==4 && xmlhttp.status==200)
-    {
-      document.getElementById("txtHint").innerHTML='开始读取数据';
-      document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
+        // var phone = str.length;
+        //   if(!(/^1[34578]\d{9}$/.test(phone))){
+        //       document.getElementById("txtHint").innerHTML="手机号格式有误";
+        //       return false;
+        //   }
+        if (window.XMLHttpRequest) {
+            // IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // IE6, IE5 浏览器执行代码
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("txtHint").innerHTML = '开始读取数据';
+                document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
+            }
+            if (xmlhttp.status > 200) {
+
+                document.getElementById("txtHint").innerHTML = "请稍后再试 错误：" + xmlhttp.readyState + " 状态" + xmlhttp.status;
+
+            }
+        }
+        xmlhttp.open("POST", "{$Think.server.script_name}/index/api/sms/s/" + str, true);
+        xmlhttp.send();
+        showtime(120);
     }
-      if (xmlhttp.status>200)
-      {
-
-          document.getElementById("txtHint").innerHTML="请稍后再试 错误：" +xmlhttp.readyState+"状态"+xmlhttp.status;
-
-      }
-  }
-  xmlhttp.open("POST","{$Think.server.script_name}/index/api/sms/s/"+str,true);
-  xmlhttp.send();
-  showtime(120);
-}
 </script>
 
 <script type="text/javascript">
 
-function showtime(t){
-    document.getElementById("sms").disabled=true;
-  for(i=1;i<=t;i++) {
-    window.setTimeout("update_p(" + i + ","+t+")", i * 1000);
-  }
+    function showtime(t) {
+        document.getElementById("sms").disabled = true;
+        for (i = 1; i <= t; i++) {
+            window.setTimeout("update_p(" + i + "," + t + ")", i * 1000);
+        }
 
-}
+    }
 
-function update_p(num,t) {
-    if(num == t) {
-        document.getElementById("sms").innerHTML="重新发送";
-        document.getElementById("sms").disabled=false;
+    function update_p(num, t) {
+        if (num == t) {
+            document.getElementById("sms").innerHTML = "重新发送";
+            document.getElementById("sms").disabled = false;
+        } else {
+            printnr = t - num;
+            document.getElementById("sms").innerHTML = " (" + printnr + ")s";
+        }
     }
-    else {
-        printnr = t-num;
-        document.getElementById("sms").innerHTML = " (" + printnr +")s";
-    }
-}
 </script>
 
 
-
-
- {if condition="$Request.param.login>=1"}
- <script>
-     window.onload=function(){
+{if condition="$Request.param.login>=1"}
+<script>
+    window.onload = function () {
 
 // 通过名称选取选项卡
-         $('#tabs-323015 a[href="#panel-401557"]').tab('show');
-     }
+        $('#tabs-323015 a[href="#panel-401557"]').tab('show');
+    }
 
- </script>
- {/if}
-
- 
-
- <div class="tabbable" id="tabs-323015">
-     <ul class="nav nav-tabs">
-         <li  style="display: none">
-             <a href="#panel-401557" data-toggle="tab" >登录 </a>
-         </li>
-         <li class="active">
-             <a href="#panel-401557" data-toggle="tab">{:session('openid_id')?'绑定账号': '注册'} </a>
-         </li>
+</script>
+{/if}
 
 
-     </ul>
-     <div class="tab-content">
-         <div class="tab-pane" id="panel-862765">
-
-             <!--登录功能-->
-             <div class="panel panel-default" style="    margin-top: -1px;">
-                 <!--<div class="panel-heading">短信快速登录/注册 {if condition="$Think.session.total_fee>'0'" }<small>订单保存中...</small>{/if}</div>-->
-                 <div class="panel-body">
-
-                     {if condition="$warning"}
-                     <div class="alert alert-warning alert-dismissible" role="alert">
-                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                         <strong>提示!</strong> {$warning}
-                     </div>
-                     {/if}
-
-                     <form  action="" method="post" name="myformlogin">
+<div class="tabbable" id="tabs-323015">
+    <ul class="nav nav-tabs">
+        <li style="display: none">
+            <a href="#panel-401557" data-toggle="tab">登录 </a>
+        </li>
+        <li class="active">
+            <a href="#panel-401557" data-toggle="tab">{:session('openid_id')?'绑定账号': '注册'} </a>
+        </li>
 
 
-                         <div class="form-group " >
-                              <label  >手机号:</label>
-                             <input type="number" class="form-control" min="13000000000" max="18999999999" id="phone" name="phone" value="{$Request.param.phone}" placeholder="请输入手机号" maxlength="100" autocomplete="on">
-                          </div>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane" id="panel-862765">
 
-                         <div class="form-group">
-                             <!--<input type="range" name="points" min="1" max="10000" />-->
-                             <label for="exampleInputPassword1">密码：</label>
-                             <input type="text" class="form-control" name="password" id="exampleInputPassword12" placeholder="请输入密码" autocomplete="on">
-                         </div>
+            <!--登录功能-->
+            <div class="panel panel-default" style="    margin-top: -1px;">
+                <!--<div class="panel-heading">短信快速登录/注册 {if condition="$Think.session.total_fee>'0'" }<small>订单保存中...</small>{/if}</div>-->
+                <div class="panel-body">
 
-                         <button type="submit" id="btngoto" class="btn btn-primary"  >提交登录</button>
+                    {if condition="$warning"}
+                    <div class="alert alert-warning alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <strong>提示!</strong> {$warning}
+                    </div>
+                    {/if}
 
-                         <small> 
-                             {if condition="$Think.session.total_fee>'0'" } 请注册/登录保存您的订单...{/if}
-                         </small>
-
-                         <input type="hidden" class="form-control" id="yan12" name="rand" value="0011" placeholder="请输入获得的验证码" maxlength="100"  style="    margin-bottom:  15px;" readonly>
-
-                     </form>
-
-                 </div>
-             </div>
-         </div>
-         <div class="tab-pane  active" id="panel-401557">
-
-             <!--注册功能-->
-             <div class="panel panel-default" style="    margin-top: -1px;">
-                 <!--<div class="panel-heading">短信快速登录/注册 {if condition="$Think.session.total_fee>'0'" }<small>订单保存中...</small>{/if}</div>-->
-                 <div class="panel-body">
-                     {if condition="$Think.session.total_fee=='099999'" }
+                    <form action="" method="post" name="myformlogin">
 
 
+                        <div class="form-group ">
+                            <label>手机号:</label>
+                            <input type="number" class="form-control" min="13000000000" max="18999999999" id="phone"
+                                   name="phone" value="{$Request.param.phone}" placeholder="请输入手机号" maxlength="100"
+                                   autocomplete="on">
+                        </div>
+
+                        <div class="form-group">
+                            <!--<input type="range" name="points" min="1" max="10000" />-->
+                            <label for="exampleInputPassword1">密码：</label>
+                            <input type="text" class="form-control" name="password" id="exampleInputPassword12"
+                                   placeholder="请输入密码" autocomplete="on">
+                        </div>
+
+                        <button type="submit" id="btngoto" class="btn btn-primary">提交登录</button>
+
+                        <small>
+                            {if condition="$Think.session.total_fee>'0'" } 请注册/登录保存您的订单...{/if}
+                        </small>
+
+                        <input type="hidden" class="form-control" id="yan12" name="rand" value="0011"
+                               placeholder="请输入获得的验证码" maxlength="100" style="    margin-bottom:  15px;" readonly>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane  active" id="panel-401557">
+
+            <!--注册功能-->
+            <div class="panel panel-default" style="    margin-top: -1px;">
+                <!--<div class="panel-heading">短信快速登录/注册 {if condition="$Think.session.total_fee>'0'" }<small>订单保存中...</small>{/if}</div>-->
+                <div class="panel-body">
+                    {if condition="$Think.session.total_fee=='099999'" }
 
 
-                     <form  action="" method="post" name="myformdislpayshow">
-                         <div class="form-group " >
-                         <!--<a  href="#" id="btn" class="btn btn-default" target="_blank" data-toggle="modal" data-target="#myModalRegistration"  >点击开始注册</a>-->
-                             <input class="form-control" id="cl" type="button"   onclick="ajaxModelPay('2','1008611','注册会员  {:date("y年m月d日 H:i:s")} {$Request.ip}','1008611{:time()}')"  name="cod3e" value="点此开始注册" />
+                    <form action="" method="post" name="myformdislpayshow">
+                        <div class="form-group ">
+                            <!--<a  href="#" id="btn" class="btn btn-default" target="_blank" data-toggle="modal" data-target="#myModalRegistration"  >点击开始注册</a>-->
+                            <input class="form-control" id="cl" type="button"
+                                   onclick="ajaxModelPay('2','1008611','注册会员  {:date(" y年m月d日 H:i:s")}
+                            {$Request.ip}','1008611{:time()}')" name="cod3e" value="点此开始注册" />
 
-                         </div>
-                         <div class="form-group " >
-                             <!-- <label for="exampleInputName2">手机号:</label> -->
-                             <input type="text" class="form-control"   name="phone"  onclick="ajaxModelPay('2','1008611','注册会员 {:date("y年m月d日 H:i:s")}  {$Request.ip}','1008611{:time()}')" value="" placeholder="请输入手机号" maxlength="100" readonly >
-                         </div>
+                        </div>
+                        <div class="form-group ">
+                            <!-- <label for="exampleInputName2">手机号:</label> -->
+                            <input type="text" class="form-control" name="phone"
+                                   onclick="ajaxModelPay('2','1008611','注册会员 {:date(" y年m月d日 H:i:s")}
+                            {$Request.ip}','1008611{:time()}')" value="" placeholder="请输入手机号" maxlength="100" readonly >
+                        </div>
 
-                         <div class="form-group form-inline" >
-                             <input type="text" class="form-control"   onclick="ajaxModelPay('2','1008611','注册会员 {:date("y年m月d日 H:i:s")}  {$Request.ip}','1008611{:time()}')" name="rand" value="" placeholder="请输入获得的验证码" maxlength="100"  style="    margin-bottom:  5px;" readonly>
+                        <div class="form-group form-inline">
+                            <input type="text" class="form-control" onclick="ajaxModelPay('2','1008611','注册会员 {:date("
+                                   y年m月d日 H:i:s")} {$Request.ip}','1008611{:time()}')" name="rand" value=""
+                            placeholder="请输入获得的验证码" maxlength="100" style=" margin-bottom: 5px;" readonly>
 
-                             <input class="form-control"   type="button"    style="    margin-bottom:  5px;" name="code65" value="获取验证码"  onclick="ajaxModelPay('2','1008611','注册会员 {:date("y年m月d日 H:i:s")}  {$Request.ip}','1008611{:time()}')" />
+                            <input class="form-control" type="button" style="    margin-bottom:  5px;" name="code65"
+                                   value="获取验证码" onclick="ajaxModelPay('2','1008611','注册会员 {:date(" y年m月d日 H:i:s")}
+                            {$Request.ip}','1008611{:time()}')" />
 
-                         </div>
-
-
-
-                         <div class="form-group " >
-                         <button type="button" id="btn" class="btn btn-primary"  onclick="ajaxModelPay('2','1008611','注册会员 {:date("y年m月d日 H:i:s")} {$Request.ip}','1008611{:time()}')" >提交注册</button>
-                         </div>
-
-                         {if condition="$invite_phone"}
-                         <div class="form-group " >
-                             <input class="form-control" type="hidden" placeholder="邀请人：{$invite_phone|substr=0,3}****{$invite_phone|substr=7,4}" readonly>
-                         </div>
-                         {/if}
-                     </form>
-                     {else /}
-
-                     {if condition="$warning"}
-                     <div class="alert alert-warning alert-dismissible" role="alert" >
-                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                         <strong>提示!</strong> {$warning}
-                     </div>
-                     {/if}
-
-                      {if condition="$Think.session.openid_id"}
-                        <h3> <img class="img-circle"  style="" src="{$Think.cookie.figureurl_qq_2}"> 
-                          昵称：{$Think.cookie.nickname} </h3>
-                       {/if}
-
-                     <form  action="" method="post" name="myform">
-
-                         {if condition="$invite_phone"}
-                         <div class="form-group " >
-                             <input type="text" class="form-control"  placeholder="邀请人：{$invite_phone|substr=0,3}****{$invite_phone|substr=7,4}" readonly>
-                         </div>
-                         {/if}
-
-                         <div class="form-group " >
-                              <label  >手机号:</label>
-                             <input type="text" class="form-control" id="tel182" name="phone" value="{$Request.param.phone}" placeholder="请输入手机号" maxlength="100" autocomplete="on" >
-                         </div>
-
-                         <div class="form-group">
-                             <label for="exampleInputPassword1">密码:</label>
-                             <input type="text" class="form-control"  name="password" id="exampleInputPassword1" placeholder="请输入密码" >
-                         </div>
+                        </div>
 
 
-                         <div class="row">
+                        <div class="form-group ">
+                            <button type="button" id="btn" class="btn btn-primary"
+                                    onclick="ajaxModelPay('2','1008611','注册会员 {:date(" y年m月d日 H:i:s
+                            ")} {$Request.ip}','1008611{:time()}')" >提交注册</button>
+                        </div>
 
-                             <div class="col-lg-6" style="margin-bottom: 10px;">
-                                 <div class="input-group">
-                                     <input type="text" class="form-control"  name="rand" placeholder="请输入验证码">
-                                     <span class="input-group-btn">
-                             <button class="btn btn-default"  id="sms" type="button" onclick="showHint(document.getElementById('tel182').value)">获取验证码</button>
+                        {if condition="$invite_phone"}
+                        <div class="form-group ">
+                            <input class="form-control" type="hidden"
+                                   placeholder="邀请人：{$invite_phone|substr=0,3}****{$invite_phone|substr=7,4}" readonly>
+                        </div>
+                        {/if}
+                    </form>
+                    {else /}
+
+                    {if condition="$warning"}
+                    <div class="alert alert-warning alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <strong>提示!</strong> {$warning}
+                    </div>
+                    {/if}
+
+                    {if condition="$Think.session.openid_id"}
+                    <h3><img class="img-circle" style="" src="{$Think.cookie.figureurl_qq_2}">
+                        昵称：{$Think.cookie.nickname} </h3>
+                    {/if}
+
+                    <form action="" method="post" name="myform">
+
+                        {if condition="$invite_phone"}
+                        <div class="form-group ">
+                            <input type="text" class="form-control"
+                                   placeholder="邀请人：{$invite_phone|substr=0,3}****{$invite_phone|substr=7,4}" readonly>
+                        </div>
+                        {/if}
+
+                        <div class="form-group ">
+                            <label>手机号:</label>
+                            <input type="text" class="form-control" id="tel182" name="phone"
+                                   value="{$Request.param.phone}" placeholder="请输入手机号" maxlength="100"
+                                   autocomplete="on">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">密码:</label>
+                            <input type="text" class="form-control" name="password" id="exampleInputPassword1"
+                                   placeholder="请输入密码">
+                        </div>
+
+
+                        <div class="row">
+
+                            <div class="col-lg-6" style="margin-bottom: 10px;">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="rand" placeholder="请输入验证码">
+                                    <span class="input-group-btn">
+                             <button class="btn btn-default" id="sms" type="button"
+                                     onclick="showHint(document.getElementById('tel182').value)">获取验证码</button>
                                 </span>
-                                 </div><!-- /input-group -->
-                             </div><!-- /.col-lg-6 -->
-                         </div><!-- /.row -->
+                                </div><!-- /input-group -->
+                            </div><!-- /.col-lg-6 -->
+                        </div><!-- /.row -->
 
-                         <div class="form-group form-inline" >
-                             <button type="submit" id="btngo" class="btn btn-primary"  >{:session('openid_id')?'绑定账号': '提交注册'} </button>
+                        <div class="form-group form-inline">
+                            <button type="submit" id="btngo" class="btn btn-primary">{:session('openid_id')?'绑定账号':
+                                '提交注册'}
+                            </button>
 
-                         <div> <h4>使用第三方账号登录</h4><a href="https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=100556678&redirect_uri=http://open.gaoxueya.com/index/api/qq&scope=get_user_info"
-   target="_blank">
+                            <div><h4>使用第三方账号登录</h4><a
+                                    href="https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=100556678&redirect_uri=http://open.gaoxueya.com/index/api/qq&scope=get_user_info"
+                                    target="_blank">
 
-    <img src="__STATIC__/images/ico_login_qq.png" title="使用QQ帐号登录"></a>
-<a href="https://api.weibo.com/oauth2/authorize?client_id=1460932055&response_type=code&redirect_uri=http://open.gaoxueya.com/index/api/weibo"
-   target="_blank" style="padding:16px">
-    <img src="__STATIC__/images/ico_login_32_32_weibo.png" title="使用微博帐号登录">
-</a>
-  <span id="txtHint"></span>  {if condition="($Think.session.total_fee>'0')  AND ($Think.session.body <> 1008612) " } 请注册/登录保存您的订单!{/if}</div>
+                                <img src="__STATIC__/images/ico_login_qq.png" title="使用QQ帐号登录"></a>
+                                <a href="https://api.weibo.com/oauth2/authorize?client_id=1460932055&response_type=code&redirect_uri=http://open.gaoxueya.com/index/api/weibo"
+                                   target="_blank" style="padding:16px">
+                                    <img src="__STATIC__/images/ico_login_32_32_weibo.png" title="使用微博帐号登录">
+                                </a>
+                                <span id="txtHint"></span> {if condition="($Think.session.total_fee>'0') AND
+                                ($Think.session.body <> 1008612) " } 请注册/登录保存您的订单!{/if}
+                            </div>
 
-                         </div>
+                        </div>
 
-                         {if condition="$Think.session.total_fee>'0'" } <small>.</small>{/if}
-                         <input type="hidden" class="form-control" id="login" name="login" value="2" placeholder="标记切换卡是第二个">
+                        {if condition="$Think.session.total_fee>'0'" } <small>.</small>{/if}
+                        <input type="hidden" class="form-control" id="login" name="login" value="2"
+                               placeholder="标记切换卡是第二个">
 
-                     </form>
-                     {/if}
+                    </form>
+                    {/if}
 
-                 </div>
-             </div>
-         </div>
+                </div>
+            </div>
+        </div>
 
-     </div>
- </div>
-
-
-
-
-
- <p style="margin: 500px"></p>
+    </div>
+</div>
 
 
- {include file="index/footer" /}
+<p style="margin: 500px"></p>
+
+
+{include file="index/footer" /}

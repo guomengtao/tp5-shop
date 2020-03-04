@@ -44,95 +44,96 @@ class Index extends \think\Controller
 
     }
 
-    public function cap(){
+    public function cap()
+    {
         ob_clean();
         $captcha = new Captcha();
         return $captcha->entry();
     }
 
     public function tom()
-{
+    {
 
-    $browser          = new COM("InternetExplorer.Application");
-    $handle           = $browser->HWND;
-    $browser->Visible = true;
-    $im               = imagegrabwindow($handle);
-    $browser->Quit();
-    imagepng($im, "iesnap.png");
-    $im = imagegrabscreen();
-    die();
+        $browser          = new COM("InternetExplorer.Application");
+        $handle           = $browser->HWND;
+        $browser->Visible = true;
+        $im               = imagegrabwindow($handle);
+        $browser->Quit();
+        imagepng($im, "iesnap.png");
+        $im = imagegrabscreen();
+        die();
 
-    header("content-type:text/html;charset=utf-8");
+        header("content-type:text/html;charset=utf-8");
 
-    $img = imagecreatetruecolor(464, 310);
+        $img = imagecreatetruecolor(464, 310);
 
-    $red    = imagecolorallocate($img, 222, 41, 16);
-    $yellow = imagecolorallocate($img, 255, 222, 0);
+        $red    = imagecolorallocate($img, 222, 41, 16);
+        $yellow = imagecolorallocate($img, 255, 222, 0);
 
-    imagefill($img, 0, 0, $red);
+        imagefill($img, 0, 0, $red);
 
 
-    $arr  = array(35, 63, 69, 63, 79, 35, 90, 63, 123, 63, 97, 84, 105, 118, 78, 99, 52, 116, 59, 84);
-    $arr1 = array(144, 22, 156, 24, 161, 18, 161, 28, 171, 32, 160, 37, 160, 46, 152, 38, 141, 39, 148, 31);
-    $arr2 = array(171, 65, 182, 59, 180, 50, 188, 57, 196, 52, 194, 62, 201, 70, 192, 70, 185, 78, 183, 67);
-    $arr3 = array(172, 104, 184, 104, 187, 94, 190, 104, 202, 104, 194, 111, 199, 124, 188, 113, 178, 124, 181, 111);
-    $arr4 = array(144, 130, 155, 133, 161, 127, 160, 136, 171, 142, 160, 145, 160, 154, 152, 145, 143, 149, 150, 138);
+        $arr  = array(35, 63, 69, 63, 79, 35, 90, 63, 123, 63, 97, 84, 105, 118, 78, 99, 52, 116, 59, 84);
+        $arr1 = array(144, 22, 156, 24, 161, 18, 161, 28, 171, 32, 160, 37, 160, 46, 152, 38, 141, 39, 148, 31);
+        $arr2 = array(171, 65, 182, 59, 180, 50, 188, 57, 196, 52, 194, 62, 201, 70, 192, 70, 185, 78, 183, 67);
+        $arr3 = array(172, 104, 184, 104, 187, 94, 190, 104, 202, 104, 194, 111, 199, 124, 188, 113, 178, 124, 181, 111);
+        $arr4 = array(144, 130, 155, 133, 161, 127, 160, 136, 171, 142, 160, 145, 160, 154, 152, 145, 143, 149, 150, 138);
 
-    imagepolygon($img, $arr, 10, $yellow);
-    imagefilledpolygon($img, $arr, 10, $yellow);
-    imagepolygon($img, $arr1, 10, $yellow);
-    imagefilledpolygon($img, $arr1, 10, $yellow);
-    imagepolygon($img, $arr2, 10, $yellow);
-    imagefilledpolygon($img, $arr2, 10, $yellow);
-    imagepolygon($img, $arr3, 10, $yellow);
-    imagefilledpolygon($img, $arr3, 10, $yellow);
-    imagepolygon($img, $arr4, 10, $yellow);
-    imagefilledpolygon($img, $arr4, 10, $yellow);
+        imagepolygon($img, $arr, 10, $yellow);
+        imagefilledpolygon($img, $arr, 10, $yellow);
+        imagepolygon($img, $arr1, 10, $yellow);
+        imagefilledpolygon($img, $arr1, 10, $yellow);
+        imagepolygon($img, $arr2, 10, $yellow);
+        imagefilledpolygon($img, $arr2, 10, $yellow);
+        imagepolygon($img, $arr3, 10, $yellow);
+        imagefilledpolygon($img, $arr3, 10, $yellow);
+        imagepolygon($img, $arr4, 10, $yellow);
+        imagefilledpolygon($img, $arr4, 10, $yellow);
 
-    header("content-type:image/jpeg");
-    imagejpeg($img);
+        header("content-type:image/jpeg");
+        imagejpeg($img);
 
-    imagedestroy($img);
-    die();
+        imagedestroy($img);
+        die();
 
-    $im = imagegrabscreen();
-    imagepng($im, "myscreenshot.png");
-    die();
+        $im = imagegrabscreen();
+        imagepng($im, "myscreenshot.png");
+        die();
 
-    $im    = imagecreatetruecolor(1200, 500);
-    $black = imagecolorallocate($im, 0, 0, 0);
-    $white = imagecolorallocate($im, 255, 255, 255);
-    $red   = imagecolorallocate($im, 255, 0, 0);
-    imagefill($im, 0, 0, $white);
-    $money = array('9' => 50, '10' => 100, '11' => 130, '12' => 150, '13' => 120, '14' => 200, '15' => 300, '16' => '280', '17' => '370', '18' => 350);//股市时间=>指数
-    foreach ($money as $key => $value) {//取得每个时间点的股市坐标
-        $point[] = array(($key - 8) * 100, 500 - $value);
+        $im    = imagecreatetruecolor(1200, 500);
+        $black = imagecolorallocate($im, 0, 0, 0);
+        $white = imagecolorallocate($im, 255, 255, 255);
+        $red   = imagecolorallocate($im, 255, 0, 0);
+        imagefill($im, 0, 0, $white);
+        $money = array('9' => 50, '10' => 100, '11' => 130, '12' => 150, '13' => 120, '14' => 200, '15' => 300, '16' => '280', '17' => '370', '18' => 350);//股市时间=>指数
+        foreach ($money as $key => $value) {//取得每个时间点的股市坐标
+            $point[] = array(($key - 8) * 100, 500 - $value);
+        }
+        for ($i = 0, $j = count($point); $i < $j - 1; $i++) {//连接前后坐标
+            imagesetpixel($im, $point[$i][0], $point[$i][1], $red);
+            imageline($im, $point[$i][0], $point[$i][1], $point[$i + 1][0], $point[$i + 1][1], $black);
+        }
+
+        header('Content-type:image/jpeg');
+        imagejpeg($im);
+        imagedestroy($im);
+
+        die();
+        $im = imagecreatetruecolor(100, 100);
+
+
+        // 将背景设为红色
+        // $red = imagecolorallocate($im, 255, 0, 0);
+        // imagefill($im, 90, 90, $red);
+
+        header('Content-type: image/jpg');
+        imagepng($im);
+        imagedestroy($im);
+        imagedestroy($im, 'tom.jpg');
+
+        die();
+
     }
-    for ($i = 0, $j = count($point); $i < $j - 1; $i++) {//连接前后坐标
-        imagesetpixel($im, $point[$i][0], $point[$i][1], $red);
-        imageline($im, $point[$i][0], $point[$i][1], $point[$i + 1][0], $point[$i + 1][1], $black);
-    }
-
-    header('Content-type:image/jpeg');
-    imagejpeg($im);
-    imagedestroy($im);
-
-    die();
-    $im = imagecreatetruecolor(100, 100);
-
-
-    // 将背景设为红色
-    // $red = imagecolorallocate($im, 255, 0, 0);
-    // imagefill($im, 90, 90, $red);
-
-    header('Content-type: image/jpg');
-    imagepng($im);
-    imagedestroy($im);
-    imagedestroy($im, 'tom.jpg');
-
-    die();
-
-}
 
 
     public function sms()

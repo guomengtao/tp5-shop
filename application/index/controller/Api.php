@@ -13,6 +13,7 @@ use app\index\model\Shop;
 use alipay\alipaynotify;
 use think\Cookie;
 use think\Session;
+
 // use QL\QueryList;
 
 class Api extends \think\Controller
@@ -689,35 +690,22 @@ class Api extends \think\Controller
         //成功授权后的回调地址
         $my_url = $config->my_url;
 
-        // $tom  = '18210787405'; 
         header("content-type:text/html; charset=utf-8");
         $tom  = input('s');
         $rand = rand(1000, 9999); //取随机四位数字
-        $cha  = $my_url . '?username=' . $username . '&password=' . $password . '&content=验证码：' . $rand . '【高血压】&receiver=' . $tom;
-
-        // $cha = 'http://www.baidu.com';
-
+        $cha  = $my_url . '?username=' . $username . '&password=' . $password .'&mobile='. $tom.'&content=验证码：' . $rand . '【高血压】' ;
 
         $fp = file_get_contents($cha);
 
-        // echo $fp;
-        // dump($cha);
-
-        // die();
 
 
         //转xml为数组形式
         $xml  = simplexml_load_string($fp);
         $data = json_decode(json_encode($xml), TRUE);
 
-        // dump($data);
-
-        // die();
-        // echo $tom;
 
         echo $data['message'];
 
-//         echo $data['result'];
 
         if ($data['message'] == '非法请求，一个号码一天内提交超过了五次') {
             return " 【请使用你今天收到的上条短信验证码登录即可 ！ 】";
@@ -727,8 +715,7 @@ class Api extends \think\Controller
 
         if ($data['message'] == '短信提交成功') {
 
-            // if ($data['result']>=0) {
-            # code...
+
             echo "(";
 
             // 模型的 静态方法 
@@ -737,10 +724,7 @@ class Api extends \think\Controller
                 'phone' => $tom,
                 'rand'  => $rand
             ]);
-            // 创建会员信息
-//            User::create([
-//                'phone'   =>  $tom
-//            ]);
+
             echo ":";
         }
         // return $this->fetch();
