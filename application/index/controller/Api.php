@@ -696,7 +696,7 @@ class Api extends \think\Controller
         $cha  = $my_url . '?username=' . $username . '&password=' . $password . '&mobile=' . $tom . '&content=验证码：' . $rand . '【高血压】';
 
         echo $cha;
-        die();
+        // die();
         $fp = file_get_contents($cha);
 
 
