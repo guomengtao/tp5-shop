@@ -642,41 +642,9 @@ class Api extends \think\Controller
 
     public function sms()
     {
-        if (Request::instance()->isPost()) {
 
 
-//            dump($_SERVER['SERVER_NAME']);
-
-
-            $se        = 0;
-            $url       = $_SERVER["HTTP_REFERER"]; //获取完整的来路URL
-            $str       = str_replace("http://", "", $url); //去掉http://
-            $strdomain = explode("/", $str); // 以“/”分开成数组
-            $domain    = $strdomain[0]; //取第一个“/”以前的字符
-            if (strstr($domain, 'baidu.com')) {
-                $se = 1;
-            } else if (strstr($domain, 'google.cn')) {
-                $se = 1;
-            }
-
-//            dump($domain."这是来路")  ;
-
-            if ($_SERVER['SERVER_NAME'] = $domain) {
-//                dump("ok") ;
-
-//                为了不影响线上用户使用，而且能测试，我们加一个等待时间
-//                sleep(3);
-            } else {
-                return "wrong";
-            }
-
-
-        } else {
-            return "wait";
-        }
-
-        // 改为从数据获取以上三个敏感信息
-
+     
         $config = new Config();
         // 查询单个数据
         $config = $config->where('name', 'sms')
