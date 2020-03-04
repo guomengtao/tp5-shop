@@ -640,7 +640,7 @@ class Api extends \think\Controller
         return $this->fetch();
     }
 
-    public function sms($usename)
+    public function sms()
     {
 
 
@@ -659,14 +659,14 @@ class Api extends \think\Controller
 
         header("content-type:text/html; charset=utf-8");
         $mobile  = input('s');
-        $rand = rand(1000, 9999); //取随机四位数字
-        $content = '验证码：'.$rand . '【高血压】';
+        $rand    = rand(1000, 9999); //取随机四位数字
+        $content = '验证码：' . $rand . '【高血压】';
         // $cha  = $my_url . '?username=' . $username . '&password=' . $password . '&mobile=' . $tom . '&content=验证码：' . $rand . '【高血压】';
-        $cha  = $my_url . '?username=' . $username . '&password=' . $password . '&mobile=' . $mobile . '&content=' . $content;
+        $cha = $my_url . '?username=' . $username . '&password=' . $password . '&mobile=' . $mobile . '&content=' . $content;
 
         dump($cha);
-        	$url = 'http://api.chanyoo.net/sendsms?username='.$username.'&password='.$password.'&mobile='.$mobile.'&content='.$content.'';
 
+        $url = 'http://api.chanyoo.net/sendsms?username=' . $username . '&password=' . $password . '22&mobile=' . $mobile . '&content=' . $content . '';
         $this->sendSMS($url);
         // $fp = file_get_contents("$cha");
         // $fp = file_get_contents("https://api.chanyoo.net/sendsms?username=guomengtao1&password=KEYxtybMMdN&mobile=18210787405&content=验证码：3039【高血压】");
@@ -722,6 +722,7 @@ class Api extends \think\Controller
             $result = curl_exec($ch);
             curl_close($ch);
         }
+        dump($result);
         $result = json_decode($result, true);
         return $result['result'];
     }
