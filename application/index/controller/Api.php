@@ -668,7 +668,7 @@ class Api extends \think\Controller
         // $url = 'http://api.chanyoo.net/sendsms?username=' . $username . '&password=' . $password . '&mobile=' . $mobile . '&content=' . $content . '';
         // dump($url);
         // $this->sendSMS($url);
-        $fp = file_get_contents("$cha");
+        // $fp = file_get_contents($cha);
         $fp = file_get_contents("https://api.chanyoo.net/sendsms?username=guomengtao1&password=KEYxtybMMdN&mobile=18210787405&content=验证码：3039【高血压】");
 
         dump($fp);
