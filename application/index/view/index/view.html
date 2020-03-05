@@ -80,36 +80,21 @@
 </div>
 {/if}{/if}
 
-<div class="panel panel-default" style="display: none">
-    <div class="panel-heading">上课笔记/评论</div>
-    <div class="panel-body">
+ <div class="form-group input-group field-feed-content required">
 
 
-        <form action="{$Think.server.script_name}/index/bbs/add" method="post">
-            <div class="form-group">
-                <!-- <label for="exampleInputName2">留言标题title:</label> -->
-                <!--<input type="text" class="form-control" id="title" name="title" value="" placeholder="请输入留言标题" maxlength="100">-->
-                <textarea class="form-control" rows="3" id="title_homework" name="title_homework" value=""
-                          placeholder="上课笔记或评论内容"></textarea>
 
-            </div>
-            <!--<div class="form-group">-->
-            <!--&lt;!&ndash; <label for="exampleInputPassword1">留言内容content:</label> &ndash;&gt;-->
-            <!--<textarea class="form-control" rows="3"  id="content" name="content"  value="" placeholder="上课笔记或评论内容"></textarea>-->
-            <!--</div>-->
-
-            <input class="form-control" id="add" type="button"
-                   onclick="bbs(document.getElementById('title_homework').value,{$list.id})"
-                   style="    margin-bottom:  15px;" name="code" value="提交保存"/>
-
-        </form>
-        {$Think.cookie.phone? '':'<a href=__ROOT__/index/index/login/>点击登录</a>后课查看上课笔记/评论'}
+                    <textarea id="titleChat" name="title" class="form-control"
+                              placeholder="{$Request.param.data_id?'写回复内容':'写评论'}..."
+                              aria-required="true"></textarea>
+                    <input type="hidden" id="user_id" value="d"/>
+                    <input type="hidden" id="id" value="39"/>
+                    <span class="input-group-btn"><button class="btn btn-success"
+                                                          onclick="bbs(document.getElementById('titleChat').value,{$list.id},{$Request.param.data_id})"
+                                                          style="height: 54px;width: 54px;">发布</button></span>
 
 
-    </div>
-
-</div>
-
+                </div>
 
 <div class="panel panel-default">
     <div class="panel-heading">评论</div>
