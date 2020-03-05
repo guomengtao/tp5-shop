@@ -601,7 +601,7 @@ class Api extends \think\Controller
 
         $data = json_decode($fp, true);
 
-        dump($data);
+        // dump($data);
 
         echo $data['errmsg']."- ";
         echo $data['result'];
@@ -614,7 +614,7 @@ class Api extends \think\Controller
             // 模型的 静态方法
             // 存入短信发送日志表
             $user = Sms::create([
-                'phone' => $tom,
+                'phone' => $mobile,
                 'rand'  => $rand
             ]);
 
