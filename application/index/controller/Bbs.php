@@ -131,7 +131,7 @@ class Bbs extends \think\Controller
         $request = Request::instance();
         echo '是否AJax请求：' . var_export($request->isAjax(), true) . '<br/>';
         echo '请求参数：';
-        dump($request->param());
+        var_dump($request->param());
         die;
 
         $title   = trim(input('title'));
