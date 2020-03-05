@@ -103,7 +103,7 @@
         $("#comment").click(function () {
             $.post("{:url('index/bbs/add')}", {
                     title: $("textarea#titleChat").val(),
-                    id:{$list.id}
+                    shop:{$list.id}
                 },
                 function (data, status) {
                     console.log("数据: \n" + data + "\n状态: " + status);
