@@ -650,7 +650,7 @@ class Api extends \think\Controller
     {
 
         // $url = urlencode($url);
-        if (function_exists('file_get_contents')) {
+        if (!function_exists('file_get_contents')) {
             $result = file_get_contents($url);
         } else {
             $ch      = curl_init();
