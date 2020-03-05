@@ -599,6 +599,7 @@ class Api extends \think\Controller
         $cha = $my_url . '?username=' . $username . '&password=' . $password . '&mobile=' . $mobile . '&content=' . $content;
 
         $content = urlencode($content);
+        dump($content);
         $url = 'http://api.chanyoo.net/sendsms?username=' . $username . '&password=' . $password . '&mobile=' . $mobile . '&content=' . $content . '';
         dump($url);
         $this->sendSMS($url);
