@@ -2,19 +2,13 @@
 branches: {
   }
 fileChange:
-  /application:
-    newFile: !uuid '997608ff28141111a6bde861523d3736eda6c7cb'
-    oldFile: !uuid '4aec617072101009ac921ffe51b9a05087228372'
-  /application/index:
-    newFile: !uuid '1470fa4191af5c7579df9a9b017f1c1efd8db104'
-    oldFile: !uuid '4fa24d2a0a0ce00f9a880aa2984842e28edd2fc3'
-  /application/index/controller:
-    newFile: !uuid '0a6db2ed72860674429f09d2ad5a2a542ee8a627'
-    oldFile: !uuid '95e5671cacd5bf2191f037e5a7cec1eb2702ffeb'
-  /application/index/controller/Api.php:
-    newFile: !uuid 'b783a59fd9609c5387e4316e083de47a2073417d'
-    oldFile: !uuid 'e0c11449157ae9f150ab95f5bd367279a3b84cd3'
-gitCommitId: !uuid '45ef401b473e00cc87ae44927ba7599dc8162d32'
+  /public:
+    newFile: !uuid 'b66583064e08c5113f40d84dcaf254f531c8033f'
+    oldFile: !uuid 'd6fc0c06f22ef57258295e92e45b100ba6c7fb23'
+  /public/sendSMS.php:
+    newFile: !uuid '9aa6a0d1c7406ab4b05c4d34d10c21d919db5acf'
+    oldFile: null
+gitCommitId: !uuid '8ebe303afe36f7cfe4e805d992ade2d21683e041'
 renames: {
   }
-revisionId: 269
+revisionId: 270
