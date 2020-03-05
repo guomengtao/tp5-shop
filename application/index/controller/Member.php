@@ -360,7 +360,7 @@ class Member extends \think\Controller
 // die();
 
         //  在线时间排名
-        $online_time = User::where('phone', ' <> ', '15966982315')
+        $online_time = User::where('phone', '<>', '15966982315')
             ->where('phone', ' = ', $phone)
             ->order('online_time desc')
             ->where('phone', $eq, $phone)
