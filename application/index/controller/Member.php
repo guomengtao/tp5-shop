@@ -398,7 +398,7 @@ class Member extends \think\Controller
         $pathinfo = Footprint::field('id,phone,create_time,pathinfo')
             ->order('id desc')
             ->where('phone', $eq, $phone)
-            ->where('pathinfo', 'like', '%' . 'index / index / view' . ' % ')
+            ->where('pathinfo', 'like', '%' . 'index / index / view' . '%')
             ->limit(10)
             // ->fetchSql(true)
             ->select();
@@ -417,8 +417,8 @@ class Member extends \think\Controller
         $domain = Footprint::
         field('id,phone,referer as domain,create_time')
             ->order('id desc')
-            // ->where('pathinfo','like',' % '.'index / index / view'.' % ')
-            // ->where('domain','like',' % '.'com'.' % ')
+            // ->where('pathinfo','like','%'.'index / index / view'.'%')
+            // ->where('domain','like','%'.'com'.'%')
             ->where('domain', '<>', 'open . gaoxueya . com')
             ->where('domain', '<>', 'www . tp5 . com')
             ->where('phone', $eq, $phone)
@@ -666,7 +666,7 @@ class Member extends \think\Controller
             $money_add = Money::group('phone')
                 ->where('phone', '<>', '15966982315')
                 ->where('phone', '<>', '0')
-                ->where('money', ' > ', '0')
+                ->where('money', '<>', '0')
                 ->field('id,phone, sum(`money`) as money')
                 ->order('money desc')
                 ->limit(10)
@@ -678,7 +678,7 @@ class Member extends \think\Controller
             $pathinfo = Footprint::group('pathinfo')
                 ->field('id,phone, count(`pathinfo`) as pathinfocount,Now(),pathinfo')
                 ->order('pathinfocount desc')
-                ->where('pathinfo', 'like', ' % ' . 'index / index / view' . ' % ')
+                ->where('pathinfo', 'like', '%' . 'index / index / view' . '%')
                 ->limit(10)
                 // ->fetchSql(true)
                 ->select();
@@ -700,8 +700,8 @@ class Member extends \think\Controller
             $domain = Footprint::group('domain')
                 ->field('id,phone, count(`domain`) as domaincount,domain')
                 ->order('domaincount desc')
-                // ->where('pathinfo','like',' % '.'index / index / view'.' % ')
-                ->where('domain', 'like', ' % ' . 'com' . ' % ')
+                // ->where('pathinfo','like','%'.'index / index / view'.'%')
+                ->where('domain', 'like', '%' . 'com' . '%')
                 ->limit(10)
                 ->select();
             cache('domain', $domain, $cach_time);
