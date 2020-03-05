@@ -113,9 +113,8 @@ class Api extends \think\Controller
 
     public function qq()
     {
-        echo 123;
 
-        // 改为从数据获取以上三个敏感信息
+        // 从数据获取以上三个敏感信息
 
         $config = new Config();
         // 查询单个数据
@@ -146,24 +145,15 @@ class Api extends \think\Controller
         $code = Cookie::get('code');
 
         // echo  "qq登录的code第二步骤：" . $code . "<br/>";
+        // Step2：通过Authorization Code获取Access Token
 
-
-        // echo "https://graph.qq.com/oauth2.0/token?grant_type=authorization_code&client_id=100556678&client_secret=ac07166c50a0361b7beec4e423a6bc46&code=" . $code. "&state=1&redirect_uri=http://open.gaoxueya.com/index/api/qq";
-
-        // echo "<br/>";
-
-        //Step2：通过Authorization Code获取Access Token
-
-        // $token_url = "https://graph.qq.com/oauth2.0/token?grant_type=authorization_code&client_id=" . $app_id."&client_secret=". $app_secret."&code=" . $code. "&state=1&redirect_uri=".$my_url;
 
         //拼接URL
         $token_url = "https://graph.qq.com/oauth2.0/token?grant_type=authorization_code&"
             . "client_id=" . $app_id . "&redirect_uri=" . urlencode($my_url)
             . "&client_secret=" . $app_secret . "&code=" . $code;
-        echo $token_url;
-        $response = file_get_contents($token_url);
+        $response  = file_get_contents($token_url);
 
-        dump($response);
         if (strpos($response, "callback") !== false) {
             $lpos     = strpos($response, "(");
             $rpos     = strrpos($response, ")");
@@ -172,10 +162,7 @@ class Api extends \think\Controller
 
             $msg = json_decode($response);
 
-            // dump($msg);die();
             if (isset($msg->error)) {
-                // echo "<h3>error:</h3>" . $msg->error;
-                // echo "<h3>msg  :</h3>" . $msg->error_description;
                 exit;
             }
         }
@@ -188,7 +175,6 @@ class Api extends \think\Controller
 
         $str = file_get_contents($graph_url);
 
-        // dump($str);
 
         if (strpos($str, "callback") !== false) {
             $lpos = strpos($str, "(");
@@ -198,14 +184,10 @@ class Api extends \think\Controller
 
         $user = json_decode($str);
 
-        // dump($user);
 
         if (isset($user->error)) {
-            // echo "<h3>error:</h3>" . $user->error;
-            // echo "<h3>msg  :</h3>" . $user->error_description;
             exit;
         }
-        // echo("Helloni " . $user->openid);
 
         $openid = $user->openid;
 
@@ -217,23 +199,7 @@ class Api extends \think\Controller
 
         $str          = file_get_contents($graph_url);
         $user_from_qq = json_decode($str);
-        // dump($str);
-        // dump($user);
 
-        // echo "欢迎您" . $user->nickname;
-        // echo "你的头像是：<img src=" . $user->figureurl_qq_1 . ">";
-        // echo "性别：" . $user->gender . "";
-
-
-        // $data = json_decode(json_encode($fp),TRUE);
-
-
-        // die();
-        // echo $tom;
-
-        // echo $data['message'];
-
-        // dump($fp);
         //Step3：使用Access Token来获取用户的OpenID
 
 
@@ -245,7 +211,6 @@ class Api extends \think\Controller
         }
 
 
-        // $openid = "1011";
 
         $user = new UserQq();
         // 查询单个数据
