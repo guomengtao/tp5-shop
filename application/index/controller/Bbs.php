@@ -139,7 +139,7 @@ class Bbs extends \think\Controller
         $shop    = input("shop");
         $request = Request::instance();
 
-        if ($request->isAjax()) {
+        if ($request->isAjax()) {}
             echo $shop;
 
             // 模型的 静态方法
@@ -153,7 +153,7 @@ class Bbs extends \think\Controller
 
             return "评论了" . $title;
 
-        }
+
 
 
         if (!$title) {
