@@ -600,8 +600,8 @@ class Api extends \think\Controller
 
 
         $data = json_decode($fp, true);
-        return $data['result'];
 
+        dump($data);
 
         echo $data['message'];
 
