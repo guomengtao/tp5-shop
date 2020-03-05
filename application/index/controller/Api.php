@@ -603,28 +603,22 @@ class Api extends \think\Controller
 
         dump($data);
 
-        echo $data['message'];
+        echo $data['errmsg']."- ";
+        echo $data['result'];
 
 
-        if ($data['message'] == '非法请求，一个号码一天内提交超过了五次') {
-            return " 【请使用你今天收到的上条短信验证码登录即可 ！ 】";
-        }
 
-        // die();
-
-        if ($data['message'] == '短信提交成功') {
+        if ($data['result'] == '0') {
 
 
-            echo "(";
-
-            // 模型的 静态方法 
+            // 模型的 静态方法
             // 存入短信发送日志表
             $user = Sms::create([
                 'phone' => $tom,
                 'rand'  => $rand
             ]);
 
-            echo ":";
+
         }
         // return $this->fetch();
 
