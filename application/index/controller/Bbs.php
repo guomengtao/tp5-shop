@@ -128,6 +128,8 @@ class Bbs extends \think\Controller
 
     public function add()
     {
+        $request = Request::instance();
+        var_dump($request);
  return 22;
 
         $title   = trim(input('title'));
@@ -137,7 +139,7 @@ class Bbs extends \think\Controller
         $user_id = $user_id ? $user_id : 126;
         $captcha = input("captcha");
         $shop    = input("shop");
-        $request = Request::instance();
+
 
         // if ($request->isAjax()) {}
             echo $shop;
