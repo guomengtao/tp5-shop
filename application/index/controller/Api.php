@@ -598,13 +598,13 @@ class Api extends \think\Controller
         // $cha  = $my_url . '?username=' . $username . '&password=' . $password . '&mobile=' . $tom . '&content=验证码：' . $rand . '【高血压】';
         $cha = $my_url . '?username=' . $username . '&password=' . $password . '&mobile=' . $mobile . '&content=' . $content;
 
-
+        $content = urlencode($content);
         $url = 'http://api.chanyoo.net/sendsms?username=' . $username . '&password=' . $password . '&mobile=' . $mobile . '&content=' . $content . '';
         dump($url);
         $this->sendSMS($url);
         die();
         // $fp = file_get_contents($cha);1234563333
-        $content = urlencode($content);
+
 
         $fp = file_get_contents("http://api.chanyoo.net/sendsms?username=$username&password=$password&mobile=$mobile&content=$content");
 
