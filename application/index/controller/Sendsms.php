@@ -23,20 +23,38 @@ class Sendsms extends \think\Controller
     '-888	短信模板未报备		短信模板未报备
     '-999	请求频繁请稍后再试	连续提交相同的手机号和短信内容
     --------------------------------*/
-                                                                                         //输出返回结果
+    //输出返回结果
 
     /*
     $ret = sendSMS($username,$password,$mobile,$content);
     echo $ret;
     */
-    function send(){
-        $username = 'guomengtao1';                //请修改成你的平台帐号
-        $password = 'KEYxtybMMdN';                //请修改成你的调用密码
-        $mobile   = '13333333333';        //你接收短信的手机号码
+    function send()
+    {
+        $config = new Config();
+        // 查询单个数据
+        $config = $config->where('name', 'sms')
+            ->find();
+
+
+        //应用的APPID
+        $username = $config->username;
+        //应用的APPKEY
+        $password = $config->password;
+        //成功授权后的回调地址
+        $my_url = $config->my_url;
+
+
+        $mobile   = input('s');
+        $rand     = rand(1000, 9999); //取随机四位数字
+        // $username = 'guomengtao1';                //请修改成你的平台帐号
+        // $password = 'KEYxtybMMdN';                //请修改成你的调用密码
+        // $mobile   = '13333333333';                //你接收短信的手机号码
         $content  = '您的手机号：13012345678，验证码：110426，请及时完成验证，如不是本人操作请忽略。';        //发送短信内容
         $ret      = $this->sendSMS($username, $password, $mobile, $content);                                                //调用接口发送
         echo $ret;
     }
+
     function sendSMS($usename, $password, $mobile, $content)
     {
         $content = urlencode($content);
