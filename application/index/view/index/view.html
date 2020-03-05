@@ -80,47 +80,36 @@
 </div>
 {/if}{/if}
 
-   <div class="form-group input-group field-feed-content required">
+<div class="form-group input-group field-feed-content required">
 
 
 
-                    <textarea id="titleChat" name="title" class="form-control"
+     <textarea id="titleChat" name="title" class="form-control"
                               placeholder="{$Request.param.data_id?'写回复内容':'写评论'}..."
                               aria-required="true"></textarea>
-                    <input type="hidden" id="user_id" value="d"/>
-                    <input type="hidden" id="id" value="39"/>
-                    <span class="input-group-btn"><button class="btn btn-success"
-                                                          off_onclick="bbs(document.getElementById('titleChat').value,{$list.id},{$Request.param.data_id})"
-                                                          style="height: 54px;width: 54px;">发布</button></span>
+    <input type="hidden" id="user_id" value="d"/>
+    <input type="hidden" id="id" value="39"/>
+    <span class="input-group-btn"><button class="btn btn-success"
+                                          off_onclick="bbs(document.getElementById('titleChat').value,{$list.id},{$Request.param.data_id})"
+                                          style="height: 54px;width: 54px;">发布</button></span>
 
 
-                </div>
-
-    <div class="form-group input-group field-feed-content required">
+</div>
 
 
-        <textarea id="titleChat" name="title" placeholder="{$Request.param.data_id?'写回复内容':'写评论'}..."
-                  aria-required="true">    </textarea>
-
-        <span class="input-group-btn">
-        <button class="btn btn-success" id="comment"
-                onclick="bbs(document.getElementById('titleChat').value,{$list.id},{$Request.param.data_id})"
-                style="height: 54px;width: 54px;">评论1</button>
-        </span>
-
-    </div>
 <form id="commit_form">
     <input type="hidden" id="user_id" value="d"/>
     <input type="hidden" id="id" value="39"/>
 </form>
 <script>
+    var data = "a/b" .$("titleChat").value();
     $(document).ready(function () {
         $("#comment").click(function () {
             alert("d");
             $.ajax({
-                type: "POST",
+                type: "GET",
                 url: "{:url('index/bbs/add')}",
-                data: $('#login_value').serialize(),
+                data: data ,
                 success: function (msg) {
                     alert("Data Saved: " + msg);
                 },
