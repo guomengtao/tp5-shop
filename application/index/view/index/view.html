@@ -92,7 +92,7 @@
     <input type="hidden" id="user_id" value="d"/>
     <input type="hidden" id="id" value="39"/>
     <span class="input-group-btn">
-        <button class="btn btn-success" id="comment"
+        <button class="btn btn-success" id="com"
                 onclick="bbs(document.getElementById('titleChat').value,{$list.id},{$Request.param.data_id})"
                 style="height: 54px;width: 54px;">评论</button>
 
@@ -100,7 +100,7 @@
 </div>
 <script>
     $(document).ready(function () {
-        $("#comment").click(function () {
+        $("#com").click(function () {
             $.ajax({
                 type: "POST",
                 url: "index.php",
