@@ -41,6 +41,7 @@ class Sendsms extends \think\Controller
         $username = $config->username;
         //应用的APPKEY
         $password = $config->password;
+        dump($password);
         //成功授权后的回调地址
         $my_url = $config->my_url;
 
