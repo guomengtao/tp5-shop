@@ -136,10 +136,23 @@ class Bbs extends \think\Controller
         $user_id = Cookie::get('user_id');
         $user_id = $user_id ? $user_id : 126;
         $captcha = input("captcha");
-        $shop = input("shop");
+        $shop    = input("shop");
+        $request = Request::instance();
 
-        if ($request->isAjax()){
+        if ($request->isAjax()) {
             echo $shop;
+
+            // 模型的 静态方法
+            $user = Data::create([
+                'title'   => $title,
+                'user_id' => $user_id,
+                'shop'    => 0,
+                'phone'   => $phone,
+                'shop'    => $shop,
+            ]);
+
+            return "评论了" . $title;
+
         }
 
 
