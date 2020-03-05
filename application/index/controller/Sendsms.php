@@ -6,7 +6,7 @@ use think\Db;
 use think\Request;
 
 
-class Api extends \think\Controller
+class Sendsms extends \think\Controller
 {
     /*--------------------------------
     '说明:	https://api.chanyoo.net/sendsms?username=demo&password=demo&mobile=13333333333&content=content
