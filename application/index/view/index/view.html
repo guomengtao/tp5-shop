@@ -104,7 +104,7 @@
             console.log("conloe");
             $.post("{:url('index/bbs/add')}", {
                     title: $("textarea#titleChat").val(),
-                    shop:{$list.id}
+                    id:{$list.id}
                 },
                 function (data, status) {
                     console.log("数据: \n" + data + "\n状态: " + status);
