@@ -653,9 +653,9 @@ class Api extends \think\Controller
         if (!function_exists('file_get_contents')) {
             $result = file_get_contents($url);
         } else {
-            $ch      = curl_init();
+            $ch      = curl_init($url);
             $timeout = 5;
-            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_URL, true);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
             curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
             $result = curl_exec($ch);
