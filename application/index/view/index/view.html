@@ -97,16 +97,14 @@
 </div>
 
 
-<form id="commit_form">
-    <input type="hidden" id="user_id" value="d"/>
-    <input type="hidden" id="id" value="39"/>
-</form>
+
 <script>
     $(document).ready(function () {
         $("#comment").click(function () {
             $.post("{:url('index/bbs/add')}", {
                     name: $("textarea#titleChat").val(),
-                    url: "http://www.runoob.com"
+                    url: "http://www.runoob.com",
+                    id:{$list.id}
                 },
                 function (data, status) {
                     console.log("数据: \n" + data + "\n状态: " + status);
