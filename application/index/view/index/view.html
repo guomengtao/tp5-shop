@@ -635,38 +635,6 @@
     </div>
 </div>
 
-<!-- <div class="panel panel-default">
-    <div class="panel-heading">赞助商</div>
-    <div class="panel-body text-center">
-          
- 欢迎加入
-
-    </div>
-</div>
-
-<div class="panel panel-default">
-    <div class="panel-heading">已完成本课的同学</div>
-    <div class="panel-body text-center">
-          
- 欢迎加入
-
-    </div>
-</div>
-
-<div class="panel panel-default">
-    <div class="panel-heading">学习本课中的同学</div>
-    <div class="panel-body text-center">
-          
- 欢迎加入
-
-    </div>
-</div> -->
-
-
-<!-- Button trigger modal -->
-<!-- <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-    Launch demo modal
-</button> -->
 
 <!-- Modal 作业-->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -687,21 +655,11 @@
                 <h3 class="text-center">本节的知识点有哪些：</h3>
                 <form action="" method="post">
                     <div class="form-group">
-                        <!-- <label for="exampleInputName2">留言标题title:</label> -->
-                        <!--<input type="text" class="form-control" id="title" name="title" value="" placeholder="请输入留言标题" maxlength="100">-->
                         <textarea class="form-control" rows="3" id="titlemodel" name="title" value=""
                                   placeholder="填写问题答案"></textarea>
 
                     </div>
-                    <!--<div class="form-group">-->
-                    <!--&lt;!&ndash; <label for="exampleInputPassword1">留言内容content:</label> &ndash;&gt;-->
-                    <!--<textarea class="form-control" rows="3"  id="content" name="content"  value="" placeholder="上课笔记或评论内容"></textarea>-->
-                    <!--</div>-->
-                    <!--<button type="button" class="close" onclick="bbs(document.getElementById('titlemodel').value,{$list.id})" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">提交作业</span></button>-->
                     <h6>本节课有疑问的地方可以直接提交问题</h6>
-                    <h6>完成本节作业，增加一颗星和一个金币</h6>
-                    <!--<input class="form-control" id="add" type="button" onclick="bbs(document.getElementById('title').value,{$list.id})"  style="    margin-bottom:  15px;" name="code" value="提交保存" />-->
-                    <!--<button type="submit" onclick="bbs(document.getElementById('titlemodel').value,{$list.id})" class="btn btn-primary">提交作业ba</button>-->
                 </form>
             </div>
             <div class="modal-footer">
@@ -717,68 +675,6 @@
 
 <script>
 
-
-    // 更新本页面访问量的ajax
-    function page_view(id) {
-
-        var xmlhttp;
-
-        // alert(id);
-
-        if (window.XMLHttpRequest) {
-            // IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
-            xmlhttp = new XMLHttpRequest();
-        } else {
-            // IE6, IE5 浏览器执行代码
-            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        xmlhttp.onreadystatechange = function () {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                // document.getElementById("red_packet").innerHTML=xmlhttp.responseText;
-                // document.getElementById("red_packet").innerHTML='99';
-
-
-            }
-        }
-        xmlhttp.open("GET", "/index/index/view/page_view/" + id, true);
-        xmlhttp.send();
-
-    }
-
-
-    var myVideo = document.getElementById("myVideo");
-
-    function playPause() {
-        if (myVideo.paused) {
-            myVideo.play();
-            document.getElementById("playPause").innerHTML = "暂停";
-        } else {
-            myVideo.pause();
-            document.getElementById("playPause").innerHTML = "开始";
-        }
-
-    }
-
-    function makeBig() {
-        myVideo.width = 560;
-    }
-
-    function makeSmall() {
-        myVideo.width = 320;
-    }
-
-    function makeNormal() {
-        myVideo.width = 420;
-    }
-
-    //全屏
-    function showFull() {
-        myVideo.requestFullscreen();
-    }
-</script>
-
-<script>
-
     var myVideo = document.getElementById("myVideo");
 
     // 调用模态框
@@ -786,143 +682,22 @@
         $('#myModal').modal('show');
     }
 
-    // 对接h5的video的播放进度接口
-    myVideo.onplay = function () {
-        // $('#myModal').modal(options);
-        // document.getElementById("myModal").modal=options;
-        // alert("视频已经开始播放");
-        // document.getElementById("chat").innerHTML=document.getElementById("chat").innerHTML+xmlhttp.responseText;
-        // $('#myModal').modal('show');
-        // alert("播放")
-        // ;
 
-
-        myVideo.addEventListener("timeupdate", function () {
-            console.log(this.currentTime);
-            document.getElementById("t").innerHTML = this.currentTime;
-            // var name='{$Request.get.id}';
-            // alert({$Request.param.id});
-            showHint(this.currentTime, {$Request.param.id}, this.duration);
-            if (this.currentTime >= 2.1 & this.currentTime <= 2.3) {
-                bbs_ask("ask_ajax_play_welcome", {$list.id});
-            }
-            document.getElementById("l").innerHTML = this.duration;
-
-        });
-        myVideo.addEventListener("loadedmetadata", function () {
-            this.play();
-        });
-    };
-
-    myVideo.onended = function () {
-        // document.getElementById("l").innerHTML="本节学习完成！每节课完成讲获得0.1元奖励金（即将推出^_^）";
-        showHintOver(this.duration, {$Request.param.id}, this.duration);
-
-    };
 </script>
+
 <script>
-    // 获取红包的ajax
-    function red_packet(id) {
-
-        var xmlhttp;
-
-
-        if (window.XMLHttpRequest) {
-            // IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
-            xmlhttp = new XMLHttpRequest();
-        } else {
-            // IE6, IE5 浏览器执行代码
-            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        xmlhttp.onreadystatechange = function () {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                document.getElementById("red_packet").innerHTML = xmlhttp.responseText;
-                // document.getElementById("red_packet").innerHTML='99';
-
-
-            }
-        }
-        xmlhttp.open("GET", "/index/index/view/red_packet_get/1/id/" + id, true);
-        xmlhttp.send();
-
-    }
-
-    // 记录播放进度的ajax
-    function showHint(t, id, d) {
-
-        var xmlhttp;
-
-
-        // var phone = str.length;
-        //   if(!(/^1[34578]\d{9}$/.test(phone))){
-        //       document.getElementById("txtHint").innerHTML="手机号格式有误";
-        //       return false;
-        //   }
-        if (window.XMLHttpRequest) {
-            // IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
-            xmlhttp = new XMLHttpRequest();
-        } else {
-            // IE6, IE5 浏览器执行代码
-            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        xmlhttp.onreadystatechange = function () {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
-
-                // document.getElementById("bbs").innerHTML=xmlhttp.responseText+document.getElementById("bbs").innerHTML;
-                // document.getElementById("chat").innerHTML=document.getElementById("chat").innerHTML+xmlhttp.responseText;
-                // 实现跳转到div的最下面
-                // document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight;
-
-            }
-        }
-        xmlhttp.open("GET", "/index/index/videotime/t/" + t + "/id/" + id + "/d/" + d, true);
-        xmlhttp.send();
-
-    }
+    $(document).ready(function () {
+        $("button").click(function () {
+            $.post("/try/ajax/demo_test_post.php", {
+                    name: "菜鸟教程",
+                    url: "http://www.runoob.com"
+                },
+                function (data, status) {
+                    alert("数据: \n" + data + "\n状态: " + status);
+                });
+        });
+    });
 </script>
-<script>
-    // 记录播放完成ajax
-    function showHintOver(t, id, d) {
-
-        var xmlhttp;
-
-
-        // var phone = str.length;
-        //   if(!(/^1[34578]\d{9}$/.test(phone))){
-        //       document.getElementById("txtHint").innerHTML="手机号格式有误";
-        //       return false;
-        //   }
-        if (window.XMLHttpRequest) {
-            // IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
-            xmlhttp = new XMLHttpRequest();
-        } else {
-            // IE6, IE5 浏览器执行代码
-            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        xmlhttp.onreadystatechange = function () {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                // document.getElementById("txtHintOver").innerHTML=xmlhttp.responseText;
-                // document.getElementById("bbs").innerHTML=xmlhttp.responseText+document.getElementById("bbs").innerHTML;
-                document.getElementById("chat").innerHTML = document.getElementById("chat").innerHTML + '<h5 class="text-center"><small>' + xmlhttp.responseText + '</small></h5>';
-                // 实现跳转到div的最下面
-                // document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight;
-                if (xmlhttp.responseText != "您此次似乎没连续看完整节课程,连续看完才能学的扎实哦^_^") {
-                    $('#myModal').modal('show');
-                }
-            }
-        }
-        xmlhttp.open("GET", "/index/index/videotimeover/t/" + t + "/id/" + id + "/d/" + d, true);
-        xmlhttp.send();
-
-    }
-
-    // 设置打开网页后16秒自动发送欢迎词
-    // setTimeout(functionfunction(){ bbs_ask("ask_ajax_welcome",{$list.id}); }, 16000);
-    // setTimeout(alert('d')}, 1000);
-
-</script>
-
 
 <script>
 
@@ -976,7 +751,6 @@
 
         xmlhttp.send("title=" + t + "&shop=" + id + "&age=" + data_id);
         // xmlhttp.send();
-        bbs_song("ask_song");
 
 
         // 发送完成后清空内容
@@ -993,87 +767,8 @@
 
     }
 
-    // 评论功能的ajax函数
-    function bbsOLd(t, id) {
-        t = t.trim();
-        var xmlhttp;
-        if (t.length == 0) {
-            document.getElementById("titleChat").innerHTML = "";
-            return;
 
-        }
-
-
-        if (window.XMLHttpRequest) {
-            // IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
-            xmlhttp = new XMLHttpRequest();
-        } else {
-            // IE6, IE5 浏览器执行代码
-            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        xmlhttp.onreadystatechange = function () {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                document.getElementById("chat").innerHTML = xmlhttp.responseText + document.getElementById("bbs").innerHTML;
-                document.getElementById("bbs").innerHTML = document.getElementById("chat").innerHTML + xmlhttp.responseText;
-                document.getElementById('bbs').scrollTop = document.getElementById('chat').scrollHeight;
-
-            }
-        }
-        xmlhttp.open("POST", "{$Think.server.script_name}/index/bbs/add/", true);
-        // xmlhttp.open("GET","/index/bbs/add/title/"+t+"/shop/"+id,true);
-        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        // xmlhttp.send("t=Bill&lname=Gates");
-        xmlhttp.send("title=" + t + "&shop=" + id);
-        // xmlhttp.send();
-        bbs_song("ask_song", {$list.id});
-
-        // 发送完成后清空内容
-        document.getElementById('titleChat').value = "";
-        // 发送完成后禁止再次点击发送按钮
-        // document.getElementById("sendChat").disabled= true;
-        // document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight;
-
-        // $('#chat').scrollTop( $('#chat')[0].scrollHeight );
-        // var content = document.getElementById('chat');
-        // content.scrollTop = content.scrollHeight;
-
-    }
 </script>
-<script>
-    //关于控制视频播放速度
-    myVid = document.getElementById("myVideo");
 
-    function getPlaySpeed() {
-        // alert(myVid.playbackRate);
-        document.getElementById("t").innerHTML = '当前的播放速度是：' + myVid.playbackRate + '倍';
-    }
 
-    function setPlaySpeed(s) {
-        myVid.playbackRate = s;
-    }
-</script>
-<script type="text/javascript">
-
-    function showtime(t) {
-        document.getElementById("add").disabled = true;
-        // document.getElementById("add").value =" 保存中 ";
-        document.getElementById('title').value = "";
-        document.getElementById('titlemodel').value = "";
-        for (i = 1; i <= t; i++) {
-            window.setTimeout("update_p(" + i + "," + t + ")", i * 1000);
-        }
-
-    }
-
-    function update_p(num, t) {
-        if (num == t) {
-            document.getElementById("add").value = "提交";
-            document.getElementById("add").disabled = false;
-        } else {
-            printnr = t - num;
-            // document.getElementById("add").value = "已保存";
-
-        }
-    }
-</script>
 {include file="index/footer" /}
