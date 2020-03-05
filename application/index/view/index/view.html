@@ -105,13 +105,13 @@
     var data = "a/b"  ;
     $(document).ready(function () {
         $("#comment").click(function () {
-            alert("d");
+            console.log("d");
             $.ajax({
                 type: "GET",
                 url: "{:url('index/bbs/add')}",
                 data: data ,
                 success: function (msg) {
-                    alert("Data Saved: " + msg);
+                    console.log("Data Saved: " + msg);
                 },
                 error: function (msg) {
                     alert("no");
