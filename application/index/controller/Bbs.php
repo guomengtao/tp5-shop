@@ -128,7 +128,7 @@ class Bbs extends \think\Controller
 
     public function add()
     {
-
+ return 22;
 
         $title   = trim(input('title'));
         $phone   = Cookie::get('phone');
