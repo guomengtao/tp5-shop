@@ -598,7 +598,7 @@ class Api extends \think\Controller
         $fp      = file_get_contents($url);
 
 
-        $data = json_decode($result, true);
+        $data = json_decode($fp, true);
         return $data['result'];
 
 
