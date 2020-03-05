@@ -105,7 +105,7 @@
     $(document).ready(function () {
         $("#comment").click(function () {
             $.post("{:url('index/bbs/add')}", {
-                    name: "菜鸟教程",
+                    name: $("textarea#titleChat").val(),
                     url: "http://www.runoob.com"
                 },
                 function (data, status) {
