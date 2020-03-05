@@ -382,7 +382,7 @@
 
                 <div class="form-group input-group field-feed-content required">
 
-                     
+
 
                     <textarea id="titleChat" name="title" class="form-control"
                               placeholder="{$Request.param.data_id?'写回复内容':'写评论'}..."
@@ -390,7 +390,7 @@
                     <input type="hidden" id="user_id" value="d"/>
                     <input type="hidden" id="id" value="39"/>
                     <span class="input-group-btn"><button class="btn btn-success"
-                                                          off_onclick="bbs(document.getElementById('titleChat').value,{$list.id},{$Request.param.data_id})"
+                                                          onclick="bbs(document.getElementById('titleChat').value,{$list.id},{$Request.param.data_id})"
                                                           style="height: 54px;width: 54px;">发布</button></span>
 
 
