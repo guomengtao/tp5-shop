@@ -638,7 +638,7 @@ class Member extends \think\Controller
 
 
             //  在线时间排名
-            $online_time = User::where('phone', ' <> ', '15966982315')
+            $online_time = User::where('phone', 'NEQ', '15966982315')
                 ->order('online_time desc')
                 ->limit(10)
                 ->select();

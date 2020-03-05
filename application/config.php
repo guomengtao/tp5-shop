@@ -244,7 +244,7 @@ return [
     //验证码
     'captcha'  => [
         // 字体大小
-        'fontSize' => 22,
+        'fontSize' => 14,
         // 验证码长度（位数）
         'length'   => 4,
         // 关闭验证码杂点
