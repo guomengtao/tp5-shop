@@ -134,7 +134,7 @@ class Bbs extends \think\Controller
         $phone   = Cookie::get('phone');
         $phone   = $phone?$phone:"15966982315";
         $user_id = Cookie::get('user_id');
-        $user_id = $user_id?$user_id:1;
+        $user_id = $user_id?$user_id:126;
         $captcha = input("captcha");
 
 
