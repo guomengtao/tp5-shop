@@ -80,15 +80,14 @@
 </div>
 {/if}{/if}
 
- 
+
 
     <div class="form-group input-group field-feed-content required">
 
 
         <textarea id="titleChat" name="title" placeholder="{$Request.param.data_id?'写回复内容':'写评论'}..."
                   aria-required="true">    </textarea>
-        <input type="hidden" id="user_id" value="d"/>
-        <input type="hidden" id="id" value="39"/>
+
         <span class="input-group-btn">
         <button class="btn btn-success" id="comment"
                 onclick="bbs(document.getElementById('titleChat').value,{$list.id},{$Request.param.data_id})"
@@ -96,7 +95,10 @@
         </span>
 
     </div>
-
+<form id="commit_form">
+    <input type="hidden" id="user_id" value="d"/>
+    <input type="hidden" id="id" value="39"/>
+</form>
 <script>
     $(document).ready(function () {
         $("#comment").click(function () {
@@ -104,7 +106,7 @@
             $.ajax({
                 type: "POST",
                 url: "{:url('index/bbs/add')}",
-                data: $('#login_value').serialize(),//jq提供的获取form表单数据的快捷方式，通过form内标签的name属性{"username":"admin","passwd":"123456"}
+                data: $('#login_value').serialize(),
                 success: function (msg) {
                     alert("Data Saved: " + msg);
                 },
