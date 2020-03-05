@@ -2907,6 +2907,10 @@ class Index extends \think\Controller
         $data_id        = input('data_id');
         $reply          = input('reply');
 
+        if (!$user_id) {
+            return $this->success('请登录！','index/index/login');
+        }
+
         if ($data_id and $reply == '') {
 
             if ($user_id <= 1) {
