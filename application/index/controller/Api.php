@@ -160,7 +160,7 @@ class Api extends \think\Controller
         $token_url = "https://graph.qq.com/oauth2.0/token?grant_type=authorization_code&"
             . "client_id=" . $app_id . "&redirect_uri=" . urlencode($my_url)
             . "&client_secret=" . $app_secret . "&code=" . $code;
-
+        echo $token_url;
         $response = file_get_contents($token_url);
 
         dump($response);
