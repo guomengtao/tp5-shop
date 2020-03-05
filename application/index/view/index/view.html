@@ -16,7 +16,7 @@
 {/if}
 
 
-<div class="row">
+<div class="row" style="display: none">
     <div class="col-xs-12 col-sm-12 col-md-12" style="height: ">
         <div style="width:100%;overflow: hidden;  " id="tovideiframe">
 
@@ -101,15 +101,18 @@
 <script>
     $(document).ready(function () {
         $("#comment").click(function () {
-            $.post("/try/ajax/demo_test_post.php", {
-                    name: "菜鸟教程",
-                    url: "http://www.runoob.com"
-                },
-                function (data, status) {
-                    alert("数据: \n" + data + "\n状态: " + status);
-                });
+            $.ajax({
+                type: "POST",
+                url: "index.php",
+                data: "name=John&location=Boston",
+                success: function (msg) {
+                    alert("Data Saved: " + msg);
+                }
+            });
         });
     });
+
+
 </script>
 <div class="panel panel-default">
     <div class="panel-heading">评论</div>
