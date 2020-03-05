@@ -361,7 +361,7 @@ class Member extends \think\Controller
 
         //  在线时间排名
         $online_time = User::where('phone', '<>', '15966982315')
-            ->where('phone', ' = ', $phone)
+            ->where('phone', '=', $phone)
             ->order('online_time desc')
             ->where('phone', $eq, $phone)
             ->limit(10)
@@ -377,8 +377,8 @@ class Member extends \think\Controller
 
 
         //  金币排行榜
-        $money = Money::where('phone', ' <> ', '15966982315')
-            ->where('phone', ' <> ', '0')
+        $money = Money::where('phone', '<>', '15966982315')
+            ->where('phone', '<>', '0')
             ->field('id,phone,content, money,create_time')
             ->order('id desc')
             ->where('phone', $eq, $phone)
@@ -386,8 +386,8 @@ class Member extends \think\Controller
             ->select();
 
         //  积分排行榜 
-        $money_add = Money::where('phone', ' <> ', '15966982315')
-            ->where('phone', ' <> ', '0')
+        $money_add = Money::where('phone', '<>', '15966982315')
+            ->where('phone', '<>', '0')
             ->where('money', ' > ', '0')
             ->where('phone', $eq, $phone)
             ->field('id,phone, money,create_time')
@@ -421,11 +421,11 @@ class Member extends \think\Controller
             ->order('id desc')
             // ->where('pathinfo','like',' % '.'index / index / view'.' % ')
             // ->where('domain','like',' % '.'com'.' % ')
-            ->where('domain', ' <> ', 'open . gaoxueya . com')
-            ->where('domain', ' <> ', 'www . tp5 . com')
+            ->where('domain', '<>', 'open . gaoxueya . com')
+            ->where('domain', '<>', 'www . tp5 . com')
             ->where('phone', $eq, $phone)
-            ->where('domain', ' <> ', '')
-            ->where('domain', ' <> ', 'blank')
+            ->where('domain', '<>', '')
+            ->where('domain', '<>', 'blank')
             ->limit(10)
             ->select();
 
@@ -435,8 +435,8 @@ class Member extends \think\Controller
         field('id,phone,pathinfo,create_time')
             ->where('phone', $eq, $phone)
             ->order('id desc')
-            ->where('phone', ' <> ', '15966982315')
-            ->where('pathinfo', ' <> ', 'index / member / news')
+            ->where('phone', '<>', '15966982315')
+            ->where('pathinfo', '<>', 'index / member / news')
             ->limit(10)
             ->select();
 
@@ -451,7 +451,7 @@ class Member extends \think\Controller
         //  最新订单
         $total_fee = Order::
         field('id,phone,body,total_fee,subject,create_time')
-            ->where('phone', ' <> ', '15966982315')
+            ->where('phone', '<>', '15966982315')
             ->where('phone', $eq, $phone)
             // ->whereTime('create_time', 'today')
             ->order('id desc')
@@ -465,7 +465,7 @@ class Member extends \think\Controller
             ->field('id,phone,create_time')
             ->where('phone', $eq, $phone)
             ->order('id desc')
-            ->where('phone', ' <> ', '15966982315')
+            ->where('phone', '<>', '15966982315')
             ->limit(10)
             ->select();
 
@@ -528,7 +528,7 @@ class Member extends \think\Controller
 
         $list = Order::where('body', ' = ', 37)
             ->field('id,phone, total_fee,create_time,subject')
-            ->where('phone', ' <> ', '15966982315')
+            ->where('phone', '<>', '15966982315')
             ->order('id desc')
             ->paginate(15);
 
@@ -537,7 +537,7 @@ class Member extends \think\Controller
         $total_fee = Order::where('body', ' = ', 37)
             ->group('phone')
             ->field('id,phone, sum(`total_fee`) as total_feecount,create_time,subject')
-            ->where('phone', ' <> ', '15966982315')
+            ->where('phone', '<>', '15966982315')
             // ->whereTime('create_time', 'today')
             ->order('total_feecount desc')
             ->limit(10)
@@ -547,7 +547,7 @@ class Member extends \think\Controller
         //  打赏总金额
         $total_fee_count = Order::where('body', ' = ', 37)
             // ->field('total_fee')
-            // ->where('phone',' <> ','15966982315')
+            // ->where('phone','<>','15966982315')
             ->sum('total_fee');
 
 
@@ -575,7 +575,7 @@ class Member extends \think\Controller
         //  打赏列表
         $list = Order::where('body', ' = ', 37)
             ->field('id,phone, total_fee,create_time,subject')
-            ->where('phone', ' <> ', '15966982315')
+            ->where('phone', '<>', '15966982315')
             ->order('id desc')
             ->paginate(15);
 
@@ -584,7 +584,7 @@ class Member extends \think\Controller
         $total_fee = Order::where('body', ' = ', 37)
             ->group('phone')
             ->field('id,phone, sum(`total_fee`) as total_feecount,create_time,subject')
-            ->where('phone', ' <> ', '15966982315')
+            ->where('phone', '<>', '15966982315')
             // ->whereTime('create_time', 'today')
             ->order('total_feecount desc')
             ->limit(10)
@@ -594,7 +594,7 @@ class Member extends \think\Controller
         //  打赏总金额
         $total_fee_count = Order::where('body', ' = ', 37)
             // ->field('total_fee')
-            // ->where('phone',' <> ','15966982315')
+            // ->where('phone','<>','15966982315')
             ->sum('total_fee');
 
 
@@ -656,8 +656,8 @@ class Member extends \think\Controller
 
             //  金币排行榜
             $money = Money::group('phone')
-                ->where('phone', ' <> ', '15966982315')
-                ->where('phone', ' <> ', '0')
+                ->where('phone', '<>', '15966982315')
+                ->where('phone', '<>', '0')
                 ->field('id,phone, sum(`money`) as money')
                 ->order('money desc')
                 ->limit(10)
@@ -666,8 +666,8 @@ class Member extends \think\Controller
 
             //  积分排行榜
             $money_add = Money::group('phone')
-                ->where('phone', ' <> ', '15966982315')
-                ->where('phone', ' <> ', '0')
+                ->where('phone', '<>', '15966982315')
+                ->where('phone', '<>', '0')
                 ->where('money', ' > ', '0')
                 ->field('id,phone, sum(`money`) as money')
                 ->order('money desc')
@@ -713,7 +713,7 @@ class Member extends \think\Controller
             $footprint_phone = Footprint::group('phone')
                 ->field('id,phone, count(`phone`) as phonecount')
                 ->order('phonecount desc')
-                ->where('phone', ' <> ', '15966982315')
+                ->where('phone', '<>', '15966982315')
                 ->limit(10)
                 ->select();
             cache('footprint_phone', $footprint_phone, $cach_time);
@@ -721,7 +721,7 @@ class Member extends \think\Controller
 
             //  连续签到排名
             $list_top = Order::where('body', ' = ', 135)
-                ->where('phone', ' <> ', '15966982315')
+                ->where('phone', '<>', '15966982315')
                 ->whereTime('create_time', 'today')
                 ->order('rand desc')
                 ->limit(10)
@@ -732,7 +732,7 @@ class Member extends \think\Controller
             $total_fee = Order::where('body', ' = ', 37)
                 ->group('phone')
                 ->field('id,phone, sum(`total_fee`) as total_feecount')
-                ->where('phone', ' <> ', '15966982315')
+                ->where('phone', '<>', '15966982315')
                 // ->whereTime('create_time', 'today')
                 ->order('total_feecount desc')
                 ->limit(10)
@@ -745,7 +745,7 @@ class Member extends \think\Controller
                 ->group('phone')
                 ->field('id,phone, count(`phone`) as phonecount')
                 ->order('phonecount desc')
-                ->where('phone', ' <> ', '15966982315')
+                ->where('phone', '<>', '15966982315')
                 ->limit(10)
                 ->select();
             cache('registration', $registration, $cach_time);
@@ -756,7 +756,7 @@ class Member extends \think\Controller
                 ->group('invite')
                 ->field('id,invite, count(`invite`) as invitecount,phone')
                 ->order('invitecount desc')
-                ->where('invite', ' <> ', '0')
+                ->where('invite', '<>', '0')
                 ->limit(10)
                 ->select();
             cache('invite', $invite, $cach_time);
@@ -867,7 +867,7 @@ class Member extends \think\Controller
 
             // 判断今天是否有签到记录
             $rand_today = Order::where('body', $body)
-                ->where('phone', ' <> ', '15966982315')
+                ->where('phone', '<>', '15966982315')
                 ->whereTime('create_time', 'today')
                 ->count();
 
