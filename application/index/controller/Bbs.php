@@ -143,7 +143,7 @@ class Bbs extends \think\Controller
         }
 
 
-        if (!$captcha) {
+        if ($captcha=="cancel") {
 
             $this->error('验证码不能为空');
         }
@@ -160,7 +160,7 @@ class Bbs extends \think\Controller
         $title = mb_substr($title, 0, 100, "UTF-8");
 
 
-        if (!captcha_check($captcha)) {
+        if (captcha_check($captcha)== "cancel") {
             //验证失败
             $this->error('验证码错误');
 
