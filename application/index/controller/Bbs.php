@@ -128,11 +128,7 @@ class Bbs extends \think\Controller
 
     public function add()
     {
-        $request = Request::instance();
-        echo '是否AJax请求：' . var_export($request->isAjax(), true) . '<br/>';
-        echo '请求参数：';
-        var_dump($request->param());
-        die;
+
 
         $title   = trim(input('title'));
         $phone   = Cookie::get('phone');
@@ -140,6 +136,11 @@ class Bbs extends \think\Controller
         $user_id = Cookie::get('user_id');
         $user_id = $user_id ? $user_id : 126;
         $captcha = input("captcha");
+        $shop = input("shop");
+
+        if ($request->isAjax()){
+            echo $shop;
+        }
 
 
         if (!$title) {

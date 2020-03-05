@@ -102,8 +102,7 @@
     $(document).ready(function () {
         $("#comment").click(function () {
             $.post("{:url('index/bbs/add')}", {
-                    name: $("textarea#titleChat").val(),
-                    url: "http://www.runoob.com",
+                    title: $("textarea#titleChat").val(),
                     id:{$list.id}
                 },
                 function (data, status) {
