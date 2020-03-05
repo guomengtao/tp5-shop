@@ -380,15 +380,7 @@
                 {/if}
 
 
-                <div class="form-group input-group field-feed-content required">
-                    <form action="{:url('index/index/view')}" method="post">
-                        <textarea class="form-control" rows="3" name="title" value=""
-                                  placeholder="内容"></textarea>
-                        <input type="hidden" name="list_id" value="{$list.id}"/>
-                        <input type="hidden" name="data_id}" value="{$Request.param.data_id}"/>
-                        <button type="submit" class="btn btn-primary" style="margin-top: 20px">评论</button>
-                    </form>
-                    <div></div>
+              
 
 
                     <textarea id="titleChat" name="title" class="form-control"
