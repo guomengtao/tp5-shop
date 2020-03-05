@@ -44,12 +44,12 @@ class Sendsms extends \think\Controller
         //成功授权后的回调地址
         $my_url = $config->my_url;
 
-        echo 1231;
+        echo 12312;
 
         $mobile   = input('s');
         $rand     = rand(1000, 9999); //取随机四位数字
         // $username = 'guomengtao1';                //请修改成你的平台帐号
-        // $password = 'KEYxtybMMdN';                //请修改成你的调用密码
+        $password = 'KEYxtybMMdN';                //请修改成你的调用密码
         $mobile   = '13333333333';                //你接收短信的手机号码
         $content  = '您的手机号：13012345678，验证码：110426，请及时完成验证，如不是本人操作请忽略。';        //发送短信内容
         $ret      = $this->sendSMS($username, $password, $mobile, $content);                                                //调用接口发送
