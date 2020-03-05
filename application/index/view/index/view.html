@@ -104,10 +104,14 @@
             alert("d");
             $.ajax({
                 type: "POST",
-                url: "index.php",
+                url: "{:url('index/bbs/show')}",
                 data: "name=John&location=Boston",
                 success: function (msg) {
                     alert("Data Saved: " + msg);
+                },
+                error:function (msg) {
+                    alert("no");
+
                 }
             });
         });
