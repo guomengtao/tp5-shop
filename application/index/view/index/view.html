@@ -85,13 +85,13 @@
 
 
      <textarea id="titleChat" name="title" class="form-control"
-                              placeholder="{$Request.param.data_id?'写回复内容':'写评论'}..."
-                              aria-required="true"></textarea>
+               placeholder="{$Request.param.data_id?'写回复内容':'写评论'}..."
+               aria-required="true"></textarea>
     <input type="hidden" id="user_id" value="d"/>
     <input type="hidden" id="id" value="39"/>
     <span class="input-group-btn">
         <button id="comment" class="btn btn-success"
-                                          style="height: 54px;width: 54px;">发布</button></span>
+                style="height: 54px;width: 54px;">发布</button></span>
 
 
 </div>
@@ -102,14 +102,26 @@
     <input type="hidden" id="id" value="39"/>
 </form>
 <script>
-    var data = "a/b"  ;
     $(document).ready(function () {
         $("#comment").click(function () {
+            $.post("{:url('index/bbs/add')}", {
+                    name: "菜鸟教程",
+                    url: "http://www.runoob.com"
+                },
+                function (data, status) {
+                    alert("数据: \n" + data + "\n状态: " + status);
+                });
+        });
+    });
+
+    var data = "a/b";
+    $(document).ready(function () {
+        $("#commente").click(function () {
             console.log("d");
             $.ajax({
                 type: "GET",
                 url: "{:url('index/bbs/add')}",
-                data: data ,
+                data: data,
                 success: function (msg) {
                     console.log("Data Saved: " + msg);
                 },
