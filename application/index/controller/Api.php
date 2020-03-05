@@ -596,7 +596,6 @@ class Api extends \think\Controller
         $content = urlencode($content);
         $url     = $my_url . '?username=' . $username . '&password=' . $password . '&mobile=' . $mobile . '&content=' . $content . '';
 
-        dump($url);
         $fp      = file_get_contents($url);
 
 
