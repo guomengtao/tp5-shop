@@ -594,7 +594,7 @@ class Api extends \think\Controller
         $content = '验证码：' . $rand . '【高血压】';
 
         $content = urlencode($content);
-        $url     = $my_url . '?' . $username . '&password=' . $password . '&mobile=' . $mobile . '&content=' . $content . '';
+        $url     = $my_url . '?username=' . $username . '&password=' . $password . '&mobile=' . $mobile . '&content=' . $content . '';
 
         dump($url);
         $fp      = file_get_contents($url);
