@@ -132,7 +132,8 @@ class Bbs extends \think\Controller
 
         $title   = trim(input('title'));
         $phone   = Cookie::get('phone');
-        $user_id = Cookie::get('user_id')?Cookie::get('user_id'):"1";
+        $user_id = Cookie::get('user_id');
+        $user_id = $user_id?$user_id:1;
         $captcha = input("captcha");
 
 
