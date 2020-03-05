@@ -80,7 +80,7 @@
 </div>
 {/if}{/if}
 
-<div class="form-group input-group field-feed-content required">
+<div class="form-group input-group field-feed-content required" id="commentform">
 
 
 
@@ -92,7 +92,7 @@
     <input type="hidden" id="user_id" value="d"/>
     <input type="hidden" id="id" value="39"/>
     <span class="input-group-btn">
-        <button class="btn btn-success" id="com"
+        <button class="btn btn-success" id="comment"
                 onclick="bbs(document.getElementById('titleChat').value,{$list.id},{$Request.param.data_id})"
                 style="height: 54px;width: 54px;">评论</button>
 
@@ -100,12 +100,12 @@
 </div>
 <script>
     $(document).ready(function () {
-        $("#com").click(function () {
+        $("#comment").click(function () {
             alert("d");
             $.ajax({
                 type: "POST",
-                url: "{:url('index/bbs/show')}",
-                data: "name=John&location=Boston",
+                url: "{:url('index/bbs/add')}",
+                data: "$('#commentform').serialize()",
                 success: function (msg) {
                     alert("Data Saved: " + msg);
                 },
