@@ -163,7 +163,7 @@ class Api extends \think\Controller
 
         $response = file_get_contents($token_url);
 
-
+        dump($response);
         if (strpos($response, "callback") !== false) {
             $lpos     = strpos($response, "(");
             $rpos     = strrpos($response, ")");
