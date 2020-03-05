@@ -105,7 +105,7 @@
             $.ajax({
                 type: "POST",
                 url: "{:url('index/bbs/add')}",
-                data: "$('#commentform').serialize()",
+                data: $('#commentform').serialize(),
                 success: function (msg) {
                     alert("Data Saved: " + msg);
                 },
