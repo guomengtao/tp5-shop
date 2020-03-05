@@ -172,6 +172,7 @@ class Bbs extends \think\Controller
         $user = Data::create([
             'title'   => $title,
             'user_id' => $user_id,
+            'shop' => 0,
         ]);
 
 
