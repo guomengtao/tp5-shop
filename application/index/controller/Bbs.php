@@ -49,7 +49,7 @@ class Bbs extends \think\Controller
 
 
         $captcha = input("captcha");
-        if ($captcha=="cancel") {
+        if ($captcha == "cancel") {
 
             if (!captcha_check($captcha)) {
                 //验证失败
@@ -128,16 +128,17 @@ class Bbs extends \think\Controller
 
     public function add()
     {
-echo '是否AJax请求：' . var_export($request->isAjax(), true) . '<br/>';
-echo '请求参数：';
-dump($request->param());
-die;
+        $request = Request::instance();
+        echo '是否AJax请求：' . var_export($request->isAjax(), true) . '<br/>';
+        echo '请求参数：';
+        dump($request->param());
+        die;
 
         $title   = trim(input('title'));
         $phone   = Cookie::get('phone');
-        $phone   = $phone?$phone:"15966982315";
+        $phone   = $phone ? $phone : "15966982315";
         $user_id = Cookie::get('user_id');
-        $user_id = $user_id?$user_id:126;
+        $user_id = $user_id ? $user_id : 126;
         $captcha = input("captcha");
 
 
@@ -148,7 +149,7 @@ die;
         }
 
 
-        if ($captcha=="cancel") {
+        if ($captcha == "cancel") {
 
             $this->error('验证码不能为空');
         }
@@ -165,7 +166,7 @@ die;
         $title = mb_substr($title, 0, 100, "UTF-8");
 
 
-        if (captcha_check($captcha)== "cancel") {
+        if (captcha_check($captcha) == "cancel") {
             //验证失败
             $this->error('验证码错误');
 
@@ -176,8 +177,8 @@ die;
         $user = Data::create([
             'title'   => $title,
             'user_id' => $user_id,
-            'shop' => 0,
-            'phone' => $phone,
+            'shop'    => 0,
+            'phone'   => $phone,
         ]);
 
 
