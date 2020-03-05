@@ -80,24 +80,24 @@
 </div>
 {/if}{/if}
 
-<div class="form-group input-group field-feed-content required" id="commentform">
+<form id="login_value">
 
 
+    <div class="form-group input-group field-feed-content required">
 
-    <textarea id="titleChat" name="title" class="form-control"
-              placeholder="{$Request.param.data_id?'写回复内容':'写评论'}..."
-              aria-required="true">
 
-    </textarea>
-    <input type="hidden" id="user_id" value="d"/>
-    <input type="hidden" id="id" value="39"/>
-    <span class="input-group-btn">
+        <textarea id="titleChat" name="title" placeholder="{$Request.param.data_id?'写回复内容':'写评论'}..."
+                  aria-required="true">    </textarea>
+        <input type="hidden" id="user_id" value="d"/>
+        <input type="hidden" id="id" value="39"/>
+        <span class="input-group-btn">
         <button class="btn btn-success" id="comment"
                 onclick="bbs(document.getElementById('titleChat').value,{$list.id},{$Request.param.data_id})"
                 style="height: 54px;width: 54px;">评论</button>
+        </span>
 
-
-</div>
+    </div>
+</form>
 <script>
     $(document).ready(function () {
         $("#comment").click(function () {
@@ -105,11 +105,11 @@
             $.ajax({
                 type: "POST",
                 url: "{:url('index/bbs/add')}",
-                data: $('#commentform').serialize(),
+                data: $('#login_value').serialize(),//jq提供的获取form表单数据的快捷方式，通过form内标签的name属性{"username":"admin","passwd":"123456"}
                 success: function (msg) {
                     alert("Data Saved: " + msg);
                 },
-                error:function (msg) {
+                error: function (msg) {
                     alert("no");
 
                 }
