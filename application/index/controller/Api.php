@@ -113,7 +113,7 @@ class Api extends \think\Controller
 
     public function qq()
     {
-
+        echo 123;
 
         // 改为从数据获取以上三个敏感信息
 
@@ -349,37 +349,6 @@ class Api extends \think\Controller
 
         // 查询有没绑定账号，没绑定跳转绑定页面。有绑定 自动设置登录
 
-
-        // https://graph.qq.com/oauth2.0/token?grant_type=authorization_code&client_id=[YOUR_APP_ID]&client_secret=[YOUR_APP_Key]&code=[The_AUTHORIZATION_CODE]&state=[The_CLIENT_STATE]&redirect_uri=[YOUR_REDIRECT_URI]
-
-        // https://graph.qq.com/oauth2.0/token?grant_type=authorization_code&client_id=[YOUR_APP_ID]&client_secret=[YOUR_APP_Key]&code=[The_AUTHORIZATION_CODE]&state=[The_CLIENT_STATE]&redirect_uri=[YOUR_REDIRECT_URI]
-
-        // https://graph.qq.com/oauth2.0/token?grant_type=authorization_code&client_id=100556678&client_secret=ac07166c50a0361b7beec4e423a6bc46&code=C043B984F85C1B301C4295878CE7E921&state=1&redirect_uri=http://open.gaoxueya.com/index/api/qq
-
-
-        // access_token=F2CE42D4E114610204B329ADDDDF90ED&expires_in=7776000&refresh_token=E973B7747526347BC63962122A2ABB5C
-
-        // access_token=F2CE42D4E114610204B329ADDDDF90ED&expires_in=7776000&refresh_token=E973B7747526347BC63962122A2ABB5C
-
-        // https://graph.qq.com/oauth2.0/me?access_token=F2CE42D4E114610204B329ADDDDF90ED
-
-
-        // https://graph.qq.com/oauth2.0/me?access_token=F2CE42D4E114610204B329ADDDDF90ED
-
-// callback( {"client_id":"100556678","openid":"537770203713756DC8D596C2E97BC5B8"} );
-
-        // https://graph.qq.com/user/get_user_info?access_token=YOUR_ACCESS_TOKEN&oauth_consumer_key=YOUR_APP_ID&openid=YOUR_OPENID
-
-
-        // callback( {"client_id":"100556678","openid":"537770203713756DC8D596C2E97BC5B8"} );
-
-
-        // https://graph.qq.com/user/get_user_info?access_token=YOUR_ACCESS_TOKEN&oauth_consumer_key=YOUR_APP_ID&openid=YOUR_OPENID
-
-        // https://graph.qq.com/user/get_user_info?access_token=F2CE42D4E114610204B329ADDDDF90ED&oauth_consumer_key=100556678&openid=537770203713756DC8D596C2E97BC5B8
-
-
-        // { "ret": 0, "msg": "", "is_lost":0, "nickname": "Speech", "gender": "男", "province": "", "city": "阿纳", "year": "1982", "figureurl": "http:\/\/qzapp.qlogo.cn\/qzapp\/100556678\/537770203713756DC8D596C2E97BC5B8\/30", "figureurl_1": "http:\/\/qzapp.qlogo.cn\/qzapp\/100556678\/537770203713756DC8D596C2E97BC5B8\/50", "figureurl_2": "http:\/\/qzapp.qlogo.cn\/qzapp\/100556678\/537770203713756DC8D596C2E97BC5B8\/100", "figureurl_qq_1": "http:\/\/thirdqq.qlogo.cn\/qqapp\/100556678\/537770203713756DC8D596C2E97BC5B8\/40", "figureurl_qq_2": "http:\/\/thirdqq.qlogo.cn\/qqapp\/100556678\/537770203713756DC8D596C2E97BC5B8\/100", "is_yellow_vip": "0", "vip": "0", "yellow_vip_level": "0", "level": "0", "is_yellow_year_vip": "0" }
 
         return "qq登录";
     }
@@ -670,7 +639,7 @@ class Api extends \think\Controller
         // $this->sendSMS($url);
         // die();
         // $fp = file_get_contents($cha);1234563333
-	$content = urlencode($content);
+        $content = urlencode($content);
 
         $fp = file_get_contents("http://api.chanyoo.net/sendsms?username=$username&password=$password&mobile=$mobile&content=$content");
 
