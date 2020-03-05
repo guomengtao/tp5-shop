@@ -649,7 +649,7 @@ class Api extends \think\Controller
     public function sendSMS($url)
     {
 
-        $url = urlencode($url);
+        // $url = urlencode($url);
         if (function_exists('file_get_contents')) {
             $result = file_get_contents($url);
         } else {
