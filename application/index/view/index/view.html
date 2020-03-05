@@ -101,7 +101,7 @@
 <script>
     $(document).ready(function () {
         $("#comment").click(function () {
-            console.log(conloe);
+            console.log("conloe");
             $.post("{:url('index/bbs/add')}", {
                     title: $("textarea#titleChat").val(),
                     shop:{$list.id}
