@@ -49,7 +49,7 @@ class Bbs extends \think\Controller
 
 
         $captcha = input("captcha");
-        if ($captcha) {
+        if ($captcha=="cancel") {
 
             if (!captcha_check($captcha)) {
                 //验证失败
