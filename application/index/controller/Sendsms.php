@@ -4,7 +4,7 @@ namespace app\index\controller;
 
 use think\Db;
 use think\Request;
-
+use app\index\model\Config;
 
 class Sendsms extends \think\Controller
 {
