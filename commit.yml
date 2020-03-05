@@ -3,18 +3,18 @@ branches: {
   }
 fileChange:
   /application:
-    newFile: !uuid 'a388293ccf99f23c09c2ef2effef0d7ad809e41f'
-    oldFile: !uuid '6362772f7b12fb1d3ff3a773988dc0b921088b77'
+    newFile: !uuid '06744e432ca7edcf6664681f21ddd725c00beb70'
+    oldFile: !uuid 'a388293ccf99f23c09c2ef2effef0d7ad809e41f'
   /application/index:
-    newFile: !uuid '27554ec634f8329029b3fa09d9170e002715f45c'
-    oldFile: !uuid '79a0dbba47c05917e7bbcead250e36cb68f6dadf'
+    newFile: !uuid '1a765393044b2c8497dd009d2d3d64ff144e335d'
+    oldFile: !uuid '27554ec634f8329029b3fa09d9170e002715f45c'
   /application/index/controller:
-    newFile: !uuid '7d1cedfeda33d6823ea2a386976e43e7b338a9b1'
-    oldFile: !uuid '5fe05f78c170c7c3f2b876e06d625b4ca4a47def'
+    newFile: !uuid '2ae5a5a7349fe100f950cfe15def3254e40b3ac2'
+    oldFile: !uuid '7d1cedfeda33d6823ea2a386976e43e7b338a9b1'
   /application/index/controller/Bbs.php:
-    newFile: !uuid 'd019e18283a248ca9f6259cd915dbfa9b2016c60'
-    oldFile: !uuid '2b841464311c67f2dff100137fc8116fd1ef60df'
-gitCommitId: !uuid 'a476451fee74ff65f7753f407e022467d8d93ec8'
+    newFile: !uuid 'c81e27c4584b4f2a55eb9e0159073f37109ccab0'
+    oldFile: !uuid 'd019e18283a248ca9f6259cd915dbfa9b2016c60'
+gitCommitId: !uuid 'bf6e728f1229ed0eeb6b28674c75560dd319b568'
 renames: {
   }
-revisionId: 296
+revisionId: 297
