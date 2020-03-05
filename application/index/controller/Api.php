@@ -211,7 +211,6 @@ class Api extends \think\Controller
         }
 
 
-
         $user = new UserQq();
         // 查询单个数据
         $user = $user->where('openid', $openid)
@@ -558,7 +557,6 @@ class Api extends \think\Controller
 
             //——请根据您的业务逻辑来编写程序（以上代码仅作参考）——
 
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         } else {
             //验证失败
             //如要调试，请看alipay_notify.php页面的verifyReturn函数
@@ -568,51 +566,37 @@ class Api extends \think\Controller
 
         }
 
-// 模板变量赋值
+        // 模板变量赋值
         $this->assign('result', $result);
-// 渲染模板输出
+        // 渲染模板输出
         return $this->fetch();
     }
 
     public function sms()
     {
 
-
         $config = new Config();
         // 查询单个数据
-        $config = $config->where('name', 'sms')
+        $config = $config
+            ->where('name', 'sms')
             ->find();
 
-
-        //应用的APPID
+        // 应用的APPID
         $username = $config->username;
-        //应用的APPKEY
+        // 应用的APPKEY
         $password = $config->password;
-        //成功授权后的回调地址
+        // 成功授权后的回调地址
         $my_url = $config->my_url;
 
         header("content-type:text/html; charset=utf-8");
         $mobile  = input('s');
         $rand    = rand(1000, 9999); //取随机四位数字
         $content = '验证码：' . $rand . '【高血压】';
-        // $cha  = $my_url . '?username=' . $username . '&password=' . $password . '&mobile=' . $tom . '&content=验证码：' . $rand . '【高血压】';
-        $cha = $my_url . '?username=' . $username . '&password=' . $password . '&mobile=' . $mobile . '&content=' . $content;
 
         $content = urlencode($content);
-        dump($content);
-        $url = 'http://api.chanyoo.net/sendsms?username=' . $username . '&password=' . $password . '&mobile=' . $mobile . '&content=' . $content . '';
-        dump($url);
-        $this->sendSMS($url);
-        die();
-        // $fp = file_get_contents($cha);1234563333
+        $url     = $my_url . $username . '&password=' . $password . '&mobile=' . $mobile . '&content=' . $content . '';
+        $fp      = file_get_contents($url);
 
-
-        $fp = file_get_contents("http://api.chanyoo.net/sendsms?username=$username&password=$password&mobile=$mobile&content=$content");
-
-        dump($fp);
-
-
-        die();
 
         //转xml为数组形式
         $xml  = simplexml_load_string($fp);
