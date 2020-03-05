@@ -594,13 +594,12 @@ class Api extends \think\Controller
         $content = '验证码：' . $rand . '【高血压】';
 
         $content = urlencode($content);
-        $url     = $my_url .'?' .$username . '&password=' . $password . '&mobile=' . $mobile . '&content=' . $content . '';
+        $url     = $my_url . '?' . $username . '&password=' . $password . '&mobile=' . $mobile . '&content=' . $content . '';
         $fp      = file_get_contents($url);
 
 
-        //转xml为数组形式
-        $xml  = simplexml_load_string($fp);
-        $data = json_decode(json_encode($xml), TRUE);
+        $data = json_decode($result, true);
+        return $data['result'];
 
 
         echo $data['message'];
