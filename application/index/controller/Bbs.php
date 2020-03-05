@@ -139,14 +139,13 @@ class Bbs extends \think\Controller
         $shop    = input("shop");
         $request = Request::instance();
 
-        if ($request->isAjax()) {}
+        // if ($request->isAjax()) {}
             echo $shop;
 
             // 模型的 静态方法
             $user = Data::create([
                 'title'   => $title,
                 'user_id' => $user_id,
-                'shop'    => 0,
                 'phone'   => $phone,
                 'shop'    => $shop,
             ]);
