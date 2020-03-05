@@ -80,22 +80,37 @@
 </div>
 {/if}{/if}
 
- <div class="form-group input-group field-feed-content required">
+<div class="form-group input-group field-feed-content required">
 
 
 
-                    <textarea id="titleChat" name="title" class="form-control"
-                              placeholder="{$Request.param.data_id?'写回复内容':'写评论'}..."
-                              aria-required="true"></textarea>
-                    <input type="hidden" id="user_id" value="d"/>
-                    <input type="hidden" id="id" value="39"/>
-                    <span class="input-group-btn"><button class="btn btn-success"
-                                                          onclick="bbs(document.getElementById('titleChat').value,{$list.id},{$Request.param.data_id})"
-                                                          style="height: 54px;width: 54px;">发布</button></span>
+    <textarea id="titleChat" name="title" class="form-control"
+              placeholder="{$Request.param.data_id?'写回复内容':'写评论'}..."
+              aria-required="true">
+
+    </textarea>
+    <input type="hidden" id="user_id" value="d"/>
+    <input type="hidden" id="id" value="39"/>
+    <span class="input-group-btn">
+        <button class="btn btn-success" id="comment"
+                onclick="bbs(document.getElementById('titleChat').value,{$list.id},{$Request.param.data_id})"
+                style="height: 54px;width: 54px;">发布</button>
 
 
-                </div>
-
+</div>
+<script>
+    $(document).ready(function () {
+        $("#comment").click(function () {
+            $.post("/try/ajax/demo_test_post.php", {
+                    name: "菜鸟教程",
+                    url: "http://www.runoob.com"
+                },
+                function (data, status) {
+                    alert("数据: \n" + data + "\n状态: " + status);
+                });
+        });
+    });
+</script>
 <div class="panel panel-default">
     <div class="panel-heading">评论</div>
 
@@ -260,19 +275,6 @@
 
 </script>
 
-<script>
-    $(document).ready(function () {
-        $("button").click(function () {
-            $.post("/try/ajax/demo_test_post.php", {
-                    name: "菜鸟教程",
-                    url: "http://www.runoob.com"
-                },
-                function (data, status) {
-                    alert("数据: \n" + data + "\n状态: " + status);
-                });
-        });
-    });
-</script>
 
 <script>
 
