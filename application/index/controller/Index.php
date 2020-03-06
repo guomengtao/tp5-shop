@@ -49,7 +49,7 @@ class Index extends \think\Controller
         ob_clean();
         $captcha = new Captcha();
         return $captcha->entry();
- 
+
     }
 
     public function tom()
