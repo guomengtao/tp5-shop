@@ -79,19 +79,14 @@
     </div>
 </div>
 {/if}{/if}
-
+<span id="chat"></span>
 <div class="form-group input-group field-feed-content required">
-
-
-
      <textarea id="titleChat" name="titleChat" class="form-control"
                placeholder="{$Request.param.data_id?'写回复内容':'写评论'}..."
                aria-required="true"></textarea>
     <span class="input-group-btn">
         <button id="comment" class="btn btn-success"
                 style="height: 54px;width: 54px;">发布</button></span>
-
-
 </div>
 
 <script>
@@ -99,7 +94,7 @@
 
         $("#comment").click(function () {
             var title = $("textarea#titleChat").val();
-            if (!title){
+            if (!title) {
                 return;
             }
             console.log(title);
@@ -132,7 +127,6 @@
 
 
             <tbody>
-            <span id="chat"></span>
 
 
             {volist name='bbs' id='user'}
