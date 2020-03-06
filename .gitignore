@@ -4,6 +4,5 @@ composer.lock
 *.log
 thinkphp
 *.env
-runtime/
 alipay-new/
 log.txt
