@@ -16,7 +16,7 @@
 {/if}
 
 
-<div class="row" >
+<div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12" style="height: ">
         <div style="width:100%;overflow: hidden;  " id="tovideiframe">
 
@@ -84,11 +84,9 @@
 
 
 
-     <textarea id="titleChat" name="title" class="form-control"
+     <textarea id="titleChat" name="titleChat" class="form-control"
                placeholder="{$Request.param.data_id?'写回复内容':'写评论'}..."
                aria-required="true"></textarea>
-    <input type="hidden" id="user_id" value="d"/>
-    <input type="hidden" id="id" value="39"/>
     <span class="input-group-btn">
         <button id="comment" class="btn btn-success"
                 style="height: 54px;width: 54px;">发布</button></span>
@@ -96,44 +94,34 @@
 
 </div>
 
-
-
 <script>
     $(document).ready(function () {
+
         $("#comment").click(function () {
-            console.log("conloe");
-            $.post("{:url('index/bbs/add')}", {
-                    title: $("textarea#titleChat").val(),
-                    shop:{$list.id}
-                },
-                function (data, status) {
-                    console.log("数据: \n" + data + "\n状态: " + status);
-                });
+            var title = $("textarea#titleChat").val();
+            if (!title){
+                return;
+            }
+            console.log(title);
 
-        });
-    });
 
-    var data = "a/b";
-    $(document).ready(function () {
-        $("#commente").click(function () {
-            console.log("d");
-            $.ajax({
-                type: "GET",
-                url: "{:url('index/bbs/add')}",
-                data: data,
-                success: function (msg) {
-                    console.log("Data Saved: " + msg);
-                },
-                error: function (msg) {
-                    alert("no");
-
-                }
+            $("#chat").load("{:url('bbs/add')}", {
+                title: title,
+                shop: {$list.id},
+            }, function (responseTxt, statusTxt, xhr) {
+                if (statusTxt == "success")
+                    console.log("外部内容加载成功！" + responseTxt);
+                if (statusTxt == "error")
+                    console.log("Error: " + xhr.status + ": " + xhr.statusText);
             });
+
+
+            $("textarea#titleChat").val("");
         });
     });
-
-
 </script>
+
+
 <div class="panel panel-default">
     <div class="panel-heading">评论</div>
 

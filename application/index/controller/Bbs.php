@@ -128,50 +128,36 @@ class Bbs extends \think\Controller
 
     public function add()
     {
+
         $request = Request::instance();
-        var_dump($request);
- return 22;
+
 
         $title   = trim(input('title'));
-        $phone   = Cookie::get('phone');
-        $phone   = $phone ? $phone : "15966982315";
         $user_id = Cookie::get('user_id');
         $user_id = $user_id ? $user_id : 126;
         $captcha = input("captcha");
         $shop    = input("shop");
 
+        if (!$title) {
+            return "内容不能为空！";
+        }
 
-        // if ($request->isAjax()) {}
-            echo $shop;
 
+        if ($request->isAjax()) {
             // 模型的 静态方法
             $user = Data::create([
                 'title'   => $title,
                 'user_id' => $user_id,
-                'phone'   => $phone,
                 'shop'    => $shop,
             ]);
-
-            return "评论了" . $title;
-
-
+            return $title;
+        }
 
 
         if (!$title) {
             # code...
             $this->error('留言内容不能为空');
 
-        }
-
-
-        if ($captcha == "cancel") {
-
-            $this->error('验证码不能为空');
-        }
-
-
-        if (!$phone) {
-            $phone = "15966982315";
         }
 
 
@@ -193,7 +179,6 @@ class Bbs extends \think\Controller
             'title'   => $title,
             'user_id' => $user_id,
             'shop'    => 0,
-            'phone'   => $phone,
         ]);
 
 
@@ -206,11 +191,23 @@ class Bbs extends \think\Controller
     public function ajax()
     {
 
-        //      调用浏览记录和来路统计功能
+        // 调用浏览记录和来路统计功能
         footprint();
         return $this->fetch();
 
 
+    }
+
+    /**
+     * 演示了核心的jQuery中的ajax用load方法加载数据
+     *
+     * 包扣的从传值到获取返回值的过程
+     * @return mixed
+     */
+    public function jqAjax()
+    {
+
+        return $this->fetch();
     }
 }
  

@@ -1,97 +1,94 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
- <link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css">  
-  <script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
-  <script src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script>
-function showHint(str)
-{
-  settime();
-  var xmlhttp;
-  if (str.length==0)
-  { 
-    document.getElementById("txtHint").innerHTML="";
-    return;
-  }
-  if (window.XMLHttpRequest)
-  {
-    // IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
-    xmlhttp=new XMLHttpRequest();
-  }
-  else
-  {
-    // IE6, IE5 浏览器执行代码
-    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-  xmlhttp.onreadystatechange=function()
-  {
-    if (xmlhttp.readyState==4 && xmlhttp.status==200)
-    {
-      document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
-    }
-  }
-  xmlhttp.open("GET","/index/api/sms/s/"+str,true);
-  xmlhttp.send();
-}
-</script>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css">
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script>
+        function showHint(str) {
+            settime();
+            var xmlhttp;
+            if (str.length == 0) {
+                document.getElementById("txtHint").innerHTML = "";
+                return;
+            }
+            if (window.XMLHttpRequest) {
+                // IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+                xmlhttp = new XMLHttpRequest();
+            } else {
+                // IE6, IE5 浏览器执行代码
+                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
+                }
+            }
+            xmlhttp.open("GET", "/index/api/sms/s/" + str, true);
+            xmlhttp.send();
+        }
+    </script>
 
-<script type="text/javascript"> 
-var countdown=60; 
-function settime() { 
-  var val = document.getElementById("cl");
-if (countdown == 0) { 
-val.removeAttribute("disabled"); 
-val.value="免费获取验证码"; 
-countdown = 60; 
-} else { 
-val.setAttribute("disabled", true); 
-val.value="重新发送(" + countdown + ")"; 
-countdown--; 
-} 
-setTimeout(function() { 
-settime(val) 
-},1000) 
-} 
-</script> 
+    <script type="text/javascript">
+        var countdown = 60;
+
+        function settime() {
+            var val = document.getElementById("cl");
+            if (countdown == 0) {
+                val.removeAttribute("disabled");
+                val.value = "免费获取验证码";
+                countdown = 60;
+            } else {
+                val.setAttribute("disabled", true);
+                val.value = "重新发送(" + countdown + ")";
+                countdown--;
+            }
+            setTimeout(function () {
+                settime(val)
+            }, 1000)
+        }
+    </script>
 </head>
 <body>
-<div class="container">  
+<div class="container">
 
 
-<h1><a href="#">Tp5简易留言板</a></h1>
-  
- 
-<div class="panel panel-default">
-  <div class="panel-heading">短信快速注册</div>
-  <div class="panel-body">
-    
- 
-    <form  action="" method="post">
-        <div class="form-group " >
-        <!-- <label for="exampleInputName2">手机号:</label> -->
-        <input type="text" class="form-control" id="tel" name="title" value="18210787405" placeholder="请输入手机号" maxlength="100">
+    <h1><a href="#">Tp5简易留言板</a></h1>
+
+
+    <div class="panel panel-default">
+        <div class="panel-heading">短信快速注册</div>
+        <div class="panel-body">
+
+
+            <form action="" method="post">
+                <div class="form-group ">
+                    <!-- <label for="exampleInputName2">手机号:</label> -->
+                    <input type="text" class="form-control" id="tel" name="title" value="18210787405"
+                           placeholder="请输入手机号" maxlength="100">
+                </div>
+
+                <div class="form-group form-inline">
+                    <input type="text" class="form-control" id="yan" name="yan" value="" placeholder="请输入获得的验证码"
+                           maxlength="100">
+
+
+                    <input class="form-control" id="cl" type="button"
+                           onclick="showHint(document.getElementById('tel').value)" value="获取验证码"/>
+
+                </div>
+
+
+                <p><span id="txtHint"></span></p>
+
+
+                <button type="submit" id="btn" class="btn btn-primary">注册会员</button>
+
+            </form>
+
         </div>
-
-        <div class="form-group form-inline" >
-        <input type="text" class="form-control" id="yan" name="yan" value="" placeholder="请输入获得的验证码" maxlength="100">
-
-
-        <input class="form-control" id="cl" type="button" onclick="showHint(document.getElementById('tel').value)" value="获取验证码" />
-
-        </div>
-
-
-        <p><span id="txtHint"></span></p>
-
-
-        <button type="submit" id="btn" class="btn btn-primary"  >注册会员</button>
-
-    </form>
-
- </div>
-</div>
+    </div>
 
 </div>
 </body>
