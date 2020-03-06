@@ -49,6 +49,57 @@ class Index extends \think\Controller
         ob_clean();
         $captcha = new Captcha();
         return $captcha->entry();
+#!/bin/bash
+echo ""
+#输出当前时间
+date --date='0 days ago' "+%Y-%m-%d %H:%M:%S"
+echo "-------开始-------"
+tom='tp5mall'
+#判断宝塔WebHook参数是否存在
+if [ ! -n "$tom" ];
+then
+          echo "param参数错误了一点"
+          echo "End"
+          exit
+fi
+#服务器 git 项目路径
+gitPath="/www/backup/database"
+#码云项目 git 网址
+gitHttp="git@gitee.com:rinuo/$tom.git"
+
+echo "路径：$gitPath"
+
+#判断项目路径是否存在
+if [ -d "$gitPath" ]; then
+        cd $gitPath
+        #判断是否存在git目录
+        if [ ! -d ".git" ]; then
+                echo "在该目录下克隆 git"
+                git clone $gitHttp gittemp
+                mv gittemp/.git .
+                rm -rf gittemp
+        fi
+        #拉取最新的项目文件
+        #git reset --hard origin/master
+#git clean -f
+        #git pull origin master
+        git add .
+        git status
+        git commit -m backups
+        git push
+        echo "推送完成"
+        #执行npm
+        #执行编译
+        #npm run build
+        #设置目录权限
+        chown -R www:www $gitPath
+        echo "-------结束--------"
+        exit
+else
+        echo "该项目路径不存在"
+        echo "End"
+        exit
+fi
     }
 
     public function tom()
