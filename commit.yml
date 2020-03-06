@@ -2,25 +2,16 @@
 branches: {
   }
 fileChange:
-  /application:
-    newFile: !uuid 'e364c6cf33fd9db901085b589a08525f3efce14b'
-    oldFile: !uuid '386d5d8ae853a87fecf7a2662628eaf6c55bec88'
-  /application/index:
-    newFile: !uuid 'b601ce39d5a69ffbeeedbeec5bea05cbbe8d4497'
-    oldFile: !uuid 'c2e36b15f03771949794d45ce0918b9bb439df42'
-  /application/index/view:
-    newFile: !uuid '361f4643957c34fae1bedfcadb029a3534b4f306'
-    oldFile: !uuid 'c53223ad6ede1f8924d08e214ee1c2b2025c10ef'
-  /application/index/view/index:
-    newFile: !uuid 'c296c93bce2b2d2cfcc00492431fdbe5a4813d60'
-    oldFile: !uuid '0a7c4542d073d9baff4e386beb7c9fcec80955ff'
-  /application/index/view/index/index.html:
-    newFile: !uuid 'e070b735991ab8f3da57e6f4c2d72e1f8cf356f4'
-    oldFile: !uuid '6d54063aa516449786533880d7929459065b2bf7'
-  /application/index/view/index/view.html:
-    newFile: !uuid 'a216ea11eb17b7bb11c99432bc50fbfbbb989066'
-    oldFile: !uuid '1cd9d7d17e9caac62ff7219e1eb93609baa000a8'
-gitCommitId: !uuid '8381c0a4fc5b15b450863574635ffa73abc68742'
+  /.gitignore:
+    newFile: !uuid 'e981785160d0f990e3ef6ae3b412748b4d0684c2'
+    oldFile: !uuid '19aa1ae45438687f2355fd8188d5e4cf4ea30453'
+  /runtime:
+    newFile: !uuid 'e1e9694bf710fecac67489ead7197f5cf930ece4'
+    oldFile: null
+  /runtime/.gitignore:
+    newFile: !uuid 'ac230515f671426bb764ecc20735196f860f235e'
+    oldFile: null
+gitCommitId: !uuid 'eb1779f8b00003d874872cc6f7e1ca0fd8f351a9'
 renames: {
   }
-revisionId: 354
+revisionId: 355
