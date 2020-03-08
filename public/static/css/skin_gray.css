@@ -1,0 +1,67 @@
+/*模仿的kiaalap的蓝色*/
+
+
+/*主要的颜色变量名*/
+:root {
+    --boss: #f8f8f8;
+    --boss_hover: #777;
+
+}
+
+.navbar-inverse .navbar-brand:focus, .navbar-inverse .navbar-brand:hover {
+    color: #777;
+}
+.navbar-inverse .navbar-nav>li>a:focus, .navbar-inverse .navbar-nav>li>a:hover {
+    color: #777;
+}
+/*主导航条的大背景色*/
+.navbar-inverse {
+    background-color: var(--boss);
+    border-color: var(--boss);
+}
+
+/*主导航条鼠标经过背景*/
+.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:focus, .navbar-inverse .navbar-nav > .open > a:hover {
+    color: #fff;
+    background-color: var(--boss_hover);
+|
+}
+
+/*导航条里菜单的链接文字颜色*/
+.navbar-inverse .navbar-nav > li > a {
+    color: #777;
+}
+
+/*标志brand文字的颜色*/
+.navbar-inverse .navbar-brand {
+    color: #777;
+}
+
+/*窄屏幕时候出现的按钮的边框颜色*/
+.navbar-inverse .navbar-toggle {
+    border-color: #ddd;
+}
+/*窄屏幕时候出现的按钮的三条线颜色*/
+/*.navbar-default .navbar-toggle .icon-bar {*/
+/*    background-color: #888;*/
+/*}*/
+.navbar-inverse .navbar-toggle .icon-bar {
+    background-color: #888;
+}
+/*下拉菜单的鼠标经过背景色*/
+.dropdown-menu > li > a:hover {
+    color: #777;
+    text-decoration: none;
+    /*background-color: rgba(42, 195, 138, .1);*/
+}
+
+
+/*全局链接颜色*/
+a {
+    color: #777;
+}
+
+a:focus, a:hover {
+    color: #777;
+    text-decoration: underline;
+}
