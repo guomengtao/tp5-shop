@@ -2,6 +2,7 @@
 
 namespace app\index\controller;
 
+use app\index\model\Ipinfo;
 use app\index\model\Money;
 use think\Db;
 use think\Request;
@@ -2516,13 +2517,14 @@ class Index extends \think\Controller
         $views_today     = Footprint::views_today();
         $views_yesterday = Footprint::views_yesterday();
         // 查询今天签到
-
         $registration_today = Order::registration_today();
+        $ip_info = Ipinfo::limit(10)->select();
 
         $this->assign('views_today', $views_today);
         $this->assign('views_yesterday', $views_yesterday);
         $this->assign('qqshow', $qqshow);
         $this->assign('registration_today', $registration_today);
+        $this->assign('ip_info',$ip_info);
         return view();
 
     }

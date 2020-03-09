@@ -170,6 +170,17 @@
             </div>
         </div>
 
+        <div class="list-group">
+            <a href="#" class="list-group-item disabled">
+                最新访客
+            </a>
+            {volist name="list" id="vo"}
+            <a href="#" class="list-group-item">
+{$vo.id}:{$user.phone|substr=0,3}****{$user.phone|substr=7,4}-{$vo.pos}-{$vo.isp}-{$vo.createtime}<br/>
+        </a>
+            {/volist}
+        </div>
+
         <div class="panel panel-default">
             <div class="panel-heading">手机扫码访问</div>
             <div class="panel-body">
@@ -188,12 +199,12 @@
                         text: "http://open.gaoxueya.com/"
                     });
                 </script>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({
-          google_ad_client: "ca-pub-8644709060035439",
-          enable_page_level_ads: true
-     });
-</script>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({
+                        google_ad_client: "ca-pub-8644709060035439",
+                        enable_page_level_ads: true
+                    });
+                </script>
             </div>
         </div>
 
@@ -202,32 +213,32 @@
 
 <footer class="col-xs-12 text-center infoheader">
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({
-          google_ad_client: "ca-pub-8644709060035439",
-          enable_page_level_ads: true
-     });
-</script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-8644709060035439",
+            enable_page_level_ads: true
+        });
+    </script>
     <p>Copyright © 2018-2020</p>
     <p style="display: none">
         <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
         document.write(unescape("%3Cspan id='cnzz_stat_icon_1275862484'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s5.cnzz.com/stat.php%3Fid%3D1275862484%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));</script>
     </p>
 </footer>
- <p id="chat"></p>
+<p id="chat" style="display: none"></p>
 <script>
     $(document).ready(function () {
 
-console.log(1);
+        console.log(1);
 
-            $("#chat").load("{:url('api/queryIp')}", {
-                title: 0,
-            }, function (responseTxt, statusTxt, xhr) {
-                if (statusTxt == "success")
-                    console.log("外部内容加载成功！" + responseTxt);
-                if (statusTxt == "error")
-                    console.log("Error: " + xhr.status + ": " + xhr.statusText);
-            });
+        $("#chat").load("{:url('api/queryIp')}", {
+            title: 0,
+        }, function (responseTxt, statusTxt, xhr) {
+            if (statusTxt == "success")
+                console.log("外部内容加载成功！" + responseTxt);
+            if (statusTxt == "error")
+                console.log("Error: " + xhr.status + ": " + xhr.statusText);
+        });
 
 
     });
