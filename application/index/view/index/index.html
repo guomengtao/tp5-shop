@@ -120,41 +120,7 @@
         </div>
 
 
-        <div class="row" style="display: none">
-            {volist name='qqshow' id='user' key="k"}
 
-
-            <div class="col-sm-6 col-md-3">
-                <div class="thumbnail text-center">
-                    <img class="img-responsive center-block img-circle"
-                         style="   width: 100px; height: 100px;   margin: 48px auto 0;  padding: 4px;     background: rgba(255,255,255,0.3);"
-                         src="{$user.figureurl_qq_2}" data-holder-rendered="true">
-
-                    <div class="caption  text-left">
-                        <h3 style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{$user.nickname}
-                            <small>
-                                ID:{$user.user_id}</small></h3>
-                        <p>
-
-                            <span class="label label-default">{$user.gender}</span>
-                            <span class="label label-default">{$user.year}</span>
-                            <span class="label label-default">{$user.update_time}</span>
-                        </p>
-                        <p><a href="{:url('index/member/home',['user_id'=>$user.user_id])}" class="btn btn-primary"
-                              role="button">主页</a> <a class="btn btn-warning"
-                                                      href="{:url('index/member/home',['user_id'=>$user.user_id,'editfollow'=>1]  )}"
-                                                      role="button"
-                                                      style="border-radius:2px;background: -webkit-linear-gradient(top, #fa7d3c 0%,#f55f10 100%);box-shadow: 0px 1px 2px rgba(0,0,0,0.3);  border-color:  #fa7d3c  ">
-                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 加关注</a></p>
-                    </div>
-                </div>
-            </div>
-            {/volist}
-
-
-            {$qqshow->render()}
-
-        </div>
     </div>
     <div class="col-md-3">
 
@@ -176,8 +142,8 @@
             </a>
             {volist name="ip_info" id="vo"}
             <a href="#" class="list-group-item">
-{$vo.id}: {$vo.region}-{$vo.isp}-{$vo.create_time}<br/>
-        </a>
+                {$vo.id}: {$vo.region}-{$vo.isp}-{$vo.create_time}<br/>
+            </a>
             {/volist}
         </div>
 
