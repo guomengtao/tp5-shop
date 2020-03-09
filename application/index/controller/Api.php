@@ -591,7 +591,7 @@ class Api extends \think\Controller
         $data = json_decode($fp, true);
 
         dump($data);
-        if ($data['']<>1){
+        if ($data['status']<>1){
             return "ok";
         }
 
