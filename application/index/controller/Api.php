@@ -599,7 +599,7 @@ class Api extends \think\Controller
             $user = new Ipinfo;
             // 显式指定更新数据操作
             $user->isUpdate(true)
-                ->save(['ip' => $ip]);
+                ->save(['ip' => $ip,'status'=>'1']);
         }
 
         $pos   = $data['data'][0]['pos'] ? $data['data'][0]['pos'] : '';
