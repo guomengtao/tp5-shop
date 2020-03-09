@@ -2519,8 +2519,6 @@ class Index extends \think\Controller
         // 查询今天签到
         $registration_today = Order::registration_today();
         $ip_info = Ipinfo::limit(10)->select();
-        dump($ip_info);
-        die();
         $this->assign('views_today', $views_today);
         $this->assign('views_yesterday', $views_yesterday);
         $this->assign('qqshow', $qqshow);
