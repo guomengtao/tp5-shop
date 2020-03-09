@@ -596,10 +596,10 @@ class Api extends \think\Controller
         }
         $check = Ipinfo::where('ip', $ip)->count();
         if ($check) {
-
-            $ip_info = new Ipinfo;
-            $ip_info->where('ip', $ip)
-                ->update(['ip' => $ip]);
+            $user = new Ipinfo;
+            // 显式指定更新数据操作
+            $user->isUpdate(true)
+                ->save(['ip' => $ip])
         }
 
         $pos   = $data['data'][0]['pos'] ? $data['data'][0]['pos'] : '';
