@@ -595,8 +595,8 @@ class Api extends \think\Controller
             return "ok";
         }
 
-        $pos = $data['data'][0]['pos']?$data['pos']:'';
-        $isp= $data['data'][0]['isp']?$data['isp']:'';
+        $pos = $data['data'][0]['pos']?$data['data'][0]['pos']:'';
+        $isp= $data['data'][0]['isp']?$data['data'][0]['isp']:'';
         if ($data['pos']) {
             Ipinfo::create([
                 'region' => $pos,
