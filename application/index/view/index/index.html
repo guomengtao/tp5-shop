@@ -120,7 +120,6 @@
         </div>
 
 
-
     </div>
     <div class="col-md-3">
 
@@ -142,11 +141,24 @@
             </a>
             {volist name="ip_info" id="vo"}
             <a href="{:url('index/member/footprint')}" class="list-group-item">
-                 <span class="badge">{$vo.update_time}/span>
+                 <span class="badge">{$vo.update_time}</span>
                 {$i}: {$vo.region}-{$vo.isp}
             </a>
             {/volist}
+
+
         </div>
+
+        <ul class="list-group">
+            {volist name="ip_info" id="vo"}
+            <li class="list-group-item">
+                <span class="badge">{$vo.update_time}</span>
+                <a href="{:url('index/member/footprint')}"   >
+                {$i}: {$vo.region}-{$vo.isp}
+            </a>
+            </li>
+            {/volist}
+        </ul>
 
         <div class="panel panel-default">
             <div class="panel-heading">手机扫码访问</div>
