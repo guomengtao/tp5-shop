@@ -1186,7 +1186,7 @@ class Member extends \think\Controller
             if ($registration_user) {
                 # 已经签到直接提示
                 $msg = "已连续签到" . $rand . "天";
-                return $this->success($msg);
+                return $this->success($msg,'index/member/registration');
                 // return "已连续签到" . $rand . "天";
             }
 
@@ -1234,7 +1234,7 @@ class Member extends \think\Controller
 
             $msg = "恭喜您，连续签到" . $rand . "天";
             //设置成功后跳转页面的地址，默认的返回页面是$_SERVER['HTTP_REFERER']
-            return $this->success($msg);
+            return $this->success($msg,'index/member/registration');
             // return "恭喜您，连续签到" . $rand . "天";
 
         }

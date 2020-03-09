@@ -2515,11 +2515,14 @@ class Index extends \think\Controller
         $qqshow          = UserQQ::show(16);
         $views_today     = Footprint::views_today();
         $views_yesterday = Footprint::views_yesterday();
+        // 查询今天签到
 
+        $registration_today = Order::registration_today();
 
         $this->assign('views_today', $views_today);
         $this->assign('views_yesterday', $views_yesterday);
         $this->assign('qqshow', $qqshow);
+        $this->assign('registration_today', $registration_today);
         return view();
 
     }
@@ -2909,7 +2912,7 @@ class Index extends \think\Controller
         $reply          = input('reply');
 
         if (!$user_id) {
-            return $this->success('请登录！','index/index/login');
+            return $this->success('请登录！', 'index/index/login');
         }
 
         if ($data_id and $reply == '') {
