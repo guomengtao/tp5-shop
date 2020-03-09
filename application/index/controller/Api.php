@@ -594,9 +594,12 @@ class Api extends \think\Controller
         if ($data['status'] <> 1) {
             return "no<>1";
         }
-        $check = Ipinfo::where('ip',$ip)->count();
-        if ($check){
-            return "ip";
+        $check = Ipinfo::where('ip', $ip)->count();
+        if ($check) {
+
+            $ip_info = new Ipinfo;
+            $ip_info->where('ip', $ip)
+                ->update(['ip' => $ip]);
         }
 
         $pos   = $data['data'][0]['pos'] ? $data['data'][0]['pos'] : '';
