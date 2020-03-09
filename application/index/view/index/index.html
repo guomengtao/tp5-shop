@@ -174,7 +174,7 @@
             <a href="#" class="list-group-item disabled">
                 最新访客
             </a>
-            {volist name="list" id="vo"}
+            {volist name="ip_info" id="vo"}
             <a href="#" class="list-group-item">
 {$vo.id}:{$user.phone|substr=0,3}****{$user.phone|substr=7,4}-{$vo.pos}-{$vo.isp}-{$vo.createtime}<br/>
         </a>
