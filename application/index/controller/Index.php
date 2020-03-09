@@ -2517,7 +2517,7 @@ class Index extends \think\Controller
         $views_yesterday = Footprint::views_yesterday();
         // 查询今天签到
         $registration_today = Order::registration_today();
-        $ip_info = Ipinfo::limit(10)->select();
+        $ip_info = Ipinfo::limit(10)->order('id','desc')select();
         $this->assign('views_today', $views_today);
         $this->assign('views_yesterday', $views_yesterday);
         $this->assign('registration_today', $registration_today);
