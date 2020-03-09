@@ -2,6 +2,7 @@
 
 namespace app\index\controller;
 
+use app\index\model\Ipinfo;
 use think\Db;
 use think\Request;
 use app\index\model\Sms;
@@ -571,23 +572,35 @@ class Api extends \think\Controller
         // 渲染模板输出
         return $this->fetch();
     }
-    public function  queryIp(){
+
+    public function queryIp()
+    {
         // https://tool.misiyu.cn/api/queryIp?ip=aliyun.com
         $request = Request::instance();
 
-        $ip      = $request->ip();
+        $ip = $request->ip();
 
-        if (!$ip or $ip =='127.0.0.1'){
+        if (!$ip or $ip == '127.0.0.1') {
             return "ok";
         }
-        $url = 'https://tool.misiyu.cn/api/queryIp?ip='.$ip;
+        $url = 'https://tool.misiyu.cn/api/queryIp?ip=' . $ip;
         echo $ip;
-        $fp      = file_get_contents($url);
+        $fp = file_get_contents($url);
 
 
         $data = json_decode($fp, true);
 
-        dump($data);
+        dump($data['pos']);
+        dump($data['isp']);
+
+        if ($data['pos']) {
+            Ipinfo::create([
+                'region' => $data['pos'],
+                'isp'    => $data['isp'],
+                'ip'     => $ip,
+            ]);
+        }
+
 
     }
 
@@ -616,26 +629,27 @@ class Api extends \think\Controller
         $content = urlencode($content);
         $url     = $my_url . '?username=' . $username . '&password=' . $password . '&mobile=' . $mobile . '&content=' . $content . '';
 
-        $fp      = file_get_contents($url);
+        $fp = file_get_contents($url);
 
 
         $data = json_decode($fp, true);
 
         // dump($data);
 
-        echo $data['errmsg']."- ";
+        echo $data['errmsg'] . "- ";
         echo $data['result'];
-
 
 
         if ($data['result'] == '0') {
 
-
+            $phone = Cookie::get('phone');
+            $phone = $phone ? $phone : '';
             // 模型的 静态方法
             // 存入短信发送日志表
             $user = Sms::create([
                 'phone' => $mobile,
-                'rand'  => $rand
+                'rand'  => $rand,
+                'phone' => $phone,
             ]);
 
 
