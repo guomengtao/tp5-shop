@@ -603,6 +603,7 @@ class Api extends \think\Controller
             $user->save([
                 'isp_id' => $status,
             ], ['ip' => $ip]);
+            return ;
         }
 
         $pos   = $data['data'][0]['pos'] ? $data['data'][0]['pos'] : '';
