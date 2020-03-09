@@ -571,6 +571,22 @@ class Api extends \think\Controller
         // 渲染模板输出
         return $this->fetch();
     }
+    public function  queryIp(){
+        // https://tool.misiyu.cn/api/queryIp?ip=aliyun.com
+        $request = Request::instance();
+
+        $ip      = $request->ip();
+
+        $url = 'https://tool.misiyu.cn/api/queryIp?ip='.$ip;
+        echo $ip;
+        $fp      = file_get_contents($url);
+
+
+        $data = json_decode($fp, true);
+
+        dump($data);
+    }
+
 
     public function sms()
     {
