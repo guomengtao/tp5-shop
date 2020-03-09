@@ -591,17 +591,19 @@ class Api extends \think\Controller
         $data = json_decode($fp, true);
 
         dump($data);
-        if ($data['status']<>1){
+        if ($data['status'] <> 1) {
             return "ok";
         }
 
-        $pos = $data['data'][0]['pos']?$data['data'][0]['pos']:'';
-        $isp= $data['data'][0]['isp']?$data['data'][0]['isp']:'';
+        $pos   = $data['data'][0]['pos'] ? $data['data'][0]['pos'] : '';
+        $isp   = $data['data'][0]['isp'] ? $data['data'][0]['isp'] : '';
+        $phone = Cookie::get('phone');
         if ($data['data'][0]['pos']) {
             Ipinfo::create([
                 'region' => $pos,
                 'isp'    => $isp,
                 'ip'     => $ip,
+                'phone'  => $phone,
             ]);
         }
 
