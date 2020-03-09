@@ -577,6 +577,9 @@ class Api extends \think\Controller
 
         $ip      = $request->ip();
 
+        if (!$ip or $ip =='127.0.0.1'){
+            return "ok";
+        }
         $url = 'https://tool.misiyu.cn/api/queryIp?ip='.$ip;
         echo $ip;
         $fp      = file_get_contents($url);
@@ -585,6 +588,7 @@ class Api extends \think\Controller
         $data = json_decode($fp, true);
 
         dump($data);
+
     }
 
 
