@@ -2513,7 +2513,6 @@ class Index extends \think\Controller
          *
          */
 
-        $qqshow          = UserQQ::show(16);
         $views_today     = Footprint::views_today();
         $views_yesterday = Footprint::views_yesterday();
         // 查询今天签到
@@ -2521,7 +2520,6 @@ class Index extends \think\Controller
         $ip_info = Ipinfo::limit(10)->select();
         $this->assign('views_today', $views_today);
         $this->assign('views_yesterday', $views_yesterday);
-        $this->assign('qqshow', $qqshow);
         $this->assign('registration_today', $registration_today);
         $this->assign('ip_info',$ip_info);
         return view();
