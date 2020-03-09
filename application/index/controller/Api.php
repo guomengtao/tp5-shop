@@ -599,9 +599,8 @@ class Api extends \think\Controller
 
             $user = new Ipinfo;
             // save方法第二个参数为更新条件
-            $status = time();
             $user->save([
-                'isp_id' => $status,
+                'ip' => $ip,
             ], ['ip' => $ip]);
             return ;
         }
