@@ -3,33 +3,18 @@ branches: {
   }
 fileChange:
   /application:
-    newFile: !uuid '38a14bdcae5613503ab8cdf289f3f6a4113227f1'
-    oldFile: !uuid '14850770737ff198b24116b5f67ee28f1715b149'
+    newFile: !uuid 'dcbc3495d96f1d5d9786b46addcb88d696df6de0'
+    oldFile: !uuid '38a14bdcae5613503ab8cdf289f3f6a4113227f1'
   /application/index:
-    newFile: !uuid '12d02b067bf19a94945c13073abef9166a012682'
-    oldFile: !uuid 'e63fc72b90106a6f6000b5a3cf6b65acdae2c4ae'
+    newFile: !uuid '140bbdc69376a857b887ec871a2eb74c58de276a'
+    oldFile: !uuid '12d02b067bf19a94945c13073abef9166a012682'
   /application/index/controller:
-    newFile: !uuid 'e879a83f942edf2cf1d99c83c38d1811cc9638d4'
-    oldFile: !uuid 'bc9f34bb8ac371b205e5495cfcea14312e79893b'
-  /application/index/controller/Member.php:
-    newFile: !uuid '684c72bfa2a48c8cfe03acc1ac5d099fad58a86e'
-    oldFile: !uuid '906d0a42ff999056119da498399abd77814e11cd'
-  /application/index/model:
-    newFile: !uuid 'f01f800701301dcd883904607e534328b434c7a7'
-    oldFile: !uuid 'aa93e9755b27391e7c6e659e2742986938eea611'
-  /application/index/model/Agent.php:
-    newFile: !uuid '74269c45017e791c6884c16b26da1341eb704952'
-    oldFile: null
-  /application/index/view:
-    newFile: !uuid '1cfb2d261aa0ff9d890ecfeb9d3ef13ecdd2bbde'
-    oldFile: !uuid 'd00e873d3ecdd742036c06ca82244d0b2260631a'
-  /application/index/view/index:
-    newFile: !uuid '26ddcbac04ec11c58c3d37102eb26ecf23481c43'
-    oldFile: !uuid 'e6fd980ff238fa5f1786826ad271b97d626c32af'
-  /application/index/view/index/footer.html:
-    newFile: !uuid '7a6297ce95ba72e930f00c3f6a42c61cd1fd7d2a'
-    oldFile: !uuid 'ebdc5b8b3c371a3f56863be5c3b2cbca2bcda382'
-gitCommitId: !uuid '7bbed73e7751bf0a257fe21bd6073d5c736620a4'
+    newFile: !uuid '2d9a7639490feede650db44a81dabb8b07fdc84e'
+    oldFile: !uuid 'e879a83f942edf2cf1d99c83c38d1811cc9638d4'
+  /application/index/controller/Api.php:
+    newFile: !uuid '5bbb83278826439635b5e22e1675e90c97ed4285'
+    oldFile: !uuid 'cd230f0f95344b56671fc354fe14d9a6da2092b1'
+gitCommitId: !uuid 'd3fd8c7a241d06f9dbb2e12cd98a4e88ec8ac6a1'
 renames: {
   }
-revisionId: 429
+revisionId: 430
