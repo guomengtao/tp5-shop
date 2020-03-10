@@ -15,7 +15,7 @@
                     <a href="#panel-401557" data-toggle="tab">会员</a>
                 </li>
                 <li>
-                    <a href="#panel-802666" data-toggle="tab">新访客 <span class="badge">{$yesterday->total()}</span></a>
+                    <a href="#panel-802666" data-toggle="tab">IP <span class="badge">{$yesterday->total()}</span></a>
                 </li>
                 <li>
                     <a href="#panel-all" data-toggle="tab">访问明细 <span class="badge">{$list_all->total()}</span></a>
@@ -31,7 +31,7 @@
                             <thead>
                             <tr>
                                 <th> 时间</th>
-                                <th> 用户/ip</th>
+                                <th> 用户/Ip</th>
                                 <th> 地址</th>
                                 <th> 详情</th>
                             </tr>
@@ -42,7 +42,7 @@
 
                             <tr>
                                 <td> {$user.create_time}</td>
-                                <td> {$user.user_id}</td>
+                                <td> {$user.user} - {$user.ip}</td>
                                 <td> {$user.path}</td>
                                 <td> {$user.ipinfo.isp}-{$user.ipinfo.region}</td>
                             </tr>
@@ -59,7 +59,7 @@
                             <thead>
                             <tr>
                                 <th> 时间</th>
-                                <th> 用户/ip</th>
+                                <th> 用户/Ip</th>
                                 <th> 地址</th>
                                 <th> 详情</th>
                             </tr>
@@ -70,12 +70,12 @@
 
                             <tr>
                                 <td> {$user.create_time}</td>
-                                <td> {$user.ip}</td>
+                                <td> {$user.user} ({$user.ip})</td>
                                 <td> {$user.path}</td>
                                 <td>
                                     {$user.ipinfo.isp}-
                                     {$user.ipinfo.region}-
-                                    {$user.agent.region}-browser
+                                    {$user.agent.browser}-
 
                                 </td>
 
@@ -93,7 +93,7 @@
                             <thead>
                             <tr>
                                 <th> 时间</th>
-                                <th> 用户/ip</th>
+                                <th> 用户/Ip</th>
                                 <th> 地址</th>
                                 <th> 详情</th>
                             </tr>
@@ -104,7 +104,7 @@
 
                             <tr>
                                 <td> {$user.create_time}</td>
-                                <td> {$user.user_id}({$user.ip})</td>
+                                <td> {$user.user_id}  ({$user.ip})</td>
                                 <td> {$user.path}</td>
                                 <td> {$user.ipinfo.isp}-{$user.ipinfo.region}</td>
                             </tr>
