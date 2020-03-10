@@ -29,9 +29,9 @@ class Member extends \think\Controller
     public function agent()
     {
 
-echo parse_url($_SERVER['HTTP_REFERER']);
+dump(parse_url($_SERVER['HTTP_REFERER']));
 echo "123<br>";
-echo  $_SERVER['HTTP_REFERER'] ;
+dump($_SERVER['HTTP_REFERER']) ;
 die();
         $agent = new Agent();
 
