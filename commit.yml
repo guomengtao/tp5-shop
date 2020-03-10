@@ -3,24 +3,33 @@ branches: {
   }
 fileChange:
   /application:
-    newFile: !uuid '3002ae0b0e78287496842093e46df41e2f4738b5'
-    oldFile: !uuid '0094962141c95484370b1dc06f14057266d15b29'
-  /application/common.php:
-    newFile: !uuid '679f8d5a29466fbc17c82436b074a15cde714218'
-    oldFile: !uuid 'ad05d1fb6f1c84083e3b20f2d6069bc35800cc8b'
+    newFile: !uuid '669ad87e560e9ae59b0cfe6d559d2256a0e95bfe'
+    oldFile: !uuid '3002ae0b0e78287496842093e46df41e2f4738b5'
   /application/index:
-    newFile: !uuid 'c88501730b2425702b4fd6eaeb487b749f1e660e'
-    oldFile: !uuid '64eec314409d7d3703bcadc35c67f01d157ae0c4'
+    newFile: !uuid 'f95a3b3c3f32b42dbdfb13e1f5f30676597796c3'
+    oldFile: !uuid 'c88501730b2425702b4fd6eaeb487b749f1e660e'
   /application/index/controller:
-    newFile: !uuid 'caf4de01a67f3f2b733347fedb9b9fb166f77380'
-    oldFile: !uuid '18ad45f4d7dbc0060477dc4fb656ff37f0f9388f'
-  /application/index/controller/Index.php:
-    newFile: !uuid 'fc2017306fd474f19614a0c56e80c8a93cb5545c'
-    oldFile: !uuid 'ab4c60f288438cf765a754c8150d408fb77a1138'
+    newFile: !uuid 'c274f642e122f4ba9774a4dab39fb227b2e20d2b'
+    oldFile: !uuid 'caf4de01a67f3f2b733347fedb9b9fb166f77380'
   /application/index/controller/Member.php:
-    newFile: !uuid '6a7e132326ffbe83407f00d91988dca8bd8e68b9'
-    oldFile: !uuid '684c72bfa2a48c8cfe03acc1ac5d099fad58a86e'
-gitCommitId: !uuid '3d78224cd5c578f6209777a320c8a9cee157d6e9'
+    newFile: !uuid '615eb421ec3fc4347bcefe7d48ea9b5eccdf3398'
+    oldFile: !uuid '6a7e132326ffbe83407f00d91988dca8bd8e68b9'
+  /application/index/model:
+    newFile: !uuid '7501011b1f80d3169024a1253f839e352aa34c73'
+    oldFile: !uuid 'f01f800701301dcd883904607e534328b434c7a7'
+  /application/index/model/Footprint.php:
+    newFile: !uuid '3c765e05bd884ec27eb7904cbc92185aaf1d8558'
+    oldFile: !uuid '86afc41a74c894637caa423ce052f1368e05e196'
+  /application/index/view:
+    newFile: !uuid 'b8281f057ae2f4b2ae1a3b8c8507b3f1f3297f1c'
+    oldFile: !uuid '1cfb2d261aa0ff9d890ecfeb9d3ef13ecdd2bbde'
+  /application/index/view/member:
+    newFile: !uuid '5c6a01c6ad0e469e47361a62b52c63a5f9214637'
+    oldFile: !uuid 'b5495d6fef71ae42422dd7319cb1c8c4e5105973'
+  /application/index/view/member/footprint.html:
+    newFile: !uuid 'bf1f809e566395d14480e3009dcd7f2e2bfb6f57'
+    oldFile: !uuid 'aac82c156c76fb47b365881f68a1dce8b790527a'
+gitCommitId: !uuid 'd0d17b76c9bcedaf3e00d35eb31fb64528eba601'
 renames: {
   }
-revisionId: 432
+revisionId: 433
