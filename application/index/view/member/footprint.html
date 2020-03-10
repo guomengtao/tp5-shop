@@ -44,14 +44,19 @@
                                 <td> {$user.create_time}</td>
                                 <td> {$user.user_id} - {$user.ip}</td>
                                 <td> {$user.path}</td>
-                                <td> {$user.ipinfo.isp}-{$user.ipinfo.region}</td>
+                                <td> {$user.ipinfo.isp}
+                                    {$user.ipinfo.region}
+                                    {$user.agentlink.browser}
+                                    {$user.agentlink.platform}
+                                    {$user.agentlink.referer}
+                                    {$user.agentlink.language}</td>
                             </tr>
 
                             {/volist}
                             </tbody>
                         </table>
                     </div>
-                    
+
                 </div>
                 <div class="tab-pane " id="panel-802666">
                     <div class="table-responsive">
@@ -73,11 +78,11 @@
                                 <td> {$user.user_id} ({$user.ip})</td>
                                 <td> {$user.path}</td>
                                 <td>
-                                    {$user.ipinfo.isp}-
-                                    {$user.ipinfo.region}-
-                                    {$user.agentlink.browser}-
-                                    {$user.agentlink.platform}-
-                                    {$user.agentlink.referer}-
+                                    {$user.ipinfo.isp}
+                                    {$user.ipinfo.region}
+                                    {$user.agentlink.browser}
+                                    {$user.agentlink.platform}
+                                    {$user.agentlink.referer}
                                     {$user.agentlink.language}
 
                                 </td>
@@ -109,7 +114,12 @@
                                 <td> {$user.create_time}</td>
                                 <td> {$user.user_id}  ({$user.ip})</td>
                                 <td> {$user.path}</td>
-                                <td> {$user.ipinfo.isp}-{$user.ipinfo.region}</td>
+                                <td> {$user.ipinfo.isp}
+                                    {$user.ipinfo.region}
+                                    {$user.agentlink.browser}
+                                    {$user.agentlink.platform}
+                                    {$user.agentlink.referer}
+                                    {$user.agentlink.language}</td>
                             </tr>
 
 
