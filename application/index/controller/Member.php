@@ -10,7 +10,7 @@ use app\index\model\Data;
 use app\index\model\User;
 use app\index\model\Video;
 use app\index\model\likes;
-use app\index\model\Fans;
+use app\index\model\Agent as Agent_T;
 use app\index\model\Order;
 use app\index\model\Money;
 use app\index\model\Footprint;
@@ -39,7 +39,10 @@ class Member extends \think\Controller
 
         // 使用session_id判断唯一用户如果只保存一条session_id记录
 
-
+        $count = Agent_T::where('session_id',   $info['session_id'])->count();
+        if ($count) {
+            return;
+        }
         $agent = new Agent();
 
         // 语言
@@ -73,7 +76,7 @@ class Member extends \think\Controller
         $info['user_id'] = isset($user_id) ? $user_id : 0;
 
 
-        $request = Request::instance();
+        $request    = Request::instance();
         $info['ip'] = $request->ip();
         //  模块控制器和方法
         $info['path'] = $request->path();
@@ -95,7 +98,7 @@ class Member extends \think\Controller
         }
 
 
-        $user = new Footprint();
+        $user = new Agent_T();
         $user->data($info);
         $user->save();
 
