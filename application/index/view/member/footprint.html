@@ -42,7 +42,7 @@
 
                             <tr>
                                 <td> {$user.create_time}</td>
-                                <td> {$user.user} - {$user.ip}</td>
+                                <td> {$user.user_id} - {$user.ip}</td>
                                 <td> {$user.path}</td>
                                 <td> {$user.ipinfo.isp}-{$user.ipinfo.region}</td>
                             </tr>
@@ -70,15 +70,15 @@
 
                             <tr>
                                 <td> {$user.create_time}</td>
-                                <td> {$user.user} ({$user.ip})</td>
+                                <td> {$user.user_id} ({$user.ip})</td>
                                 <td> {$user.path}</td>
                                 <td>
                                     {$user.ipinfo.isp}-
                                     {$user.ipinfo.region}-
-                                    {$user.agent.browser}-
-                                    {$user.agent.platform}-
-                                    {$user.agent.referer}-
-                                    {$user.agent.language}
+                                    {$user.agentlink.browser}-
+                                    {$user.agentlink.platform}-
+                                    {$user.agentlink.referer}-
+                                    {$user.agentlink.language}
 
                                 </td>
 

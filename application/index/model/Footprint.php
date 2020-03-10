@@ -6,6 +6,7 @@ use think\Model;
 use think\Cookie;
 use traits\model\SoftDelete;
 use think\Request;
+
 class Footprint extends model
 {
 	use SoftDelete;
@@ -97,7 +98,7 @@ class Footprint extends model
     {
         return $this->hasOne('Ipinfo','ip','ip');
     }
-    public function Agent()
+    public function AgentLink()
     {
         return $this->hasOne('Agent','ip','ip');
     }
