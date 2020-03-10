@@ -28,11 +28,20 @@ class Member extends \think\Controller
 
     public function agent()
     {
+        $agent = [];
 
-dump(parse_url($_SERVER['HTTP_REFERER']));
-echo "123<br>";
-dump($_SERVER['HTTP_REFERER']) ;
-die();
+        // 初始化
+        $referer   = '';
+        $domain    = '';
+        $path_info = '';
+        $mobile    = '';
+        $address   = '';
+        $browser   = '';
+        $user_id   = Cookie::get('user_id');
+        $user_id   = isset($user_id) ? $user_id : 0;
+        $goods_id  = '';
+
+
         $agent = new Agent();
 
         // 语言
@@ -54,6 +63,8 @@ die();
 
         $version = $agent->version($platform);
 
+        $agent['language'] = $languages;
+        $agent['browser']  = $browser;
         /**
          * 以上是agent类提供的
          * 以下补充需要重点加的
@@ -68,7 +79,11 @@ die();
         $user_id = isset($user_id) ? $user_id : 0;
 
         $request = Request::instance();
-        $goods_id = '';
+        //  去掉http://后的所有url
+        $url = $request->url();
+        //  模块控制器和方法
+        $pathinfo = $request->path();
+
         $view = $request->module() . $request->controller() . $request->action();
         // 如果是产品详情页，记录一下访问的产品id，$goods_id
         if ($view == 'indexIndexview') {
@@ -77,37 +92,24 @@ die();
 
         if (isset($_SERVER["HTTP_REFERER"])) {
 
-            $se  = 0;
-            $url = $_SERVER["HTTP_REFERER"]; //获取完整的来路URL
-parse_url($_SERVER['HTTP_REFERER']);
-
-            $str       = str_replace("http://", "", $url); //去掉http://
-            $strdomain = explode("/", $str); // 以“/”分开成数组
-            $domain    = $strdomain[0]; //取第一个“/”以前的字符
-            if (strstr($domain, 'baidu.com')) {
-                $se = 1;
-            } else if (strstr($domain, 'google.cn')) {
-                $se = 1;
-            }
-
-            $referer = $str;
-
-
+            $domain = parse_url($_SERVER['HTTP_REFERER']['host']);
+            $url    = $_SERVER['HTTP_REFERER'];
         }
-        $data = ['domain'      => $domain,
-                 'mobile'      => $mobile,
-                 'pathinfo'    => $pathinfo,
-                 'url'         => $url,
-                 'os'          => $os,
-                 'ip'          => $ip,
-                 'user_id'     => $user_id,
-                 'goods_id'    => $goods_id,
-                 'referer'     => $referer,
-                 'address'     => $address,
-                 'browser'     => $browser,
-                 'create_time' => time(),
-                 'update_time' => time()
-        ];
+
+        // $data = ['domain'      => $domain,
+        //          'mobile'      => $mobile,
+        //          'pathinfo'    => $pathinfo,
+        //          'url'         => $url,
+        //          'os'          => $os,
+        //          'ip'          => $ip,
+        //          'user_id'     => $user_id,
+        //          'goods_id'    => $goods_id,
+        //          'referer'     => $referer,
+        //          'address'     => $address,
+        //          'browser'     => $browser,
+        //          'create_time' => time(),
+        //          'update_time' => time()
+        // ];
 
     }
 
@@ -1675,9 +1677,9 @@ parse_url($_SERVER['HTTP_REFERER']);
     public function diary()
     {
 
-        $body  = input('id');
-        $phone = Cookie::get('phone');
-
+        $body          = input('id');
+        $phone         = Cookie::get('phone');
+        $invite_status = '';
         if (!$phone) {
             return $this->success('查看学习进度，请先登录', 'index/login');;
         }
@@ -1724,12 +1726,6 @@ parse_url($_SERVER['HTTP_REFERER']);
                     'buyer_email'  => $phone,
                     'out_trade_no' => $phone,
                 ]);
-                // 更新兑换券状态
-                $tom = User::where('invite', $id)
-                    ->where('status', 0)
-                    ->limit(1)
-                    ->order('id asc')
-                    ->update(['status' => $body]);
 
                 // dump($tom);
                 // $this->success('兑换成功', '__ROOT__/index/index/view/id/' . $body);
@@ -1783,37 +1779,7 @@ parse_url($_SERVER['HTTP_REFERER']);
                 // 如果未登录跳转到登录页面
                 $this->success('兑换前，请先登录', 'index/login');
             }
-            // 查询是否有兑换券
-            if ($invite_status) {
-                # code...
-                // return  "开始兑换";
-
-                // 写入订单
-                $order = Order::create([
-                    'phone'        => $phone,
-                    'body'         => $body,
-                    'subject'      => "使用兑换券兑换 课程 id：" . $body,
-                    'total_fee'    => 0,
-                    'buyer_id'     => $phone,
-                    'buyer_email'  => $phone,
-                    'out_trade_no' => $phone,
-                ]);
-                // 更新兑换券状态
-                $tom = User::where('invite', $id)
-                    ->where('status', 0)
-                    ->limit(1)
-                    ->order('id asc')
-                    ->update(['status' => $body]);
-
-                // dump($tom);
-                // $this->success('兑换成功', '__ROOT__/index/index/view/id/' . $body);
-                // 第一次用这个知识点，带参数提示跳转写法 标记
-                $this->success('兑换成功^_^', url("index/view", array('id' => $body)));
-                die;
-            } else {
-                // 没有兑换券了
-                $this->success('无兑换券，立即邀请好友一起学习即可获得兑换券', 'index/member/invite');
-            }
+         
 
 
         }
