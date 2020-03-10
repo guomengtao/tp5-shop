@@ -595,19 +595,21 @@ class Api extends \think\Controller
             return "no<>1";
         }
         $check = Ipinfo::where('ip', $ip)->count();
+        $user_id = Cookie::get('user_id');
+
         if ($check) {
 
             $user = new Ipinfo;
             // save方法第二个参数为更新条件
             $user->save([
-                'ip' => $ip,
+                'user_id' => $user_id,
             ], ['ip' => $ip]);
             return;
         }
 
         $pos     = $data['data'][0]['pos'] ? $data['data'][0]['pos'] : '';
         $isp     = $data['data'][0]['isp'] ? $data['data'][0]['isp'] : '';
-        $user_id = Cookie::get('user_id');
+
         if ($data['data'][0]['pos']) {
             Ipinfo::create([
                 'region'  => $pos,
