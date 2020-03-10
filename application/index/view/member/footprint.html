@@ -72,7 +72,13 @@
                                 <td> {$user.create_time}</td>
                                 <td> {$user.ip}</td>
                                 <td> {$user.path}</td>
-                                <td> {$user.ipinfo.isp}-{$user.ipinfo.region}</td>
+                                <td>
+                                    {$user.ipinfo.isp}-
+                                    {$user.ipinfo.region}-
+                                    {$user.agent.region}-browser
+
+                                </td>
+
                             </tr>
                             <
                             {/volist}
