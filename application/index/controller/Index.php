@@ -2506,15 +2506,7 @@ class Index extends \think\Controller
     public function index()
     {
 
-        $ip2region = new \Ip2Region();
-
-        $ip = '125.80.175.84';
-
-        $info = $ip2region->btreeSearch($ip);
-    echo 123;
-        dump($info, true);
-        var_export($info, true);
-die();
+//   
         // array (
         //     'city_id' => 2163,
         //     'region' => '中国|华南|广东省|深圳市|鹏博士',

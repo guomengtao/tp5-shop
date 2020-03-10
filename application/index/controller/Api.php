@@ -658,7 +658,7 @@ class Api extends \think\Controller
 
         if ($data['result'] == '0') {
 
-            
+
             // 模型的 静态方法
             // 存入短信发送日志表
             $user = Sms::create([
