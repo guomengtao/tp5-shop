@@ -72,24 +72,7 @@
     }
 
 </script>
-<div class="chatDemoTomaCan"     >ddd</div>
-<script>
-    $(document).ready(function () {
 
-        console.log(1);
-
-        $(".chatDemoTomaCan").load("{:url('member/agent')}", {
-            title: 0,
-        }, function (responseTxt, statusTxt, xhr) {
-            if (statusTxt == "success")
-                console.log("外部内容加载成功！" + responseTxt);
-            if (statusTxt == "error")
-                console.log("Error: " + xhr.status + ": " + xhr.statusText);
-        });
-
-
-    });
-</script>
 </div>
 <div>
     <footer class="bs-docs-footer " style="

@@ -23,10 +23,10 @@ class Member extends \think\Controller
 
     public function _initialize()
     {
-
+        $this::agent();
     }
 
-    public function agent()
+    public static function agent()
     {
         // 初始化需要获取的值
         // 把需要收集信息随时加入到这个数组里 很方面
