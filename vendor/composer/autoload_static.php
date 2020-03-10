@@ -70,11 +70,16 @@ class ComposerStaticInit34a41e2841af1a67f3ddef099fc7b348
         ),
     );
 
+    public static $classMap = array (
+        'Ip2Region' => __DIR__ . '/..' . '/zoujingli/ip2region/Ip2Region.php',
+    );
+
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit34a41e2841af1a67f3ddef099fc7b348::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit34a41e2841af1a67f3ddef099fc7b348::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit34a41e2841af1a67f3ddef099fc7b348::$classMap;
 
         }, null, ClassLoader::class);
     }

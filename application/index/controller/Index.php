@@ -25,7 +25,7 @@ use think\Cookie;
 use think\Session;
 use think\Validate;
 use think\captcha\Captcha;
-
+use Ip2Region;
 
 class Index extends \think\Controller
 {
@@ -2506,6 +2506,19 @@ class Index extends \think\Controller
     public function index()
     {
 
+        $ip2region = new \Ip2Region();
+
+        $ip = '125.80.175.84';
+
+        $info = $ip2region->btreeSearch($ip);
+    echo 123;
+        dump($info, true);
+        var_export($info, true);
+die();
+        // array (
+        //     'city_id' => 2163,
+        //     'region' => '中国|华南|广东省|深圳市|鹏博士',
+        // )
 
         /**
          * 查询最新会员
@@ -2517,11 +2530,11 @@ class Index extends \think\Controller
         $views_yesterday = Footprint::views_yesterday();
         // 查询今天签到
         $registration_today = Order::registration_today();
-        $ip_info = Ipinfo::limit(10)->order('update_time','desc')->select();
+        $ip_info            = Ipinfo::limit(10)->order('update_time', 'desc')->select();
         $this->assign('views_today', $views_today);
         $this->assign('views_yesterday', $views_yesterday);
         $this->assign('registration_today', $registration_today);
-        $this->assign('ip_info',$ip_info);
+        $this->assign('ip_info', $ip_info);
         return view();
 
     }

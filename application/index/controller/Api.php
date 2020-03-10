@@ -658,14 +658,12 @@ class Api extends \think\Controller
 
         if ($data['result'] == '0') {
 
-            $phone = Cookie::get('phone');
-            $phone = $phone ? $phone : '';
+            
             // 模型的 静态方法
             // 存入短信发送日志表
             $user = Sms::create([
                 'phone' => $mobile,
                 'rand'  => $rand,
-                'phone' => $phone,
             ]);
 
 
