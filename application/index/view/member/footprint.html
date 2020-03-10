@@ -49,7 +49,8 @@
                                     {$user.agentlink.browser}
                                     {$user.agentlink.platform}
                                     {$user.agentlink.referer}
-                                    {$user.agentlink.language}</td>
+                                    {$user.agentlink.language}
+                                </td>
                             </tr>
 
                             {/volist}
@@ -60,7 +61,7 @@
                 </div>
                 <div class="tab-pane " id="panel-802666">
                     <div class="table-responsive" style="margin-top: 20px">
-                        <table class="table table-hover table-bordered" >
+                        <table class="table table-hover table-bordered">
                             <thead>
                             <tr>
                                 <th> 时间</th>
@@ -78,13 +79,15 @@
                                 <td> {$user.user_id} ({$user.ip})</td>
                                 <td> {$user.path}</td>
                                 <td>
-                                    {$user.ipinfo.isp}
-                                    {$user.ipinfo.region}
-                                    {$user.agentlink.browser}
-                                    {$user.agentlink.platform}
-                                    {$user.agentlink.referer}
-                                    {$user.agentlink.language}
 
+
+                                    <span class="label label-default"> {$user.ipinfo.region}</span>
+                                    <span class="label label-default"> {$user.ipinfo.isp}</span>
+                                    <span class="label label-primary">{$user.agentlink.browser}</span>
+                                    <span class="label label-success">{$user.agentlink.platform}</span>
+                                    <span class="label label-info">{$user.agentlink.referer}</span>
+                                    <span class="label label-warning">{$user.agentlink.language}</span>
+                                    <span class="label label-danger">{$user.agentlink.device}</span>
                                 </td>
 
                             </tr>
@@ -112,14 +115,15 @@
 
                             <tr>
                                 <td> {$user.create_time}</td>
-                                <td> {$user.user_id}  ({$user.ip})</td>
+                                <td> {$user.user_id} ({$user.ip})</td>
                                 <td> {$user.path}</td>
                                 <td> {$user.ipinfo.isp}
                                     {$user.ipinfo.region}
                                     {$user.agentlink.browser}
                                     {$user.agentlink.platform}
                                     {$user.agentlink.referer}
-                                    {$user.agentlink.language}</td>
+                                    {$user.agentlink.language}
+                                </td>
                             </tr>
 
 
