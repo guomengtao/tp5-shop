@@ -3,18 +3,33 @@ branches: {
   }
 fileChange:
   /application:
-    newFile: !uuid '78d7a6097f311505344d3d6abc339fc767ca7c6a'
-    oldFile: !uuid '382bf37eadc5c5b976909312df97d0f0b9eb28ca'
+    newFile: !uuid '041078e12e115ee7ddd98f39698a54f6bddabd12'
+    oldFile: !uuid '78d7a6097f311505344d3d6abc339fc767ca7c6a'
+  /application/common.php:
+    newFile: !uuid '32d80fc0ab3171049f776a2a212f57f9d16defff'
+    oldFile: !uuid '679f8d5a29466fbc17c82436b074a15cde714218'
   /application/index:
-    newFile: !uuid '7437307d627c1a3acaa3aa8a63c85a1631ea8396'
-    oldFile: !uuid '3341a23448542dfb51f0fd1d11509263cc391b42'
+    newFile: !uuid '186666fc29a7ae382b59fc0aebd0d01a2f2e24b4'
+    oldFile: !uuid '7437307d627c1a3acaa3aa8a63c85a1631ea8396'
   /application/index/controller:
-    newFile: !uuid 'ffd0e8c1ad33f8589d53d984aaf63d922ec8d9c4'
-    oldFile: !uuid 'ebc593628511b02fb70006fea9b77c6cec4c260c'
+    newFile: !uuid 'e5ddac425e98e02b72d7a8054799aba533cf0ed4'
+    oldFile: !uuid 'ffd0e8c1ad33f8589d53d984aaf63d922ec8d9c4'
   /application/index/controller/Api.php:
-    newFile: !uuid '1b6986a29646890d784e49f9986775d78e9b0e39'
-    oldFile: !uuid '6dc8bd11daf60ca70f1bcdd0204ea627e18f1581'
-gitCommitId: !uuid 'd686c1b60296e2d0e3b77560b7dc4d5b7f104cc5'
+    newFile: !uuid '6fbeb097185e4bc410ca4d3fb1976f9ed0e2e3ee'
+    oldFile: !uuid '1b6986a29646890d784e49f9986775d78e9b0e39'
+  /application/index/controller/Member.php:
+    newFile: !uuid '1190a5603ff04f12f3a8779655952eaabd7eb11e'
+    oldFile: !uuid '52f5450602c005b24b3d8f99c38712205d34319a'
+  /application/index/view:
+    newFile: !uuid '50b624a880d753b1283e92f022d8483790fd5cc8'
+    oldFile: !uuid 'bd25e3b13d09bf80677041294972218c8bb220dc'
+  /application/index/view/index:
+    newFile: !uuid '509a983dff5b27a945c6acc9783fc12725827fbb'
+    oldFile: !uuid '26ddcbac04ec11c58c3d37102eb26ecf23481c43'
+  /application/index/view/index/index.html:
+    newFile: !uuid 'e0c9c8b9ff588575b8f9bb44d642ed63481f4334'
+    oldFile: !uuid 'e63aadacc3e2c2d3fe1ed8360c1b10c4f1c4f4f3'
+gitCommitId: !uuid '08c0f7a505a4f5b22a5bda299d892afbd8153e79'
 renames: {
   }
-revisionId: 452
+revisionId: 453
