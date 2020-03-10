@@ -97,7 +97,7 @@ class Footprint extends model
     {
         return $this->hasOne('Ipinfo','ip','ip');
     }
-    public function agent()
+    public function Agent()
     {
         return $this->hasOne('Agent','ip','ip');
     }
