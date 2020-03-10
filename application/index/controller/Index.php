@@ -2506,7 +2506,7 @@ class Index extends \think\Controller
     public function index()
     {
 
-//   
+//
         // array (
         //     'city_id' => 2163,
         //     'region' => '中国|华南|广东省|深圳市|鹏博士',
