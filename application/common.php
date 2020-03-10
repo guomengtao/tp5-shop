@@ -228,10 +228,10 @@ function add_vip_days($add_vip_days, $out_trade_no)
 function footprint()
 {
 
-    debug('begin');
+        return;
 
 
-
+    // 采用laravel的第三方类库替换Jenssegers\Agent\Agent
 
     $referer  = '';
     $domain   = '';

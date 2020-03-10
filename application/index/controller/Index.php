@@ -35,13 +35,7 @@ class Index extends \think\Controller
     {
 
 
-        // 访问记录12345
-        // 调用Footprint模型的add()自定义方法
-        Footprint::add();
 
-
-        //权限认证 test
-        // $auth = new \Auth\Auth();
 
     }
 
@@ -1055,8 +1049,7 @@ class Index extends \think\Controller
 
     public function order()
     {
-//        调用浏览记录和来路统计功能
-        footprint();
+
         $user = Cookie::get('phone');
 
         // 查询订单是否存在
@@ -1214,9 +1207,6 @@ class Index extends \think\Controller
 
     public function login()
     {
-
-        // 调用浏览记录和来路统计功能
-        footprint();
 
 
         $phone        = input('param.phone');
@@ -1647,8 +1637,6 @@ class Index extends \think\Controller
     public function register()
     {
 
-        //        调用浏览记录和来路统计功能
-        footprint();
 
 
         $phone        = input('param.phone');
@@ -2231,19 +2219,13 @@ class Index extends \think\Controller
     {
 
 
-//  Db::listen(function($sql,$time,$explain){
-//     // 记录SQL
-//     echo $sql. ' ['.$time.'s]';
-//     // 查看性能分析结果
-//     dump($explain);
-// });
+
         $user  = Cookie::get('phone');
         $token = Cookie::get('token');
 
         //      Cookie加密验证功能
         token();
-        //      调用浏览记录和来路统计功能
-        footprint();
+
         //      调用统计是否满足所有课程免费功能
         $all_lesson_free = all_lesson_free();
 
@@ -2591,8 +2573,6 @@ class Index extends \think\Controller
         }
 
 
-        // 调用浏览记录和来路统计功能
-        footprint();
 
 
         $registration_user  = '';
@@ -2686,8 +2666,7 @@ class Index extends \think\Controller
 
         //      Cookie加密验证功能
         token();
-        //      调用浏览记录和来路统计功能
-        footprint();
+
         //      调用统计是否满足所有课程免费功能
         $all_lesson_free = all_lesson_free();
 
@@ -2899,8 +2878,7 @@ class Index extends \think\Controller
 
         //        调用cookie验证功能
         token();
-        //        调用浏览记录和来路统计功能
-        footprint();
+
         //      调用统计是否满足所有课程免费功能
         $all_lesson_free = all_lesson_free();
 

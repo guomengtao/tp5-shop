@@ -23,8 +23,7 @@ class Bbs extends \think\Controller
     public function admin()
     {
 
-        //      调用浏览记录和来路统计功能
-        footprint();
+
 
         return $this->fetch();
 
@@ -34,8 +33,6 @@ class Bbs extends \think\Controller
     public function show()
     {
 
-        //      调用浏览记录和来路统计功能
-        footprint();
 
 
         // DB写法
@@ -77,8 +74,7 @@ class Bbs extends \think\Controller
     public function view()
     {
 
-        //      调用浏览记录和来路统计功能
-        footprint();
+
 
         //echo input('param.id');
 
@@ -191,8 +187,7 @@ class Bbs extends \think\Controller
     public function ajax()
     {
 
-        // 调用浏览记录和来路统计功能
-        footprint();
+
         return $this->fetch();
 
 

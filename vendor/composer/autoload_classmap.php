@@ -7,4 +7,5 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Ip2Region' => $vendorDir . '/zoujingli/ip2region/Ip2Region.php',
+    'Mobile_Detect' => $vendorDir . '/mobiledetect/mobiledetectlib/Mobile_Detect.php',
 );

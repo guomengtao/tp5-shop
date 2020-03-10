@@ -26,8 +26,7 @@ class Ajax extends \think\Controller
 
     public function ajaxrun()
     {
-        //      调用浏览记录和来路统计功能
-        footprint();
+
 
         $show = User::where('id', '>', 1)
             ->order('id', 'desc')

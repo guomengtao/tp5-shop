@@ -14,4 +14,6 @@ return array(
     'think\\' => array($baseDir . '/thinkphp/library/think', $vendorDir . '/topthink/think-image/src', $vendorDir . '/topthink/think-queue/src'),
     'app\\' => array($baseDir . '/application'),
     'Phinx\\' => array($vendorDir . '/topthink/think-migration/phinx/src/Phinx'),
+    'Jenssegers\\Agent\\' => array($vendorDir . '/jenssegers/agent/src'),
+    'Jaybizzle\\CrawlerDetect\\' => array($vendorDir . '/jaybizzle/crawler-detect/src'),
 );

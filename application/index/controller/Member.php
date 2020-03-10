@@ -16,14 +16,99 @@ use app\index\model\Money;
 use app\index\model\Footprint;
 use think\Cookie;
 use think\Session;
+use Jenssegers\Agent\Agent;
 
 class Member extends \think\Controller
 {
 
     public function _initialize()
     {
-        // 访问记录
-        Footprint::add();
+
+    }
+
+    public function agent()
+    {
+
+echo parse_url($_SERVER['HTTP_REFERER']);
+echo "123<br>";
+echo  $_SERVER['HTTP_REFERER'] ;
+die();
+        $agent = new Agent();
+
+        // 语言
+        $languages = $agent->languages();
+        // ['nl-nl', 'nl', 'en-us', 'en']
+        // 是否是机器人
+        $agent->isRobot();
+        // 获取设备信息 (iPhone, Nexus, AsusTablet, ...)
+        $agent->device();
+        // 系统信息  (Ubuntu, Windows, OS X, ...)
+        $agent->platform();
+        // 浏览器信息  (Chrome, IE, Safari, Firefox, ...)
+        $agent->browser();
+        // 获取浏览器版本
+        $browser = $agent->browser();
+        $version = $agent->version($browser);
+        // 获取系统版本
+        $platform = $agent->platform();
+
+        $version = $agent->version($platform);
+
+        /**
+         * 以上是agent类提供的
+         * 以下补充需要重点加的
+         * 1. 产品页面需要带id 页面太多不然都是统计一页
+         * 2. 来路统计
+         */
+
+        Session::get('start_session_working');
+        echo session_id();
+
+        $user_id = Cookie::get('user_id');
+        $user_id = isset($user_id) ? $user_id : 0;
+
+        $request = Request::instance();
+        $goods_id = '';
+        $view = $request->module() . $request->controller() . $request->action();
+        // 如果是产品详情页，记录一下访问的产品id，$goods_id
+        if ($view == 'indexIndexview') {
+            $goods_id = input('id');
+        }
+
+        if (isset($_SERVER["HTTP_REFERER"])) {
+
+            $se  = 0;
+            $url = $_SERVER["HTTP_REFERER"]; //获取完整的来路URL
+parse_url($_SERVER['HTTP_REFERER']);
+
+            $str       = str_replace("http://", "", $url); //去掉http://
+            $strdomain = explode("/", $str); // 以“/”分开成数组
+            $domain    = $strdomain[0]; //取第一个“/”以前的字符
+            if (strstr($domain, 'baidu.com')) {
+                $se = 1;
+            } else if (strstr($domain, 'google.cn')) {
+                $se = 1;
+            }
+
+            $referer = $str;
+
+
+        }
+        $data = ['domain'      => $domain,
+                 'mobile'      => $mobile,
+                 'pathinfo'    => $pathinfo,
+                 'url'         => $url,
+                 'os'          => $os,
+                 'ip'          => $ip,
+                 'user_id'     => $user_id,
+                 'goods_id'    => $goods_id,
+                 'referer'     => $referer,
+                 'address'     => $address,
+                 'browser'     => $browser,
+                 'create_time' => time(),
+                 'update_time' => time()
+        ];
+
     }
 
     public function skin()
@@ -62,8 +147,6 @@ class Member extends \think\Controller
     public function myhome()
     {
 
-        //  调用浏览记录和来路统计功能
-        footprint();
 
         // 是否为 POST 请求
         if (request()->isPost()) {
@@ -196,10 +279,6 @@ class Member extends \think\Controller
         }
 
 
-        // 调用浏览记录和来路统计功能
-        footprint();
-
-
         //        查询今天签到
         $list = Order::where('body', '=', 135)
             ->whereTime('create_time', 'today')
@@ -328,9 +407,6 @@ class Member extends \think\Controller
     public function news()
     {
 
-
-        // 调用浏览记录和来路统计功能
-        footprint();
 
         // 获取需要查询的某个用户的动态
         $user_id = input('user_id');
@@ -497,8 +573,6 @@ class Member extends \think\Controller
     public function home()
     {
 
-        //  调用浏览记录和来路统计功能
-        footprint();
 
         // 直接调用统一的自定义方法 查询指定用户信息
         $user = User::userselfinfo(input('user_id'));
@@ -516,8 +590,7 @@ class Member extends \think\Controller
 
     public function tip()
     {
-        //      调用浏览记录和来路统计功能
-        footprint();
+
         //  打赏列表
 
         $appointment = input('appointment');
@@ -564,9 +637,6 @@ class Member extends \think\Controller
     public function tips()
     {
 
-        //      调用浏览记录和来路统计功能
-        footprint();
-
 
         //  打赏列表
         $list = Order::where('body', '=', 37)
@@ -606,9 +676,6 @@ class Member extends \think\Controller
     public function top()
     {
 
-
-        // 调用浏览记录和来路统计功能
-        footprint();
 
         // 设置缓存数据
         // cache('show', $show, 300);
@@ -1103,8 +1170,6 @@ class Member extends \think\Controller
     {
 
 
-        footprint();
-
         // 查询会员学习记录
         $list = Footprint::whereTime('create_time', 'today')
             ->order('id desc,create_time')
@@ -1186,7 +1251,7 @@ class Member extends \think\Controller
             if ($registration_user) {
                 # 已经签到直接提示
                 $msg = "已连续签到" . $rand . "天";
-                return $this->success($msg,'index/member/registration');
+                return $this->success($msg, 'index/member/registration');
                 // return "已连续签到" . $rand . "天";
             }
 
@@ -1234,14 +1299,10 @@ class Member extends \think\Controller
 
             $msg = "恭喜您，连续签到" . $rand . "天";
             //设置成功后跳转页面的地址，默认的返回页面是$_SERVER['HTTP_REFERER']
-            return $this->success($msg,'index/member/registration');
+            return $this->success($msg, 'index/member/registration');
             // return "恭喜您，连续签到" . $rand . "天";
 
         }
-
-
-        // 调用浏览记录和来路统计功能
-        footprint();
 
 
         //        查询今天签到
@@ -1288,8 +1349,7 @@ class Member extends \think\Controller
     public function vip()
     {
 
-//        调用浏览记录和来路统计功能
-        footprint();
+
         $phone = Cookie::get('phone');
 
         // if (!$phone){
@@ -1357,8 +1417,7 @@ class Member extends \think\Controller
     public function money()
     {
 
-        //        调用浏览记录和来路统计功能
-        footprint();
+
         // 查询用户积分的方法
 
         $phone = Cookie::get('phone');
@@ -1486,8 +1545,7 @@ class Member extends \think\Controller
 
     public function invite()
     {
-//        调用浏览记录和来路统计功能
-        footprint();
+
         $body     = input('id');
         $phone    = Cookie::get('phone');
         $integral = '';
@@ -1616,8 +1674,7 @@ class Member extends \think\Controller
 
     public function diary()
     {
-//        调用浏览记录和来路统计功能
-        footprint();
+
         $body  = input('id');
         $phone = Cookie::get('phone');
 
@@ -1696,8 +1753,7 @@ class Member extends \think\Controller
 
     public function learning()
     {
-        //        调用浏览记录和来路统计功能
-        footprint();
+
 
         $body  = input('id');
         $phone = Cookie::get('phone');
