@@ -3,21 +3,225 @@ branches: {
   }
 fileChange:
   /application:
-    newFile: !uuid '7d0ce302ce4b61284c178b03484088de700f7168'
-    oldFile: !uuid '0bbaf17ed261beaf74dd84f703e42beac7afbf2d'
+    newFile: !uuid '89c0ff42aff1177b6d9985b160ff959f55487a69'
+    oldFile: !uuid '7d0ce302ce4b61284c178b03484088de700f7168'
+  /application/common.php:
+    newFile: !uuid 'ad05d1fb6f1c84083e3b20f2d6069bc35800cc8b'
+    oldFile: !uuid '0bbb7383c2bbd13a608a74558afcaa70e6b4a508'
+  /application/config.php:
+    newFile: !uuid 'a4d423c839a9fcaae23c430e6fd50004f37946c1'
+    oldFile: !uuid 'c85dbb875d75610c9e7b0586a0570eda2562db54'
   /application/index:
-    newFile: !uuid '5b8ed713c7adf1dfdd16493cfee1f8f4423fdb5f'
-    oldFile: !uuid '90db5f16212f251c51259a52617c7a7fd631ccba'
+    newFile: !uuid '768542d50944d153d1b078e1cecf59ac420c79cb'
+    oldFile: !uuid '5b8ed713c7adf1dfdd16493cfee1f8f4423fdb5f'
+  /application/index/controller:
+    newFile: !uuid 'e9a34f2c0261413cdd3f89b7a921e865a3e0d172'
+    oldFile: !uuid '8b19a8b13cf257b70fcbd1a4ef55d6d45147b41e'
+  /application/index/controller/Ajax.php:
+    newFile: !uuid '039c423f915dccbad102c59d38ce00d63b263a03'
+    oldFile: !uuid '11edbeb6612c9837689ca68467266a37b620ed68'
+  /application/index/controller/Api.php:
+    newFile: !uuid 'cd230f0f95344b56671fc354fe14d9a6da2092b1'
+    oldFile: !uuid 'fbbf5bba22977ea963aeeb79ea7998f7a23b7658'
+  /application/index/controller/Bbs.php:
+    newFile: !uuid '84274159b1ab981c665da8fedb981f7d44b410d4'
+    oldFile: !uuid '58c4349e0520b2d6b9c356af1ade824ccd316416'
+  /application/index/controller/Index.php:
+    newFile: !uuid 'e1273b39da9ed7f1b06c381b96e986a0fba4ac0f'
+    oldFile: !uuid 'b882c43425919b4e2ad1cf5cd3bb345577f1d8b2'
+  /application/index/controller/Member.php:
+    newFile: !uuid 'd6346ea15c46b95ba940244109deb3fe8ebada52'
+    oldFile: !uuid 'd093e996fdc02ac7e688e911af5d1066de4b1177'
+  /application/index/model:
+    newFile: !uuid 'aa93e9755b27391e7c6e659e2742986938eea611'
+    oldFile: !uuid '380965844dc14f40dd796e90c5f0bc697a8c4add'
+  /application/index/model/Index.php:
+    newFile: !uuid 'ddee0012d5cad716d3c560f1a948e3023fab4f7e'
+    oldFile: !uuid '530bffeb79c502ac29e52c8c89c99fcfaad013a6'
   /application/index/view:
-    newFile: !uuid '2d9e63cfa5a50a9bfb3e9090a5a07b0ee083df6a'
-    oldFile: !uuid '24aaedd31f011229371fcf7dc47832d5a09e5dbd'
+    newFile: !uuid 'd4d383a3124ff0c5958ef38fcd31eada402dce43'
+    oldFile: !uuid '2d9e63cfa5a50a9bfb3e9090a5a07b0ee083df6a'
   /application/index/view/index:
-    newFile: !uuid '3a88c527efe83e26367de95f834078a051ab6da5'
-    oldFile: !uuid '4e710aee86af196b3f2250476554e69ecc0a63ef'
-  /application/index/view/index/login.html:
-    newFile: !uuid '522d5f5d83f2ff5dbba34e834ca7f3174ed4c3d9'
-    oldFile: !uuid '61b56a3ac7d6a24269f8be03d4ab3d38fb1882f2'
-gitCommitId: !uuid '21d705b067abf5edfdd889cd4d3a49f48dd4c579'
+    newFile: !uuid '66cba4acf3b16b5dcc59a44e0796afb09550382e'
+    oldFile: !uuid '3a88c527efe83e26367de95f834078a051ab6da5'
+  /application/index/view/index/footer.html:
+    newFile: !uuid '1aab350f55a5bc11abd43b6bcb60b24b78fde7a9'
+    oldFile: !uuid '270bf1bb035114426281cd10e129881b6759bed4'
+  /application/index/view/index/indexgo.html:
+    newFile: !uuid '519d2868b6560f36ad27fe54b99e3500965d186c'
+    oldFile: !uuid '774c28ff672f2e08f9d6fcf264882cb9d349710e'
+  /composer.json:
+    newFile: !uuid '9c0de239a3d74a76fb6af882b67ccf4ea2fc110f'
+    oldFile: !uuid 'd124bcd240d7524287ab7ffe018ae69498a0d4ae'
+  /vendor:
+    newFile: !uuid '5cf8e6cd77bbd17a938e896b52c3f97464e2f096'
+    oldFile: !uuid 'e69d4fcfeb9da320d2a37dffb112208ce13095d2'
+  /vendor/composer:
+    newFile: !uuid 'a25d80d4d48a5fba74aaa51420e3b8a5ed0bc6a8'
+    oldFile: !uuid '42f41e8491a6f12269dd0cbba1e6e4928b324206'
+  /vendor/composer/autoload_classmap.php:
+    newFile: !uuid '8c062c88887752b5886b95c94a793e53dda688c0'
+    oldFile: !uuid '06962d8e4fcb99eee645a1434f2c16bf028d4209'
+  /vendor/composer/autoload_namespaces.php:
+    newFile: !uuid '6c17505369a2900f9ee23c265e8e0717bb54f1e7'
+    oldFile: !uuid 'b7fc0125dbca56fd7565ad62097672a59473e64e'
+  /vendor/composer/autoload_psr4.php:
+    newFile: !uuid '993610c12faa3b340a3ff3d837b860d512543bb2'
+    oldFile: !uuid '979cd95afa6fcde645ffef2306121f81702f37d2'
+  /vendor/composer/autoload_static.php:
+    newFile: !uuid 'a789a0439be90641c842782d4f154e55782cbfc4'
+    oldFile: !uuid '3dc80c926193862ceb2b4b88aa29f0d9b93b6d02'
+  /vendor/composer/installed.json:
+    newFile: !uuid '421c20f21a343e9ea0b7f4810c6fccf14cae47af'
+    oldFile: !uuid '062badc4bb52b30fd1a2cc084a93f38d83c3b7a3'
+  /vendor/jaybizzle:
+    newFile: !uuid 'be8bdb4fb0df07517c6be26f6634e0a97d64b21f'
+    oldFile: null
+  /vendor/jaybizzle/crawler-detect:
+    newFile: !uuid '207c70907f4cb9ae7a3c03fd1ed292df730f599b'
+    oldFile: null
+  /vendor/jaybizzle/crawler-detect/LICENSE:
+    newFile: !uuid '2f4e15e252caa1266a077ce2ffb4a844b811a17f'
+    oldFile: null
+  /vendor/jaybizzle/crawler-detect/README.md:
+    newFile: !uuid '862d0f8233ad29388d56eefa8ef6b70965c46080'
+    oldFile: null
+  /vendor/jaybizzle/crawler-detect/composer.json:
+    newFile: !uuid '0c0babe6c51823547b409374a9e28454757ca62c'
+    oldFile: null
+  /vendor/jaybizzle/crawler-detect/export.php:
+    newFile: !uuid '4c4b9d5d37c3f6bee790c0019faeaac9f7fb20ce'
+    oldFile: null
+  /vendor/jaybizzle/crawler-detect/raw:
+    newFile: !uuid '9b7c92773cfa5500ef91bb81ad4c9b3a1fef7753'
+    oldFile: null
+  /vendor/jaybizzle/crawler-detect/raw/Crawlers.json:
+    newFile: !uuid 'e6edf8b2ba789fcfa7c15c69ad7e9584ba92b391'
+    oldFile: null
+  /vendor/jaybizzle/crawler-detect/raw/Crawlers.txt:
+    newFile: !uuid 'be806350869dc9035b517e6be9764bcceb2aea30'
+    oldFile: null
+  /vendor/jaybizzle/crawler-detect/raw/Exclusions.json:
+    newFile: !uuid 'a18eb985ed773a6e4414900add53e72384e1b53e'
+    oldFile: null
+  /vendor/jaybizzle/crawler-detect/raw/Exclusions.txt:
+    newFile: !uuid 'da56db9bd086d89c6138fa96295645dd47a58dee'
+    oldFile: null
+  /vendor/jaybizzle/crawler-detect/raw/Headers.json:
+    newFile: !uuid '718f7f6177c1eb5589ab6f9facebc316807a70d7'
+    oldFile: null
+  /vendor/jaybizzle/crawler-detect/raw/Headers.txt:
+    newFile: !uuid '5e1ae3211d2c051e6e1581162656237a3656885e'
+    oldFile: null
+  /vendor/jaybizzle/crawler-detect/src:
+    newFile: !uuid 'f03e87aed67268538dbb9db7e0eb8d28e0b912ee'
+    oldFile: null
+  /vendor/jaybizzle/crawler-detect/src/CrawlerDetect.php:
+    newFile: !uuid '44f909b1829a7eef9947acf6580ede882c7c049d'
+    oldFile: null
+  /vendor/jaybizzle/crawler-detect/src/Fixtures:
+    newFile: !uuid 'd58eae4c6879361906c7f82bfcfbb078478dcd2e'
+    oldFile: null
+  /vendor/jaybizzle/crawler-detect/src/Fixtures/AbstractProvider.php:
+    newFile: !uuid '26ea8e5fc44b4dec61b44cb904a2f72f92b1da83'
+    oldFile: null
+  /vendor/jaybizzle/crawler-detect/src/Fixtures/Crawlers.php:
+    newFile: !uuid 'f2e89e468f6f0f4d6ff2af664156d7cd31df3c1a'
+    oldFile: null
+  /vendor/jaybizzle/crawler-detect/src/Fixtures/Exclusions.php:
+    newFile: !uuid 'e6b3ca8978aba097e4edb51fa2e62616f5ca38f3'
+    oldFile: null
+  /vendor/jaybizzle/crawler-detect/src/Fixtures/Headers.php:
+    newFile: !uuid '35c60c3898ea64920a807e17c37d1211117f08bd'
+    oldFile: null
+  /vendor/jenssegers:
+    newFile: !uuid '8e83b0f4043aac1e2c0a9d1a463437ebb582c378'
+    oldFile: null
+  /vendor/jenssegers/agent:
+    newFile: !uuid 'a2b20bfc9a100e1d8cbc5b405d9a35049bc05ae3'
+    oldFile: null
+  /vendor/jenssegers/agent/LICENSE:
+    newFile: !uuid '229071a822a476ef86c27637abdb9548d551d6fd'
+    oldFile: null
+  /vendor/jenssegers/agent/README.md:
+    newFile: !uuid '1c074552b4e011b253c07a3d7346f09f138d2a70'
+    oldFile: null
+  /vendor/jenssegers/agent/composer.json:
+    newFile: !uuid 'c87056872dd9b8f5f63ede4f5558a0085aa1295c'
+    oldFile: null
+  /vendor/jenssegers/agent/src:
+    newFile: !uuid 'b20a859aac8e44e18dda8a95ab47d16b22606319'
+    oldFile: null
+  /vendor/jenssegers/agent/src/Agent.php:
+    newFile: !uuid 'a1549f0b4e37c9821989e9f9650b8f4b5667b6ed'
+    oldFile: null
+  /vendor/jenssegers/agent/src/AgentServiceProvider.php:
+    newFile: !uuid 'b3334bb3e9be0182fd161a9c078f3daa46ca1f7d'
+    oldFile: null
+  /vendor/jenssegers/agent/src/Facades:
+    newFile: !uuid 'f02b90681a7d2511e9cb73675a15786cb352da9f'
+    oldFile: null
+  /vendor/jenssegers/agent/src/Facades/Agent.php:
+    newFile: !uuid '863a227fcdead4a42d14e64a6da74201c93ed43e'
+    oldFile: null
+  /vendor/mobiledetect:
+    newFile: !uuid '17441197f986155eaf405acca114e55e6c193e6e'
+    oldFile: null
+  /vendor/mobiledetect/mobiledetectlib:
+    newFile: !uuid '16f83de29131244f6a9a2ff89747901fa57c5643'
+    oldFile: null
+  /vendor/mobiledetect/mobiledetectlib/LICENSE.txt:
+    newFile: !uuid '90e632a7875d1264882be7e568ca899d581e1b03'
+    oldFile: null
+  /vendor/mobiledetect/mobiledetectlib/Mobile_Detect.json:
+    newFile: !uuid '2b807e1155712e7d5a21ee499f6a5d4b4b6f1c95'
+    oldFile: null
+  /vendor/mobiledetect/mobiledetectlib/Mobile_Detect.php:
+    newFile: !uuid 'b105eb717710238dbf5d1491b88f1232d11daa93'
+    oldFile: null
+  /vendor/mobiledetect/mobiledetectlib/README.md:
+    newFile: !uuid 'd73757b728f05baddb6f6a4efc2e699244535c04'
+    oldFile: null
+  /vendor/mobiledetect/mobiledetectlib/composer.json:
+    newFile: !uuid '25cd99a375fae49a351954c7b1d95cfe87503c5d'
+    oldFile: null
+  /vendor/mobiledetect/mobiledetectlib/docker-compose.yml:
+    newFile: !uuid '58ce75e879ca0e5cc7c1cae9a77398b0a9a86ace'
+    oldFile: null
+  /vendor/mobiledetect/mobiledetectlib/docs:
+    newFile: !uuid 'ca120c4c68646dfa640496458cf488aebfc037e4'
+    oldFile: null
+  /vendor/mobiledetect/mobiledetectlib/docs/CONTRIBUTING.md:
+    newFile: !uuid '01a266ed83c78e22de20c55ad77d271047636946'
+    oldFile: null
+  /vendor/mobiledetect/mobiledetectlib/docs/HISTORY.md:
+    newFile: !uuid '3483985258e7365295679175460a1bcdb13d51b4'
+    oldFile: null
+  /vendor/mobiledetect/mobiledetectlib/docs/ISSUE_TEMPLATE.md:
+    newFile: !uuid '8d6384fce890282ebe1b1056c39ad130b9fcf02c'
+    oldFile: null
+  /vendor/mobiledetect/mobiledetectlib/docs/KNOWN_LIMITATIONS.md:
+    newFile: !uuid '5887092f1f86cf30b2e42ace843470f82683cb75'
+    oldFile: null
+  /vendor/mobiledetect/mobiledetectlib/export:
+    newFile: !uuid '9d6c73650ad941b2f36cf27d82feb2b5f36ef203'
+    oldFile: null
+  /vendor/mobiledetect/mobiledetectlib/export/exportToJSON.php:
+    newFile: !uuid 'e2c72aece1c565a0d40b2bb5d6afefc8764f6ad8'
+    oldFile: null
+  /vendor/mobiledetect/mobiledetectlib/namespaced:
+    newFile: !uuid 'cd911a37fc38775ae8df0038355fca740dc1d83c'
+    oldFile: null
+  /vendor/mobiledetect/mobiledetectlib/namespaced/Detection:
+    newFile: !uuid '5e5a0ece9f51a2695b5fdc7c564f4346e13ab328'
+    oldFile: null
+  /vendor/mobiledetect/mobiledetectlib/namespaced/Detection/MobileDetect.php:
+    newFile: !uuid 'ca7efec23fbc0f7bea7833ee5c31f46986c24b2b'
+    oldFile: null
+  /vendor/mobiledetect/mobiledetectlib/phpcs.xml:
+    newFile: !uuid '3c6666490469c9bc68fb2d3ea236f4a254836d21'
+    oldFile: null
+gitCommitId: !uuid '70b9acdad3d68856b968d203cb672df3d6c4ccd9'
 renames: {
   }
-revisionId: 420
+revisionId: 421
