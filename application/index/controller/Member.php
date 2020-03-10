@@ -1170,7 +1170,6 @@ class Member extends \think\Controller
         $list = Footprint::whereTime('create_time', 'today')
             ->where('user_id','>',0)
             ->order('id desc,create_time')
-            ->group('user_id')
             ->paginate(100);
 
 
