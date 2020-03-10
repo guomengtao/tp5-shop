@@ -2,7 +2,7 @@
 
 
 <div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-9">
+    <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="page-header">
             <h2 style="color: #337ab7;"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> 网站概况 访问明细
                 <small> 今日IP：<span style="color: red">{$yesterday->total()}</span> </small></h2>
@@ -42,19 +42,13 @@
 
                             <tr>
                                 <td> {$user.create_time}</td>
-                                <td> {$user.phone|substr=0,3}****{$user.phone|substr=7,4}</td>
-                                <td> {$user.address}</td>
-                                <td> {$user.url}</td>
+                                <td> {$user.user_id}</td>
+                                <td> {$user.path}</td>
                             </tr>
                             <tr>
                                 <td colspan="4"><h5><small>
 
-                                    操作系统:{$user.os}
-
-
-                                    手机访问：{$user.mobile}
-
-                                    浏览器：{$user.browser} 来路：{$user.referer}
+                                    {$user.ipinfo.isp}-{$user.ipinfo.region}
 
                                 </small></h5></td>
                             </tr>
@@ -82,18 +76,15 @@
                             <tr>
                                 <td> {$user.create_time}</td>
                                 <td> {$user.ip}</td>
-                                <td> {$user.address}</td>
-                                <td> {$user.url}</td>
+                                <td> {$user.path}</td>
                             </tr>
                             <tr>
                                 <td colspan="4"><h5><small>
 
-                                    操作系统:{$user.os}
+                                     {$user.ipinfo.isp}-{$user.ipinfo.region}
 
 
-                                    手机访问：{$user.mobile}
 
-                                    浏览器：{$user.browser} 来路：{$user.referer}
 
                                 </small></h5></td>
                             </tr>
@@ -120,25 +111,15 @@
 
                             <tr>
                                 <td> {$user.create_time}</td>
-                                <td><h5><small>
-                                    {if condition="$user.phone==15966982315"}
-                                    新访客
-                                    {else /}
-                                    {$user.phone|substr=0,3}****{$user.phone|substr=7,4}:
-                                    {/if} {$user.ip}
-                                </small></h5></td>
-                                <td> {$user.address}</td>
-                                <td> {$user.url}</td>
+                                <td
+                                     {$user.ip}
+                                 </td>
+                                <td> {$user.path}</td>
                             </tr>
                             <tr>
                                 <td colspan="4"><h5><small>
 
-                                    操作系统:{$user.os}
-
-
-                                    手机访问：{$user.mobile}
-
-                                    浏览器：{$user.browser} 来路：{$user.referer}
+                                    {$user.ipinfo.isp}-{$user.ipinfo.region}
 
                                 </small></h5></td>
                             </tr>
@@ -153,59 +134,13 @@
             </div>
         </div>
     </div>
-    <div class="col-xs-12 col-md-3">
-        <div class="panel panel-default">
-            <div class="panel-heading">连续签到排名</div>
-            <div class="panel-body">
-                {volist name='list_top' id='user' key="k"}
-                <div class="col-xs-12 col-sm-6 col-md-12" style="padding: 0px;">
 
-
-                    <div class="media">
-                        <div class="media-left">
-                            <a href="#">
-                                <img class="media-object img-thumbnail"
-                                     src="__STATIC__/images/user/user ({:rand(1,25)}).jpg" data-holder-rendered="true"
-                                     style="width: 64px; height: 64px;">
-                            </a>
-                        </div>
-                        <div class="media-body">
-                            <small><a href="#">{$user.phone|substr=0,3}****{$user.phone|substr=7,4}</a>
-                                NO.<span style="color: #D8582B;font-weight: bold;">{$k}</span></small>
-                            <h5><small>签到时间：<span
-                                    style="color: #D8582B;font-weight: bold;">{$user.create_time}</span></small></h5>
-                            <h5><small>连续签到：<span style="color: #D8582B;font-weight: bold;">{$user.url}</span>天</small>
-                            </h5>
-                        </div>
-                    </div>
-
-
-                    <hr>
-
-
-                </div>
-
-
-                {/volist}
-            </div>
-        </div>
-    </div>
 </div>
 
 
-{if condition="$list"}
 
-{/if}
 
-<div class="panel panel-default">
-    <div class="panel-heading">提示：</div>
-    <div class="panel-body">
-        <h5><small> 希望大家相互学习，共同进步。^_^ </small></h5>
 
-        <h5><small> 刚开发好，还有许多BUG,欢迎提意见。统计数据仅供参考。 </small></h5>
-
-    </div>
-</div>
 
 
 {include file="index/footer" /}

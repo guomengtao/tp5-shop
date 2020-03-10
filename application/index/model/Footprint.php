@@ -93,5 +93,9 @@ class Footprint extends model
     	}
         return $value ;
     }
+    public function Ipinfo()
+    {
+        return $this->hasOne('Ipinfo','ip','ip');
+    }
 
 }

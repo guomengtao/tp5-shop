@@ -1169,7 +1169,7 @@ class Member extends \think\Controller
         // 查询会员学习记录
         $list = Footprint::whereTime('create_time', 'today')
             ->order('id desc,create_time')
-            ->group('phone')
+            ->group('user_id')
             ->paginate(100);
 
 
@@ -1185,16 +1185,11 @@ class Member extends \think\Controller
             ->order('create_time desc')
             ->paginate(100);
 
-        //       连续访问排名
-        $list_top = Footprint::where('url', '=', 135)
-            ->whereTime('create_time', 'today')
-            ->order('id desc')
-            ->paginate(50);
+
 
 
         $this->assign('list', $list);
         $this->assign('list_all', $list_all);
-        $this->assign('list_top', $list_top);
         $this->assign('yesterday', $yesterday);
 
         return view();
