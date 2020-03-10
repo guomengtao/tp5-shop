@@ -94,7 +94,6 @@ class Member extends \think\Controller
 
         }
 
-        dump($info);
 
         $user = new Footprint();
         $user->data($info);
