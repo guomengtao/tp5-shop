@@ -602,18 +602,18 @@ class Api extends \think\Controller
             $user->save([
                 'ip' => $ip,
             ], ['ip' => $ip]);
-            return ;
+            return;
         }
 
-        $pos   = $data['data'][0]['pos'] ? $data['data'][0]['pos'] : '';
-        $isp   = $data['data'][0]['isp'] ? $data['data'][0]['isp'] : '';
-        $phone = Cookie::get('phone');
+        $pos     = $data['data'][0]['pos'] ? $data['data'][0]['pos'] : '';
+        $isp     = $data['data'][0]['isp'] ? $data['data'][0]['isp'] : '';
+        $user_id = Cookie::get('user_id');
         if ($data['data'][0]['pos']) {
             Ipinfo::create([
-                'region' => $pos,
-                'isp'    => $isp,
-                'ip'     => $ip,
-                'phone'  => $phone,
+                'region'  => $pos,
+                'isp'     => $isp,
+                'ip'      => $ip,
+                'user_id' => $user_id,
             ]);
         }
 
