@@ -27,13 +27,13 @@
 
                 <div class="tab-pane active" id="panel-401557">
                     <div class="table-responsive">
-                        <table class="table table-hover ">
+                        <table class="table table-hover table-bordered">
                             <thead>
                             <tr>
                                 <th> 时间</th>
-                                <th> 用户</th>
-                                <th>地区</th>
-                                <th> 课堂</th>
+                                <th> 用户/ip</th>
+                                <th> 地址</th>
+                                <th> 详情</th>
                             </tr>
                             </thead>
 
@@ -44,14 +44,9 @@
                                 <td> {$user.create_time}</td>
                                 <td> {$user.user_id}</td>
                                 <td> {$user.path}</td>
+                                <td> {$user.ipinfo.isp}-{$user.ipinfo.region}</td>
                             </tr>
-                            <tr>
-                                <td colspan="4"><h5><small>
 
-                                    {$user.ipinfo.isp}-{$user.ipinfo.region}
-
-                                </small></h5></td>
-                            </tr>
                             {/volist}
                             </tbody>
                         </table>
@@ -60,13 +55,13 @@
                 </div>
                 <div class="tab-pane " id="panel-802666">
                     <div class="table-responsive">
-                        <table class="table table-hover ">
+                        <table class="table table-hover table-bordered">
                             <thead>
                             <tr>
                                 <th> 时间</th>
-                                <th> IP</th>
-                                <th>地区</th>
-                                <th> 课堂</th>
+                                <th> 用户/ip</th>
+                                <th> 地址</th>
+                                <th> 详情</th>
                             </tr>
                             </thead>
 
@@ -77,17 +72,9 @@
                                 <td> {$user.create_time}</td>
                                 <td> {$user.ip}</td>
                                 <td> {$user.path}</td>
+                                <td> {$user.ipinfo.isp}-{$user.ipinfo.region}</td>
                             </tr>
-                            <tr>
-                                <td colspan="4"><h5><small>
-
-                                     {$user.ipinfo.isp}-{$user.ipinfo.region}
-
-
-
-
-                                </small></h5></td>
-                            </tr>
+                            <
                             {/volist}
                             </tbody>
                         </table>
@@ -96,13 +83,13 @@
                 </div>
                 <div class="tab-pane " id="panel-all">
                     <div class="table-responsive">
-                        <table class="table table-hover ">
+                        <table class="table table-hover table-bordered">
                             <thead>
                             <tr>
                                 <th> 时间</th>
                                 <th> 用户/ip</th>
-                                <th>地区</th>
-                                <th> 课堂</th>
+                                <th> 地址</th>
+                                <th> 详情</th>
                             </tr>
                             </thead>
 
@@ -111,18 +98,11 @@
 
                             <tr>
                                 <td> {$user.create_time}</td>
-                                <td
-                                     {$user.ip}
-                                 </td>
+                                <td> {$user.user_id}({$user.ip})</td>
                                 <td> {$user.path}</td>
+                                <td> {$user.ipinfo.isp}-{$user.ipinfo.region}</td>
                             </tr>
-                            <tr>
-                                <td colspan="4"><h5><small>
 
-                                    {$user.ipinfo.isp}-{$user.ipinfo.region}
-
-                                </small></h5></td>
-                            </tr>
 
                             {/volist}
                             </tbody>
@@ -136,11 +116,6 @@
     </div>
 
 </div>
-
-
-
-
-
 
 
 {include file="index/footer" /}
