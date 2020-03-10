@@ -23,7 +23,10 @@ class Member extends \think\Controller
 
     public function _initialize()
     {
-        $this::agent();
+        // 记录访问量
+        footprint();
+        // 记录访问信息
+        Member::agent();
     }
 
     public static function agent()
@@ -39,7 +42,7 @@ class Member extends \think\Controller
 
         // 使用session_id判断唯一用户如果只保存一条session_id记录
 
-        $count = Agent_T::where('session_id',   $info['session_id'])->count();
+        $count = Agent_T::where('session_id', $info['session_id'])->count();
         if ($count) {
             return;
         }

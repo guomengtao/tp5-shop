@@ -34,9 +34,10 @@ class Index extends \think\Controller
 
     public function _initialize()
     {
-
+        // 记录访问量
+        footprint();
+        // 记录访问信息
          Member::agent();
-
 
     }
 
