@@ -3,27 +3,21 @@ branches: {
   }
 fileChange:
   /application:
-    newFile: !uuid '6fb442b608f309bcd20b3a416bead9dcf3909e64'
-    oldFile: !uuid '4e6378f1f3535abea4239485e6af6f1ac2271741'
+    newFile: !uuid '0439132e0a54abc3d9401abc762f674adddba37b'
+    oldFile: !uuid '6fb442b608f309bcd20b3a416bead9dcf3909e64'
   /application/index:
-    newFile: !uuid '19891e17880ad51d4c45ecf388db09a8bf656843'
-    oldFile: !uuid 'c6cb65388e8d615b92020260b67c93d0d6f19cb0'
-  /application/index/controller:
-    newFile: !uuid '8b19a8b13cf257b70fcbd1a4ef55d6d45147b41e'
-    oldFile: !uuid 'b0f3603261c9c5d7102e91cd28f1fdc92e939225'
-  /application/index/controller/Index.php:
-    newFile: !uuid 'b882c43425919b4e2ad1cf5cd3bb345577f1d8b2'
-    oldFile: !uuid '2c53792fb58ff0cbea847d33fe2336628d7a4eac'
-  /extend:
-    newFile: !uuid '507cd51e4df882e2d05342c430ddc28938dd71f6'
-    oldFile: !uuid '682ac07eafd8378df16dcdc3f40c5aa642989955'
-  /extend/alipay:
-    newFile: !uuid '74fc62f577135e165cfbb3160efa0c88ced1d280'
-    oldFile: !uuid '2c3945de4c46789bcf227990715df4f7be800bf0'
-  /extend/alipay/alipaynotify.php:
-    newFile: !uuid '3134d6670fcfc4c27e728fa467aba4b8395e601e'
-    oldFile: !uuid '27c0b5b8a200db3a80e627e5ecd9cb5baf14e924'
-gitCommitId: !uuid 'c67064b0a544a5b415266c622300332c176272bc'
+    newFile: !uuid 'f39d2c8232d5b2ea626e2960fb22b464057004c8'
+    oldFile: !uuid '19891e17880ad51d4c45ecf388db09a8bf656843'
+  /application/index/view:
+    newFile: !uuid 'd966973e06b9eade40c1f0b283bc3d8f2fd04636'
+    oldFile: !uuid '021dc4235f356cfd36b2eda8ad4449918db41029'
+  /application/index/view/index:
+    newFile: !uuid '265ba5441281676b6cc5c46dad2419710f80b70a'
+    oldFile: !uuid '60cfd600ad3dc9beb450a60462f57076ee7602c5'
+  /application/index/view/index/register.html:
+    newFile: !uuid 'fee9a15b54783b92fb0ce697e5f9bd353a25a510'
+    oldFile: !uuid '0d24340c9d545cd9bdd0055cf66713190cd8fcad'
+gitCommitId: !uuid 'bcc79ce1705086cf4f23145b3e60507558485ab2'
 renames: {
   }
-revisionId: 414
+revisionId: 415
