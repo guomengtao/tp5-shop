@@ -71,51 +71,25 @@
         $('#myModalRegistration').modal('show');
     }
 
-    function public_login(str) {
-
-
-        var xmlhttp;
-        if (str.length == 0) {
-            document.getElementById("txtHint").innerHTML = "请输入手机号";
-            return;
-        }
-
-        if (str.length != 11) {
-            document.getElementById("txtHint").innerHTML = "手机号格式有误";
-            return;
-        }
-
-        // var phone = str.length;
-        //   if(!(/^1[34578]\d{9}$/.test(phone))){
-        //       document.getElementById("txtHint").innerHTML="手机号格式有误";
-        //       return false;
-        //   }
-        if (window.XMLHttpRequest) {
-            // IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
-            xmlhttp = new XMLHttpRequest();
-        } else {
-            // IE6, IE5 浏览器执行代码
-            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        xmlhttp.onreadystatechange = function () {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                document.getElementById("txtHint").innerHTML = '开始读取数据';
-                document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
-            }
-            if (xmlhttp.status > 200) {
-
-                document.getElementById("txtHint").innerHTML = "请稍后再试 错误：" + xmlhttp.readyState + "状态" + xmlhttp.status;
-
-            }
-        }
-        xmlhttp.open("POST", "{$Think.server.script_name}/index/api/sms/s/" + str, true);
-        xmlhttp.send();
-        showtime(120);
-    }
-
 </script>
+<div class="chatDemoTomaCan"     >ddd</div>
+<script>
+    $(document).ready(function () {
+
+        console.log(1);
+
+        $(".chatDemoTomaCan").load("{:url('member/agent')}", {
+            title: 0,
+        }, function (responseTxt, statusTxt, xhr) {
+            if (statusTxt == "success")
+                console.log("外部内容加载成功！" + responseTxt);
+            if (statusTxt == "error")
+                console.log("Error: " + xhr.status + ": " + xhr.statusText);
+        });
 
 
+    });
+</script>
 </div>
 <div>
     <footer class="bs-docs-footer " style="
@@ -128,8 +102,7 @@
     background-color: #fff">
         <div class="container">
 
-            <p> Tp5简易商城
-                <a href="http://tp5shop.php.com/index/member/agent" >test</a>
+            <p> Tp5简易商城sss <a href="http://tp5shop.php.com" >test</a>
             </p>
 
 

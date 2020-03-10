@@ -28,18 +28,16 @@ class Member extends \think\Controller
 
     public function agent()
     {
-        $agent = [];
+        // 初始化需要获取的值
+        // 把需要收集信息随时加入到这个数组里 很方面
+        $info = [];
 
-        // 初始化
-        $referer   = '';
-        $domain    = '';
-        $path_info = '';
-        $mobile    = '';
-        $address   = '';
-        $browser   = '';
-        $user_id   = Cookie::get('user_id');
-        $user_id   = isset($user_id) ? $user_id : 0;
-        $goods_id  = '';
+        // 这一句是tp5是任意使用一下session类才可以获取session_id
+        // 估计tp5里为了节省资源，默认没有创建session_id
+        Session::get('start_session_working');
+        $info['session_id'] = session_id();
+
+        // 使用session_id判断唯一用户如果只保存一条session_id记录
 
 
         $agent = new Agent();
@@ -47,69 +45,60 @@ class Member extends \think\Controller
         // 语言
         $languages = $agent->languages();
         // ['nl-nl', 'nl', 'en-us', 'en']
+        $info['language'] = isset($languages) ? $languages[0] : '';
         // 是否是机器人
-        $agent->isRobot();
+        $info['robot'] = $agent->isRobot();
         // 获取设备信息 (iPhone, Nexus, AsusTablet, ...)
-        $agent->device();
-        // 系统信息  (Ubuntu, Windows, OS X, ...)
-        $agent->platform();
+        $info['device'] = $agent->device();
+
         // 浏览器信息  (Chrome, IE, Safari, Firefox, ...)
-        $agent->browser();
+        $browser         = $agent->browser();
+        $info['browser'] = $browser;
         // 获取浏览器版本
-        $browser = $agent->browser();
         $version = $agent->version($browser);
         // 获取系统版本
-        $platform = $agent->platform();
+        $platform         = $agent->platform();
+        $info['platform'] = $platform;
+        $version          = $agent->version($platform);
+        $info['platform'] = $info['platform'] . $version;
 
-        $version = $agent->version($platform);
 
-        $agent['language'] = $languages;
-        $agent['browser']  = $browser;
         /**
          * 以上是agent类提供的
          * 以下补充需要重点加的
          * 1. 产品页面需要带id 页面太多不然都是统计一页
          * 2. 来路统计
          */
+        $user_id         = Cookie::get('user_id');
+        $info['user_id'] = isset($user_id) ? $user_id : 0;
 
-        Session::get('start_session_working');
-        echo session_id();
-
-        $user_id = Cookie::get('user_id');
-        $user_id = isset($user_id) ? $user_id : 0;
 
         $request = Request::instance();
-        //  去掉http://后的所有url
-        $url = $request->url();
+        $info['ip'] = $request->ip();
         //  模块控制器和方法
-        $pathinfo = $request->path();
-
-        $view = $request->module() . $request->controller() . $request->action();
+        $info['path'] = $request->path();
+        $view         = $request->module() . $request->controller() . $request->action();
         // 如果是产品详情页，记录一下访问的产品id，$goods_id
         if ($view == 'indexIndexview') {
-            $goods_id = input('id');
+            $info['goods_id'] = input('id');
         }
 
         if (isset($_SERVER["HTTP_REFERER"])) {
 
-            $domain = parse_url($_SERVER['HTTP_REFERER']['host']);
-            $url    = $_SERVER['HTTP_REFERER'];
+            $domain = "http://" . parse_url($_SERVER['HTTP_REFERER'])['host'];
+            if ($domain <> $request->domain()) {
+                $info['domain']  = parse_url($_SERVER['HTTP_REFERER'])['host'];
+                $info['referer'] = $_SERVER['HTTP_REFERER'];
+            }
+
+
         }
 
-        // $data = ['domain'      => $domain,
-        //          'mobile'      => $mobile,
-        //          'pathinfo'    => $pathinfo,
-        //          'url'         => $url,
-        //          'os'          => $os,
-        //          'ip'          => $ip,
-        //          'user_id'     => $user_id,
-        //          'goods_id'    => $goods_id,
-        //          'referer'     => $referer,
-        //          'address'     => $address,
-        //          'browser'     => $browser,
-        //          'create_time' => time(),
-        //          'update_time' => time()
-        // ];
+        dump($info);
+
+        $user = new Footprint();
+        $user->data($info);
+        $user->save();
 
     }
 
@@ -1779,7 +1768,6 @@ class Member extends \think\Controller
                 // 如果未登录跳转到登录页面
                 $this->success('兑换前，请先登录', 'index/login');
             }
-         
 
 
         }
