@@ -41,7 +41,10 @@ function ip1region()
         return "ok";
     }
 
-    $ip2Region = $this->ip2Region($ip);
+    $ip2region = new Ip2Region();
+
+
+    $info = $ip2region->btreeSearch($ip);
 
     $check   = Ipinfo::where('ip', $ip)->count();
     $user_id = Cookie::get('user_id');
@@ -57,7 +60,7 @@ function ip1region()
     }
 
 
-    $pos = $ip2Region;
+    $pos = $info['region'];
 
     if ($pos) {
         Ipinfo::create([
@@ -267,7 +270,7 @@ function footprint()
     $user->data($info);
     $user->save();
 
-ip1region();
+    ip1region();
 }
 
 
