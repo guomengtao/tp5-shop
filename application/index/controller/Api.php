@@ -18,7 +18,7 @@ use Ip2Region;
 
 class Api extends \think\Controller
 {
-    public function ip2Region($ip ='173.212.245.240')
+    public function ip2Region($ip = '47.100.178.109')
     {
         $ip2region = new Ip2Region();
 
@@ -27,7 +27,7 @@ class Api extends \think\Controller
         $info = $ip2region->btreeSearch($ip);
 
 
-        echo ($info['region']);
+        echo($info['region']);
     }
 
     public function login()
@@ -542,7 +542,7 @@ class Api extends \think\Controller
         dump($data);
         if ($data['status'] <> 1) {
             $ip2Region = $this->ip2Region($ip);
-            if (!$ip2Region){
+            if (!$ip2Region) {
                 return "no<>1";
             }
 
@@ -562,13 +562,52 @@ class Api extends \think\Controller
 
         $pos = $data['data'][0]['pos'] ? $data['data'][0]['pos'] : '';
         $isp = $data['data'][0]['isp'] ? $data['data'][0]['isp'] : '';
-        if (!$pos){
+        if (!$pos) {
             $pos = $ip2Region;
         }
         if ($data['data'][0]['pos']) {
             Ipinfo::create([
                 'region'  => $pos,
                 'isp'     => $isp,
+                'ip'      => $ip,
+                'user_id' => $user_id,
+            ]);
+        }
+
+
+    }
+
+    public   function ip1region()
+    {
+        $request = Request::instance();
+
+        $ip = $request->ip();
+
+        if (!$ip or $ip == '127.0.0.1') {
+            return "ok";
+        }
+
+        $ip2Region = $this->ip2Region($ip);
+
+        $check   = Ipinfo::where('ip', $ip)->count();
+        $user_id = Cookie::get('user_id');
+
+        if ($check) {
+
+            $user = new Ipinfo;
+            // save方法第二个参数为更新条件
+            $user->save([
+                'user_id' => $user_id,
+            ], ['ip' => $ip]);
+            return '';
+        }
+
+
+        $pos = $ip2Region;
+
+        if ($pos) {
+            Ipinfo::create([
+                'region'  => $pos,
                 'ip'      => $ip,
                 'user_id' => $user_id,
             ]);

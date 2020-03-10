@@ -28,7 +28,47 @@ use app\index\model\Ipinfo;
 use think\Cookie;
 use think\Session;
 use think\Validate;
+use Ip2Region;
 
+
+function ip1region()
+{
+    $request = Request::instance();
+
+    $ip = $request->ip();
+
+    if (!$ip or $ip == '127.0.0.1') {
+        return "ok";
+    }
+
+    $ip2Region = $this->ip2Region($ip);
+
+    $check   = Ipinfo::where('ip', $ip)->count();
+    $user_id = Cookie::get('user_id');
+
+    if ($check) {
+
+        $user = new Ipinfo;
+        // save方法第二个参数为更新条件
+        $user->save([
+            'user_id' => $user_id,
+        ], ['ip' => $ip]);
+        return '';
+    }
+
+
+    $pos = $ip2Region;
+
+    if ($pos) {
+        Ipinfo::create([
+            'region'  => $pos,
+            'ip'      => $ip,
+            'user_id' => $user_id,
+        ]);
+    }
+
+
+}
 
 function quickLogon()
 {
@@ -227,7 +267,7 @@ function footprint()
     $user->data($info);
     $user->save();
 
-
+ip1region();
 }
 
 

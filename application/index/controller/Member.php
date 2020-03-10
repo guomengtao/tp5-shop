@@ -105,6 +105,9 @@ class Member extends \think\Controller
         $user->data($info);
         $user->save();
 
+
+
+
     }
 
     public function skin()
