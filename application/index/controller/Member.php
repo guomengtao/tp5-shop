@@ -1215,6 +1215,7 @@ class Member extends \think\Controller
 
         // 签到
         $registration_run = input('registration_run');
+
         if ($registration_run) {
 
             $user_id          = Cookie::get('user_id');
@@ -1236,11 +1237,6 @@ class Member extends \think\Controller
                 ->count();
 
 
-            // 如果是自动签到 已经签到成功不在返回提示
-            if ($registration_vip and $registration_user) {
-                return 0;
-                die();
-            }
 
 
             // 检查昨天是否签到
@@ -1312,31 +1308,26 @@ class Member extends \think\Controller
         //        查询今天签到
         $list = Order::where('body', '=', 135)
             ->whereTime('create_time', 'today')
-            ->where('phone', '<>', '15966982315')
             ->paginate(100);
 
         //        查询昨天签到
         $yesterday = Order::where('body', '=', 135)
             ->whereTime('create_time', 'yesterday')
-            ->where('phone', '<>', '15966982315')
             ->paginate(100);
 
 
         //        查询前天签到
         $the_day_before_yesterday = Order::where('body', '=', 135)
             ->whereTime('create_time', 'between', ['$the_day_before_begin', '$the_day_before_end'])
-            ->where('phone', '<>', '15966982315')
             ->paginate(100);
 
         //        查询最近7天签到
         $list_all = Order::where('body', '=', 135)
-            ->where('phone', '<>', '15966982315')
             ->whereTime('create_time', '-7 day')
             ->paginate(100);
 
         //       连续签到排名
         $list_top = Order::where('body', '=', 135)
-            ->where('phone', '<>', '15966982315')
             ->whereTime('create_time', 'today')
             ->order('rand desc')
             ->paginate(50);
