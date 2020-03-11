@@ -108,5 +108,9 @@ class Footprint extends model
     {
         return $this->hasOne('Agent', 'session_id', 'session_id');
     }
+    public function Shop()
+    {
+        return $this->hasOne('Shop', 'id', 'goods_id');
+    }
 
 }
