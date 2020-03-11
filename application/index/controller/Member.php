@@ -1215,14 +1215,14 @@ class Member extends \think\Controller
     {
 
 
-        // ajax 签到调用
+        // 签到
         $registration_run = input('registration_run');
         if ($registration_run) {
 
             $user_id             = Cookie::get('user_id');
             $registration_vip = input('registration_vip');
 
-            if (!$user) {
+            if (!$user_id) {
                 //错误页面的默认跳转页面是返回前一页，通常不需要设置
                 $this->error('请登录', 'Index/index/login', 'tom', 5);
                 return "请登录";
