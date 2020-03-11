@@ -160,10 +160,10 @@ class Api extends \think\Controller
 
         $user = new UserQq();
         // 查询单个数据
-        $user = $user->where('openid', $openid)
+        $user     = $user->where('openid', $openid)
             ->where('type', 0)
             ->find();
-
+        $user_id  = $user['id'];
         $nickname = $user_from_qq->nickname;
         // 没登记openID的先登记
         if (!$user) {
@@ -180,6 +180,7 @@ class Api extends \think\Controller
             $user->type           = 0;
             $user->save();
 
+
             // return "创建成功！";
 
             // 查询单个数据
@@ -189,7 +190,16 @@ class Api extends \think\Controller
 
         } else {
 
-            // 如果已经存在就更新，保持数据最新  暂时不更新
+            // 如果已经存在就更新，保持数据最新
+            $user                 = User::get($user_id);
+            $user->openid         = $openid;
+            $user->nickname       = $user_from_qq->nickname;
+            $user->figureurl_qq_1 = $user_from_qq->figureurl_qq_1;
+            $user->figureurl_qq_2 = $user_from_qq->figureurl_qq_2;
+            $user->gender         = $user_from_qq->gender;
+            $user->year           = $user_from_qq->year;
+            $user->type           = 0;
+            $user->save();
         }
 
         // 不强制绑定手机号，直接用qq就可以登录的功能
