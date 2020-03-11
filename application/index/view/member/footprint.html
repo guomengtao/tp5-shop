@@ -43,7 +43,7 @@
                             <tr>
                                 <td> {$user.create_time}</td>
                                 <td><a href="{:url('index/member/home',['user_id'=>$user.user_id])} ">{$user.user_id} </a> ({$user.ip})</td>
-                                <td><a href="__ROOT__/{$user.path}">{$user.path}</a> {$user.shop.title}</td>
+                                <td><a href="__ROOT__/{$user.path}" alt="{$user.shop.title}">{$user.path}</a></td>
                                 <td>
                                     <span class="label label-success">{$user.ipinfo.region}</span>
                                     <span class="label label-default">{$user.ipinfo.isp}</span>
