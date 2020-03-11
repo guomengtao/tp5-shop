@@ -1219,7 +1219,7 @@ class Member extends \think\Controller
         $registration_run = input('registration_run');
         if ($registration_run) {
 
-            $user             = Cookie::get('phone');
+            $user             = Cookie::get('user_id');
             $registration_vip = input('registration_vip');
 
             if (!$user) {
