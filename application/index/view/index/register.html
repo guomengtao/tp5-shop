@@ -239,7 +239,7 @@
                             <button type="submit" id="btngo" class="btn btn-primary">{:session('openid_id')?'绑定账号':
                                 '提交注册'}
                             </button>
-                           {if condition="session('openid_id')" } <a href="{:url('index/index/course')}" >访问课程</a>{/if}
+                           {if condition="session('openid_id')" } <a href="{:url('index/index/course')}" > 访问课程</a>{/if}
 
                             <div><h4>使用第三方账号登录</h4><a
                                     href="https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=100556678&redirect_uri=http://open.gaoxueya.com/index/api/qq&scope=get_user_info"
