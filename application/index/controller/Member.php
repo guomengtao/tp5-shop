@@ -120,8 +120,6 @@ class Member extends \think\Controller
         $user->save();
 
 
-
-
     }
 
     public function skin()
@@ -1219,7 +1217,7 @@ class Member extends \think\Controller
         $registration_run = input('registration_run');
         if ($registration_run) {
 
-            $user_id             = Cookie::get('user_id');
+            $user_id          = Cookie::get('user_id');
             $registration_vip = input('registration_vip');
 
             if (!$user_id) {
@@ -1268,7 +1266,7 @@ class Member extends \think\Controller
                 'subject'   => "签到",
                 'total_fee' => 0,
                 'rand'      => $rand,
-                'user_id'     => $user_id
+                'user_id'   => $user_id
             ]);
 
 

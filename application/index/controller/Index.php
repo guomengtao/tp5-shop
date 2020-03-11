@@ -1318,7 +1318,7 @@ class Index extends \think\Controller
                     // 此处如果不加判断，每次都更新，就会实现限制用户只能同时登录一个浏览器或者设备
                     if (!$get_token) {
                         User::where('phone', $phone)
-                            ->update(['token' => $token]);
+                            ->update(['token' => $get_token]);
                         Cookie::set('token', $token, 3600000);
                     }
                     // 判断是否是先支付了，再来注册/登录的用户
@@ -1774,8 +1774,6 @@ class Index extends \think\Controller
                     // 新注册 绑定qq操作 获取刚存入的$user->id
 
 
-
-
                     // 删除（当前作用域）
                     session('openid_id', null);
 
@@ -2198,12 +2196,6 @@ class Index extends \think\Controller
     public function index()
     {
 
-//
-        // array (
-        //     'city_id' => 2163,
-        //     'region' => '中国|华南|广东省|深圳市|鹏博士',
-        // )
-
         /**
          * 查询最新会员
          * 直接读取user_qq表里的新会员
@@ -2213,12 +2205,13 @@ class Index extends \think\Controller
         $views_today     = Footprint::views_today();
         $views_yesterday = Footprint::views_yesterday();
         // 查询今天签到
-        $registration_today = Order::registration_today();
+        $registration_today = Order::registration_today(); 
         $ip_info            = Ipinfo::limit(10)->order('update_time', 'desc')->select();
         $this->assign('views_today', $views_today);
         $this->assign('views_yesterday', $views_yesterday);
         $this->assign('registration_today', $registration_today);
         $this->assign('ip_info', $ip_info);
+
         return view();
 
     }

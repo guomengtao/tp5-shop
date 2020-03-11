@@ -68,7 +68,6 @@ class Order extends model
         // 查询今天签到
         $registration = Order::where('body', '=', 135)
             ->whereTime('create_time', 'today')
-            ->where('phone', '<>', '15966982315')
             ->count();
         return $registration;
     }
