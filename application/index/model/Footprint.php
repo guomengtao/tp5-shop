@@ -9,7 +9,7 @@ use think\Request;
 
 class Footprint extends model
 {
-	use SoftDelete;
+    use SoftDelete;
     protected $deleteTime = 'delete_time';
     protected $autoWriteTimestamp = true;
 
@@ -18,17 +18,22 @@ class Footprint extends model
     protected $insert = ['ip'];
     protected $update = [];
 
-    public static function views_today(){
+    public static function views_today()
+    {
 
-       return Footprint::whereTime('create_time', 'today')->cache(3600)->count();
-
-    }
-    public static function views_yesterday(){
-
-       return Footprint::whereTime('create_time', 'yesterday')->cache(7200)->count();
+        return Footprint::whereTime('create_time', 'today')->cache(3600)->count();
 
     }
-    public static function add(){
+
+    public static function views_yesterday()
+    {
+
+        return Footprint::whereTime('create_time', 'yesterday')->cache(7200)->count();
+
+    }
+
+    public static function add()
+    {
 
         $user_id = Cookie::get('user_id');
 
@@ -36,10 +41,10 @@ class Footprint extends model
         $url     = $request->url();
         $ip      = $request->ip();
 
-        $user         = new Footprint;
-        $user->ip     = $ip;
-        $user->url    = $url;
-        $user->user_id= $user_id;
+        $user          = new Footprint;
+        $user->ip      = $ip;
+        $user->url     = $url;
+        $user->user_id = $user_id;
         $user->save();
     }
 
@@ -49,14 +54,12 @@ class Footprint extends model
     }
 
 
-
-
     public function setLessonAttr($value)
     {
         return request()->ip();
         return "30";
     }
-    
+
 
     public function setAgeAttr($value)
     {
@@ -76,31 +79,34 @@ class Footprint extends model
 //        return strtolower($value);
     }
 
-    public function getTitleAttr($value)
+    public function getPathAttr($value)
     {
-        
-       
-        return $value ;
-
-        
+        if ($value == '/'){
+            $value = 'index';
+        }
+        return $value;
     }
+
+
     public function getContentAttr($value)
     {
         // $title = [-1=>'删除',0=>'禁用',1=>'正常',2=>'待审核'];
-    	if ($value) {
-    		# code...
-    		return $value ;
+        if ($value) {
+            # code...
+            return $value;
 
-    	}
-        return $value ;
+        }
+        return $value;
     }
+
     public function Ipinfo()
     {
-        return $this->hasOne('Ipinfo','ip','ip');
+        return $this->hasOne('Ipinfo', 'ip', 'ip');
     }
+
     public function AgentLink()
     {
-        return $this->hasOne('Agent','ip','ip');
+        return $this->hasOne('Agent', 'session_id', 'session_id');
     }
 
 }
