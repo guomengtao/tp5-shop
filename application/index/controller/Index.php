@@ -38,6 +38,8 @@ class Index extends \think\Controller
         Member::agent();
         // 记录访问量
         footprint();
+
+
     }
 
     public function cap()

@@ -63,6 +63,11 @@ function ip1region()
     $isp = $info['city_id'];
     $pos = $info['region'];
 
+    $pos = str_replace('中国', '', $pos);
+    $pos = str_replace('|', '', $pos);
+    $pos = str_replace('0', '', $pos);
+
+
     if ($pos) {
         Ipinfo::create([
             'region'  => $pos,
