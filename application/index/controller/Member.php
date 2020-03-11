@@ -61,6 +61,10 @@ class Member extends \think\Controller
         // 获取系统版本
         $platform         = $agent->platform();
         $info['platform'] = $platform;
+        if (!$platform) {
+            echo "请问访问操作系统是什么？";
+            die;
+        }
         $version          = $agent->version($platform);
         $info['platform'] = $info['platform'] . $version;
 
