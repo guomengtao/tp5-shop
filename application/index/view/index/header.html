@@ -276,7 +276,7 @@
                                 <li role="separator" class="divider"></li>
 
                                 <!--<li><a onclick="ajaxModelPay('0.1','135','签到{$Think.cookie.phone}{:date("y年m月d日 H:i:s")}','135{$Think.cookie.phone}{:time()}') href="" >签到</a></li>-->
-                                <li>{if condition="$Think.cookie.phone"} <a href="__ROOT__/index/index/login/logout/1">退出登录</a>
+                                <li>{if condition="$Think.cookie.user_id"} <a href="__ROOT__/index/index/login/logout/1">退出登录</a>
                                     {else /}
                                     <!-- <a href="__ROOT__/index/index/login">登录/注册</a> -->
                                     <a href="{:url('/index/index/login')}">登录/注册</a>
