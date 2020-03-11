@@ -1219,7 +1219,7 @@ class Member extends \think\Controller
         $registration_run = input('registration_run');
         if ($registration_run) {
 
-            $user             = Cookie::get('user_id');
+            $user_id             = Cookie::get('user_id');
             $registration_vip = input('registration_vip');
 
             if (!$user) {
@@ -1232,7 +1232,7 @@ class Member extends \think\Controller
             }
 
             // 判断今天是否有签到记录
-            $registration_user = Order::where('phone', '=', $user)
+            $registration_user = Order::where('user_id', '=', $user_id)
                 ->where('body', '=', 135)
                 ->whereTime('create_time', 'today')
                 ->count();
@@ -1247,7 +1247,7 @@ class Member extends \think\Controller
 
             // 检查昨天是否签到
             $rand = Order::where('body', 135)
-                ->where('phone', $user)
+                ->where('user_id', '=', $user_id)
                 ->whereTime('create_time', 'yesterday')
                 ->value('rand');
 
@@ -1268,7 +1268,7 @@ class Member extends \think\Controller
                 'subject'   => "签到",
                 'total_fee' => 0,
                 'rand'      => $rand,
-                'phone'     => $user
+                'user_id'     => $user_id
             ]);
 
 
@@ -1292,7 +1292,7 @@ class Member extends \think\Controller
 
             // 判断今天是否领取奖励
             $rand_today = Order::where('body', 135)
-                ->where('phone', $user)
+                ->where('user_id', '=', $user_id)
                 ->where('out_trade_no', '135001')
                 ->whereTime('create_time', 'today')
                 ->count();
