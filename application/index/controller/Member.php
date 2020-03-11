@@ -25,8 +25,7 @@ class Member extends \think\Controller
     {
         // 记录访问信息 和 机器人拦截
         Member::agent();
-        // 记录访问量
-        footprint();
+
     }
 
     public static function agent()
@@ -67,6 +66,11 @@ class Member extends \think\Controller
         }
         $version          = $agent->version($platform);
         $info['platform'] = $info['platform'] . $version;
+
+        if ($info['platform']) {
+            // 记录访问量
+            footprint();
+        }
 
         // 这一句是tp5是任意使用一下session类才可以获取session_id
         // 估计tp5里为了节省资源，默认没有创建session_id
@@ -114,6 +118,8 @@ class Member extends \think\Controller
         $user = new Agent_T();
         $user->data($info);
         $user->save();
+
+
 
 
     }

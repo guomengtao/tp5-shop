@@ -36,8 +36,7 @@ class Index extends \think\Controller
     {
         // 记录访问信息 和 机器人拦截
         Member::agent();
-        // 记录访问量
-        footprint();
+
 
 
     }
