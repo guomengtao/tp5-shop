@@ -23,10 +23,10 @@ class Member extends \think\Controller
 
     public function _initialize()
     {
+        // 记录访问信息 和 机器人拦截
+        Member::agent();
         // 记录访问量
         footprint();
-        // 记录访问信息
-        Member::agent();
     }
 
     public static function agent()
@@ -35,17 +35,7 @@ class Member extends \think\Controller
         // 把需要收集信息随时加入到这个数组里 很方面
         $info = [];
 
-        // 这一句是tp5是任意使用一下session类才可以获取session_id
-        // 估计tp5里为了节省资源，默认没有创建session_id
-        Session::get('start_session_working');
-        $info['session_id'] = session_id();
 
-        // 使用session_id判断唯一用户如果只保存一条session_id记录
-
-        $count = Agent_T::where('session_id', $info['session_id'])->count();
-        if ($count) {
-            return;
-        }
         $agent = new Agent();
 
         // 语言
@@ -60,6 +50,12 @@ class Member extends \think\Controller
         // 浏览器信息  (Chrome, IE, Safari, Firefox, ...)
         $browser         = $agent->browser();
         $info['browser'] = $browser;
+
+        if (!$browser) {
+            echo "请使用浏览器访问";
+            die;
+        }
+
         // 获取浏览器版本
         $version = $agent->version($browser);
         // 获取系统版本
@@ -68,7 +64,17 @@ class Member extends \think\Controller
         $version          = $agent->version($platform);
         $info['platform'] = $info['platform'] . $version;
 
+        // 这一句是tp5是任意使用一下session类才可以获取session_id
+        // 估计tp5里为了节省资源，默认没有创建session_id
+        Session::get('start_session_working');
+        $info['session_id'] = session_id();
 
+        // 使用session_id判断唯一用户如果只保存一条session_id记录
+
+        $count = Agent_T::where('session_id', $info['session_id'])->count();
+        if ($count) {
+            return '';
+        }
         /**
          * 以上是agent类提供的
          * 以下补充需要重点加的
@@ -104,8 +110,6 @@ class Member extends \think\Controller
         $user = new Agent_T();
         $user->data($info);
         $user->save();
-
-
 
 
     }
@@ -1171,7 +1175,7 @@ class Member extends \think\Controller
 
         // 查询会员学习记录
         $list = Footprint::whereTime('create_time', 'today')
-            ->where('user_id','>',0)
+            ->where('user_id', '>', 0)
             ->order('id desc,create_time')
             ->paginate(100);
 
@@ -1187,8 +1191,6 @@ class Member extends \think\Controller
         $list_all = Footprint::whereTime('create_time', 'today')
             ->order('create_time desc')
             ->paginate(100);
-
-
 
 
         $this->assign('list', $list);

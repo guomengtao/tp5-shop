@@ -34,11 +34,10 @@ class Index extends \think\Controller
 
     public function _initialize()
     {
+        // 记录访问信息 和 机器人拦截
+        Member::agent();
         // 记录访问量
         footprint();
-        // 记录访问信息
-         Member::agent();
-
     }
 
     public function cap()

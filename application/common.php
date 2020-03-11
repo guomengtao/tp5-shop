@@ -252,6 +252,9 @@ function footprint()
     $info['user_id'] = Cookie::get('user_id');
 
     $request = Request::instance();
+
+
+    $ip = $request->ip();
     $view    = $request->module() . $request->controller() . $request->action();
 
     // 如果是产品详情页，记录一下访问的产品id，$goods_id 
