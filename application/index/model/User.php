@@ -163,7 +163,7 @@ class User extends model
     }
     public function user_qq()
     {
-        return $this->hasOne('UserQq','suer_id','id');
+        return $this->hasOne('UserQq','user_id','id');
     }
     public function money()
     {
