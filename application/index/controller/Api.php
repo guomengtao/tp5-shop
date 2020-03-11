@@ -164,11 +164,11 @@ class Api extends \think\Controller
             ->where('type', 0)
             ->find();
 
-
+        $nickname = $user_from_qq->nickname;
         // 没登记openID的先登记
         if (!$user) {
             # code.. 
-            $nickname = $user_from_qq->nickname;
+
 
             $user                 = new UserQq();
             $user->openid         = $openid;
