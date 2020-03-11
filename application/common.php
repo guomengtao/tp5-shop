@@ -65,7 +65,6 @@ function ip1region()
 
     if ($pos) {
         Ipinfo::create([
-            'isp'     => $isp,
             'region'  => $pos,
             'ip'      => $ip,
             'user_id' => $user_id,
