@@ -261,7 +261,7 @@ class Api extends \think\Controller
         // 取出主键为 $user->user_id 的数据
         // 提示从user表里查询主键id是$user->user_id ，这个$user->user_id是用户id从已经绑定的UserQq里面获取
         // 这个页面大量的用$user 造成了很多混淆，简易改成独立的
-        $user = User::get($user->user_id);
+        $user = User::get($user_id);
 
         // dump($user);
         // echo $user->phone . "999+++++";
