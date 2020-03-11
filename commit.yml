@@ -3,21 +3,21 @@ branches: {
   }
 fileChange:
   /application:
-    newFile: !uuid 'c42d5918fb921e8e0d39026bab706d9a482cb336'
-    oldFile: !uuid '42018a5e5839a2609f90bbd925837437a765622f'
+    newFile: !uuid 'b999403d4ca313350a91a48f3057a375b6a51e65'
+    oldFile: !uuid 'c42d5918fb921e8e0d39026bab706d9a482cb336'
   /application/index:
-    newFile: !uuid '2ca2284bcc3086d1188a0196805fbd7d8de3c94e'
-    oldFile: !uuid 'aaf1d52660e5ec1e4c2157f1d8847cd7fb4a60a8'
+    newFile: !uuid '69cd3e6f0367be1f452c153f22828b1919ae03c0'
+    oldFile: !uuid '2ca2284bcc3086d1188a0196805fbd7d8de3c94e'
   /application/index/view:
-    newFile: !uuid '0e136f349c3b6aecbdc183d0e90c4cfbca2bc9a3'
-    oldFile: !uuid 'f28bded03686672d0d4eaa8eda5c1e2dee55339e'
-  /application/index/view/member:
-    newFile: !uuid '37c3b728e0b255e52e2296a993bd7da53159128f'
-    oldFile: !uuid 'da5ec8771e9efe72a6e9db7daa729835ae18e98c'
-  /application/index/view/member/registration.html:
-    newFile: !uuid 'd50c930b95c80df1cb1ff58843fc9abb386f7a59'
-    oldFile: !uuid 'b418f2be62b45de0a4ee1b9c2a5d5b2dba08eef6'
-gitCommitId: !uuid 'd2fa6b99a295564fe3367faad7ebd1a3443aa987'
+    newFile: !uuid '3a76d090de7117b29fca4c009d2b519126ac71e1'
+    oldFile: !uuid '0e136f349c3b6aecbdc183d0e90c4cfbca2bc9a3'
+  /application/index/view/index:
+    newFile: !uuid '49ad2ee12e6510514948608a6c4523c1d8c790d7'
+    oldFile: !uuid '4998b8956abe574de97bca12903179bafea793b4'
+  /application/index/view/index/register.html:
+    newFile: !uuid 'a7a29ee423f843b3f2abfbec479a9e51cb6626e5'
+    oldFile: !uuid 'b08736de830ba9bf42c891ef6c5dea7397f060ab'
+gitCommitId: !uuid '70fcf20346d8a84de2d2f7d9642b8bac294ea507'
 renames: {
   }
-revisionId: 492
+revisionId: 493
