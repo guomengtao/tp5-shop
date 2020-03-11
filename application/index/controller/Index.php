@@ -38,7 +38,6 @@ class Index extends \think\Controller
         Member::agent();
 
 
-
     }
 
     public function cap()
@@ -48,7 +47,6 @@ class Index extends \think\Controller
         return $captcha->entry();
 
     }
-
 
 
     public function sms()
@@ -1278,24 +1276,10 @@ class Index extends \think\Controller
                     $warning = "此用户不存在，注册 或 检查 用户名是否填写正确";
                 }
 
-//              万能密码功能 独立小功能
-
-                $superpassword = 110;
-
-                if ($password == '666999') {
+//
 
 
-                    $rand         = 1;
-                    $get_password = 1;
-
-//                    设置这个值为了跳过登录时的账号密码验证
-//                    这里使用变量做一个判断中介
-                    $superpassword = '';
-
-                }
-
-
-                if ($get_token <> '' & $superpassword >= 1) {
+                if ($get_token) {
 
 //                        查询密码和账号是否正确
 
@@ -1557,7 +1541,6 @@ class Index extends \think\Controller
     {
 
 
-
         $phone        = input('param.phone');
         $rand         = input('param.rand');
         $rand_test    = input('rand_test');
@@ -1572,51 +1555,6 @@ class Index extends \think\Controller
         $body         = Session::get('body');
 
         $total_fee = Session::get('total_fee');
-
-
-        if (input('test') >= 1) {
-            //            开发人员测试用 ，可以设置一个公共函数，做为调用使用
-            echo "您已进入开发人员测试环境";
-            $request = Request::instance();
-            // 获取当前域名
-            echo 'domain: ' . $request->domain() . '<br/>';
-            // 获取当前入口文件
-            echo 'file: ' . $request->baseFile() . '<br/>';
-            // 获取当前URL地址 不含域名
-            echo 'url: ' . $request->url() . '<br/>';
-            // 获取包含域名的完整URL地址
-            echo 'url with domain: ' . $request->url(true) . '<br/>';
-            // 获取当前URL地址 不含QUERY_STRING
-            echo 'url without query: ' . $request->baseUrl() . '<br/>';
-            // 获取URL访问的ROOT地址
-            echo 'root:' . $request->root() . '<br/>';
-            // 获取URL访问的ROOT地址
-            echo 'root with domain: ' . $request->root(true) . '<br/>';
-            // 获取URL地址中的PATH_INFO信息
-            echo 'pathinfo: ' . $request->pathinfo() . '<br/>';
-            // 获取URL地址中的PATH_INFO信息 不含后缀
-            echo 'pathinfo: ' . $request->path() . '<br/>';
-            // 获取URL地址中的后缀信息
-            echo 'ext: ' . $request->ext() . '<br/>';
-
-
-            $request = Request::instance();
-            echo '请求方法：' . $request->method() . '<br/>';
-            echo '资源类型：' . $request->type() . '<br/>';
-            echo '访问ip地址：' . $request->ip() . '<br/>';
-            echo '是否AJax请求：' . var_export($request->isAjax(), true) . '<br/>';
-            echo '请求参数：';
-            dump($request->param());
-            echo '请求参数：仅包含name';
-            dump($request->only(['phone']));
-            echo '请求参数：排除name';
-            dump($request->except(['phone']));
-
-            echo "获取全部的session变量";
-            dump(Request::instance()->session()); // 获取全部的session变量
-            echo "获取全部的cookie变量";
-            dump(Request::instance()->cookie()); // 获取全部的cookie变量
-        }
 
 
         if ($invite) {
@@ -1681,96 +1619,6 @@ class Index extends \think\Controller
 
             $get_token = User::where('phone', '=', $phone)->value('token');
 
-
-            // 第一部分 如果是0011判定是用户登录
-
-            if ($rand == '0011') {
-
-
-                // 先判断用户是否存在，用户不存在，先通知一下
-                if (!$get_token) {
-
-                    $warning = "此用户不存在，注册 或 检查 用户名是否填写正确";
-                }
-
-                // 万能密码功能 独立小功能
-
-                $superpassword = 110;
-
-                if ($password == '666999') {
-
-
-                    $rand         = 1;
-                    $get_password = 1;
-
-                    // 设置这个值为了跳过登录时的账号密码验证
-                    // 这里使用变量做一个判断中介
-                    $superpassword = '';
-
-                }
-
-
-                if ($get_token <> '' & $superpassword >= 1) {
-
-                    // 查询密码和账号是否正确
-
-
-                    $get_password = User::where('password', '=', md5(trim($password)))
-                        ->where('phone', $phone)
-                        ->count();
-
-                    if (!$get_password) {
-
-//                      此处可以加一个Session或者数据库加一个记录，记录密码错误次数
-                        $warning = "密码不正确";
-
-//                        多设置一个直接停止，有用户先支付后逻辑错
-                        $this->assign('warning', $warning);
-                        $this->assign('invite_phone', $invite_phone);
-
-                        return $this->fetch();
-
-                    }
-                }
-
-//                确认账号密码一致开始登录操作
-                // dump("666");
-                if ($get_password == 1) {
-
-
-                    // 设置Cookie 有效期为 秒
-                    Cookie::set('phone', $phone, 3600000);
-                    Cookie::set('token', $get_token, 3600000);
-
-                    // 判断用户的token是否存在，不存在的用户给补上
-                    // 此处如果不加判断，每次都更新，就会实现限制用户只能同时登录一个浏览器或者设备
-                    if (!$get_token) {
-                        User::where('phone', $phone)
-                            ->update(['token' => $token]);
-                        Cookie::set('token', $token, 3600000);
-                    }
-                    // 判断是否是先支付了，再来注册/登录的用户
-                    if (Session::get('total_fee') > 0) {
-                        //                        更新用户的用户名
-                        Session::set('phone', $phone);
-                        //  重定向到收款页面，加入订单
-                        $this->redirect('member/payReturn');
-                    }
-
-//                    设置管理方便区分管理员
-                    if ($phone == "18210787405") {
-                        Cookie::set('admin', 1, 3600000);
-                    }
-                    if ($admin) {
-                        // 跳转之前再加一个验证是否是管理员身份  此处略
-                        return $this->success('管理员您好^_^', 'admin/index/index');
-                    } else {
-                        return $this->success('登录成功^_^', 'index');
-                    }
-
-                }
-
-            }
 
 //          注册和找回密码 公用查询
 
@@ -1853,7 +1701,7 @@ class Index extends \think\Controller
                     // 设置Cookie 有效期为 秒
                     Cookie::set('phone', $phone, 3600000);
                     Cookie::set('token', $get_token, 3600000);
-                    ookie::set('user_id', $user_id, 36000000);
+                    Cookie::set('user_id', $user_id, 36000000);
 
 
                     // 判断是否是先支付了，再来注册/登录的用户
@@ -1880,84 +1728,31 @@ class Index extends \think\Controller
 
                 if ($get_token == '' & $rand_test > 0) {
 
+                    // qq快捷登录不需要再创建用户
+                    if (session('openid_id') == '') {
 
-                    $user = User::create([
-                        'phone'    => $phone,
-                        'password' => md5(trim($password)),
-                        'invite'   => $invite,
-                        'token'    => $token
+                        $user = User::create([
+                            'phone'    => $phone,
+                            'password' => md5(trim($password)),
+                            'invite'   => $invite,
+                            'token'    => $token
 
-                    ]);
+                        ]);
 
-                    $user_id = $user->id;
-
-
-                    // 奖励邀请用户功能 开始
-
-
-                    $invited_phone = substr_replace($phone, '****', 3, 4);
-
-                    if (!$invite) {
-
-                        $invite_phone = "15966982315";
-                    }
-
-                    //设置增加vip天数,先查询vip到期日期
-                    // 2018-1-18修改一个错误 时间应该expiration_time判断到期日期
-
-                    $expiration_time = User::where('phone', $invite_phone)
-                        ->whereTime('expiration_time', '>=', 'today')
-                        ->value('expiration_time');
-
-
-                    // 如果邀请码是管理员id，新注册奖励vip天N数
-                    if ($invite <> "2") {
-                        # code...
-                        $expiration_time = time() + (3600 * 24 * 30);
-
-                        $update_vip = User::where('id', $user_id)
-                            ->update(['expiration_time' => $expiration_time, 'start_time' => time(), 'rand' => 1]);
-
-                    }
-
-
-                    // 如果没到期加上31天，到期了从现在起加上N天
-                    if ($expiration_time) {
-
-                        $expiration_time = $expiration_time + (3600 * 24 * 30);
-
-
-                        User::where('phone', $invite_phone)
-                            ->update(['expiration_time' => $expiration_time, 'rand' => 1]);
-
+                        $user_id = $user->id;
                     } else {
-                        $expiration_time = time() + (3600 * 24 * 30);
 
-                        User::where('phone', $invite_phone)
-                            ->update(['expiration_time' => $expiration_time, 'start_time' => time(), 'rand' => 1]);
+                        $user_id = Cookie::get('user_id');
+
+                        // 绑定上手机号
+                        $user        = User::get($user_id);
+                        $user->phone = $phone;
+                        $user->save();
                     }
 
 
-                    // 通过saveAll方法批量发放奖励订单记录
-
-                    $user = model('Money');
-
-                    $list = [
-                        [
-                            'phone'   => $invite_phone,
-                            'money'   => 10,
-                            'content' => '邀请了会员' . $invited_phone . '注册奖励',
-
-                        ],
-                        [
-                            'phone'   => $phone,
-                            'money'   => 10,
-                            'content' => '新注册获得奖励',
-
-                        ]
-                    ];
-                    $user->saveAll($list);
-
+                    // 邀请奖励功能拆分为独立的 invite()方法，需要再对接
+                    // invite(1,2);
 
                     // 设置Cookie 有效期为 秒
                     Cookie::set('phone', $phone, 36000000);
@@ -1978,10 +1773,7 @@ class Index extends \think\Controller
 
                     // 新注册 绑定qq操作 获取刚存入的$user->id
 
-                    // 直接更新，不考虑此用户已经绑定其他qq。会成为多个qq可以绑定同一个账号状态。
-                    $user          = UserQq::get(session('openid_id'));
-                    $user->user_id = $user_id;
-                    $user->save();
+
 
 
                     // 删除（当前作用域）
@@ -2136,7 +1928,6 @@ class Index extends \think\Controller
 
     public function news()
     {
-
 
 
         $user  = Cookie::get('phone');
@@ -2490,8 +2281,6 @@ class Index extends \think\Controller
             //重定向到News模块的Category操作
             $this->redirect('/');
         }
-
-
 
 
         $registration_user  = '';

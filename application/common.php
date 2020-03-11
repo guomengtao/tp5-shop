@@ -30,6 +30,59 @@ use think\Session;
 use think\Validate;
 use Ip2Region;
 
+function admin_test_model()
+{
+
+    // 首页地址栏加入参数 test=1将开启开发人员测试功能
+    // test=0 关闭测试功能
+    // 此函数跟随随网站统计尾部运行
+    // 作用：  查看当前用户所有请求信息，也可以用于用户自身使用
+
+    if (input('test') >= 1) {
+        //            开发人员测试用 ，可以设置一个公共函数，做为调用使用
+        echo "您已开启检查请求信息功能";
+        echo "点击此处关闭检查功能";
+        $request = Request::instance();
+        // 获取当前域名
+        echo 'domain: ' . $request->domain() . '<br/>';
+        // 获取当前入口文件
+        echo 'file: ' . $request->baseFile() . '<br/>';
+        // 获取当前URL地址 不含域名
+        echo 'url: ' . $request->url() . '<br/>';
+        // 获取包含域名的完整URL地址
+        echo 'url with domain: ' . $request->url(true) . '<br/>';
+        // 获取当前URL地址 不含QUERY_STRING
+        echo 'url without query: ' . $request->baseUrl() . '<br/>';
+        // 获取URL访问的ROOT地址
+        echo 'root:' . $request->root() . '<br/>';
+        // 获取URL访问的ROOT地址
+        echo 'root with domain: ' . $request->root(true) . '<br/>';
+        // 获取URL地址中的PATH_INFO信息
+        echo 'pathinfo: ' . $request->pathinfo() . '<br/>';
+        // 获取URL地址中的PATH_INFO信息 不含后缀
+        echo 'pathinfo: ' . $request->path() . '<br/>';
+        // 获取URL地址中的后缀信息
+        echo 'ext: ' . $request->ext() . '<br/>';
+
+
+        $request = Request::instance();
+        echo '请求方法：' . $request->method() . '<br/>';
+        echo '资源类型：' . $request->type() . '<br/>';
+        echo '访问ip地址：' . $request->ip() . '<br/>';
+        echo '是否AJax请求：' . var_export($request->isAjax(), true) . '<br/>';
+        echo '请求参数：';
+        dump($request->param());
+        echo '请求参数：仅包含name';
+        dump($request->only(['phone']));
+        echo '请求参数：排除name';
+        dump($request->except(['phone']));
+
+        echo "获取全部的session变量";
+        dump(Request::instance()->session()); // 获取全部的session变量
+        echo "获取全部的cookie变量";
+        dump(Request::instance()->cookie()); // 获取全部的cookie变量
+    }
+}
 
 function ip1region()
 {
@@ -247,6 +300,55 @@ function add_vip_days($add_vip_days, $out_trade_no)
     ]);
 
 
+}
+
+function invite($invite_user, $user_id)
+{
+    // 奖励邀请用户功能
+
+
+    //设置增加vip天数,先查询vip到期日期
+    $expiration_time = User::where('user_id', $invite_user)
+        ->whereTime('expiration_time', '>=', 'today')
+        ->value('expiration_time');
+
+
+    // 如果没到期加上30天，到期了从现在起加上N天
+    if ($expiration_time) {
+
+        $expiration_time = $expiration_time + (3600 * 24 * 30);
+
+
+        User::where('user_id', $invite_user)
+            ->update(['expiration_time' => $expiration_time, 'rand' => 1]);
+
+    } else {
+        $expiration_time = time() + (3600 * 24 * 30);
+
+        User::where('user_id', $invite_user)
+            ->update(['expiration_time' => $expiration_time, 'start_time' => time(), 'rand' => 1]);
+    }
+
+
+    // 通过saveAll方法批量发放金币奖励订单记录
+
+    $user = model('Money');
+
+    $list = [
+        [
+            'phone'   => $invite_user_id,
+            'money'   => 10,
+            'content' => '邀请了会员' . $invited_phone . '注册奖励',
+
+        ],
+        [
+            'phone'   => $user_id,
+            'money'   => 10,
+            'content' => '新注册获得奖励',
+
+        ]
+    ];
+    $user->saveAll($list);
 }
 
 //功能浏览次数和来路

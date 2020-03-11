@@ -87,7 +87,6 @@ class Api extends \think\Controller
         $code = input("code");
 
         if ($code) {
-            # code...
 
             $code = Cookie::set('code', $code, 200000);
         }
@@ -150,8 +149,6 @@ class Api extends \think\Controller
         $str          = file_get_contents($graph_url);
         $user_from_qq = json_decode($str);
 
-        //Step3：使用Access Token来获取用户的OpenID
-
 
         // Step5：数据库存储
 
@@ -194,6 +191,15 @@ class Api extends \think\Controller
             // 如果已经存在就更新，保持数据最新  暂时不更新
         }
 
+        // 不强制绑定手机号，直接用qq就可以登录的功能
+        //
+        // 在核心的会员表里创建一个会员。
+        // 1. 如果绑定新手机号号。直接绑定  不再创建会员号
+        // 2. 如果绑定老用户手机号
+        //     2.1 qq绑定到老用户上，直接绑定，造成
+        //
+        // 3. 如果老手机号，要来绑定qq，
+
 
         // 记录昵称和头像，页面展示
         cookie('openid', $user_from_qq->nickname, 3600000);
@@ -204,9 +210,26 @@ class Api extends \think\Controller
         // dump($user);
         // dump($user->user_id);
 
-        // 没绑定的跳转到绑定页面
+        // 没有绑定会员号的，创建账号
         if (!$user->user_id) {
-            # code.. 
+
+            $token  = md5(time() . rand(100000, 999999));
+            $invite = Cookie::get('invite');
+            $user   = User::create([
+                'invite' => $invite,
+                'token'  => $token,
+            ]);
+
+            $user_id = $user->id;
+
+
+            // 在qq表登记绑定用户id
+            $user          = UserQq::get(session('openid_id'));
+            $user->user_id = $user_id;
+            $user->save();
+
+            Cookie::set('user_id', $user_id, 36000000);
+            Cookie::set('token', $token, 3600000);
 
             // 赋值（当前作用域）记录需要绑定openid
             session('openid_id', $user->id);
@@ -218,6 +241,9 @@ class Api extends \think\Controller
 
             return $this->success('登录成功，绑定账号', 'index/index/register');
 
+
+            // 邀请奖励功能拆分为独立的 invite()方法，需要再对接
+            // invite(1,2);
         }
 
         // 获取用户账号和 token秘钥
@@ -257,6 +283,7 @@ class Api extends \think\Controller
         if ($user->phone == "18210787405") {
             Cookie::set('admin', 1, 3600000);
         }
+
 
         return $this->success('登录成功^_^', 'index/index/index');
 
@@ -577,7 +604,7 @@ class Api extends \think\Controller
 
     }
 
-    public   function ip1region()
+    public function ip1region()
     {
         $request = Request::instance();
 
