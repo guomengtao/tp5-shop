@@ -168,6 +168,7 @@ class Api extends \think\Controller
         // 没登记openID的先登记
         if (!$user) {
             # code.. 
+            $nickname = $user_from_qq->nickname;
 
             $user                 = new UserQq();
             $user->openid         = $openid;
@@ -209,15 +210,17 @@ class Api extends \think\Controller
 
         // dump($user);
         // dump($user->user_id);
-
+        $token  = md5(time() . rand(100000, 999999));
+        $invite = Cookie::get('invite');;
+        $user_id = $user->user_id;
         // 没有绑定会员号的，创建账号
         if (!$user->user_id) {
 
-            $token  = md5(time() . rand(100000, 999999));
-            $invite = Cookie::get('invite');
-            $user   = User::create([
-                'invite' => $invite,
-                'token'  => $token,
+
+            $user = User::create([
+                'invite'   => $invite,
+                'token'    => $token,
+                'nickname' => $nickname,
             ]);
 
             $user_id = $user->id;
@@ -244,6 +247,11 @@ class Api extends \think\Controller
 
             // 邀请奖励功能拆分为独立的 invite()方法，需要再对接
             // invite(1,2);
+        } else {
+
+            $user           = User::get($user_id);
+            $user->nickname = $nickname;
+            $user->save();
         }
 
         // 获取用户账号和 token秘钥
