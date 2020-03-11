@@ -191,7 +191,7 @@ class Api extends \think\Controller
         } else {
 
             // 如果已经存在就更新，保持数据最新
-            $user                 = User::get($user_id);
+            $user                 = UserQq::get($user_id);
             $user->openid         = $openid;
             $user->nickname       = $user_from_qq->nickname;
             $user->figureurl_qq_1 = $user_from_qq->figureurl_qq_1;
