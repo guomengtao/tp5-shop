@@ -60,10 +60,12 @@ function ip1region()
     }
 
 
+    $isp = $info['city_id'];
     $pos = $info['region'];
 
     if ($pos) {
         Ipinfo::create([
+            'isp'     => $isp,
             'region'  => $pos,
             'ip'      => $ip,
             'user_id' => $user_id,
@@ -254,8 +256,8 @@ function footprint()
     $request = Request::instance();
 
 
-    $ip = $request->ip();
-    $view    = $request->module() . $request->controller() . $request->action();
+    $ip   = $request->ip();
+    $view = $request->module() . $request->controller() . $request->action();
 
     // 如果是产品详情页，记录一下访问的产品id，$goods_id 
     if ($view == 'indexIndexview') {
