@@ -209,7 +209,7 @@
                     </form>
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            {if condition="$Think.cookie.phone"} <a
+                            {if condition="$Think.cookie.user_id"} <a
                                 href="{:url('index/member/home',['user_id'=>$Think.cookie.user_id])}">
                             {if condition="$Think.cookie.figureurl_qq_2"}
                             <img class="img-circle" style="width: 18px; height: 18px;"
@@ -250,7 +250,7 @@
                         <li>
                             {/if}
 
-                            {if condition="$Think.cookie.phone<=0"}
+                            {if condition="!$Think.cookie.user_id"}
 
                             <!-- <a href="https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=100556678&redirect_uri=http://open.gaoxueya.com/index/api/qq&scope=get_user_info" target="_black">QQ快捷登陆</a>  -->
                             <a href="{:url('index/index/register')}"
