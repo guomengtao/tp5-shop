@@ -3,27 +3,27 @@ branches: {
   }
 fileChange:
   /application:
-    newFile: !uuid '1700438c7bcae3f629d784d0b33135cacfaa2edc'
-    oldFile: !uuid '25d329d6f31215280332e0e547cb68fb7e2ad342'
+    newFile: !uuid '09e9adb69e56c9b678b233907c1ff167b7ddc900'
+    oldFile: !uuid '1700438c7bcae3f629d784d0b33135cacfaa2edc'
   /application/index:
-    newFile: !uuid '287e68d75a0d3e31e0fcb14ca483329b99da756e'
-    oldFile: !uuid '09028f6737038f83eae32e896301f75184a10399'
-  /application/index/controller:
-    newFile: !uuid '64f70116ab4dff8177a034a7acd9d0486ed4826b'
-    oldFile: !uuid '501dcf7bf7cec62eaae2c7693fe2ad4a16429f6f'
-  /application/index/controller/Api.php:
-    newFile: !uuid '2f57e323df6a9aec28405715d469e47a8ece0685'
-    oldFile: !uuid 'e956ab2921b88d8baa1ccf6785972020f0b4d63b'
+    newFile: !uuid '256dd636df487e47f5378ed61d18b8828c00004c'
+    oldFile: !uuid '287e68d75a0d3e31e0fcb14ca483329b99da756e'
   /application/index/view:
-    newFile: !uuid 'ba9e56adba57837d15c3419566c91f18498e74aa'
-    oldFile: !uuid 'b53130a55e697a00ac0eec263e2755e07f5cbc1d'
-  /application/index/view/index:
-    newFile: !uuid '08efc51417ee80f776681d582f23a6f9c9be3ec9'
-    oldFile: !uuid 'dc6efad254351625f0f649a854ee8c9c62b8fdc3'
-  /application/index/view/index/header.html:
-    newFile: !uuid 'b0005a71320ed008ce656cea440e0d8b4779b008'
-    oldFile: !uuid '681e366bbeff4d123a76fffe4ca2f18710ad2d31'
-gitCommitId: !uuid 'e13f4d71d59d9661f26510a3d7524143898ee16c'
+    newFile: !uuid '90ca2b36a519c53c7e1b0c43136565ae084aa99d'
+    oldFile: !uuid 'ba9e56adba57837d15c3419566c91f18498e74aa'
+  /application/index/view/member:
+    newFile: !uuid 'c22eba33d4296d7abc539b7d74a9685f430b7add'
+    oldFile: !uuid '5e7ac2ad420ea4f7a45d5826cf4f0a8198584a20'
+  /application/index/view/member/registration.html:
+    newFile: !uuid '5ec8abc0622822d7d1067387821008eedbafdee6'
+    oldFile: !uuid '209449c7f1948dea3d9a86c23ccdbc0fe8ef39af'
+  /public:
+    newFile: !uuid 'a27f7bce869b15204478746b4e531dc9e2e535f4'
+    oldFile: !uuid 'a5c27c384c55cc5d710f68bb63eb10caa55fcff3'
+  /public/local.ico:
+    newFile: null
+    oldFile: !uuid 'e667e2fb8f3cb012f457e7171eb367f069289507'
+gitCommitId: !uuid '1098bd68bb0ea1dcd5d7e96b28772f05a08609a3'
 renames: {
   }
-revisionId: 537
+revisionId: 538
