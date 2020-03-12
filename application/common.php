@@ -381,21 +381,24 @@ function footprint()
     $user->data($info);
     $user->save();
 
+    // 记录地理位置
     ip1region();
+    // 验证用户登录token
+    checkToken();
 }
 
 
 // 验证用户是否token功能
-function token()
+function checkToken()
 {
-    $user  = Cookie::get('phone');
-    $token = Cookie::get('token');
-    // dump($token);
-    if ($user) {
+    $user_id = Cookie::get('user_id');
+    $token   = Cookie::get('token');
+
+    if ($user_id) {
 
         // 判断是否其他浏览器或者设备登录（设置每次登录修改token时有效）
         // 判断Cookie里的token的否正确
-        $token_count = User::where('phone', '=', $user)
+        $token_count = User::where('id', '=', $user_id)
             ->where('token', '=', $token)
             ->count();
         if ($token_count <= 0) {

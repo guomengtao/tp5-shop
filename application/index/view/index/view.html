@@ -1,19 +1,7 @@
 {include file="index/header" /}
 
 
-<!--是否为手机访问-->
 
-{if condition="request()->isMobile()==false"}
-
-<!--Ueditor代码高亮样式 -->
-<script type="text/javascript" src="__STATIC__/ueditor/third-party/SyntaxHighlighter/shCore.js"></script>
-<link rel="stylesheet" type="text/css" href="__STATIC__/ueditor/third-party/SyntaxHighlighter/shCoreDefault.css">
-<script type="text/javascript">
-    SyntaxHighlighter.all();
-</script>
-<!--Ueditor代码高亮样式 -->
-
-{/if}
 
 
 <div class="row">
@@ -28,12 +16,9 @@
     </div>
 
 </div>
-<script type="text/javascript">
-    document.getElementById("videiframe").style.height = document.getElementById("videiframe").scrollWidth * 0.75 + "px";
-    document.getElementById("tovideiframe").style.height = document.getElementById("tovideiframe").scrollWidth * 0.75 - 85 + "px";
-</script>
+
 <!--以上是提示购买的结束-->
-<div class="page-header" style="display: none">
+<div class="page-header" >
     <h3>{$list.title} <small>{$list.page_view} 次</small></h3>
     <div class="btn-toolbar" role="toolbar">
 
@@ -70,15 +55,7 @@
 </div>
 
 
-{if condition="($order <=0) AND ($list.price >= 0.01)"}
-{if condition="$list.address"}
-<div class="panel panel-default">
-    <div class="panel-heading">学习币兑换</div>
-    <div class="panel-body">
-        <a class="btn btn-default btn-block" href="__ROOT__/index/member/invite/id/{$list.id}" role="button">点击兑换</a>
-    </div>
-</div>
-{/if}{/if}
+
 <span id="chat"></span>
 <div class="form-group input-group field-feed-content required">
      <textarea id="titleChat" name="titleChat" class="form-control"
@@ -97,20 +74,10 @@
             if (!title) {
                 return;
             }
-            console.log(title);
-
-
             $("#chat").load("{:url('bbs/add')}", {
                 title: title,
                 shop: {$list.id},
-            }, function (responseTxt, statusTxt, xhr) {
-                if (statusTxt == "success")
-                    console.log("外部内容加载成功！" + responseTxt);
-                if (statusTxt == "error")
-                    console.log("Error: " + xhr.status + ": " + xhr.statusText);
             });
-
-
             $("textarea#titleChat").val("");
         });
     });
@@ -143,15 +110,14 @@
                             </a>
                         </div>
                         <div class="col-xs-6 col-md-9  ">
-                            <h6><small>{$user.id|substr=0,3}****{$user.id|substr=7,4}</small></h6>
+                            <h6><small>{$user.user.nickname}</small></h6>
                         </div>
                         <div class="col-xs-3  col-md-1 pull-right">
                             <!-- 点赞的功能 -->
                             <span onclick='public_ajax("{$Think.server.script_name}/index/index/view/all/1/data_id/{$user.id}",0)'
                                   style="position: relative;">
 
-                            <small><span id="like_all_{$user.id}"
-                                         style="color: #555;">{$user.likes?$user.likes:"赞"}</span> </small>
+
                                     <span id="like_icon_all_{$user.id}"
                                           style="color: {$user.on?'#0084ff':'#8590a6'}; fill: currentColor;">
                             <svg viewBox="0 0 20 18" xmlns="http://www.w3.org/2000/svg" class="likeicon" width="13"
@@ -166,16 +132,7 @@
                     </div>
 
 
-                    <!-- 引用的回帖部分          -->
-                    {if condition="$user.age >=100"}
-                    <div class="form-group input-group field-feed-content required"
-                         style="background-color:  #f4f4f4;padding: 10px;color: #555555">
 
-                        @{$user.r_phone|substr=0,3}****{$user.r_phone|substr=7,4}:{$user.r_title}
-
-                    </div>
-
-                    {/if}
                     {:nl2br($user.title)}
                     <h5><small> {$user.create_time}
 

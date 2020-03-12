@@ -1932,7 +1932,7 @@ class Index extends \think\Controller
         $token = Cookie::get('token');
 
         //      Cookie加密验证功能
-        token();
+        
 
         //      调用统计是否满足所有课程免费功能
         $all_lesson_free = all_lesson_free();
@@ -2366,7 +2366,7 @@ class Index extends \think\Controller
         $token   = Cookie::get('token');
 
         //      Cookie加密验证功能
-        token();
+        
 
         //      调用统计是否满足所有课程免费功能
         $all_lesson_free = all_lesson_free();
@@ -2576,21 +2576,10 @@ class Index extends \think\Controller
     public function view()
     {
 
-
-        //        调用cookie验证功能
-        token();
-
-        //      调用统计是否满足所有课程免费功能
-        $all_lesson_free = all_lesson_free();
-
-
-        //echo input('param.id');
-
         $id             = input('id');
         $page_view      = input('page_view');
         $red_packet_get = input('red_packet_get');
         $user_id        = Cookie::get('user_id');
-        $user           = Cookie::get('user_id');
         $data_id        = input('data_id');
         $reply          = input('reply');
 
@@ -2659,8 +2648,7 @@ class Index extends \think\Controller
 
 
         if (!$id) {
-
-            return "id不存在";
+                $id = 38;
         }
 
 
@@ -2675,160 +2663,7 @@ class Index extends \think\Controller
         // $list['view_count'] = view_count($id);
 
 
-        // 查询总的可领取红包，根据已成交订单
-
-        // 排除红包发送的订单记录
-        $red_packet_count = Order::where('phone', '=', $user)
-            ->where('buyer_id', '<>', 188666)
-            ->sum('total_fee');
-
-        // 设置发放的比例
-        $red_packet_count = $red_packet_count * 0.8;
-
-
-        // 红包已发送总额
-        $red_packet_pay = Order::where('phone', '=', $user)
-            ->where('buyer_id', '=', 188666)
-            ->sum('total_fee');
-
-        $red_packet_count = $red_packet_count - $red_packet_pay;
-
-
-        // 设置领取红包的起始度
-        if ($red_packet_count >= 5) {
-
-            $list['red_packet_count'] = $red_packet_count;
-        } else {
-            $list['red_packet_count'] = 0;
-        }
-
-
-        // 判断是否领取过本节课
-        $red_packet_lesson = Order::where('body', '=', $id)
-            ->where('phone', '=', $user)
-            ->where('buyer_id', '=', 188666)
-            ->value('total_fee');
-
-        // 判断是否领取过本节课
-        $red_packet_lesson_id = Order::where('body', '=', $id)
-            ->where('phone', '=', $user)
-            ->where('buyer_id', '=', 188666)
-            ->value('id');
-
-        $list['red_packet_lesson'] = $red_packet_lesson;
-
-        $list['red_packet_lesson_id'] = $red_packet_lesson_id;
-
-
-        // 判断是否领取红包功能
-        if ($red_packet_get) {
-
-            // 判断是否学习完成本课
-            $learn_count = Video::where('phone', $user)
-                ->where('shop', '=', $id)
-                // ->where('status','>=', 1)
-                ->value('status');
-
-            $list['learn_count'] = $learn_count;
-
-
-            if (!$learn_count) {
-
-                return "完成本节课学习，即可领取红包了！";
-            }
-
-
-            // 判断是否评论满10个字
-
-            $data_len = Data::where('user_id', $user_id)
-                ->where('shop', '=', $id)
-                ->order('id desc')
-                ->value('title');
-
-
-            // 判断留言是否有中文
-            if (preg_match("/[\x7f-\xff]/", $data_len)) {
-
-                // 判断长度
-                $data_len         = mb_strlen($data_len, 'utf-8') >= 10 ? 1 : 0;
-                $list['data_len'] = $data_len;
-            }
-
-
-            if (!$list['data_len']) {
-                // return "评论满10字本课来领取";
-            }
-
-
-            if ($list['learn_count'] and $list['red_packet_count']) {
-
-                $rand = mt_rand(100, 300); //取随机四位数字
-
-                $total_fee = $rand / 100; //缩小为0.01-0.30之间的数字
-
-
-                $list['data_len'] = $data_len;
-
-
-                if (!$red_packet_lesson) {
-
-                    // 红包订单语句
-                    // $order = Order::create([
-                    //     'phone'                   =>  $user,
-                    //     'body'                    =>  $id,
-                    //     'rand'                    =>  188666,
-                    //     'subject'                 =>  "完成课程".$id."获得一个红包",
-                    //     'total_fee'               =>  $total_fee,
-                    //     'buyer_id'                =>  188666,
-                    //     'buyer_email'             =>  $user,
-                    //     'out_trade_no'            =>  188666,
-                    // ]);
-
-
-                    $order               = new Order;
-                    $order->phone        = $user;
-                    $order->body         = $id;
-                    $order->rand         = '188666';
-                    $order->subject      = "完成课程id" . $id . ",获得一个红包。24小时内领取有效";
-                    $order->total_fee    = $total_fee;
-                    $order->buyer_id     = '188666';
-                    $order->buyer_email  = $user;
-                    $order->out_trade_no = '188666';
-                    $order->save();
-                    // 获取自增ID
-                    // echo $order->id;
-
-
-                    return "恭喜您，获得了" . $total_fee . "元红包(id" . $order->id . ")，请截图在qq群189250799领取。24小时内领取有效";
-
-
-                } else {
-
-                    return "恭喜您，获得了" . $list['red_packet_lesson'] . "元红包(id" . $list['red_packet_lesson_id'] . ")，请截图在qq群189250799领取.24小时内领取有效";
-
-                }
-
-
-            } else {
-
-                return "没有获得红包";
-            }
-
-
-            // 此处处理ajax调用统一结束
-            return "";
-        }
-
-
-        // 获取本课学员学习人数
-        $play_count = play_count($id);
-
-        $list['play_count'] = $play_count;
-
-
         // 查询数据 - 上一页
-
-
         $sort = isset($list['sort']) ? $list['sort'] : 0;
         // $sort = $list['sort'] ;
         $up = Shop::where('sort', '<', $sort)
@@ -2836,7 +2671,6 @@ class Index extends \think\Controller
             ->limit(1)
             ->field('title,id')
             ->find();
-        // dump($up);
 
         // 查询数据 - 下一页
         $next = Shop::where('sort', '>', $sort)
@@ -2845,50 +2679,11 @@ class Index extends \think\Controller
             ->field('title,id')
             ->find();
 
-        //dump($next);
-
-        $rand = User::where('id', '=', $user_id)->whereTime('expiration_time', '>=', 'today')->value('rand');
 
 
-        if ($rand or $all_lesson_free == 1) {
-
-
-            $order = 1;
-
-
-        } else {
-
-
-            // 查询订单是否存在
-
-            $order = Order::where('body', '=', $id)
-                ->where('phone', '=', $user)
-                ->count();
-
-            // 判断是否存在购买订单或者访问次数小于20 设置播放
-            if ($order > 0 OR $list['page_view'] <= 3) {
-
-                // $order = 1;
-
-            }
-
-            // 查询是否预约ajax课程 
-            $ajax = Order::where('phone', '=', $user)
-                ->where('body', '=', 134)
-                ->count();
-
-            // 如果预约过，设置相应的ajax课播放
-            if ($ajax >= 1 and $list['sort'] > 100 and $list['sort'] < 130) {
-                $order = 1;
-            }
-            // dump($order);
-
-
-        }
 
         // 查询全部评论
-        $bbs = Data::where('shop', '=', $id)
-            ->order('id', 'desc')
+        $bbs = Data::order('id', 'desc')
             ->limit(100)
             ->select();
         // ->paginate(30);
@@ -2899,115 +2694,16 @@ class Index extends \think\Controller
             ->select();
 
 
-        foreach ($bbs as $k => $v) {
 
 
-            // 点赞数量的统计查询
-
-            $likes = likes::where('data_id', '=', $bbs[$k]['id'])->count();
-            $on    = likes::where('data_id', '=', $bbs[$k]['id'])
-                ->where('user_id', '=', $user_id)
-                ->count();
-            // dump($likes);die();
-            $bbs[$k]['likes'] = $likes;
-            $bbs[$k]['on']    = $on;
 
 
-            if ($bbs[$k]['age'] >= 100) {
-                # 如果属于回复，查出来回的谁的评论
-
-                $data = Data::get($bbs[$k]['age']);
-
-                $bbs[$k]['r_phone'] = $data->id;
-                $bbs[$k]['r_title'] = $data->title;
-
-
-            }
-
-        }
-
-
-        foreach ($talk as $k => $v) {
-
-            $title = $talk[$k]['title'];
-
-            // 三个表情的统一转换
-            if ($title == "[thumb]") {
-                $title = '<img    src="/static/images/[thumb].png" data-holder-rendered="true" style="width: 28px; height: 28px;">';
-            }
-
-            if ($title == "[rose]") {
-                $title = '<img    src="/static/images/[rose].png" data-holder-rendered="true" style="width: 28px; height: 28px;">';
-            }
-            if ($title == "[bq]") {
-                $title = '<img    src="/static/images/[bq].png" data-holder-rendered="true" style="width: 28px; height: 28px;">';
-            }
-
-            $talk[$k]['title'] = $title;
-
-
-            // 利用此循环，顺便加入点赞数量的统计查询
-
-            $likes = likes::where('data_id', '=', $talk[$k]['id'])->count();
-
-            $on = likes::where('data_id', '=', $talk[$k]['id'])
-                ->where('user_id', '=', $user_id)
-                ->count();
-
-
-            $talk[$k]['likes'] = $likes;
-            $talk[$k]['on']    = $on;
-
-            if ($talk[$k]['age'] >= 100) {
-                # 如果属于回复，查出来回的谁的评论
-
-                $data = Data::get($talk[$k]['age']);
-
-                $talk[$k]['r_phone'] = $data->id;
-                $talk[$k]['r_title'] = $data->title;
-
-
-            }
-
-            // 删除点赞数量少的
-            if ($likes <= 2) {
-                # code...
-                unset($talk[$k]);
-            }
-
-
-        }
-
-        // 重置删除后的数组
-        $talk = array_values($talk);
-
-        $talk = array_slice($talk, 0, 9);
-
-
-        // 实现聊天最新的在最下面
-        // 因为tp5分页默认返回的是对象是多维数组，暂时取消时候tp5分页
-        // $talk = array_reverse($talk);
-
-        // 实现按照点赞排序
-        $flag = array();
-
-        foreach ($talk as $v) {
-            $flag[] = $v['likes'];
-        }
-
-        array_multisort($flag, SORT_DESC, $talk);
-
-
-        // dump($list);
 
         // return Cookie::get('t'.$id);
         $this->assign('up', $up);
         $this->assign('next', $next);
         $this->assign('talk', $talk);
         $this->assign('list', $list);
-//        $this->assign('list_label',$list_label);
-        $this->assign('date', date('Ymdhis'));
-        $this->assign('order', $order);
         $this->assign('bbs', $bbs);
         $this->assign('t', Cookie::get('t' . $id));
 

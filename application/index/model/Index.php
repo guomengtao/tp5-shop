@@ -2224,23 +2224,15 @@ class Index extends \think\Controller
     {
 
 
-//  Db::listen(function($sql,$time,$explain){
-//     // 记录SQL
-//     echo $sql. ' ['.$time.'s]';
-//     // 查看性能分析结果
-//     dump($explain);
-// });
         $user  = Cookie::get('phone');
         $token = Cookie::get('token');
 
-        //      Cookie加密验证功能
-        token();
+
         
         
         //      调用统计是否满足所有课程免费功能
         $all_lesson_free = all_lesson_free();
 
-//        dump($all_lesson_free);die();
 
 
         $registration_user  = '';
@@ -2665,14 +2657,11 @@ class Index extends \think\Controller
         $user_id = Cookie::get('user_id');
         $token   = Cookie::get('token');
 
-        //      Cookie加密验证功能
-        token();
-        
+
         
         //      调用统计是否满足所有课程免费功能
         $all_lesson_free = all_lesson_free();
 
-//        dump($all_lesson_free);die();
 
 
         $registration_user  = '';
@@ -2878,8 +2867,6 @@ class Index extends \think\Controller
     {
 
 
-        //        调用cookie验证功能
-        token();
 
         
         //      调用统计是否满足所有课程免费功能
