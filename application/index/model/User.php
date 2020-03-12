@@ -104,9 +104,14 @@ class User extends model
         $query->where('age', '>', 50)->limit(10);
     }
 
+    public function userqq()
+    {
+        return $this->hasOne('userQq');
+        //hasOne('关联模型名','外键名','主键名',['模型别名定义'],'join类型');
+    }
     public function footprint()
     {
-        return $this->hasOne('Footprint', 'user_id', 'id');
+        return $this->hasOne('Footprint','user_id','id');
         //hasOne('关联模型名','外键名','主键名',['模型别名定义'],'join类型');
     }
 
@@ -155,6 +160,7 @@ class User extends model
     {
         return $this->hasMany('Money');
     }
+
 
 
     public function setIpAttr($value)
