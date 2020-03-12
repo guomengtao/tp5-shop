@@ -1,21 +1,19 @@
 {include file="index/header" /}
 
 
+<div style="width:100%;overflow: hidden;  " id="tovideiframe">
 
-
-
-<div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-12" style="height: ">
-        <div style="width:100%;overflow: hidden;  " id="tovideiframe">
-
-            <iframe id="videiframe" style="width:100%; margin-top: -45px; object-fit: fill"
-                    src="//player.bilibili.com/player.html?aid=32556750&cid=57080268&page={$list.sort}&as_wide=1&high_quality=1&danmaku=0"
-                    scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
-
-        </div>
-    </div>
+    <iframe id="videiframe" style="width:100%; margin-top: -45px; object-fit: fill"
+            src="//player.bilibili.com/player.html?aid=32556750&cid=57080268&page={$list.sort}&as_wide=1&high_quality=1&danmaku=0"
+            scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
 
 </div>
+
+<!--重要，设置iframe的高度-->
+<script type="text/javascript">
+    document.getElementById("videiframe").style.height = document.getElementById("videiframe").scrollWidth * 0.75 + "px";
+    document.getElementById("tovideiframe").style.height = document.getElementById("tovideiframe").scrollWidth * 0.75 - 85 + "px";
+</script>
 
 <!--以上是提示购买的结束-->
 <div class="page-header" >
