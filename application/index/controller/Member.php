@@ -26,12 +26,25 @@ class Member extends \think\Controller
         // 记录访问信息 和 机器人拦截
         Member::agent();
 
+        $request = Request::instance();
+
+        $ip = $request->ip();
+        echo $ip;
+        if ($ip == '127.0.0.1') {
+            $this->assign('icon', 'local');
+        } else {
+            $this->assign('icon', 'favicon');
+
+        }
+
     }
 
     public static function agent()
     {
         // 初始化需要获取的值
         // 把需要收集信息随时加入到这个数组里 很方面
+
+
         $info = [];
 
 
@@ -1235,8 +1248,6 @@ class Member extends \think\Controller
                 ->where('body', '=', 135)
                 ->whereTime('create_time', 'today')
                 ->count();
-
-
 
 
             // 检查昨天是否签到

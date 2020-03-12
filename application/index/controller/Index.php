@@ -36,8 +36,15 @@ class Index extends \think\Controller
     {
         // 记录访问信息 和 机器人拦截
         Member::agent();
+        $request = Request::instance();
+        $ip      = $request->ip();
+   
+        if ($ip == '127.0.0.1') {
+            $this->assign('icon', 'local');
+        } else {
+            $this->assign('icon', 'favicon');
 
-
+        }
     }
 
     public function cap()
@@ -1932,7 +1939,7 @@ class Index extends \think\Controller
         $token = Cookie::get('token');
 
         //      Cookie加密验证功能
-        
+
 
         //      调用统计是否满足所有课程免费功能
         $all_lesson_free = all_lesson_free();
@@ -2202,6 +2209,7 @@ class Index extends \think\Controller
          *
          */
 
+
         $views_today     = Footprint::views_today();
         $views_yesterday = Footprint::views_yesterday();
         // 查询今天签到
@@ -2366,7 +2374,7 @@ class Index extends \think\Controller
         $token   = Cookie::get('token');
 
         //      Cookie加密验证功能
-        
+
 
         //      调用统计是否满足所有课程免费功能
         $all_lesson_free = all_lesson_free();
@@ -2648,7 +2656,7 @@ class Index extends \think\Controller
 
 
         if (!$id) {
-                $id = 38;
+            $id = 38;
         }
 
 
@@ -2680,8 +2688,6 @@ class Index extends \think\Controller
             ->find();
 
 
-
-
         // 查询全部评论
         $bbs = Data::order('id', 'desc')
             ->limit(100)
@@ -2692,11 +2698,6 @@ class Index extends \think\Controller
         $talk = Data::where('shop', '=', $id)
             ->order('id', 'desc')
             ->select();
-
-
-
-
-
 
 
         // return Cookie::get('t'.$id);

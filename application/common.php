@@ -91,6 +91,8 @@ function ip1region()
     $ip = $request->ip();
 
     if (!$ip or $ip == '127.0.0.1') {
+
+
         return "ok";
     }
 
@@ -132,46 +134,6 @@ function ip1region()
 
 }
 
-function quickLogon()
-{
-    // $openid = "1011";
-
-    $user = new User_qq();
-    // 查询单个数据
-    $user = $user->where('openid', $openid)
-        ->find();
-
-
-    // 没登记openID的先登记
-    if (!$user) {
-        # code..
-
-        $user                 = new User_qq;
-        $user->openid         = $openid;
-        $user->nickname       = $user_from_qq->nickname;
-        $user->figureurl_qq_1 = $user_from_qq->figureurl_qq_1;
-        $user->figureurl_qq_2 = $user_from_qq->figureurl_qq_2;
-        $user->gender         = $user_from_qq->gender;
-        $user->year           = $user_from_qq->year;
-        $user->save();
-
-        // return "创建成功！";
-
-        // 查询单个数据
-        $user = $user->where('openid', $openid)
-            ->find();
-
-    } else {
-
-        // 如果已经存在就更新，保持数据最新  暂时不更新
-    }
-
-
-    // 记录昵称和头像，页面展示
-    cookie('nickname', $user_from_qq->nickname, 3600000);
-    cookie('figureurl_qq_2', $user_from_qq->figureurl_qq_2, 3600000);
-    return "ok123456";
-}
 
 function get_user_id($phone)
 {
@@ -190,6 +152,7 @@ function arraySequence($array, $field, $sort = 'SORT_DESC')
     array_multisort($arrSort['view_count'], constant($sort), $array);
     return $array;
 }
+
 
 
 // 验证课程播放少于10次
@@ -336,9 +299,9 @@ function invite($invite_user, $user_id)
 
     $list = [
         [
-            'phone'   => $invite_user_id,
+            'phone'   => $invite_user,
             'money'   => 10,
-            'content' => '邀请了会员' . $invited_phone . '注册奖励',
+            'content' => '邀请了会员' . $user_id . '注册奖励',
 
         ],
         [
