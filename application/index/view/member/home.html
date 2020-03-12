@@ -120,11 +120,10 @@
           {/if}
       </li>
       <li class="list-group-item">年龄： {:date('Y')-$user.userqq.year}</li>
-      <li class="list-group-item">简介：一起来学习</li>
-      <li class="list-group-item">所在地：</li>
+       <li class="list-group-item">所在地：{$user.ipinfo.region}</li>
       <li class="list-group-item">注册时间：{$user.create_time}</li>
       <li class="list-group-item">最后在线：{$user.update_time}</li>
-    </ul>
+    </ul> 
 
     <div class="panel panel-default">
         <div class="panel-heading">学习进度 <sapn class="pull-right">更多</sapn>
@@ -143,7 +142,7 @@
     <span class="glyphicon glyphicon-yen" aria-hidden="true"></span> {$user.online_time} 分钟
 
     <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
-      
+
 
      <span class="glyphicon glyphicon-map-marker " aria-hidden="true"></span> 
     {$user.ipinfo.region}
