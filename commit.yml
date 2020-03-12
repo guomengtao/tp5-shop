@@ -3,36 +3,18 @@ branches: {
   }
 fileChange:
   /application:
-    newFile: !uuid '0bdbcb2eb847a2f31a897fcb64bf0570c35190c3'
-    oldFile: !uuid '09e9adb69e56c9b678b233907c1ff167b7ddc900'
+    newFile: !uuid '4a8c66284aab11ea0cf367b9d6d29b6869ad8aa0'
+    oldFile: !uuid '0bdbcb2eb847a2f31a897fcb64bf0570c35190c3'
   /application/index:
-    newFile: !uuid '5bf2e372a0bdacc55e021a1cfc72b493b2bf5654'
-    oldFile: !uuid '256dd636df487e47f5378ed61d18b8828c00004c'
-  /application/index/view:
-    newFile: !uuid '7db4e39f9bc8c9cd15190c2f70ae462f55885046'
-    oldFile: !uuid '90ca2b36a519c53c7e1b0c43136565ae084aa99d'
-  /application/index/view/member:
-    newFile: !uuid 'dacd5479304337eca1dc706d71d05949bf1f3a0c'
-    oldFile: !uuid 'c22eba33d4296d7abc539b7d74a9685f430b7add'
-  /application/index/view/member/registration.html:
-    newFile: !uuid '6a5a3be17e681d41f4a5c5a5d49897242c23a7d8'
-    oldFile: !uuid '5ec8abc0622822d7d1067387821008eedbafdee6'
-  /public:
-    newFile: !uuid '7cc41f5005ed2e762a926bd2c548fc1551f9e05a'
-    oldFile: !uuid 'a27f7bce869b15204478746b4e531dc9e2e535f4'
-  /public/static:
-    newFile: !uuid '9d946369a74b4cad6b91bb30a3a7e8d40b50995b'
-    oldFile: !uuid '5e2f6f8ba9554badae093adcbb8f7a4fc93b7898'
-  /public/static/images:
-    newFile: !uuid '9b931053ed55507be6fa1f18239ef69bcd5f7576'
-    oldFile: !uuid '0d560f2231f3fde374c8db5c734c6a6c6179d528'
-  /public/static/images/user:
-    newFile: !uuid '31e078382166262c72656e9467cd4de88b90e79a'
-    oldFile: !uuid 'df3c00d479649d81bc2308da489122d7413ea67c'
-  /public/static/images/user/user-photo-default.jpg:
-    newFile: !uuid '4b61f86898a3de4bdddc3f0290f599cd7a617118'
-    oldFile: null
-gitCommitId: !uuid 'f1e456d849e3b13ab8681a3af4fec873c84b36cf'
+    newFile: !uuid '682dbe44af12e2fc67a8b05c1f17c88bf2f303a4'
+    oldFile: !uuid '5bf2e372a0bdacc55e021a1cfc72b493b2bf5654'
+  /application/index/model:
+    newFile: !uuid 'c64fb901e34740fd2e1a5d3f38bbe8d63481bd64'
+    oldFile: !uuid '25d32d2f56ed348291e6945d37ef895df0d030ca'
+  /application/index/model/Order.php:
+    newFile: !uuid '31b3c33a682c53bea9a62adcb54cdf3c15ecde43'
+    oldFile: !uuid '8be739dcef22f4c540ad7164a6800b9d76e1c8ee'
+gitCommitId: !uuid '2a29f7df5e8e77811a5061df786403aab05542df'
 renames: {
   }
-revisionId: 539
+revisionId: 540
