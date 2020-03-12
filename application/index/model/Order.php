@@ -24,7 +24,7 @@ class Order extends model
     }
 
     public function  user(){
-        $this->hasOne('user','id','user_id');
+        $this->hasOne('User','id','user_id');
     }
 
 
