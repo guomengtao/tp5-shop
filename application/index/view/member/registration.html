@@ -131,7 +131,7 @@
                             {volist name='list' id='user' key="k"}
 
                             <tr>
-                                <td> {$user.user_id}</td>
+                                <td> {$user.user.nickname??$user.user_id}</td>
                                 <td><h5><small>NO.</small><span style="color: tomato">{$k}</span></h5></td>
                                 <td> {$user.create_time}</td>
                                 <td> {$user.rand}</td>
@@ -155,12 +155,12 @@
                                 <div class="media-left">
                                     <a href="#">
                                         <img class="media-object img-circle"
-                                             src="__STATIC__/images/user/user ({:rand(1,25)}).jpg"
+                                             src="{$user.user.photo??'__STATIC__/images/user/user-photo-default.jpg'}"
                                              data-holder-rendered="true" style="width: 64px; height: 64px;">
                                     </a>
                                 </div>
                                 <div class="media-body">
-                                    <small><a href="{:url('index/member/home', ['user_id' => $user.user_id])}">{$user.user_id}</a>
+                                    <small><a href="{:url('index/member/home', ['user_id' => $user.user_id])}">{$user.user.nickname??$user.user_id}</a>
                                         NO.<span style="color: #D8582B;font-weight: bold;">{$k}</span></small>
                                     <h5><small>签到时间：<span
                                             style="color: #D8582B;font-weight: bold;">{$user.create_time}</span></small>
@@ -193,12 +193,12 @@
                                 <div class="media-left">
                                     <a href="#">
                                         <img class="media-object img-circle"
-                                             src="__STATIC__/images/user/user ({:rand(1,25)}).jpg"
+                                             src="{$user.user.photo??'__STATIC__/images/user/user-photo-default.jpg'}"
                                              data-holder-rendered="true" style="width: 64px; height: 64px;">
                                     </a>
                                 </div>
                                 <div class="media-body">
-                                    <small><a href="{:url('index/member/home', ['user_id' => $user.user_id])}">{$user.user_id}</a>
+                                    <small><a href="{:url('index/member/home', ['user_id' => $user.user_id])}">{$user.user.nickname??$user.user_id}</a>
                                         NO.<span style="color: #D8582B;font-weight: bold;">{$k}</span></small>
                                     <h5><small>签到时间：<span
                                             style="color: #D8582B;font-weight: bold;">{$user.create_time}</span></small>
@@ -237,12 +237,12 @@
                         <div class="media-left">
                             <a href="#">
                                 <img class="media-object img-circle"
-                                     src="__STATIC__/images/user/user ({:rand(1,25)}).jpg" data-holder-rendered="true"
+                                     src="{$user.user.photo??'__STATIC__/images/user/user-photo-default.jpg'}" data-holder-rendered="true"
                                      style="width: 64px; height: 64px;">
                             </a>
                         </div>
                         <div class="media-body">
-                            <small><a href="{:url('index/member/home', ['user_id' => $user.user_id])}">{$user.user_id}</a>
+                            <small><a href="{:url('index/member/home', ['user_id' => $user.user_id])}">{$user.user.nickname??$user.user_id}</a>
                                 NO.<span style="color: #D8582B;font-weight: bold;">{$k}</span></small>
                             <h5><small>签到时间：<span
                                     style="color: #D8582B;font-weight: bold;">{$user.create_time}</span></small></h5>
