@@ -125,32 +125,6 @@
       <li class="list-group-item">最后访问：{$user.footprint.create_time}</li>
     </ul>
 
-    <div class="panel panel-default">
-        <div class="panel-heading">学习进度 <sapn class="pull-right">更多</sapn>
-</div>
-        <div class="panel-body">
-
-
-    {$user.rand? 'VIP' : ''}
-
-
-
-<span class="glyphicon glyphicon-time" aria-hidden="true"></span>
-    {$user.create_time} 加入
-
-
-    <span class="glyphicon glyphicon-yen" aria-hidden="true"></span> {$user.online_time} 分钟
-
-    <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
-
-
-     <span class="glyphicon glyphicon-map-marker " aria-hidden="true"></span>
-    {$user.ipinfo.region}
-
-
-    <span class="glyphicon glyphicon-signal " aria-hidden="true"></span> {$user.ipinfo.isp}
-        </div>
-    </div>
 
       <div class="panel panel-default">
         <div class="panel-heading">访问记录  <sapn class="pull-right">更多</sapn></div>
@@ -174,6 +148,32 @@
         </div>
 
      </div>
+      <div class="panel panel-default">
+          <div class="panel-heading">学习进度 <sapn class="pull-right">更多</sapn>
+          </div>
+          <div class="panel-body">
+
+
+              {$user.rand? 'VIP' : ''}
+
+
+
+              <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+              {$user.create_time} 加入
+
+
+              <span class="glyphicon glyphicon-yen" aria-hidden="true"></span> {$user.online_time} 分钟
+
+              <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+
+
+              <span class="glyphicon glyphicon-map-marker " aria-hidden="true"></span>
+              {$user.ipinfo.region}
+
+
+              <span class="glyphicon glyphicon-signal " aria-hidden="true"></span> {$user.ipinfo.isp}
+          </div>
+      </div>
 
     <div class="panel panel-default">
         <div class="panel-heading">他的粉丝：</div>
