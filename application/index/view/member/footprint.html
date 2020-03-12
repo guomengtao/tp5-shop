@@ -144,7 +144,7 @@
                                     <span class="label label-warning">{$user.agentlink.language}</span>
                                     <span class="label label-danger">{$user.agentlink.device}</span>
                                     <a href="{$user.agentlink.referer}" target="_blank"><span
-                                            class="label label-default">{$user.agentlink.referer}</span></a>
+                                            class="label label-default">{：substr($user.agentlink.referer,30)}</span></a>
                                 </td>
                             </tr>
 
