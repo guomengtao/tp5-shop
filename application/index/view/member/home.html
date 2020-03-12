@@ -122,7 +122,7 @@
       <li class="list-group-item">年龄： {:date('Y')-$user.userqq.year}</li>
        <li class="list-group-item">所在地：{$user.ipinfo.region}</li>
       <li class="list-group-item">注册时间：{$user.create_time}</li>
-      <li class="list-group-item">最后在线：{$user.update_time}</li>
+      <li class="list-group-item">最后在线：{$user.footprint.update_time??$user.update_time}</li>
     </ul>
 
     <div class="panel panel-default">

@@ -8,7 +8,7 @@ use think\Cookie;
 
 class User extends model
 {
- 
+
 
     // 测试 查询单个用户信息模型
 
@@ -104,9 +104,9 @@ class User extends model
         $query->where('age', '>', 50)->limit(10);
     }
 
-    public function userqq()
+    public function footprint()
     {
-        return $this->hasOne('userQq');
+        return $this->hasOne('Footprint', 'user_id', 'id');
         //hasOne('关联模型名','外键名','主键名',['模型别名定义'],'join类型');
     }
 
@@ -155,7 +155,6 @@ class User extends model
     {
         return $this->hasMany('Money');
     }
-
 
 
     public function setIpAttr($value)
