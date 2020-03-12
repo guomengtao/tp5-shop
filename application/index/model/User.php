@@ -113,10 +113,13 @@ class User extends model
     public function footprint()
     {
 
-
-
         return $this->hasOne('Footprint','user_id','id')->field('create_time')->order('id','desc');
-        // return $this->hasOne('Footprint','user_id','id')->order('id','desc')->field('create_time');
+
+    }
+        public function footprints()
+    {
+
+        return $this->hasMany('Footprint','user_id','id')->limit(10)->order('id','desc');
 
     }
 
