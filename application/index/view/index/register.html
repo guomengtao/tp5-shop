@@ -79,8 +79,9 @@
 
 <div class="tabbable" id="tabs-323015">
     <ul class="nav nav-tabs">
-        <li style="display: none">
-            <a href="#panel-401557" data-toggle="tab">登录 </a>
+        <li  >
+<!--            <a href="#panel-401557" data-toggle="tab">登录 </a>-->
+            <a href="{:url('index/index/login')}"                           target="_self">登录</a>
         </li>
         <li class="active">
             <a href="#panel-401557" data-toggle="tab">{:session('openid_id')?'绑定账号': '注册'} </a>
@@ -92,7 +93,7 @@
         <div class="tab-pane" id="panel-862765">
 
             <!--登录功能-->
-            <div class="panel panel-default" style="    margin-top: -1px;">
+            <div class="panel panel-default" style="    margin-top: -2px;">
                 <!--<div class="panel-heading">短信快速登录/注册 {if condition="$Think.session.total_fee>'0'" }<small>订单保存中...</small>{/if}</div>-->
                 <div class="panel-body">
 
@@ -138,7 +139,7 @@
         <div class="tab-pane  active" id="panel-401557">
 
             <!--注册功能-->
-            <div class="panel panel-default" style="    margin-top: -1px;">
+            <div class="panel panel-default" style="    margin-top: -2px;">
                 <!--<div class="panel-heading">短信快速登录/注册 {if condition="$Think.session.total_fee>'0'" }<small>订单保存中...</small>{/if}</div>-->
                 <div class="panel-body">
                     {if condition="$Think.session.total_fee=='099999'" }
