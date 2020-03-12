@@ -234,7 +234,7 @@ class Api extends \think\Controller
             $user = User::create([
                 'invite'   => $invite,
                 'token'    => $token,
-                'phone'    => $phone,
+                'photo'    => $photo,
                 'nickname' => $nickname,
                 'ip'       => 1,
             ]);
