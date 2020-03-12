@@ -16,7 +16,7 @@ class User extends model
     {
         // 查询当前用户信息
 
-        $user = User::with('ipinfo', 'userqq', 'fans')
+        $user = User::with('ipinfo', 'userqq', 'fans','footprint' )
             ->withCount('myblog')
             ->withCount('fans')
             ->where('id', $id)
@@ -112,9 +112,15 @@ class User extends model
     }
     public function footprint()
     {
-        return $this->hasOne('Footprint','user_id','id');
-        //hasOne('关联模型名','外键名','主键名',['模型别名定义'],'join类型');
+
+
+
+        return $this->hasOne('Footprint','user_id','id')->field('create_time')->order('id','desc');
+        // return $this->hasOne('Footprint','user_id','id')->order('id','desc')->field('create_time');
+
     }
+
+
 
 
     protected function scopeAgeAbove($query, $lowest_age)
