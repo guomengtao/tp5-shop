@@ -20,6 +20,7 @@ class User extends model
             ->withCount('myblog')
             ->withCount('fans')
             ->where('id', $id)
+            ->order("id",'desc')
             ->find();
 
         return $user;
