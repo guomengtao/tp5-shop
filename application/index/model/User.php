@@ -151,7 +151,7 @@ class User extends model
 
     public function userinfo()
     {
-        return $this->hasOne('Userinfo', 'phone', 'phone');
+        return $this->hasOne('Userinfo', 'user_id', 'id');
     }
 
     public function user_qq()
