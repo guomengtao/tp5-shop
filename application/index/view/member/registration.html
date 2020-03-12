@@ -87,13 +87,13 @@
                                     <div class="img_box"  >
                                     <a href="#">
                                         <img class="media-object img-circle img"
-                                             src="{$user.user.photo??'__STATIC__/images/user/user 20(19).jpg'}"
+                                             src="{$user.user.photo??'__STATIC__/images/user/user-photo-default.jpg'}"
                                              data-holder-rendered="true" style="width: 64px; height: 64px;">
                                     </a>
                                     </div>
                                 </div>
                                 <div class="media-body">
-                                    <small><a href="{:url('index/member/home', ['user_id' => $user.user_id])}">{$user.user_id}</a>
+                                    <small><a href="{:url('index/member/home', ['user_id' => $user.user_id])}">{$user.user.nickname??$user.user_id}</a>
                                         NO.<span style="color: #D8582B;font-weight: bold;">{$k}</span></small>
                                     <h5><small>签到时间：<span
                                             style="color: #D8582B;font-weight: bold;">{$user.create_time}</span></small>
