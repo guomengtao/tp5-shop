@@ -166,7 +166,7 @@ class Api extends \think\Controller
 
         $user_id  = $user['id'];
         $nickname = $user_from_qq->nickname;
-        $phone    = $user_from_qq->figureurl_qq_2;
+        $photo    = $user_from_qq->figureurl_qq_2;
 
         // 没登记openID的先登记
         if (!$user) {
@@ -218,7 +218,7 @@ class Api extends \think\Controller
         // 记录昵称和头像，页面展示
         cookie('openid', $user_from_qq->nickname, 3600000);
         cookie('nickname', $user_from_qq->nickname, 3600000);
-        cookie('figureurl_qq_2', $user_from_qq->figureurl_qq_2, 3600000);
+        cookie('photo', $user_from_qq->figureurl_qq_2, 3600000);
 
 
         // dump($user);
@@ -267,7 +267,7 @@ class Api extends \think\Controller
 
             $user           = User::get($user_id);
             $user->nickname = $nickname;
-            $user->phone    = $phone;
+            $user->photo    = $photo;
             $user->ip       = 1;
             $user->save();
         }
@@ -291,8 +291,9 @@ class Api extends \think\Controller
         cookie('token', null);
 
         // 设置Cookie 有效期为 秒
-        Cookie('phone', $user->phone, 3600000);
         Cookie('token', $user->token, 3600000);
+        Cookie('nickname', $user->nickname, 3600000);
+        Cookie('photo', $user->photo, 3600000);
         Cookie('user_id', $user->id, 3600000);
 
 
@@ -305,10 +306,6 @@ class Api extends \think\Controller
         }
 
 
-        // 设置管理方便区分管理员
-        if ($user->phone == "18210787405") {
-            Cookie::set('admin', 1, 3600000);
-        }
 
 
         return $this->success('登录成功^_^', 'index/index/index');
@@ -317,7 +314,6 @@ class Api extends \think\Controller
         // 查询有没绑定账号，没绑定跳转绑定页面。有绑定 自动设置登录
 
 
-        return "qq登录";
     }
 
     public function json()
