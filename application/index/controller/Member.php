@@ -29,7 +29,7 @@ class Member extends \think\Controller
         $request = Request::instance();
 
         $ip = $request->ip();
-        echo $ip;
+
         if ($ip == '127.0.0.1') {
             $this->assign('icon', 'local');
         } else {

@@ -142,9 +142,10 @@
                                     <span class="label label-primary">{$user.agentlink.browser}</span>
                                     <span class="label label-info">{$user.agentlink.platform}</span>
                                     <span class="label label-warning">{$user.agentlink.language}</span>
+
                                     <span class="label label-danger">{$user.agentlink.device}</span>
                                     <a href="{$user.agentlink.referer}" target="_blank"><span
-                                            class="label label-default">来路</span></a>
+                                            class="label label-default">{$user.agentlink.device?'来路':"}</span></a>
                                 </td>
                             </tr>
 
