@@ -23,7 +23,7 @@ class Order extends model
         return request()->ip();
     }
 
-    public function  user(){
+    public function  User(){
         $this->hasOne('User','id','user_id');
     }
 
