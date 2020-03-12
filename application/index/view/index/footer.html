@@ -73,24 +73,37 @@
 
 </script>
 
-</div>
-<div>
-    <footer class="bs-docs-footer " style="
-    padding-top: 50px;
-    padding-bottom: 50px;
-    margin-top: 100px;
-    margin-bottom: 0px;
-    color: #99979c;
-    text-align: center;
-    background-color: #fff">
-        <div class="container">
+<style>
+    footer a {
+        margin: 4px;
+    }
 
-            <p>  Copyright © 2018-2020 Tp5简易商城
-            </p>
+    footer a {
+        color: #333;
+    }
+
+    footer a:focus, footer a:hover {
+        color: #333;
+        text-decoration: underline;
+    }
+</style>
+<footer>
+
+    <p> Copyright © {:date('Y')} ThinkPHP5.0视频教程
 
 
-        </div>
-    </footer>
+
+        <a class="footer_link" href="{:url('index/index/like','search=路由')}">路由</a>
+        <a class="footer_link" href="{:url('index/index/like','search=模型')}">模型</a>
+        <a class="footer_link" href="{:url('index/index/like','search=分页')}">分页</a>
+        <a class="footer_link" href="{:url('index/index/like','search=支付')}宝">支付宝</a>
+        <a class="footer_link" href="{:url('index/index/like','search=签到')}">签到</a>
+        <a class="footer_link" href="{:url('index/index/like','search=AP')}I">API</a>
+        <a class="footer_link" href="{:url('index/index/like','search=短信')}">短信</a>
+    </p>
+</footer>
+
+
 </div>
 
 </body>
