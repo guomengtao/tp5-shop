@@ -3,24 +3,18 @@ branches: {
   }
 fileChange:
   /application:
-    newFile: !uuid '33989a664cd6c70b89f08b630a28b7b2d0ae08cc'
-    oldFile: !uuid '779729d02a64389480983b78749ae21615ecedc2'
+    newFile: !uuid '25d329d6f31215280332e0e547cb68fb7e2ad342'
+    oldFile: !uuid '33989a664cd6c70b89f08b630a28b7b2d0ae08cc'
   /application/index:
-    newFile: !uuid 'e682c91582ecd1d9b60ea1329956ae0ba74e00fc'
-    oldFile: !uuid 'ec8446421443cf75955fd59652cd164dc42c6244'
+    newFile: !uuid '09028f6737038f83eae32e896301f75184a10399'
+    oldFile: !uuid 'e682c91582ecd1d9b60ea1329956ae0ba74e00fc'
   /application/index/controller:
-    newFile: !uuid '27e08814da0a797138871795422cd340b159b1d1'
-    oldFile: !uuid 'a7b217179c5e539a21a4dacfca908cd12e32faf5'
+    newFile: !uuid '501dcf7bf7cec62eaae2c7693fe2ad4a16429f6f'
+    oldFile: !uuid '27e08814da0a797138871795422cd340b159b1d1'
   /application/index/controller/Api.php:
-    newFile: !uuid 'a4988159c9cc4a7ac99b4e31c2a88e514a11aaa8'
-    oldFile: !uuid '22064fb9b3df3fb70f8bac6a1dadc198be41ff3b'
-  /application/index/model:
-    newFile: !uuid '25d32d2f56ed348291e6945d37ef895df0d030ca'
-    oldFile: !uuid '98e691f3cc1ad7ac31c58d334ca6b9d6932d0ba5'
-  /application/index/model/User.php:
-    newFile: !uuid '18ec11c86b3e27921b19c8b048ab08f41183a60e'
-    oldFile: !uuid '1c374da4b544ebcd94609609b04ff3fa1518cd63'
-gitCommitId: !uuid 'b0a772916cea692e9efd0d06be9593df2490a7b3'
+    newFile: !uuid 'e956ab2921b88d8baa1ccf6785972020f0b4d63b'
+    oldFile: !uuid 'a4988159c9cc4a7ac99b4e31c2a88e514a11aaa8'
+gitCommitId: !uuid '1804d8c107cece45ce8d34218f3396ca645685a1'
 renames: {
   }
-revisionId: 535
+revisionId: 536
