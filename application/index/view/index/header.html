@@ -151,14 +151,15 @@
 
                 {if condition="$Think.cookie.user_id"}
                 <li><a href="{:url('index/member/registration','registration_run=1')}">签到</a></li>
+
                 <li class="dropdown  "  >
 
                     {if condition="$Think.cookie.figureurl_qq_2"}
 
                         <a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button"
                            aria-haspopup="true"
-                           aria-expanded="false"  >
-                            <img class="img-circle  " style="width: 28px; height: 28px;"
+                           aria-expanded="false"  style="padding-top: 5px;padding-bottom: 5px;">
+                            <img class="img-circle img " style="width: 28px; height: 28px;"
                                  src="{$Think.cookie.figureurl_qq_2}">
                         </a>
 

@@ -7,4 +7,4 @@
 /*3.调用时可以写内置css重写设置符合页面的图片尺寸，此处为默认尺寸*/
 .img_box{width:64px;height:64px;overflow: hidden;border-radius: 50%;}
 .img{width:64px;transition: all 0.6s;border-radius: 50%;}
-.img:hover{transform: scale(1.5);border-radius: 50%;}
+.img:hover{transform: scale(2);border-radius: 50%;}
