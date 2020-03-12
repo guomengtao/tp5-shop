@@ -36,15 +36,7 @@ class Index extends \think\Controller
     {
         // 记录访问信息 和 机器人拦截
         Member::agent();
-        $request = Request::instance();
-        $ip      = $request->ip();
-   
-        if ($ip == '127.0.0.1') {
-            $this->assign('icon', 'local');
-        } else {
-            $this->assign('icon', 'favicon');
 
-        }
     }
 
     public function cap()
