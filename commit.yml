@@ -3,27 +3,36 @@ branches: {
   }
 fileChange:
   /application:
-    newFile: !uuid '09e9adb69e56c9b678b233907c1ff167b7ddc900'
-    oldFile: !uuid '1700438c7bcae3f629d784d0b33135cacfaa2edc'
+    newFile: !uuid '0bdbcb2eb847a2f31a897fcb64bf0570c35190c3'
+    oldFile: !uuid '09e9adb69e56c9b678b233907c1ff167b7ddc900'
   /application/index:
-    newFile: !uuid '256dd636df487e47f5378ed61d18b8828c00004c'
-    oldFile: !uuid '287e68d75a0d3e31e0fcb14ca483329b99da756e'
+    newFile: !uuid '5bf2e372a0bdacc55e021a1cfc72b493b2bf5654'
+    oldFile: !uuid '256dd636df487e47f5378ed61d18b8828c00004c'
   /application/index/view:
-    newFile: !uuid '90ca2b36a519c53c7e1b0c43136565ae084aa99d'
-    oldFile: !uuid 'ba9e56adba57837d15c3419566c91f18498e74aa'
+    newFile: !uuid '7db4e39f9bc8c9cd15190c2f70ae462f55885046'
+    oldFile: !uuid '90ca2b36a519c53c7e1b0c43136565ae084aa99d'
   /application/index/view/member:
-    newFile: !uuid 'c22eba33d4296d7abc539b7d74a9685f430b7add'
-    oldFile: !uuid '5e7ac2ad420ea4f7a45d5826cf4f0a8198584a20'
+    newFile: !uuid 'dacd5479304337eca1dc706d71d05949bf1f3a0c'
+    oldFile: !uuid 'c22eba33d4296d7abc539b7d74a9685f430b7add'
   /application/index/view/member/registration.html:
-    newFile: !uuid '5ec8abc0622822d7d1067387821008eedbafdee6'
-    oldFile: !uuid '209449c7f1948dea3d9a86c23ccdbc0fe8ef39af'
+    newFile: !uuid '6a5a3be17e681d41f4a5c5a5d49897242c23a7d8'
+    oldFile: !uuid '5ec8abc0622822d7d1067387821008eedbafdee6'
   /public:
-    newFile: !uuid 'a27f7bce869b15204478746b4e531dc9e2e535f4'
-    oldFile: !uuid 'a5c27c384c55cc5d710f68bb63eb10caa55fcff3'
-  /public/local.ico:
-    newFile: null
-    oldFile: !uuid 'e667e2fb8f3cb012f457e7171eb367f069289507'
-gitCommitId: !uuid '1098bd68bb0ea1dcd5d7e96b28772f05a08609a3'
+    newFile: !uuid '7cc41f5005ed2e762a926bd2c548fc1551f9e05a'
+    oldFile: !uuid 'a27f7bce869b15204478746b4e531dc9e2e535f4'
+  /public/static:
+    newFile: !uuid '9d946369a74b4cad6b91bb30a3a7e8d40b50995b'
+    oldFile: !uuid '5e2f6f8ba9554badae093adcbb8f7a4fc93b7898'
+  /public/static/images:
+    newFile: !uuid '9b931053ed55507be6fa1f18239ef69bcd5f7576'
+    oldFile: !uuid '0d560f2231f3fde374c8db5c734c6a6c6179d528'
+  /public/static/images/user:
+    newFile: !uuid '31e078382166262c72656e9467cd4de88b90e79a'
+    oldFile: !uuid 'df3c00d479649d81bc2308da489122d7413ea67c'
+  /public/static/images/user/user-photo-default.jpg:
+    newFile: !uuid '4b61f86898a3de4bdddc3f0290f599cd7a617118'
+    oldFile: null
+gitCommitId: !uuid 'f1e456d849e3b13ab8681a3af4fec873c84b36cf'
 renames: {
   }
-revisionId: 538
+revisionId: 539
