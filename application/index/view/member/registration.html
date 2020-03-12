@@ -77,17 +77,20 @@
                     <div class="row" style="padding: 15px">
 
 
+
                         {volist name='$list' id='user' key="k"}
                         <div class="col-xs-12 col-sm-6 col-md-4 " style="padding: 0px;">
 
 
                             <div class="media">
                                 <div class="media-left">
+                                    <div class="img_box"  >
                                     <a href="#">
-                                        <img class="media-object img-circle"
+                                        <img class="media-object img-circle img"
                                              src="__STATIC__/images/user/user ({:rand(1,25)}).jpg"
                                              data-holder-rendered="true" style="width: 64px; height: 64px;">
                                     </a>
+                                    </div>
                                 </div>
                                 <div class="media-body">
                                     <small><a href="{:url('index/member/home', ['user_id' => $user.user_id])}">{$user.user_id}</a>
