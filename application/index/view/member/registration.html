@@ -192,8 +192,9 @@
                             <div class="media">
                                 <div class="media-left">
                                     <a href="{:url('index/member/home', ['user_id' => $user.user_id])}">
+                                        {$user.user.photo}+
                                         <img class="media-object img-circle"
-                                             src="{$user.user.photo??'__STATIC__/images/user/user-photo-default.jpg'}"
+                                             src="{$user.user.photo?$user.user.photo:'__STATIC__/images/user/user-photo-default.jpg'}"
                                              data-holder-rendered="true" style="width: 64px; height: 64px;">
                                     </a>
                                 </div>
