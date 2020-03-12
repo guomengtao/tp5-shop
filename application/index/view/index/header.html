@@ -26,6 +26,24 @@
             var s = document.getElementsByTagName("script")[0];
             s.parentNode.insertBefore(hm, s);
         })();
+        // 设置bootstrap导航条鼠标经过可以自动下拉打开
+        $(document).ready(function () {
+            dropdownOpen();//调用
+        });
+
+        /**
+         * 鼠标划过就展开子菜单，免得需要点击才能展开
+         */
+        function dropdownOpen() {
+
+            var $dropdownLi = $('li.dropdown');
+
+            $dropdownLi.mouseover(function () {
+                $(this).addClass('open');
+            }).mouseout(function () {
+                $(this).removeClass('open');
+            });
+        }
     </script>
 
 </head>
