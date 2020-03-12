@@ -23,7 +23,10 @@ class Order extends model
         return request()->ip();
     }
 
-   
+    public function  user(){
+        return $this->hasOne('User','id','user_id');
+    }
+
 
 
     public function setTitleAttr($value)
