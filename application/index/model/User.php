@@ -8,15 +8,7 @@ use think\Cookie;
 
 class User extends model
 {
-    use SoftDelete;
-    protected $deleteTime = 'delete_time';
-    protected $autoWriteTimestamp = true;
-
-
-    protected $auto = [];
-    protected $insert = [];
-    protected $update = ['name'];
-
+ 
 
     // 测试 查询单个用户信息模型
 
