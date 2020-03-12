@@ -160,11 +160,14 @@ class Api extends \think\Controller
 
         $user = new UserQq();
         // 查询单个数据
-        $user     = $user->where('openid', $openid)
+        $user = $user->where('openid', $openid)
             ->where('type', 0)
             ->find();
+
         $user_id  = $user['id'];
         $nickname = $user_from_qq->nickname;
+        $phone    = $user_from_qq->figureurl_qq_2;
+
         // 没登记openID的先登记
         if (!$user) {
             # code.. 
@@ -223,6 +226,7 @@ class Api extends \think\Controller
         $token  = md5(time() . rand(100000, 999999));
         $invite = Cookie::get('invite');;
         $user_id = $user->user_id;
+
         // 没有绑定会员号的，创建账号
         if (!$user->user_id) {
 
@@ -230,7 +234,9 @@ class Api extends \think\Controller
             $user = User::create([
                 'invite'   => $invite,
                 'token'    => $token,
+                'phone'    => $phone,
                 'nickname' => $nickname,
+                'ip'       => 1,
             ]);
 
             $user_id = $user->id;
@@ -261,6 +267,8 @@ class Api extends \think\Controller
 
             $user           = User::get($user_id);
             $user->nickname = $nickname;
+            $user->phone    = $phone;
+            $user->ip       = 1;
             $user->save();
         }
 
