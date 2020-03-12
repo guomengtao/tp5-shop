@@ -128,21 +128,9 @@
             </form>
             <ul class="nav navbar-nav navbar-right">
 
-                {if condition="$Think.cookie.user_id"}
-                <li>
-                    <a href="{:url('index/member/home',['user_id'=>$Think.cookie.user_id])}">
-                        {if condition="$Think.cookie.figureurl_qq_2"}
-                        <img class="img-circle" style="width: 18px; height: 18px;"
-                             src="{$Think.cookie.figureurl_qq_2}">
-                        {$Think.cookie.nickname}
-                        {else /}
-                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span> {$Think.cookie.phone}
+                {if condition="!$Think.cookie.user_id"}
 
-                        {/if}
-                    </a>
-
-                </li>
-                {else /}
+                 
 
                 <li>
                     <a href="__ROOT__/index/index/login">登录</a>
@@ -165,7 +153,16 @@
 
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                       aria-haspopup="true" aria-expanded="false">会员中心<span class="caret"></span></a>
+                       aria-haspopup="true" aria-expanded="false">
+                        {if condition="$Think.cookie.figureurl_qq_2"}
+                        <img class="img-circle" style="width: 18px; height: 18px;"
+                             src="{$Think.cookie.figureurl_qq_2}">
+                        {$Think.cookie.nickname}
+                        {else /}
+                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span> {$Think.cookie.phone}
+
+                        {/if}
+                        <span class="caret"></span></a>
                     <ul class="dropdown-menu">
 
                         <li><a href="{:url('index/member/registration','regisration_run=1')}">签到打卡</a></li>
