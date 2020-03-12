@@ -3,21 +3,21 @@ branches: {
   }
 fileChange:
   /application:
-    newFile: !uuid '30e753bcfbf09fdd830e3ab52ff1c02ee1571813'
-    oldFile: !uuid 'a15f17fe406151b2660c9764dbccff3fe1d6757c'
+    newFile: !uuid '2378935c36241bf6fcd98139d40b463eb0a45f44'
+    oldFile: !uuid '30e753bcfbf09fdd830e3ab52ff1c02ee1571813'
   /application/index:
-    newFile: !uuid '4158bc553b6b5c31d47dda93113f0aab614202c0'
-    oldFile: !uuid 'f273ee32beb8bc4aae8303656707e87ac6b5e001'
+    newFile: !uuid '8e7e4f07d42e7faf54cbb3133fedec964c7fc2e3'
+    oldFile: !uuid '4158bc553b6b5c31d47dda93113f0aab614202c0'
   /application/index/view:
-    newFile: !uuid '93147ea0e5853f47a311dc46d10d941a1176157a'
-    oldFile: !uuid '2c3559a7be0ed7a7cab8faa6d9188f8d0738c483'
+    newFile: !uuid '411ffb43051858a4104f8de79e005525debf2331'
+    oldFile: !uuid '93147ea0e5853f47a311dc46d10d941a1176157a'
   /application/index/view/member:
-    newFile: !uuid 'dc6c967af869e20071b2e5837367e91360c94d2d'
-    oldFile: !uuid '94c6576ddeb771d51b3f2839c7dc5446be83d745'
+    newFile: !uuid 'ad01c59f1a8c9606fcb023653ae668a7b9bee3e7'
+    oldFile: !uuid 'dc6c967af869e20071b2e5837367e91360c94d2d'
   /application/index/view/member/footprint.html:
-    newFile: !uuid '2ce4109b815dbf67a092a9a1be1fd47a4da0917c'
-    oldFile: !uuid '9cc1e896cac6bf895fa6cfedd8813d2373095f59'
-gitCommitId: !uuid '7a60d803f464fa40e5629db9662459c24cb20be8'
+    newFile: !uuid '6b68781b3cb062962544ff654515d731e6a37338'
+    oldFile: !uuid '2ce4109b815dbf67a092a9a1be1fd47a4da0917c'
+gitCommitId: !uuid 'd48a8518ef252da88b1e00a51fb2a06801dc30a1'
 renames: {
   }
-revisionId: 528
+revisionId: 529
