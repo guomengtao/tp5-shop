@@ -147,52 +147,52 @@ class Api extends \think\Controller
 
 
         $str          = file_get_contents($graph_url);
-        $user_from_qq = json_decode($str);
+        $userFromQq = json_decode($str);
 
 
         // Step5：数据库存储
 
-        if (!$user_from_qq->nickname) {
+        if (!$userFromQq->nickname) {
             // 如果没获取到昵称终止操作
             return "没有昵称";
         }
 
-        $nickname = $user_from_qq->nickname;
-        $photo    = $user_from_qq->figureurl_qq_2;
+        $nickname = $userFromQq->nickname;
+        $photo    = $userFromQq->figureurl_qq_2;
 
         $user = new UserQq();
         // 查询是否登记
-        $user_qq_id = $user->where('openid', $openid)->value('id');
+        $userQqId = $user->where('openid', $openid)->value('id');
 
 
         // 没登记openID的先登记
-        if (!$user_qq_id) {
+        if (!$userQqId) {
 
 
             $user                 = new UserQq();
             $user->openid         = $openid;
-            $user->nickname       = $user_from_qq->nickname;
-            $user->figureurl_qq_1 = $user_from_qq->figureurl_qq_1;
-            $user->figureurl_qq_2 = $user_from_qq->figureurl_qq_2;
-            $user->gender         = $user_from_qq->gender;
-            $user->year           = $user_from_qq->year;
+            $user->nickname       = $userFromQq->nickname;
+            $user->figureurl_qq_1 = $userFromQq->figureurl_qq_1;
+            $user->figureurl_qq_2 = $userFromQq->figureurl_qq_2;
+            $user->gender         = $userFromQq->gender;
+            $user->year           = $userFromQq->year;
             $user->type           = 0;
             $user->save();
 
 
-            $user_qq_id = $user->id;
+            $userQqId = $user->id;
 
 
         } else {
 
             // 如果已经存在就更新，保持数据最新
-            $user                 = UserQq::get($user_qq_id);
+            $user                 = UserQq::get($userQqId);
             $user->openid         = $openid;
-            $user->nickname       = $user_from_qq->nickname;
-            $user->figureurl_qq_1 = $user_from_qq->figureurl_qq_1;
-            $user->figureurl_qq_2 = $user_from_qq->figureurl_qq_2;
-            $user->gender         = $user_from_qq->gender;
-            $user->year           = $user_from_qq->year;
+            $user->nickname       = $userFromQq->nickname;
+            $user->figureurl_qq_1 = $userFromQq->figureurl_qq_1;
+            $user->figureurl_qq_2 = $userFromQq->figureurl_qq_2;
+            $user->gender         = $userFromQq->gender;
+            $user->year           = $userFromQq->year;
             $user->type           = 0;
             $user->save();
 
@@ -200,11 +200,11 @@ class Api extends \think\Controller
 
 
         // 查询是否绑定会员
-        $user_id = UserQq::where('id', $user_qq_id)->value('user_id');
+        $userId = UserQq::where('id', $userQqId)->value('user_id');
 
 
         // 没有绑定会员号的，创建会员账号
-        if (!$user_id) {
+        if (!$userId) {
 
             $token  = md5(time() . rand(100000, 999999));
             $invite = Cookie::get('invite');;
@@ -221,7 +221,7 @@ class Api extends \think\Controller
 
 
             // 在qq表登记绑定用户id
-            $user          = UserQq::get($user_qq_id);
+            $user          = UserQq::get($userQqId);
             $user->user_id = $user_id;
             $user->save();
 
@@ -241,7 +241,7 @@ class Api extends \think\Controller
 
         } else {
 
-            $user           = User::get($user_id);
+            $user           = User::get($userId);
             $user->nickname = $nickname;
             $user->photo    = $photo;
             $user->ip       = 1;
