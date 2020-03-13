@@ -8,7 +8,7 @@
 <tbody>
 {volist name='show' id='user'}
   
-    <tr  ><th> {$user.id} </th><td> <a href="{$Think.server.script_name}/index/bbs/view/id/{$user.id} ">{$user.nickname}</a></td><td> {$user.rand? 'VIP' : '普通会员'} </td><td>  {$user.create_time}</td> </tr>
+    <tr  ><th> {$user.id} </th><td> <a href="{$Think.server.script_name}/index/bbs/view/id/{$user.id} ">{$user.nickname?$user.nickname:$user.id}</a></td><td> {$user.rand? 'VIP' : '普通会员'} </td><td>  {$user.create_time}</td> </tr>
 {/volist}
  
 </tbody>
