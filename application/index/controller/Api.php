@@ -241,6 +241,7 @@ class Api extends \think\Controller
 
         } else {
 
+
             $user           = User::get($userId);
             $user->nickname = $nickname;
             $user->photo    = $photo;
