@@ -113,11 +113,8 @@
     <ul class="list-group">
       <li class="list-group-item">昵称： {$user.nickname|default="努力学习TP5中的小强"}
       <li class="list-group-item">性别：
-           {if condition="$user.userQq.gender=='男'"}
-           <span class="glyphicon glyphicon-king" style="color: #4ebdf9" aria-hidden="true"></span>
-          {else /}
-          <span class="glyphicon glyphicon-queen" style="color: #ff7bb6" aria-hidden="true"></span>
-          {/if}
+           {$user.userQq.gender}
+
       </li>
       <li class="list-group-item">年龄： {:date('Y')-$user.userQq.year}</li>
        <li class="list-group-item">所在地：{$user.ipInfo.region}</li>
