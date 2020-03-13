@@ -164,6 +164,10 @@ class User extends model
     {
         return $this->hasOne('UserQq', 'user_id', 'id');
     }
+    public function human()
+    {
+        return $this->hasOne('Human', 'ip', 'ip');
+    }
 
     public function money()
     {

@@ -81,7 +81,7 @@ class Footprint extends model
 
     public function getPathAttr($value)
     {
-        if ($value == '/'){
+        if ($value == '/') {
             $value = 'index';
         }
         return $value;
@@ -104,14 +104,21 @@ class Footprint extends model
         return $this->hasOne('Ipinfo', 'ip', 'ip');
     }
 
+    public function human()
+    {
+        return $this->hasOne('Human', 'ip', 'ip');
+    }
+
     public function AgentLink()
     {
         return $this->hasOne('Agent', 'session_id', 'session_id');
     }
+
     public function Shop()
     {
         return $this->hasOne('Shop', 'id', 'goods_id');
     }
+
     public function user()
     {
         return $this->hasOne('User', 'id', 'user_id');
