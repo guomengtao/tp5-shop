@@ -157,19 +157,16 @@ class Api extends \think\Controller
             return "没有昵称";
         }
 
+        $nickname = $user_from_qq->nickname;
+        $photo    = $user_from_qq->figureurl_qq_2;
 
         $user = new UserQq();
         // 查询是否登记
-        $user = $user->where('openid', $openid)
-            ->where('type', 0)
-            ->count();
+        $user_qq_id = $user->where('openid', $openid)->value('id');
 
-        $nickname   = $user_from_qq->nickname;
-        $photo      = $user_from_qq->figureurl_qq_2;
-        $user_qq_id = '';
 
         // 没登记openID的先登记
-        if (!$user) {
+        if ($user_qq_id) {
 
 
             $user                 = new UserQq();
@@ -189,7 +186,7 @@ class Api extends \think\Controller
         } else {
 
             // 如果已经存在就更新，保持数据最新
-            $user                 = UserQq::get($user_id);
+            $user                 = UserQq::get($user_qq_id);
             $user->openid         = $openid;
             $user->nickname       = $user_from_qq->nickname;
             $user->figureurl_qq_1 = $user_from_qq->figureurl_qq_1;
@@ -233,14 +230,14 @@ class Api extends \think\Controller
             Cookie::set('token', $token, 3600000);
             session('openid_id', $user->id);
 
-
+            // 邀请奖励功能拆分为独立的 invite()方法，需要再对接
+            // invite(1,2);
+            
             // 重定向到News模块的Category操作
             $this->redirect('index/index/register', ['cate_id' => 2]);
 
 
 
-            // 邀请奖励功能拆分为独立的 invite()方法，需要再对接
-            // invite(1,2);
 
         } else {
 
@@ -257,8 +254,6 @@ class Api extends \think\Controller
         }
 
         return $this->success('登录成功^_^', 'index/index/index');
-
-
 
 
     }
