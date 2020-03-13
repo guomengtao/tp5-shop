@@ -3,6 +3,7 @@
 namespace app\index\controller;
 
 use app\common\controller\Frontend;
+use app\index\model\Footprint;
 use app\index\model\Human;
 use think\Config;
 use think\Cookie;
@@ -41,7 +42,11 @@ class User extends Frontend
 
         $web = input('web');
 
-
+        $footpirnt = Footprint::where('ip', $ip)->count();
+        if (!$footpirnt){
+            echo '-';
+            die;
+        }
         // 已存在的跳过
         $human = Human::where('ip', $ip)->find();
         if ($human) {
