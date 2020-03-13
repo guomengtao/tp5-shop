@@ -2,7 +2,9 @@
 
 namespace app\index\controller;
 
+use app\index\model\Human;
 use app\index\model\Ipinfo;
+use app\index\controller\User as HumanCheck;
 use app\index\model\Money;
 use think\Db;
 use think\Request;
@@ -50,6 +52,8 @@ class Index extends \think\Controller
 
     public function sms()
     {
+        $human = new HumanCheck();
+        echo $human->human('106.11.223.55');
         echo '666123456';
     }
 
