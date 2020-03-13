@@ -17,6 +17,7 @@ use app\index\model\Footprint;
 use think\Cookie;
 use think\Session;
 use Jenssegers\Agent\Agent;
+use app\index\controller\User as HumanCheck;
 
 class Member extends \think\Controller
 {
@@ -71,8 +72,7 @@ class Member extends \think\Controller
         $info['platform'] = $info['platform'] . $version;
 
         if ($info['platform']) {
-            // 记录访问量
-            footprint();
+
         }
 
         // 这一句是tp5是任意使用一下session类才可以获取session_id
@@ -121,6 +121,15 @@ class Member extends \think\Controller
         $user = new Agent_T();
         $user->data($info);
         $user->save();
+
+
+        if ($user->id) {
+            // 记录访问量
+            footprint();
+            // 验证真人
+            $human = new HumanCheck();
+            $human->human($info['ip']);
+        }
 
 
     }
