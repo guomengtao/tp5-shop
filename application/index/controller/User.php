@@ -123,7 +123,7 @@ class User extends Frontend
                 case "应用场景":
                     $val['scene'] = $b;
                     break;
-                case "威胁报警":
+                case "威胁情报":
                     $val['danger'] = $b;
                     break;
                 case "地理位置":
