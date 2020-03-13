@@ -133,7 +133,7 @@ class User extends model
         // ->order('update_time', 'desc')->where('id','>',394)->limit(10);
     }
 
-    public function ipinfo()
+    public function ipInfo()
     {
         return $this->hasOne('Ipinfo', 'ip', 'ip');
         //hasOne('关联模型名','外键名','主键名',['模型别名定义'],'join类型');

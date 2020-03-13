@@ -120,7 +120,7 @@
           {/if}
       </li>
       <li class="list-group-item">年龄： {:date('Y')-$user.userQq.year}</li>
-       <li class="list-group-item">所在地：{$user.ipinfo.region}</li>
+       <li class="list-group-item">所在地：{$user.ipInfo.region}</li>
       <li class="list-group-item">注册时间：{$user.create_time}</li>
       <li class="list-group-item">最后访问：{$user.footprint.create_time}</li>
     </ul>
@@ -134,7 +134,7 @@
 
 
              {$fo.create_time}
-            {$fo.Ipinfo.region}
+            {$fo.ipInfo.region}
             {$fo.path}
            {$fo.agentlink.browser}
 <br>
@@ -168,10 +168,10 @@
 
 
               <span class="glyphicon glyphicon-map-marker " aria-hidden="true"></span>
-              {$user.ipinfo.region}
+              {$user.ipInfo.region}
 
 
-              <span class="glyphicon glyphicon-signal " aria-hidden="true"></span> {$user.ipinfo.isp}
+              <span class="glyphicon glyphicon-signal " aria-hidden="true"></span> {$user.ipInfo.isp}
           </div>
       </div>
 
