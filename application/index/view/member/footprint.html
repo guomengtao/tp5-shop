@@ -93,7 +93,7 @@
                                 <td> {$user.create_time}</td>
                                 <td>
                                     <a href="{:url('index/member/home',['user_id'=>$user.user_id])} ">{$user.user.nickname?$user.user.nickname: $user.user_id} </a>
-                                    <a href="{:url('index/user/human',['ip'=>$user.ip,'web'=>1])} alt='{$user.human.address}'">{$user.ip}</a>
+                                    <a href="{:url('index/user/human',['ip'=>$user.ip,'web'=>1])} title='{$user.human.address}'">{$user.ip}</a>
                                     {$user.human.scene}
                                 </td>
                                 <td><a href="__ROOT__/{$user.path}">{$user.path|substr=0,20}</a></td>
