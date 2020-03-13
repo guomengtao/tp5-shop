@@ -154,7 +154,6 @@ function arraySequence($array, $field, $sort = 'SORT_DESC')
 }
 
 
-
 // 验证课程播放少于10次
 function play_count($shop)
 {
@@ -215,21 +214,14 @@ function add_vip_days($add_vip_days, $out_trade_no)
 {
 
 
-    $phone = Cookie::get('phone');
-
-    // 首先查询他的到期日期大于现在
-
-    // 处理没有登录先付款的情况
-    if (!$phone) {
-        $phone = '15966982315';
-    }
+    $user_id = Cookie::get('user_id');
 
 
     // 把时间增加上 ，忽略开始日期字段
     // 日期转秒数 60*60*24=1天的秒数
 
 
-    $expiration_time = User::where('phone', $phone)
+    $expiration_time = User::where('user_id ', $user_id)
         ->whereTime('expiration_time', '>=', '-1 minute')
         ->value('expiration_time');
 
@@ -241,24 +233,24 @@ function add_vip_days($add_vip_days, $out_trade_no)
 
         $expiration_time = $expiration_time + $add_vip_days_time;
 
-        User::where('phone', $phone)
+        User::where('user_id ', $user_id)
             ->update(['expiration_time' => $expiration_time, 'rand' => 1]);
     } else {
         $expiration_time = time() + $add_vip_days_time;
 
-        User::where('phone', $phone)
+        User::where('user_id ', $user_id)
             ->update(['expiration_time' => $expiration_time, 'start_time' => time(), 'rand' => 1]);
     }
 
 
     // 写入订单
     $order = Order::create([
-        'phone'        => $phone,
+        'user_id'      => $user_id,
         'body'         => 105,
         'subject'      => "增加VIP会员：" . $add_vip_days . "天",
         'total_fee'    => 0,
-        'buyer_id'     => $phone,
-        'buyer_email'  => $phone,
+        'buyer_id'     => $user_id,
+        'buyer_email'  => $user_id ,
         'out_trade_no' => $out_trade_no,
     ]);
 

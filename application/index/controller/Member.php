@@ -27,7 +27,6 @@ class Member extends \think\Controller
         Member::agent();
 
 
-
     }
 
     public static function agent()
@@ -1222,16 +1221,11 @@ class Member extends \think\Controller
 
         if ($registration_run) {
 
-            $user_id          = Cookie::get('user_id');
-            $registration_vip = input('registration_vip');
+            $user_id = Cookie::get('user_id');
 
             if (!$user_id) {
-                //错误页面的默认跳转页面是返回前一页，通常不需要设置
                 $this->error('请登录', 'Index/index/login', 'tom', 5);
                 return "请登录";
-                # 没有登录 跳转到登录页面
-                // redirect('index/index/login')->remember();
-
             }
 
             // 判断今天是否有签到记录
