@@ -96,7 +96,6 @@ $parameter = array(
     "total_fee"	=> $total_fee,
     "body"	=> $body,
     "show_url"           => $show_url,
-    "qr_pay_mode"   => $qr_pay_mode2,
     "anti_phishing_key"	=> $anti_phishing_key,
     "exter_invoke_ip"	=> $exter_invoke_ip,
     "_input_charset"	=> trim(strtolower($alipay_config['input_charset']))
