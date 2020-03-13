@@ -80,7 +80,6 @@ $exter_invoke_ip = "";
 //支付界面 默认采用第一种扫码方式
 
 $qr_pay_mode2 = isset($_GET['qr_pay_mode']) ? $_GET['qr_pay_mode'] : '1' ;
-$qr_pay_mode2 = 4 ;
 
  
 //构造要请求的参数数组，无需改动
@@ -96,6 +95,7 @@ $parameter = array(
     "total_fee"	=> $total_fee,
     "body"	=> $body,
     "show_url"           => $show_url,
+    "qr_pay_mode"   => $qr_pay_mode2,
     "anti_phishing_key"	=> $anti_phishing_key,
     "exter_invoke_ip"	=> $exter_invoke_ip,
     "_input_charset"	=> trim(strtolower($alipay_config['input_charset']))
