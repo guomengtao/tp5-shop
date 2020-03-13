@@ -84,8 +84,8 @@
             {volist name='show' id='user'}
 
             <tr>
-                <th> {$user.id}</th>  
-                <td><a href="{:url('index/member/home', ['user_id' => $user.id])}">{$user.nickname??$user.phone|substr=7,4}</a>
+                <th> {$user.id}</th>
+                <td><a href="{:url('index/member/home', ['user_id' => $user.id])}">{$user.nickname??$user.id}</a>
                 </td>
                 <td> {$user.rand? 'VIP' : '普通会员'}</td>
                 <td> {$user.create_time}</td>
