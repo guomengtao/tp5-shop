@@ -3,18 +3,30 @@ branches: {
   }
 fileChange:
   /application:
-    newFile: !uuid '1078f47649e0f2080488c885743b3cb6ce4dc20a'
-    oldFile: !uuid '3562ebba252ad4b677b91f2b7ddb37596968615a'
+    newFile: !uuid '691cda277885fedcba7a7861bee2296569d5ccfb'
+    oldFile: !uuid '1078f47649e0f2080488c885743b3cb6ce4dc20a'
   /application/index:
-    newFile: !uuid '52353898f7600b204fe9e54c3414feb15c1c2f6a'
-    oldFile: !uuid '8478374b13b8ac6fbf05d59cf325c232ae1c734d'
-  /application/index/controller:
-    newFile: !uuid '75f0fa2579dc7e22f31b107b55da1d25c4584cbe'
-    oldFile: !uuid '10ddc75417804c8d8b2c7f4d49a5d2980d02aced'
-  /application/index/controller/User.php:
-    newFile: !uuid 'e840e4e441b931f82e115f178b30d6fffaae6094'
-    oldFile: !uuid '1a4b6b0d217e156fd9c83744ecd055f6f735f197'
-gitCommitId: !uuid '4c4ad10983219e8dfeed7fb512398138cf7cee56'
+    newFile: !uuid '323eeb8c3dffd4b8019b81c104b469d800ea9f8d'
+    oldFile: !uuid '52353898f7600b204fe9e54c3414feb15c1c2f6a'
+  /application/index/model:
+    newFile: !uuid '75e9e7bb7b4312d97535a72ab52074241e2a9f5a'
+    oldFile: !uuid 'a7bea7278b0abac74b947bbb1473bf47f0fbdbfe'
+  /application/index/model/Footprint.php:
+    newFile: !uuid '2784248c20461825ec449e1c5d9de0ea7eb9045f'
+    oldFile: !uuid '896ba89b53e1026bbc83f43f11e6332a5cc9b78c'
+  /application/index/model/User.php:
+    newFile: !uuid 'ebddb2e3c56a835d2cb5fb7bdad23e17489dfa7b'
+    oldFile: !uuid 'a97bacb99c923976f1d77896dc900dfe085dc027'
+  /application/index/view:
+    newFile: !uuid 'e7cf210f51de69fbf7e3dbfc6aa09276a925f697'
+    oldFile: !uuid '7da9a52d979515b914df8d62d3a3618e011882ed'
+  /application/index/view/member:
+    newFile: !uuid 'f3ced3388098693185393d1eae84957bc6eb0f66'
+    oldFile: !uuid '14b8826411880c473dadd8d3635d2aa1d6b360f3'
+  /application/index/view/member/footprint.html:
+    newFile: !uuid '6f9df3c88379a26e48bc027ef3143be93ac32b62'
+    oldFile: !uuid '5078f764a2830148b99a376d9b289e901a5e9ac8'
+gitCommitId: !uuid '746902d250dc4cb4544349eada5f258ba4257e7b'
 renames: {
   }
-revisionId: 606
+revisionId: 607
