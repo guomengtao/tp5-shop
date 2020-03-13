@@ -3,30 +3,21 @@ branches: {
   }
 fileChange:
   /application:
-    newFile: !uuid '691cda277885fedcba7a7861bee2296569d5ccfb'
-    oldFile: !uuid '1078f47649e0f2080488c885743b3cb6ce4dc20a'
+    newFile: !uuid '6550bf6e09d77b907aad7b8ee0f52b5b2e43a6f1'
+    oldFile: !uuid '691cda277885fedcba7a7861bee2296569d5ccfb'
   /application/index:
-    newFile: !uuid '323eeb8c3dffd4b8019b81c104b469d800ea9f8d'
-    oldFile: !uuid '52353898f7600b204fe9e54c3414feb15c1c2f6a'
-  /application/index/model:
-    newFile: !uuid '75e9e7bb7b4312d97535a72ab52074241e2a9f5a'
-    oldFile: !uuid 'a7bea7278b0abac74b947bbb1473bf47f0fbdbfe'
-  /application/index/model/Footprint.php:
-    newFile: !uuid '2784248c20461825ec449e1c5d9de0ea7eb9045f'
-    oldFile: !uuid '896ba89b53e1026bbc83f43f11e6332a5cc9b78c'
-  /application/index/model/User.php:
-    newFile: !uuid 'ebddb2e3c56a835d2cb5fb7bdad23e17489dfa7b'
-    oldFile: !uuid 'a97bacb99c923976f1d77896dc900dfe085dc027'
+    newFile: !uuid 'b48f7d95dc01dfab1247f377a39765b35b1c1340'
+    oldFile: !uuid '323eeb8c3dffd4b8019b81c104b469d800ea9f8d'
   /application/index/view:
-    newFile: !uuid 'e7cf210f51de69fbf7e3dbfc6aa09276a925f697'
-    oldFile: !uuid '7da9a52d979515b914df8d62d3a3618e011882ed'
+    newFile: !uuid 'b18cb8a0d9ffc411931c11c082ad564a8fa2877d'
+    oldFile: !uuid 'e7cf210f51de69fbf7e3dbfc6aa09276a925f697'
   /application/index/view/member:
-    newFile: !uuid 'f3ced3388098693185393d1eae84957bc6eb0f66'
-    oldFile: !uuid '14b8826411880c473dadd8d3635d2aa1d6b360f3'
+    newFile: !uuid '21d39de7e195f219064407a25715491afccc2312'
+    oldFile: !uuid 'f3ced3388098693185393d1eae84957bc6eb0f66'
   /application/index/view/member/footprint.html:
-    newFile: !uuid '6f9df3c88379a26e48bc027ef3143be93ac32b62'
-    oldFile: !uuid '5078f764a2830148b99a376d9b289e901a5e9ac8'
-gitCommitId: !uuid '746902d250dc4cb4544349eada5f258ba4257e7b'
+    newFile: !uuid 'd85d35d322d05fd8bd4338aaf9ea6d2a48434674'
+    oldFile: !uuid '6f9df3c88379a26e48bc027ef3143be93ac32b62'
+gitCommitId: !uuid '247ad233f92b8727de1464748ac93661d5542a44'
 renames: {
   }
-revisionId: 607
+revisionId: 608
