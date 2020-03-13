@@ -146,7 +146,7 @@ class Api extends \think\Controller
         $graph_url = "https://graph.qq.com/user/get_user_info?access_token=" . $params['access_token'] . "&oauth_consumer_key=" . $app_id . "&openid=" . $user->openid;
 
 
-        $str          = file_get_contents($graph_url);
+        $str        = file_get_contents($graph_url);
         $userFromQq = json_decode($str);
 
 
@@ -237,8 +237,6 @@ class Api extends \think\Controller
             $this->redirect('index/index/register', ['cate_id' => 2]);
 
 
-
-
         } else {
 
 
@@ -254,7 +252,8 @@ class Api extends \think\Controller
             Cookie('photo', $photo, 3600000);
 
         }
-
+        // 重定向到News模块的Category操作
+        return $this->redirect('index/index/index');
         return $this->success('登录成功^_^', 'index/index/index');
 
 
