@@ -92,7 +92,7 @@
                             <tr>
                                 <td> {$user.create_time}</td>
                                 <td>
-                                    <a href="{:url('index/member/home',['user_id'=>$user.user_id])} ">{$user.user_id} </a>({$user.ip})
+                                    <a href="{:url('index/member/home',['user_id'=>$user.user_id])} ">{$user.user.nickname?$user.user.nickname: $user.user_id} </a>({$user.ip})
                                 </td>
                                 <td><a href="__ROOT__/{$user.path}">{$user.path}</a></td>
 
@@ -134,7 +134,7 @@
                             <tr>
                                 <td> {$user.create_time}</td>
                                 <td>
-                                    <a href="{:url('index/member/home',['user_id'=>$user.user_id])}  ">{$user.user_id} </a>({$user.ip})
+                                    <a href="{:url('index/member/home',['user_id'=>$user.user_id])}  ">{$user.user.nickname?$user.user.nickname: $user.user_id} </a>({$user.ip})
                                 </td>
                                 <td><a href="__ROOT__/{$user.path}">{$user.path}</a></td>
 
