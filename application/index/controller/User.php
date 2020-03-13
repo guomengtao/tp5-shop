@@ -36,20 +36,20 @@ class User extends Frontend
     /**
      * 会员中心
      */
-    public   function human($ip = '119.62.42.104')
+    public function human($ip = '119.62.42.104')
     {
 
         $web = input('web');
-        if ($web) {
-            $ip = input('ip');
-        }
 
 
         // 已存在的跳过
         $human = Human::where('ip', $ip)->find();
         if ($human) {
-            dump($human->toArray());
-            echo "--ok--";
+            if ($web) {
+                dump($human->toArray());
+                echo "--ok--";
+            }
+
             die();
         }
 
@@ -65,8 +65,10 @@ class User extends Frontend
         });
 
         // print_r($tableHeader->all());
-        print_r($tableRows->all());
 
+        if ($web) {
+            print_r($tableRows->all());
+        }
 
         $arr = $tableRows->all();
         $this->save($arr, $ip);
