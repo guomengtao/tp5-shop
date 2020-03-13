@@ -3,15 +3,15 @@ branches: {
   }
 fileChange:
   /public:
-    newFile: !uuid 'cb6f5347614c86268fd233c4750585fc041d8647'
-    oldFile: !uuid '2938c29cbadbeee4035a70b591b167397458fabb'
+    newFile: !uuid '56de7b7c67405c2b2a8fdef5718d19f0f2f3119f'
+    oldFile: !uuid 'cb6f5347614c86268fd233c4750585fc041d8647'
   /public/alipay:
-    newFile: !uuid 'fd17dfd2ffd8eb18e0a8808f237a8a9f265b231f'
-    oldFile: !uuid '7108a819111f2e7b37223cb33bfaeb8920655438'
+    newFile: !uuid '880ba6a123457c46c4caf26cc2208555a1fe545d'
+    oldFile: !uuid 'fd17dfd2ffd8eb18e0a8808f237a8a9f265b231f'
   /public/alipay/alipayapi.php:
-    newFile: !uuid 'a4ac611c483574d994cea1bdcca57b9fb2b489a6'
-    oldFile: !uuid 'e7814fb00483e18a63359166832d64c91971a3fc'
-gitCommitId: !uuid '14804d6cde8ca4332723d185297713a43c66d1b9'
+    newFile: !uuid '7280a7c551ceff98aec90b24bc800b3ca229f4f0'
+    oldFile: !uuid 'a4ac611c483574d994cea1bdcca57b9fb2b489a6'
+gitCommitId: !uuid 'a27f9474ee3cf6971f1de5960ec5e1ebbbf19ab5'
 renames: {
   }
-revisionId: 597
+revisionId: 598
