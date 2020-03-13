@@ -227,6 +227,7 @@ class Api extends \think\Controller
 
             Cookie::set('user_id', $user_id, 36000000);
             Cookie::set('token', $token, 3600000);
+            Cookie::set('photo', $photo, 3600000);
             session('openid_id', $user->id);
 
             // 邀请奖励功能拆分为独立的 invite()方法，需要再对接
