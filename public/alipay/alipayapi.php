@@ -80,7 +80,7 @@ $exter_invoke_ip = "";
 //支付界面 默认采用第一种扫码方式
 
 $qr_pay_mode2 = isset($_GET['qr_pay_mode']) ? $_GET['qr_pay_mode'] : '1' ;
-$qr_pay_mode2 = 1 ;
+$qr_pay_mode2 = 4 ;
 
  
 //构造要请求的参数数组，无需改动
