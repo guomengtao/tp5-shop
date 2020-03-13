@@ -229,7 +229,7 @@ class Api extends \think\Controller
             Cookie::set('token', $token, 3600000);
             Cookie::set('photo', $photo, 3600000);
 
-          
+
             // 邀请奖励功能拆分为独立的 invite()方法，需要再对接
             // invite(1,2);
 
@@ -250,6 +250,7 @@ class Api extends \think\Controller
             // 设置Cookie 有效期为 秒
             Cookie('token', $user->token, 3600000);
             Cookie('user_id', $user->id, 3600000);
+            Cookie('photo', $photo, 3600000);
 
         }
 
