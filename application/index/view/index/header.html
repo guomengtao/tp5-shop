@@ -142,15 +142,15 @@
                 </li>
                 <li>
                     <a href="https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=100556678&redirect_uri=http://open.gaoxueya.com/index/api/qq&scope=get_user_info"
-                       target="_black">
-                        <img src="http://qzonestyle.gtimg.cn/qzone/vas/opensns/res/img/Connect_logo_7.png"/></a>
+                       target="_black"  style="padding-top: 11px;padding-bottom: 9px;">
+                        <img class="img-circle img " src="__STATIC__/images/ico_login_qq.png" style="width: 28px;height: 28px ;background-color: #fff"/></a>
 
 
                 </li>
                 {/if}
 
                 {if condition="$Think.cookie.user_id"}
-                <li><a href="{:url('index/member/registration','registration_run=1')}">签到</a></li>
+                <li><a href="{:url('index/member/registration','registration_run=1')}" >签到</a></li>
 
                 <li class="dropdown  ">
 
