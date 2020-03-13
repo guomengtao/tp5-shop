@@ -105,7 +105,7 @@ class User extends model
         $query->where('age', '>', 50)->limit(10);
     }
 
-    public function userqq()
+    public function userQq()
     {
         return $this->hasOne('userQq');
         //hasOne('关联模型名','外键名','主键名',['模型别名定义'],'join类型');

@@ -27,7 +27,7 @@
 
 
 
-    <img    class="img-responsive center-block img-circle" style="   width: 100px; height: 100px;   margin: 48px auto 0;  padding: 4px;     background: rgba(255,255,255,0.3);"   src="{$user.userqq.figureurl_qq_2?$user.userqq.figureurl_qq_2:'__STATIC__/images/user/user ('.rand(1,25).').jpg'}" data-holder-rendered="true"  >
+    <img    class="img-responsive center-block img-circle" style="   width: 100px; height: 100px;   margin: 48px auto 0;  padding: 4px;     background: rgba(255,255,255,0.3);"   src="{$user.userQq.figureurl_qq_2?$user.userQq.figureurl_qq_2:'__STATIC__/images/user/user ('.rand(1,25).').jpg'}" data-holder-rendered="true"  >
 
 
 
@@ -111,15 +111,15 @@
 
     <!-- 用户信息列表 -->
     <ul class="list-group">
-      <li class="list-group-item">昵称： {$user.userqq.nickname|default="努力学习TP5中的小强"}
+      <li class="list-group-item">昵称： {$user.nickname|default="努力学习TP5中的小强"}
       <li class="list-group-item">性别：
-           {if condition="$user.userqq.gender=='男'"}
+           {if condition="$user.userQq.gender=='男'"}
            <span class="glyphicon glyphicon-king" style="color: #4ebdf9" aria-hidden="true"></span>
           {else /}
           <span class="glyphicon glyphicon-queen" style="color: #ff7bb6" aria-hidden="true"></span>
           {/if}
       </li>
-      <li class="list-group-item">年龄： {:date('Y')-$user.userqq.year}</li>
+      <li class="list-group-item">年龄： {:date('Y')-$user.userQq.year}</li>
        <li class="list-group-item">所在地：{$user.ipinfo.region}</li>
       <li class="list-group-item">注册时间：{$user.create_time}</li>
       <li class="list-group-item">最后访问：{$user.footprint.create_time}</li>
@@ -184,7 +184,7 @@
 
 
                     <a href="{:url('index/member/home',['user_id'=>$fo.user_id])}" class="thumbnail">
-                                    <img class="  img-circle"    src="{$fo.userqq.figureurl_qq_2?$fo.userqq.figureurl_qq_2:'__STATIC__/images/user/user ('.rand(1,25).').jpg'}" data-holder-rendered="true" style="width: 28px; height: 28px;">
+                                    <img class="  img-circle"    src="{$fo.userQq.figureurl_qq_2?$fo.userQq.figureurl_qq_2:'__STATIC__/images/user/user ('.rand(1,25).').jpg'}" data-holder-rendered="true" style="width: 28px; height: 28px;">
                     </a>
 
 
@@ -254,7 +254,7 @@
                         <div class="media" >
                             <div class="media-left" >
                                 <a href="{:url('/')}index/member/home/user_id/{$user.user_id}">
-                                    <img class="media-object img-circle"    src="{$user.user.userqq.figureurl_qq_2?$user.user.userqq.figureurl_qq_2:'__STATIC__/images/user/user ('.rand(1,25).').jpg'}" data-holder-rendered="true" style="width: 28px; height: 28px;">
+                                    <img class="media-object img-circle"    src="{$user.user.userQq.figureurl_qq_2?$user.user.userQq.figureurl_qq_2:'__STATIC__/images/user/user ('.rand(1,25).').jpg'}" data-holder-rendered="true" style="width: 28px; height: 28px;">
                                 </a>
                             </div>
 
@@ -265,7 +265,7 @@
                                   <div class="col-xs-6 col-md-7">
                                         <small><a href="{:url('/')}index/member/home/user_id/{$user.user_id}">
 
-                                        {$user.user.userqq.nickname?$user.user.userqq.nickname:'学员'.$user.user.id}
+                                        {$user.user.userQq.nickname?$user.user.userQq.nickname:'学员'.$user.user.id}
                                         
 
 
@@ -283,7 +283,7 @@
                                                                   {if condition="$user.dataself.title"}
                                                                 <div class="form-group input-group field-feed-content required" style="background-color:  #f4f4f4;padding: 10px;color: #555555">
 
-                                                                     @  {$user.dataself.user.userqq.nickname?$user.dataself.user.userqq.nickname:'学员'.$user.user.id}  : {$user.dataself.title}
+                                                                     @  {$user.dataself.user.userQq.nickname?$user.dataself.user.userQq.nickname:'学员'.$user.user.id}  : {$user.dataself.title}
                                                  
                                                                 </div>
 
@@ -299,7 +299,7 @@
                                                                       
                                                                 {volist name='user.likesList' id='lik'}
                                                                               <a href="{:url('index/member/home',['user_id'=>$lik.user_id])}">
-                                    <img class="  img-circle"    src="{$lik.user.userqq.figureurl_qq_2?$lik.user.userqq.figureurl_qq_2:'__STATIC__/images/user/user ('.rand(1,25).').jpg'}" data-holder-rendered="true" style="width: 28px; height: 28px;">
+                                    <img class="  img-circle"    src="{$lik.user.userQq.figureurl_qq_2?$lik.user.userQq.figureurl_qq_2:'__STATIC__/images/user/user ('.rand(1,25).').jpg'}" data-holder-rendered="true" style="width: 28px; height: 28px;">
                 </a>
                                                                   {/volist}
 
@@ -322,9 +322,9 @@
                                                
 
                                                                     <h5>                                <a href="{:url('/')}index/member/home/user_id/{$user.user_id}">
-                                    <img class="  img-circle"    src="{$dataself.user.userqq.figureurl_qq_2?$dataself.user.userqq.figureurl_qq_2:'__STATIC__/images/user/user ('.rand(1,25).').jpg'}" data-holder-rendered="true" style="width: 28px; height: 28px;">
+                                    <img class="  img-circle"    src="{$dataself.user.userQq.figureurl_qq_2?$dataself.user.userQq.figureurl_qq_2:'__STATIC__/images/user/user ('.rand(1,25).').jpg'}" data-holder-rendered="true" style="width: 28px; height: 28px;">
                                 </a>
-                                                                     {$dataself.user.userqq.nickname?$dataself.user.userqq.nickname:'学员'.$dataself.user.id}    :{$dataself.title} {$dataself.create_time}</h5>   
+                                                                     {$dataself.user.userQq.nickname?$dataself.user.userQq.nickname:'学员'.$dataself.user.id}    :{$dataself.title} {$dataself.create_time}</h5>   
                                                  
                                                                  
                                                {/volist} 
