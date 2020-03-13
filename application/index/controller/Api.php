@@ -159,18 +159,17 @@ class Api extends \think\Controller
 
 
         $user = new UserQq();
-        // 查询单个数据
+        // 查询是否登记
         $user = $user->where('openid', $openid)
             ->where('type', 0)
-            ->find();
+            ->count();
 
-        $user_id  = $user['id'];
-        $nickname = $user_from_qq->nickname;
-        $photo    = $user_from_qq->figureurl_qq_2;
+        $nickname   = $user_from_qq->nickname;
+        $photo      = $user_from_qq->figureurl_qq_2;
+        $user_qq_id = '';
 
         // 没登记openID的先登记
         if (!$user) {
-            # code.. 
 
 
             $user                 = new UserQq();
@@ -184,12 +183,8 @@ class Api extends \think\Controller
             $user->save();
 
 
-            // return "创建成功！";
+            $user_qq_id = $user->id;
 
-            // 查询单个数据
-            $user = $user->where('openid', $openid)
-                ->where('type', 0)
-                ->find();
 
         } else {
 
@@ -203,33 +198,20 @@ class Api extends \think\Controller
             $user->year           = $user_from_qq->year;
             $user->type           = 0;
             $user->save();
+
+            $user_qq_id = $user->id;
         }
 
-        // 不强制绑定手机号，直接用qq就可以登录的功能
-        //
-        // 在核心的会员表里创建一个会员。
-        // 1. 如果绑定新手机号号。直接绑定  不再创建会员号
-        // 2. 如果绑定老用户手机号
-        //     2.1 qq绑定到老用户上，直接绑定，造成
-        //
-        // 3. 如果老手机号，要来绑定qq，
+
+        // 查询是否绑定会员
+        $user_id = UserQq::where('id', 'user_qq_id')->value('user_id');
 
 
-        // 记录昵称和头像，页面展示
-        cookie('openid', $user_from_qq->nickname, 3600000);
-        cookie('nickname', $user_from_qq->nickname, 3600000);
-        cookie('photo', $user_from_qq->figureurl_qq_2, 3600000);
+        // 没有绑定会员号的，创建会员账号
+        if (!$user_id) {
 
-
-        // dump($user);
-        // dump($user->user_id);
-        $token  = md5(time() . rand(100000, 999999));
-        $invite = Cookie::get('invite');;
-        $user_id = $user->user_id;
-
-        // 没有绑定会员号的，创建账号
-        if (!$user->user_id) {
-
+            $token  = md5(time() . rand(100000, 999999));
+            $invite = Cookie::get('invite');;
 
             $user = User::create([
                 'invite'   => $invite,
@@ -243,14 +225,12 @@ class Api extends \think\Controller
 
 
             // 在qq表登记绑定用户id
-            $user          = UserQq::get(session('openid_id'));
+            $user          = UserQq::get($user_qq_id);
             $user->user_id = $user_id;
             $user->save();
 
             Cookie::set('user_id', $user_id, 36000000);
             Cookie::set('token', $token, 3600000);
-
-            // 赋值（当前作用域）记录需要绑定openid
             session('openid_id', $user->id);
 
 
@@ -258,11 +238,10 @@ class Api extends \think\Controller
             $this->redirect('index/index/register', ['cate_id' => 2]);
 
 
-            return $this->success('登录成功，绑定账号', 'index/index/register');
-
 
             // 邀请奖励功能拆分为独立的 invite()方法，需要再对接
             // invite(1,2);
+
         } else {
 
             $user           = User::get($user_id);
@@ -270,48 +249,16 @@ class Api extends \think\Controller
             $user->photo    = $photo;
             $user->ip       = 1;
             $user->save();
+
+            // 设置Cookie 有效期为 秒
+            Cookie('token', $user->token, 3600000);
+            Cookie('user_id', $user->id, 3600000);
+
         }
-
-        // 获取用户账号和 token秘钥
-
-        // dump($openid);
-
-        // 取出主键为 $user->user_id 的数据
-        // 提示从user表里查询主键id是$user->user_id ，这个$user->user_id是用户id从已经绑定的UserQq里面获取
-        // 这个页面大量的用$user 造成了很多混淆，简易改成独立的
-        $user = User::get($user_id);
-
-        // dump($user);
-        // echo $user->phone . "999+++++";
-        // echo $user->token;
-
-
-        // 删除Cookie
-        cookie('phone', null);
-        cookie('token', null);
-
-        // 设置Cookie 有效期为 秒
-        Cookie('token', $user->token, 3600000);
-        Cookie('nickname', $user->nickname, 3600000);
-        Cookie('photo', $user->photo, 3600000);
-        Cookie('user_id', $user->id, 3600000);
-
-
-        // 判断是否是先支付了，再来注册/登录的用户
-        if (Session::get('total_fee') > 0) {
-            // 更新用户的用户名
-            Session::set('phone', $user->phone);
-            //  重定向到收款页面，加入订单
-            $this->redirect('member/payReturn');
-        }
-
-
-
 
         return $this->success('登录成功^_^', 'index/index/index');
 
 
-        // 查询有没绑定账号，没绑定跳转绑定页面。有绑定 自动设置登录
 
 
     }
