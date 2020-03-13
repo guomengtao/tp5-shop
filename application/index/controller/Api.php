@@ -166,7 +166,7 @@ class Api extends \think\Controller
 
 
         // 没登记openID的先登记
-        if ($user_qq_id) {
+        if (!$user_qq_id) {
 
 
             $user                 = new UserQq();
@@ -196,12 +196,11 @@ class Api extends \think\Controller
             $user->type           = 0;
             $user->save();
 
-            $user_qq_id = $user->id;
         }
 
 
         // 查询是否绑定会员
-        $user_id = UserQq::where('id', 'user_qq_id')->value('user_id');
+        $user_id = UserQq::where('id', $user_qq_id)->value('user_id');
 
 
         // 没有绑定会员号的，创建会员账号
@@ -232,7 +231,7 @@ class Api extends \think\Controller
 
             // 邀请奖励功能拆分为独立的 invite()方法，需要再对接
             // invite(1,2);
-            
+
             // 重定向到News模块的Category操作
             $this->redirect('index/index/register', ['cate_id' => 2]);
 
