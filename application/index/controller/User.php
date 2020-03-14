@@ -146,7 +146,7 @@ class User extends Frontend
                     break;
             }
         }
-        
+
         if ($val['address']) {
 
             $str          = $val['address'];
