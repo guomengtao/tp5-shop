@@ -81,15 +81,8 @@ class User extends Frontend
         });
 
         // print_r($tableHeader->all());
-
-        if ($web) {
-            print_r($tableRows->all());
-        }
-
         $arr = $tableRows->all();
-        $this->save($arr, $ip);
-
-
+        $this->save($arr, $ip, $web);
 
 
     }
@@ -97,14 +90,13 @@ class User extends Frontend
     public function save($arr = [], $ip = '1')
     {
 
-
+        dump($arr);
         $arr = array_filter($arr);
         $arr = array_filter($arr, function ($item) {
 
             return $item['0'] !== '';
 
         });
-        // dump($arr);
         $val       = [];
         $val['ip'] = $ip;
         // 初始化地址字段，防止未定义
