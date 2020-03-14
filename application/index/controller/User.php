@@ -153,9 +153,9 @@ class User extends Frontend
             $val['score'] = $this->get_between($str, '：', ') 查');
 
 
-            $strCheck = strstr($str, '\\');
+            $strCheck = strstr($str, '(');
             if ($strCheck) {
-                $val['address'] = substr($str, 0, strpos($str, '\\'));
+                $val['address'] = substr($str, 0, strpos($str, '('));
             }
             $user = new Human;
             $user->data($val);
