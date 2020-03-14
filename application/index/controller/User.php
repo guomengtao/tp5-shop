@@ -155,8 +155,10 @@ class User extends Frontend
             if ($scoreCheck) {
                 $val['score'] = $this->get_between($str, '可信', '查看');
                 $score        = $val['score'];
-                dump($val['score']);
-                $val['score'] = preg_replace("/[a-zA-Z][\x{4e00}-\x{9fa5}]+/u", '', $val['score']);//替换为空
+                dump($score);
+                preg_match_all('/\d+/', $score, $arr);
+                $arr          = join('', $arr[0]);
+                $val['score'] = $arr;
                 dump($val['score']);
             }
 
