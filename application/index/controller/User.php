@@ -150,12 +150,20 @@ class User extends Frontend
 
             $str = $val['address'];
             $str = str_replace(array("\r\n", "\r", "\n", " "), "", $str);
-            $val['score'] = $this->get_between($str, '：', ') 查');
+
+            $scoreCheck = strstr($str, '可信度');
+            if ($scoreCheck){
+                $val['score'] = $this->get_between($str, '可', '查');
+                dump($val['score']);
+            }
+
 
 
             $strCheck = strstr($str, '(');
             if ($strCheck) {
                 $val['address'] = substr($str, 0, strpos($str, '('));
+            }else{
+                $val['address'] = $str;
             }
             $user = new Human;
             $user->data($val);
