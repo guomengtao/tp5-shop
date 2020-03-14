@@ -64,6 +64,10 @@ class User extends Frontend
         try {
             $table = QueryList::post($url, ['ip' => $ip])->find('table');
         } catch (\Exception $e) {
+            if ($web) {
+                dump($e);
+                echo "--ok--";
+            }
             return '';
         }
 
