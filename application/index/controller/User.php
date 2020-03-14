@@ -44,7 +44,7 @@ class User extends Frontend
 
         $footpirnt = Footprint::where('ip', $ip)->count();
         if (!$footpirnt) {
-            return "-";
+            return "";
         }
         // 已存在的跳过
         $human = Human::where('ip', $ip)->find();
@@ -54,7 +54,7 @@ class User extends Frontend
                 echo "--ok--";
             }
 
-            return '+';
+            return '';
         }
 
         $url = "https://www.ipip.net/ip.html";
