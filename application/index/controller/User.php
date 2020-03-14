@@ -129,7 +129,7 @@ class User extends Frontend
 
             $val['ip'] = $ip;
             // 初始化地址字段，防止未定义
-            $val['address'] = '';
+            $val['address'] = 0;
 
             switch ($a) {
                 case "运营商":
