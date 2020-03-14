@@ -101,7 +101,7 @@ class User extends Frontend
         $val       = [];
         $val['ip'] = $ip;
         // 初始化地址字段，防止未定义
-        $val['address'] = 0;
+        // $val['address'] = 0;
 
         foreach ($arr as list($a, $b)) {
             // $a contains the first element of the nested array,
