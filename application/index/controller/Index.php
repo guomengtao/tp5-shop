@@ -50,6 +50,8 @@ class Index extends \think\Controller
         //
         // die();
 
+
+
     }
 
     public function get_between($input, $start, $end)

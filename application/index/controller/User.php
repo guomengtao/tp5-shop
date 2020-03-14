@@ -91,8 +91,8 @@ class User extends Frontend
     {
 
         dump($arr);
-        $arr = array_filter($arr);
-        $arr = array_filter($arr, function ($item) {
+        $arr       = array_filter($arr);
+        $arr       = array_filter($arr, function ($item) {
 
             return $item['0'] !== '';
 
@@ -148,7 +148,8 @@ class User extends Frontend
 
         if ($val['address']) {
 
-            $str          = $val['address'];
+            $str = $val['address'];
+            $str = str_replace(array("\r\n", "\r", "\n", " "), "", $str);
             $val['score'] = $this->get_between($str, '：', ') 查');
 
 
