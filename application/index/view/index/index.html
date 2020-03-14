@@ -2,12 +2,14 @@
 
 <div class="row">
     <div class="col-md-9">
-
-
- <div class="alert alert-warning alert-dismissible" role="alert">
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-  <strong>Welcome!</strong> 欢迎来自 {$human.address?$human.address:$human.user.ipinfo.region} {$human.user.ipinfo.region}的大佬！
-</div>
+        {if condition="!$Think.session.alertHidden" }
+        <div class="alert alert-warning alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span id="alert_hidden"
+                                                                                              aria-hidden="true">&times;</span>
+            </button>
+            <strong>Welcome!</strong> 欢迎来自 {$human.address?$human.address:$human.user.ipinfo.region} 的大佬！
+        </div>
+        {/if}
         <div class="panel panel-default">
             <div class="panel-heading">站点说明</div>
             <div class="panel-body">
@@ -145,14 +147,13 @@
             </a>
             {volist name="ip_info" id="vo"}
             <a href="{:url('index/member/footprint')}" class="list-group-item">
-                 <span class="badge">{$vo.update_time}</span>
+                <span class="badge">{$vo.update_time}</span>
                 {$i}: {$vo.region} ({$vo.ip})
             </a>
             {/volist}
 
 
         </div>
-
 
 
         <div class="panel panel-default">
@@ -181,11 +182,10 @@
 </div>
 
 
-
-    <p style="display: none">
-        <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-        document.write(unescape("%3Cspan id='cnzz_stat_icon_1275862484'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s5.cnzz.com/stat.php%3Fid%3D1275862484%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));</script>
-    </p>
+<p style="display: none">
+    <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cspan id='cnzz_stat_icon_1275862484'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s5.cnzz.com/stat.php%3Fid%3D1275862484%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));</script>
+</p>
 
 <script>
     $(document).ready(function () {
@@ -201,8 +201,15 @@
                 console.log("Error: " + xhr.status + ": " + xhr.statusText);
         });
 
+        $("#alert_hidden").click(function () {
+            console.log(2);
+            $.get("{:url('index/ajax/alertHidden')}",
+                function (data) {
+                    console.log("Data Loaded: " + data);
+                });
+        });
 
     });
 </script>
 
- {include file="index/footer" /}
+{include file="index/footer" /}
