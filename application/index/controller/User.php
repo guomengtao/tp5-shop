@@ -139,10 +139,14 @@ class User extends Frontend
         }
         if ($val['address']) {
 
-            $str = $val['address'];
+            $str          = $val['address'];
             $val['score'] = $this->get_between($str, '：', ') 查');
-            $val['address'] = substr($str, 0, strpos($str, '\\'));
 
+
+            $strCheck = strstr($str, '\\');
+            if ($strCheck) {
+                $val['address'] = substr($str, 0, strpos($str, '\\'));
+            }
             $user = new Human;
             $user->data($val);
             $user->save();

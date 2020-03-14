@@ -38,12 +38,17 @@ class Index extends \think\Controller
     {
         // 记录访问信息 和 机器人拦截
         Member::agent();
-        // $str = "中国四川成都青羊区中铁·双龙湾\(住宅小区)(可信度：99) 查看地图";
-        //
-        // echo $this->get_between($str, '：', ') 查');
-        // echo "<br>222";
-        // echo substr($str, 0, strpos($str, '\\'));
-        // die();
+        $str = "中国四川成都青羊区中铁·双龙湾\(住宅小区)(可信度：99) 查看地图";
+        $str = "中国四川成都青羊区";
+
+        echo $this->get_between($str, '：', ') 查');
+
+        $strCheck = strstr($str, '\\');
+        if ($strCheck) {
+            echo substr($str, 0, strpos($str, '\\'));
+        }
+
+        die();
 
     }
 
