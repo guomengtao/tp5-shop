@@ -6,7 +6,7 @@
 
  <div class="alert alert-warning alert-dismissible" role="alert">
   <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-  <strong>Welcome!</strong> 欢迎来自 {$human.address} 的大佬！
+  <strong>Welcome!</strong> 欢迎来自 {$human.address?$human.address:$human.user.ipinfo.region} {$human.user.ipinfo.region}的大佬！
 </div>
         <div class="panel panel-default">
             <div class="panel-heading">站点说明</div>
