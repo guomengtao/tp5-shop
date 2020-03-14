@@ -3,18 +3,30 @@ branches: {
   }
 fileChange:
   /application:
-    newFile: !uuid 'cb088f88d47db5b6b9f1cbe62cec501ed1c58660'
-    oldFile: !uuid 'c8993c4e4ab82891c53bf0a81de0c3798543d10f'
+    newFile: !uuid '88e358c83a21d1fb891e44f2985dd971f72211ce'
+    oldFile: !uuid 'cb088f88d47db5b6b9f1cbe62cec501ed1c58660'
   /application/index:
-    newFile: !uuid 'f09d5639bec765efe254aded8baecdf439a8d71f'
-    oldFile: !uuid 'fe165476569669721a23ba3f20535a749893713b'
+    newFile: !uuid '4e639c553aed704e1848e6de0767f5d0d50a59d6'
+    oldFile: !uuid 'f09d5639bec765efe254aded8baecdf439a8d71f'
   /application/index/controller:
-    newFile: !uuid 'c100a52ef84443faff2d9f85aaf14416789cecea'
-    oldFile: !uuid 'b7f22b27a6c151c4d5fa934c0a750bb0612e805e'
-  /application/index/controller/Member.php:
-    newFile: !uuid '464e03e9fad65dae274428e01f919668afc3dbff'
-    oldFile: !uuid '09bc397d0494ec392204a9d48b1fdfea1b85962a'
-gitCommitId: !uuid 'd93ed2e41522f15bde6b6c77b05e92fdd8576ab6'
+    newFile: !uuid '882144790137fd1f8d7029717858aac8350aa29b'
+    oldFile: !uuid 'c100a52ef84443faff2d9f85aaf14416789cecea'
+  /application/index/controller/Index.php:
+    newFile: !uuid 'd339fb843326c1c2c11bdf2267b979cddf6cb319'
+    oldFile: !uuid '6d259c52a23ca4364ae2b4d8536b550c711be372'
+  /application/index/controller/User.php:
+    newFile: !uuid '4e8fc90874434da15c3a5ba335294b13eb4abe84'
+    oldFile: !uuid 'b362ecfb8fdaec9bbc8496be57a89db9ad276fe4'
+  /application/index/view:
+    newFile: !uuid '8680f98e1885cd94605d8f9fddebb69fe7efb0b9'
+    oldFile: !uuid '8b41388fac24e012677060e5d2e35e5ffd5ba773'
+  /application/index/view/member:
+    newFile: !uuid 'a8ea95621884985d841643f1ff1e867924417f16'
+    oldFile: !uuid 'd13b9b1bbb4e6b6edd9ad4a952fb213b26cad38c'
+  /application/index/view/member/footprint.html:
+    newFile: !uuid 'e2a58e8923dec8a882328ecba48e3ee41993e6dc'
+    oldFile: !uuid 'c621b2374c61e0cc38f1d203cb2bc19772183ffe'
+gitCommitId: !uuid 'ae8921ccf7def27a6bb16ff13954b126534be094'
 renames: {
   }
-revisionId: 617
+revisionId: 618
