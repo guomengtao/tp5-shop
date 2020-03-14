@@ -62,9 +62,9 @@ class User extends Frontend
 
 
         try {
-              $table = QueryList::post($url, ['ip' => $ip])->find('table');
+            $table = QueryList::post($url, ['ip' => $ip])->find('table');
         } catch (\Exception $e) {
-             return '';
+            return '';
         }
 
 
@@ -98,7 +98,10 @@ class User extends Frontend
 
         });
         // dump($arr);
-        $val = [];
+        $val       = [];
+        $val['ip'] = $ip;
+        // 初始化地址字段，防止未定义
+        $val['address'] = 0;
 
         foreach ($arr as list($a, $b)) {
             // $a contains the first element of the nested array,
@@ -127,9 +130,6 @@ class User extends Frontend
             // 	4	isp	varchar(200)	utf8_general_ci		否	无	运营商		修改 修改	删除 删除
             // 更多
 
-            $val['ip'] = $ip;
-            // 初始化地址字段，防止未定义
-            $val['address'] = 0;
 
             switch ($a) {
                 case "运营商":
@@ -146,6 +146,7 @@ class User extends Frontend
                     break;
             }
         }
+        
         if ($val['address']) {
 
             $str          = $val['address'];
