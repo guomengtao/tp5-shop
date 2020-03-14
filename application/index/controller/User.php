@@ -43,8 +43,8 @@ class User extends Frontend
         $web = input('web');
 
         $footpirnt = Footprint::where('ip', $ip)->count();
-        if (!$footpirnt){
-            return true;
+        if (!$footpirnt) {
+            return "";
         }
         // 已存在的跳过
         $human = Human::where('ip', $ip)->find();
@@ -54,7 +54,7 @@ class User extends Frontend
                 echo "--ok--";
             }
 
-            return true;
+            return "";
         }
 
         $url = "https://www.ipip.net/ip.html";
@@ -137,11 +137,25 @@ class User extends Frontend
                     break;
             }
         }
-        $user = new Human;
-        $user->data($val);
-        $user->save();
+        if ($val['address']) {
+
+            $str = $val['address'];
+            $val['score'] = $this->get_between($str, '：', ') 查');
+            $val['address'] = substr($str, 0, strpos($str, '\\'));
+
+            $user = new Human;
+            $user->data($val);
+            $user->save();
+        }
+
 
         dump($val);
+    }
+
+    public function get_between($input, $start, $end)
+    {
+        $substr = substr($input, strlen($start) + strpos($input, $start), (strlen($input) - strpos($input, $end)) * (-1));
+        return $substr;
     }
 
     /**
