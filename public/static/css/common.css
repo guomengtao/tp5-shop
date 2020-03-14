@@ -8,4 +8,4 @@
 /*4. 可以直接调用img，不加外部img_box前提是外部的div有限制，否则可能会撑大页码*/
 .img_box{width:64px;height:64px;overflow: hidden;border-radius: 50%;}
 .img{width:64px;transition: all 0.6s;border-radius: 50%;}
-.img:hover{transform: scale(1.5);border-radius: 50%;}
+.img:hover{transform: scale(1.2);border-radius: 50%;}
