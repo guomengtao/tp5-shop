@@ -21,7 +21,7 @@ class Footprint extends model
     public static function views_today()
     {
 
-        return Footprint::whereTime('create_time', 'today')->cache(3600)->count();
+        return Footprint::whereTime('create_time', 'today')->cache(360)->count();
 
     }
 

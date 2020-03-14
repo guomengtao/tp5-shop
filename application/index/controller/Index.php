@@ -38,7 +38,6 @@ class Index extends \think\Controller
     {
         // 记录访问信息 和 机器人拦截
         Member::agent();
-      
 
 
     }
@@ -2213,7 +2212,8 @@ class Index extends \think\Controller
          *
          */
 
-
+        $ip              = Request::instance()->ip();
+        $human           = Human::where('ip', $ip)->find();
         $views_today     = Footprint::views_today();
         $views_yesterday = Footprint::views_yesterday();
         // 查询今天签到
@@ -2223,6 +2223,7 @@ class Index extends \think\Controller
         $this->assign('views_yesterday', $views_yesterday);
         $this->assign('registration_today', $registration_today);
         $this->assign('ip_info', $ip_info);
+        $this->assign('human', $human);
 
         return view();
 
