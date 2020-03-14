@@ -65,8 +65,9 @@ class User extends Frontend
             $table = QueryList::post($url, ['ip' => $ip])->find('table');
         } catch (\Exception $e) {
             if ($web) {
+                echo "--接口升级 稍后访问--";
                 dump($e);
-                echo "--ok--";
+
             }
             return '';
         }
@@ -76,7 +77,7 @@ class User extends Frontend
         $tableHeader = $table->find('tr:eq(0)')->find('td')->texts();
         // 采集表的每行内容
         $tableRows = $table->find('tr:gt(0)')->map(function ($row) {
-            // return $row->find('td')->texts()->all();
+            return $row->find('td')->texts()->all();
         });
 
         // print_r($tableHeader->all());
@@ -87,6 +88,8 @@ class User extends Frontend
 
         $arr = $tableRows->all();
         $this->save($arr, $ip);
+
+
 
 
     }
@@ -105,7 +108,7 @@ class User extends Frontend
         $val       = [];
         $val['ip'] = $ip;
         // 初始化地址字段，防止未定义
-        // $val['address'] = 0;
+        $val['address'] = '';
 
         foreach ($arr as list($a, $b)) {
             // $a contains the first element of the nested array,
