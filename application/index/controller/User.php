@@ -149,7 +149,8 @@ class User extends Frontend
         if ($val['address']) {
 
             $str = $val['address'];
-            $str = str_replace(array("\r\n", "\r", "\n", " "), "", $str);
+            $str = str_replace(array("\r\n", "\r", "\n", " ","产品详情"), "", $str);
+
 
             $scoreCheck = strstr($str, '可信度');
             if ($scoreCheck) {
