@@ -3,39 +3,21 @@ branches: {
   }
 fileChange:
   /application:
-    newFile: !uuid 'ddf459f080562c3b00dce993a486924b3c904918'
-    oldFile: !uuid 'bbdcf7d4ef92b9a01c387c98aaa0f75338bd1c4c'
+    newFile: !uuid 'f06a686aa1c9edbd23c60d1c310b605f5f06d80f'
+    oldFile: !uuid 'ddf459f080562c3b00dce993a486924b3c904918'
   /application/index:
-    newFile: !uuid 'bac557fba1ec2130146697f3f8b5cf9ee0ee21ea'
-    oldFile: !uuid 'c2e63ce0f241212dd37d7b95c185c5f5c2363f4b'
+    newFile: !uuid 'dd5a087c3a7c4373246fd112ecbd7687e77b1e82'
+    oldFile: !uuid 'bac557fba1ec2130146697f3f8b5cf9ee0ee21ea'
   /application/index/view:
-    newFile: !uuid '0ab3bde7bcd906c1fa8ce91af00458b0057e88f1'
-    oldFile: !uuid 'ae0aa9bd17133853c36c844d78ae1ca9d39a76e7'
+    newFile: !uuid '6f549211201340f4adf61420e4935f3f48e78190'
+    oldFile: !uuid '0ab3bde7bcd906c1fa8ce91af00458b0057e88f1'
   /application/index/view/index:
-    newFile: !uuid 'b6abe12ca7a5fea7bbced0c73cd1e25578658932'
-    oldFile: !uuid 'ad9d192842bad4828114ffd5c25a5aa4b2002a77'
+    newFile: !uuid 'f1bdcb52c590c268277049ec96f4c92f62369764'
+    oldFile: !uuid 'b6abe12ca7a5fea7bbced0c73cd1e25578658932'
   /application/index/view/index/header.html:
-    newFile: !uuid 'b168c7bd0f0a90c978985ad8ebf84181fd2703e2'
-    oldFile: !uuid 'd1a62894666ed21232ae7ab8faca6dd82ca0dcb7'
-  /application/index/view/member:
-    newFile: !uuid 'b42223d51784edf9f24ba548106c42ea0e4e1b7d'
-    oldFile: !uuid 'a48d23c7dfcaa18869fd5d9c58c7cb77ae7eaa67'
-  /application/index/view/member/home.html:
-    newFile: !uuid 'fab49ce84d30de97c62c5a567b8e704b5ad9107f'
-    oldFile: !uuid '45e099e575878ab0d3ab04c88dd83138bfea04ca'
-  /public:
-    newFile: !uuid '8355cdccd0dba4511fe7701fb5795411b927b4af'
-    oldFile: !uuid '15dffec4532f8464fe267162f4d8e47430fac668'
-  /public/static:
-    newFile: !uuid 'c3f0c80a1bccfa8f031e19719fbd197817a549e6'
-    oldFile: !uuid 'd275c284534f5a4fc4c05589b595df145a018356'
-  /public/static/css:
-    newFile: !uuid '0c1d67ceb73ca0702fe27e17dd7f8ec392acc726'
-    oldFile: !uuid '96dd978e070d6bdc90ba935576b2a86239af97ed'
-  /public/static/css/common.css:
-    newFile: !uuid '873da1a01d9408de5416cf440c0b5a6d0da7d8c9'
-    oldFile: !uuid '977e3045cf5da5d49b790987557cbd3cc58d1f96'
-gitCommitId: !uuid 'd16c129aded604631785e0d8b866c3116084971f'
+    newFile: !uuid '0ceac3f6ad834f5ab5d17a288523243597190ad7'
+    oldFile: !uuid 'b168c7bd0f0a90c978985ad8ebf84181fd2703e2'
+gitCommitId: !uuid 'c436bbb7c71803083f32d1d1bb78f0583e4166bb'
 renames: {
   }
-revisionId: 646
+revisionId: 647
