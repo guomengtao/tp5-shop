@@ -38,9 +38,7 @@ class Index extends \think\Controller
     {
         // 记录访问信息 和 机器人拦截
         Member::agent();
-       $ms="北京市be北京市dd223、\n";
-echo $news;
-        die;
+      
 
 
     }
