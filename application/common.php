@@ -93,7 +93,7 @@ function ip1region()
     if (!$ip or $ip == '127.0.0.1') {
 
 
-        return "ok";
+        // return "ok";
     }
 
     $ip2region = new Ip2Region();

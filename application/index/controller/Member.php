@@ -75,18 +75,17 @@ class Member extends \think\Controller
             // 记录访问量
             footprint();
         }
-
         // 这一句是tp5是任意使用一下session类才可以获取session_id
         // 估计tp5里为了节省资源，默认没有创建session_id
         Session::get('start_session_working');
         $info['session_id'] = session_id();
-
         // 使用session_id判断唯一用户如果只保存一条session_id记录
 
         $count = Agent_T::where('session_id', $info['session_id'])->count();
         if ($count) {
             return '';
         }
+
         /**
          * 以上是agent类提供的
          * 以下补充需要重点加的
@@ -1255,7 +1254,7 @@ class Member extends \think\Controller
 
             if ($registration_user) {
                 # 已经签到直接提示
-                $msg = "已连续签到" . $rand . "天";
+                $msg = "已签到过，加油！已连续签到" . $rand . "天";
                 return $this->success($msg, 'index/member/registration');
                 // return "已连续签到" . $rand . "天";
             }

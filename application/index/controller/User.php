@@ -57,15 +57,23 @@ class User extends Frontend
             return '';
         }
 
+
         $url = "https://www.ipip.net/ip.html";
 
-        $table = QueryList::post($url, ['ip' => $ip])->find('table');
+
+        try {
+              $table = QueryList::post($url, ['ip' => $ip])->find('table');
+        } catch (\Exception $e) {
+             echo "ok";
+             return '';
+        }
+
 
         // 采集表头
         $tableHeader = $table->find('tr:eq(0)')->find('td')->texts();
         // 采集表的每行内容
         $tableRows = $table->find('tr:gt(0)')->map(function ($row) {
-            return $row->find('td')->texts()->all();
+            // return $row->find('td')->texts()->all();
         });
 
         // print_r($tableHeader->all());
@@ -121,6 +129,8 @@ class User extends Frontend
             // 更多
 
             $val['ip'] = $ip;
+            // 初始化地址字段，防止未定义
+            $val['address'] = '';
 
             switch ($a) {
                 case "运营商":
