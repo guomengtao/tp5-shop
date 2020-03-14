@@ -153,15 +153,15 @@ class User extends Frontend
 
             $scoreCheck = strstr($str, '可信度');
             if ($scoreCheck){
-                $val['score'] = $this->get_between($str, '可', '查');
+                $val['score'] = $this->get_between($str, '可信度：', ')');
                 dump($val['score']);
             }
 
 
 
-            $strCheck = strstr($str, '(');
+            $strCheck = strstr($str, '(可信度');
             if ($strCheck) {
-                $val['address'] = substr($str, 0, strpos($str, '('));
+                $val['address'] = substr($str, 0, strpos($str, '(可信度'));
             }else{
                 $val['address'] = $str;
             }
