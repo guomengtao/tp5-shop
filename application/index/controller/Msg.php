@@ -21,7 +21,10 @@ class Msg extends Frontend
 
     public function _initialize()
     {
-
+        $user_id = Cookie::get('user_id');
+        if($user_id){
+            return $this->error('请登录','index/index/login');
+        }
     }
 
     /**
