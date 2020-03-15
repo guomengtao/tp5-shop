@@ -2202,7 +2202,14 @@ class Index extends \think\Controller
 
     }
 
+    public  function  basic(){
 
+        return view();
+    }
+    public function starter(){
+        echo 12;
+        return $this->fetch();
+    }
     public function index()
     {
 

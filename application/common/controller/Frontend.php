@@ -17,6 +17,7 @@ class Frontend extends Controller
         //移除HTML标签
         $this->request->filter('trim,strip_tags,htmlspecialchars');
 
+
     }
 
 

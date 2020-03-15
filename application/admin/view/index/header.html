@@ -12,8 +12,7 @@
 </head>
 <body>
 
-{if condition="$Think.cookie.phone neq 18210787405"}   <script>window.location.href="__ROOT__/admin/index/login"</script>
-{/if} 
+
     
     <nav class="navbar navbar-inverse navbar-fixed-top" style=" border-radius: 0px;margin-bottom: 10px;">
   <div class="container-fluid">
@@ -69,9 +68,8 @@
       <ul class="nav navbar-nav navbar-right">
         <li class="active"> <a href="__ROOT__/index/index/index" target="_blank">预览首页</a>
  </li>
-        <li>{if condition="$Think.cookie.phone==18210787405"} <a href="__ROOT__/admin/index/login">{$Think.cookie.phone} 管理员您好！</a>
-{else /} <script>window.location.href="__ROOT__/admin/index/login"</script>
-{/if}</li>
+        <li> <a href="__ROOT__/admin/index/login">{$Think.cookie.phone} 管理员您好！</a>
+ </li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">设置 <span class="caret"></span></a>
           <ul class="dropdown-menu">
