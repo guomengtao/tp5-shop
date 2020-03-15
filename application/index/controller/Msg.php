@@ -25,6 +25,7 @@ class Msg extends Frontend
         if(!$user_id){
             return $this->error('请登录','index/index/login');
         }
+
     }
 
     /**
@@ -39,6 +40,7 @@ class Msg extends Frontend
 
     public function index()
     {
+        $this->assign("title","首页");
         return $this->fetch();
     }
 }
