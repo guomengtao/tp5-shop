@@ -1,0 +1,19 @@
+{layout name="basic" /}
+
+<table class="table table-striped">
+
+    <tbody>
+    {volist name="visits" id="vo"}
+    <tr>
+        <th scope="row">{$vo.create_time}</th>
+        <td>{$vo.user_id}</td>
+        <td><img src="{$vo.user.photo}" class="img-size-50 img-circle mr-3"/></td>
+        <td><a href="{:url('index/member/home',['user_id'=>$vo.user_id])}" target="_blank">回访</a></td>
+    </tr>
+    {/volist}
+
+
+    {$visits->render()}
+
+    </tbody>
+</table>
