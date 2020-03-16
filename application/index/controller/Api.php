@@ -108,6 +108,7 @@ class Api extends \think\Controller
         $userInfo = json_decode($userInfo, true);
         dump($userInfo);
         dump($userInfo['nickname']);
+        dump($userInfo['headimgurl']);
     }
 
     public function qq()
