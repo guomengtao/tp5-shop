@@ -1,5 +1,5 @@
 :loop
-D:\phpStudy\PHPTutorial\MySQL\bin\mysqldump.exe -hlocalhost -uroot -p123456 tom >tp5.sql
+D:\phpStudy\PHPTutorial\MySQL\bin\mysqldump.exe -hlocalhost -uroot -p123456 tom >tp5.sql.zips
 git status
 git add .
 git status
