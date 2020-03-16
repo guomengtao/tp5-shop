@@ -2,28 +2,10 @@
 branches: {
   }
 fileChange:
-  /application:
-    newFile: !uuid 'a6ce3b33155560a3ea88d2a822b9991e5450cbea'
-    oldFile: !uuid '85699bbc80330ab3ce59a06255277e03c7344a78'
-  /application/index:
-    newFile: !uuid '8efb2decceb8c6baa53af198e80bd3b81f96e444'
-    oldFile: !uuid 'd787b91e292466bff6bcf3b096f98b16f5be77d5'
-  /application/index/controller:
-    newFile: !uuid '9c52d5df858f184f38fd08d965cd7c23caea8c57'
-    oldFile: !uuid '55a5e25e7c361fba1adae41a0c05792ea18de7e8'
-  /application/index/controller/Api.php:
-    newFile: !uuid '42c414d73ed968b3ed56f869546be31b56773c2e'
-    oldFile: !uuid 'e31c8e90acfe3316c2adaae7dcb9526fe1af6c34'
-  /gitpush -mysql.bat:
-    newFile: !uuid 'bc160419c539e90276e4fad4d7ce385e8de40244'
-    oldFile: null
-  /push.bat:
-    newFile: !uuid '37cf67eb0e4843f5e3ea71df2d718cb8492f925f'
-    oldFile: !uuid 'd2fb3d78be59907ef927ed5aaff201e3f4c13ea5'
   /tp5.sql:
-    newFile: !uuid '89f904a12912822e2316c400d3f993d3b38b9693'
-    oldFile: null
-gitCommitId: !uuid '8eaeae1681b29c994ac1509cee12edb119eb1b23'
+    newFile: !uuid 'bc41bed106fdf7b973df731d0dcf85cf66255c2a'
+    oldFile: !uuid '89f904a12912822e2316c400d3f993d3b38b9693'
+gitCommitId: !uuid 'b0773c31567e52b665caca3e126b8f021c2414cc'
 renames: {
   }
-revisionId: 667
+revisionId: 668
