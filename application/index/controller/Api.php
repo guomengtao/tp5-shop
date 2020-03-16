@@ -89,7 +89,7 @@ class Api extends \think\Controller
 
         $refresh_token = $token['refresh_token'];
 
-        if ($refresh_token) {
+        if (!$refresh_token) {
             return "获取token失败";
         }
         // 第三步：刷新access_token（如果需要）
