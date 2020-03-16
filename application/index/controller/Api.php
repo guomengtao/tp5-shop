@@ -109,6 +109,9 @@ class Api extends \think\Controller
         dump($userInfo);
         dump($userInfo['nickname']);
         dump($userInfo['headimgurl']);
+
+        // 数据库入库
+
     }
 
     public function qq()
