@@ -807,46 +807,6 @@ LOCK TABLES `think_user_profile` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `think_user_qq`
---
-
-DROP TABLE IF EXISTS `think_user_qq`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `think_user_qq` (
-  `id` int(8) unsigned NOT NULL AUTO_INCREMENT,
-  `type` int(11) NOT NULL,
-  `nickname` varchar(255) DEFAULT NULL COMMENT '名称',
-  `openid` text,
-  `figureurl_qq_2` text COMMENT '状态',
-  `phone` bigint(11) DEFAULT NULL,
-  `year` int(11) DEFAULT NULL,
-  `invite` int(11) DEFAULT NULL,
-  `gender` text,
-  `start_time` int(11) DEFAULT NULL,
-  `figureurl_qq_1` text,
-  `delete_time` int(11) DEFAULT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  `ip` text,
-  `create_time` int(11) NOT NULL,
-  `update_time` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `phone` (`phone`),
-  KEY `phone_2` (`phone`)
-) ENGINE=MyISAM AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `think_user_qq`
---
-
-LOCK TABLES `think_user_qq` WRITE;
-/*!40000 ALTER TABLE `think_user_qq` DISABLE KEYS */;
-INSERT INTO `think_user_qq` VALUES (25,0,'我的qq网名',NULL,'http://thirdqq.qlogo.cn/qqapp/100556678/537770203713756DC8D596C2E97BC5B8/100',NULL,2000,NULL,'男',NULL,NULL,NULL,395,NULL,0,0),(26,0,'tp5_qq网名',NULL,'http://thirdqq.qlogo.cn/qqapp/100556678/4F595A725A6FA2069417C2A5787B35B1/100',NULL,1990,NULL,'女',NULL,NULL,NULL,393,NULL,0,0);
-/*!40000 ALTER TABLE `think_user_qq` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `think_video`
 --
 
@@ -878,6 +838,44 @@ LOCK TABLES `think_video` WRITE;
 /*!40000 ALTER TABLE `think_video` DISABLE KEYS */;
 /*!40000 ALTER TABLE `think_video` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `think_wechat`
+--
+
+DROP TABLE IF EXISTS `think_wechat`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `think_wechat` (
+  `id` int(8) unsigned NOT NULL AUTO_INCREMENT,
+  `nickname` varchar(255) DEFAULT NULL COMMENT '名称',
+  `sex` int(10) DEFAULT NULL,
+  `language` text,
+  `openid` text,
+  `headimgurl` text COMMENT '状态',
+  `city` varchar(11) DEFAULT NULL,
+  `invite` int(11) DEFAULT NULL,
+  `province` varchar(200) DEFAULT NULL,
+  `country` varchar(11) DEFAULT NULL,
+  `privilege` text,
+  `delete_time` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `ip` text,
+  `create_time` int(11) NOT NULL,
+  `update_time` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `think_wechat`
+--
+
+LOCK TABLES `think_wechat` WRITE;
+/*!40000 ALTER TABLE `think_wechat` DISABLE KEYS */;
+INSERT INTO `think_wechat` VALUES (25,'我的qq网名',NULL,'0',NULL,'http://thirdqq.qlogo.cn/qqapp/100556678/537770203713756DC8D596C2E97BC5B8/100','2000',NULL,'男',NULL,NULL,NULL,395,NULL,0,0),(26,'tp5_qq网名',NULL,'0',NULL,'http://thirdqq.qlogo.cn/qqapp/100556678/4F595A725A6FA2069417C2A5787B35B1/100','1990',NULL,'女',NULL,NULL,NULL,393,NULL,0,0);
+/*!40000 ALTER TABLE `think_wechat` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -888,4 +886,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-03-17  3:11:54
+-- Dump completed on 2020-03-17  3:32:30
