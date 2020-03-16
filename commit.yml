@@ -3,18 +3,18 @@ branches: {
   }
 fileChange:
   /application:
-    newFile: !uuid '6e8c699eee6294ac20efbe7fb718108cde17f2b8'
-    oldFile: !uuid 'd176b32feeaf35d0bc4499e1dc49a9f716ccd343'
-  /application/MP_verify_HZHroiAH4zapUljQ.txt:
-    newFile: null
-    oldFile: !uuid '635eadcc239da77aa840aed91d8e0b5f3de8a5c2'
-  /public:
-    newFile: !uuid '9567fb547461884f990c1e3f217e96fbc71dc57e'
-    oldFile: !uuid '9236b2d9c97cad6f8202d66c9af1696114151e54'
-  /public/MP_verify_HZHroiAH4zapUljQ.txt:
-    newFile: !uuid '635eadcc239da77aa840aed91d8e0b5f3de8a5c2'
-    oldFile: null
-gitCommitId: !uuid 'acb0e58433df3af26a3851401f882c546f6b185b'
-renames:
-  /public/MP_verify_HZHroiAH4zapUljQ.txt: /application/MP_verify_HZHroiAH4zapUljQ.txt
-revisionId: 658
+    newFile: !uuid 'fe17a233f24445344cc255dea3c6d71fe9e6b152'
+    oldFile: !uuid '6e8c699eee6294ac20efbe7fb718108cde17f2b8'
+  /application/index:
+    newFile: !uuid '70b4935cd5a21a767a2f7c44abbd3d372235d4df'
+    oldFile: !uuid 'a25579743ae1ce1b80a21e12574684cece0fb05b'
+  /application/index/controller:
+    newFile: !uuid '30424ef2ee46e0aa6eaaa8c340c72e9b6eac672a'
+    oldFile: !uuid '1d158af523f6caeacef29c955dada63fefb8b1da'
+  /application/index/controller/Api.php:
+    newFile: !uuid 'eca99b0e26f6500e0aa3e2ba2400c16e990af79f'
+    oldFile: !uuid 'ea418a23b9335e88c5bdcfa4a8b751e99e47184b'
+gitCommitId: !uuid 'd236fa06fa50fcc30586ee59e338fad9911ace67'
+renames: {
+  }
+revisionId: 659
