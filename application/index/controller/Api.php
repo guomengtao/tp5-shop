@@ -7,6 +7,7 @@ use think\Db;
 use think\Request;
 use app\index\model\Sms;
 use app\index\model\User;
+use app\index\model\Wechat;
 use app\index\model\Config;
 use app\index\model\UserQq;
 use app\index\model\Order;
@@ -69,48 +70,80 @@ class Api extends \think\Controller
 
     }
 
-    public function weiXin()
+    public function wechat()
     {
-        $code  = input('code');
-        $state = input('state');
-
-        $appId  = "wx45d07510895e9970";
-        $secret = '048b6a1deaaa39e508cfab5bfa4730a6';
-        $url    = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=$appId&secret=$secret&code=$code&grant_type=authorization_code";
-
-        $token = file_get_contents($url);
-        // 第二步：通过code换取网页授权access_token
-
-        // $token = '{"access_token":"31_NFTr_5yfwyh18VohnLMZNkK9UPhF6MjyJEPncJHuHhACLE9baKF3UzGIJQ_l9VdZvbemBxsggZPi1iYGM8v_2A","expires_in":7200,"refresh_token":"31_hzboRAivXXSZHIVhYCmT24D98N12zdIEn6n1ItZR3duJfwjNgOSJy14edGjL8_rGrrb8J0RruoZ0v4FZBCqs1w","openid":"o8ZWLv0q--I2irppcRT87g_GNkq0","scope":"snsapi_userinfo"}';
-        $token = json_decode($token, true);
-        dump($token);
-        dump($token['access_token']);
-        dump($token['expires_in']);
-
-        $refresh_token = $token['refresh_token'];
-
-        if (!$refresh_token) {
-            return "获取token失败";
-        }
-        // 第三步：刷新access_token（如果需要）
-
-        $url   = "https://api.weixin.qq.com/sns/oauth2/refresh_token?appid=$appId&grant_type=refresh_token&refresh_token=$refresh_token";
-        $token = file_get_contents($url);
-        $token = json_decode($token, true);
-        dump($token);
-
-        $access_token = $token['access_token'];
-        $openid       = $token['openid'];
-
-        // 第四步：拉取用户信息(需scope为 snsapi_userinfo)
-        $url   = "https://api.weixin.qq.com/sns/userinfo?access_token=$access_token&openid=$openid&lang=zh_CN";
-        $userInfo = file_get_contents($url);
-        $userInfo = json_decode($userInfo, true);
-        dump($userInfo);
-        dump($userInfo['nickname']);
-        dump($userInfo['headimgurl']);
+        // $code  = input('code');
+        // $state = input('state');
+        //
+        // $appId  = "wx45d07510895e9970";
+        // $secret = '048b6a1deaaa39e508cfab5bfa4730a6';
+        // $url    = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=$appId&secret=$secret&code=$code&grant_type=authorization_code";
+        //
+        // $token = file_get_contents($url);
+        // // 第二步：通过code换取网页授权access_token
+        //
+        // // $token = '{"access_token":"31_NFTr_5yfwyh18VohnLMZNkK9UPhF6MjyJEPncJHuHhACLE9baKF3UzGIJQ_l9VdZvbemBxsggZPi1iYGM8v_2A","expires_in":7200,"refresh_token":"31_hzboRAivXXSZHIVhYCmT24D98N12zdIEn6n1ItZR3duJfwjNgOSJy14edGjL8_rGrrb8J0RruoZ0v4FZBCqs1w","openid":"o8ZWLv0q--I2irppcRT87g_GNkq0","scope":"snsapi_userinfo"}';
+        // $token = json_decode($token, true);
+        // dump($token);
+        // dump($token['access_token']);
+        // dump($token['expires_in']);
+        //
+        // $refresh_token = $token['refresh_token'];
+        //
+        // if (!$refresh_token) {
+        //     return "获取token失败";
+        // }
+        // // 第三步：刷新access_token（如果需要）
+        //
+        // $url   = "https://api.weixin.qq.com/sns/oauth2/refresh_token?appid=$appId&grant_type=refresh_token&refresh_token=$refresh_token";
+        // $token = file_get_contents($url);
+        // $token = json_decode($token, true);
+        // dump($token);
+        //
+        // $access_token = $token['access_token'];
+        // $openid       = $token['openid'];
+        //
+        // // 第四步：拉取用户信息(需scope为 snsapi_userinfo)
+        // $url      = "https://api.weixin.qq.com/sns/userinfo?access_token=$access_token&openid=$openid&lang=zh_CN";
+        // $userInfo = file_get_contents($url);
+        // $userInfo = json_decode($userInfo, true);
+        // dump($userInfo);
+        // dump($userInfo['nickname']);
+        // dump($userInfo['headimgurl']);
 
         // 数据库入库
+
+        $userInfo = [];
+
+        $userInfo['openid'] = "333343434s";
+        $openid = $userInfo['openid'];
+        // 第一步查询是否入库
+        // 查询单个数据
+        $user_id = Wechat::where('openid', $openid)->value('user_id');
+
+
+        if (!$user_id) {
+
+            // 没有openid就存储
+            echo "meiyou入库";
+
+
+            $token  = md5(time() . rand(100000, 999999));
+
+            $userInfo['token'] = $token;
+
+            dump($userInfo);
+            // die();
+            $user = Wechat::create($userInfo);
+
+            $user_id = $user->id;
+
+            dump($user_id);
+        }
+
+        // 入库之后查询是否绑定
+
+
 
     }
 
