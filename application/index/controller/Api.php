@@ -21,8 +21,10 @@ class Api extends \think\Controller
     public function ip2Region($ip = '47.100.178.109')
     {
         // https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx45d07510895e9970&secret=048b6a1deaaa39e508cfab5bfa4730a6
-        https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx45d07510895e9970&redirect_uri=http%3a%2f%2fopen.gaoxueya.com%2fweixin&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect
+        // https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx45d07510895e9970&redirect_uri=http%3a%2f%2fopen.gaoxueya.com%2fweixin&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect
 // https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxf0e81c3bee622d60&redirect_uri=http%3A%2F%2Fnba.bluewebgame.com%2Foauth_response.php&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect
+//        https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxf0e81c3bee622d60&redirect_uri=http%3A%2F%2Fnba.bluewebgame.com%2Foauth_response.php&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect
+
         $ip2region = new Ip2Region();
 
         // $ip = '173.212.245.240';
@@ -62,6 +64,14 @@ class Api extends \think\Controller
         }
 
 
+    }
+
+    public  function  weiXin(){
+        $code = input('code');
+        $state = input('state');
+
+        dump($code);
+        dump($state);
     }
 
     public function qq()
