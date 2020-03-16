@@ -105,7 +105,7 @@ class Api extends \think\Controller
         // 第四步：拉取用户信息(需scope为 snsapi_userinfo)
         $url   = "https://api.weixin.qq.com/sns/userinfo?access_token=$access_token&openid=$openid&lang=zh_CN";
         $userInfo = file_get_contents($url);
-        // $userInfo = json_decode($token, true);
+        $userInfo = json_decode($userInfo, true);
         dump($userInfo);
         dump($userInfo['nickname']);
     }
