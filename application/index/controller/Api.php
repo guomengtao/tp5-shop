@@ -115,7 +115,11 @@ class Api extends \think\Controller
 
         $userInfo = [];
 
-        $userInfo['openid'] = "333343434s";
+        $userInfo['openid']   = "3333d434s";
+        $userInfo['nickname'] = "wechat";
+        $userInfo['headimgurl']='http://thirdqq.qlogo.cn/g?b=oidb&k=ibbokEqv0hsaB5qkmltfeWw&s=100&t=1578247986';
+
+
         $openid = $userInfo['openid'];
         // 第一步查询是否入库
         // 查询单个数据
@@ -125,25 +129,37 @@ class Api extends \think\Controller
         if (!$user_id) {
 
             // 没有openid就存储
-            echo "meiyou入库";
+
+            // 创建会员表【不强制绑定用户，注意后期绑定问题】
+            $nickname = $userInfo['nickname'];
+            $photo    = $userInfo['headimgurl'];
+            $token    = md5(time() . rand(100000, 999999));
 
 
-            $token  = md5(time() . rand(100000, 999999));
+            $user    = User::create([
+                'token'    => $token,
+                'nickname' => $nickname,
+                'photo'    => $photo,
+            ]);
 
-            $userInfo['token'] = $token;
-
-            dump($userInfo);
-            // die();
-            $user = Wechat::create($userInfo);
 
             $user_id = $user->id;
 
-            dump($user_id);
+            $userInfo['user_id'] = $user->id;
+            Wechat::create($userInfo);
+
+
         }
 
-        // 入库之后查询是否绑定
+        // 登录操作
+        Cookie('token', $token, 3600000);
+        Cookie('user_id', $user_id, 3600000);
+        Cookie('photo', $photo, 3600000);
+        Cookie('nickname', $photo, 3600000);
 
 
+        // 进入会员中心
+        return $this->redirect('index/index/index');
 
     }
 
