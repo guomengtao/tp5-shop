@@ -3,12 +3,15 @@ branches: {
   }
 fileChange:
   /push.bat:
-    newFile: !uuid 'd0a785c1baab7e03a572c63ffbdacfd0121a4be5'
-    oldFile: !uuid '37cf67eb0e4843f5e3ea71df2d718cb8492f925f'
+    newFile: !uuid '37cf67eb0e4843f5e3ea71df2d718cb8492f925f'
+    oldFile: !uuid 'd0a785c1baab7e03a572c63ffbdacfd0121a4be5'
+  /tp5.sql:
+    newFile: !uuid '36a17aabcee9079523fa0f38ed8dd88fb7d7a955'
+    oldFile: !uuid 'bc41bed106fdf7b973df731d0dcf85cf66255c2a'
   /tp5.sql.zips:
-    newFile: !uuid '699cfffbf92b0aedf69631cdfaa0256ba2b28df6'
-    oldFile: null
-gitCommitId: !uuid 'fa4613cbaf6a14f5560ceeefb306081786bec9cd'
+    newFile: null
+    oldFile: !uuid '699cfffbf92b0aedf69631cdfaa0256ba2b28df6'
+gitCommitId: !uuid '205c41dc3d18a020f4a0b014992372d72c8e8e2e'
 renames: {
   }
-revisionId: 669
+revisionId: 670
