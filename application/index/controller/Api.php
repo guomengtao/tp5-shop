@@ -20,10 +20,13 @@ class Api extends \think\Controller
 {
     public function ip2Region($ip = '47.100.178.109')
     {
+
+
         // https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx45d07510895e9970&secret=048b6a1deaaa39e508cfab5bfa4730a6
         // https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx45d07510895e9970&redirect_uri=http%3a%2f%2fopen.gaoxueya.com%2fweixin&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect
 // https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxf0e81c3bee622d60&redirect_uri=http%3A%2F%2Fnba.bluewebgame.com%2Foauth_response.php&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect
 //        https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxf0e81c3bee622d60&redirect_uri=http%3A%2F%2Fnba.bluewebgame.com%2Foauth_response.php&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect
+
 
         $ip2region = new Ip2Region();
 
@@ -66,12 +69,23 @@ class Api extends \think\Controller
 
     }
 
-    public  function  weiXin(){
-        $code = input('code');
+    public function weiXin()
+    {
+        $code  = input('code');
         $state = input('state');
 
-        dump($code);
-        dump($state);
+        $appId  = "wx45d07510895e9970";
+        $secret = '048b6a1deaaa39e508cfab5bfa4730a6';
+        $url    = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=$appId&secret=$secret&code=$code&grant_type=authorization_code";
+
+        $token  = file_get_contents($url);
+        // 第二步：通过code换取网页授权access_token
+
+        // $token = '{"access_token":"31_NFTr_5yfwyh18VohnLMZNkK9UPhF6MjyJEPncJHuHhACLE9baKF3UzGIJQ_l9VdZvbemBxsggZPi1iYGM8v_2A","expires_in":7200,"refresh_token":"31_hzboRAivXXSZHIVhYCmT24D98N12zdIEn6n1ItZR3duJfwjNgOSJy14edGjL8_rGrrb8J0RruoZ0v4FZBCqs1w","openid":"o8ZWLv0q--I2irppcRT87g_GNkq0","scope":"snsapi_userinfo"}';
+        $token = json_decode($token,true);
+        dump($token);
+        dump($token['access_token']);
+        dump($token['expires_in']);
     }
 
     public function qq()
