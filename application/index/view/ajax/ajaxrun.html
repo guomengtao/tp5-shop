@@ -66,7 +66,6 @@
 
 
 <div class="panel panel-default">
-    <div class="panel-heading"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> 最新注册会员：</div>
     <div class="panel-body">
 
 
@@ -85,7 +84,10 @@
 
             <tr>
                 <th> {$user.id}</th>
-                <td><a href="{:url('index/member/home', ['user_id' => $user.id])}">{$user.nickname?$user.nickname:$user.id}</a>
+                <td>
+                    <a href="{:url('index/member/home', ['user_id' => $user.id])}" >
+                        <img src="{$user.photo?:'__STATIC__/images/logo.jpg'}" class="brand-image img-circle elevation-3"/>
+                        {$user.nickname?$user.nickname:$user.id}</a>
                 </td>
                 <td> {$user.rand? 'VIP' : '普通会员'}</td>
                 <td> {$user.create_time}</td>

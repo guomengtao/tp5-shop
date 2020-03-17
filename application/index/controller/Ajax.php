@@ -52,6 +52,7 @@ class Ajax extends Frontend
             ->paginate(15);
 
         $this->assign('show', $show);
+        $this->assign('title', '欢迎新同学');
         // 渲染模板输出
 
         return $this->fetch();
