@@ -74,7 +74,7 @@
             <tr>
                 <th> 会员ID</th>
                 <th> 昵称</th>
-                <th> 会员类型</th>
+                <th> 城市</th>
                 <th> 注册时间</th>
             </tr>
             </thead>
@@ -89,7 +89,7 @@
                         <img style="height: 50px;width: 50px" src="{$user.photo?:'__STATIC__/images/logo.jpg'}" class="brand-image img-circle elevation-3"/>
                         {$user.nickname?$user.nickname:$user.id} st</a>
                 </td>
-                <td> {$user.rand? 'VIP' : '普通会员'}</td>
+                <td> {$user.human.address?:$user.ipinfo.region}</td>
                 <td> {$user.create_time}</td>
             </tr>
             {/volist}
