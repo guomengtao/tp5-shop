@@ -19,28 +19,6 @@ use think\Request;
 class Msg extends Frontend
 {
 
-    public function _initialize()
-    {
-
-        $user_id = Cookie::get('user_id');
-        if (!$user_id) {
-            return $this->error('请登录', 'index/index/login');
-        }
-        $home = 'u/' . Cookie::get('user_id');
-
-        $visit      = Footprint::where('path', $home)
-            ->where('user_id', '<>', $user_id)
-            ->where('msg', '<>', 1)
-            ->limit(3)
-            ->order('id', 'desc')
-            ->select();
-        $visitCount = Footprint::where('path', $home)
-            ->where('msg', '<>', 1)
-            ->where('user_id', '<>', $user_id)
-            ->count();
-        $this->assign("visit", $visit);
-        $this->assign("visitCount", $visitCount);
-    }
 
     /**
      * 空的请求
@@ -52,16 +30,26 @@ class Msg extends Frontend
         echo "empty";
     }
 
+    public function sidebar()
+    {
+        $sidebar = Cookie::get('sidebar');
+        // sidebar-mini sidebar-collapse
+        if ($sidebar=='sidebar-mini'){
+            Cookie::set('sidebar','sidebar-mini sidebar-collapse','360000');
+        }else{
+            Cookie::set('sidebar','sidebar-mini','360000');
+        }
+
+    }
     public function index()
     {
-
         $this->assign("title", "首页");
         return $this->fetch();
     }
 
     public function visit()
     {
-        $home    = 'u/' . Cookie::get('user_id');
+        $home    = 'u/'.Cookie::get('user_id');
         $user_id = Cookie::get('user_id');
 
 
@@ -71,10 +59,10 @@ class Msg extends Frontend
             ->where('user_id', '<>', $user_id)
             ->update(['msg' => '1']);
 
-        $visits  = Footprint::where('path', $home)
+        $visits = Footprint::where('path', $home)
             ->where('user_id', '<>', $user_id)
             ->order('id', 'desc')
-            ->paginate(5);
+            ->paginate(5,false,['type'=>'page\Page']);
 
 
         $this->assign("visits", $visits);

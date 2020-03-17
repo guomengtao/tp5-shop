@@ -29,22 +29,27 @@ use think\Validate;
 use think\captcha\Captcha;
 use Ip2Region;
 use app\index\controller\Member;
+use app\common\controller\Frontend;
 
-class Index extends \think\Controller
+class Index extends Frontend
 {
 
 
     public function _initialize()
     {
+        parent::_initialize();
         // 记录访问信息 和 机器人拦截
         Member::agent();
-
-
     }
+
 
     public function get_between($input, $start, $end)
     {
-        $substr = substr($input, strlen($start) + strpos($input, $start), (strlen($input) - strpos($input, $end)) * (-1));
+        $substr = substr(
+            $input,
+            strlen($start) + strpos($input, $start),
+            (strlen($input) - strpos($input, $end)) * (-1)
+        );
         return $substr;
     }
 
@@ -53,7 +58,6 @@ class Index extends \think\Controller
         ob_clean();
         $captcha = new Captcha();
         return $captcha->entry();
-
     }
 
 
@@ -66,19 +70,16 @@ class Index extends \think\Controller
 
     public function course()
     {
-
-
         $course = Shop::course();
 
 
         $this->assign('course', $course);
-
+        $this->assign('title', '课程表');
         return view();
     }
 
     public function install()
     {
-
         set_time_limit(0);
 
 
@@ -90,10 +91,9 @@ class Index extends \think\Controller
 
 
         // 是否存在安装锁文件
-        $install_lock = ROOT_PATH . 'application' . DS . 'install.lock';
+        $install_lock = ROOT_PATH.'application'.DS.'install.lock';
         if (file_exists($install_lock)) {
             $install_lock = 1;
-
         }
 
         // 增加一个第二步的已安装判断，方便查看
@@ -106,27 +106,24 @@ class Index extends \think\Controller
 
 
         if (Request::instance()->isPost() and $install_lock <> 1) {
-
-
             try {
-
                 // 测试填写的数据库信息是否正确，不正确 thinkphp5的调试模式会报错
                 $conn = mysqli_connect(
                     $hostname, /* The host to connect to 连接MySQL地址 */
                     $username, /* The user to connect as 连接MySQL用户名 */
                     $password, /* The password to use 连接MySQL密码 */
-                    $database);/* The default database to query 连接数据库名称*/
-
+                    $database
+                );/* The default database to query 连接数据库名称*/
             } catch (\Exception $e) {
                 // echo 10086;
                 // return $e->getMessage();
                 // $getwrong = $e->getMessage();
-                return $this->error("连接数据库错误，请检查数据库账号密码是否正确。<br/>" . $e->getMessage());
+                return $this->error("连接数据库错误，请检查数据库账号密码是否正确。<br/>".$e->getMessage());
             }
 
 
             // 设置读取数据库配置文件路径
-            $database_file = ROOT_PATH . 'application' . DS . 'database.php';
+            $database_file = ROOT_PATH.'application'.DS.'database.php';
             // 通过覆盖方式，直接重新复制配置文件里的内容
             $myfile = fopen($database_file, "w") or die("Unable to open file!");
             $txt = "<?php
@@ -144,13 +141,13 @@ class Index extends \think\Controller
                   // 数据库类型
                   'type'            => 'mysql',
                   // 服务器地址
-                  'hostname'        => '" . $hostname . "',
+                  'hostname'        => '".$hostname."',
                   // 数据库名
-                  'database'        => '" . $database . "',
+                  'database'        => '".$database."',
                   // 用户名
-                  'username'        => '" . $username . "',
+                  'username'        => '".$username."',
                   // 密码
-                  'password'        => '" . $password . "',
+                  'password'        => '".$password."',
                   // 端口
                   'hostport'        => '',
                   // 连接dsn
@@ -195,7 +192,7 @@ class Index extends \think\Controller
             // ob_end_clean();
 
             //读取文件内容
-            $sql_file = ROOT_PATH . 't9665.sql';
+            $sql_file = ROOT_PATH.'t9665.sql';
             $_sql     = file_get_contents($sql_file);
 
             $_arr = explode(';', $_sql);
@@ -213,26 +210,22 @@ class Index extends \think\Controller
                 // $conn->query($_value.';');
 
 
-                if ($conn->query($_value . ';') === TRUE) {
-
-                    echo $_value . "    --- > ok  ";
+                if ($conn->query($_value.';') === true) {
+                    echo $_value."    --- > ok  ";
                     ob_flush();
                     flush();
                     sleep(1);
                 } else {
-
                     // 过滤掉数组里的空值
 
                     if (!$_value) {
-                        echo $_value . " Error: " . $conn->error . "  ";
+                        echo $_value." Error: ".$conn->error."  ";
                         ob_flush();
                         flush();
                         sleep(1);
                         echo "<script>alert('导入sql，注意先清空数据库。防止冲突')</script>";
                         die();
                     }
-
-
                 }
             }
 
@@ -254,218 +247,19 @@ class Index extends \think\Controller
 
             //重定向到安装成功结果页
             $this->redirect('index/install', ['step' => 10]);
-
-
         }
 
 
         $this->assign('install_lock', $install_lock);
         return view();
-
     }
 
 
-    public function cha123()
-    {
-
-
-        $image = \think\Image::open('./image.png');
-        // 按照原图的比例生成一个最大为150*150的缩略图并保存为thumb.png
-        $image->thumb(150, 150)->save('./thumb.png');
-
-        die();
-
-
-        // 这个是实现自动添加跟进记录的功能，十分重要，这个是开始
-
-        //使用上面保存的cookies再次访问
-        $url = 'https://weibo.com/p/aj/v6/mblog/add?ajwvr=6&domain=100505&__rnd=1523085138515';
-
-
-        // 请求数据
-        $data = [
-
-            "title"      => "有什么新鲜事想告诉大家?",
-            "location"   => "page_100505_info",
-            "text"       => "123456",
-            "appkey"     => "",
-            "style_type" => 1,
-            "pic_id"     => "",
-            "tid"        => "",
-            "pdetail"    => "1005051174602572",
-            "mid"        => "",
-            "isReEdit"   => "false",
-            "rank"       => 0,
-            "rankid"     => " ",
-            "pub_source" => "page_2",
-            "longtext"   => 1,
-            "topic_id"   => "1022:",
-            "pub_type"   => "dialog",
-            "_t"         => "0"
-
-
-        ];
-
-
-        $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_HEADER, 0);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
-        curl_setopt($ch, CURLOPT_COOKIE, 'YF-Ugrow-G0=169004153682ef91866609488943c77f; login_sid_t=eb5628f23b074423332be157f520ccdf; cross_origin_proto=SSL; YF-V5-G0=8d795ebe002ad1309b7c59a48532ef7d; _s_tentry=passport.weibo.com; Apache=380468972491.9297.1523082813101; SINAGLOBAL=380468972491.9297.1523082813101; ULV=1523082813107:1:1:1:380468972491.9297.1523082813101:; appkey=; ALF=1554619614; SSOLoginState=1523083615; SUB=_2A253zBkPDeRhGedP7FYX8CzJzD6IHXVUuA3HrDV8PUNbmtANLRXBkW9NXxMmyXsgzkCZQWUUhBJMpq8X45vWPBc0; SUBP=0033WrSXqPxfM725Ws9jqgMF55529P9D9Why4PpkzmwOd6lEdh4ZjGv.5JpX5KzhUgL.Fo2pS0BcehzfS0z2dJLoIpjLxK.L1heLB-BLxK-LB-BL1-qLxKqLBoqL1-zt; SUHB=0YhQq4cPotswOh; wvr=6; UOR=,,graph.qq.com; YF-Page-G0=7b9ec0e98d1ec5668c6906382e96b5db; wb_timefeed_1174602572=1'); //使用上面获取的cookies
-        $contents = curl_exec($ch);
-        curl_close($ch);
-
-        dump($contents);
-
-
-    }
-
-    public function cha66()
-    {
-
-
-        // 这个是实现自动添加跟进记录的功能，十分重要，这个是开始
-
-        //使用上面保存的cookies再次访问
-        $url = 'http://www.thinkphp.cn/member/updateUserDesc';
-        $url = 'http://www.thinkphp.cn/code/2528.html';
-
-
-        // 请求数据
-        $data = [
-
-            "description" => "thinkphp+tom66",
-
-
-        ];
-
-
-        $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_HEADER, 0);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
-        curl_setopt($ch, CURLOPT_COOKIE, 'pgv_pvi=6923126784; __jsluid=7367e1661802f46ff57401231db9169b; PHPSESSID=tf4eqf4p2hmvsr5ru97rbb9t12; pgv_si=s5298642944; THINK_THINKPHP_USER=%22MDAwMDAwMDAwMIWihmSEqKnb%22; THINK_think_auth=%22MDAwMDAwMDAwMIWihmSEqKnbpIiWk8iUaqHEpZdlv4qbbg%22; think_ucenter_sync_login=%22MDAwMDAwMDAwMIWjimGvfXzfeY15ZrOig9mAdnuSfrqtcQ%22; __utmc=118719948; __utmz=118719948.1523083151.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utma=118719948.1002877965.1523083151.1523083151.1523086307.2; __utmb=118719948.3.10.1523086307'); //使用上面获取的cookies
-        $contents = curl_exec($ch);
-        curl_close($ch);
-
-        dump($contents);
-
-
-    }
-
-
-//    这里是控制器
-    public function cha9()
-    {
-
-        //        $a = new Shop;
-        //        $b = $a->cha();
-        //        dump($b);
-
-        set_time_limit(0);
-        $tom = array("82699",
-                     "82561",
-                     "13146");
-
-
-        $tom = array(
-            "92017", "91406", "88382", "88083", "86155", "85357", "84400", "83489", "82810", "82459", "81256", "81248", "80820", "78591", " 78556", "75891", "75859", "75762", "75403", "74958", "74011", "73879", "73856", "73493", "72869", "71308", "71307", "70675", "69732", "69258", "68994", "67632", "67620", "66999", "66912", "65978", "65315", "65213", "64934", "64810", "64545", "63508", "63473", "62283", "61720", "61296", "60013", "58917", "58371", "57725", "57220", "57153", "57116", "57108", "56542", "55876", "55322", "55307", "55272", "55251", "54838", "51963", "51929", "51894", "51515", "50637", "50216", "50081", "48606", "48208", "47663", "47118", "45340", "45328", "45227", "44941", "44923", "44497", "43610", "42699", "42388", "42127", "41678", "41619", "41131", "41054", "40923", "40913", "40747", "40744", "40133", "39886", "39801", "39181", "39175", "39032", "39029", "38663", "38305", "38211", "38129", "38046", "37658", "37211", "37007", "36907", "36755", "35486", "35182", "35109", "34960", "34706", "32837", "32802", "32424", "31382", "30880", "30714", "30267", "30038", "29455", "29195", "28120", "27735", "27198", "26786", "26535", "26262", "26073", "24816", " 24615", "24538", "18199", "18193", "17926", "17841", "17049"
-        );
-
-        $cars = $tom;
-
-
-        $arrlength = count($cars);
-
-
-        for ($x = 0; $x < $arrlength; $x++) {
-            // echo $cars[$x];
-            $add_id = $cars[$x];
-            // echo "<br>";
-
-            // 随机的词语
-
-            $g = array(
-
-                "1" => "需要再联系",
-                "2" => "再联系",
-                "3" => "近期没有",
-                "4" => "跟进",
-                "5" => "需要联系我",
-                "6" => "需要在联系",
-                "7" => "再联系",
-                "8" => "近期再联系",
-                "9" => "近期再联系");
-
-            // 随机数，生成随机下次联系时间和随机等待时间,随机语言
-            $ran_time = rand(1, 9);
-
-            $next_time = "2018-08-01 11:40:23";
-            $next_time = "2018-08-0" . $ran_time . " 1" . $ran_time . ":2" . $ran_time . ":5" . $ran_time;
-
-
-            sleep(rand(0, 0));
-            dump($next_time);
-
-            $g = $g[$ran_time];
-            dump($g);
-
-
-            ob_flush();
-
-            flush();
-
-
-            // $add_id = "77777";
-
-
-            // 这个是实现自动添加跟进记录的功能，十分重要，这个是开始
-
-            //使用上面保存的cookies再次访问
-            $url = 'http://crm.zhiguagua.com/SystemFrameWorkV3/Ajax/Task/LoadService.aspx?IsMenu=true&TaskName=%E8%A1%8C%E5%8A%A8%E5%8E%86%E5%8F%B2%E8%AE%B0%E5%BD%95&TaskGuid=87ebc3e5-d250-4046-af13-5e04dd1862e9&WCFUITaskGuid=e3b6ccc9-f471-4219-9bae-f928e735c950&FormEvent=1&SubmitFormEventDealer=CustomizedWCFUI.ServiceFactory.CRM.CustomerActionHistoryClass%7CAddNewEvent&Version=0.34745302515421295';
-
-
-            // 这个方式是获取cooike后，拿着cookie来操作
-            dump(Cookie::get('cookie_file'));
-            $cookie_file = Cookie::get('cookie_file');
-
-
-            // 请求数据
-            $data = [
-
-                "HtmlControlFormPostDataObject" => '{"CRM.CustomerActionHistory.1":{"CustomerActionHistory_Title":"' . $g . '","CustomerActionHistory_ContactRealName":"","CustomerActionHistory_Date":"","CustomerActionHistory_ActionTye":"有效","CustomerActionHistory_ApplyEmployee":"靳佩佩","CustomerActionHistory_Note":"","CustomerActionHistory_Attachment":"","CustomerActionHistory_下次跟进时间":"' . $next_time . '","CustomerActionHistory_下次跟进内容":"","CustomerActionHistory_longitude":"","CustomerActionHistory_latitude":"","CustomerActionHistory_Location":""}}',
-                "CustomerID"                    => $add_id,
-                "CustomerSaleChanceID"          => 0,
-                "CommonChildDataTable"          => "{}",
-
-
-            ];
-
-
-            $ch = curl_init($url);
-            curl_setopt($ch, CURLOPT_HEADER, 0);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
-            curl_setopt($ch, CURLOPT_COOKIE, 'JXLoginUsername=jinpeipei; ASP.NET_SessionId=loeakka1utydivddsaymrtsb; UserInfo=ewAiAEkAcwBMAG8AZwBnAGkAbgAiADoAdAByAHUAZQAsACIATwByAGcAYQBuAGkAegBhAHQAaQBvAG4ASQBEACIAOgAxACwAIgBVAHMAZQByAEcAdQBpAGQAIgA6ACIAYgA2ADkAYgAwADUAMwA5AC0AMAA5ADcAZQAtADQAOABiAGEALQA5AGYAYwA1AC0ANwBlADEAMAA3AGEAYgA5AGQAZAA0ADIAIgAsACIAVQBzAGUAcgBuAGEAbQBlACIAOgAiAGoAaQBuAHAAZQBpAHAAZQBpACIALAAiAFIAZQBhAGwAbgBhAG0AZQAiADoAIgBzl2lPaU8iACwAIgBMAGEAcwB0AEwAbwBnAGkAbgBEAGEAdABlACIAOgAiADIAMAAxADgALwA1AC8AMgAgADkAOgAwADEAOgAyADgAIgAsACIAQQBjAHQAaQBvAG4AUgBlAHMAdQBsAHQATQBzAGcAIgA6ACIAIgAsACIASQBzAEMAbABpAGUAbgB0AE0AbwBkAGUAIgA6AGYAYQBsAHMAZQAsACIAUgBvAGwAZQBDAG8AZABlAEQAaQBjAHQAaQBvAG4AYQByAHkAIgA6AHsAIgBiADYAOQBiADAANQAzADkALQAwADkANwBlAC0ANAA4AGIAYQAtADkAZgBjADUALQA3AGUAMQAwADcAYQBiADkAZABkADQAMgAiADoAIgBzl2lPaU8iACwAIgBSAG8AbABlAC0AQwBvAG0AbQBvAG4AIgA6ACIAGpAoddKJcoIiACwAIgBSAG8AbABlAC0AYwB3AGwAIgA6ACIAIo2hUuVdXE9BbSIAfQAsACIATQBhAGkAbgBKAG8AYgBEAGUAcABhAHIAdABtAGUAbgB0AEMAbwBkAGUARABpAGMAdABpAG8AbgBhAHIAeQAiADoAewAiADMAIgA6ACIAG1JHkBNOKVITTilSfpjulSIAfQAsACIAUgBvAGwAZQBDAG8AZABlAEwAaQBzAHQAUwBRAEwAIgA6ACIAXAB1ADAAMAAyADcAYgA2ADkAYgAwADUAMwA5AC0AMAA5ADcAZQAtADQAOABiAGEALQA5AGYAYwA1AC0ANwBlADEAMAA3AGEAYgA5AGQAZAA0ADIAXAB1ADAAMAAyADcALABcAHUAMAAwADIANwBSAG8AbABlAC0AQwBvAG0AbQBvAG4AXAB1ADAAMAAyADcALABcAHUAMAAwADIANwBSAG8AbABlAC0AYwB3AGwAXAB1ADAAMAAyADcAIgAsACIAQwBvAG8AawBpAGUAVgBlAHIAaQBmAHkAQwBvAGQAZQAiADoAIgA3AGMAZgAyADMAYgA3ADgAMgA2ADIAOQA0AGMANQBjADcAMABmADgAYgA1ADYAOQA0AGMAZQBlADQAOABmAGIAIgAsACIATABvAGcAaQBuAFMAdQBiAFMAeQBzAHQAZQBtAEMAbwBkAGUAIgA6ACIAUwB5AHMAdABlAG0ALQBDAFIATQAiACwAIgBPAHIAZABlAHIASQBEACIAOgAxADAAMAAwADAALAAiAEkAcwBWAGEAbABpAGQAIgA6AHQAcgB1AGUAfQA='); //使用上面获取的cookies
-            $contents = curl_exec($ch);
-            curl_close($ch);
-
-            // dump($contents);
-        }
-
-        die();
-
-        // 重要结束
-        die();
-
-
-    }
+    //    这里是控制器
 
 
     public function curl_copy_cookie()
     {
-
-
 //   $str = '<div class="name" id="abc">电影</div>';
 // preg_match('/<div class="name" id="abc">(.*?)<\/div>/i', $str, $name);
 
@@ -480,7 +274,11 @@ class Index extends \think\Controller
         die();
         header("Content-type:text/html;Charset=utf8");
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, 'http://crm.zhiguagua.com/SystemFrameWorkV3/Service.CRM.CustomizedWCFUI.ServiceFactory.CRM.CustomerInfoClass.LoadDataGrid.aspx?Method=ViewCustomerInfo&MethodName=%E6%9F%A5%E7%9C%8B%E5%AE%A2%E6%88%B7%E4%BF%A1%E6%81%AF&CustomerID=94100&CustomerName=%E7%8E%8B%E5%A5%B3%E5%A3%AB&VerifyCode=45365f4fc91b680512c2b6eca0299ff7');
+        curl_setopt(
+            $ch,
+            CURLOPT_URL,
+            'http://crm.zhiguagua.com/SystemFrameWorkV3/Service.CRM.CustomizedWCFUI.ServiceFactory.CRM.CustomerInfoClass.LoadDataGrid.aspx?Method=ViewCustomerInfo&MethodName=%E6%9F%A5%E7%9C%8B%E5%AE%A2%E6%88%B7%E4%BF%A1%E6%81%AF&CustomerID=94100&CustomerName=%E7%8E%8B%E5%A5%B3%E5%A3%AB&VerifyCode=45365f4fc91b680512c2b6eca0299ff7'
+        );
 
         $header = array();
         //curl_setopt($ch,CURLOPT_POST,true);
@@ -488,7 +286,11 @@ class Index extends \think\Controller
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HEADER, true);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
-        curl_setopt($ch, CURLOPT_COOKIE, 'JXLoginUsername=jinpeipei; ASP.NET_SessionId=ardtu0jvzpb5ng1mlkpewyu2; UserInfo=ewAiAEkAcwBMAG8AZwBnAGkAbgAiADoAdAByAHUAZQAsACIATwByAGcAYQBuAGkAegBhAHQAaQBvAG4ASQBEACIAOgAxACwAIgBVAHMAZQByAEcAdQBpAGQAIgA6ACIAYgA2ADkAYgAwADUAMwA5AC0AMAA5ADcAZQAtADQAOABiAGEALQA5AGYAYwA1AC0ANwBlADEAMAA3AGEAYgA5AGQAZAA0ADIAIgAsACIAVQBzAGUAcgBuAGEAbQBlACIAOgAiAGoAaQBuAHAAZQBpAHAAZQBpACIALAAiAFIAZQBhAGwAbgBhAG0AZQAiADoAIgBzl2lPaU8iACwAIgBMAGEAcwB0AEwAbwBnAGkAbgBEAGEAdABlACIAOgAiADIAMAAxADgALwA0AC8ANwAgADEAOgAzADYAOgAwADUAIgAsACIAQQBjAHQAaQBvAG4AUgBlAHMAdQBsAHQATQBzAGcAIgA6ACIAIgAsACIASQBzAEMAbABpAGUAbgB0AE0AbwBkAGUAIgA6AGYAYQBsAHMAZQAsACIAUgBvAGwAZQBDAG8AZABlAEQAaQBjAHQAaQBvAG4AYQByAHkAIgA6AHsAIgBiADYAOQBiADAANQAzADkALQAwADkANwBlAC0ANAA4AGIAYQAtADkAZgBjADUALQA3AGUAMQAwADcAYQBiADkAZABkADQAMgAiADoAIgBzl2lPaU8iACwAIgBSAG8AbABlAC0AQwBvAG0AbQBvAG4AIgA6ACIAGpAoddKJcoIiACwAIgBSAG8AbABlAC0AYwB3AGwAIgA6ACIAIo2hUuVdXE9BbSIAfQAsACIATQBhAGkAbgBKAG8AYgBEAGUAcABhAHIAdABtAGUAbgB0AEMAbwBkAGUARABpAGMAdABpAG8AbgBhAHIAeQAiADoAewAiADMAIgA6ACIAG1JHkBNOKVITTilSfpjulSIAfQAsACIAUgBvAGwAZQBDAG8AZABlAEwAaQBzAHQAUwBRAEwAIgA6ACIAXAB1ADAAMAAyADcAYgA2ADkAYgAwADUAMwA5AC0AMAA5ADcAZQAtADQAOABiAGEALQA5AGYAYwA1AC0ANwBlADEAMAA3AGEAYgA5AGQAZAA0ADIAXAB1ADAAMAAyADcALABcAHUAMAAwADIANwBSAG8AbABlAC0AQwBvAG0AbQBvAG4AXAB1ADAAMAAyADcALABcAHUAMAAwADIANwBSAG8AbABlAC0AYwB3AGwAXAB1ADAAMAAyADcAIgAsACIAQwBvAG8AawBpAGUAVgBlAHIAaQBmAHkAQwBvAGQAZQAiADoAIgAxADAANwA5ADUAZABlADIAMAAyAGQAMQA2ADYAZgA3ADAANQA4ADEAZAA0ADkAZgA2ADYAMAA1AGMAZgAxADgAIgAsACIATABvAGcAaQBuAFMAdQBiAFMAeQBzAHQAZQBtAEMAbwBkAGUAIgA6ACIAUwB5AHMAdABlAG0ALQBDAFIATQAiACwAIgBPAHIAZABlAHIASQBEACIAOgAxADAAMAAwADAALAAiAEkAcwBWAGEAbABpAGQAIgA6AHQAcgB1AGUAfQA=');
+        curl_setopt(
+            $ch,
+            CURLOPT_COOKIE,
+            'JXLoginUsername=jinpeipei; ASP.NET_SessionId=ardtu0jvzpb5ng1mlkpewyu2; UserInfo=ewAiAEkAcwBMAG8AZwBnAGkAbgAiADoAdAByAHUAZQAsACIATwByAGcAYQBuAGkAegBhAHQAaQBvAG4ASQBEACIAOgAxACwAIgBVAHMAZQByAEcAdQBpAGQAIgA6ACIAYgA2ADkAYgAwADUAMwA5AC0AMAA5ADcAZQAtADQAOABiAGEALQA5AGYAYwA1AC0ANwBlADEAMAA3AGEAYgA5AGQAZAA0ADIAIgAsACIAVQBzAGUAcgBuAGEAbQBlACIAOgAiAGoAaQBuAHAAZQBpAHAAZQBpACIALAAiAFIAZQBhAGwAbgBhAG0AZQAiADoAIgBzl2lPaU8iACwAIgBMAGEAcwB0AEwAbwBnAGkAbgBEAGEAdABlACIAOgAiADIAMAAxADgALwA0AC8ANwAgADEAOgAzADYAOgAwADUAIgAsACIAQQBjAHQAaQBvAG4AUgBlAHMAdQBsAHQATQBzAGcAIgA6ACIAIgAsACIASQBzAEMAbABpAGUAbgB0AE0AbwBkAGUAIgA6AGYAYQBsAHMAZQAsACIAUgBvAGwAZQBDAG8AZABlAEQAaQBjAHQAaQBvAG4AYQByAHkAIgA6AHsAIgBiADYAOQBiADAANQAzADkALQAwADkANwBlAC0ANAA4AGIAYQAtADkAZgBjADUALQA3AGUAMQAwADcAYQBiADkAZABkADQAMgAiADoAIgBzl2lPaU8iACwAIgBSAG8AbABlAC0AQwBvAG0AbQBvAG4AIgA6ACIAGpAoddKJcoIiACwAIgBSAG8AbABlAC0AYwB3AGwAIgA6ACIAIo2hUuVdXE9BbSIAfQAsACIATQBhAGkAbgBKAG8AYgBEAGUAcABhAHIAdABtAGUAbgB0AEMAbwBkAGUARABpAGMAdABpAG8AbgBhAHIAeQAiADoAewAiADMAIgA6ACIAG1JHkBNOKVITTilSfpjulSIAfQAsACIAUgBvAGwAZQBDAG8AZABlAEwAaQBzAHQAUwBRAEwAIgA6ACIAXAB1ADAAMAAyADcAYgA2ADkAYgAwADUAMwA5AC0AMAA5ADcAZQAtADQAOABiAGEALQA5AGYAYwA1AC0ANwBlADEAMAA3AGEAYgA5AGQAZAA0ADIAXAB1ADAAMAAyADcALABcAHUAMAAwADIANwBSAG8AbABlAC0AQwBvAG0AbQBvAG4AXAB1ADAAMAAyADcALABcAHUAMAAwADIANwBSAG8AbABlAC0AYwB3AGwAXAB1ADAAMAAyADcAIgAsACIAQwBvAG8AawBpAGUAVgBlAHIAaQBmAHkAQwBvAGQAZQAiADoAIgAxADAANwA5ADUAZABlADIAMAAyAGQAMQA2ADYAZgA3ADAANQA4ADEAZAA0ADkAZgA2ADYAMAA1AGMAZgAxADgAIgAsACIATABvAGcAaQBuAFMAdQBiAFMAeQBzAHQAZQBtAEMAbwBkAGUAIgA6ACIAUwB5AHMAdABlAG0ALQBDAFIATQAiACwAIgBPAHIAZABlAHIASQBEACIAOgAxADAAMAAwADAALAAiAEkAcwBWAGEAbABpAGQAIgA6AHQAcgB1AGUAfQA='
+        );
 
 
         $content = curl_exec($ch);
@@ -497,16 +299,17 @@ class Index extends \think\Controller
         // echo "<pre>";print_r(curl_getinfo($ch));echo "</pre>";
         // echo "<pre>";print_r($header);echo "</pre>";
         echo $content;
-
     }
 
     public function curl_copy_cookie002()
     {
-
-
         header("Content-type:text/html;Charset=utf8");
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, 'http://crm.zhiguagua.com/SystemFrameWorkV3/Service.CRM.CustomizedWCFUI.ServiceFactory.CRM.CustomerInfoClass.LoadDataGrid.aspx?Method=ViewCustomerInfo&MethodName=查看客户信息&CustomerID=83736&CustomerName=2&VerifyCode=d5d84599953dc1d80cbe2b4a88e52485');
+        curl_setopt(
+            $ch,
+            CURLOPT_URL,
+            'http://crm.zhiguagua.com/SystemFrameWorkV3/Service.CRM.CustomizedWCFUI.ServiceFactory.CRM.CustomerInfoClass.LoadDataGrid.aspx?Method=ViewCustomerInfo&MethodName=查看客户信息&CustomerID=83736&CustomerName=2&VerifyCode=d5d84599953dc1d80cbe2b4a88e52485'
+        );
 
         $header = array();
         //curl_setopt($ch,CURLOPT_POST,true);
@@ -514,7 +317,11 @@ class Index extends \think\Controller
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HEADER, true);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
-        curl_setopt($ch, CURLOPT_COOKIE, 'JXLoginUsername=jinpeipei; ASP.NET_SessionId=ardtu0jvzpb5ng1mlkpewyu2; UserInfo=ewAiAEkAcwBMAG8AZwBnAGkAbgAiADoAdAByAHUAZQAsACIATwByAGcAYQBuAGkAegBhAHQAaQBvAG4ASQBEACIAOgAxACwAIgBVAHMAZQByAEcAdQBpAGQAIgA6ACIAYgA2ADkAYgAwADUAMwA5AC0AMAA5ADcAZQAtADQAOABiAGEALQA5AGYAYwA1AC0ANwBlADEAMAA3AGEAYgA5AGQAZAA0ADIAIgAsACIAVQBzAGUAcgBuAGEAbQBlACIAOgAiAGoAaQBuAHAAZQBpAHAAZQBpACIALAAiAFIAZQBhAGwAbgBhAG0AZQAiADoAIgBzl2lPaU8iACwAIgBMAGEAcwB0AEwAbwBnAGkAbgBEAGEAdABlACIAOgAiADIAMAAxADgALwA0AC8ANwAgADEAOgAzADYAOgAwADUAIgAsACIAQQBjAHQAaQBvAG4AUgBlAHMAdQBsAHQATQBzAGcAIgA6ACIAIgAsACIASQBzAEMAbABpAGUAbgB0AE0AbwBkAGUAIgA6AGYAYQBsAHMAZQAsACIAUgBvAGwAZQBDAG8AZABlAEQAaQBjAHQAaQBvAG4AYQByAHkAIgA6AHsAIgBiADYAOQBiADAANQAzADkALQAwADkANwBlAC0ANAA4AGIAYQAtADkAZgBjADUALQA3AGUAMQAwADcAYQBiADkAZABkADQAMgAiADoAIgBzl2lPaU8iACwAIgBSAG8AbABlAC0AQwBvAG0AbQBvAG4AIgA6ACIAGpAoddKJcoIiACwAIgBSAG8AbABlAC0AYwB3AGwAIgA6ACIAIo2hUuVdXE9BbSIAfQAsACIATQBhAGkAbgBKAG8AYgBEAGUAcABhAHIAdABtAGUAbgB0AEMAbwBkAGUARABpAGMAdABpAG8AbgBhAHIAeQAiADoAewAiADMAIgA6ACIAG1JHkBNOKVITTilSfpjulSIAfQAsACIAUgBvAGwAZQBDAG8AZABlAEwAaQBzAHQAUwBRAEwAIgA6ACIAXAB1ADAAMAAyADcAYgA2ADkAYgAwADUAMwA5AC0AMAA5ADcAZQAtADQAOABiAGEALQA5AGYAYwA1AC0ANwBlADEAMAA3AGEAYgA5AGQAZAA0ADIAXAB1ADAAMAAyADcALABcAHUAMAAwADIANwBSAG8AbABlAC0AQwBvAG0AbQBvAG4AXAB1ADAAMAAyADcALABcAHUAMAAwADIANwBSAG8AbABlAC0AYwB3AGwAXAB1ADAAMAAyADcAIgAsACIAQwBvAG8AawBpAGUAVgBlAHIAaQBmAHkAQwBvAGQAZQAiADoAIgAxADAANwA5ADUAZABlADIAMAAyAGQAMQA2ADYAZgA3ADAANQA4ADEAZAA0ADkAZgA2ADYAMAA1AGMAZgAxADgAIgAsACIATABvAGcAaQBuAFMAdQBiAFMAeQBzAHQAZQBtAEMAbwBkAGUAIgA6ACIAUwB5AHMAdABlAG0ALQBDAFIATQAiACwAIgBPAHIAZABlAHIASQBEACIAOgAxADAAMAAwADAALAAiAEkAcwBWAGEAbABpAGQAIgA6AHQAcgB1AGUAfQA=');
+        curl_setopt(
+            $ch,
+            CURLOPT_COOKIE,
+            'JXLoginUsername=jinpeipei; ASP.NET_SessionId=ardtu0jvzpb5ng1mlkpewyu2; UserInfo=ewAiAEkAcwBMAG8AZwBnAGkAbgAiADoAdAByAHUAZQAsACIATwByAGcAYQBuAGkAegBhAHQAaQBvAG4ASQBEACIAOgAxACwAIgBVAHMAZQByAEcAdQBpAGQAIgA6ACIAYgA2ADkAYgAwADUAMwA5AC0AMAA5ADcAZQAtADQAOABiAGEALQA5AGYAYwA1AC0ANwBlADEAMAA3AGEAYgA5AGQAZAA0ADIAIgAsACIAVQBzAGUAcgBuAGEAbQBlACIAOgAiAGoAaQBuAHAAZQBpAHAAZQBpACIALAAiAFIAZQBhAGwAbgBhAG0AZQAiADoAIgBzl2lPaU8iACwAIgBMAGEAcwB0AEwAbwBnAGkAbgBEAGEAdABlACIAOgAiADIAMAAxADgALwA0AC8ANwAgADEAOgAzADYAOgAwADUAIgAsACIAQQBjAHQAaQBvAG4AUgBlAHMAdQBsAHQATQBzAGcAIgA6ACIAIgAsACIASQBzAEMAbABpAGUAbgB0AE0AbwBkAGUAIgA6AGYAYQBsAHMAZQAsACIAUgBvAGwAZQBDAG8AZABlAEQAaQBjAHQAaQBvAG4AYQByAHkAIgA6AHsAIgBiADYAOQBiADAANQAzADkALQAwADkANwBlAC0ANAA4AGIAYQAtADkAZgBjADUALQA3AGUAMQAwADcAYQBiADkAZABkADQAMgAiADoAIgBzl2lPaU8iACwAIgBSAG8AbABlAC0AQwBvAG0AbQBvAG4AIgA6ACIAGpAoddKJcoIiACwAIgBSAG8AbABlAC0AYwB3AGwAIgA6ACIAIo2hUuVdXE9BbSIAfQAsACIATQBhAGkAbgBKAG8AYgBEAGUAcABhAHIAdABtAGUAbgB0AEMAbwBkAGUARABpAGMAdABpAG8AbgBhAHIAeQAiADoAewAiADMAIgA6ACIAG1JHkBNOKVITTilSfpjulSIAfQAsACIAUgBvAGwAZQBDAG8AZABlAEwAaQBzAHQAUwBRAEwAIgA6ACIAXAB1ADAAMAAyADcAYgA2ADkAYgAwADUAMwA5AC0AMAA5ADcAZQAtADQAOABiAGEALQA5AGYAYwA1AC0ANwBlADEAMAA3AGEAYgA5AGQAZAA0ADIAXAB1ADAAMAAyADcALABcAHUAMAAwADIANwBSAG8AbABlAC0AQwBvAG0AbQBvAG4AXAB1ADAAMAAyADcALABcAHUAMAAwADIANwBSAG8AbABlAC0AYwB3AGwAXAB1ADAAMAAyADcAIgAsACIAQwBvAG8AawBpAGUAVgBlAHIAaQBmAHkAQwBvAGQAZQAiADoAIgAxADAANwA5ADUAZABlADIAMAAyAGQAMQA2ADYAZgA3ADAANQA4ADEAZAA0ADkAZgA2ADYAMAA1AGMAZgAxADgAIgAsACIATABvAGcAaQBuAFMAdQBiAFMAeQBzAHQAZQBtAEMAbwBkAGUAIgA6ACIAUwB5AHMAdABlAG0ALQBDAFIATQAiACwAIgBPAHIAZABlAHIASQBEACIAOgAxADAAMAAwADAALAAiAEkAcwBWAGEAbABpAGQAIgA6AHQAcgB1AGUAfQA='
+        );
 
 
         $content = curl_exec($ch);
@@ -529,12 +336,10 @@ class Index extends \think\Controller
         print_r($header);
         echo "</pre>";
         echo "</br>", $content;
-
     }
 
     public function curl_get()
     {
-
         //使用上面保存的cookies再次访问
         $url = 'http://crm.zhiguagua.com/SystemFrameWorkV3/Ajax/Task/LoadData.aspx?IsMenu=True&TaskName=&TaskGuid=88b5feb1-6951-43c8-aeb7-8af7f3cef372&WCFUITaskGuid=9fee84cf-bdc4-4ec0-a5f0-ba83e17415ae&LoadGridDataEventDealer=CustomizedWCFUI.ServiceFactory.CRM.CustomerInfoClass%7cLoadGridDataEvent&Version=2018/4/7%202:57:40';
 
@@ -562,7 +367,11 @@ class Index extends \think\Controller
         curl_setopt($ch, CURLOPT_HEADER, 0);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
-        curl_setopt($ch, CURLOPT_COOKIE, 'JXLoginUsername=jinpeipei; ASP.NET_SessionId=ardtu0jvzpb5ng1mlkpewyu2; UserInfo=ewAiAEkAcwBMAG8AZwBnAGkAbgAiADoAdAByAHUAZQAsACIATwByAGcAYQBuAGkAegBhAHQAaQBvAG4ASQBEACIAOgAxACwAIgBVAHMAZQByAEcAdQBpAGQAIgA6ACIAYgA2ADkAYgAwADUAMwA5AC0AMAA5ADcAZQAtADQAOABiAGEALQA5AGYAYwA1AC0ANwBlADEAMAA3AGEAYgA5AGQAZAA0ADIAIgAsACIAVQBzAGUAcgBuAGEAbQBlACIAOgAiAGoAaQBuAHAAZQBpAHAAZQBpACIALAAiAFIAZQBhAGwAbgBhAG0AZQAiADoAIgBzl2lPaU8iACwAIgBMAGEAcwB0AEwAbwBnAGkAbgBEAGEAdABlACIAOgAiADIAMAAxADgALwA0AC8ANwAgADEAOgAzADYAOgAwADUAIgAsACIAQQBjAHQAaQBvAG4AUgBlAHMAdQBsAHQATQBzAGcAIgA6ACIAIgAsACIASQBzAEMAbABpAGUAbgB0AE0AbwBkAGUAIgA6AGYAYQBsAHMAZQAsACIAUgBvAGwAZQBDAG8AZABlAEQAaQBjAHQAaQBvAG4AYQByAHkAIgA6AHsAIgBiADYAOQBiADAANQAzADkALQAwADkANwBlAC0ANAA4AGIAYQAtADkAZgBjADUALQA3AGUAMQAwADcAYQBiADkAZABkADQAMgAiADoAIgBzl2lPaU8iACwAIgBSAG8AbABlAC0AQwBvAG0AbQBvAG4AIgA6ACIAGpAoddKJcoIiACwAIgBSAG8AbABlAC0AYwB3AGwAIgA6ACIAIo2hUuVdXE9BbSIAfQAsACIATQBhAGkAbgBKAG8AYgBEAGUAcABhAHIAdABtAGUAbgB0AEMAbwBkAGUARABpAGMAdABpAG8AbgBhAHIAeQAiADoAewAiADMAIgA6ACIAG1JHkBNOKVITTilSfpjulSIAfQAsACIAUgBvAGwAZQBDAG8AZABlAEwAaQBzAHQAUwBRAEwAIgA6ACIAXAB1ADAAMAAyADcAYgA2ADkAYgAwADUAMwA5AC0AMAA5ADcAZQAtADQAOABiAGEALQA5AGYAYwA1AC0ANwBlADEAMAA3AGEAYgA5AGQAZAA0ADIAXAB1ADAAMAAyADcALABcAHUAMAAwADIANwBSAG8AbABlAC0AQwBvAG0AbQBvAG4AXAB1ADAAMAAyADcALABcAHUAMAAwADIANwBSAG8AbABlAC0AYwB3AGwAXAB1ADAAMAAyADcAIgAsACIAQwBvAG8AawBpAGUAVgBlAHIAaQBmAHkAQwBvAGQAZQAiADoAIgAxADAANwA5ADUAZABlADIAMAAyAGQAMQA2ADYAZgA3ADAANQA4ADEAZAA0ADkAZgA2ADYAMAA1AGMAZgAxADgAIgAsACIATABvAGcAaQBuAFMAdQBiAFMAeQBzAHQAZQBtAEMAbwBkAGUAIgA6ACIAUwB5AHMAdABlAG0ALQBDAFIATQAiACwAIgBPAHIAZABlAHIASQBEACIAOgAxADAAMAAwADAALAAiAEkAcwBWAGEAbABpAGQAIgA6AHQAcgB1AGUAfQA='); //使用上面获取的cookies
+        curl_setopt(
+            $ch,
+            CURLOPT_COOKIE,
+            'JXLoginUsername=jinpeipei; ASP.NET_SessionId=ardtu0jvzpb5ng1mlkpewyu2; UserInfo=ewAiAEkAcwBMAG8AZwBnAGkAbgAiADoAdAByAHUAZQAsACIATwByAGcAYQBuAGkAegBhAHQAaQBvAG4ASQBEACIAOgAxACwAIgBVAHMAZQByAEcAdQBpAGQAIgA6ACIAYgA2ADkAYgAwADUAMwA5AC0AMAA5ADcAZQAtADQAOABiAGEALQA5AGYAYwA1AC0ANwBlADEAMAA3AGEAYgA5AGQAZAA0ADIAIgAsACIAVQBzAGUAcgBuAGEAbQBlACIAOgAiAGoAaQBuAHAAZQBpAHAAZQBpACIALAAiAFIAZQBhAGwAbgBhAG0AZQAiADoAIgBzl2lPaU8iACwAIgBMAGEAcwB0AEwAbwBnAGkAbgBEAGEAdABlACIAOgAiADIAMAAxADgALwA0AC8ANwAgADEAOgAzADYAOgAwADUAIgAsACIAQQBjAHQAaQBvAG4AUgBlAHMAdQBsAHQATQBzAGcAIgA6ACIAIgAsACIASQBzAEMAbABpAGUAbgB0AE0AbwBkAGUAIgA6AGYAYQBsAHMAZQAsACIAUgBvAGwAZQBDAG8AZABlAEQAaQBjAHQAaQBvAG4AYQByAHkAIgA6AHsAIgBiADYAOQBiADAANQAzADkALQAwADkANwBlAC0ANAA4AGIAYQAtADkAZgBjADUALQA3AGUAMQAwADcAYQBiADkAZABkADQAMgAiADoAIgBzl2lPaU8iACwAIgBSAG8AbABlAC0AQwBvAG0AbQBvAG4AIgA6ACIAGpAoddKJcoIiACwAIgBSAG8AbABlAC0AYwB3AGwAIgA6ACIAIo2hUuVdXE9BbSIAfQAsACIATQBhAGkAbgBKAG8AYgBEAGUAcABhAHIAdABtAGUAbgB0AEMAbwBkAGUARABpAGMAdABpAG8AbgBhAHIAeQAiADoAewAiADMAIgA6ACIAG1JHkBNOKVITTilSfpjulSIAfQAsACIAUgBvAGwAZQBDAG8AZABlAEwAaQBzAHQAUwBRAEwAIgA6ACIAXAB1ADAAMAAyADcAYgA2ADkAYgAwADUAMwA5AC0AMAA5ADcAZQAtADQAOABiAGEALQA5AGYAYwA1AC0ANwBlADEAMAA3AGEAYgA5AGQAZAA0ADIAXAB1ADAAMAAyADcALABcAHUAMAAwADIANwBSAG8AbABlAC0AQwBvAG0AbQBvAG4AXAB1ADAAMAAyADcALABcAHUAMAAwADIANwBSAG8AbABlAC0AYwB3AGwAXAB1ADAAMAAyADcAIgAsACIAQwBvAG8AawBpAGUAVgBlAHIAaQBmAHkAQwBvAGQAZQAiADoAIgAxADAANwA5ADUAZABlADIAMAAyAGQAMQA2ADYAZgA3ADAANQA4ADEAZAA0ADkAZgA2ADYAMAA1AGMAZgAxADgAIgAsACIATABvAGcAaQBuAFMAdQBiAFMAeQBzAHQAZQBtAEMAbwBkAGUAIgA6ACIAUwB5AHMAdABlAG0ALQBDAFIATQAiACwAIgBPAHIAZABlAHIASQBEACIAOgAxADAAMAAwADAALAAiAEkAcwBWAGEAbABpAGQAIgA6AHQAcgB1AGUAfQA='
+        ); //使用上面获取的cookies
         $contents = curl_exec($ch);
         curl_close($ch);
 
@@ -598,7 +407,11 @@ class Index extends \think\Controller
         curl_setopt($ch, CURLOPT_HEADER, 0);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
-        curl_setopt($ch, CURLOPT_COOKIE, 'JXLoginUsername=jinpeipei; ASP.NET_SessionId=ardtu0jvzpb5ng1mlkpewyu2; UserInfo=ewAiAEkAcwBMAG8AZwBnAGkAbgAiADoAdAByAHUAZQAsACIATwByAGcAYQBuAGkAegBhAHQAaQBvAG4ASQBEACIAOgAxACwAIgBVAHMAZQByAEcAdQBpAGQAIgA6ACIAYgA2ADkAYgAwADUAMwA5AC0AMAA5ADcAZQAtADQAOABiAGEALQA5AGYAYwA1AC0ANwBlADEAMAA3AGEAYgA5AGQAZAA0ADIAIgAsACIAVQBzAGUAcgBuAGEAbQBlACIAOgAiAGoAaQBuAHAAZQBpAHAAZQBpACIALAAiAFIAZQBhAGwAbgBhAG0AZQAiADoAIgBzl2lPaU8iACwAIgBMAGEAcwB0AEwAbwBnAGkAbgBEAGEAdABlACIAOgAiADIAMAAxADgALwA0AC8ANwAgADEAOgAzADYAOgAwADUAIgAsACIAQQBjAHQAaQBvAG4AUgBlAHMAdQBsAHQATQBzAGcAIgA6ACIAIgAsACIASQBzAEMAbABpAGUAbgB0AE0AbwBkAGUAIgA6AGYAYQBsAHMAZQAsACIAUgBvAGwAZQBDAG8AZABlAEQAaQBjAHQAaQBvAG4AYQByAHkAIgA6AHsAIgBiADYAOQBiADAANQAzADkALQAwADkANwBlAC0ANAA4AGIAYQAtADkAZgBjADUALQA3AGUAMQAwADcAYQBiADkAZABkADQAMgAiADoAIgBzl2lPaU8iACwAIgBSAG8AbABlAC0AQwBvAG0AbQBvAG4AIgA6ACIAGpAoddKJcoIiACwAIgBSAG8AbABlAC0AYwB3AGwAIgA6ACIAIo2hUuVdXE9BbSIAfQAsACIATQBhAGkAbgBKAG8AYgBEAGUAcABhAHIAdABtAGUAbgB0AEMAbwBkAGUARABpAGMAdABpAG8AbgBhAHIAeQAiADoAewAiADMAIgA6ACIAG1JHkBNOKVITTilSfpjulSIAfQAsACIAUgBvAGwAZQBDAG8AZABlAEwAaQBzAHQAUwBRAEwAIgA6ACIAXAB1ADAAMAAyADcAYgA2ADkAYgAwADUAMwA5AC0AMAA5ADcAZQAtADQAOABiAGEALQA5AGYAYwA1AC0ANwBlADEAMAA3AGEAYgA5AGQAZAA0ADIAXAB1ADAAMAAyADcALABcAHUAMAAwADIANwBSAG8AbABlAC0AQwBvAG0AbQBvAG4AXAB1ADAAMAAyADcALABcAHUAMAAwADIANwBSAG8AbABlAC0AYwB3AGwAXAB1ADAAMAAyADcAIgAsACIAQwBvAG8AawBpAGUAVgBlAHIAaQBmAHkAQwBvAGQAZQAiADoAIgAxADAANwA5ADUAZABlADIAMAAyAGQAMQA2ADYAZgA3ADAANQA4ADEAZAA0ADkAZgA2ADYAMAA1AGMAZgAxADgAIgAsACIATABvAGcAaQBuAFMAdQBiAFMAeQBzAHQAZQBtAEMAbwBkAGUAIgA6ACIAUwB5AHMAdABlAG0ALQBDAFIATQAiACwAIgBPAHIAZABlAHIASQBEACIAOgAxADAAMAAwADAALAAiAEkAcwBWAGEAbABpAGQAIgA6AHQAcgB1AGUAfQA='); //使用上面获取的cookies
+        curl_setopt(
+            $ch,
+            CURLOPT_COOKIE,
+            'JXLoginUsername=jinpeipei; ASP.NET_SessionId=ardtu0jvzpb5ng1mlkpewyu2; UserInfo=ewAiAEkAcwBMAG8AZwBnAGkAbgAiADoAdAByAHUAZQAsACIATwByAGcAYQBuAGkAegBhAHQAaQBvAG4ASQBEACIAOgAxACwAIgBVAHMAZQByAEcAdQBpAGQAIgA6ACIAYgA2ADkAYgAwADUAMwA5AC0AMAA5ADcAZQAtADQAOABiAGEALQA5AGYAYwA1AC0ANwBlADEAMAA3AGEAYgA5AGQAZAA0ADIAIgAsACIAVQBzAGUAcgBuAGEAbQBlACIAOgAiAGoAaQBuAHAAZQBpAHAAZQBpACIALAAiAFIAZQBhAGwAbgBhAG0AZQAiADoAIgBzl2lPaU8iACwAIgBMAGEAcwB0AEwAbwBnAGkAbgBEAGEAdABlACIAOgAiADIAMAAxADgALwA0AC8ANwAgADEAOgAzADYAOgAwADUAIgAsACIAQQBjAHQAaQBvAG4AUgBlAHMAdQBsAHQATQBzAGcAIgA6ACIAIgAsACIASQBzAEMAbABpAGUAbgB0AE0AbwBkAGUAIgA6AGYAYQBsAHMAZQAsACIAUgBvAGwAZQBDAG8AZABlAEQAaQBjAHQAaQBvAG4AYQByAHkAIgA6AHsAIgBiADYAOQBiADAANQAzADkALQAwADkANwBlAC0ANAA4AGIAYQAtADkAZgBjADUALQA3AGUAMQAwADcAYQBiADkAZABkADQAMgAiADoAIgBzl2lPaU8iACwAIgBSAG8AbABlAC0AQwBvAG0AbQBvAG4AIgA6ACIAGpAoddKJcoIiACwAIgBSAG8AbABlAC0AYwB3AGwAIgA6ACIAIo2hUuVdXE9BbSIAfQAsACIATQBhAGkAbgBKAG8AYgBEAGUAcABhAHIAdABtAGUAbgB0AEMAbwBkAGUARABpAGMAdABpAG8AbgBhAHIAeQAiADoAewAiADMAIgA6ACIAG1JHkBNOKVITTilSfpjulSIAfQAsACIAUgBvAGwAZQBDAG8AZABlAEwAaQBzAHQAUwBRAEwAIgA6ACIAXAB1ADAAMAAyADcAYgA2ADkAYgAwADUAMwA5AC0AMAA5ADcAZQAtADQAOABiAGEALQA5AGYAYwA1AC0ANwBlADEAMAA3AGEAYgA5AGQAZAA0ADIAXAB1ADAAMAAyADcALABcAHUAMAAwADIANwBSAG8AbABlAC0AQwBvAG0AbQBvAG4AXAB1ADAAMAAyADcALABcAHUAMAAwADIANwBSAG8AbABlAC0AYwB3AGwAXAB1ADAAMAAyADcAIgAsACIAQwBvAG8AawBpAGUAVgBlAHIAaQBmAHkAQwBvAGQAZQAiADoAIgAxADAANwA5ADUAZABlADIAMAAyAGQAMQA2ADYAZgA3ADAANQA4ADEAZAA0ADkAZgA2ADYAMAA1AGMAZgAxADgAIgAsACIATABvAGcAaQBuAFMAdQBiAFMAeQBzAHQAZQBtAEMAbwBkAGUAIgA6ACIAUwB5AHMAdABlAG0ALQBDAFIATQAiACwAIgBPAHIAZABlAHIASQBEACIAOgAxADAAMAAwADAALAAiAEkAcwBWAGEAbABpAGQAIgA6AHQAcgB1AGUAfQA='
+        ); //使用上面获取的cookies
         $contents = curl_exec($ch);
         curl_close($ch);
 
@@ -649,12 +462,10 @@ class Index extends \think\Controller
         echo $output;
 
         die();
-
     }
 
     public function curl_login()
     {
-
         // 这个方法就是登陆后拿到cookie
 
         $cookie_file = "";
@@ -672,7 +483,7 @@ class Index extends \think\Controller
             'Accept:text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
             'Accept-Encoding:gzip, deflate',
             'Accept-Language:zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3',
-            'Host:' . 'crm.zhiguagua.com', //必填
+            'Host:'.'crm.zhiguagua.com', //必填
             'X-Requested-With:XMLHttpRequest', // 设置ajax请求头
         ];
         curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
@@ -690,7 +501,7 @@ class Index extends \think\Controller
 
 
 // cookie文件保存在当前文件目录下的cookie文件中（没有扩展名不影响功能）
-        $cookie_file = dirname(__FILE__) . '/cookie.txt';
+        $cookie_file = dirname(__FILE__).'/cookie.txt';
 // 保存服务器响应头信息中的cookie到文件
         curl_setopt($ch, CURLOPT_COOKIEJAR, $cookie_file);
 
@@ -786,14 +597,10 @@ class Index extends \think\Controller
 
 
         echo $output;
-
-
     }
 
     public function has()
     {
-
-
         // 查询状态为1的用户数据 并且每页显示10条数据
 //        $list = User::where('status','<>',1)->paginate(10);
 // 把分页数据赋值给模板变量list
@@ -849,7 +656,6 @@ class Index extends \think\Controller
 
     public function videoTime()
     {
-
         $t     = input('t');
         $d     = input('d');
         $shop  = input('id');
@@ -859,7 +665,7 @@ class Index extends \think\Controller
         if (!$phone) {
             $phone = "15966982315";
         }
-        $tshop = Cookie::get('t' . $shop);
+        $tshop = Cookie::get('t'.$shop);
 //        $d      =  $d - $tshop;
 //        echo $tshop."<br />";
 
@@ -875,9 +681,9 @@ class Index extends \think\Controller
 //            echo "重新播放";
 
 //            重新设置播放进度的记录
-            Cookie::set('t' . $shop, 0, 36000000);
+            Cookie::set('t'.$shop, 0, 36000000);
 //            重新赋值到当前进行判断使用
-            $tshop = Cookie::get('t' . $shop);
+            $tshop = Cookie::get('t'.$shop);
 
 
             $count = Video::where('phone', $phone)
@@ -888,16 +694,16 @@ class Index extends \think\Controller
 //             模型的 静态方法
 
             if (!$count) {
-
 //                echo "恭喜您进入新的一课的学习 <br/>";
-                $user = Video::create([
-                    'title' => 10,
-                    'shop'  => $shop,
-                    'phone' => $phone,
-                    'age'   => 100,
-                ]);
+                $user = Video::create(
+                    [
+                        'title' => 10,
+                        'shop'  => $shop,
+                        'phone' => $phone,
+                        'age'   => 100,
+                    ]
+                );
             }
-
         }
 
 //        echo "已帮您创建一条新的学习记录 <br/>";
@@ -908,46 +714,38 @@ class Index extends \think\Controller
 
         // 判断是否连续播放
         if ($tshopvalue >= "5.00000" and $tshopvalue <= "12.50500") {
-
 //            echo "已测试到";
 
             if ($tshopvalue >= "10.00000" and $tshopvalue <= "12.00500") {
-
-
 //                echo "开始更新增加记录";
                 $edit = Video::where('phone', $phone)
                     ->where('shop', $shop)
                     ->update(['title' => $t + $add, 'age' => $d, 'update_time' => time()]);
-                echo "更新学习进度,跟新了" . $edit . '条';
+                echo "更新学习进度,跟新了".$edit.'条';
 
                 //            重新设置播放进度的记录
-                Cookie::set('t' . $shop, $t, 36000000);
-
+                Cookie::set('t'.$shop, $t, 36000000);
             }
-
         }
-
     }
 
     // 判断播放完成后的操作
     public function videoTimeOver()
     {
-
         $t     = input('t');
         $d     = input('d');
         $shop  = input('id');
         $phone = Cookie::get('phone');
-        $tshop = Cookie::get('t' . $shop);
+        $tshop = Cookie::get('t'.$shop);
 
 
         if ($d <= $tshop + 9) {
-
             // 获取播放次数
             $status = Video::where('phone', $phone)
                 ->where('shop', $shop)->value('status');
             $status = $status + 1;
 
-            echo "本课您已学习完成：" . $status . "次,为您的努力学习点赞~<br />";
+            echo "本课您已学习完成：".$status."次,为您的努力学习点赞~<br />";
 
             if ($status == "1") {
 //                echo "播放条件满足" . "22+" .$status;
@@ -970,13 +768,10 @@ class Index extends \think\Controller
         } else {
             return "您此次似乎没连续看完整节课程,连续看完才能学的扎实哦^_^";
         }
-
-
     }
 
     public function order()
     {
-
         $user = Cookie::get('phone');
 
         // 查询订单是否存在
@@ -994,21 +789,17 @@ class Index extends \think\Controller
 
     public function like()
     {
-
-
         $search = input('search');
 
         $show = Shop::course($search);
+        $title = "搜索".$search;
+        $show123 = Shop::where('label|title', 'like', '%'.$search.'%')->cache(3)->order('sort', 'asc')->paginate(10);
 
-        $show123 = Shop::where('label|title', 'like', '%' . $search . '%')->cache(3)->order('sort', 'asc')->paginate(10);
-
-
+         $this->assign('title', $title);
         $this->assign('show', $show);
         $this->assign('date', date('Ymdhis'));
         // 渲染模板输出
         return $this->fetch();
-
-
     }
 
     public function pay()
@@ -1022,10 +813,10 @@ class Index extends \think\Controller
         $subject = input('param.WIDsubject');
         $fee     = input('param.WIDtotal_fee');
         $lesson  = input('param.WIDbody');
-        $no      = input('param.WIDout_trade_no') . Cookie::get('phone');
+        $no      = input('param.WIDout_trade_no').Cookie::get('phone');
 
         if ($lesson = 37) {
-            $subject = "打赏:" . $subject;
+            $subject = "打赏:".$subject;
         }
         if ($lesson) {
             // dump($lesson);
@@ -1045,7 +836,8 @@ class Index extends \think\Controller
             # code...
             // 用request方法获取当前域名
             $request = Request::instance();
-            $url     = $request->domain() . '/alipay/alipayapi.php?WIDtotal_fee=' . $fee . '&WIDsubject=' . $subject . '&WIDout_trade_no=' . $no . '&WIDbody=' . $lesson . '&WIDshow_url=' . $lesson;
+            $url     = $request->domain(
+                ).'/alipay/alipayapi.php?WIDtotal_fee='.$fee.'&WIDsubject='.$subject.'&WIDout_trade_no='.$no.'&WIDbody='.$lesson.'&WIDshow_url='.$lesson;
 
             //重定向到支付宝
             $this->redirect($url);
@@ -1058,12 +850,13 @@ class Index extends \think\Controller
 
 
         if ($phone) {
+            $validate = new Validate(
+                [
+                    'phone' => 'max:11|number|between:13000000000,18999999999',
+                    'rand'  => 'require|min:4|number'
 
-            $validate = new Validate([
-                'phone' => 'max:11|number|between:13000000000,18999999999',
-                'rand'  => 'require|min:4|number'
-
-            ]);
+                ]
+            );
             $data     = [
                 'phone' => $phone,
                 'rand'  => $rand
@@ -1072,7 +865,6 @@ class Index extends \think\Controller
                 // dump($validate->getError());
                 $warning = $validate->getError();
             } else {
-
                 $count = User::where('phone', '=', $phone)->count();
 
                 $rand = Sms::where('rand', '=', $rand)
@@ -1085,45 +877,43 @@ class Index extends \think\Controller
 
                 // 如果没注册就先注册 验证码要正确
                 if ($count == 0 & $rand >= 1) {
-
                     // 提交注册
-                    $user = User::create([
-                        'phone' => $phone
-                    ]);
+                    $user = User::create(
+                        [
+                            'phone' => $phone
+                        ]
+                    );
                     // 设置Cookie 有效期为 3600秒
                     Cookie::set('phone', $phone, 360000000);
-                    $no = $no . Cookie::get('phone');
+                    $no = $no.Cookie::get('phone');
                     // 登录成功 跳转到支付宝
 
                     // 用request方法获取当前域名
                     $request = Request::instance();
-                    $url     = $request->domain() . '/alipay/alipayapi.php?WIDtotal_fee=' . $fee . '&WIDsubject=' . $subject . '&WIDout_trade_no=' . $no . '&WIDbody=' . $lesson . '&WIDshow_url=' . $lesson;
+                    $url     = $request->domain(
+                        ).'/alipay/alipayapi.php?WIDtotal_fee='.$fee.'&WIDsubject='.$subject.'&WIDout_trade_no='.$no.'&WIDbody='.$lesson.'&WIDshow_url='.$lesson;
 
                     //重定向到支付宝
                     $this->redirect($url);
-
                 } elseif ($rand >= 1) {
                     // 设置Cookie 有效期为 3600秒
                     Cookie::set('phone', $phone, 360000000);
-                    $no = $no . Cookie::get('phone');
+                    $no = $no.Cookie::get('phone');
 
 
                     // 登录成功 跳转到支付宝
 
                     // 用request方法获取当前域名
                     $request = Request::instance();
-                    $url     = $request->domain() . '/alipay/alipayapi.php?WIDtotal_fee=' . $fee . '&WIDsubject=' . $subject . '&WIDout_trade_no=' . $no . '&WIDbody=' . $lesson . '&WIDshow_url=' . $lesson;
+                    $url     = $request->domain(
+                        ).'/alipay/alipayapi.php?WIDtotal_fee='.$fee.'&WIDsubject='.$subject.'&WIDout_trade_no='.$no.'&WIDbody='.$lesson.'&WIDshow_url='.$lesson;
 
                     //重定向到支付宝
                     $this->redirect($url);
-
                 } else {
                     $warning = "验证码有误";
                 }
-
             }
-
-
         }
 
 
@@ -1134,8 +924,6 @@ class Index extends \think\Controller
 
     public function login()
     {
-
-
         $phone        = input('param.phone');
         $rand         = input('param.rand');
         $rand_test    = input('rand_test');
@@ -1154,37 +942,36 @@ class Index extends \think\Controller
 
 
         if (input('test') >= 1) {
-
             // 开发人员测试用 ，可以设置一个公共函数，做为调用使用
             echo "您已进入开发人员测试环境";
             $request = Request::instance();
             // 获取当前域名
-            echo 'domain: ' . $request->domain() . '<br/>';
+            echo 'domain: '.$request->domain().'<br/>';
             // 获取当前入口文件
-            echo 'file: ' . $request->baseFile() . '<br/>';
+            echo 'file: '.$request->baseFile().'<br/>';
             // 获取当前URL地址 不含域名
-            echo 'url: ' . $request->url() . '<br/>';
+            echo 'url: '.$request->url().'<br/>';
             // 获取包含域名的完整URL地址
-            echo 'url with domain: ' . $request->url(true) . '<br/>';
+            echo 'url with domain: '.$request->url(true).'<br/>';
             // 获取当前URL地址 不含QUERY_STRING
-            echo 'url without query: ' . $request->baseUrl() . '<br/>';
+            echo 'url without query: '.$request->baseUrl().'<br/>';
             // 获取URL访问的ROOT地址
-            echo 'root:' . $request->root() . '<br/>';
+            echo 'root:'.$request->root().'<br/>';
             // 获取URL访问的ROOT地址
-            echo 'root with domain: ' . $request->root(true) . '<br/>';
+            echo 'root with domain: '.$request->root(true).'<br/>';
             // 获取URL地址中的PATH_INFO信息
-            echo 'pathinfo: ' . $request->pathinfo() . '<br/>';
+            echo 'pathinfo: '.$request->pathinfo().'<br/>';
             // 获取URL地址中的PATH_INFO信息 不含后缀
-            echo 'pathinfo: ' . $request->path() . '<br/>';
+            echo 'pathinfo: '.$request->path().'<br/>';
             // 获取URL地址中的后缀信息
-            echo 'ext: ' . $request->ext() . '<br/>';
+            echo 'ext: '.$request->ext().'<br/>';
 
 
             $request = Request::instance();
-            echo '请求方法：' . $request->method() . '<br/>';
-            echo '资源类型：' . $request->type() . '<br/>';
-            echo '访问ip地址：' . $request->ip() . '<br/>';
-            echo '是否AJax请求：' . var_export($request->isAjax(), true) . '<br/>';
+            echo '请求方法：'.$request->method().'<br/>';
+            echo '资源类型：'.$request->type().'<br/>';
+            echo '访问ip地址：'.$request->ip().'<br/>';
+            echo '是否AJax请求：'.var_export($request->isAjax(), true).'<br/>';
             echo '请求参数：';
             dump($request->param());
             echo '请求参数：仅包含name';
@@ -1200,7 +987,6 @@ class Index extends \think\Controller
 
 
         if ($invite) {
-
             // 设置邀请人存入cookie，解决新用户先浏览页面再去注册
             Cookie::set('invite', $invite, 3600);
         }
@@ -1208,16 +994,13 @@ class Index extends \think\Controller
         $invite = Cookie::get('invite');
 
         if (Cookie::get('invite')) {
-
             // 查询邀请人会员号
             $invite_phone = User::where('id', '=', $invite)->value('phone');
-
         }
 
         // 退出登录功能
 
         if ($logout) {
-
             // 设置Cookie 有效期为 秒
             Cookie::set('phone', '', 1);
             Cookie::set('user_id', '', 1);
@@ -1226,12 +1009,9 @@ class Index extends \think\Controller
             Cookie::set('admin', '', 1);
             // $warning ="退出成功";
             return $this->success('退出成功^_^', 'login');
-
         }
 
         if (Request::instance()->isPost()) {
-
-
             // dump($code);
             // if (!captcha_check($code)) {
             //     $this->error('验证码错误');
@@ -1240,13 +1020,15 @@ class Index extends \think\Controller
             // }
 
 
-            $validate = new Validate([
-                'phone'    => 'require|max:11|number|between:13000000000,18999999999',
-                'password' => 'require|min:6',
-                'rand'     => 'require|min:4|number',
+            $validate = new Validate(
+                [
+                    'phone'    => 'require|max:11|number|between:13000000000,18999999999',
+                    'password' => 'require|min:6',
+                    'rand'     => 'require|min:4|number',
 
 
-            ]);
+                ]
+            );
             $data     = [
                 'phone'    => $phone,
                 'password' => $password,
@@ -1278,11 +1060,8 @@ class Index extends \think\Controller
 //          第一部分 如果是0011判定是用户登录
 
             if ($rand == '0011') {
-
-
 //                  先判断用户是否存在，用户不存在，先通知一下
                 if (!$get_token) {
-
                     $warning = "此用户不存在，注册 或 检查 用户名是否填写正确";
                 }
 
@@ -1290,7 +1069,6 @@ class Index extends \think\Controller
 
 
                 if ($get_token) {
-
 //                        查询密码和账号是否正确
 
 
@@ -1299,7 +1077,6 @@ class Index extends \think\Controller
                         ->count();
 
                     if (!$get_password) {
-
 //                      此处可以加一个Session或者数据库加一个记录，记录密码错误次数
                         $warning = "密码不正确";
 
@@ -1308,15 +1085,12 @@ class Index extends \think\Controller
                         $this->assign('invite_phone', $invite_phone);
 
                         return $this->fetch();
-
                     }
                 }
 
 //                确认账号密码一致开始登录操作
                 // dump("666");
                 if ($get_password == 1) {
-
-
                     $user_id = User::where('phone', '=', $phone)->value('id');
 
                     // 设置Cookie 有效期为 秒
@@ -1344,45 +1118,37 @@ class Index extends \think\Controller
                         Cookie::set('admin', 1, 3600000);
                     }
                     if ($admin) {
-
                         return redirect()->restore();
                         // 跳转之前再加一个验证是否是管理员身份  此处略
                         return $this->success('管理员您好^_^', 'admin/index/index');
                     } else {
-
                         // return redirect()->restore(); 社交首页
                         return $this->success('登录成功^_^', 'index/member/myhome');
                     }
-
                 }
-
             }
 
 //          注册和找回密码 公用查询
 
             if ($total_fee <> 9999) {
-
 //              设置一个token的秘钥，注册的时候需要。
 //              找回密码 是用来更新token，更安全
 
-                $token = md5(time() . $phone . rand(100000, 999999));
+                $token = md5(time().$phone.rand(100000, 999999));
 
 //                设置一个注册时的万能验证码
                 if ($rand == 3066) {
-
                     $rand_test = 3066;
                 }
 
 
 //              查询验证码是否正确
                 if ($rand <> 3066) {
-
                     $rand_test = Sms::where('rand', '=', $rand)
                         ->where('phone', $phone)
                         ->whereTime('create_time', 'today')
                         ->count();
                 }
-
             }
 
 
@@ -1396,27 +1162,24 @@ class Index extends \think\Controller
 //                dump($login);die();
 
                 if ($get_token <> '') {
-
                     $warning = "此用户已经存在, 登录 或者 查看账号是否正确";
-
                 } elseif ($rand_test <= 0) {
                     $warning = "验证码不正确";
-
                 }
 
 
 //                    没有注册和验证码正确开始入库
 
                 if ($get_token == '' & $rand_test > 0) {
+                    $user = User::create(
+                        [
+                            'phone'    => $phone,
+                            'password' => md5(trim($password)),
+                            'invite'   => $invite,
+                            'token'    => $token
 
-
-                    $user = User::create([
-                        'phone'    => $phone,
-                        'password' => md5(trim($password)),
-                        'invite'   => $invite,
-                        'token'    => $token
-
-                    ]);
+                        ]
+                    );
 
 
 //                    奖励邀请用户功能 开始
@@ -1425,7 +1188,6 @@ class Index extends \think\Controller
                     $invited_phone = substr_replace($phone, '****', 3, 4);
 
                     if (!$invite) {
-
                         $invite_phone = "15966982315";
                     }
 
@@ -1438,7 +1200,6 @@ class Index extends \think\Controller
 
 //                    如果没到期加上31天，到期了从现在起加上31天
                     if ($expiration_time) {
-
                         $expiration_time = $expiration_time + (3600 * 24 * 6);
 
                         User::where('phone', $invite_phone)
@@ -1459,7 +1220,7 @@ class Index extends \think\Controller
                         [
                             'phone'   => $invite_phone,
                             'money'   => 10,
-                            'content' => '邀请了会员' . $invited_phone . '注册奖励',
+                            'content' => '邀请了会员'.$invited_phone.'注册奖励',
 
                         ],
                         [
@@ -1485,8 +1246,6 @@ class Index extends \think\Controller
 //                    $this->redirect('member/payReturn');
 
                 }
-
-
             }
 
 
@@ -1494,8 +1253,6 @@ class Index extends \think\Controller
 //          1008612 重置密码状态  需要判断验证码是否正确奥
 
             if ($total_fee > 0 and $body == 1008612) {
-
-
 //                    判断用户是否存在，不存在没法操作的
                 if ($get_token == '') {
                     $warning = "用户不存在";
@@ -1506,8 +1263,6 @@ class Index extends \think\Controller
 //                有注册和验证码正确 可以修改密码啦
 
                 if ($get_token <> '' and $rand_test > 0) {
-
-
 //                  此处用save方式会更新update字段时间戳
 //                  同时更新token的，使cookie更安全
 
@@ -1529,14 +1284,9 @@ class Index extends \think\Controller
                     return $this->success('重置密码成功^_^', 'index/index/index');
 
 //                  跳出框架转到首页方式
-                    exit('<script>top.location.href="../index/index/login/221/' . $body . $phone . '"</script>');
-
-
+                    exit('<script>top.location.href="../index/index/login/221/'.$body.$phone.'"</script>');
                 }
-
-
             }
-
         }
 
 
@@ -1549,8 +1299,6 @@ class Index extends \think\Controller
 
     public function register()
     {
-
-
         $phone        = input('param.phone');
         $rand         = input('param.rand');
         $rand_test    = input('rand_test');
@@ -1568,7 +1316,6 @@ class Index extends \think\Controller
 
 
         if ($invite) {
-
             // 设置邀请人存入cookie，解决新用户先浏览页面再去注册
             Cookie::set('invite', $invite, 3600);
         }
@@ -1576,32 +1323,28 @@ class Index extends \think\Controller
         $invite = Cookie::get('invite');
 
         if (Cookie::get('invite')) {
-
             // 查询邀请人会员号
             $invite_phone = User::where('id', '=', $invite)->value('phone');
-
         }
 
         // 退出登录功能
 
         if ($logout) {
-
             // 设置Cookie 有效期为 秒
             Cookie::set('phone', '', 1);
             // $warning ="退出成功";
             return $this->success('退出成功^_^', 'login');
-
         }
 
         if (Request::instance()->isPost()) {
+            $validate = new Validate(
+                [
+                    'phone'    => 'require|max:11|number|between:13000000000,18999999999',
+                    'password' => 'require|min:6',
+                    'rand'     => 'require|min:4|number'
 
-
-            $validate = new Validate([
-                'phone'    => 'require|max:11|number|between:13000000000,18999999999',
-                'password' => 'require|min:6',
-                'rand'     => 'require|min:4|number'
-
-            ]);
+                ]
+            );
             $data     = [
                 'phone'    => $phone,
                 'password' => $password,
@@ -1633,28 +1376,24 @@ class Index extends \think\Controller
 //          注册和找回密码 公用查询
 
             if ($total_fee <> 9999) {
-
 //              设置一个token的秘钥，注册的时候需要。
 //              找回密码 是用来更新token，更安全
 
-                $token = md5(time() . $phone . rand(100000, 999999));
+                $token = md5(time().$phone.rand(100000, 999999));
 
 //                设置一个注册时的万能验证码
                 if ($rand == 3066) {
-
                     $rand_test = 3066;
                 }
 
 
 //              查询验证码是否正确
                 if ($rand <> 3066) {
-
                     $rand_test = Sms::where('rand', '=', $rand)
                         ->where('phone', $phone)
                         ->whereTime('create_time', 'today')
                         ->count();
                 }
-
             }
 
 
@@ -1668,25 +1407,20 @@ class Index extends \think\Controller
 //                dump($login);die();
 
                 if ($get_token <> '') {
-
                     $warning = "此用户已经存在，登录 或 检查手机号是否正确！";
-
                 } elseif ($rand_test <= 0) {
                     $warning = "验证码不正确";
-
                 }
 
                 // 已注册的 绑定qq 验证验证码提示
                 if (session('openid_id') <> '' & $get_token <> '' & $rand_test <= 0) {
                     $warning = "验证码不正确";
-
                 }
 
 
                 // 判断是绑定qq操作，已经注册和验证码正确开始绑定 {三个条件满足}
 
                 if (session('openid_id') <> '' & $get_token <> '' & $rand_test > 0) {
-
                     $warning = "绑定qq，已经注册和验证码正确开始绑定66669999";
 
 
@@ -1695,7 +1429,7 @@ class Index extends \think\Controller
                     $user_id = get_user_id($phone);
 
 
-                    $warning = "绑定qq，已经注册和验证码正确开始绑定id:" . $user_id;
+                    $warning = "绑定qq，已经注册和验证码正确开始绑定id:".$user_id;
 
                     // 直接更新，不考虑此用户已经绑定其他qq。会成为多个qq可以绑定同一个账号状态。
                     $user          = UserQq::get(session('openid_id'));
@@ -1729,29 +1463,26 @@ class Index extends \think\Controller
                     }
 
                     return $this->success('绑定并登录成功^_^', 'index/index/index');
-
-
                 }
 
 
                 // 没有注册和验证码正确开始入库
 
                 if ($get_token == '' & $rand_test > 0) {
-
                     // qq快捷登录不需要再创建用户
                     if (session('openid_id') == '') {
+                        $user = User::create(
+                            [
+                                'phone'    => $phone,
+                                'password' => md5(trim($password)),
+                                'invite'   => $invite,
+                                'token'    => $token
 
-                        $user = User::create([
-                            'phone'    => $phone,
-                            'password' => md5(trim($password)),
-                            'invite'   => $invite,
-                            'token'    => $token
-
-                        ]);
+                            ]
+                        );
 
                         $user_id = $user->id;
                     } else {
-
                         $user_id = Cookie::get('user_id');
 
                         // 绑定上手机号
@@ -1774,7 +1505,6 @@ class Index extends \think\Controller
 
                     // 非绑定qq是的跳转
                     if (session('openid_id') == '') {
-
                         //  重定向到收款页面，加入订单
                         $this->redirect('index/index');
                         // $this->redirect('member/payReturn');
@@ -1789,11 +1519,7 @@ class Index extends \think\Controller
 
 
                     return $this->success('注册并绑定成功^_^', 'index/index/index');
-
-
                 }
-
-
             }
 
 
@@ -1801,8 +1527,6 @@ class Index extends \think\Controller
 //          1008612 重置密码状态  需要判断验证码是否正确奥
 
             if ($total_fee > 0 and $body == 1008612) {
-
-
 //                    判断用户是否存在，不存在没法操作的
                 if ($get_token == '') {
                     $warning = "用户不存在";
@@ -1813,8 +1537,6 @@ class Index extends \think\Controller
 //                有注册和验证码正确 可以修改密码啦
 
                 if ($get_token <> '' and $rand_test > 0) {
-
-
 //                  此处用save方式会更新update字段时间戳
 //                  同时更新token的，使cookie更安全
 
@@ -1836,14 +1558,9 @@ class Index extends \think\Controller
                     return $this->success('重置密码成功^_^', 'index/index/index');
 
 //                  跳出框架转到首页方式
-                    exit('<script>top.location.href="../index/index/login/221/' . $body . $phone . '"</script>');
-
-
+                    exit('<script>top.location.href="../index/index/login/221/'.$body.$phone.'"</script>');
                 }
-
-
             }
-
         }
 
 
@@ -1856,20 +1573,16 @@ class Index extends \think\Controller
 
     public function cookie()
     {
-
         // echo  "^_^";
 
         // 设置Cookie 有效期为 3600秒
         // Cookie::set('phone','value123456',3600);
 
         echo Cookie::get('phone');
-
-
     }
 
     public function session()
     {
-
         // echo  "^_^";
 
         Session::set('title', '我的题目');
@@ -1891,20 +1604,15 @@ class Index extends \think\Controller
 //        echo  Session::get('name','think');
 
         return $this->fetch();
-
-
     }
 
     public function admin()
     {
-
 // $html = $this->fetch();
 // file_put_contents('./test.html',$html);
         echo "生成成功";
 
         return $this->fetch();
-
-
     }
 
 //人性化时间显示
@@ -1917,16 +1625,16 @@ class Index extends \think\Controller
             $str = '刚刚';
         } elseif ($time < 60 * 60) {
             $min = floor($time / 60);
-            $str = $min . '分钟前';
+            $str = $min.'分钟前';
         } elseif ($time < 60 * 60 * 24) {
             $h   = floor($time / (60 * 60));
-            $str = $h . '小时前 ';
+            $str = $h.'小时前 ';
         } elseif ($time < 60 * 60 * 24 * 3) {
             $d = floor($time / (60 * 60 * 24));
             if ($d == 1) {
-                $str = '昨天 ' . $rtime;
+                $str = '昨天 '.$rtime;
             } else {
-                $str = '前天 ' . $rtime;
+                $str = '前天 '.$rtime;
             }
         } else {
             $str = $rtime;
@@ -1936,8 +1644,6 @@ class Index extends \think\Controller
 
     public function news()
     {
-
-
         $user  = Cookie::get('phone');
         $token = Cookie::get('token');
 
@@ -1966,7 +1672,6 @@ class Index extends \think\Controller
                 ->whereTime('expiration_time', '>=', 'today')
                 ->field('start_time,expiration_time')
                 ->find();
-
 //            // dump($user_vip);
 
 
@@ -2004,7 +1709,9 @@ class Index extends \think\Controller
             ->where('sort', '<=', 1008601)
             ->where('sort', '>=', 0)
             ->order('sort', 'desc')
-            ->paginate(100, false,
+            ->paginate(
+                100,
+                false,
                 [
                     'type'     => 'Bootstrap',
                     'var_page' => 'page',
@@ -2029,7 +1736,6 @@ class Index extends \think\Controller
         // 循环嵌套播放进度
 
         foreach ($show as $k => $v) {
-
             $video_title  = '0.1';
             $video_status = '0';
             $video_age    = '100';
@@ -2046,7 +1752,6 @@ class Index extends \think\Controller
 //            return $video;
 
             if ($video) {
-
                 $video_title  = $video->title;
                 $video_age    = $video->age;
                 $video_status = $video->status;
@@ -2056,22 +1761,16 @@ class Index extends \think\Controller
                     ->count();
 
                 $data_count = $data;
-
             }
             $show[$k]['video_title']  = $video_title;
             $show[$k]['video_age']    = $video_age;
             $show[$k]['video_status'] = $video_status;
             $show[$k]['data_count']   = $data_count;
-
-
         }
 
 
         if ($rand or $all_lesson_free == 1) {
-
-
             foreach ($show as $k => $v) {
-
                 $show[$k]['buy'] = 1;
 
                 $show[$k]['play_count'] = play_count($show[$k]['id']);
@@ -2079,14 +1778,10 @@ class Index extends \think\Controller
 
 
             }
-
-
         } else {
-
             Cookie::set('vip', 0, 36000000);
 
             foreach ($show as $k => $v) {
-
                 // echo $show[$k]['id'] . "<br/>";
 
                 $body = $show[$k]['id'];
@@ -2101,8 +1796,6 @@ class Index extends \think\Controller
 
                 // 设置新课查看次数少于20次时，免费开放功能
                 if ($order >= 1 or $show[$k]['page_view'] <= 3) {
-
-
                     // $order = 1;
 
 
@@ -2113,8 +1806,6 @@ class Index extends \think\Controller
 
                 $show[$k]['buy'] = $order ? 1 : 0;
                 $show[$k]['buy'] = $order;
-
-
                 // $show[$k]['isBuy'] = "买了吗" ? 1 : 0;
             }
 
@@ -2130,7 +1821,6 @@ class Index extends \think\Controller
                         # code...
                         $show[$k]['buy'] = 1;
                     }
-
                 }
             }
 //            dump($show->toarray());
@@ -2155,13 +1845,10 @@ class Index extends \think\Controller
 
         // 渲染模板输出
         echo $this->fetch('index');
-
-
     }
 
     public function auth()
     {
-
         //权限认证 示例
         $auth = new \Auth\Auth();
 
@@ -2184,35 +1871,39 @@ class Index extends \think\Controller
 
         $request = Request::instance();
 
-        if (!$auth->check($request->module() . '/' . $request->controller() . '/' . $request->action(), Cookie::get('user_id'))) {
-
+        if (!$auth->check(
+            $request->module().'/'.$request->controller().'/'.$request->action(),
+            Cookie::get('user_id')
+        )) {
             // 第一个参数是规则名称,第二个参数是用户UID
 
-            if (!$auth->check($request->module() . '/' . $request->controller() . '/' . $request->action(), 100867)) {// 第一个参数是规则名称,第二个参数是用户UID
+            if (!$auth->check(
+                $request->module().'/'.$request->controller().'/'.$request->action(),
+                100867
+            )) {// 第一个参数是规则名称,第二个参数是用户UID
                 // return array('status'=>'error','msg'=>'有权限！');
                 $this->error('你没有权限');
             } else {
-
                 echo "管理员您好";
                 //   // $this->success('恭喜您，你有权限');
 
             }
         }
-
-
     }
 
-    public  function  basic(){
-
+    public function basic()
+    {
         return view();
     }
-    public function starter(){
+
+    public function starter()
+    {
         echo 12;
         return $this->fetch();
     }
+
     public function index()
     {
-
         /**
          * 查询最新会员
          * 直接读取user_qq表里的新会员
@@ -2233,19 +1924,15 @@ class Index extends \think\Controller
         $this->assign('human', $human);
 
         return view();
-
     }
 
     public function indexgo()
     {
-
-
         // 是否存在安装锁文件
-        $install_lock = ROOT_PATH . 'application' . DS . 'install.lock';
+        $install_lock = ROOT_PATH.'application'.DS.'install.lock';
         if (!file_exists($install_lock)) {
             //在线安装向导
             $this->success('在线安装向导【关闭方法：在application增加一个install.lock】', 'Index/install');
-
         }
 
 
@@ -2356,8 +2043,8 @@ class Index extends \think\Controller
         // 这个用来控制ajax的更新频率
         // 目前用这个来控制频率，因为这个有时候下一页没加载
         // 解决下一页没有数据的问题
-        cache('shop_show_' . $page, $show, 600);
-        cache('shop_show_make_' . $page, $show, 0);
+        cache('shop_show_'.$page, $show, 600);
+        cache('shop_show_make_'.$page, $show, 0);
 
 
         // }
@@ -2373,14 +2060,10 @@ class Index extends \think\Controller
 
         // 渲染模板输出
         return $this->fetch();
-
-
     }
 
     public function all()
     {
-
-
         $user    = Cookie::get('phone');
         $user_id = Cookie::get('user_id');
         $token   = Cookie::get('token');
@@ -2410,7 +2093,6 @@ class Index extends \think\Controller
                 ->whereTime('expiration_time', '>=', 'today')
                 ->field('start_time,expiration_time')
                 ->find();
-
 //            // dump($user_vip);
 
 
@@ -2446,7 +2128,9 @@ class Index extends \think\Controller
             ->where('sort', '<=', 1008601)
             ->where('sort', '>=', 0)
             ->order('sort', 'asc')
-            ->paginate(100, false,
+            ->paginate(
+                100,
+                false,
                 [
                     'type'     => 'Bootstrap',
                     'var_page' => 'page',
@@ -2471,7 +2155,6 @@ class Index extends \think\Controller
         // 循环嵌套播放进度
 
         foreach ($show as $k => $v) {
-
             $video_title  = '0.1';
             $video_status = '0';
             $video_age    = '100';
@@ -2487,7 +2170,6 @@ class Index extends \think\Controller
 //            return $video;
 
             if ($video) {
-
                 $video_title  = $video->title;
                 $video_age    = $video->age;
                 $video_status = $video->status;
@@ -2497,7 +2179,6 @@ class Index extends \think\Controller
                     ->count();
 
                 $data_count = $data;
-
             }
             $show[$k]['video_title']  = $video_title;
             $show[$k]['video_age']    = $video_age;
@@ -2509,22 +2190,15 @@ class Index extends \think\Controller
         }
 
         if ($rand or $all_lesson_free == 1) {
-
             foreach ($show as $k => $v) {
-
                 $show[$k]['buy'] = 1;
 
                 $show[$k]['play_count'] = play_count($show[$k]['id']);
-
             }
-
-
         } else {
-
             Cookie::set('vip', 0, 36000000);
 
             foreach ($show as $k => $v) {
-
                 // echo $show[$k]['id'] . "<br/>";
 
                 $body = $show[$k]['id'];
@@ -2538,7 +2212,6 @@ class Index extends \think\Controller
 
 
                 if ($order == 0 or $show[$k]['page_view'] <= 3) {
-
                     // $order = 1;
                     // $show[$k]['buy']            = 0;
 
@@ -2569,7 +2242,6 @@ class Index extends \think\Controller
                         # code...
                         $show[$k]['buy'] = 1;
                     }
-
                 }
             }
 //            dump($show->toarray());
@@ -2589,13 +2261,10 @@ class Index extends \think\Controller
 
         // 渲染模板输出
         return $this->fetch();
-
-
     }
 
     public function view()
     {
-
         $id             = input('id');
         $page_view      = input('page_view');
         $red_packet_get = input('red_packet_get');
@@ -2603,18 +2272,16 @@ class Index extends \think\Controller
         $data_id        = input('data_id');
         $reply          = input('reply');
 
-        if (!$user_id) {
-            return $this->success('请登录！', 'index/index/login');
-        }
+        // if (!$user_id) {
+        //     return $this->success('请登录！', 'index/index/login');
+        // }
 
         if ($data_id and $reply == '') {
-
             if ($user_id <= 1) {
                 # 没有登录禁止点赞
                 return redirect('index/index/login')->remember();
 
                 die();
-
             }
 
             // 判断是否点赞
@@ -2627,14 +2294,12 @@ class Index extends \think\Controller
             if ($like_count_user) {
                 # 有点赞软删除
                 Likes::destroy(['data_id' => $data_id, 'user_id' => $user_id]);
-
             } else {
                 # 没有点赞创建
                 $Likes          = new Likes;
                 $Likes->data_id = $data_id;
                 $Likes->user_id = $user_id;
                 $Likes->save();
-
             }
 
 
@@ -2648,10 +2313,8 @@ class Index extends \think\Controller
 
 
         if ($page_view) {
-
-
             // 查询播放记录条数
-            $url = "/index/index/view/id/" . $page_view;
+            $url = "/index/index/view/id/".$page_view;
             // $view_count =  1;
             $view_count = Footprint::where('url', '=', $url)
                 ->count();
@@ -2662,8 +2325,6 @@ class Index extends \think\Controller
 
 
             return $view_count;
-
-
         }
 
 
@@ -2718,41 +2379,37 @@ class Index extends \think\Controller
         $this->assign('talk', $talk);
         $this->assign('list', $list);
         $this->assign('bbs', $bbs);
-        $this->assign('t', Cookie::get('t' . $id));
+        $this->assign('t', Cookie::get('t'.$id));
+        $this->assign('title', $list['title']);
 
 
         // 渲染模板输出
         return $this->fetch();
-
-
     }
 
     public function add()
     {
-
-
         $title   = input('param.title');
         $content = input('param.content');
 
         //dump($title);
 
         if ($title <> '') {
-
-
             // 插入记录 - 去掉表前缀
             // $result = Db::name('data')
             // ->insert(['title' => $title, 'content' => $content, 'create_time' => time()]);
             //dump($result);
 
             // 模型的 静态方法
-            $user = Shop::create([
-                'title'   => $title,
-                'content' => $content
-            ]);
+            $user = Shop::create(
+                [
+                    'title'   => $title,
+                    'content' => $content
+                ]
+            );
 
 
             return $this->success('恭喜您发布课程成功^_^', 'index');
-
         }
 
         return $this->fetch();
@@ -2760,10 +2417,6 @@ class Index extends \think\Controller
 
     public function ajaxrun()
     {
-
-
         return $this->fetch();
-
-
     }
 }

@@ -13,6 +13,28 @@ class Wechat extends model
         return request()->ip();
     }
 
+    function adb()
+    {
+        $a   = 1;
+        $ine = 5;
+        if ($a) {
+            echo 33;
+        } elseif ($a) {
+            echo 12;
+        } else {
+            echo 3;
+        } //s
+    }
+
+    public function god()
+    {
+        if
+    }
+
+    static function Morris()
+    {
+    }
+
     public function footprint()
     {
         return $this->hasOne('Footprint', 'ip', 'ip');

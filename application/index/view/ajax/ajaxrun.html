@@ -1,4 +1,4 @@
-{include file="index/header" /}
+{layout name="common/basic" /}
 <script>
     function showHint(str) {
         var tom;
@@ -37,7 +37,7 @@
         // document.documentElement.clientHeight 浏览器可视窗口高度
 
 
-        document.getElementById("look").innerHTML = "页面的滚动条总的高度:" + document.documentElement.scrollHeight + "滚动条位置:" + document.documentElement.scrollTop + "第二种滚动条位置:" + document.body.scrollTop + "浏览器可视窗口高度:" + document.documentElement.clientHeight;
+        document.getElementById("look1").innerHTML = "页面的滚动条总的高度:" + document.documentElement.scrollHeight + "滚动条位置:" + document.documentElement.scrollTop + "第二种滚动条位置:" + document.body.scrollTop + "浏览器可视窗口高度:" + document.documentElement.clientHeight;
 
         if ((document.documentElement.scrollHeight) == (document.documentElement.scrollTop | document.body.scrollTop) + document.documentElement.clientHeight) {
 
@@ -123,6 +123,3 @@
 <option value="5">5</option>
 </select> -->
 
-
-{include file="index/footer" /}
- 

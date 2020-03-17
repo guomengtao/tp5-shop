@@ -1,4 +1,5 @@
- {include file="index/header" /}
+{layout name="common/basic" /}
+
 
  <h5><small>为您找到相关"{$Think.get.search}"结果约{$show->total()}个</small></h5>
 
@@ -9,7 +10,7 @@
 
 
 <div class="row">
-    <div class="col-md-9 col-lg-9" >
+    <div class="col-md-12 col-lg-12" >
 
  <table class="table table-striped table-hover ">
  	<thead>
@@ -21,7 +22,7 @@
  		
  		{volist name='show' id='user'}
 
- 		<tr  ><th> <h4><a href="__ROOT__/index/index/view/id/{$user.id} ">{$user.title|mb_substr=0,50,'utf-8' }</a></h4>
+ 		<tr  ><th> <a href="__ROOT__/index/index/view/id/{$user.id} ">{$user.title|mb_substr=0,50,'utf-8' }</a>
 			
 				{foreach name="user.label" item="vo" }
 
@@ -53,7 +54,7 @@
 </div> 
 
 <!-- 右侧开始 -->
- <div class="col-md-3 col-lg-3" >
+ <div class="col-md-3 col-lg-3"  style="display: none">
  
         <div class="panel panel-default"> 
             <div class="panel-heading"><span class="glyphicon glyphicon-road" aria-hidden="true"></span> 热门搜索</div>
@@ -87,4 +88,3 @@
 
  </div>
 </div>
- {include file="index/footer" /}
