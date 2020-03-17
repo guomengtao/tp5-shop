@@ -5,8 +5,16 @@ namespace app\index\controller;
 use app\index\model\User;
 use think\Session;
 
-class Ajax extends \think\Controller
+class Ajax extends Frontend
 {
+
+
+    public function _initialize()
+    {
+        parent::_initialize();
+        // 记录访问信息 和 机器人拦截
+        Member::agent();
+    }
     public function ajax()
     {
 
