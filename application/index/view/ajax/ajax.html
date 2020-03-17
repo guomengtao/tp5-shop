@@ -1,14 +1,11 @@
   
 <table class="table table-striped table-hover ">
-<thead>
-<tr  ><th > 会员ID</th><th > 昵称</th><th > 会员类型</th><th > 注册时间</th>
-</tr>
-</thead>
+
 
 <tbody>
 {volist name='show' id='user'}
   
-    <tr  ><th> {$user.id} </th><td> <a href="{$Think.server.script_name}/index/bbs/view/id/{$user.id} ">{$user.nickname?$user.nickname:$user.id}</a></td><td> {$user.rand? 'VIP' : '普通会员'} </td><td>  {$user.create_time}</td> </tr>
+    <tr  ><th> {$user.id} </th><td> <a href="{$Think.server.script_name}/index/bbs/view/id/{$user.id} ">{$user.nickname?$user.nickname:$user.id}</a></td><td> {$user.human.address?:$user.ipinfo.region} </td><td>  {$user.create_time}</td> </tr>
 {/volist}
  
 </tbody>
