@@ -4,6 +4,7 @@ namespace app\index\controller;
 
 use app\index\model\User;
 use think\Session;
+use app\common\controller\Frontend;
 
 class Ajax extends Frontend
 {
