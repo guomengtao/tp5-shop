@@ -35,9 +35,9 @@ class Msg extends Frontend
         $sidebar = Cookie::get('sidebar');
         // sidebar-mini sidebar-collapse
         if ($sidebar=='sidebar-mini'){
-            Cookie::set('sidebar','sidebar-mini sidebar-collapse','360000');
+            Cookie::set('sidebar','sidebar-mini sidebar-collapse','31536000');
         }else{
-            Cookie::set('sidebar','sidebar-mini','360000');
+            Cookie::set('sidebar','sidebar-mini','31536000');
         }
 
     }
