@@ -33,6 +33,11 @@ class User extends Frontend
         echo "empty";
     }
 
+    /**
+     * 备用human接口
+     * @param  string  $ip 接口地址
+     * @return false|string 返回接口html数据
+     */
     public function humanApi($ip = '119.62.42.104')
     {
 
@@ -60,7 +65,7 @@ class User extends Frontend
         $web = input('web');
 
         $footprint = Footprint::where('ip', $ip)->count();
-        if (!$footprint) {
+        if ($footprint) {
             return "";
         }
         // 已存在的跳过
@@ -123,6 +128,16 @@ class User extends Frontend
         $url = "https://www.ipip.net/ip.html";
 
 
+
+        try {
+            $table = QueryList::post($url, ['ip' => $ip])->find('table');
+        } catch (\Exception $e) {
+             $url = "http://tp5.dq.gaoxueya.com/index/user/humanapi";
+            if ($web) {
+               echo "api-2";
+            }
+
+        }
         try {
             $table = QueryList::post($url, ['ip' => $ip])->find('table');
         } catch (\Exception $e) {
@@ -143,13 +158,16 @@ class User extends Frontend
             }
         );
 
+
         // print_r($tableHeader->all());
         $arr = $tableRows->all();
+        dump($arr);
         $this->save($arr, $ip, $web);
     }
 
-    public function save($arr = [], $ip = '1')
+    public function save($arr = [], $ip = '1',$web)
     {
+echo 124888;
         $arr       = array_filter($arr);
         $arr       = array_filter(
             $arr,
@@ -227,6 +245,8 @@ class User extends Frontend
             $user->data($val);
             $user->save();
         }
+
+
     }
 
     public function get_between($input, $start, $end)
