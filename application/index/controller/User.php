@@ -53,6 +53,9 @@ class User extends Frontend
 
                 // 数据清洗
                 $val = $human->toArray();
+                $val['create_time'] ='';
+                $val['update_time'] ='';
+
                 if ($val['danger']) {
                     $str      = $val['danger'];
                     $str      = str_replace(array("\r\n", "\r", "\n", " ", "产品详情", ":", "登陆后可见"), "", $str);
