@@ -31,15 +31,20 @@ class User extends Frontend
     public function _empty($name)
     {
         echo "empty";
+
+
     }
 
     /**
      * 备用human接口
-     * @param  string  $ip 接口地址
+     * @param  string  $ip  接口地址
      * @return false|string 返回接口html数据
      */
     public function humanApi($ip = '119.62.42.104')
     {
+        $web = input('web');
+
+
 
         $url = "https://www.ipip.net/ip.html";
 
@@ -47,18 +52,29 @@ class User extends Frontend
         try {
             $table = QueryList::post($url, ['ip' => $ip])->find('table');
         } catch (\Exception $e) {
-
-                echo "--接口升级 稍后访问--";
-                dump($e);
-
-            return '';
+           return '';
         }
-        $val = file_get_contents($url);
-        return $val;
+
+
+
+        // 采集表头
+        $tableHeader = $table->find('tr:eq(0)')->find('td')->texts();
+        // 采集表的每行内容
+        $tableRows = $table->find('tr:gt(0)')->map(
+            function ($row) {
+                return $row->find('td')->texts()->all();
+            }
+        );
+
+
+        // print_r($tableHeader->all());
+        $arr = $tableRows->all();
+
+        return  $arr;
     }
 
     /**
-     * 真人检测
+     * 真人检测  
      */
     public function human($ip = '119.62.42.104')
     {
@@ -128,15 +144,13 @@ class User extends Frontend
         $url = "https://www.ipip.net/ip.html";
 
 
-
         try {
             $table = QueryList::post($url, ['ip' => $ip])->find('table');
         } catch (\Exception $e) {
-             $url = "http://tp5.dq.gaoxueya.com/index/user/humanapi";
+            $url = "http://tp5.dq.gaoxueya.com/index/user/humanapi";
             if ($web) {
-               echo "api-2";
+                echo "api-2";
             }
-
         }
         try {
             $table = QueryList::post($url, ['ip' => $ip])->find('table');
@@ -165,9 +179,9 @@ class User extends Frontend
         $this->save($arr, $ip, $web);
     }
 
-    public function save($arr = [], $ip = '1',$web)
+    public function save($arr = [], $ip = '1', $web)
     {
-echo 124888;
+        echo 124888;
         $arr       = array_filter($arr);
         $arr       = array_filter(
             $arr,
@@ -245,8 +259,6 @@ echo 124888;
             $user->data($val);
             $user->save();
         }
-
-
     }
 
     public function get_between($input, $start, $end)
