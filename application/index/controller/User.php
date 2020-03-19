@@ -70,7 +70,7 @@ class User extends Frontend
         }
         // 已存在的跳过
         $human = Human::where('ip', $ip)->find();
-        if ($human) {
+        if (!$human) {
             if ($web) {
                 dump($human->toArray());
                 echo "--ok--";
