@@ -40,7 +40,6 @@ class Index extends Frontend
         parent::_initialize();
         // 记录访问信息 和 机器人拦截
         Member::agent();
-
     }
 
 
@@ -790,11 +789,11 @@ class Index extends Frontend
     {
         $search = input('search');
 
-        $show = Shop::course($search);
-        $title = "搜索".$search;
+        $show    = Shop::course($search);
+        $title   = "搜索".$search;
         $show123 = Shop::where('label|title', 'like', '%'.$search.'%')->cache(3)->order('sort', 'asc')->paginate(10);
 
-         $this->assign('title', $title);
+        $this->assign('title', $title);
         $this->assign('show', $show);
         $this->assign('date', date('Ymdhis'));
         // 渲染模板输出
@@ -1903,11 +1902,6 @@ class Index extends Frontend
 
     public function index()
     {
-
-
-
-  
-
         /**
          * 查询最新会员
          * 直接读取user_qq表里的新会员

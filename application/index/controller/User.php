@@ -146,9 +146,7 @@ class User extends Frontend
                 // 调用2号接口 http://tp5.dq.gaoxueya.com/index/user/humanapi/api/ip/223.96.76.158
                 $url = "http://tp5.dq.gaoxueya.com/index/user/humanapi/ip/".$ip;
                 $arr = file_get_contents($url);
-                dump($arr);
-                $arr = json_decode($arr);
-                dump($arr);
+                $arr = json_decode($arr,true);
                 if ($arr['address']) {
                     $this->save($arr, $ip);
                 }
@@ -254,6 +252,7 @@ class User extends Frontend
             $val['scene']   = urlencode($val['scene']);
             $val['isp']     = urlencode($val['isp']);
             $val['ip']      = urlencode($val['ip']);
+
             echo urldecode(json_encode($val));
         }
     }
