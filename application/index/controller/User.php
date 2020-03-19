@@ -90,7 +90,8 @@ class User extends Frontend
                 // $user = new Human();
                 // $user->save($val, ['id' => $val['id']]);
 
-                Human::update([$val]);
+                Human::where('id', $val['id'])
+                    ->update($val);
                 dump($val);
             }
 
