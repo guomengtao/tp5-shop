@@ -75,7 +75,7 @@ class User extends Frontend
         echo $json;
         // dump($json);
         // dump(json_decode($json));
-        return '';
+        // return '';
     }
 
     /**
@@ -157,6 +157,7 @@ class User extends Frontend
             $arr = file_get_contents($url);
             dump($arr);
             $arr = json_decode($arr);
+            dump($arr)
             dump($arr);
             if ($arr['address']) {
                 $this->save($arr, $ip);
