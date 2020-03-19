@@ -56,7 +56,7 @@ class User extends Frontend
                 if ($val['danger']) {
                     $str      = $val['danger'];
                     $str      = str_replace(array("\r\n", "\r", "\n", " ", "产品详情", ":", "登陆后可见"), "", $str);
-                    $strCheck = strstr($str, '(可信度');
+                    $strCheck = strstr($str, '2');
                     if ($strCheck) {
                         $val['danger'] = substr($str, 0, strpos($str, '2'));
                     } else {
@@ -85,11 +85,12 @@ class User extends Frontend
                     } else {
                         $val['address'] = $str;
                     }
-                    // 更新清洗后数据
-                    $user = new User;
-                    $user->save($val, ['id' => $val['id']]);
-                    dump($val);
+
                 }
+                // 更新清洗后数据
+                $user = new User;
+                $user->save($val, ['id' => $val['id']]);
+                dump($val);
             }
 
             return '';
