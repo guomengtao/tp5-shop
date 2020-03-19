@@ -74,7 +74,7 @@ class User extends Frontend
     }
 
     /**
-     * 真人检测  
+     * 真人检测
      */
     public function human($ip = '119.62.42.104')
     {
@@ -147,7 +147,6 @@ class User extends Frontend
         try {
             $table = QueryList::post($url, ['ip' => $ip])->find('table');
         } catch (\Exception $e) {
-            $url = "http://tp5.dq.gaoxueya.com/index/user/humanapi";
             if ($web) {
                 echo "api-2";
             }
