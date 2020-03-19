@@ -58,7 +58,7 @@ class User extends Frontend
 
                 if ($val['danger']) {
                     $str      = $val['danger'];
-                    $str      = str_replace(array("\r\n", "\r", "\n", " ", "产品详情", ":", "登陆后可见"), "", $str);
+                    $str      = str_replace(array("\r\n", "\r", "\n", " ", "产品详情", ":", "登录后可见"), "", $str);
                     $strCheck = strstr($str, '2');
                     if ($strCheck) {
                         $val['danger'] = substr($str, 0, strpos($str, '2'));
@@ -69,7 +69,7 @@ class User extends Frontend
 
                 if ($val['address']) {
                     $str = $val['address'];
-                    $str = str_replace(array("\r\n", "\r", "\n", " ", "产品详情", "中国", "登陆后可见"), "", $str);
+                    $str = str_replace(array("\r\n", "\r", "\n", " ", "产品详情", "中国", "登录后可见"), "", $str);
 
 
                     $scoreCheck = strstr($str, '可信度');
