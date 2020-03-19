@@ -76,9 +76,9 @@ class User extends Frontend
         $web = input('web');
 
         $footprint = Footprint::where('ip', $ip)->count();
-        // if (!$footprint) {
-        //     return "";
-        // }
+        if (!$footprint) {
+            return "";
+        }
         // 已存在的跳过
         $human = Human::where('ip', $ip)->find();
         if ($human) {
@@ -146,7 +146,7 @@ class User extends Frontend
                 // 调用2号接口 http://tp5.dq.gaoxueya.com/index/user/humanapi/api/ip/223.96.76.158
                 $url = "http://tp5.dq.gaoxueya.com/index/user/humanapi/ip/".$ip;
                 $arr = file_get_contents($url);
-                $arr = json_decode($arr,true);
+                $arr = json_decode($arr, true);
                 if ($arr['address']) {
                     $this->save($arr, $ip);
                 }
@@ -169,6 +169,9 @@ class User extends Frontend
 
         // print_r($tableHeader->all());
         $arr = $tableRows->all();
+        if ($web) {
+            dump($arr);
+        }
         $this->save($arr, $ip);
     }
 

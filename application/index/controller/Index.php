@@ -1896,7 +1896,6 @@ class Index extends Frontend
 
     public function starter()
     {
-        echo 12;
         return $this->fetch();
     }
 
