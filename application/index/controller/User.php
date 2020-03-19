@@ -42,7 +42,7 @@ class User extends Frontend
      */
     public function humanApi($ip = '119.62.42.104')
     {
-        $web = input('web');
+        $ip = input('ip');
 
 
 
@@ -69,7 +69,7 @@ class User extends Frontend
 
         // print_r($tableHeader->all());
         $arr = $tableRows->all();
-        print_r($arr);
+        echo json_encode($arr);
 
         return  '';
     }
@@ -82,9 +82,9 @@ class User extends Frontend
         $web = input('web');
 
         $footprint = Footprint::where('ip', $ip)->count();
-        if (!$footprint) {
-            return "";
-        }
+        // if (!$footprint) {
+        //     return "";
+        // }
         // 已存在的跳过
         $human = Human::where('ip', $ip)->find();
         if ($human) {
@@ -142,7 +142,7 @@ class User extends Frontend
         }
 
 
-        $url = "https://www.ipip.net/ip.html";
+        $url = "https://www.ipip5.net/ip.html";
 
 
         try {
@@ -152,6 +152,9 @@ class User extends Frontend
             // 调用2号接口 http://tp5.dq.gaoxueya.com/index/user/humanapi/api/ip/223.96.76.158
             $url  = "http://tp5.dq.gaoxueya.com/index/user/humanapi/api/ip/".$ip;
             $arr = file_get_contents($url);
+            dump($arr);
+            $arr = json_decode($arr);
+            dump($arr);
             if ($arr['address']){
                 $this->save($arr, $ip);
             }
