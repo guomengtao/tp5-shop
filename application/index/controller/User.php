@@ -151,7 +151,9 @@ class User extends Frontend
 
             // 调用2号接口 http://tp5.dq.gaoxueya.com/index/user/humanapi/ip/223.96.76.158
             $url = "http://tp5.dq.gaoxueya.com/index/user/humanapi/ip/".$ip;
+             dump($url);
             $arr = file_get_contents($url);
+             dump($arr);
             $arr = json_decode($arr, true);
                 echo 124;
                 dump($arr);
