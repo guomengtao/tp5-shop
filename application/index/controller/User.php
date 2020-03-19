@@ -69,8 +69,9 @@ class User extends Frontend
 
         // print_r($tableHeader->all());
         $arr = $tableRows->all();
-
-        return  $arr;
+        print_r($arr);
+        
+        return  '';
     }
 
     /**
@@ -147,19 +148,13 @@ class User extends Frontend
         try {
             $table = QueryList::post($url, ['ip' => $ip])->find('table');
         } catch (\Exception $e) {
-            if ($web) {
-                echo "api-2";
-            }
-        }
-        try {
-            $table = QueryList::post($url, ['ip' => $ip])->find('table');
-        } catch (\Exception $e) {
-            if ($web) {
-                echo "--接口升级 稍后访问--";
-                dump($e);
-            }
+
+            // 调用2号接口
+            $url  = "";
+            $url = file_get_contents($url);
             return '';
         }
+
 
 
         // 采集表头
