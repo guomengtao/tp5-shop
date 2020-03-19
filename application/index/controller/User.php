@@ -164,6 +164,10 @@ class User extends Frontend
             echo $jack;
 
 var_dump(json_decode($arr, true));
+
+print_r (json_decode($arr,true));
+
+
             $arr2 = json_decode($arr);
             print_r($arr2);
             $arr = json_decode($arr, true);
