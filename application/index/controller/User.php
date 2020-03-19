@@ -49,7 +49,9 @@ class User extends Frontend
         try {
             $table = QueryList::post($url, ['ip' => $ip])->find('table');
         } catch (\Exception $e) {
+            dump($e);
             return '';
+
         }
 
 
@@ -68,7 +70,7 @@ class User extends Frontend
 
         // dump($arr);
 
-        $arr1 = array('a' => 1, 'b' => 2, 'c' => 3, 'd' => 4, 'e' => 5);
+        // $arr1 = array('a' => 1, 'b' => 2, 'c' => 3, 'd' => 4, 'e' => 5);
         // echo json_encode($arr1);
 
         $json = json_encode($arr);
