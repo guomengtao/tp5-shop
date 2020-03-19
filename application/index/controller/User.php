@@ -42,7 +42,7 @@ class User extends Frontend
     {
         $ip = input('ip');
 
-        echo $ip;
+        echo $ip;die();
         $url = "https://www.ipip.net/ip.html";
 
 
