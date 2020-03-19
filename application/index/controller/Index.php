@@ -1906,14 +1906,7 @@ class Index extends Frontend
 
 
 
-
-        echo json_encode($arr);
-
-        $arr = json($arr);
-
-        dump($arr);
-
-        print_r($arr);
+  
 
         /**
          * 查询最新会员
