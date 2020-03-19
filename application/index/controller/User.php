@@ -85,12 +85,8 @@ class User extends Frontend
                     } else {
                         $val['address'] = $str;
                     }
-                    $user = new Human;
-                    $user->data();
-                    $user->save();
-                    $user = new User;
-
                     // 更新清洗后数据
+                    $user = new User;
                     $user->save($val, ['id' => $val['id']]);
                     dump($val);
                 }
