@@ -74,9 +74,15 @@ class User extends Frontend
     public function human($ip = '119.62.42.104')
     {
         $web = input('web');
+        if ($web){
+            echo "linking";
+        }
 
         $footprint = Footprint::where('ip', $ip)->count();
         if (!$footprint) {
+            if ($web){
+                echo "null";
+            }
             return "";
         }
         // 已存在的跳过
