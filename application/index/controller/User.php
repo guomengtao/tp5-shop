@@ -154,9 +154,11 @@ class User extends Frontend
              dump($url);
             $arr = file_get_contents($url);
              dump($arr);
+             dump($arr->ip);
+
             $arr = json_decode($arr, true);
                 echo 124;
-                dump($arr);
+                print_r($arr);
                 die;
 
 
