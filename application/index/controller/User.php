@@ -155,6 +155,8 @@ class User extends Frontend
             $arr = file_get_contents($url);
              dump($arr);
 
+            $arr2 = json_decode($arr);
+            print_r($arr2);
             $arr = json_decode($arr, true);
                 echo 124;
                 print_r($arr);
