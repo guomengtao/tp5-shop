@@ -53,8 +53,8 @@ class User extends Frontend
 
                 // 数据清洗
                 $val = $human->toArray();
-                $val['create_time'] ='';
-                $val['update_time'] ='';
+                unset($val['create_time']);
+                unset($val['update_time']);
 
                 if ($val['danger']) {
                     $str      = $val['danger'];
