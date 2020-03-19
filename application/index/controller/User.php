@@ -162,7 +162,7 @@ class User extends Frontend
             $arr = $jack;
             dump($jack);
             echo $jack;
-
+echo $errorinfo = json_last_error(); //输出4 语法错误
 var_dump(json_decode($arr, true));
 
 print_r (json_decode($arr,true));
