@@ -70,7 +70,7 @@ class User extends Frontend
         // print_r($tableHeader->all());
         $arr = $tableRows->all();
         print_r($arr);
-        
+
         return  '';
     }
 
@@ -149,9 +149,13 @@ class User extends Frontend
             $table = QueryList::post($url, ['ip' => $ip])->find('table');
         } catch (\Exception $e) {
 
-            // 调用2号接口
-            $url  = "";
-            $url = file_get_contents($url);
+            // 调用2号接口 http://tp5.dq.gaoxueya.com/index/user/humanapi/api/ip/223.96.76.158
+            $url  = "http://tp5.dq.gaoxueya.com/index/user/humanapi/api/ip/".$ip;
+            $arr = file_get_contents($url);
+            if ($arr['address']){
+                $this->save($arr, $ip);
+            }
+
             return '';
         }
 
@@ -169,13 +173,11 @@ class User extends Frontend
 
         // print_r($tableHeader->all());
         $arr = $tableRows->all();
-        dump($arr);
         $this->save($arr, $ip, $web);
     }
 
-    public function save($arr = [], $ip = '1', $web)
+    public function save($arr = [], $ip = '1')
     {
-        echo 124888;
         $arr       = array_filter($arr);
         $arr       = array_filter(
             $arr,
