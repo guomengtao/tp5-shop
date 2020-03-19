@@ -31,8 +31,6 @@ class User extends Frontend
     public function _empty($name)
     {
         echo "empty";
-
-
     }
 
     /**
@@ -45,16 +43,14 @@ class User extends Frontend
         $ip = input('ip');
 
 
-
         $url = "https://www.ipip.net/ip.html";
 
 
         try {
             $table = QueryList::post($url, ['ip' => $ip])->find('table');
         } catch (\Exception $e) {
-           return '';
+            return '';
         }
-
 
 
         // 采集表头
@@ -69,9 +65,17 @@ class User extends Frontend
 
         // print_r($tableHeader->all());
         $arr = $tableRows->all();
-        echo json_encode($arr);
 
-        return  '';
+        // dump($arr);
+
+        $arr1 = array('a' => 1, 'b' => 2, 'c' => 3, 'd' => 4, 'e' => 5);
+        // echo json_encode($arr1);
+
+        $json = json_encode($arr);
+        echo $json;
+        // dump($json);
+        // dump(json_decode($json));
+        return '';
     }
 
     /**
@@ -148,20 +152,18 @@ class User extends Frontend
         try {
             $table = QueryList::post($url, ['ip' => $ip])->find('table');
         } catch (\Exception $e) {
-
             // 调用2号接口 http://tp5.dq.gaoxueya.com/index/user/humanapi/api/ip/223.96.76.158
-            $url  = "http://tp5.dq.gaoxueya.com/index/user/humanapi/api/ip/".$ip;
+            $url = "http://tp5.dq.gaoxueya.com/index/user/humanapi/api/ip/".$ip;
             $arr = file_get_contents($url);
             dump($arr);
             $arr = json_decode($arr);
             dump($arr);
-            if ($arr['address']){
+            if ($arr['address']) {
                 $this->save($arr, $ip);
             }
 
             return '';
         }
-
 
 
         // 采集表头

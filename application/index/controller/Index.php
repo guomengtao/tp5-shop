@@ -41,17 +41,8 @@ class Index extends Frontend
         // 记录访问信息 和 机器人拦截
         Member::agent();
 
-        // $jack = "玩手机游戏";
-        // echo $jack ;
-        // if($jack== "好好学习"){
-        //     echo "一百元的玩具";
-        // }
-        //  if($jack== "玩手机游戏"){
-        //     echo "一顿胖揍";
-        // }else{
-        //      echo "：）";
-        //  }
-        //  die();
+
+
     }
 
 
