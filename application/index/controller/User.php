@@ -142,7 +142,7 @@ class User extends Frontend
         }
 
 
-        $url = "https://www.ipip5.net/ip.html";
+        $url = "https://www.ipip.net/ip.html";
 
 
         try {
@@ -159,20 +159,8 @@ class User extends Frontend
                 $jack = Cookie::set('jack',$arr,3600000);
             }
 
-            $arr = $jack;
-            dump($jack);
-            echo $jack;
- var_dump(json_decode($arr, true));
-
-print_r (json_decode($arr,true));
 
 
-            $arr2 = json_decode($arr);
-            print_r($arr2);
-            $arr = json_decode($arr, true);
-                echo 124;
-                print_r($arr);
-                die;
 
 
             if ($web) {
