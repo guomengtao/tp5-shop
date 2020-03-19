@@ -23,44 +23,27 @@ class Api extends \think\Controller
     {
 
 
-        // https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx45d07510895e9970&secret=048b6a1deaaa39e508cfab5bfa4730a6
-        // https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx45d07510895e9970&redirect_uri=http%3a%2f%2fopen.gaoxueya.com%2fweixin&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect
-// https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxf0e81c3bee622d60&redirect_uri=http%3A%2F%2Fnba.bluewebgame.com%2Foauth_response.php&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect
-//        https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxf0e81c3bee622d60&redirect_uri=http%3A%2F%2Fnba.bluewebgame.com%2Foauth_response.php&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect
-
-
         $ip2region = new Ip2Region();
-
-        // $ip = '173.212.245.240';
-
         $info = $ip2region->btreeSearch($ip);
-
-
         echo($info['region']);
     }
 
     public function login()
     {
 
-        // 指定json数据输出
-        // return json(['data'=>6,'code'=>1,'message'=>'操作完成']);
-
-
         $username = input('username');
         $password = input('password');
 
         if (!$username) {
-            # code...
             return 3;
         }
         if (!$password) {
-            # code...
             return json(['data' => 6, 'code' => 404, 'message' => '密码不能为空']);
             return 4;
         }
 
         if ($username == '13034892752' and $password == '123456') {
-            # code...
+            
             return 200;
         } else {
             return 2;

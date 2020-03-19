@@ -21,7 +21,6 @@ class User extends Frontend
 
     public function _initialize()
     {
-
     }
 
     /**
@@ -39,11 +38,10 @@ class User extends Frontend
      */
     public function human($ip = '119.62.42.104')
     {
-
         $web = input('web');
 
-        $footpirnt = Footprint::where('ip', $ip)->count();
-        if (!$footpirnt) {
+        $footprint = Footprint::where('ip', $ip)->count();
+        if (!$footprint) {
             return "";
         }
         // 已存在的跳过
@@ -52,6 +50,50 @@ class User extends Frontend
             if ($web) {
                 dump($human->toArray());
                 echo "--ok--";
+
+                // 数据清洗
+                $val = $human->toArray();
+                if ($val['danger']) {
+                    $str      = $val['address'];
+                    $str      = str_replace(array("\r\n", "\r", "\n", " ", "产品详情", ":", "登陆后可见"), "", $str);
+                    $strCheck = strstr($str, '(可信度');
+                    if ($strCheck) {
+                        $val['danger'] = substr($str, 0, strpos($str, '2'));
+                    } else {
+                        $val['danger'] = $str;
+                    }
+                }
+
+                if ($val['address']) {
+                    $str = $val['address'];
+                    $str = str_replace(array("\r\n", "\r", "\n", " ", "产品详情", "中国", "登陆后可见"), "", $str);
+
+
+                    $scoreCheck = strstr($str, '可信度');
+                    if ($scoreCheck) {
+                        $val['score'] = $this->get_between($str, '可信', '查看');
+                        $score        = $val['score'];
+                        preg_match_all('/\d+/', $score, $arr);
+                        $arr          = join('', $arr[0]);
+                        $val['score'] = $arr;
+                    }
+
+
+                    $strCheck = strstr($str, '(可信度');
+                    if ($strCheck) {
+                        $val['address'] = substr($str, 0, strpos($str, '(可信度'));
+                    } else {
+                        $val['address'] = $str;
+                    }
+                    $user = new Human;
+                    $user->data();
+                    $user->save();
+                    $user = new User;
+
+                    // 更新清洗后数据
+                    $user->save($val, ['id' => $val['id']]);
+                    dump($val);
+                }
             }
 
             return '';
@@ -67,7 +109,6 @@ class User extends Frontend
             if ($web) {
                 echo "--接口升级 稍后访问--";
                 dump($e);
-
             }
             return '';
         }
@@ -76,31 +117,31 @@ class User extends Frontend
         // 采集表头
         $tableHeader = $table->find('tr:eq(0)')->find('td')->texts();
         // 采集表的每行内容
-        $tableRows = $table->find('tr:gt(0)')->map(function ($row) {
-            return $row->find('td')->texts()->all();
-        });
+        $tableRows = $table->find('tr:gt(0)')->map(
+            function ($row) {
+                return $row->find('td')->texts()->all();
+            }
+        );
 
         // print_r($tableHeader->all());
         $arr = $tableRows->all();
         $this->save($arr, $ip, $web);
-
-
     }
 
     public function save($arr = [], $ip = '1')
     {
-
-        dump($arr);
         $arr       = array_filter($arr);
-        $arr       = array_filter($arr, function ($item) {
-
-            return $item['0'] !== '';
-
-        });
+        $arr       = array_filter(
+            $arr,
+            function ($item) {
+                return $item['0'] !== '';
+            }
+        );
         $val       = [];
         $val['ip'] = $ip;
         // 初始化地址字段，防止未定义
         $val['address'] = '';
+        $val['danger']  = '';
 
         foreach ($arr as list($a, $b)) {
             // $a contains the first element of the nested array,
@@ -111,23 +152,6 @@ class User extends Frontend
             if (!isset($b)) {
                 continue;
             }
-
-            echo "A: $a B: $b\n";
-
-            // 1	id主键	int(100)			否	无	ID	AUTO_INCREMENT	修改 修改	删除 删除
-            // 更多 更多
-            // 	2	ip	varchar(50)	utf8_general_ci		否	无	ip		修改 修改	删除 删除
-            // 更多 更多
-            // 	3	address	varchar(200)	utf8_general_ci		否	无	地理位置		修改 修改	删除 删除
-            // 更 更多
-            // // 	5	scene	varchar(100)	utf8_general_ci		否	无	应用场景		修改 修改	删除 删除
-            // // 更多 更多
-            // // 	6	score	int(10)			否	无	真人率		修改 修改	删除 删除
-            // // 更多 更多
-            // // 	7	danger	varchar(200)	utf8_general_ci		否	无	威胁警报		修改 修改	删除 删除
-            // // 更多 更多多 更多
-            // 	4	isp	varchar(200)	utf8_general_ci		否	无	运营商		修改 修改	删除 删除
-            // 更多
 
 
             switch ($a) {
@@ -146,21 +170,30 @@ class User extends Frontend
             }
         }
 
-        if ($val['address']) {
 
+        if ($val['danger']) {
+            $str      = $val['address'];
+            $str      = str_replace(array("\r\n", "\r", "\n", " ", "产品详情", ":", "登陆后可见"), "", $str);
+            $strCheck = strstr($str, '(可信度');
+            if ($strCheck) {
+                $val['danger'] = substr($str, 0, strpos($str, '2'));
+            } else {
+                $val['danger'] = $str;
+            }
+        }
+
+        if ($val['address']) {
             $str = $val['address'];
-            $str = str_replace(array("\r\n", "\r", "\n", " ","产品详情","中国"), "", $str);
+            $str = str_replace(array("\r\n", "\r", "\n", " ", "产品详情", "中国", "登陆后可见"), "", $str);
 
 
             $scoreCheck = strstr($str, '可信度');
             if ($scoreCheck) {
                 $val['score'] = $this->get_between($str, '可信', '查看');
                 $score        = $val['score'];
-                dump($score);
                 preg_match_all('/\d+/', $score, $arr);
                 $arr          = join('', $arr[0]);
                 $val['score'] = $arr;
-                dump($val['score']);
             }
 
 
@@ -174,14 +207,15 @@ class User extends Frontend
             $user->data($val);
             $user->save();
         }
-
-
-        dump($val);
     }
 
     public function get_between($input, $start, $end)
     {
-        $substr = substr($input, strlen($start) + strpos($input, $start), (strlen($input) - strpos($input, $end)) * (-1));
+        $substr = substr(
+            $input,
+            strlen($start) + strpos($input, $start),
+            (strlen($input) - strpos($input, $end)) * (-1)
+        );
         return $substr;
     }
 
@@ -190,7 +224,6 @@ class User extends Frontend
      */
     public function register()
     {
-
     }
 
     /**
@@ -199,7 +232,6 @@ class User extends Frontend
     public
     function login()
     {
-
     }
 
     /**
@@ -208,7 +240,6 @@ class User extends Frontend
     public
     function logout()
     {
-
     }
 
     /**
@@ -217,7 +248,6 @@ class User extends Frontend
     public
     function profile()
     {
-
     }
 
     /**
@@ -226,6 +256,5 @@ class User extends Frontend
     public
     function changePassword()
     {
-
     }
 }
