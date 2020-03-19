@@ -41,8 +41,6 @@ class Index extends Frontend
         // 记录访问信息 和 机器人拦截
         Member::agent();
 
-
-
     }
 
 
@@ -1905,6 +1903,18 @@ class Index extends Frontend
 
     public function index()
     {
+
+
+
+
+        echo json_encode($arr);
+
+        $arr = json($arr);
+
+        dump($arr);
+
+        print_r($arr);
+
         /**
          * 查询最新会员
          * 直接读取user_qq表里的新会员

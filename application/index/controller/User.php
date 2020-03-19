@@ -42,16 +42,13 @@ class User extends Frontend
     {
         $ip = input('ip');
 
-
         $url = "https://www.ipip.net/ip.html";
-
 
         try {
             $table = QueryList::post($url, ['ip' => $ip])->find('table');
         } catch (\Exception $e) {
             dump($e);
             return '';
-
         }
 
 
@@ -68,16 +65,7 @@ class User extends Frontend
         // print_r($tableHeader->all());
         $arr = $tableRows->all();
 
-        // dump($arr);
-
-        // $arr1 = array('a' => 1, 'b' => 2, 'c' => 3, 'd' => 4, 'e' => 5);
-        // echo json_encode($arr1);
-
-        $json = json_encode($arr);
-        echo $json;
-        // dump($json);
-        // dump(json_decode($json));
-        // return '';
+        $this->saveApi($arr, $ip);
     }
 
     /**
@@ -154,8 +142,7 @@ class User extends Frontend
         try {
             $table = QueryList::post($url, ['ip' => $ip])->find('table');
         } catch (\Exception $e) {
-
-            if ($web){
+            if ($web) {
                 // 调用2号接口 http://tp5.dq.gaoxueya.com/index/user/humanapi/api/ip/223.96.76.158
                 $url = "http://tp5.dq.gaoxueya.com/index/user/humanapi/ip/".$ip;
                 $arr = file_get_contents($url);
@@ -184,7 +171,91 @@ class User extends Frontend
 
         // print_r($tableHeader->all());
         $arr = $tableRows->all();
-        $this->save($arr, $ip, $web);
+        $this->save($arr, $ip);
+    }
+
+    public function saveApi($arr = [], $ip = '1')
+    {
+        $arr       = array_filter($arr);
+        $arr       = array_filter(
+            $arr,
+            function ($item) {
+                return $item['0'] !== '';
+            }
+        );
+        $val       = [];
+        $val['ip'] = $ip;
+        // 初始化地址字段，防止未定义
+        $val['address'] = '';
+        $val['danger']  = '';
+
+        foreach ($arr as list($a, $b)) {
+            // $a contains the first element of the nested array,
+            // and $b contains the second element.
+            if (!isset($a)) {
+                continue;
+            }
+            if (!isset($b)) {
+                continue;
+            }
+
+
+            switch ($a) {
+                case "运营商":
+                    $val['isp'] = $b;
+                    break;
+                case "应用场景":
+                    $val['scene'] = $b;
+                    break;
+                case "威胁情报":
+                    $val['danger'] = $b;
+                    break;
+                case "地理位置":
+                    $val['address'] = $b;
+                    break;
+            }
+        }
+
+
+        if ($val['danger']) {
+            $str      = $val['address'];
+            $str      = str_replace(array("\r\n", "\r", "\n", " ", "产品详情", ":", "登录后可见"), "", $str);
+            $strCheck = strstr($str, '(可信度');
+            if ($strCheck) {
+                $val['danger'] = substr($str, 0, strpos($str, '2'));
+            } else {
+                $val['danger'] = $str;
+            }
+        }
+
+        if ($val['address']) {
+            $str = $val['address'];
+            $str = str_replace(array("\r\n", "\r", "\n", " ", "产品详情", "中国", "登录后可见"), "", $str);
+
+
+            $scoreCheck = strstr($str, '可信度');
+            if ($scoreCheck) {
+                $val['score'] = $this->get_between($str, '可信', '查看');
+                $score        = $val['score'];
+                preg_match_all('/\d+/', $score, $arr);
+                $arr          = join('', $arr[0]);
+                $val['score'] = $arr;
+            }
+
+
+            $strCheck = strstr($str, '(可信度');
+            if ($strCheck) {
+                $val['address'] = substr($str, 0, strpos($str, '(可信度'));
+            } else {
+                $val['address'] = $str;
+            }
+            $val['address'] = urlencode($val['address']);
+            $val['danger']  = urlencode($val['danger']);
+            $val['scene']   = urlencode($val['scene']);
+            $val['isp']     = urlencode($val['isp']);
+            $val['ip']      = urlencode($val['ip']);
+            echo urldecode(json_encode($val));
+        }
     }
 
     public function save($arr = [], $ip = '1')
