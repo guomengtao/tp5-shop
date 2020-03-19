@@ -87,11 +87,9 @@ class User extends Frontend
                     }
                 }
                 // 更新清洗后数据
-                // $user = new Human();
-                // $user->save($val, ['id' => $val['id']]);
+                Human::save($val, ['id' => $val['id']]);
 
-                Human::where('id', $val['id'])
-                    ->update($val);
+
                 dump($val);
             }
 
