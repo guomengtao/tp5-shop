@@ -33,8 +33,27 @@ class User extends Frontend
         echo "empty";
     }
 
+    public function humanApi($ip = '119.62.42.104')
+    {
+
+        $url = "https://www.ipip.net/ip.html";
+
+
+        try {
+            $table = QueryList::post($url, ['ip' => $ip])->find('table');
+        } catch (\Exception $e) {
+
+                echo "--接口升级 稍后访问--";
+                dump($e);
+
+            return '';
+        }
+        $val = file_get_contents($url);
+        return $val;
+    }
+
     /**
-     * 会员中心
+     * 真人检测
      */
     public function human($ip = '119.62.42.104')
     {
