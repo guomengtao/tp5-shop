@@ -54,7 +54,7 @@ class User extends Frontend
                 // 数据清洗
                 $val = $human->toArray();
                 if ($val['danger']) {
-                    $str      = $val['address'];
+                    $str      = $val['danger'];
                     $str      = str_replace(array("\r\n", "\r", "\n", " ", "产品详情", ":", "登陆后可见"), "", $str);
                     $strCheck = strstr($str, '(可信度');
                     if ($strCheck) {
