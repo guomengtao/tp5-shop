@@ -42,7 +42,7 @@ class User extends Frontend
     {
         $ip = input('ip');
 
-        echo $ip;die();
+
         $url = "https://www.ipip.net/ip.html";
 
 
@@ -153,7 +153,7 @@ class User extends Frontend
             $table = QueryList::post($url, ['ip' => $ip])->find('table');
         } catch (\Exception $e) {
             // 调用2号接口 http://tp5.dq.gaoxueya.com/index/user/humanapi/api/ip/223.96.76.158
-            $url = "http://tp5.dq.gaoxueya.com/index/user/humanapi/api/ip/".$ip;
+            $url = "http://tp5.dq.gaoxueya.com/index/user/humanapi/ip/".$ip;
             $arr = file_get_contents($url);
             dump($arr);
             $arr = json_decode($arr);
