@@ -149,11 +149,13 @@ class User extends Frontend
             $table = QueryList::post($url, ['ip' => $ip])->find('table');
         } catch (\Exception $e) {
 
-            // 调用2号接口 http://tp5.dq.gaoxueya.com/index/user/humanapi/api/ip/223.96.76.158
+            // 调用2号接口 http://tp5.dq.gaoxueya.com/index/user/humanapi/ip/223.96.76.158
             $url = "http://tp5.dq.gaoxueya.com/index/user/humanapi/ip/".$ip;
             $arr = file_get_contents($url);
             $arr = json_decode($arr, true);
-
+                echo 124;
+                dump($arr);
+                die;
 
 
             if ($web) {
