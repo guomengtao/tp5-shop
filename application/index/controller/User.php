@@ -36,7 +36,6 @@ class User extends Frontend
 
     public function json()
     {
-
         $json = '{"ip":"223.96.76.158","address":"山东淄博桓台县","danger":"","isp":"移动","scene":"住宅用户/企业用户"}';
         echo $json;
     }
@@ -44,10 +43,10 @@ class User extends Frontend
     public function jsonBorn()
     {
         header('Content-type: application/json');
-        $data = ['name'=>'thinkphp','url'=>'thinkphp.cn'];
-        // 指定json数据输出
-        return json(['data'=>$data,'code'=>1,'message'=>'操作完成']);
+        $data = ['a' => 'a', 'a' => 'a'];
 
+        // 指定json数据输出
+        return json(['code' => 1]);
     }
 
     public function jsonTest()
@@ -65,7 +64,7 @@ class User extends Frontend
 
         // $url = "https://api.chanyoo.net/sendsms";
         // $url = "https://demo.fastadmin.net//api/index/index";
-         $url = "http://tp5.dq.gaoxueya.com/index/user/jsonborn";
+        $url = "http://tp5.dq.gaoxueya.com/index/user/jsonborn";
         $h   = file_get_contents($url);
 
         var_dump($h);
@@ -75,16 +74,16 @@ class User extends Frontend
     public function sendSMS($usename, $password, $mobile, $content)
     {
         $content = urlencode($content);
-        $url     = 'http://api.chanyoo.net/sendsms?username='.$usename.'&password='.$password.'&mobile='.$mobile.'&content='.$content.'';
-        $url     = "http://tp5.dq.gaoxueya.com/index/user/jsonborn";
-        // $url     = "http://fa.dq.gaoxueya.com/api";
-        $result  = file_get_contents($url);
+        // $url     = 'http://api.chanyoo.net/sendsms?username='.$usename.'&password='.$password.'&mobile='.$mobile.'&content='.$content.'';
+        // $url     = "http://tp5.dq.gaoxueya.com/index/user/jsonborn";
+        $url     = "http://fa.dq.gaoxueya.com/api";
+        $result = file_get_contents($url);
 
         echo 1;
         var_dump($result);
-
+        echo json_last_error();
         echo "<br><br><br><br>";
-        $result = json_decode($result, true);
+echo        json_last_error();
         var_dump($result);
         // return $result['result'];
     }
