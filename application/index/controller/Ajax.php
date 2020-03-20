@@ -3,6 +3,7 @@
 namespace app\index\controller;
 
 use app\index\model\User;
+use think\Cookie;
 use think\Session;
 use app\common\controller\Frontend;
 
@@ -39,7 +40,7 @@ class Ajax extends Frontend
      * 可以加一个参数已方便多处调用
      */
     public  function alertHidden(){
-        Session::set("alertHidden",1);
+        Cookie::set("alertHidden",1,"86400");
         return true;
     }
 
