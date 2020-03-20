@@ -36,12 +36,14 @@ class User extends Frontend
 
     public function json()
     {
+
         $json = '{"ip":"223.96.76.158","address":"山东淄博桓台县","danger":"","isp":"移动","scene":"住宅用户/企业用户"}';
         echo $json;
     }
 
     public function jsonBorn()
     {
+        header('Content-Type:application/json; charset=utf-8');
         $data = ['name'=>'thinkphp','url'=>'thinkphp.cn'];
         // 指定json数据输出
         return json(['data'=>$data,'code'=>1,'message'=>'操作完成']);
@@ -60,9 +62,10 @@ class User extends Frontend
 
         echo "<br>";
         Session::set('name', 'ddd');
-        $url = "http://tp5.dq.gaoxueya.com/index/user/jsonborn";
-        $url = "https://api.chanyoo.net/sendsms";
-        $url = "https://demo.fastadmin.net//api/index/index";
+
+        // $url = "https://api.chanyoo.net/sendsms";
+        // $url = "https://demo.fastadmin.net//api/index/index";
+         $url = "http://tp5.dq.gaoxueya.com/index/user/jsonborn";
         $h   = file_get_contents($url);
 
         var_dump($h);
@@ -73,8 +76,8 @@ class User extends Frontend
     {
         $content = urlencode($content);
         $url     = 'http://api.chanyoo.net/sendsms?username='.$usename.'&password='.$password.'&mobile='.$mobile.'&content='.$content.'';
-        // $url     = "http://tp5.dq.gaoxueya.com/index/user/jsonborn";
-        $url     = "http://fa.dq.gaoxueya.com/api";
+        $url     = "http://tp5.dq.gaoxueya.com/index/user/jsonborn";
+        // $url     = "http://fa.dq.gaoxueya.com/api";
         $result  = file_get_contents($url);
 
         echo 1;
