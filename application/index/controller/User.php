@@ -34,62 +34,6 @@ class User extends Frontend
         echo "empty";
     }
 
-    public function json()
-    {
-        $json = '{"ip":"223.96.76.158","address":"山东淄博桓台县","danger":"","isp":"移动","scene":"住宅用户/企业用户"}';
-        echo $json;
-    }
-
-    public function jsonBorn()
-    {
-        header('Content-type: application/json');
-        $data = ['a' => 'a', 'a' => 'a'];
-
-        // 指定json数据输出
-        return json(['a' => 1]);
-    }
-
-    public function jsonTest()
-    {
-        echo $this->sendSMS(1, 1, 1, 1);
-        die();
-
-        // 在PHP变量中存储JSON数据
-
-        dump(json_decode($json, true));
-        var_dump(json_decode($json, true));
-
-        echo "<br>";
-        Session::set('name', 'ddd');
-
-        // $url = "https://api.chanyoo.net/sendsms";
-        // $url = "https://demo.fastadmin.net//api/index/index";
-        $url = "http://tp5.dq.gaoxueya.com/index/user/jsonborn";
-        $h   = file_get_contents($url);
-
-        var_dump($h);
-        dump($h);
-    }
-
-    public function sendSMS($usename, $password, $mobile, $content)
-    {
-        $content = urlencode($content);
-        $url     = 'http://api.chanyoo.net/sendsms?username='.$usename.'&password='.$password.'&mobile='.$mobile.'&content='.$content.'';
-        $url     = "http://tp5.dq.gaoxueya.com/index/user/jsonborn";
-        // $url     = "http://fa.dq.gaoxueya.com/api";
-        $result = file_get_contents($url);
-
-        echo 1;
-        var_dump($result);
-        echo json_last_error();
-        echo "<br><br><br><br>";
-        $result = json_decode($result, true);
-        echo json_last_error();
-
-        var_dump($result);
-        // return $result['result'];
-    }
-
     /**
      * 备用human接口
      * @param  string  $ip  接口地址
@@ -284,27 +228,29 @@ class User extends Frontend
         }
 
 
-        $url = "https://www.ipip.net/ip.html";
+        $url = "https://www.ipip5.net/ip.html";
 
 
         try {
             $table = QueryList::post($url, ['ip' => $ip])->find('table');
         } catch (\Exception $e) {
-            // $jack = Cookie::get('jack');
-            // if (!$jack) {
-            //     // 调用2号接口 http://tp5.dq.gaoxueya.com/index/user/humanapi/ip/223.96.76.158
-            //     $url = "http://tp5.dq.gaoxueya.com/index/user/humanapi/ip/".$ip;
-            //     dump($url);
-            //     $arr = file_get_contents($url);
-            //     dump($arr);
-            //     $jack = Cookie::set('jack', $arr, 3600000);
-            //     if ($arr['address']) {
-            //         $this->save($arr, $ip);
-            //     }
-            // }
 
 
             if ($web) {
+                echo "备用接口";
+                $url  = "http://tp5.dq.gaoxueya.com/index/user/humanapi/ip/".$ip;
+                $arr  = file_get_contents($url);
+
+                // 文件有bom头，检查了2天，终于各种崩溃中找到了这个原因导致转数组失败
+                // 此为临时解决办法，后期把文件全部检查一遍，去掉bom头
+
+                $arr  = substr($arr , 3);
+
+                if ($arr['address']) {
+                    echo "读取成功！";
+                    $this->save($arr, $ip);
+                }
+
                 dump($e);
                 echo "goto2";
             }
