@@ -42,8 +42,9 @@ class User extends Frontend
 
     public function jsonBorn()
     {
-
-	header('content-type:application/json;charset=utf8');
+        $data = ['name'=>'thinkphp','url'=>'thinkphp.cn'];
+        // 指定json数据输出
+        return json(['data'=>$data,'code'=>1,'message'=>'操作完成']);
 
     }
 
@@ -73,7 +74,7 @@ class User extends Frontend
         $content = urlencode($content);
         $url     = 'http://api.chanyoo.net/sendsms?username='.$usename.'&password='.$password.'&mobile='.$mobile.'&content='.$content.'';
         // $url     = "http://tp5.dq.gaoxueya.com/index/user/jsonborn";
-        $url     = "https://demo.fastadmin.net//api/index/index";
+        $url     = "http://fa.dq.gaoxueya.com/api";
         $result  = file_get_contents($url);
 
         echo 1;
