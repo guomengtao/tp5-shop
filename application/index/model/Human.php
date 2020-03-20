@@ -21,6 +21,11 @@ class Human extends model
         return $this->hasOne('User', 'ip', 'ip');
         //hasOne('关联模型名','外键名','主键名',['模型别名定义'],'join类型');
     }
+    public function ipInfo()
+    {
+        return $this->hasOne('Ipinfo', 'ip', 'ip');
+        //hasOne('关联模型名','外键名','主键名',['模型别名定义'],'join类型');
+    }
 
 
 
