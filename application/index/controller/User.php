@@ -245,6 +245,7 @@ class User extends Frontend
                 // 此为临时解决办法，后期把文件全部检查一遍，去掉bom头
 
                 $arr  = substr($arr , 3);
+                $arr= json_decode($arr, true);
 
                 if ($arr['address']) {
                     echo "读取成功！";
