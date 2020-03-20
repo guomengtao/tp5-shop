@@ -1,5 +1,5 @@
-PHP.JACK
- 
+<?php
+
 
 class Jack extends Frontend
 {
@@ -9,7 +9,7 @@ class Jack extends Frontend
     }
     public function toy()
     {
-        echo "a";
+        echo "PHP.JACKa";
     }
     function tom(){
 

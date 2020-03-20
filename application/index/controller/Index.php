@@ -1901,6 +1901,8 @@ class Index extends Frontend
 
     public function index()
     {
+
+
         /**
          * 查询最新会员
          * 直接读取user_qq表里的新会员

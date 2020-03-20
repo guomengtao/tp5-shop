@@ -33,6 +33,22 @@ class User extends Frontend
         echo "empty";
     }
 
+    public function json()
+    {
+        $json = '{"ip":"223.96.76.158","address":"山东淄博桓台县","danger":"","isp":"移动","scene":"住宅用户/企业用户"}';
+        echo $json;
+    }
+
+    public function jsonTest()
+    {
+        // 在PHP变量中存储JSON数据
+
+        $json = '{"Peter":65,"Harry":80,"John":78,"Clark":90}';
+        $json = '{"ip":"223.96.76.158","address":"山东淄博桓台县","danger":"","isp":"移动","scene":"住宅用户/企业用户"}';
+
+        var_dump(json_decode($json, true));
+    }
+
     /**
      * 备用human接口
      * @param  string  $ip  接口地址
@@ -148,7 +164,6 @@ class User extends Frontend
         try {
             $table = QueryList::post($url, ['ip' => $ip])->find('table');
         } catch (\Exception $e) {
-
             // $jack = Cookie::get('jack');
             // if (!$jack) {
             //     // 调用2号接口 http://tp5.dq.gaoxueya.com/index/user/humanapi/ip/223.96.76.158
@@ -377,32 +392,23 @@ class User extends Frontend
     /**
      * 会员登录
      */
-    public
-    function login()
+    public function login()
     {
     }
 
     /**
      * 注销登录
      */
-    public
-    function logout()
+    public function logout()
     {
     }
 
     /**
      * 个人信息
      */
-    public
-    function profile()
+    public function profile()
     {
     }
 
-    /**
-     * 修改密码
-     */
-    public
-    function changePassword()
-    {
-    }
+
 }
