@@ -165,7 +165,6 @@ class User extends Frontend
             if ($web) {
                 dump($e);
                 echo "goto2";
-                dump($arr);
             }
 
 
