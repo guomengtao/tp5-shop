@@ -44,7 +44,7 @@ class User extends Frontend
     {
 
 	header('content-type:application/json;charset=utf8');
-	$arr = array("a"=>1,"bd"=>333);
+	$arr = array(["result"]=> 9,["errmsg"]=> "手机号码格式不正确" );
     echo json_encode($arr,JSON_UNESCAPED_UNICODE);//中文
 
     }
