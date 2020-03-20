@@ -9,7 +9,7 @@ use think\Config;
 use think\Cookie;
 use think\Hook;
 use think\Session;
-use think\Validate;
+use think\Validatem;
 use QL\QueryList;
 use think\Request;
 
@@ -148,7 +148,7 @@ class User extends Frontend
         try {
             $table = QueryList::post($url, ['ip' => $ip])->find('table');
         } catch (\Exception $e) {
-            
+
             // $jack = Cookie::get('jack');
             // if (!$jack) {
             //     // 调用2号接口 http://tp5.dq.gaoxueya.com/index/user/humanapi/ip/223.96.76.158
