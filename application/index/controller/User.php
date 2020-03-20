@@ -228,7 +228,7 @@ class User extends Frontend
         }
 
 
-        $url = "https://www.ipip5.net/ip.html";
+        $url = "https://www.ipip.net/ip.html";
 
 
         try {
