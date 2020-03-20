@@ -41,10 +41,53 @@ class User extends Frontend
 
     public function jsonBorn()
     {
-        header('Content - type:text / json');
-        echo '{ "result": -119, "errmsg": "33" }';
-        die;
-
+       
+	header('content-type:application/json;charset=utf8');
+	$arr=array(
+            array(
+                "name"=>"0元大抽奖，快来体验吧",
+				"price"=>666,
+				"pre_price"=>2888,
+				"dazhe"=>"3折",
+				"img"=>"img/img2.png",
+				"id"=>"1001",
+                ),
+            array(
+                "name"=>"玉洁洗发水",
+				"price"=>57,
+				"pre_price"=>1267,
+				"dazhe"=>"5折",
+				"img"=>"img/img4.png",
+				"id"=>"1002",
+                ),
+            array(
+                "name"=>"超强微波炉",
+				"price"=>399,
+				"pre_price"=>1767,
+				"dazhe"=>"7折",
+				"img"=>"img/im23.png",
+				"id"=>"1003",
+                ),
+            array(
+            	"name"=>"柯南麻醉手表",
+				"price"=>199,
+				"pre_price"=>267,
+				"dazhe"=>"6折",
+				"img"=>"img/im24.png",
+				"id"=>"1004",
+			),
+			array(
+            	"name"=>"柯达照相机",
+				"price"=>3000,
+				"pre_price"=>5474,
+				"dazhe"=>"5折",
+				"img"=>"img/im25.png",
+				"id"=>"1005",
+			)
+        );
+  	$result=array("status"=> 1,"data"=>$arr,"msg"=>"获取商品信息成功");
+    $json=json_encode($result);
+	echo $json;
 
     }
 
@@ -72,7 +115,7 @@ class User extends Frontend
     {
         $content = urlencode($content);
         $url     = 'http://api.chanyoo.net/sendsms?username='.$usename.'&password='.$password.'&mobile='.$mobile.'&content='.$content.'';
-        $url     = "http://tp5.dq.gaoxueya.com/index/user/jsonborn";
+        // $url     = "http://tp5.dq.gaoxueya.com/index/user/jsonborn";
         $result  = file_get_contents($url);
 
         echo 1;
