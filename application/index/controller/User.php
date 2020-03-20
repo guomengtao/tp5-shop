@@ -39,14 +39,37 @@ class User extends Frontend
         echo $json;
     }
 
+    public function jsonBorn()
+    {
+        $data      = array(
+            'request' => 'success',
+            'msg'     => '35235'
+        );
+        $data_json = json_encode($data);
+        header('Content - type:text / json');
+        echo $data_json;
+    }
+
     public function jsonTest()
     {
         // 在PHP变量中存储JSON数据
 
-        $json = '{"Peter":65,"Harry":80,"John":78,"Clark":90}';
-        $json = '{"ip":"223.96.76.158","address":"山东淄博桓台县","danger":"","isp":"移动","scene":"住宅用户/企业用户"}';
-
+        $json = '{
+        "Peter":65,"Harry":80,"John":78,"Clark":90}';
+        // $json = '{
+        "ip":"223.96.76.158","address":"山东淄博桓台县","danger":"","isp":"移动","scene":"住宅用户/企业用户"}';
+            dump(json_decode($json, true));
         var_dump(json_decode($json, true));
+
+        echo "<br>";
+        Session::set('name','ddd');
+        $url = "http://tp5.dq.gaoxueya.com/index/user/json";
+        $h = file_get_contents($url);
+
+        var_dump($h);
+        dump($h);
+
+        echo $h['ip'];
     }
 
     /**
@@ -83,7 +106,90 @@ class User extends Frontend
 
         $this->saveApi($arr, $ip);
     }
+    public function saveApi($arr = [], $ip = '1')
+    {
+        $arr       = array_filter($arr);
+        $arr       = array_filter(
+            $arr,
+            function ($item) {
+                return $item['0'] !== '';
+            }
+        );
+        $val       = [];
+        $val['ip'] = $ip;
+        // 初始化地址字段，防止未定义
+        $val['address'] = '';
+        $val['danger']  = '';
 
+        foreach ($arr as list($a, $b)) {
+            // $a contains the first element of the nested array,
+            // and $b contains the second element.
+            if (!isset($a)) {
+                continue;
+            }
+            if (!isset($b)) {
+                continue;
+            }
+
+
+            switch ($a) {
+                case "运营商":
+                    $val['isp'] = $b;
+                    break;
+                case "应用场景":
+                    $val['scene'] = $b;
+                    break;
+                case "威胁情报":
+                    $val['danger'] = $b;
+                    break;
+                case "地理位置":
+                    $val['address'] = $b;
+                    break;
+            }
+        }
+
+
+        if ($val['danger']) {
+            $str      = $val['address'];
+            $str      = str_replace(array("\r\n", "\r", "\n", " ", "产品详情", ":", "登录后可见"), "", $str);
+            $strCheck = strstr($str, '(可信度');
+            if ($strCheck) {
+                $val['danger'] = substr($str, 0, strpos($str, '2'));
+            } else {
+                $val['danger'] = $str;
+            }
+        }
+
+        if ($val['address']) {
+            $str = $val['address'];
+            $str = str_replace(array("\r\n", "\r", "\n", " ", "产品详情", "中国", "登录后可见"), "", $str);
+
+
+            $scoreCheck = strstr($str, '可信度');
+            if ($scoreCheck) {
+                $val['score'] = $this->get_between($str, '可信', '查看');
+                $score        = $val['score'];
+                preg_match_all(' / \d +/', $score, $arr);
+                $arr          = join('', $arr[0]);
+                $val['score'] = $arr;
+            }
+
+
+            $strCheck = strstr($str, '(可信度');
+            if ($strCheck) {
+                $val['address'] = substr($str, 0, strpos($str, '(可信度'));
+            } else {
+                $val['address'] = $str;
+            }
+            $val['address'] = urlencode($val['address']);
+            $val['danger']  = urlencode($val['danger']);
+            $val['scene']   = urlencode($val['scene']);
+            $val['isp']     = urlencode($val['isp']);
+            $val['ip']      = urlencode($val['ip']);
+
+            echo urldecode(json_encode($val));
+        }
+    }
     /**
      * 真人检测
      */
@@ -133,7 +239,7 @@ class User extends Frontend
                     if ($scoreCheck) {
                         $val['score'] = $this->get_between($str, '可信', '查看');
                         $score        = $val['score'];
-                        preg_match_all('/\d+/', $score, $arr);
+                        preg_match_all(' / \d +/', $score, $arr);
                         $arr          = join('', $arr[0]);
                         $val['score'] = $arr;
                     }
@@ -206,90 +312,7 @@ class User extends Frontend
         $this->save($arr, $ip);
     }
 
-    public function saveApi($arr = [], $ip = '1')
-    {
-        $arr       = array_filter($arr);
-        $arr       = array_filter(
-            $arr,
-            function ($item) {
-                return $item['0'] !== '';
-            }
-        );
-        $val       = [];
-        $val['ip'] = $ip;
-        // 初始化地址字段，防止未定义
-        $val['address'] = '';
-        $val['danger']  = '';
 
-        foreach ($arr as list($a, $b)) {
-            // $a contains the first element of the nested array,
-            // and $b contains the second element.
-            if (!isset($a)) {
-                continue;
-            }
-            if (!isset($b)) {
-                continue;
-            }
-
-
-            switch ($a) {
-                case "运营商":
-                    $val['isp'] = $b;
-                    break;
-                case "应用场景":
-                    $val['scene'] = $b;
-                    break;
-                case "威胁情报":
-                    $val['danger'] = $b;
-                    break;
-                case "地理位置":
-                    $val['address'] = $b;
-                    break;
-            }
-        }
-
-
-        if ($val['danger']) {
-            $str      = $val['address'];
-            $str      = str_replace(array("\r\n", "\r", "\n", " ", "产品详情", ":", "登录后可见"), "", $str);
-            $strCheck = strstr($str, '(可信度');
-            if ($strCheck) {
-                $val['danger'] = substr($str, 0, strpos($str, '2'));
-            } else {
-                $val['danger'] = $str;
-            }
-        }
-
-        if ($val['address']) {
-            $str = $val['address'];
-            $str = str_replace(array("\r\n", "\r", "\n", " ", "产品详情", "中国", "登录后可见"), "", $str);
-
-
-            $scoreCheck = strstr($str, '可信度');
-            if ($scoreCheck) {
-                $val['score'] = $this->get_between($str, '可信', '查看');
-                $score        = $val['score'];
-                preg_match_all('/\d+/', $score, $arr);
-                $arr          = join('', $arr[0]);
-                $val['score'] = $arr;
-            }
-
-
-            $strCheck = strstr($str, '(可信度');
-            if ($strCheck) {
-                $val['address'] = substr($str, 0, strpos($str, '(可信度'));
-            } else {
-                $val['address'] = $str;
-            }
-            $val['address'] = urlencode($val['address']);
-            $val['danger']  = urlencode($val['danger']);
-            $val['scene']   = urlencode($val['scene']);
-            $val['isp']     = urlencode($val['isp']);
-            $val['ip']      = urlencode($val['ip']);
-
-            echo urldecode(json_encode($val));
-        }
-    }
 
     public function save($arr = [], $ip = '1')
     {
@@ -354,7 +377,7 @@ class User extends Frontend
             if ($scoreCheck) {
                 $val['score'] = $this->get_between($str, '可信', '查看');
                 $score        = $val['score'];
-                preg_match_all('/\d+/', $score, $arr);
+                preg_match_all(' / \d +/', $score, $arr);
                 $arr          = join('', $arr[0]);
                 $val['score'] = $arr;
             }
