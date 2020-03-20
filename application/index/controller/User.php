@@ -44,8 +44,6 @@ class User extends Frontend
     {
 
 	header('content-type:application/json;charset=utf8');
-	$arr = array(["result"]=> 9,["errmsg"]=> "手机号码格式不正确" );
-    echo json_encode($arr,JSON_UNESCAPED_UNICODE);//中文
 
     }
 
@@ -63,6 +61,7 @@ class User extends Frontend
         Session::set('name', 'ddd');
         $url = "http://tp5.dq.gaoxueya.com/index/user/jsonborn";
         $url = "https://api.chanyoo.net/sendsms";
+        $url = "https://demo.fastadmin.net//api/index/index";
         $h   = file_get_contents($url);
 
         var_dump($h);
@@ -74,6 +73,7 @@ class User extends Frontend
         $content = urlencode($content);
         $url     = 'http://api.chanyoo.net/sendsms?username='.$usename.'&password='.$password.'&mobile='.$mobile.'&content='.$content.'';
         // $url     = "http://tp5.dq.gaoxueya.com/index/user/jsonborn";
+        $url     = "https://demo.fastadmin.net//api/index/index";
         $result  = file_get_contents($url);
 
         echo 1;
