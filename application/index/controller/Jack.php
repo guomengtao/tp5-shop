@@ -1,10 +1,5 @@
-<?php
-
-namespace app\index\controller;
-
-
-
-
+PHP.JACK
+ 
 
 class Jack extends Frontend
 {
