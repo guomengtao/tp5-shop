@@ -56,15 +56,15 @@ class User extends Frontend
 
         $json = '{
         "Peter":65,"Harry":80,"John":78,"Clark":90}';
-        // $json = '{
+        $json = '{
         "ip":"223.96.76.158","address":"山东淄博桓台县","danger":"","isp":"移动","scene":"住宅用户/企业用户"}';
-            dump(json_decode($json, true));
+        dump(json_decode($json, true));
         var_dump(json_decode($json, true));
 
         echo "<br>";
-        Session::set('name','ddd');
+        Session::set('name', 'ddd');
         $url = "http://tp5.dq.gaoxueya.com/index/user/json";
-        $h = file_get_contents($url);
+        $h   = file_get_contents($url);
 
         var_dump($h);
         dump($h);
@@ -106,6 +106,7 @@ class User extends Frontend
 
         $this->saveApi($arr, $ip);
     }
+
     public function saveApi($arr = [], $ip = '1')
     {
         $arr       = array_filter($arr);
@@ -190,6 +191,7 @@ class User extends Frontend
             echo urldecode(json_encode($val));
         }
     }
+
     /**
      * 真人检测
      */
@@ -311,7 +313,6 @@ class User extends Frontend
         }
         $this->save($arr, $ip);
     }
-
 
 
     public function save($arr = [], $ip = '1')
