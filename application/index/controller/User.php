@@ -148,31 +148,26 @@ class User extends Frontend
         try {
             $table = QueryList::post($url, ['ip' => $ip])->find('table');
         } catch (\Exception $e) {
-
             $jack = Cookie::get('jack');
-            if (!$jack){
+            if (!$jack) {
                 // 调用2号接口 http://tp5.dq.gaoxueya.com/index/user/humanapi/ip/223.96.76.158
                 $url = "http://tp5.dq.gaoxueya.com/index/user/humanapi/ip/".$ip;
                 dump($url);
                 $arr = file_get_contents($url);
                 dump($arr);
-                $jack = Cookie::set('jack',$arr,3600000);
+                $jack = Cookie::set('jack', $arr, 3600000);
+                if ($arr['address']) {
+                    $this->save($arr, $ip);
+                }
             }
-
-
-
 
 
             if ($web) {
                 dump($e);
                 echo "goto2";
                 dump($arr);
-
-
             }
-            if ($arr['address']) {
-                $this->save($arr, $ip);
-            }
+
 
             return '';
         }
