@@ -41,35 +41,45 @@ class User extends Frontend
 
     public function jsonBorn()
     {
-        $data      = array(
-            'request' => 'success',
-            'msg'     => '35235'
-        );
-        $data_json = json_encode($data);
         header('Content - type:text / json');
-        echo $data_json;
+        echo '{ "result": -119, "errmsg": "33" }';
+        die;
+
+
     }
 
     public function jsonTest()
     {
+        echo $this->sendSMS(1, 1, 1, 1);
+        die();
+
         // 在PHP变量中存储JSON数据
 
-        $json = '{
-        "Peter":65,"Harry":80,"John":78,"Clark":90}';
-        $json = '{
-        "ip":"223.96.76.158","address":"山东淄博桓台县","danger":"","isp":"移动","scene":"住宅用户/企业用户"}';
         dump(json_decode($json, true));
         var_dump(json_decode($json, true));
 
         echo "<br>";
         Session::set('name', 'ddd');
-        $url = "http://tp5.dq.gaoxueya.com/index/user/json";
+        $url = "http://tp5.dq.gaoxueya.com/index/user/jsonborn";
+        $url = "https://api.chanyoo.net/sendsms";
         $h   = file_get_contents($url);
 
         var_dump($h);
         dump($h);
+    }
 
-        echo $h['ip'];
+    public function sendSMS($usename, $password, $mobile, $content)
+    {
+        $content = urlencode($content);
+        $url     = 'http://api.chanyoo.net/sendsms?username='.$usename.'&password='.$password.'&mobile='.$mobile.'&content='.$content.'';
+        $url     = "http://tp5.dq.gaoxueya.com/index/user/jsonborn";
+        $result  = file_get_contents($url);
+
+        echo 1;
+        var_dump($result);
+        $result = json_decode($result, true);
+        var_dump($result);
+        // return $result['result'];
     }
 
     /**
