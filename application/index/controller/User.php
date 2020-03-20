@@ -43,7 +43,7 @@ class User extends Frontend
 
     public function jsonBorn()
     {
-        header('Content-Type:application/json; charset=utf-8');
+        header('Content-type: application/json');
         $data = ['name'=>'thinkphp','url'=>'thinkphp.cn'];
         // 指定json数据输出
         return json(['data'=>$data,'code'=>1,'message'=>'操作完成']);
