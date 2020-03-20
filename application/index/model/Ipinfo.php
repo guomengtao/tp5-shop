@@ -64,5 +64,9 @@ class Ipinfo extends model
     	}
         return $value ;
     }
-
+    public function human()
+    {
+        return $this->hasOne('Human', 'ip', 'ip');
+        //hasOne('关联模型名','外键名','主键名',['模型别名定义'],'join类型');
+    }
 }
