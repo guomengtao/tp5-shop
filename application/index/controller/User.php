@@ -7,6 +7,7 @@ use app\index\model\Footprint;
 use app\index\model\Human;
 use think\Config;
 use think\Cookie;
+use think\helper\Arr;
 use think\Hook;
 use think\Session;
 use think\Validatem;
@@ -41,53 +42,10 @@ class User extends Frontend
 
     public function jsonBorn()
     {
-       
+
 	header('content-type:application/json;charset=utf8');
-	$arr=array(
-            array(
-                "name"=>"0元大抽奖，快来体验吧",
-				"price"=>666,
-				"pre_price"=>2888,
-				"dazhe"=>"3折",
-				"img"=>"img/img2.png",
-				"id"=>"1001",
-                ),
-            array(
-                "name"=>"玉洁洗发水",
-				"price"=>57,
-				"pre_price"=>1267,
-				"dazhe"=>"5折",
-				"img"=>"img/img4.png",
-				"id"=>"1002",
-                ),
-            array(
-                "name"=>"超强微波炉",
-				"price"=>399,
-				"pre_price"=>1767,
-				"dazhe"=>"7折",
-				"img"=>"img/im23.png",
-				"id"=>"1003",
-                ),
-            array(
-            	"name"=>"柯南麻醉手表",
-				"price"=>199,
-				"pre_price"=>267,
-				"dazhe"=>"6折",
-				"img"=>"img/im24.png",
-				"id"=>"1004",
-			),
-			array(
-            	"name"=>"柯达照相机",
-				"price"=>3000,
-				"pre_price"=>5474,
-				"dazhe"=>"5折",
-				"img"=>"img/im25.png",
-				"id"=>"1005",
-			)
-        );
-  	$result=array("status"=> 1,"data"=>$arr,"msg"=>"获取商品信息成功");
-    $json=json_encode($result);
-	echo $json;
+	$arr = array("a"=>1,"bd"=>333);
+    echo json_encode($arr,JSON_UNESCAPED_UNICODE);//中文
 
     }
 
@@ -120,6 +78,8 @@ class User extends Frontend
 
         echo 1;
         var_dump($result);
+
+        echo "<br><br><br><br>";
         $result = json_decode($result, true);
         var_dump($result);
         // return $result['result'];
