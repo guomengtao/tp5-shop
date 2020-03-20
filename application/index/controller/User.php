@@ -46,7 +46,7 @@ class User extends Frontend
         $data = ['a' => 'a', 'a' => 'a'];
 
         // 指定json数据输出
-        return json(['code' => 1]);
+        return json(['a' => 1]);
     }
 
     public function jsonTest()
@@ -74,16 +74,18 @@ class User extends Frontend
     public function sendSMS($usename, $password, $mobile, $content)
     {
         $content = urlencode($content);
-        // $url     = 'http://api.chanyoo.net/sendsms?username='.$usename.'&password='.$password.'&mobile='.$mobile.'&content='.$content.'';
-        // $url     = "http://tp5.dq.gaoxueya.com/index/user/jsonborn";
-        $url     = "http://fa.dq.gaoxueya.com/api";
+        $url     = 'http://api.chanyoo.net/sendsms?username='.$usename.'&password='.$password.'&mobile='.$mobile.'&content='.$content.'';
+        $url     = "http://tp5.dq.gaoxueya.com/index/user/jsonborn";
+        // $url     = "http://fa.dq.gaoxueya.com/api";
         $result = file_get_contents($url);
 
         echo 1;
         var_dump($result);
         echo json_last_error();
         echo "<br><br><br><br>";
-echo        json_last_error();
+        $result = json_decode($result, true);
+        echo json_last_error();
+
         var_dump($result);
         // return $result['result'];
     }
