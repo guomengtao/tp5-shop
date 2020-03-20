@@ -1910,6 +1910,7 @@ class Index extends Frontend
         $ip              = Request::instance()->ip();
         echo $ip;
         $human           = Human::where('ip', $ip)->find();
+        dump($human);
         $views_today     = Footprint::views_today();
         $views_yesterday = Footprint::views_yesterday();
         // 查询今天签到
