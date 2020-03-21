@@ -63,7 +63,9 @@ class Index extends Frontend
 
     public function sms()
     {
-        echo '666123456';
+        // Cookie::set('test','t',100);
+        $tet = Cookie::get('test');
+        dump($tet);
     }
 
     public function course()

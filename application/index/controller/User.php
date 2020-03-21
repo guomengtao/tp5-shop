@@ -237,28 +237,34 @@ class User extends Frontend
         try {
             $table = QueryList::post($url, ['ip' => $ip])->find('table');
         } catch (\Exception $e) {
-            if ($web) {
-                echo "备用接口";
-                $url = "http://tp5.dq.gaoxueya.com/index/user/humanapi/ip/".$ip;
+            $url = "http://tp5.dq.gaoxueya.com/index/user/humanapi/ip/".$ip;
+            try {
                 $arr = file_get_contents($url);
-
-                // 文件有bom头，检查了2天，终于各种崩溃中找到了这个原因导致转数组失败
-                // 此为临时解决办法，后期把文件全部检查一遍，去掉bom头
-
-                $arr = substr($arr, 3);
-                $arr = json_decode($arr, true);
-
-                if ($arr['address']) {
-                    echo "读取成功！";
-                    dump($arr);
-                    $user = new Human;
-                    $user->data($arr);
-                    $user->save();
+            }catch (\Exception $e){
+                if ($web){
+                    echo "二号接口暂停";
+                    dump($e);
                 }
+                return "";
+            }
 
 
+            // 文件有bom头，检查了2天，终于各种崩溃中找到了这个原因导致转数组失败
+            // 此为临时解决办法，后期把文件全部检查一遍，去掉bom头
+
+            $arr = substr($arr, 3);
+            $arr = json_decode($arr, true);
+
+            if ($arr['address']) {
+                $user = new Human;
+                $user->data($arr);
+                $user->save();
+            }
+
+            if ($web) {
+                echo "备用接口启动";
+                dump($arr);
                 dump($e);
-                echo "goto2";
             }
 
 
