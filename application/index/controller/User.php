@@ -322,6 +322,10 @@ class User extends Frontend
                     $val['address'] = $b;
                     break;
             }
+            $addressCheck = strstr($a, 'China');
+            if ($addressCheck) {
+                $val['address'] = $b;
+            }
         }
 
 
