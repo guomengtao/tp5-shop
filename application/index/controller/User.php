@@ -357,6 +357,8 @@ class User extends Frontend
             } else {
                 $val['address'] = $str;
             }
+        }
+        if ($val['address']) {
             $user = new Human;
             $user->data($val);
             $user->save();
