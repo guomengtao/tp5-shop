@@ -1915,11 +1915,12 @@ class Index extends Frontend
         $views_yesterday = Footprint::views_yesterday();
         // 查询今天签到
         $registration_today = Order::registration_today();
-        $ip_info            = Ipinfo::limit(10)->order('update_time', 'desc')->select();
+        $humans            = Human::limit(10)->order('update_time', 'desc')->select();
+
         $this->assign('views_today', $views_today);
         $this->assign('views_yesterday', $views_yesterday);
         $this->assign('registration_today', $registration_today);
-        $this->assign('ip_info', $ip_info);
+        $this->assign('humans', $humans);
         $this->assign('human', $human);
 
         return view();
