@@ -40,7 +40,7 @@ class Ajax extends Frontend
      * 可以加一个参数已方便多处调用
      */
     public  function alertHidden(){
-        Cookie::set("alertHidden",1,"86400");
+        Cookie::set("alertHidden",1,"36000");
         return true;
     }
 
