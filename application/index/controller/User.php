@@ -326,7 +326,7 @@ class User extends Frontend
 
 
         if ($val['danger']) {
-            $str      = $val['address'];
+            $str      = $val['danger'];
             $str      = str_replace(array("\r\n", "\r", "\n", " ", "产品详情", ":", "登录后可见"), "", $str);
             $strCheck = strstr($str, '(可信度');
             if ($strCheck) {

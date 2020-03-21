@@ -1101,7 +1101,7 @@ class Index extends Frontend
                     if (!$get_token) {
                         User::where('phone', $phone)
                             ->update(['token' => $get_token]);
-                        Cookie::set('token', $token, 3600000);
+                        Cookie::set('token', $get_token, 3600000);
                     }
                     // 判断是否是先支付了，再来注册/登录的用户
                     if (Session::get('total_fee') > 0) {
