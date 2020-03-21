@@ -125,6 +125,7 @@ class User extends Frontend
             } else {
                 $val['danger'] = $str;
             }
+            $val['danger'] = urlencode($val['danger']);
         }
 
         if ($val['address']) {
@@ -149,8 +150,6 @@ class User extends Frontend
                 $val['address'] = $str;
             }
             $val['address'] = urlencode($val['address']);
-            $val['danger']  = urlencode($val['danger']);
-            $val['scene']   = urlencode($val['scene']);
             $val['isp']     = urlencode($val['isp']);
             $val['ip']      = urlencode($val['ip']);
 
