@@ -109,11 +109,15 @@ class User extends Frontend
                     $val['address'] = $b;
                     break;
             }
+            $addressCheck = strstr($a, 'China');
+            if ($addressCheck) {
+                $val['address'] = $b;
+            }
         }
 
 
         if ($val['danger']) {
-            $str      = $val['address'];
+            $str      = $val['danger'];
             $str      = str_replace(array("\r\n", "\r", "\n", " ", "产品详情", ":", "登录后可见"), "", $str);
             $strCheck = strstr($str, '(可信度');
             if ($strCheck) {
