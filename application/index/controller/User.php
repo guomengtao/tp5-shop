@@ -83,6 +83,7 @@ class User extends Frontend
         // 初始化地址字段，防止未定义
         $val['address'] = '';
         $val['danger']  = '';
+        $val['scene']  = '';
 
         foreach ($arr as list($a, $b)) {
             // $a contains the first element of the nested array,
@@ -126,6 +127,14 @@ class User extends Frontend
                 $val['danger'] = $str;
             }
             $val['danger'] = urlencode($val['danger']);
+        }
+
+        if ($val['scene']) {
+            $str      = $val['scene'];
+            $strCheck = strstr($str, '您的IP被');
+            if ($strCheck) {
+                $val['danger'] = '';
+            }
         }
 
         if ($val['address']) {
@@ -186,6 +195,14 @@ class User extends Frontend
                 unset($val['create_time']);
                 unset($val['update_time']);
 
+                if ($val['scene']) {
+                    $str      = $val['scene'];
+                    $strCheck = strstr($str, '您的IP被');
+                    if ($strCheck) {
+                        $val['danger'] = '';
+                    }
+                }
+
                 if ($val['danger']) {
                     $str      = $val['danger'];
                     $str      = str_replace(array("\r\n", "\r", "\n", " ", "产品详情", ":", "登录后可见"), "", $str);
@@ -240,8 +257,8 @@ class User extends Frontend
             $url = "http://tp5.dq.gaoxueya.com/index/user/humanapi/ip/".$ip;
             try {
                 $arr = file_get_contents($url);
-            }catch (\Exception $e){
-                if ($web){
+            } catch (\Exception $e) {
+                if ($web) {
                     echo "二号接口暂停";
                     dump($e);
                 }
@@ -305,6 +322,7 @@ class User extends Frontend
         // 初始化地址字段，防止未定义
         $val['address'] = '';
         $val['danger']  = '';
+        $val['scene']  = '';
 
         foreach ($arr as list($a, $b)) {
             // $a contains the first element of the nested array,
@@ -338,6 +356,13 @@ class User extends Frontend
         }
 
 
+        if ($val['scene']) {
+            $str      = $val['scene'];
+            $strCheck = strstr($str, '您的IP被');
+            if ($strCheck) {
+                $val['danger'] = '';
+            }
+        }
         if ($val['danger']) {
             $str      = $val['danger'];
             $str      = str_replace(array("\r\n", "\r", "\n", " ", "产品详情", ":", "登录后可见"), "", $str);

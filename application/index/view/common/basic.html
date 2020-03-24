@@ -73,12 +73,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
             {/if}
 
             {if condition="$Think.cookie.user_id"}
+
+            {if condition="!$visitCount"}
+            <li class="nav-item dropdown">
+                <a class="nav-link" href="{:url('index/msg/visit')}">
+                    <i class="far fa-comments"></i>
+                </a>
+            </li>
+            {/if}
+
+            {if condition="$visitCount"}
             <li class="nav-item dropdown">
                 <a class="nav-link" data-toggle="dropdown" href="#">
                     <i class="far fa-comments"></i>
-                    {if condition="$visitCount"}
                     <span class="badge badge-danger navbar-badge">{$visitCount}</span>
-                    {/if}
                 </a>
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
 
@@ -107,6 +115,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <a href="{:url('index/msg/visit')}" class="dropdown-item dropdown-footer">See All Messages</a>
                 </div>
             </li>
+            {/if}
             <!-- Notifications Dropdown Menu -->
             <li class="nav-item dropdown">
                 <a class="nav-link" data-toggle="dropdown" href="#">
@@ -180,7 +189,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                          class="img-circle elevation-2" alt="User Image">
                 </div>
                 <div class="info">
-                    <a href="{:url('index/index/course')}" class="d-block">{$Think.cookie.nickname?:$Think.cookie.phone}</a>
+                    <a href="{:url('index/index/course')}"
+                       class="d-block">{$Think.cookie.nickname?:$Think.cookie.phone}</a>
                 </div>
             </div>
             {/if}
