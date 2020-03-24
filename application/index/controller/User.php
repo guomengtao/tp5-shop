@@ -83,7 +83,7 @@ class User extends Frontend
         // 初始化地址字段，防止未定义
         $val['address'] = '';
         $val['danger']  = '';
-        $val['scene']  = '';
+        $val['scene']   = '';
 
         foreach ($arr as list($a, $b)) {
             // $a contains the first element of the nested array,
@@ -131,9 +131,9 @@ class User extends Frontend
 
         if ($val['scene']) {
             $str      = $val['scene'];
-            $strCheck = strstr($str, '您的IP被');
+            $strCheck = strstr($str, '被判定为企业专线');
             if ($strCheck) {
-                $val['danger'] = '';
+                $val['scene'] = '';
             }
         }
 
@@ -197,9 +197,9 @@ class User extends Frontend
 
                 if ($val['scene']) {
                     $str      = $val['scene'];
-                    $strCheck = strstr($str, '您的IP被');
+                    $strCheck = strstr($str, '被判定为企业专线');
                     if ($strCheck) {
-                        $val['danger'] = '';
+                        $val['scene'] = '';
                     }
                 }
 
@@ -322,7 +322,7 @@ class User extends Frontend
         // 初始化地址字段，防止未定义
         $val['address'] = '';
         $val['danger']  = '';
-        $val['scene']  = '';
+        $val['scene']   = '';
 
         foreach ($arr as list($a, $b)) {
             // $a contains the first element of the nested array,
@@ -358,9 +358,9 @@ class User extends Frontend
 
         if ($val['scene']) {
             $str      = $val['scene'];
-            $strCheck = strstr($str, '您的IP被');
+            $strCheck = strstr($str, '被判定为企业专线');
             if ($strCheck) {
-                $val['danger'] = '';
+                $val['scene'] = '';
             }
         }
         if ($val['danger']) {
