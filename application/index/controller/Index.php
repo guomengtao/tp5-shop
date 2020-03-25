@@ -1917,7 +1917,7 @@ class Index extends Frontend
         $views_yesterday = Footprint::views_yesterday();
         // 查询今天签到
         $registration_today = Order::registration_today();
-        $humans            = Human::limit(10)->order('update_time', 'desc')->select();
+        $humans            = Ipinfo::limit(10)->order('update_time', 'desc')->select();
 
         $this->assign('views_today', $views_today);
         $this->assign('views_yesterday', $views_yesterday);
