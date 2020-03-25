@@ -138,7 +138,11 @@ class User extends Frontend
         }
 
         if ($val['address']) {
-            $str = $val['address'];
+            $str        = $val['address'];
+            $scoreCheck = strstr($str, '被判定');
+            if ($scoreCheck) {
+                $str = '';
+            }
             $str = str_replace(array("\r\n", "\r", "\n", " ", "产品详情", "中国", "登录后可见"), "", $str);
 
 
@@ -215,7 +219,11 @@ class User extends Frontend
                 }
 
                 if ($val['address']) {
-                    $str = $val['address'];
+                    $str        = $val['address'];
+                    $scoreCheck = strstr($str, '被判定');
+                    if ($scoreCheck) {
+                        $str = '';
+                    }
                     $str = str_replace(array("\r\n", "\r", "\n", " ", "产品详情", "中国", "登录后可见"), "", $str);
 
 
@@ -375,7 +383,11 @@ class User extends Frontend
         }
 
         if ($val['address']) {
-            $str = $val['address'];
+            $str        = $val['address'];
+            $scoreCheck = strstr($str, '被判定');
+            if ($scoreCheck) {
+                $str = '';
+            }
             $str = str_replace(array("\r\n", "\r", "\n", " ", "产品详情", "中国", "登录后可见"), "", $str);
 
 
