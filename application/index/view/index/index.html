@@ -144,12 +144,12 @@
 
         <div class="list-group">
             <a href="#" class="list-group-item disabled">
-                来访真人识别
+                最新访客
             </a>
             {volist name="humans" id="vo"}
             <a href="{:url('index/member/footprint')}" class="list-group-item">
                 <span class="badge">{$vo.update_time}</span>
-                {$i}: {$vo.address} {$vo.danger}
+                {$i}: {$vo.region} {$vo.ip}
             </a>
             {/volist}
 
