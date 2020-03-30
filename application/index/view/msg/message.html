@@ -1,0 +1,19 @@
+{layout name="common/basic" /}
+
+<table class="table table-striped">
+
+    <tbody>
+    {volist name="message" id="vo"}
+    <tr>
+        <th scope="row">{$vo.create_time}</th>
+        <td>{$vo.id}</td>
+        <td><a href="{:url('index/msg/view',['id'=>$vo.id])}" target="_self">{$vo.title}</a></td>
+    </tr>
+    {/volist}
+
+
+
+
+    </tbody>
+</table>
+{$message->render()}

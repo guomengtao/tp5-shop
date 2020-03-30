@@ -26,8 +26,6 @@ class Member extends \think\Controller
     {
         // 记录访问信息 和 机器人拦截
         Member::agent();
-
-
     }
 
     public static function agent()
@@ -69,7 +67,7 @@ class Member extends \think\Controller
             die;
         }
         $version          = $agent->version($platform);
-        $info['platform'] = $info['platform'] . $version;
+        $info['platform'] = $info['platform'].$version;
 
         if ($info['platform']) {
             // 记录访问量
@@ -100,21 +98,18 @@ class Member extends \think\Controller
         $info['ip'] = $request->ip();
         //  模块控制器和方法
         $info['path'] = $request->path();
-        $view         = $request->module() . $request->controller() . $request->action();
+        $view         = $request->module().$request->controller().$request->action();
         // 如果是产品详情页，记录一下访问的产品id，$goods_id
         if ($view == 'indexIndexview') {
             $info['goods_id'] = input('id');
         }
 
         if (isset($_SERVER["HTTP_REFERER"])) {
-
-            $domain = "http://" . parse_url($_SERVER['HTTP_REFERER'])['host'];
+            $domain = "http://".parse_url($_SERVER['HTTP_REFERER'])['host'];
             if ($domain <> $request->domain()) {
                 $info['domain']  = parse_url($_SERVER['HTTP_REFERER'])['host'];
                 $info['referer'] = $_SERVER['HTTP_REFERER'];
             }
-
-
         }
 
 
@@ -124,13 +119,10 @@ class Member extends \think\Controller
 
 
         if ($user->id) {
-
             // 验证真人
             $human = new HumanCheck();
             $human->human($info['ip']);
         }
-
-
     }
 
     public function skin()
@@ -160,7 +152,7 @@ class Member extends \think\Controller
             // 代码略
         }
         //重定向 不用提示
-        return $this->redirect('Index/index/index');
+        return $this->redirect('index/index/index');
 
         // 提示
         // return $this->success('设置成功^_^', 'index/index', 0);
@@ -168,12 +160,14 @@ class Member extends \think\Controller
 
     public function myhome()
     {
-
+        $user_id = Cookie::get("user_id");
+        if (!$user_id) {
+            # 没有登录 跳转到登录页面
+            return $this->redirect('index/index/login');
+        }
 
         // 是否为 POST 请求
         if (request()->isPost()) {
-
-
             $add = Data::add();
 
 
@@ -185,7 +179,6 @@ class Member extends \think\Controller
                 //错误页面的默认跳转页面是返回前一页，通常不需要设置
                 $this->error('请填写内容');
             }
-
         }
 
 
@@ -206,19 +199,16 @@ class Member extends \think\Controller
 
     public function start()
     {
-
         $user = Cookie::get('phone');
 
 
         // ajax 签到调用
 
         if (request()->isPost()) {
-
             $user             = Cookie::get('phone');
             $registration_vip = input('registration_vip');
 
             if (!$user) {
-
                 return "大佬！请登录";
                 # 没有登录 跳转到登录页面
                 // redirect('index / index / login')->remember();
@@ -250,18 +240,20 @@ class Member extends \think\Controller
 
             if ($registration_user) {
                 # 已经签到直接提示
-                return "已连续签到" . $rand . "天";
+                return "已连续签到".$rand."天";
             }
 
 
             // 生成签到记录订单
-            $user = Order::create([
-                'body'      => 135,
-                'subject'   => "签到",
-                'total_fee' => 0,
-                'rand'      => $rand,
-                'phone'     => $user
-            ]);
+            $user = Order::create(
+                [
+                    'body'      => 135,
+                    'subject'   => "签到",
+                    'total_fee' => 0,
+                    'rand'      => $rand,
+                    'phone'     => $user
+                ]
+            );
 
 
             // 设置对应奖励的vip天数
@@ -296,8 +288,7 @@ class Member extends \think\Controller
             }
 
 
-            return "恭喜您，连续签到" . $rand . "天";
-
+            return "恭喜您，连续签到".$rand."天";
         }
 
 
@@ -368,13 +359,13 @@ class Member extends \think\Controller
         for ($i = 1; $i < 46; $i++) {
             # code...
 
-            echo "45天-之第" . $i . "天 ";
+            echo "45天-之第".$i."天 ";
 
 
             // echo $firstday. "签到情况 ";
 
-            $day_a = $firstday . ' 00:00:00';
-            $day_b = $firstday . ' 23:59:59';
+            $day_a = $firstday.' 00:00:00';
+            $day_b = $firstday.' 23:59:59';
 
 
             $everyday = Order::where('body', '=', 135)
@@ -386,15 +377,13 @@ class Member extends \think\Controller
 
             // 设置对应45个session的方式，方便模板里调用。
 
-            session('s_' . $i, $everyday);
-            echo 'session里的结果' . session('s_' . $i);
+            session('s_'.$i, $everyday);
+            echo 'session里的结果'.session('s_'.$i);
 
             if ($everyday) {
                 # code...
                 // echo " 今天签到了，点亮   获得一课星星  ☆   <br> ";
                 $allstart++;
-
-
             } else {
                 // echo " 熄灭代码 <br>";
             }
@@ -402,12 +391,11 @@ class Member extends \think\Controller
 
             // 下一天 date('Y - m - d',strtotime($date.' - 1 day'))
             // $firstday=$firstday +1;
-            $firstday = date('Y - m - d', strtotime($firstday . ' + 1 day'));
-
+            $firstday = date('Y - m - d', strtotime($firstday.' + 1 day'));
         }
 
 
-        echo "您总共获得星星" . $allstart;
+        echo "您总共获得星星".$allstart;
 
 
         //       连续签到排名
@@ -428,8 +416,6 @@ class Member extends \think\Controller
 
     public function news()
     {
-
-
         // 获取需要查询的某个用户的动态
         $user_id = input('user_id');
 
@@ -449,7 +435,6 @@ class Member extends \think\Controller
         if ($phone) {
             # 设置打开单用户搜索功能
             $eq = "=";
-
         }
 
 
@@ -494,7 +479,7 @@ class Member extends \think\Controller
         $pathinfo = Footprint::field('id,phone,create_time,pathinfo')
             ->order('id desc')
             ->where('phone', $eq, $phone)
-            ->where('pathinfo', 'like', '%' . 'index / index / view' . '%')
+            ->where('pathinfo', 'like', '%'.'index / index / view'.'%')
             ->limit(10)
             // ->fetchSql(true)
             ->select();
@@ -587,15 +572,11 @@ class Member extends \think\Controller
         $this->assign('registration', $registration);
 
         return view();
-
-
     }
 
 
     public function home()
     {
-
-
         // 直接调用统一的自定义方法 查询指定用户信息
         $user = User::userselfinfo(input('user_id'));
 
@@ -612,7 +593,6 @@ class Member extends \think\Controller
 
     public function tip()
     {
-
         //  打赏列表
 
         $appointment = input('appointment');
@@ -653,13 +633,10 @@ class Member extends \think\Controller
 
 
         return view();
-
     }
 
     public function tips()
     {
-
-
         //  打赏列表
         $list = Order::where('body', '=', 37)
             ->field('id,phone, total_fee,create_time,subject')
@@ -692,13 +669,10 @@ class Member extends \think\Controller
 
 
         return view();
-
     }
 
     public function top()
     {
-
-
         // 设置缓存数据
         // cache('show', $show, 300);
 
@@ -707,15 +681,14 @@ class Member extends \think\Controller
         // ajax异步更新缓存 通过清空缓存激活的方式
         // 少嵌套if是代码更加简洁
         if (request()->isPost()) {
-
-            cache('online_time', NULL);
+            cache('online_time', null);
         }
 
         if (!cache('online_time')) {
             # code...
             $cach_time = 0;
 
-            dump("没有用缓存" . $cach_time);
+            dump("没有用缓存".$cach_time);
 
             // 设置缓存数据
             // cache('date',  date('y - m - d h:i:s',time()), $cach_time);
@@ -765,7 +738,7 @@ class Member extends \think\Controller
             $pathinfo = Footprint::group('pathinfo')
                 ->field('id,phone, count(`pathinfo`) as pathinfocount,Now(),pathinfo')
                 ->order('pathinfocount desc')
-                ->where('pathinfo', 'like', '%' . 'index / index / view' . '%')
+                ->where('pathinfo', 'like', '%'.'index / index / view'.'%')
                 ->limit(10)
                 // ->fetchSql(true)
                 ->select();
@@ -788,7 +761,7 @@ class Member extends \think\Controller
                 ->field('id,phone, count(`domain`) as domaincount,domain')
                 ->order('domaincount desc')
                 // ->where('pathinfo','like','%'.'index / index / view'.'%')
-                ->where('domain', 'like', '%' . 'com' . '%')
+                ->where('domain', 'like', '%'.'com'.'%')
                 ->limit(10)
                 ->select();
             cache('domain', $domain, $cach_time);
@@ -845,7 +818,6 @@ class Member extends \think\Controller
                 ->limit(10)
                 ->select();
             cache('invite', $invite, $cach_time);
-
         }
 
         // $this->assign('list',$list);
@@ -863,14 +835,12 @@ class Member extends \think\Controller
         $this->assign('registration', cache('registration'));
 
         return view();
-
         // 排行榜页面
 
     }
 
     public function ajaxModelPay()
     {
-
         // 价格 total_fee
 // 主题描述 subject
 // 产品id body
@@ -885,12 +855,11 @@ class Member extends \think\Controller
         $admin     = Cookie::get('admin');
 
         if ($admin >= 1) {
-
 //            开发人员测试用
-            dump('价格' . $total_fee);
-            dump('主题' . $subject);
-            dump('产品id' . $body);
-            dump('订单号' . $trade_no);
+            dump('价格'.$total_fee);
+            dump('主题'.$subject);
+            dump('产品id'.$body);
+            dump('订单号'.$trade_no);
             dump($phone);
         }
 
@@ -906,8 +875,6 @@ class Member extends \think\Controller
 
     public function payReturn()
     {
-
-
 //        验证时否有支付的Session
 //        注意处理完订单后把total_fee的Session设置为0，关闭订单入库
         if (Session::get('total_fee') <= 0) {
@@ -948,8 +915,6 @@ class Member extends \think\Controller
 
         // 如果是签到，查询昨天累加的签到天数
         if ($body == 135) {
-
-
             // 判断今天是否有签到记录
             $rand_today = Order::where('body', $body)
                 ->where('phone', '<>', '15966982315')
@@ -1000,29 +965,27 @@ class Member extends \think\Controller
             if ($add_vip_days >= 1 and $rand_today <= 0) {
                 add_vip_days($add_vip_days, 135001);
             }
-
-
         }
 
 
         // 公共的订单创建语句
 
-        $order = Order::create([
-            'phone'        => $phone,
-            'body'         => $body,
-            'rand'         => $rand,
-            'subject'      => $subject,
-            'total_fee'    => $total_fee,
-            'buyer_id'     => $buyer_id,
-            'buyer_email'  => $buyer_email,
-            'out_trade_no' => $out_trade_no,
-        ]);
+        $order = Order::create(
+            [
+                'phone'        => $phone,
+                'body'         => $body,
+                'rand'         => $rand,
+                'subject'      => $subject,
+                'total_fee'    => $total_fee,
+                'buyer_id'     => $buyer_id,
+                'buyer_email'  => $buyer_email,
+                'out_trade_no' => $out_trade_no,
+            ]
+        );
 
 
         // 如果是vip用户，设置vip字段
         if ($body == 105) {
-
-
             // 设置对应够买的vip会员时间
             if ($total_fee == 9.9) {
                 $add_vip_days = 30;
@@ -1085,12 +1048,9 @@ class Member extends \think\Controller
 //        没有登录订单先临时存入Session中，注册成功后，再回来再次加入订单。
 
         if ($phone == 15966982315) {
-
 //           重定向方式注册页面，注册/登录后 注意再跳转回次页面进行订单入库
 
             if ($body == 1008612) {
-
-
                 //    跳出模态框架
                 exit(' < script>top . location . href="../index/login/login/2/" </script > ');
 
@@ -1119,40 +1079,40 @@ class Member extends \think\Controller
 //        注册并订单入库后返回到首页
         if ($body == 1008611) {
             //    跳出模态框架
-            exit('<script>top.location.href=" ../index / index / login / 221 / ' . $body . '"</script>');
+            exit('<script>top.location.href=" ../index / index / login / 221 / '.$body.'"</script>');
         }
 
 
 //        注册并订单入库后返回到首页
         if ($body == 1008611 or $body == 1008611) {
             //    跳出模态框架
-            exit('<script>top.location.href=" ../index / index / login / 221 / ' . $body . $phone . '"</script>');
+            exit('<script>top.location.href=" ../index / index / login / 221 / '.$body.$phone.'"</script>');
         }
 
 
         //        135是签到的，签到后跳转到签到排名
         if ($body == 135) {
             //    跳出模态框架
-            exit('<script>top.location.href=" ../member / registration / login / 135 / add_vip_days / ' . $rand . '"</script>');
+            exit('<script>top.location.href=" ../member / registration / login / 135 / add_vip_days / '.$rand.'"</script>');
         }
 
 
         //        105是开通vip，跳转到vip页面
         if ($body == 105) {
             //    跳出模态框架
-            exit('<script>top.location.href=" ../member / vip / add_vip_days / ' . $add_vip_days . '"</script>');
+            exit('<script>top.location.href=" ../member / vip / add_vip_days / '.$add_vip_days.'"</script>');
         }
 
         //  37是打赏，打赏后跳转到打赏排名
         if ($body == 37) {
             //    跳出模态框架
-            exit('<script>top.location.href=" ../member / tips / login / 23021 / add_vip_days / ' . $rand . '"</script>');
+            exit('<script>top.location.href=" ../member / tips / login / 23021 / add_vip_days / '.$rand.'"</script>');
         }
 
         // 如果大于100811的商品上面没有特别指定就跳转到首页 不过这里没给明显的提示
         if ($body >= 1008811) {
             //    跳出模态框架
-            exit('<script>top.location.href=" ../index / index / login / 232 / ' . $body . '"</script>');
+            exit('<script>top.location.href=" ../index / index / login / 232 / '.$body.'"</script>');
         }
 
 
@@ -1161,13 +1121,11 @@ class Member extends \think\Controller
 //        如果没登录，重置密码时先做记录，不重置付款状态，跳转回来重新入库。
 
 
-        exit('<script>top.location.href=" ../index / view / id / ' . $body . '"</script>');
-
+        exit('<script>top.location.href=" ../index / view / id / '.$body.'"</script>');
     }
 
     public function footprint_add()
     {
-
         $data = Cookie::get('footprint');
 
 
@@ -1176,22 +1134,16 @@ class Member extends \think\Controller
         // $user->save(); 
 
         if ($data) {
-
             // 添加单条数据
             db('footprint')->insert($data);
-
         }
 
 
         Cookie::set('footprint', '', 20);
-
-
     }
 
     public function footprint()
     {
-
-
         // 查询会员学习记录
         $list = Footprint::whereTime('create_time', 'today')
             ->where('user_id', '>', 0)
@@ -1222,13 +1174,10 @@ class Member extends \think\Controller
 
     public function registration()
     {
-
-
         // 签到
         $registration_run = input('registration_run');
 
         if ($registration_run) {
-
             $user_id = Cookie::get('user_id');
 
             if (!$user_id) {
@@ -1254,20 +1203,22 @@ class Member extends \think\Controller
 
             if ($registration_user) {
                 # 已经签到直接提示
-                $msg = "已签到过，加油！已连续签到" . $rand . "天";
+                $msg = "已签到过，加油！已连续签到".$rand."天";
                 return $this->success($msg, 'index/member/registration');
                 // return "已连续签到" . $rand . "天";
             }
 
 
             // 生成签到记录订单
-            $user = Order::create([
-                'body'      => 135,
-                'subject'   => "签到",
-                'total_fee' => 0,
-                'rand'      => $rand,
-                'user_id'   => $user_id
-            ]);
+            $user = Order::create(
+                [
+                    'body'      => 135,
+                    'subject'   => "签到",
+                    'total_fee' => 0,
+                    'rand'      => $rand,
+                    'user_id'   => $user_id
+                ]
+            );
 
 
             // 设置对应奖励的vip天数
@@ -1301,7 +1252,7 @@ class Member extends \think\Controller
                 add_vip_days($add_vip_days, 135001);
             }
 
-            $msg = "恭喜您，连续签到" . $rand . "天";
+            $msg = "恭喜您，连续签到".$rand."天";
             //设置成功后跳转页面的地址，默认的返回页面是$_SERVER['HTTP_REFERER']
             return $this->success($msg, 'index/member/registration');
             // return "恭喜您，连续签到" . $rand . "天";
@@ -1347,8 +1298,6 @@ class Member extends \think\Controller
 
     public function vip()
     {
-
-
         $phone = Cookie::get('phone');
 
         // if (!$phone){
@@ -1409,14 +1358,10 @@ class Member extends \think\Controller
         $this->assign('vip_day', $vip_day);
 
         return view();
-
-
     }
 
     public function money()
     {
-
-
         // 查询用户积分的方法
 
         $phone = Cookie::get('phone');
@@ -1449,12 +1394,11 @@ class Member extends \think\Controller
     public function fgetcsv()
     {
         $phone = Cookie::get('phone');
-        $file  = fopen("tom666" . $phone . " . csv", "r");
+        $file  = fopen("tom666".$phone." . csv", "r");
         while (!feof($file)) {
             dump(fgetcsv($file));
         }
         fclose($file);
-
     }
 
     public function fputcsv()
@@ -1503,7 +1447,7 @@ class Member extends \think\Controller
 //        die();
 
 
-        $file = fopen("tom666" . $phone . ".csv", "w");
+        $file = fopen("tom666".$phone.".csv", "w");
 
 
         $value = array
@@ -1529,8 +1473,6 @@ class Member extends \think\Controller
 //            $value=array($value);
 //            dump($value);
             fputcsv($file, $value);
-
-
         }
 //        echo "导出成功 <a href=/"."tom666".$phone.".csv> 点击保存</a>";
         echo 123;
@@ -1538,13 +1480,11 @@ class Member extends \think\Controller
 
         fclose($file);
 //  重定向到指定的URL地址 并且使用302
-        $this->redirect("/tom666" . $phone . ".csv", 302);
-
+        $this->redirect("/tom666".$phone.".csv", 302);
     }
 
     public function invite()
     {
-
         $body     = input('id');
         $phone    = Cookie::get('phone');
         $integral = '';
@@ -1575,7 +1515,6 @@ class Member extends \think\Controller
             $list = User::where('invite', $id)
                 ->order('id desc')
                 ->paginate(20);
-
             // dump($list);
 
 
@@ -1594,31 +1533,34 @@ class Member extends \think\Controller
             }
             // 查询是否有足够金币
             if ($money >= 10) {
-
                 // return  "开始兑换";
 
                 // 写入订单
-                $order = Order::create([
-                    'phone'        => $phone,
-                    'body'         => $body,
-                    'subject'      => "使用10学习币兑换 课程 id：" . $body,
-                    'total_fee'    => 0,
-                    'buyer_id'     => $phone,
-                    'buyer_email'  => $phone,
-                    'out_trade_no' => $phone,
-                ]);
+                $order = Order::create(
+                    [
+                        'phone'        => $phone,
+                        'body'         => $body,
+                        'subject'      => "使用10学习币兑换 课程 id：".$body,
+                        'total_fee'    => 0,
+                        'buyer_id'     => $phone,
+                        'buyer_email'  => $phone,
+                        'out_trade_no' => $phone,
+                    ]
+                );
 //                // 更新兑换券状态
 //                $tom=User::where('invite', $id)
 //                    ->where('status',0)
 //                    ->limit(1)
 //                    ->order('id asc')
 //                    ->update(['status' => $body]);
-                $money = Money::create([
-                    'phone'   => $phone,
-                    'money'   => '-10',
-                    'content' => "使用10学习币兑换 课程 id：" . $body,
+                $money = Money::create(
+                    [
+                        'phone'   => $phone,
+                        'money'   => '-10',
+                        'content' => "使用10学习币兑换 课程 id：".$body,
 
-                ]);
+                    ]
+                );
 
                 // dump($tom);
                 // $this->success('兑换成功', '__ROOT__/index/index/view/id/' . $body);
@@ -1635,15 +1577,17 @@ class Member extends \think\Controller
                 // return  "开始兑换";
 
                 // 写入订单
-                $order = Order::create([
-                    'phone'        => $phone,
-                    'body'         => $body,
-                    'subject'      => "使用兑换券兑换 课程 id：" . $body,
-                    'total_fee'    => 0,
-                    'buyer_id'     => $phone,
-                    'buyer_email'  => $phone,
-                    'out_trade_no' => $phone,
-                ]);
+                $order = Order::create(
+                    [
+                        'phone'        => $phone,
+                        'body'         => $body,
+                        'subject'      => "使用兑换券兑换 课程 id：".$body,
+                        'total_fee'    => 0,
+                        'buyer_id'     => $phone,
+                        'buyer_email'  => $phone,
+                        'out_trade_no' => $phone,
+                    ]
+                );
                 // 更新兑换券状态
                 $tom = User::where('invite', $id)
                     ->where('status', 0)
@@ -1660,8 +1604,6 @@ class Member extends \think\Controller
                 // 没有兑换券了
                 $this->success('无兑换券，立即邀请好友一起学习即可获得兑换券', 'index/member/invite');
             }
-
-
         }
 
         $this->assign('id', $id);
@@ -1673,7 +1615,6 @@ class Member extends \think\Controller
 
     public function diary()
     {
-
         $body          = input('id');
         $phone         = Cookie::get('phone');
         $invite_status = '';
@@ -1714,15 +1655,17 @@ class Member extends \think\Controller
                 // return  "开始兑换";
 
                 // 写入订单
-                $order = Order::create([
-                    'phone'        => $phone,
-                    'body'         => $body,
-                    'subject'      => "使用兑换券兑换 课程 id：" . $body,
-                    'total_fee'    => 0,
-                    'buyer_id'     => $phone,
-                    'buyer_email'  => $phone,
-                    'out_trade_no' => $phone,
-                ]);
+                $order = Order::create(
+                    [
+                        'phone'        => $phone,
+                        'body'         => $body,
+                        'subject'      => "使用兑换券兑换 课程 id：".$body,
+                        'total_fee'    => 0,
+                        'buyer_id'     => $phone,
+                        'buyer_email'  => $phone,
+                        'out_trade_no' => $phone,
+                    ]
+                );
 
                 // dump($tom);
                 // $this->success('兑换成功', '__ROOT__/index/index/view/id/' . $body);
@@ -1733,8 +1676,6 @@ class Member extends \think\Controller
                 // 没有兑换券了
                 $this->success('无兑换券，立即邀请好友一起学习即可获得兑换券', 'index/member/invite');
             }
-
-
         }
 
 
@@ -1746,8 +1687,6 @@ class Member extends \think\Controller
 
     public function learning()
     {
-
-
         $body  = input('id');
         $phone = Cookie::get('phone');
 
@@ -1776,8 +1715,6 @@ class Member extends \think\Controller
                 // 如果未登录跳转到登录页面
                 $this->success('兑换前，请先登录', 'index/login');
             }
-
-
         }
 
 

@@ -941,49 +941,6 @@ class Index extends Frontend
         $total_fee = Session::get('total_fee');
 
 
-        if (input('test') >= 1) {
-            // 开发人员测试用 ，可以设置一个公共函数，做为调用使用
-            echo "您已进入开发人员测试环境";
-            $request = Request::instance();
-            // 获取当前域名
-            echo 'domain: '.$request->domain().'<br/>';
-            // 获取当前入口文件
-            echo 'file: '.$request->baseFile().'<br/>';
-            // 获取当前URL地址 不含域名
-            echo 'url: '.$request->url().'<br/>';
-            // 获取包含域名的完整URL地址
-            echo 'url with domain: '.$request->url(true).'<br/>';
-            // 获取当前URL地址 不含QUERY_STRING
-            echo 'url without query: '.$request->baseUrl().'<br/>';
-            // 获取URL访问的ROOT地址
-            echo 'root:'.$request->root().'<br/>';
-            // 获取URL访问的ROOT地址
-            echo 'root with domain: '.$request->root(true).'<br/>';
-            // 获取URL地址中的PATH_INFO信息
-            echo 'pathinfo: '.$request->pathinfo().'<br/>';
-            // 获取URL地址中的PATH_INFO信息 不含后缀
-            echo 'pathinfo: '.$request->path().'<br/>';
-            // 获取URL地址中的后缀信息
-            echo 'ext: '.$request->ext().'<br/>';
-
-
-            $request = Request::instance();
-            echo '请求方法：'.$request->method().'<br/>';
-            echo '资源类型：'.$request->type().'<br/>';
-            echo '访问ip地址：'.$request->ip().'<br/>';
-            echo '是否AJax请求：'.var_export($request->isAjax(), true).'<br/>';
-            echo '请求参数：';
-            dump($request->param());
-            echo '请求参数：仅包含name';
-            dump($request->only(['phone']));
-            echo '请求参数：排除name';
-            dump($request->except(['phone']));
-
-            echo "获取全部的session变量";
-            dump(Request::instance()->session()); // 获取全部的session变量
-            echo "获取全部的cookie变量";
-            dump(Request::instance()->cookie()); // 获取全部的cookie变量
-        }
 
 
         if ($invite) {
@@ -1007,6 +964,8 @@ class Index extends Frontend
             Cookie::set('vip', '', 1);
             Cookie::set('token', '', 1);
             Cookie::set('admin', '', 1);
+            Cookie::set('photo', '', 1);
+            Cookie::set('nickname', '', 1);
             // $warning ="退出成功";
             return $this->success('退出成功^_^', 'login');
         }

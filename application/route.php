@@ -18,5 +18,8 @@ use think\Route;
 // Route::rule('tom','index/index/index');
 Route::get('u/:user_id','index/member/home',['ext'=>'']);
 
+Route::any('login','admin/login/index',['ext'=>'']);
+Route::any('admin','admin/index/index',['ext'=>'']);
+
 
  

@@ -1421,8 +1421,8 @@ class Index extends \think\Controller
                     // 此处如果不加判断，每次都更新，就会实现限制用户只能同时登录一个浏览器或者设备
                     if (!$get_token) {
                         User::where('phone', $phone)
-                            ->update(['token' => $token]);
-                        Cookie::set('token', $token, 3600000);
+                            ->update(['token' => $get_token]);
+                        Cookie::set('token', $get_token, 3600000);
                     }
                     // 判断是否是先支付了，再来注册/登录的用户
                     if (Session::get('total_fee') > 0) {
@@ -1832,8 +1832,8 @@ class Index extends \think\Controller
                     // 此处如果不加判断，每次都更新，就会实现限制用户只能同时登录一个浏览器或者设备
                     if (!$get_token) {
                         User::where('phone', $phone)
-                            ->update(['token' => $token]);
-                        Cookie::set('token', $token, 3600000);
+                            ->update(['token' => $get_token]);
+                        Cookie::set('token',$get_token, 3600000);
                     }
                     // 判断是否是先支付了，再来注册/登录的用户
                     if (Session::get('total_fee') > 0) {

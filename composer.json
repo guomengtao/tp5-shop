@@ -26,7 +26,8 @@
         "topthink/think-helper": "1.*",
         "zoujingli/ip2region": "^1.0",
         "jenssegers/agent": "^2.6",
-        "jaeger/querylist": "^4.1"
+        "jaeger/querylist": "^4.1",
+        "yansongda/pay": "^2.9"
     },
     "autoload": {
         "psr-4": {

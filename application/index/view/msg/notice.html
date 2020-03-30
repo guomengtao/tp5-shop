@@ -1,0 +1,24 @@
+{layout name="common/basic" /}
+
+<table class="table table-striped">
+
+    <tbody>
+    {volist name="message" id="vo"}
+    <tr>
+        <th scope="row">{$vo.create_time}</th>
+
+        <td><a href="{:url('index/msg/view',['id'=>$vo.id])}" target="_self">{$vo.title}</a>
+
+           
+        </td>
+        <td>
+            <span class="right badge badge-danger">{$vo.noticed.id?'':'未读'}</span>
+            <span class="right badge badge-success">{$vo.noticed.id?'已读':''}</span>
+        </td>
+    </tr>
+    {/volist}
+
+
+    </tbody>
+</table>
+{$message->render()}

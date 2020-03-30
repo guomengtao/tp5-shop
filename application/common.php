@@ -1,6 +1,7 @@
 <?php
 
 namespace app\index\controller;
+
 // +----------------------------------------------------------------------
 // | ThinkPHP [ WE CAN DO IT JUST THINK ]
 // +----------------------------------------------------------------------
@@ -32,7 +33,6 @@ use Ip2Region;
 
 function admin_test_model()
 {
-
     // 首页地址栏加入参数 test=1将开启开发人员测试功能
     // test=0 关闭测试功能
     // 此函数跟随随网站统计尾部运行
@@ -44,32 +44,32 @@ function admin_test_model()
         echo "点击此处关闭检查功能";
         $request = Request::instance();
         // 获取当前域名
-        echo 'domain: ' . $request->domain() . '<br/>';
+        echo 'domain: '.$request->domain().'<br/>';
         // 获取当前入口文件
-        echo 'file: ' . $request->baseFile() . '<br/>';
+        echo 'file: '.$request->baseFile().'<br/>';
         // 获取当前URL地址 不含域名
-        echo 'url: ' . $request->url() . '<br/>';
+        echo 'url: '.$request->url().'<br/>';
         // 获取包含域名的完整URL地址
-        echo 'url with domain: ' . $request->url(true) . '<br/>';
+        echo 'url with domain: '.$request->url(true).'<br/>';
         // 获取当前URL地址 不含QUERY_STRING
-        echo 'url without query: ' . $request->baseUrl() . '<br/>';
+        echo 'url without query: '.$request->baseUrl().'<br/>';
         // 获取URL访问的ROOT地址
-        echo 'root:' . $request->root() . '<br/>';
+        echo 'root:'.$request->root().'<br/>';
         // 获取URL访问的ROOT地址
-        echo 'root with domain: ' . $request->root(true) . '<br/>';
+        echo 'root with domain: '.$request->root(true).'<br/>';
         // 获取URL地址中的PATH_INFO信息
-        echo 'pathinfo: ' . $request->pathinfo() . '<br/>';
+        echo 'pathinfo: '.$request->pathinfo().'<br/>';
         // 获取URL地址中的PATH_INFO信息 不含后缀
-        echo 'pathinfo: ' . $request->path() . '<br/>';
+        echo 'pathinfo: '.$request->path().'<br/>';
         // 获取URL地址中的后缀信息
-        echo 'ext: ' . $request->ext() . '<br/>';
+        echo 'ext: '.$request->ext().'<br/>';
 
 
         $request = Request::instance();
-        echo '请求方法：' . $request->method() . '<br/>';
-        echo '资源类型：' . $request->type() . '<br/>';
-        echo '访问ip地址：' . $request->ip() . '<br/>';
-        echo '是否AJax请求：' . var_export($request->isAjax(), true) . '<br/>';
+        echo '请求方法：'.$request->method().'<br/>';
+        echo '资源类型：'.$request->type().'<br/>';
+        echo '访问ip地址：'.$request->ip().'<br/>';
+        echo '是否AJax请求：'.var_export($request->isAjax(), true).'<br/>';
         echo '请求参数：';
         dump($request->param());
         echo '请求参数：仅包含name';
@@ -91,8 +91,6 @@ function ip1region()
     $ip = $request->ip();
 
     if (!$ip or $ip == '127.0.0.1') {
-
-
         // return "ok";
     }
 
@@ -105,12 +103,14 @@ function ip1region()
     $user_id = Cookie::get('user_id');
 
     if ($check) {
-
         $user = new Ipinfo;
         // save方法第二个参数为更新条件
-        $user->save([
-            'user_id' => $user_id,
-        ], ['ip' => $ip]);
+        $user->save(
+            [
+                'user_id' => $user_id,
+            ],
+            ['ip' => $ip]
+        );
         return '';
     }
 
@@ -124,14 +124,14 @@ function ip1region()
 
 
     if ($pos) {
-        Ipinfo::create([
-            'region'  => $pos,
-            'ip'      => $ip,
-            'user_id' => $user_id,
-        ]);
+        Ipinfo::create(
+            [
+                'region'  => $pos,
+                'ip'      => $ip,
+                'user_id' => $user_id,
+            ]
+        );
     }
-
-
 }
 
 
@@ -157,21 +157,17 @@ function arraySequence($array, $field, $sort = 'SORT_DESC')
 // 验证课程播放少于10次
 function play_count($shop)
 {
-
     // 查询播放记录条数
     $play_count = Video::where('shop', '=', $shop)
         ->count();
 
     return $play_count;
-
 }
 
 
 // 验证是否达到所有课程免费的功能
 function all_lesson_free()
 {
-
-
 //    说明：
 //    有多种情况可以设置为课程免费
 //
@@ -205,15 +201,12 @@ function all_lesson_free()
 
 
     return 0;
-
 }
 
 // 增加会员vip天数功能
 
 function add_vip_days($add_vip_days, $out_trade_no)
 {
-
-
     $user_id = Cookie::get('user_id');
 
 
@@ -230,7 +223,6 @@ function add_vip_days($add_vip_days, $out_trade_no)
 
     // 判断是否过期
     if ($expiration_time) {
-
         $expiration_time = $expiration_time + $add_vip_days_time;
 
         User::where('user_id ', $user_id)
@@ -244,17 +236,17 @@ function add_vip_days($add_vip_days, $out_trade_no)
 
 
     // 写入订单
-    $order = Order::create([
-        'user_id'      => $user_id,
-        'body'         => 105,
-        'subject'      => "增加VIP会员：" . $add_vip_days . "天",
-        'total_fee'    => 0,
-        'buyer_id'     => $user_id,
-        'buyer_email'  => $user_id ,
-        'out_trade_no' => $out_trade_no,
-    ]);
-
-
+    $order = Order::create(
+        [
+            'user_id'      => $user_id,
+            'body'         => 105,
+            'subject'      => "增加VIP会员：".$add_vip_days."天",
+            'total_fee'    => 0,
+            'buyer_id'     => $user_id,
+            'buyer_email'  => $user_id,
+            'out_trade_no' => $out_trade_no,
+        ]
+    );
 }
 
 function invite($invite_user, $user_id)
@@ -270,13 +262,11 @@ function invite($invite_user, $user_id)
 
     // 如果没到期加上30天，到期了从现在起加上N天
     if ($expiration_time) {
-
         $expiration_time = $expiration_time + (3600 * 24 * 30);
 
 
         User::where('user_id', $invite_user)
             ->update(['expiration_time' => $expiration_time, 'rand' => 1]);
-
     } else {
         $expiration_time = time() + (3600 * 24 * 30);
 
@@ -293,7 +283,7 @@ function invite($invite_user, $user_id)
         [
             'phone'   => $invite_user,
             'money'   => 10,
-            'content' => '邀请了会员' . $user_id . '注册奖励',
+            'content' => '邀请了会员'.$user_id.'注册奖励',
 
         ],
         [
@@ -306,10 +296,56 @@ function invite($invite_user, $user_id)
     $user->saveAll($list);
 }
 
+function developerTest()
+{
+    if (input('test') >= 1) {
+        // 开发人员测试用 ，可以设置一个公共函数，做为调用使用
+        echo "您已进入开发人员测试环境";
+        $request = Request::instance();
+        // 获取当前域名
+        echo 'domain: '.$request->domain().'<br/>';
+        // 获取当前入口文件
+        echo 'file: '.$request->baseFile().'<br/>';
+        // 获取当前URL地址 不含域名
+        echo 'url: '.$request->url().'<br/>';
+        // 获取包含域名的完整URL地址
+        echo 'url with domain: '.$request->url(true).'<br/>';
+        // 获取当前URL地址 不含QUERY_STRING
+        echo 'url without query: '.$request->baseUrl().'<br/>';
+        // 获取URL访问的ROOT地址
+        echo 'root:'.$request->root().'<br/>';
+        // 获取URL访问的ROOT地址
+        echo 'root with domain: '.$request->root(true).'<br/>';
+        // 获取URL地址中的PATH_INFO信息
+        echo 'pathinfo: '.$request->pathinfo().'<br/>';
+        // 获取URL地址中的PATH_INFO信息 不含后缀
+        echo 'pathinfo: '.$request->path().'<br/>';
+        // 获取URL地址中的后缀信息
+        echo 'ext: '.$request->ext().'<br/>';
+
+
+        $request = Request::instance();
+        echo '请求方法：'.$request->method().'<br/>';
+        echo '资源类型：'.$request->type().'<br/>';
+        echo '访问ip地址：'.$request->ip().'<br/>';
+        echo '是否AJax请求：'.var_export($request->isAjax(), true).'<br/>';
+        echo '请求参数：';
+        dump($request->param());
+        echo '请求参数：仅包含name';
+        dump($request->only(['phone']));
+        echo '请求参数：排除name';
+        dump($request->except(['phone']));
+
+        echo "获取全部的session变量";
+        dump(Request::instance()->session()); // 获取全部的session变量
+        echo "获取全部的cookie变量";
+        dump(Request::instance()->cookie()); // 获取全部的cookie变量
+    }
+}
+
 //功能浏览次数和来路
 function footprint()
 {
-
     $info = [];
 
     $info['user_id'] = Cookie::get('user_id');
@@ -317,16 +353,19 @@ function footprint()
     $request = Request::instance();
 
 
-    $ip   = $request->ip();
-    $view = $request->module() . $request->controller() . $request->action();
+    $view = request()->module().request()->controller().request()->action();
 
-    // 如果是产品详情页，记录一下访问的产品id，$goods_id 
+    // 如果是产品详情页，记录一下访问的产品id，$goods_id
     if ($view == 'indexIndexview') {
         $info['goods_id'] = input('id');
     }
 
+
     //  模块控制器和方法
-    $info['path'] = $request->path();
+    $info['module']     = $request->module();
+    $info['controller'] = $request->controller();
+    $info['action']     = $request->action();
+    $info['path']       = $request->url();
     //  获取ip地址
     $info['ip'] = $request->ip();
     Session::get('start_session_working');
@@ -336,6 +375,8 @@ function footprint()
     $user->data($info);
     $user->save();
 
+    // 开发人员测试
+    developerTest();
     // 记录地理位置
     ip1region();
     // 验证用户登录token
@@ -350,19 +391,16 @@ function checkToken()
     $token   = Cookie::get('token');
 
     if ($user_id) {
-
         // 判断是否其他浏览器或者设备登录（设置每次登录修改token时有效）
         // 判断Cookie里的token的否正确
         $token_count = User::where('id', '=', $user_id)
             ->where('token', '=', $token)
             ->count();
         if ($token_count <= 0) {
-
             Cookie::set('phone', '', 36000000);
             Cookie::set('token', '', 36000000);
             $user  = "";
             $token = "";
-
         }
     }
 }
@@ -380,16 +418,16 @@ function formatTime($time)
         $str = '刚刚';
     } elseif ($time < 60 * 60) {
         $min = floor($time / 60);
-        $str = $min . '分钟前';
+        $str = $min.'分钟前';
     } elseif ($time < 60 * 60 * 24) {
         $h   = floor($time / (60 * 60));
-        $str = $h . '小时前 ';
+        $str = $h.'小时前 ';
     } elseif ($time < 60 * 60 * 24 * 3) {
         $d = floor($time / (60 * 60 * 24));
         if ($d == 1) {
-            $str = '昨天 ' . $rtime;
+            $str = '昨天 '.$rtime;
         } else {
-            $str = '前天 ' . $rtime;
+            $str = '前天 '.$rtime;
         }
     } elseif ($year > 0) {
         $str = $rtime;
