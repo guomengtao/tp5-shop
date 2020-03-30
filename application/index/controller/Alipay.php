@@ -29,6 +29,10 @@ class Alipay extends Controller
         ],
     ];
 
+    /**
+     * 支付金额设置
+     * @return \think\response\View
+     */
     public function userPay()
     {
         return view();
