@@ -2,10 +2,11 @@
 
 namespace App\index\Controller;
 
+use think\Controller;
 use Yansongda\Pay\Pay;
 use Yansongda\Pay\Log;
 
-class Alipay
+class Alipay extends Controller
 {
 
     protected $config = [
@@ -28,13 +29,24 @@ class Alipay
         ],
     ];
 
+    public function userPay()
+    {
+        return view();
+    }
 
     public function index()
     {
+        $total = input('price');
+        $title = input('title');
+
+        if (!$total) {
+            return;
+        }
+
         $order = [
-            'out_trade_no' => time().'666888',
-            'total_amount' => '0.02',
-            'subject'      => 'test subject - 测试666',
+            'out_trade_no' => time().'666',
+            'total_amount' => $total,
+            'subject'      => $title,
         ];
 
         $alipay = Pay::alipay($this->config)->web($order);
