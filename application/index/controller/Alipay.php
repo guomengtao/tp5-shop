@@ -87,7 +87,7 @@ class Alipay extends Controller
          dump($data);
 
          dump($data->toArray());
-         
+
          dump($data->toJson());
 
     }
