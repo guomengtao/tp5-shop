@@ -941,8 +941,6 @@ class Index extends Frontend
         $total_fee = Session::get('total_fee');
 
 
-
-
         if ($invite) {
             // 设置邀请人存入cookie，解决新用户先浏览页面再去注册
             Cookie::set('invite', $invite, 3600);
@@ -1860,10 +1858,10 @@ class Index extends Frontend
         return $this->fetch();
     }
 
+
+
     public function index()
     {
-
-
         /**
          * 查询最新会员
          * 直接读取user_qq表里的新会员
@@ -1876,7 +1874,7 @@ class Index extends Frontend
         $views_yesterday = Footprint::views_yesterday();
         // 查询今天签到
         $registration_today = Order::registration_today();
-        $humans            = Ipinfo::limit(10)->order('update_time', 'desc')->select();
+        $humans             = Ipinfo::limit(10)->order('update_time', 'desc')->select();
 
         $this->assign('views_today', $views_today);
         $this->assign('views_yesterday', $views_yesterday);
