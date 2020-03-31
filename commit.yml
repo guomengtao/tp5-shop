@@ -2,19 +2,10 @@
 branches: {
   }
 fileChange:
-  /application:
-    newFile: !uuid '5a1aa6b683b48b53939bf2487f91b74e36e33970'
-    oldFile: !uuid '2230d4e176ab259a62ebcae11d1538ce2337b9ac'
-  /application/index:
-    newFile: !uuid '9165366fec6d33e4389d7286b3bd9989f1d7e636'
-    oldFile: !uuid 'ceddb5ded33db9cbef0ecaebb9227f1d2d08574c'
-  /application/index/controller:
-    newFile: !uuid 'f01474198a76d2e767cbd6910e91765c48f94c50'
-    oldFile: !uuid '5192e91c33900a12b2491ba875a7a33bf46388aa'
-  /application/index/controller/Alipay.php:
-    newFile: !uuid 'b4447f0d83e3ccfa578270d9d4a165a4d6870a10'
-    oldFile: !uuid 'f2778c5180078b136dccd68fa32e3bdfc63759b7'
-gitCommitId: !uuid '766fd606849763bcb9b0a903d9a645b0d833236a'
+  /tp5.sql:
+    newFile: !uuid 'e3917186f3e722e3c9fc5af87d0e878334a25caa'
+    oldFile: !uuid '67a3681874942bc3d848df365572d76d9ab4ccea'
+gitCommitId: !uuid 'fcd1f17b594411e14727755ce8ae917594762f6d'
 renames: {
   }
-revisionId: 813
+revisionId: 814
