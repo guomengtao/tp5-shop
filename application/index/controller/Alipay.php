@@ -83,6 +83,7 @@ class Alipay extends Controller
         echo "订单号：".$data->out_trade_no;
         echo "支付宝交易号：".$data->trade_no;
         echo "订单总金额：".$data->total_amount;
+        
          dump($data);
 
          dump($data->toArray());
