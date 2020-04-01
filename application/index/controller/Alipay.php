@@ -63,10 +63,6 @@ class Alipay extends Frontend
         $orderSave->save();
 
 
-
-
-
-
         $alipay = Pay::alipay($this->config)->web($order);
 
         return $alipay->send();// laravel 框架中请直接 `return $alipay`
@@ -74,8 +70,7 @@ class Alipay extends Frontend
 
     public function scan()
     {
-
-        $order = [
+        $order  = [
             'out_trade_no' => time().'666',
             'total_amount' => '0.01',
             'subject'      => 't 扫码',
@@ -88,8 +83,6 @@ class Alipay extends Frontend
 
     public function returns()
     {
-
-
         $data = Pay::alipay($this->config)->verify(); // 是的，验签就这么简单！
 
         // 订单号：$data->out_trade_no
@@ -99,22 +92,22 @@ class Alipay extends Frontend
         // 更新支付状态
 
         // 判断这个订单已更新
-        $out_trade_no = $data->out_trade_no;
+        $order = [
+            'status'       => 1,
+            'out_trade_no' => $data->out_trade_no,
+            'trade_no'     => $data->trade_no,
+            'total_amount' => $data->total_amount,
+        ];
 
 
         // 更新的命名
-        $orderUpdate = Order::Where('out_trade_no',$out_trade_no)
-        ->update(['status'=>1]);
+        $orderUpdate = Order::Where('out_trade_no', $order['out_trade_no'])
+            ->update($order);
 
 
         echo "订单号：".$data->out_trade_no;
         echo "支付宝交易号：".$data->trade_no;
         echo "订单总金额：".$data->total_amount;
-
-
-
-
-
     }
 
     public function notify()
