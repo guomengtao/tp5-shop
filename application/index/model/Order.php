@@ -13,8 +13,6 @@ class Order extends model
 
 
     protected $auto = [];
-    protected $insert = ['name' => "游客", 'age' => 17, 'ip' => 17];
-    protected $update = ['name'];
 
 
 

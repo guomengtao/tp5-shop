@@ -2,11 +2,13 @@
 
 namespace App\index\Controller;
 
+use app\common\controller\Frontend;
+use app\index\model\Order;
 use think\Controller;
 use Yansongda\Pay\Pay;
 use Yansongda\Pay\Log;
 
-class Alipay extends Controller
+class Alipay extends Frontend
 {
 
     protected $config = [
@@ -49,10 +51,21 @@ class Alipay extends Controller
         }
 
         $order = [
-            'out_trade_no' => time().'666',
+            'out_trade_no' => time().'666ac订单号c',
             'total_amount' => $total,
             'subject'      => $title,
+            'user_id'      => $this->user_id,
         ];
+
+        // 记录这个单号。但是未完成付款
+        $orderSave = new Order();
+        $orderSave->data($order);
+        $orderSave->save();
+
+
+
+
+
 
         $alipay = Pay::alipay($this->config)->web($order);
 
@@ -75,20 +88,32 @@ class Alipay extends Controller
 
     public function returns()
     {
+
+
         $data = Pay::alipay($this->config)->verify(); // 是的，验签就这么简单！
 
         // 订单号：$data->out_trade_no
         // 支付宝交易号：$data->trade_no
         // 订单总金额：$data->total_amount
+
+        // 更新支付状态
+
+        // 判断这个订单已更新
+        $out_trade_no = $data->out_trade_no;
+
+
+        // 更新的命名
+        $orderUpdate = Order::Where('out_trade_no',$out_trade_no)
+        ->update(['status'=>1]);
+
+
         echo "订单号：".$data->out_trade_no;
         echo "支付宝交易号：".$data->trade_no;
         echo "订单总金额：".$data->total_amount;
 
-         dump($data);
 
-         dump($data->toArray());
 
-         dump($data->toJson());
+
 
     }
 
