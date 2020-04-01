@@ -108,7 +108,8 @@ class Alipay extends Frontend
             ->update($order);
 
 
-        // 直接跳转到用户的会员里的订单管理处
+        // 重定向方式直接跳转到用户的会员里的订单管理处
+        // $this->redirect('index/index/order');
 
         echo "订单号：".$data->out_trade_no;
         echo "支付宝交易号：".$data->trade_no;
