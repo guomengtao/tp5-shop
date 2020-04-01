@@ -95,6 +95,8 @@ class Alipay extends Frontend
         // 更新支付状态
 
         // 判断这个订单已更新
+
+
         $order = [
             'status'       => 1,
             'out_trade_no' => $data->out_trade_no,
@@ -109,7 +111,7 @@ class Alipay extends Frontend
 
 
         // 重定向方式直接跳转到用户的会员里的订单管理处
-        // $this->redirect('index/index/order');
+        $this->redirect('index/index/order');
 
         echo "订单号：".$data->out_trade_no;
         echo "支付宝交易号：".$data->trade_no;
