@@ -89,6 +89,9 @@ class Alipay extends Frontend
         // 支付宝交易号：$data->trade_no
         // 订单总金额：$data->total_amount
 
+        dump($data);
+
+
         // 更新支付状态
 
         // 判断这个订单已更新
@@ -104,6 +107,8 @@ class Alipay extends Frontend
         $orderUpdate = Order::Where('out_trade_no', $order['out_trade_no'])
             ->update($order);
 
+
+        // 直接跳转到用户的会员里的订单管理处
 
         echo "订单号：".$data->out_trade_no;
         echo "支付宝交易号：".$data->trade_no;
