@@ -10,7 +10,6 @@ use Yansongda\Pay\Log;
 
 class Alipay extends Frontend
 {
-
     protected $config = [
         'app_id'         => '2016070501580903',
         'notify_url'     => 'http://open.gaoxueya.com/index/alipay/notify',
@@ -89,8 +88,6 @@ class Alipay extends Frontend
         // 支付宝交易号：$data->trade_no
         // 订单总金额：$data->total_amount
 
-        dump($data);
-
 
         // 更新支付状态
 
@@ -132,23 +129,55 @@ class Alipay extends Frontend
             // 4、验证app_id是否为该商户本身。
             // 5、其它业务逻辑情况
 
+            Log::debug('Alipay notify', $data->all());
+            // $json = '{"gmt_create":"2020-04-02 23:39:31","charset":"utf-8","gmt_payment":"2020-04-02 23:39:38","notify_time":"2020-04-02 23:39:39","subject":"02 Composer 安装与使用 简介","sign":"Xn13nFxt71LKytqit322Ahcu60DJYaCi377LHyXD4nETT90810oYN+q9rJR61Iff4yVuxRZRLlLpM7C+COVmEMEdj5DIV9sCP62yW5cikXSVerFbqO4wrUkw77rs1uIPvOCZ70nyseTPDaThKGaVf9S8ShFBU8m+RpSvyyZslXTISgrr+oghdfkMy5yCTGVVmtlfOpZfkzOxAHn6YrdrP29BLjrvA+DpDre\/l6AvfklsD\/JFcHcaM5xFguNKCnHNd15foVE\/HYAd7BTrx+dEyZlxlWgTIj9R9EUHdmPVm5QfoSiVSLTqwF7Tju8d52XmWIb1L\/ZPP\/ioAyTxIpRRmg==","buyer_id":"2088822675183141","invoice_amount":"0.01","version":"1.0","notify_id":"2020040200222233938083141409415349","fund_bill_list":"[{\"amount\":\"0.01\",\"fundChannel\":\"PCREDIT\"}]","notify_type":"trade_status_sync","out_trade_no":"1585841964666ac订单号c","total_amount":"0.01","trade_status":"TRADE_SUCCESS","trade_no":"2020040222001483141439290278","auth_app_id":"2016070501580903","receipt_amount":"0.01","point_amount":"0.00","buyer_pay_amount":"0.01","app_id":"2016070501580903","sign_type":"RSA2","seller_id":"2088002229990889"}';
+
             // 存储一下异步给返回的数据情况
             $info['body'] = $data->toJson();
             // 临时存入order表的body里，做一个体验
-             $orderAll = new Order();
-             $orderAll->data($info);
-             $orderAll->save();
+            $orderAll = new Order();
+            $orderAll->data($info);
+            $orderAll->save();
 
-            Log::debug('Alipay notify', $data->all());
+            $app_id = $data->app_id;
 
+
+            // 不是本商户的，直接忽略
+            if ($app_id <> $this->config['app_id']) {
+                return "SUCCESS";
+            }
+
+
+            // 如果订单已经存在就直接返回SUCCESS
+            $out_trade_no       = $data->out_trade_no;
+            $check_out_trade_no = Order::where('out_trade_no ', $out_trade_no)
+                ->where('status ', 0)
+                ->count();
+            if ($check_out_trade_no) {
+                return "SUCCESS";
+            } else {
+                // 如果查询是丢单，就保存进去
+                $order = [
+                    'status'       => 1,
+                    'out_trade_no' => $data->out_trade_no,
+                    'trade_no'     => $data->trade_no,
+                    'total_amount' => $data->total_amount,
+                    'body' => 'from_notify',
+                ];
+
+
+                // 更新的命名
+                $orderUpdate = Order::Where('out_trade_no', $order['out_trade_no'])
+                    ->update($order);
+
+                return "SUCCESS";
+            }
 
 
 
         } catch (\Exception $e) {
             echo $e->getMessage();
-
         }
-
         // return $alipay->success()->send();// laravel 框架中请直接 `return $alipay->success()`
     }
 }
