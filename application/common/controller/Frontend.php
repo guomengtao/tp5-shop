@@ -25,7 +25,7 @@ class Frontend extends Controller
     {
         $user_id = Cookie::get('user_id');
 
-       $this->user_id = $user_id;
+        $this->user_id = $user_id;
         // if (!$user_id) {
         //     return $this->error('请登录', 'index/index/login');
         // }
@@ -58,12 +58,9 @@ class Frontend extends Controller
         $messageCount = $noticeCount - $noticedCount;
 
 
-
         $this->assign("visit", $visit);
         $this->assign("visitCount", $visitCount);
         $this->assign("messageCount", $messageCount);
-
-
     }
 
 

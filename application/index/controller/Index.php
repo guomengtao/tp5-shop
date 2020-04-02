@@ -921,6 +921,19 @@ class Index extends Frontend
         return $this->fetch();
     }
 
+    public function logout()
+    {
+            // 设置Cookie 有效期为 秒
+            Cookie::set('phone', '', 1);
+            Cookie::set('user_id', '', 1);
+            Cookie::set('vip', '', 1);
+            Cookie::set('token', '', 1);
+            Cookie::set('admin', '', 1);
+            Cookie::set('photo', '', 1);
+            Cookie::set('nickname', '', 1);
+            // $warning ="退出成功";
+            return $this->success('退出成功^_^', 'login');
+    }
 
     public function login()
     {

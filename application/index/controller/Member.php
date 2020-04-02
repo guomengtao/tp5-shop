@@ -3,6 +3,7 @@
 namespace app\index\controller;
 
 
+use app\common\controller\Frontend;
 use think\Request;
 use app\index\model\Sms;
 use app\index\model\Shop;
@@ -19,14 +20,16 @@ use think\Session;
 use Jenssegers\Agent\Agent;
 use app\index\controller\User as HumanCheck;
 
-class Member extends \think\Controller
+class Member extends Frontend
 {
 
     public function _initialize()
     {
+         parent::_initialize();
         // 记录访问信息 和 机器人拦截
         Member::agent();
     }
+
 
     public static function agent()
     {
@@ -1364,16 +1367,17 @@ class Member extends \think\Controller
     {
         // 查询用户积分的方法
 
-        $phone = Cookie::get('phone');
+        $user_id = $this->user_id;
 
-        $money = Money::where('phone', $phone)
+
+        $money = Money::where('user_id', $user_id)
             ->sum('money');
 
-        $integral = Money::where('phone', $phone)
+        $integral = Money::where('user_id', $user_id)
             ->where('money', '>', 0)
             ->sum('money');
 
-        $list = Money::where('phone', $phone)
+        $list = Money::where('user_id', $user_id)
             ->order('id desc')
             ->paginate(30);
 
