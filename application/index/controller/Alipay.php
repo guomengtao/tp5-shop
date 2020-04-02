@@ -94,27 +94,26 @@ class Alipay extends Frontend
 
         // 判断这个订单已更新
 
-
-        $order = [
-            'status'       => 1,
-            'out_trade_no' => $data->out_trade_no,
-            'trade_no'     => $data->trade_no,
-            'total_amount' => $data->total_amount,
-            'buyer_email' => 'from_returns',
-        ];
+        // $order = [
+        //     'status'       => 1,
+        //     'out_trade_no' => $data->out_trade_no,
+        //     'trade_no'     => $data->trade_no,
+        //     'total_amount' => $data->total_amount,
+        //     'buyer_email' => 'from_returns',
+        // ];
 
 
         // 更新的命名
-        $orderUpdate = Order::Where('out_trade_no', $order['out_trade_no'])
-            ->update($order);
+        // $orderUpdate = Order::Where('out_trade_no', $order['out_trade_no'])
+        //     ->update($order);
 
 
         // 重定向方式直接跳转到用户的会员里的订单管理处
         $this->redirect('index/index/order');
 
-        echo "订单号：".$data->out_trade_no;
-        echo "支付宝交易号：".$data->trade_no;
-        echo "订单总金额：".$data->total_amount;
+        // echo "订单号：".$data->out_trade_no;
+        // echo "支付宝交易号：".$data->trade_no;
+        // echo "订单总金额：".$data->total_amount;
     }
 
     public function notify()
