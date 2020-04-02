@@ -10,7 +10,7 @@
  	<tbody>
  		{volist name='show' id='user'}
  		 
- 		<tr  ><th> {$user.id} </th><td> <a href="__ROOT__/index/index/view/id/{$user.id} ">{$user.subject|mb_substr=0,50,'utf-8' }</a></td><td> {$user.total_fee}</del></span> 
+ 		<tr  ><th> {$user.id} </th><td> <a href="__ROOT__/index/index/view/id/{$user.id} ">{$user.subject|mb_substr=0,50,'utf-8' }</a></td><td> {$user.total_amount}</del></span>
  		</td>
  			<td>		
  			{$user.create_time} 

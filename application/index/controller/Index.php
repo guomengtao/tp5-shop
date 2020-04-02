@@ -772,10 +772,10 @@ class Index extends Frontend
 
     public function order()
     {
-        $user = Cookie::get('phone');
+        $user_id = $this->user_id;
 
         // 查询订单是否存在
-        $order = Order::where('phone', '=', $user)
+        $order = Order::where('user_id', '=', $user_id)
             ->order('id', 'desc')
             ->paginate(20);
 
