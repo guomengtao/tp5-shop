@@ -133,10 +133,10 @@ class Alipay extends Frontend
             // 5、其它业务逻辑情况
 
             // 存储一下异步给返回的数据情况
-
+            $info['body'] = $data->toJson();
             // 临时存入order表的body里，做一个体验
              $orderAll = new Order();
-             $orderAll->data($data->toJson());
+             $orderAll->data($info);
              $orderAll->save();
 
             Log::debug('Alipay notify', $data->all());
