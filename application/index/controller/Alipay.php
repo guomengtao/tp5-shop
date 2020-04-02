@@ -50,7 +50,7 @@ class Alipay extends Frontend
         }
 
         $order = [
-            'out_trade_no' => time().'666ac订单号c',
+            'out_trade_no' => time(),
             'total_amount' => $total,
             'subject'      => $title,
             'user_id'      => $this->user_id,
