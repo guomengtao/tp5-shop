@@ -142,22 +142,27 @@ class Alipay extends Frontend
             // $orderAll->data($info);
             // $orderAll->save();
 
-            
-            $app_id       = $data->app_id;
+
+            $app_id = $data->app_id;
             // 不是本商户的，直接忽略
             if ($app_id <> $this->config['app_id']) {
                 return "SUCCESS";
             }
 
 
-            // 如果订单已经存在就直接返回SUCCESS
-            $out_trade_no       = $data->out_trade_no;
+            $out_trade_no = $data->out_trade_no;
+
+            // 检查是不是未支付订单
             $check_out_trade_no = Order::where('out_trade_no ', $out_trade_no)
                 ->where('status ', 0)
                 ->count();
-            if ($check_out_trade_no) {
+            if (!$check_out_trade_no) {
                 return "SUCCESS";
-            } else {
+            }
+
+
+      
+            if ($check_out_trade_no) {
                 // 如果查询是丢单，就保存进去
                 $order = [
                     'status'       => 1,
