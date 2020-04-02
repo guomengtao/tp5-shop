@@ -782,6 +782,7 @@ class Index extends Frontend
 
         $this->assign('show', $order);
         $this->assign('date', date('Ymdhis'));
+        $this->assign('title', '我的订单');
 
         // 渲染模板输出
         return $this->fetch();

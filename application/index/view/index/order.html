@@ -1,5 +1,5 @@
-{include file="index/header" /}
-<p>我的订单：</p>
+{layout name="common/basic" /}
+ 
 
 <table class="table table-bordered table-hover ">
     <thead>
@@ -20,8 +20,9 @@
         <td> {$user.subject|mb_substr=0,50,'utf-8' }</td>
         <td> {$user.total_amount}</td>
         <td> {$user.create_time}</td>
-        <td><span class="label label-success">{$user.status?"已支付":""}</span>
-            <span class="label label-danger">{$user.status?"":"未支付"}</span>
+        <td>
+			<span class="right badge badge-success">{$user.status?"已支付":""}</span>
+			<span class="right badge badge-danger">{$user.status?"":"未支付"}</span>
         </td>
 
     </tr>
@@ -32,5 +33,3 @@
 </table>
 {$show->render()}
 
-
-{include file="index/footer" /}
