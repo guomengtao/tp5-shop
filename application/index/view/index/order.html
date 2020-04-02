@@ -14,8 +14,9 @@
  		</td>
  			<td>		
  			{$user.create_time} 
- 		</td><td>		
- 			<a href="__ROOT__/index/index/view/id/{$user.id}" class="btn btn-success" target="_blank"  >立即播放</a>
+ 		</td><td>
+				{$user.status?"未支付":"已支付"}
+<!-- 			<a href="__ROOT__/index/index/view/id/{$user.id}" class="btn btn-success" target="_blank"  >立即播放</a>-->
  		</td>
 		
  		 </tr>
