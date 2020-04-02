@@ -3,21 +3,21 @@ branches: {
   }
 fileChange:
   /application:
-    newFile: !uuid '5d4e7e1f18834393676f4167bb83def136f13bbc'
-    oldFile: !uuid '1ed750911a4be40d77291da91015ca0a444abc68'
+    newFile: !uuid '9acb3440dce2c59f75d6e5d0ee2d84da389a7652'
+    oldFile: !uuid '5d4e7e1f18834393676f4167bb83def136f13bbc'
   /application/index:
-    newFile: !uuid '13549b5c289b9831579d3764f998b3f710f188e6'
-    oldFile: !uuid 'f8c5e4cd78bcd0d96cf61a3c9a03a609ebf86a2f'
+    newFile: !uuid '7818df188b5bd91ac0269d6839fda086f25257a9'
+    oldFile: !uuid '13549b5c289b9831579d3764f998b3f710f188e6'
   /application/index/controller:
-    newFile: !uuid '3c47b9990b013677d4d07ccdb3d55e3bb12e7960'
-    oldFile: !uuid '8bd63bc84b7c208e3aebdd7abd985b2bbf495698'
+    newFile: !uuid '0e1efbb7ffab2c1420f1d496094ddd6792e3d467'
+    oldFile: !uuid '3c47b9990b013677d4d07ccdb3d55e3bb12e7960'
   /application/index/controller/Alipay.php:
-    newFile: !uuid 'ca6275c5f0bce8fe17ce8c28d61aa4e9d9435c21'
-    oldFile: !uuid '7fe87cb77f23d5e55de1a4a6158ee8030b7f3db1'
+    newFile: !uuid '5eef05424dcffd89b11d57551ef952eda7e15444'
+    oldFile: !uuid 'ca6275c5f0bce8fe17ce8c28d61aa4e9d9435c21'
   /tp5.sql:
-    newFile: !uuid '25a31c69343093a6461d4f6b587e1e4481fc29bf'
-    oldFile: !uuid '95694308e1757871d906c89cbe610075cd5b2bf4'
-gitCommitId: !uuid 'eb730ced13ebd0f0e3f96122fd389cbcf9f190b6'
+    newFile: !uuid 'e953fe8a6ffed90129381fccd998a9e51b2c81c0'
+    oldFile: !uuid '25a31c69343093a6461d4f6b587e1e4481fc29bf'
+gitCommitId: !uuid '08cf351d827369ab4f7eb6e22d1075c1a6840e96'
 renames: {
   }
-revisionId: 831
+revisionId: 832
