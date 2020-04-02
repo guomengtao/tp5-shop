@@ -1217,7 +1217,7 @@ class Member extends Frontend
                 [
                     'body'      => 135,
                     'subject'   => "签到",
-                    'total_fee' => 0,
+                    'total_amount' => 0,
                     'rand'      => $rand,
                     'user_id'   => $user_id
                 ]
