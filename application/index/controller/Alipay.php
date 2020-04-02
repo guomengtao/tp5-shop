@@ -84,6 +84,7 @@ class Alipay extends Frontend
     {
         $data = Pay::alipay($this->config)->verify(); // 是的，验签就这么简单！
 
+
         // 订单号：$data->out_trade_no
         // 支付宝交易号：$data->trade_no
         // 订单总金额：$data->total_amount
@@ -100,7 +101,9 @@ class Alipay extends Frontend
             'trade_no'     => $data->trade_no,
             'total_amount' => $data->total_amount,
         ];
-
+        dump($order);
+        echo 'loser';
+        return;
 
         // 更新的命名
         $orderUpdate = Order::Where('out_trade_no', $order['out_trade_no'])
@@ -162,7 +165,7 @@ class Alipay extends Frontend
                     'out_trade_no' => $data->out_trade_no,
                     'trade_no'     => $data->trade_no,
                     'total_amount' => $data->total_amount,
-                    'body' => 'from_notify',
+                    'body'         => 'from_notify',
                 ];
 
 
@@ -172,9 +175,6 @@ class Alipay extends Frontend
 
                 return "SUCCESS";
             }
-
-
-
         } catch (\Exception $e) {
             echo $e->getMessage();
         }
