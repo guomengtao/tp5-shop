@@ -101,9 +101,7 @@ class Alipay extends Frontend
             'trade_no'     => $data->trade_no,
             'total_amount' => $data->total_amount,
         ];
-        dump($order);
-        echo 'loser';
-        return;
+   
 
         // 更新的命名
         $orderUpdate = Order::Where('out_trade_no', $order['out_trade_no'])
@@ -161,7 +159,7 @@ class Alipay extends Frontend
             }
 
 
-      
+
             if ($check_out_trade_no) {
                 // 如果查询是丢单，就保存进去
                 $order = [
