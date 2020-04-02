@@ -100,8 +100,9 @@ class Alipay extends Frontend
             'out_trade_no' => $data->out_trade_no,
             'trade_no'     => $data->trade_no,
             'total_amount' => $data->total_amount,
+            'buyer_email' => 'from_returns',
         ];
-   
+
 
         // 更新的命名
         $orderUpdate = Order::Where('out_trade_no', $order['out_trade_no'])
