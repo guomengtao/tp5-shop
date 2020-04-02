@@ -149,6 +149,6 @@ class Alipay extends Frontend
 
         }
 
-        return $alipay->success()->send();// laravel 框架中请直接 `return $alipay->success()`
+        // return $alipay->success()->send();// laravel 框架中请直接 `return $alipay->success()`
     }
 }
