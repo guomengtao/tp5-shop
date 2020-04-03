@@ -57,7 +57,6 @@ class Alipay extends Frontend
     {
         $total      = input('price');
         $title      = input('title');
-        $return_url = input('return_url');
 
         // 如果存在新的同步返回地址，就直接到新的返回地址
         //    if ($return_url){
