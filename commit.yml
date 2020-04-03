@@ -3,30 +3,21 @@ branches: {
   }
 fileChange:
   /application:
-    newFile: !uuid '22b2d4c106dfbc30e384a6432a2b4885df06b71a'
-    oldFile: !uuid '36796cba40e8150557562167398155cc2dd88def'
+    newFile: !uuid 'ccfde37aeccb1053fff48b62b9ef48210881da2c'
+    oldFile: !uuid '22b2d4c106dfbc30e384a6432a2b4885df06b71a'
   /application/index:
-    newFile: !uuid '0bde1d550f2d22c2cddfaebdce17153a6bb8ffb1'
-    oldFile: !uuid '31f3f9f32f8591ca491f63f7516df6483972d6a0'
+    newFile: !uuid '9a987e1aab692fdf9ac98dad6e340efc7ba46353'
+    oldFile: !uuid '0bde1d550f2d22c2cddfaebdce17153a6bb8ffb1'
   /application/index/controller:
-    newFile: !uuid 'f469114bdeeacf9725aafe7622a9b197730bd9c7'
-    oldFile: !uuid '2d7dff92d949a8872906fd89a388fbd131ca9916'
-  /application/index/controller/Alipay.php:
-    newFile: !uuid 'ba5b78170669588f2aabb44b7dbd809a30693cf5'
-    oldFile: !uuid '5b7868973f685782f6446a848805de6d6b9f345f'
-  /application/index/view:
-    newFile: !uuid 'a8468b77b02ca4cf41908175f33942f241ccf001'
-    oldFile: !uuid 'ecbd9fedaac91134c3607b31df27368168730c76'
-  /application/index/view/member:
-    newFile: !uuid 'bde60787e56bc1a166805969c049b5cabdc4740a'
-    oldFile: !uuid '0ef4f5031d7bea3f8e1903b644b2fed26a719b27'
-  /application/index/view/member/tip.html:
-    newFile: !uuid '808a1fcc9690da68a6b915b68eb90a1e8dc284e2'
-    oldFile: !uuid '15428ddd715c3b67e75c8cd404b4877264e0ed12'
+    newFile: !uuid '74d3bb78de828eae69563cf0df1456a6ead9c454'
+    oldFile: !uuid 'f469114bdeeacf9725aafe7622a9b197730bd9c7'
+  /application/index/controller/Member.php:
+    newFile: !uuid 'a38f756757012ab1add9feacc3a4c5a41ba8d066'
+    oldFile: !uuid '1938bdf3532cf388a741bed6a438f20cf884c56f'
   /tp5.sql:
-    newFile: !uuid 'e96623d4de68c6807d157753f94fce2e6fb5a752'
-    oldFile: !uuid '5fac11b47e9f81925059674224c32a3ff7eed335'
-gitCommitId: !uuid '7001ecb096c0e87ec7f776ec765a8d6a3dac821a'
+    newFile: !uuid '4d3f732f26260919dfcc6575f05e6788685db85a'
+    oldFile: !uuid 'e96623d4de68c6807d157753f94fce2e6fb5a752'
+gitCommitId: !uuid '79cbfd74767c23cd7d64b43d447155392e52681c'
 renames: {
   }
-revisionId: 872
+revisionId: 873
