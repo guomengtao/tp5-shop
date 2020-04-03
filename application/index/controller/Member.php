@@ -608,14 +608,14 @@ class Member extends Frontend
 
 
             if (!$total_amount) {
-                $this->redirect('index/member/money');
+                $this->redirect('index/member/tip');
             }
 
 
             Order::where('out_trade_no', $out_trade_no)
                 ->update(['type'=>'37']);
 
-            $this->redirect('index/member/money');
+            $this->redirect('index/member/tip');
         }
 
 
