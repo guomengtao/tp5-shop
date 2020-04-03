@@ -603,14 +603,14 @@ class Member extends Frontend
         Session::set('return_url','index/member/tip');
 
         //  打赏列表
-        $list = Order::where('body', '=', 37)
+        $list = Order::where('type', '=', 37)
             ->field('id,user_id, total_amount,create_time,subject')
             ->order('id desc')
             ->paginate(15);
 
 
         //  打赏排名
-        $total_amount = Order::where('body', '=', 37)
+        $total_amount = Order::where('type', '=', 37)
             ->group('user_id')
             ->field('id,user_id, sum(`total_amount`) as total_amountcount,create_time,subject')
             ->order('total_amountcount desc')
@@ -619,7 +619,7 @@ class Member extends Frontend
 
 
         //  打赏总金额
-        $total_amount_count = Order::where('body', '=', 37)
+        $total_amount_count = Order::where('type', '=', 37)
             ->sum('total_amount');
 
 
@@ -639,7 +639,7 @@ class Member extends Frontend
     public function tips()
     {
         //  打赏列表
-        $list = Order::where('body', '=', 37)
+        $list = Order::where('type', '=', 37)
             ->field('id,phone, total_amount,create_time,subject')
             ->where('phone', '<>', '15966982315')
             ->order('id desc')
@@ -647,7 +647,7 @@ class Member extends Frontend
 
 
         //  打赏排名
-        $total_amount = Order::where('body', '=', 37)
+        $total_amount = Order::where('type', '=', 37)
             ->group('phone')
             ->field('id,phone, sum(`total_amount`) as total_amountcount,create_time,subject')
             ->where('phone', '<>', '15966982315')
@@ -658,7 +658,7 @@ class Member extends Frontend
 
 
         //  打赏总金额
-        $total_amount_count = Order::where('body', '=', 37)
+        $total_amount_count = Order::where('type', '=', 37)
             // ->field('total_amount')
             // ->where('phone','<>','15966982315')
             ->sum('total_amount');
@@ -788,7 +788,7 @@ class Member extends Frontend
             cache('list_top', $list_top, $cach_time);
 
             //  打赏排名
-            $total_amount = Order::where('body', '=', 37)
+            $total_amount = Order::where('type', '=', 37)
                 ->group('phone')
                 ->field('id,phone, sum(`total_amount`) as total_amountcount')
                 ->where('phone', '<>', '15966982315')
