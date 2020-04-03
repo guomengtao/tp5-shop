@@ -47,17 +47,22 @@ class Alipay extends Frontend
      */
     public function money()
     {
-        Session::set('return_url','index/member/money');
-        $this->assign('title','积分充值');
+        Session::set('return_url', 'index/member/money');
+        $this->assign('title', '积分充值');
         return view();
     }
 
 
     public function index()
     {
-        $total      = input('price');
-        $title      = input('title');
+        $total   = input('price');
+        $title   = input('title');
+        $title   = $title ?: time();
+        $user_id = $this->user_id;
 
+        if (!$user_id) {
+            $this->success("请登录", 'index/index/login');
+        }
         // 如果存在新的同步返回地址，就直接到新的返回地址
         //    if ($return_url){
         //        $this->config['return_url'] = 'http://open.gaoxueya.com/'.$return_url ;
@@ -72,7 +77,7 @@ class Alipay extends Frontend
             'out_trade_no' => time(),
             'total_amount' => $total,
             'subject'      => $title,
-            'user_id'      => $this->user_id,
+            'user_id'      => $user_id,
         ];
 
         // 记录这个单号。但是未完成付款
@@ -120,8 +125,8 @@ class Alipay extends Frontend
 
         // 查询详细业务需求的回调地址
         $return_url = Session::get('return_url');
-        Session::set('return_url','');
-        $return_url = $return_url?:'index/index/order';
+        Session::set('return_url', '');
+        $return_url = $return_url ?: 'index/index/order';
 
         // 更新支付状态
 
@@ -146,7 +151,7 @@ class Alipay extends Frontend
         // 并且发送订单号
 
 
-        $this->redirect($return_url, ['out_trade_no'=>$out_trade_no]);
+        $this->redirect($return_url, ['out_trade_no' => $out_trade_no]);
 
         // echo "订单号：".$data->out_trade_no;
         // echo "支付宝交易号：".$data->trade_no;

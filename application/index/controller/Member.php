@@ -252,7 +252,7 @@ class Member extends Frontend
                 [
                     'body'      => 135,
                     'subject'   => "签到",
-                    'total_fee' => 0,
+                    'total_amount' => 0,
                     'rand'      => $rand,
                     'phone'     => $user
                 ]
@@ -531,8 +531,8 @@ class Member extends Frontend
             ->select();
 
         //  最新订单
-        $total_fee = Order::
-        field('id,phone,body,total_fee,subject,create_time')
+        $total_amount = Order::
+        field('id,phone,body,total_amount,subject,create_time')
             ->where('phone', '<>', '15966982315')
             ->where('phone', $eq, $phone)
             // ->whereTime('create_time', 'today')
@@ -568,7 +568,7 @@ class Member extends Frontend
         $this->assign('domain', $domain);
         $this->assign('money', $money);
         $this->assign('search', $search);
-        $this->assign('total_fee', $total_fee);
+        $this->assign('total_amount', $total_amount);
         $this->assign('new_message', $new_message);
         $this->assign('money_add', $money_add);
         $this->assign('footprint_phone', $footprint_phone);
@@ -601,32 +601,27 @@ class Member extends Frontend
         $appointment = input('appointment');
 
         $list = Order::where('body', '=', 37)
-            ->field('id,phone, total_fee,create_time,subject')
-            ->where('phone', '<>', '15966982315')
+            ->field('id,user_id, total_amount,create_time,subject')
             ->order('id desc')
             ->paginate(15);
 
 
         //  打赏排名
-        $total_fee = Order::where('body', '=', 37)
-            ->group('phone')
-            ->field('id,phone, sum(`total_fee`) as total_feecount,create_time,subject')
-            ->where('phone', '<>', '15966982315')
-            // ->whereTime('create_time', 'today')
-            ->order('total_feecount desc')
+        $total_amount = Order::where('body', '=', 37)
+            ->group('user_id')
+            ->field('id,user_id, sum(`total_amount`) as total_amountcount,create_time,subject')
+            ->order('total_amountcount desc')
             ->limit(10)
             ->select();
 
 
         //  打赏总金额
-        $total_fee_count = Order::where('body', '=', 37)
-            // ->field('total_fee')
-            // ->where('phone','<>','15966982315')
-            ->sum('total_fee');
+        $total_amount_count = Order::where('body', '=', 37)
+            ->sum('total_amount');
 
 
-        $this->assign('total_fee', $total_fee);
-        $this->assign('total_fee_count', $total_fee_count);
+        $this->assign('total_amount', $total_amount);
+        $this->assign('total_amount_count', $total_amount_count);
         $this->assign('list', $list);
 
         if ($appointment) {
@@ -642,32 +637,32 @@ class Member extends Frontend
     {
         //  打赏列表
         $list = Order::where('body', '=', 37)
-            ->field('id,phone, total_fee,create_time,subject')
+            ->field('id,phone, total_amount,create_time,subject')
             ->where('phone', '<>', '15966982315')
             ->order('id desc')
             ->paginate(15);
 
 
         //  打赏排名
-        $total_fee = Order::where('body', '=', 37)
+        $total_amount = Order::where('body', '=', 37)
             ->group('phone')
-            ->field('id,phone, sum(`total_fee`) as total_feecount,create_time,subject')
+            ->field('id,phone, sum(`total_amount`) as total_amountcount,create_time,subject')
             ->where('phone', '<>', '15966982315')
             // ->whereTime('create_time', 'today')
-            ->order('total_feecount desc')
+            ->order('total_amountcount desc')
             ->limit(10)
             ->select();
 
 
         //  打赏总金额
-        $total_fee_count = Order::where('body', '=', 37)
-            // ->field('total_fee')
+        $total_amount_count = Order::where('body', '=', 37)
+            // ->field('total_amount')
             // ->where('phone','<>','15966982315')
-            ->sum('total_fee');
+            ->sum('total_amount');
 
 
-        $this->assign('total_fee', $total_fee);
-        $this->assign('total_fee_count', $total_fee_count);
+        $this->assign('total_amount', $total_amount);
+        $this->assign('total_amount_count', $total_amount_count);
         $this->assign('list', $list);
 
 
@@ -790,15 +785,15 @@ class Member extends Frontend
             cache('list_top', $list_top, $cach_time);
 
             //  打赏排名
-            $total_fee = Order::where('body', '=', 37)
+            $total_amount = Order::where('body', '=', 37)
                 ->group('phone')
-                ->field('id,phone, sum(`total_fee`) as total_feecount')
+                ->field('id,phone, sum(`total_amount`) as total_amountcount')
                 ->where('phone', '<>', '15966982315')
                 // ->whereTime('create_time', 'today')
-                ->order('total_feecount desc')
+                ->order('total_amountcount desc')
                 ->limit(10)
                 ->select();
-            cache('total_fee', $total_fee, $cach_time);
+            cache('total_amount', $total_amount, $cach_time);
 
 
             //  访问次数榜
@@ -831,7 +826,7 @@ class Member extends Frontend
         $this->assign('domain', cache('domain'));
         $this->assign('search', cache('search'));
         $this->assign('money', cache('money'));
-        $this->assign('total_fee', cache('total_fee'));
+        $this->assign('total_amount', cache('total_amount'));
         $this->assign('invite', cache('invite'));
         $this->assign('money_add', cache('money_add'));
         $this->assign('footprint_phone', cache('footprint_phone'));
@@ -844,14 +839,14 @@ class Member extends Frontend
 
     public function ajaxModelPay()
     {
-        // 价格 total_fee
+        // 价格 total_amount
 // 主题描述 subject
 // 产品id body
 // 唯一订单号 trade_no
 
 
         $body      = input('body');
-        $total_fee = input('total_fee');
+        $total_amount = input('total_amount');
         $subject   = input('subject');
         $trade_no  = input('trade_no');
         $phone     = Cookie::get('phone');
@@ -859,7 +854,7 @@ class Member extends Frontend
 
         if ($admin >= 1) {
 //            开发人员测试用
-            dump('价格'.$total_fee);
+            dump('价格'.$total_amount);
             dump('主题'.$subject);
             dump('产品id'.$body);
             dump('订单号'.$trade_no);
@@ -867,7 +862,7 @@ class Member extends Frontend
         }
 
 
-        $this->assign('total_fee', $total_fee);
+        $this->assign('total_amount', $total_amount);
         $this->assign('subject', $subject);
         $this->assign('body', $body);
         $this->assign('trade_no', $trade_no);
@@ -879,9 +874,9 @@ class Member extends Frontend
     public function payReturn()
     {
 //        验证时否有支付的Session
-//        注意处理完订单后把total_fee的Session设置为0，关闭订单入库
-        if (Session::get('total_fee') <= 0) {
-            dump(Session::get('total_fee'));
+//        注意处理完订单后把total_amount的Session设置为0，关闭订单入库
+        if (Session::get('total_amount') <= 0) {
+            dump(Session::get('total_amount'));
             return "1";
             die();
         } else {
@@ -892,10 +887,10 @@ class Member extends Frontend
         $body         = Session::get('body');
         $rand         = Session::get('rand');
         $subject      = Session::get('subject');
-        $total_fee    = Session::get('total_fee');
+        $total_amount    = Session::get('total_amount');
         $buyer_id     = Session::get('buyer_id');
         $buyer_email  = Session::get('buyer_email');
-        $total_fee    = Session::get('total_fee');
+        $total_amount    = Session::get('total_amount');
         $out_trade_no = Session::get('out_trade_no');
         $add_vip_days = '';
 
@@ -910,7 +905,7 @@ class Member extends Frontend
 
         $price = Shop::where($map)
             ->value('price');
-        if ($total_fee >= $price) {
+        if ($total_amount >= $price) {
         } else {
             $body = 40;
         }
@@ -979,7 +974,7 @@ class Member extends Frontend
                 'body'         => $body,
                 'rand'         => $rand,
                 'subject'      => $subject,
-                'total_fee'    => $total_fee,
+                'total_amount'    => $total_amount,
                 'buyer_id'     => $buyer_id,
                 'buyer_email'  => $buyer_email,
                 'out_trade_no' => $out_trade_no,
@@ -990,17 +985,17 @@ class Member extends Frontend
         // 如果是vip用户，设置vip字段
         if ($body == 105) {
             // 设置对应够买的vip会员时间
-            if ($total_fee == 9.9) {
+            if ($total_amount == 9.9) {
                 $add_vip_days = 30;
-            } elseif ($total_fee == 0.02) {
+            } elseif ($total_amount == 0.02) {
                 $add_vip_days = 1;
-            } elseif ($total_fee == 19.9) {
+            } elseif ($total_amount == 19.9) {
                 $add_vip_days = 300;
-            } elseif ($total_fee == 99) {
+            } elseif ($total_amount == 99) {
                 $add_vip_days = 365;
-            } elseif ($total_fee == 399) {
+            } elseif ($total_amount == 399) {
                 $add_vip_days = 186;
-            } elseif ($total_fee == 699) {
+            } elseif ($total_amount == 699) {
                 $add_vip_days = 366;
             }
 
@@ -1028,11 +1023,11 @@ class Member extends Frontend
 
             // }
             // 根据支付价格设置对应vip有效期
-            // if ($total_fee=33) {
+            // if ($total_amount=33) {
             //     $expiration_time=$expiration_time+ (3600*24*99) ;
-            // }elseif ($total_fee=188) {
+            // }elseif ($total_amount=188) {
             //     $expiration_time=$expiration_time+ (3600*24*188) ;
-            // }elseif ($total_fee>=320) {
+            // }elseif ($total_amount>=320) {
             //     $expiration_time=$expiration_time+ (3600*24*366) ;
             // }else{
             //     $expiration_time=$expiration_time+ (3600*24*32) ;
@@ -1046,7 +1041,7 @@ class Member extends Frontend
 
 
 //        判断是新注册或者重置密码情况
-//        注意在重置密码后把total_fee设置为0
+//        注意在重置密码后把total_amount设置为0
 //        处理没有登录先付款的情况
 //        没有登录订单先临时存入Session中，注册成功后，再回来再次加入订单。
 
@@ -1074,7 +1069,7 @@ class Member extends Frontend
 
 
 //        设置支付价格为零防止重复订单
-        Session::set('total_fee', '0');
+        Session::set('total_amount', '0');
         Session::set('body', '');
         Session::set('phone', '15966982315');
 
@@ -1592,7 +1587,7 @@ class Member extends Frontend
                         'phone'        => $phone,
                         'body'         => $body,
                         'subject'      => "使用10学习币兑换 课程 id：".$body,
-                        'total_fee'    => 0,
+                        'total_amount'    => 0,
                         'buyer_id'     => $phone,
                         'buyer_email'  => $phone,
                         'out_trade_no' => $phone,
@@ -1633,7 +1628,7 @@ class Member extends Frontend
                         'phone'        => $phone,
                         'body'         => $body,
                         'subject'      => "使用兑换券兑换 课程 id：".$body,
-                        'total_fee'    => 0,
+                        'total_amount'    => 0,
                         'buyer_id'     => $phone,
                         'buyer_email'  => $phone,
                         'out_trade_no' => $phone,
@@ -1711,7 +1706,7 @@ class Member extends Frontend
                         'phone'        => $phone,
                         'body'         => $body,
                         'subject'      => "使用兑换券兑换 课程 id：".$body,
-                        'total_fee'    => 0,
+                        'total_amount'    => 0,
                         'buyer_id'     => $phone,
                         'buyer_email'  => $phone,
                         'out_trade_no' => $phone,
