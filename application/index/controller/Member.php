@@ -1365,6 +1365,31 @@ class Member extends Frontend
 
     public function money()
     {
+
+        $pay = input('pay');
+        if ($pay){
+
+            // 积分充值操作
+
+            
+            // 通过数据库的order订单表查看已经充值status=1
+            $order = Order::where('out_trade_no',$out_trade_no)->count();
+
+
+
+            // 如果已经充值过，那么结束
+            // 检验增加一个标记，记录充值记录
+
+
+
+            // 没有充值的进行充值操作，积分等于 金额*10
+            // 增加一个标记，记录充值记录
+
+
+
+        }
+
+
         // 查询用户积分的方法
 
         $user_id = $this->user_id;

@@ -5,6 +5,8 @@ namespace App\index\Controller;
 use app\common\controller\Frontend;
 use app\index\model\Order;
 use think\Controller;
+use think\Cookie;
+use think\Session;
 use Yansongda\Pay\Pay;
 use Yansongda\Pay\Log;
 
@@ -38,6 +40,7 @@ class Alipay extends Frontend
     {
         return view();
     }
+
     /**
      * 积分充值
      * @return \think\response\View
@@ -48,18 +51,16 @@ class Alipay extends Frontend
     }
 
 
-
-
     public function index()
     {
-        $total = input('price');
-        $title = input('title');
+        $total      = input('price');
+        $title      = input('title');
         $return_url = input('return_url');
 
-     // 如果存在新的同步返回地址，就直接到新的返回地址
-        if ($return_url){
-            $this->config['return_url'] = 'http://open.gaoxueya.com/'.$return_url ;
-        }
+        // 如果存在新的同步返回地址，就直接到新的返回地址
+        //    if ($return_url){
+        //        $this->config['return_url'] = 'http://open.gaoxueya.com/'.$return_url ;
+        //    }
 
 
         if (!$total) {
@@ -98,7 +99,11 @@ class Alipay extends Frontend
     }
 
 
-
+    /**
+     * 一级回调地址
+     * @throws \Yansongda\Pay\Exceptions\InvalidConfigException
+     * @throws \Yansongda\Pay\Exceptions\InvalidSignException
+     */
     public function returns()
     {
         $data = Pay::alipay($this->config)->verify(); // 是的，验签就这么简单！
@@ -108,6 +113,12 @@ class Alipay extends Frontend
         // 支付宝交易号：$data->trade_no
         // 订单总金额：$data->total_amount
 
+
+        $out_trade_no = $data->out_trade_no;
+
+
+        // 查询详细业务需求的回调地址
+        $return_url = Session::get('return_url');
 
         // 更新支付状态
 
@@ -127,9 +138,10 @@ class Alipay extends Frontend
         //     ->update($order);
 
 
-
+        // $this->redirect('index/index/order');
         // 重定向方式直接跳转到用户的会员里的订单管理处
-        $this->redirect('index/index/order');
+        // 并且发送订单号
+        $this->redirect($return_url, ['out_trade_no', $data->out_trade_no]);
 
         // echo "订单号：".$data->out_trade_no;
         // echo "支付宝交易号：".$data->trade_no;
@@ -160,7 +172,6 @@ class Alipay extends Frontend
             // $orderAll->save();
 
 
-
             $app_id = $data->app_id;
             // 不是本商户的，直接忽略
             if ($app_id <> $this->config['app_id']) {
@@ -177,7 +188,6 @@ class Alipay extends Frontend
             if (!$check_out_trade_no) {
                 return "SUCCESS";
             }
-
 
 
             if ($check_out_trade_no) {
