@@ -596,27 +596,27 @@ class Member extends Frontend
 
     public function tip()
     {
-        $out_trade_no = input('out_trade_no');
-
-        if ($out_trade_no) {
-
-            // 通过数据库的order订单表查看已经充值status=1
-            $total_amount = Order::where('out_trade_no', $out_trade_no)
-                ->where('user_id', $this->user_id)
-                ->where('status', 1)
-                ->value('total_amount');
-
-
-            if (!$total_amount) {
-                $this->redirect('index/member/tip');
-            }
-
-
-            Order::where('out_trade_no', $out_trade_no)
-                ->update(['type'=>'37']);
-
-            $this->redirect('index/member/tip');
-        }
+        // $out_trade_no = input('out_trade_no');
+        //
+        // if ($out_trade_no=) {
+        //
+        //     // 通过数据库的order订单表查看已经充值status=1
+        //     $total_amount = Order::where('out_trade_no', $out_trade_no)
+        //         ->where('user_id', $this->user_id)
+        //         ->where('status', 1)
+        //         ->value('total_amount');
+        //
+        //
+        //     if (!$total_amount) {
+        //         $this->redirect('index/member/tip');
+        //     }
+        //
+        //
+        //     Order::where('out_trade_no', $out_trade_no)
+        //         ->update(['type'=>'37']);
+        //
+        //     $this->redirect('index/member/tip');
+        // }
 
 
         // 预约课程
