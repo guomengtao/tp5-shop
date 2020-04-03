@@ -596,10 +596,13 @@ class Member extends Frontend
 
     public function tip()
     {
-        //  打赏列表
 
+       // 预约课程
         $appointment = input('appointment');
 
+        Session::set('return_url','index/member/tip');
+
+        //  打赏列表
         $list = Order::where('body', '=', 37)
             ->field('id,user_id, total_amount,create_time,subject')
             ->order('id desc')
