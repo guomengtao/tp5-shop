@@ -44,6 +44,13 @@ class Alipay extends Frontend
     {
         $total = input('price');
         $title = input('title');
+        $return_url = input('return_url');
+
+     // 如果存在新的同步返回地址，就直接到新的返回地址
+        if ($return_url){
+            $this->config['return_url'] = 'http://open.gaoxueya.com/'.$return_url ;
+        }
+
 
         if (!$total) {
             return;
@@ -80,6 +87,8 @@ class Alipay extends Frontend
         return $alipay->send();// laravel 框架中请直接 `return $alipay`
     }
 
+
+
     public function returns()
     {
         $data = Pay::alipay($this->config)->verify(); // 是的，验签就这么简单！
@@ -106,6 +115,7 @@ class Alipay extends Frontend
         // 更新的命名
         // $orderUpdate = Order::Where('out_trade_no', $order['out_trade_no'])
         //     ->update($order);
+
 
 
         // 重定向方式直接跳转到用户的会员里的订单管理处
