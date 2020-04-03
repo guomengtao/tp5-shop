@@ -25,7 +25,7 @@ class Member extends Frontend
 
     public function _initialize()
     {
-         parent::_initialize();
+        parent::_initialize();
         // 记录访问信息 和 机器人拦截
         Member::agent();
     }
@@ -1215,11 +1215,11 @@ class Member extends Frontend
             // 生成签到记录订单
             $user = Order::create(
                 [
-                    'body'      => 135,
-                    'subject'   => "签到",
+                    'body'         => 135,
+                    'subject'      => "签到",
                     'total_amount' => 0,
-                    'rand'      => $rand,
-                    'user_id'   => $user_id
+                    'rand'         => $rand,
+                    'user_id'      => $user_id
                 ]
             );
 
@@ -1365,28 +1365,41 @@ class Member extends Frontend
 
     public function money()
     {
-
-        $pay = input('pay');
-        if ($pay){
-
+        $out_trade_no = input('out_trade_no');
+        if ($out_trade_no) {
             // 积分充值操作
 
-            
+
             // 通过数据库的order订单表查看已经充值status=1
-            $order = Order::where('out_trade_no',$out_trade_no)->count();
+            $total_amount= Order::where('out_trade_no', $out_trade_no)
+                ->where('user_id', $this->user_id)
+                ->where('status', 1)
+                ->value('total_amount');
 
+            if (!$total_amount) {
+                return;
+            }
 
-
+            $money_order = Money::where('out_trade_no', $out_trade_no)->count();
             // 如果已经充值过，那么结束
             // 检验增加一个标记，记录充值记录
-
+            if ($money_order) {
+                return;
+            }
 
 
             // 没有充值的进行充值操作，积分等于 金额*10
             // 增加一个标记，记录充值记录
+            if (!$money_order) {
 
+                $arr = [
+                    'user_id'=> $this->user_id,
+                    'money'=> $total_amount*10,
+                    'out_trade_no'=> $out_trade_no,
+                    'content'=> '充值'.$total_amount . '元',
 
-
+                ];
+            }
         }
 
 
