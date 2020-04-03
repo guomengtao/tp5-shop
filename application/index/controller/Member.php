@@ -1376,6 +1376,8 @@ class Member extends Frontend
                 ->where('status', 1)
                 ->value('total_amount');
 
+            echo $total_amount;
+            die();
             if (!$total_amount) {
                 return;
             }
