@@ -108,7 +108,7 @@
                                     </a>
                                 </div>
                                 <div class="media-body">
-                                    <small><a href="{:url('index/member/home', ['user_id' => $user.id])}">{$user.phone|substr=0,3}****{$user.phone|substr=7,4}</a>
+                                    <small><a href="{:url('index/member/home', ['user_id' => $user.id])}">{$user.user_id|substr=0,3}****{$user.user_id|substr=7,4}</a>
                                         <span style="color: #D8582B;font-weight: bold;">￥{$user.total_amount}</span></small>
                                     <h5><small>赞赏时间：<span
                                             style="color: #D8582B;font-weight: bold;">{$user.create_time}</span></small>
@@ -151,7 +151,7 @@
                                 <td>
                                     <img class="img-rounded" src="__STATIC__/images/user/user ({:rand(1,25)}).jpg"
                                          data-holder-rendered="true" style="width: 30px; height: 30px;">
-                                    {$user.phone|substr=0,3}****{$user.phone|substr=7,4}
+                                    {$user.user_id|substr=0,3}****{$user.user_id|substr=7,4}
                                 </td>
                                 <td><h5><small></small><span style="color: tomato">￥{$user.total_amount}</span></h5>
                                 </td>
@@ -188,7 +188,7 @@
                             </a>
                         </div>
                         <div class="media-body">
-                            <small><a href="{:url('index/member/home', ['user_id' => $user.id])}">{$user.phone|substr=0,3}****{$user.phone|substr=7,4}</a>
+                            <small><a href="{:url('index/member/home', ['user_id' => $user.id])}">{$user.user_id|substr=0,3}****{$user.user_id|substr=7,4}</a>
                                 NO.<span style="color: #D8582B;font-weight: bold;">{$k}</span></small>
                             <h5><small>赞赏金额：<span
                                     style="color: #D8582B;font-weight: bold;">{$user.total_amountcount}</span></small>
