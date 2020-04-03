@@ -1371,12 +1371,15 @@ class Member extends Frontend
 
 
             // 通过数据库的order订单表查看已经充值status=1
-            $total_amount= Order::where('out_trade_no', $out_trade_no)
+            $total_amount = Order::where('out_trade_no', $out_trade_no)
                 ->where('user_id', $this->user_id)
                 ->where('status', 1)
                 ->value('total_amount');
 
             echo $total_amount;
+            $total_amount = $total_amount * 10;
+            echo '<br>'.$total_amount;
+
             if (!$total_amount) {
                 return;
             }
@@ -1393,11 +1396,11 @@ class Member extends Frontend
             // 增加一个标记，记录充值记录
             if (!$money_order) {
 
-                $arr = [
-                    'user_id'=> $this->user_id,
-                    'money'=> $total_amount*10,
-                    'out_trade_no'=> $out_trade_no,
-                    'content'=> '充值'.$total_amount . '元',
+                $arr          = [
+                    'user_id'      => $this->user_id,
+                    'money'        => $total_amount,
+                    'out_trade_no' => $out_trade_no,
+                    'content'      => '充值'.$total_amount.'元',
 
                 ];
 
