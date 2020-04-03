@@ -48,6 +48,7 @@ class Alipay extends Frontend
     public function money()
     {
         Session::set('return_url','index/member/money');
+        $this->assign('title','积分充值');
         return view();
     }
 

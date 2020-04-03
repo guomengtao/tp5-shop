@@ -1,70 +1,114 @@
-{include file="index/header" /}
+{layout name="common/basic" /}
 
-<div class="page-header">
-    <h1>我的积分/金币 <small> 邀请一个会员注册可以获得100金币和积分</small></h1>
-</div>
-<div class="panel panel-default">
-    <div class="panel-body">
-        <ul class="nav nav-pills" role="tablist">
-            <li role="presentation" class="active"><a href="#">总积分 <span class="badge">{$integral} 分</span></a></li>
-            <li role="presentation"><a href="#">金币 <span class="badge">{$money} 个</span></a></li>
-            <li role="presentation"><a href="#">已消费金币 <span class="badge">{$integral-$money} 个</span></a></li>
-            <li role="presentation"><a href="{:url('index/alipay/money')}" target="_blank">积分充值 <span class="badge">1元10个</span></a></li>
 
-        </ul>
+
+
+<div class="row">
+    <div class="col-md-3 col-sm-6 col-12">
+        <div class="info-box">
+            <span class="info-box-icon bg-info"><i class="far fa-envelope"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">总积分</span>
+                <span class="info-box-number">{$integral}</span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
     </div>
+    <!-- /.col -->
+    <div class="col-md-3 col-sm-6 col-12">
+        <div class="info-box">
+            <span class="info-box-icon bg-success"><i class="far fa-flag"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">金币余额</span>
+                <span class="info-box-number">{$money}</span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    <div class="col-md-3 col-sm-6 col-12">
+        <div class="info-box">
+            <span class="info-box-icon bg-warning"><i class="far fa-copy"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">已消费金币</span>
+                <span class="info-box-number">{$integral-$money}</span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    <div class="col-md-3 col-sm-6 col-12">
+        <div class="info-box">
+            <span class="info-box-icon bg-danger"><i class="far fa-star"></i></span>
+
+            <div class="info-box-content">
+                <a href="{:url('index/alipay/money')}" target="_blank"><span class="info-box-text">积分/金币充值</span></a>
+                 <span class="info-box-number">1元= 10个积分和金币</span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
 </div>
-
-
 
 
 
 
 {if condition="$list"}
-<div class="panel panel-default">
-    <div class="panel-heading">获得积分/金币明细：</div>
-    <div class="panel-body">
-        <table class="table table-hover ">
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">获得积分/金币明细</h3>
+
+        <div class="card-tools">
+            {$list->render()}
+        </div>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body p-0">
+        <table class="table">
             <thead>
-            <tr  ><th > ID</th><th > 类型 </th><th > 积分/金币 </th><th> 说明 </th><th > 日期</th>
+            <tr>
+                <th style="width: 10px"> ID</th>
+                <th> 类型</th>
+                <th> 积分/金币</th>
+                <th> 说明</th>
+                <th> 日期</th>
             </tr>
             </thead>
-
             <tbody>
             {volist name='list' id='user'}
 
-            <tr  ><th> {$user.id} </th><th > {$user.money<0?'消费金币':'获得积分和金币'} </th> <th> {$user.money}个 </th><th> {$user.content} </th><th> {$user.create_time} </th> </tr>
+            <tr>
+                <th> {$user.id}</th>
+                <th> {$user.money<0?'消费金币':'获得积分和金币'}</th>
+                <th> {$user.money}个</th>
+                <th> {$user.content}</th>
+                <th> {$user.create_time}</th>
+            </tr>
 
             {/volist}
+
+
             </tbody>
-        </table><!-- {$list->total()} -->
-        {$list->render()}
-    </div></div>
-{/if}
-
-<div class="panel panel-default">
-    <div class="panel-heading">积分/金币说明：</div>
-    <div class="panel-body">
-        <h5><small>  刚上线 各种奖励 bug 逐步开发中...</small></h5>
-        <h5><small>  10个金币可以兑换1节课程</small></h5>
-        <h5><small>  评论课程奖励1个积分和金币</small></h5>
-        <h5><small>  活动保留一切解释权</small></h5>
-
+        </table>
     </div>
+    <!-- /.card-body -->
 </div>
 
 
-<script>
+{/if}
 
-    $(function () {
-        $('[data-toggle="tooltip"]').tooltip()
-    })
-    function myCopy(){
-        var ele = document.getElementById("text");
-        ele.select();
-        document.execCommand("Copy");
-        document.getElementById("bt").innerHTML = " 已复制";
-    }
-</script>
 
-{include file="index/footer" /}
+
+
+    <h6> 邀请一个会员注册可以获得100金币和积分</h6>
+
+
+

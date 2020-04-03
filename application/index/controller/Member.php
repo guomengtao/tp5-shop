@@ -1434,6 +1434,7 @@ class Member extends Frontend
         $this->assign('money', $money);
         $this->assign('integral', $integral);
         $this->assign('list', $list);
+        $this->assign('title', '积分金币');
 
         return view();
 //        return $this->fetch();
