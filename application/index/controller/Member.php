@@ -596,29 +596,6 @@ class Member extends Frontend
 
     public function tip()
     {
-        // $out_trade_no = input('out_trade_no');
-        //
-        // if ($out_trade_no=) {
-        //
-        //     // 通过数据库的order订单表查看已经充值status=1
-        //     $total_amount = Order::where('out_trade_no', $out_trade_no)
-        //         ->where('user_id', $this->user_id)
-        //         ->where('status', 1)
-        //         ->value('total_amount');
-        //
-        //
-        //     if (!$total_amount) {
-        //         $this->redirect('index/member/tip');
-        //     }
-        //
-        //
-        //     Order::where('out_trade_no', $out_trade_no)
-        //         ->update(['type'=>'37']);
-        //
-        //     $this->redirect('index/member/tip');
-        // }
-
-
         // 预约课程
         $appointment = input('appointment');
 
@@ -626,6 +603,7 @@ class Member extends Frontend
 
         //  打赏列表
         $list = Order::where('type', '=', 37)
+            ->where('status', 1)
             ->field('id,user_id, total_amount,create_time,subject')
             ->order('id desc')
             ->paginate(15);
@@ -633,6 +611,7 @@ class Member extends Frontend
 
         //  打赏排名
         $total_amount = Order::where('type', '=', 37)
+            ->where('status', 1)
             ->group('user_id')
             ->field('id,user_id, sum(`total_amount`) as total_amountcount,create_time,subject')
             ->order('total_amountcount desc')
@@ -642,6 +621,7 @@ class Member extends Frontend
 
         //  打赏总金额
         $total_amount_count = Order::where('type', '=', 37)
+            ->where('status', 1)
             ->sum('total_amount');
 
 
