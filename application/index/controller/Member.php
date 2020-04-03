@@ -1377,7 +1377,6 @@ class Member extends Frontend
                 ->value('total_amount');
 
             echo $total_amount;
-            die();
             if (!$total_amount) {
                 return;
             }
@@ -1401,6 +1400,10 @@ class Member extends Frontend
                     'content'=> '充值'.$total_amount . '元',
 
                 ];
+
+                $money = new Money();
+                $money->data($arr);
+                $money->save();
             }
         }
 
