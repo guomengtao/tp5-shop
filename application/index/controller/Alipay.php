@@ -38,6 +38,16 @@ class Alipay extends Frontend
     {
         return view();
     }
+    /**
+     * 积分充值
+     * @return \think\response\View
+     */
+    public function money()
+    {
+        return view();
+    }
+
+
 
 
     public function index()
