@@ -250,11 +250,11 @@ class Member extends Frontend
             // 生成签到记录订单
             $user = Order::create(
                 [
-                    'body'      => 135,
-                    'subject'   => "签到",
+                    'body'         => 135,
+                    'subject'      => "签到",
                     'total_amount' => 0,
-                    'rand'      => $rand,
-                    'phone'     => $user
+                    'rand'         => $rand,
+                    'phone'        => $user
                 ]
             );
 
@@ -596,11 +596,33 @@ class Member extends Frontend
 
     public function tip()
     {
+        $out_trade_no = input('out_trade_no');
 
-       // 预约课程
+        if ($out_trade_no) {
+
+            // 通过数据库的order订单表查看已经充值status=1
+            $total_amount = Order::where('out_trade_no', $out_trade_no)
+                ->where('user_id', $this->user_id)
+                ->where('status', 1)
+                ->value('total_amount');
+
+
+            if (!$total_amount) {
+                $this->redirect('index/member/money');
+            }
+
+
+            Order::where('out_trade_no', $out_trade_no)
+                ->update(['type', 37]);
+
+            $this->redirect('index/member/money');
+        }
+
+
+        // 预约课程
         $appointment = input('appointment');
 
-        Session::set('return_url','index/member/tip');
+        Session::set('return_url', 'index/member/tip');
 
         //  打赏列表
         $list = Order::where('type', '=', 37)
@@ -848,12 +870,12 @@ class Member extends Frontend
 // 唯一订单号 trade_no
 
 
-        $body      = input('body');
+        $body         = input('body');
         $total_amount = input('total_amount');
-        $subject   = input('subject');
-        $trade_no  = input('trade_no');
-        $phone     = Cookie::get('phone');
-        $admin     = Cookie::get('admin');
+        $subject      = input('subject');
+        $trade_no     = input('trade_no');
+        $phone        = Cookie::get('phone');
+        $admin        = Cookie::get('admin');
 
         if ($admin >= 1) {
 //            开发人员测试用
@@ -890,10 +912,10 @@ class Member extends Frontend
         $body         = Session::get('body');
         $rand         = Session::get('rand');
         $subject      = Session::get('subject');
-        $total_amount    = Session::get('total_amount');
+        $total_amount = Session::get('total_amount');
         $buyer_id     = Session::get('buyer_id');
         $buyer_email  = Session::get('buyer_email');
-        $total_amount    = Session::get('total_amount');
+        $total_amount = Session::get('total_amount');
         $out_trade_no = Session::get('out_trade_no');
         $add_vip_days = '';
 
@@ -977,7 +999,7 @@ class Member extends Frontend
                 'body'         => $body,
                 'rand'         => $rand,
                 'subject'      => $subject,
-                'total_amount'    => $total_amount,
+                'total_amount' => $total_amount,
                 'buyer_id'     => $buyer_id,
                 'buyer_email'  => $buyer_email,
                 'out_trade_no' => $out_trade_no,
@@ -1375,7 +1397,6 @@ class Member extends Frontend
                 ->value('total_amount');
 
 
-
             if (!$total_amount) {
                 $this->redirect('index/member/money');
             }
@@ -1391,10 +1412,9 @@ class Member extends Frontend
             // 没有充值的进行充值操作，积分等于 金额*10
             // 增加一个标记，记录充值记录
             if (!$money_order) {
-
-                $arr          = [
+                $arr = [
                     'user_id'      => $this->user_id,
-                    'money'        => $total_amount*10,
+                    'money'        => $total_amount * 10,
                     'out_trade_no' => $out_trade_no,
                     'content'      => '充值'.$total_amount.'元',
 
@@ -1590,7 +1610,7 @@ class Member extends Frontend
                         'phone'        => $phone,
                         'body'         => $body,
                         'subject'      => "使用10学习币兑换 课程 id：".$body,
-                        'total_amount'    => 0,
+                        'total_amount' => 0,
                         'buyer_id'     => $phone,
                         'buyer_email'  => $phone,
                         'out_trade_no' => $phone,
@@ -1631,7 +1651,7 @@ class Member extends Frontend
                         'phone'        => $phone,
                         'body'         => $body,
                         'subject'      => "使用兑换券兑换 课程 id：".$body,
-                        'total_amount'    => 0,
+                        'total_amount' => 0,
                         'buyer_id'     => $phone,
                         'buyer_email'  => $phone,
                         'out_trade_no' => $phone,
@@ -1709,7 +1729,7 @@ class Member extends Frontend
                         'phone'        => $phone,
                         'body'         => $body,
                         'subject'      => "使用兑换券兑换 课程 id：".$body,
-                        'total_amount'    => 0,
+                        'total_amount' => 0,
                         'buyer_id'     => $phone,
                         'buyer_email'  => $phone,
                         'out_trade_no' => $phone,
