@@ -613,7 +613,7 @@ class Member extends Frontend
 
 
             Order::where('out_trade_no', $out_trade_no)
-                ->update(['type', 37]);
+                ->update(['type'=>'37']);
 
             $this->redirect('index/member/money');
         }
