@@ -57,6 +57,7 @@ class Alipay extends Frontend
     {
         $total   = input('price');
         $title   = input('title');
+        $type   = input('type');
         $title   = $title ?: time();
         $user_id = $this->user_id;
 
@@ -78,6 +79,7 @@ class Alipay extends Frontend
             'total_amount' => $total,
             'subject'      => $title,
             'user_id'      => $user_id,
+            'type'      => $type,
         ];
 
         // 记录这个单号。但是未完成付款
