@@ -1379,14 +1379,14 @@ class Member extends Frontend
 
 
             if (!$total_amount) {
-                return;
+                $this->redirect('index/member/money');
             }
 
             $money_order = Money::where('out_trade_no', $out_trade_no)->count();
             // 如果已经充值过，那么结束
             // 检验增加一个标记，记录充值记录
             if ($money_order) {
-                return;
+                $this->redirect('index/member/money');
             }
 
 
@@ -1405,6 +1405,8 @@ class Member extends Frontend
                 $money = new Money();
                 $money->data($arr);
                 $money->save();
+
+                $this->redirect('index/member/money');
             }
         }
 
