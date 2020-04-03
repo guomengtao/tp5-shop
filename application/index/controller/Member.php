@@ -1376,9 +1376,7 @@ class Member extends Frontend
                 ->where('status', 1)
                 ->value('total_amount');
 
-            echo $total_amount;
-            $total_amount = $total_amount * 10;
-            echo '<br>'.$total_amount;
+
 
             if (!$total_amount) {
                 return;
@@ -1398,7 +1396,7 @@ class Member extends Frontend
 
                 $arr          = [
                     'user_id'      => $this->user_id,
-                    'money'        => $total_amount,
+                    'money'        => $total_amount*10,
                     'out_trade_no' => $out_trade_no,
                     'content'      => '充值'.$total_amount.'元',
 
