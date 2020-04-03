@@ -120,6 +120,7 @@ class Alipay extends Frontend
 
         // 查询详细业务需求的回调地址
         $return_url = Session::get('return_url');
+        Session::set('return_url','');
         $return_url = $return_url?:'index/index/order';
 
         // 更新支付状态
