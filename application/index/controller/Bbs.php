@@ -3,6 +3,7 @@
 namespace app\index\controller;
 
 
+use app\common\controller\Frontend;
 use think\Db;
 use think\Request;
 use app\index\model\Data;
@@ -12,29 +13,24 @@ use app\index\model\Ipinfo;
 use think\Cookie;
 use think\Session;
 
-class Bbs extends \think\Controller
+class Bbs extends Frontend
 {
-    public function __construct(Request $request = null)
+
+
+    public function _initialize()
     {
-        parent::__construct($request);
-        ob_clean();
+        parent::_initialize();
+        // 记录访问信息 和 机器人拦截
+        Member::agent();
     }
 
     public function admin()
     {
-
-
-
         return $this->fetch();
-
-
     }
 
     public function show()
     {
-
-
-
         // DB写法
         // $show = Db::name('data')->where('id','>',0)->order('id', 'desc')->paginate(10,80);
 
@@ -47,42 +43,30 @@ class Bbs extends \think\Controller
 
         $captcha = input("captcha");
         if ($captcha == "cancel") {
-
             if (!captcha_check($captcha)) {
                 //验证失败
                 $this->error('验证码错误');
-
             } else {
                 // $this->success('验证码正确');
 
             };
-
-
         }
 
 
-        // dump($show);
-        // exit();
+
         $this->assign('show', $show);
-        // 渲染模板输出
+        $this->assign('title', '留言板');
 
         return $this->fetch();
-
-
     }
 
     public function view()
     {
-
-
-
         //echo input('param.id');
 
         $id = input('id');
 
         if ($id <> '') {
-
-
             // 查询数据 - 查询留言详情内容
             $list = Db::name('data')
                 ->where('id', '=', $id)
@@ -114,17 +98,13 @@ class Bbs extends \think\Controller
 
             // 渲染模板输出
             return $this->fetch();
-
-
         }
         return $this->fetch('no');
         return "留言不存在";
-
     }
 
     public function add()
     {
-
         $request = Request::instance();
 
 
@@ -141,11 +121,13 @@ class Bbs extends \think\Controller
 
         if ($request->isAjax()) {
             // 模型的 静态方法
-            $user = Data::create([
-                'title'   => $title,
-                'user_id' => $user_id,
-                'shop'    => $shop,
-            ]);
+            $user = Data::create(
+                [
+                    'title'   => $title,
+                    'user_id' => $user_id,
+                    'shop'    => $shop,
+                ]
+            );
             return $title;
         }
 
@@ -153,7 +135,6 @@ class Bbs extends \think\Controller
         if (!$title) {
             # code...
             $this->error('留言内容不能为空');
-
         }
 
 
@@ -166,31 +147,26 @@ class Bbs extends \think\Controller
         if (captcha_check($captcha) == "cancel") {
             //验证失败
             $this->error('验证码错误');
-
         }
 
 
         // 模型的 静态方法
-        $user = Data::create([
-            'title'   => $title,
-            'user_id' => $user_id,
-            'shop'    => 0,
-        ]);
+        $user = Data::create(
+            [
+                'title'   => $title,
+                'user_id' => $user_id,
+                'shop'    => 0,
+            ]
+        );
 
 
         return $this->success('恭喜您留言成功^_^', 'bbs/show');
-
-
     }
 
 
     public function ajax()
     {
-
-
         return $this->fetch();
-
-
     }
 
     /**
@@ -201,7 +177,6 @@ class Bbs extends \think\Controller
      */
     public function jqAjax()
     {
-
         return $this->fetch();
     }
 }
