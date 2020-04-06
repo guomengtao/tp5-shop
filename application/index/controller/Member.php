@@ -1380,10 +1380,11 @@ class Member extends Frontend
         } elseif ($rand > 32) {
             $reward = 1;
         } else {
-            $reward = 0;
+            $reward = 1;
         }
 
         $arr = [
+            "user_id" => $user_id,
             "money" => $reward,
             "title" => '扫码签到奖励',
             "content" => '扫码签到奖励'
