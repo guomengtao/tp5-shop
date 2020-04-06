@@ -1355,12 +1355,7 @@ class Member extends Frontend
         $rand = $rand + 1;
 
 
-        if ($registration_user) {
-            # 已经签到直接提示
-            $msg = "已签到过，加油！已连续签到".$rand."天";
-            return $this->success($msg, 'index/member/registration');
-            // return "已连续签到" . $rand . "天";
-        }
+
 
 
         // 生成签到记录订单
@@ -1372,6 +1367,13 @@ class Member extends Frontend
         Order::where('out_trade_no', $out_trade_no)
             ->update($arr);
 
+        
+        if ($registration_user) {
+            # 已经签到直接提示
+            $msg = "已签到过，加油！已连续签到".$rand."天";
+            return $this->success($msg, 'index/member/registration');
+            // return "已连续签到" . $rand . "天";
+        }
 
         // 设置对应奖励的 数
         // if ($rand == 3) {
