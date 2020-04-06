@@ -7,8 +7,8 @@
             <h2 style="color: #337ac4;"><span class="glyphicon glyphicon-check" aria-hidden="true"></span> 签到打卡
                 <small> 今日签到：<span style="color: red">{$list->total()}</span> </small>
                 <a class="btn btn-success btn-registration" style="font-size: 12px;"
-                   href="{:url('index/alipay/index', ['price' => 0.01,'type' => 135,'return_url' => 'index/member/checkin',])}">
-                    点击签到 </a>
+                   href="{:url('index/alipay/index', ['price' => 0.01,'type' => 135,'return_url' => 'index/member/checkin','title' => '扫码签到'])}">
+                    一分钱支付宝 扫码签到 </a>  商城支付体验
 
             </h2>
         </div>
