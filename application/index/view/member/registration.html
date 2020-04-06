@@ -9,7 +9,7 @@
                 <form role="form" id="quickForm" action="{:url('index/alipay/index')}" method="post">
                     <div class="card-body">
                         <div class="form-group">
-                            <input type="hidden" name="title" value="积分充值" class="form-control" id="exampleInputEmail1"
+                            <input type="hidden" name="type" value="135" class="form-control" id="exampleInputEmail1"
                             >
                         </div>
                         <div class="form-group">
@@ -32,7 +32,9 @@
                     </div>
                 </form>
 
-
+                <a class="btn btn-success btn-registration" style="font-size: 12px;"
+                   href="{:url('index/alipay/index', ['price' => 0.01,'type' => 135,'return_url' => 'index/member/checkin','title' => '扫码签到'])}">
+                </a>
 
             </h2>
         </div>
