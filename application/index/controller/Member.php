@@ -1267,6 +1267,7 @@ class Member extends Frontend
         $list = Order::where('type', '=', 135)
             ->whereTime('create_time', 'today')
             ->where('status', 1)
+            ->order('id','asc')
             ->paginate(100);
 
         //        查询昨天签到
