@@ -162,6 +162,9 @@ class Alipay extends Frontend
         // 并且发送订单号
 
 
+        echo $return_url;
+        die();
+
         $this->redirect($return_url, ['out_trade_no' => $out_trade_no]);
 
         // echo "订单号：".$data->out_trade_no;
