@@ -1360,7 +1360,6 @@ class Member extends Frontend
 
         // 生成签到记录订单
         $arr = [
-            'title' => "扫码签到",
             'rand'  => $rand,
         ];
 
@@ -1386,6 +1385,8 @@ class Member extends Frontend
 
         $arr = [
             "money" => $reward,
+            "title" => '扫码签到奖励',
+            "content" => '扫码签到奖励'
         ];
 
         // 积分奖励
