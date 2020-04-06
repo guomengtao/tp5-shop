@@ -121,11 +121,11 @@ class Member extends Frontend
         $user->save();
 
 
-        if ($user->id) {
-            // 验证真人
-            $human = new HumanCheck();
-            $human->human($info['ip']);
-        }
+        // if ($user->id) {
+        //     // 验证真人
+        //     $human = new HumanCheck();
+        //     $human->human($info['ip']);
+        // }
     }
 
     public function skin()

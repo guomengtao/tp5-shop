@@ -19,9 +19,19 @@ use think\Request;
  */
 class User extends Frontend
 {
-
+    public $user = '';
     public function _initialize()
     {
+        parent::_initialize();
+        // 记录访问信息 和 机器人拦截
+        Member::agent();
+        if (!$this->user_id) {
+            return $this->error('请登录', 'index/index/login');
+        }
+
+        // 查询会员信息
+        $this->user = \app\index\model\User::find($this->user_id)->toArray();
+        $this->assign('user',$this->user);
     }
 
     /**
@@ -451,6 +461,17 @@ class User extends Frontend
      */
     public function profile()
     {
+        $this->assign('title', '账号设置');
+        return $this->fetch();
+    }
+
+    /**
+     * 会员中心
+     */
+    public function index()
+    {
+        $this->assign('title', '会员中心');
+        return $this->fetch();
     }
 
 

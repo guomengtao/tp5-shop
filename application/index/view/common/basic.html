@@ -32,6 +32,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <li class="nav-item d-none d-sm-inline-block">
                 <a href="{:url('index/index/course')}" class="nav-link">课程表</a>
             </li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    推荐功能
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{:url('index/member/tip')}">在线打赏</a>
+                    <a class="dropdown-item" href="{:url('index/bbs/show')}">在线留言</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{:url('index/msg/notice')}">通知公告</a>
+                </div>
+            </li>
         </ul>
 
         <!-- SEARCH FORM -->
@@ -141,6 +154,37 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     </a>
                     <div class="dropdown-divider"></div>
                     <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+                </div>
+            </li>
+            <!-- 会员下拉菜单 -->
+            <li class="nav-item dropdown">
+                <a class="nav-link" data-toggle="dropdown" href="#">
+                    <img src="__STATIC__/adminlte/dist/img/user2-160x160.jpg" class="brand-image img-circle elevation-3"
+                         alt="User Image" style="width: 30px">
+                </a>
+                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                    <span class="dropdown-header">15 Notifications</span>
+                    <div class="dropdown-divider"></div>
+                    <a href="{:url('index/member/money')}" class="dropdown-item">
+                        <i class="fas fa-envelope mr-2"></i> 我的积分
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="{:url('index/index/order')}" class="dropdown-item">
+                        <i class="fas fa-users mr-2"></i> 我的订单
+                        <span class="float-right text-muted text-sm">12 hours</span>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="{:url('index/user/index')}" class="dropdown-item">
+                        <i class="fas fa-users mr-2"></i> 会员中心
+                        <span class="float-right text-muted text-sm">2 days</span>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="{:url('index/user/profile')}" class="dropdown-item">
+                        <i class="fas fa-users mr-2"></i> 账号设置
+                        <span class="float-right text-muted text-sm">2 days</span>
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="{:url('index/index/logout')}" class="dropdown-item dropdown-footer">退出登录</a>
                 </div>
             </li>
             <li class="nav-item">
@@ -268,6 +312,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- Main content -->
         <div class="content">
             <div class="container-fluid">
+
+
                 {__CONTENT__}
                 <!-- /.row -->
             </div><!-- /.container-fluid -->
