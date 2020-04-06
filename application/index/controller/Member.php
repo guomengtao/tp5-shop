@@ -1364,7 +1364,7 @@ class Member extends Frontend
         ];
 
         // 更新签到天数
-        $rand = Order::where('out_trade_no', $out_trade_no)
+        Order::where('out_trade_no', $out_trade_no)
             ->update($arr);
 
 
