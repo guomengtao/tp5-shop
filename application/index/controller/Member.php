@@ -1342,7 +1342,7 @@ class Member extends Frontend
 
         // 检查昨天是否签到
         $rand = Order::where('type', 135)
-            ->whereTime('status', 1)
+            ->where('status', 1)
             ->where('user_id', '=', $user_id)
             ->whereTime('create_time', 'yesterday')
             ->value('rand');
@@ -1369,23 +1369,23 @@ class Member extends Frontend
 
 
         // 设置对应奖励的 数
-        if ($rand == 3) {
-            $reward = 1;
-        } elseif ($rand == 8) {
-            $reward = 3;
-        } elseif ($rand == 16) {
-            $reward = 6;
-        } elseif ($rand == 32) {
-            $reward = 18;
-        } elseif ($rand > 32) {
-            $reward = 1;
-        } else {
-            $reward = 1;
-        }
+        // if ($rand == 3) {
+        //     $reward = 1;
+        // } elseif ($rand == 8) {
+        //     $reward = 3;
+        // } elseif ($rand == 16) {
+        //     $reward = 6;
+        // } elseif ($rand == 32) {
+        //     $reward = 18;
+        // } elseif ($rand > 32) {
+        //     $reward = 1;
+        // } else {
+        //     $reward = 1;
+        // }
 
         $arr = [
             "user_id" => $user_id,
-            "money" => $reward,
+            "money" => $rand,
             "title" => '扫码签到奖励',
             "content" => '扫码签到奖励'
         ];
