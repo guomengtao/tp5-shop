@@ -1274,6 +1274,7 @@ class Member extends Frontend
         $yesterday = Order::where('type', '=', 135)
             ->where('status', 1)
             ->whereTime('create_time', 'yesterday')
+             ->order('id','asc')
             ->paginate(100);
 
 
@@ -1281,16 +1282,19 @@ class Member extends Frontend
         $the_day_before_yesterday = Order::where('type', '=', 135)
             ->where('status', 1)
             ->whereTime('create_time', 'between', ['$the_day_before_begin', '$the_day_before_end'])
+             ->order('id','asc')
             ->paginate(100);
 
         //        查询最近7天签到
         $list_all = Order::where('type', '=', 135)
             ->where('status', 1)
             ->whereTime('create_time', '-7 day')
+             ->order('id','asc')
             ->paginate(100);
 
         //       连续签到排名
         $list_top = Order::where('type', '=', 135)
+            ->group('user_id')
             ->where('status', 1)
             ->whereTime('create_time', 'today')
             ->order('rand desc')
