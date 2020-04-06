@@ -1334,7 +1334,7 @@ class Member extends Frontend
 
         // 判断今天是否有签到记录
         $registration_user = Order::where('user_id', '=', $user_id)
-            ->whereTime('status', 1)
+            ->where('status', 1)
             ->where('type', '=', 135)
             ->whereTime('create_time', 'today')
             ->count();
