@@ -1310,7 +1310,7 @@ class Member extends Frontend
 
         $out_trade_no = input('out_trade_no');
 
-       
+
 
         if ($out_trade_no) {
             // 积分充值操作
@@ -1386,7 +1386,6 @@ class Member extends Frontend
 
         $arr = [
             "money" => $reward,
-            "title" => '扫码签到奖励'
         ];
 
         // 积分奖励
