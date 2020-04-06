@@ -3,30 +3,21 @@ branches: {
   }
 fileChange:
   /application:
-    newFile: !uuid '07df616cbe373aaa702c6bf5b9de3f519b5082b4'
-    oldFile: !uuid 'e81df9c07b31d26b2b55115a3cc38f4939f91daa'
+    newFile: !uuid '5c1cfdb8b6d5fb2e9409066b77a92121947be301'
+    oldFile: !uuid '07df616cbe373aaa702c6bf5b9de3f519b5082b4'
   /application/index:
-    newFile: !uuid 'fd47d1b1506c629de29b9993134cd44e41a253e5'
-    oldFile: !uuid '752a3ea77e61bb5d4d53eafc7ed43de205c1ed64'
+    newFile: !uuid '1ee276cad19485668b0ecee7f4b00f092d583c79'
+    oldFile: !uuid 'fd47d1b1506c629de29b9993134cd44e41a253e5'
   /application/index/controller:
-    newFile: !uuid '77346f487cc72efd670db5c885bb89d80e80ca60'
-    oldFile: !uuid '538d2beb582ccb29564accdc799cb9f0eb2a29ec'
+    newFile: !uuid '2ee4e3b22373c76998f0730de8c69a5eb907a1d6'
+    oldFile: !uuid '77346f487cc72efd670db5c885bb89d80e80ca60'
   /application/index/controller/Member.php:
-    newFile: !uuid 'abb4f0c2f3d9b34dcf990198925dc4dd7227e1b3'
-    oldFile: !uuid '521ee85d54a97a1de9e5a15b274cd9b12af57edf'
-  /application/index/view:
-    newFile: !uuid '57d280a3f41c326d9c2db14fb77e9f2a77795852'
-    oldFile: !uuid '43b89125d09ec75c902f89b1d0e3ee0e5c03810f'
-  /application/index/view/member:
-    newFile: !uuid 'dc5a21bef3895efc0fc90253454487d4299defb7'
-    oldFile: !uuid 'c9c709085ccdd73dbb044465067ce9b8edcf718b'
-  /application/index/view/member/registration.html:
-    newFile: !uuid 'd36c5076c12542b82e98268cfa6500bc1e9723e7'
-    oldFile: !uuid '600232466a0f0433f796a364392ca56cec89c8ee'
+    newFile: !uuid '6f1952d2aec7ef9ec8c77d71d271c7e018ec1e9f'
+    oldFile: !uuid 'abb4f0c2f3d9b34dcf990198925dc4dd7227e1b3'
   /tp5.sql:
-    newFile: !uuid '7dd5741e50a17d882c4044075e031ef6883aa8c4'
-    oldFile: !uuid '80dbae7407ac13aeddb4a8c39176698666d0c917'
-gitCommitId: !uuid '733430162637ac4b031add9bdf3f189f8b99bf49'
+    newFile: !uuid '2759e040130e38e392a3782654c5e5de77aa3d4a'
+    oldFile: !uuid '7dd5741e50a17d882c4044075e031ef6883aa8c4'
+gitCommitId: !uuid 'ea52a7d50337489708dc402515b0bbc5558ab0d5'
 renames: {
   }
-revisionId: 892
+revisionId: 893
