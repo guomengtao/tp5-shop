@@ -75,7 +75,7 @@
 
 <style>
     footer a {
-         margin: 5px 5px 5px 25px ;
+        margin: 5px 5px 5px 25px;
         color: #333;
     }
 
@@ -89,14 +89,16 @@
     <p> Copyright © {:date('Y')} ThinkPHP5.0开发示例
 
 
-
-        <a class="footer_link" href="{:url('index/index/like','search=路由')}">路由</a>
-        <a class="footer_link" href="{:url('index/index/like','search=模型')}">模型</a>
-        <a class="footer_link" href="{:url('index/index/like','search=分页')}">分页</a>
-        <a class="footer_link" href="{:url('index/index/like','search=支付')}宝">支付宝</a>
-        <a class="footer_link" href="{:url('index/index/like','search=签到')}">签到</a>
-        <a class="footer_link" href="{:url('index/index/like','search=AP')}I">API</a>
-        <a class="footer_link" href="{:url('index/index/like','search=短信')}">短信</a>
+        <a style="color: #000;" href="{:url('index/member/skin')}"><span class="glyphicon glyphicon-comment"
+                                                                         aria-hidden="true"></span> 默认黑色</a>
+        <a style="color: #2ac38a;" href="{:url('index/member/skin',['param'=>'green'])}"><span
+                class="glyphicon glyphicon-comment" aria-hidden="true"></span> 绿色</a>
+        <a style="color: #006DF0;" href="{:url('index/member/skin',['param'=>'blue'])}"><span
+                class="glyphicon glyphicon-comment" aria-hidden="true"></span> 蓝色</a>
+        <a style="color: #563d7c;" href="{:url('index/member/skin',['param'=>'purple'])}"><span
+                class="glyphicon glyphicon-comment" aria-hidden="true"></span> 紫色</a>
+        <a style="color: #777;" href="{:url('index/member/skin',['param'=>'gray'])}"><span
+                class="glyphicon glyphicon-comment" aria-hidden="true"></span> 灰色</a>
     </p>
 </footer>
 

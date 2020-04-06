@@ -55,14 +55,23 @@ class Alipay extends Frontend
 
     public function index()
     {
-        $total   = input('price');
-        $title   = input('title');
-        $type   = input('type');
+        // 初始化发起支付的参数
+        $total      = input('price');
+        $title      = input('title');
+        $type       = input('type');
+        $return_url = input('return_url ');  // 设置回调地址
+
+
         $title   = $title ?: time();
+        $type    = $type ?: 1;
         $user_id = $this->user_id;
 
+        if ($return_url) {
+            Session::set('return_url', $return_url);
+        }
+
         if (!$user_id) {
-            $this->success("请登录", 'index/index/login');
+            $this->success("支付前，请登录", 'index/index/login');
         }
         // 如果存在新的同步返回地址，就直接到新的返回地址
         //    if ($return_url){
@@ -79,7 +88,7 @@ class Alipay extends Frontend
             'total_amount' => $total,
             'subject'      => $title,
             'user_id'      => $user_id,
-            'type'      => $type,
+            'type'         => $type,
         ];
 
         // 记录这个单号。但是未完成付款
@@ -175,7 +184,6 @@ class Alipay extends Frontend
             // 5、其它业务逻辑情况
 
             Log::debug('Alipay notify', $data->all());
-            $json = '{"gmt_create":"2020-04-02 23:39:31","charset":"utf-8","gmt_payment":"2020-04-02 23:39:38","notify_time":"2020-04-02 23:39:39","subject":"02 Composer 安装与使用 简介","sign":"Xn13nFxt71LKytqit322Ahcu60DJYaCi377LHyXD4nETT90810oYN+q9rJR61Iff4yVuxRZRLlLpM7C+COVmEMEdj5DIV9sCP62yW5cikXSVerFbqO4wrUkw77rs1uIPvOCZ70nyseTPDaThKGaVf9S8ShFBU8m+RpSvyyZslXTISgrr+oghdfkMy5yCTGVVmtlfOpZfkzOxAHn6YrdrP29BLjrvA+DpDre\/l6AvfklsD\/JFcHcaM5xFguNKCnHNd15foVE\/HYAd7BTrx+dEyZlxlWgTIj9R9EUHdmPVm5QfoSiVSLTqwF7Tju8d52XmWIb1L\/ZPP\/ioAyTxIpRRmg==","buyer_id":"2088822675183141","invoice_amount":"0.01","version":"1.0","notify_id":"2020040200222233938083141409415349","fund_bill_list":"[{\"amount\":\"0.01\",\"fundChannel\":\"PCREDIT\"}]","notify_type":"trade_status_sync","out_trade_no":"1585841964666ac订单号c","total_amount":"0.01","trade_status":"TRADE_SUCCESS","trade_no":"2020040222001483141439290278","auth_app_id":"2016070501580903","receipt_amount":"0.01","point_amount":"0.00","buyer_pay_amount":"0.01","app_id":"2016070501580903","sign_type":"RSA2","seller_id":"2088002229990889"}';
             // 存储一下异步给返回的数据情况
             // $info['body'] = $data->toJson();
             // 临时存入order表的body里，做一个体验

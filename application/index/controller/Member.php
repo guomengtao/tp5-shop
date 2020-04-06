@@ -1264,28 +1264,28 @@ class Member extends Frontend
 
 
         //        查询今天签到
-        $list = Order::where('body', '=', 135)
+        $list = Order::where('type', '=', 135)
             ->whereTime('create_time', 'today')
             ->paginate(100);
 
         //        查询昨天签到
-        $yesterday = Order::where('body', '=', 135)
+        $yesterday = Order::where('type', '=', 135)
             ->whereTime('create_time', 'yesterday')
             ->paginate(100);
 
 
         //        查询前天签到
-        $the_day_before_yesterday = Order::where('body', '=', 135)
+        $the_day_before_yesterday = Order::where('type', '=', 135)
             ->whereTime('create_time', 'between', ['$the_day_before_begin', '$the_day_before_end'])
             ->paginate(100);
 
         //        查询最近7天签到
-        $list_all = Order::where('body', '=', 135)
+        $list_all = Order::where('type', '=', 135)
             ->whereTime('create_time', '-7 day')
             ->paginate(100);
 
         //       连续签到排名
-        $list_top = Order::where('body', '=', 135)
+        $list_top = Order::where('type', '=', 135)
             ->whereTime('create_time', 'today')
             ->order('rand desc')
             ->paginate(50);
@@ -1297,6 +1297,100 @@ class Member extends Frontend
         $this->assign('yesterday', $yesterday);
 
         return view();
+    }
+
+    public function checkin()
+    {
+        // 签到登记功能，对接 扫码签到
+
+        $out_trade_no = input('out_trade_no');
+
+        if ($out_trade_no) {
+            // 积分充值操作
+
+
+            // 通过数据库的order订单表查看已经充值status=1
+            $total_amount = Order::where('out_trade_no', $out_trade_no)
+                ->where('user_id', $this->user_id)
+                ->where('status', 1)
+                ->value('total_amount');
+
+
+            if (!$total_amount) {
+                $this->redirect('/');
+            }
+        }
+
+
+        $user_id = Cookie::get('user_id');
+
+
+        // 判断今天是否有签到记录
+        $registration_user = Order::where('user_id', '=', $user_id)
+            ->where('type', '=', 135)
+            ->whereTime('create_time', 'today')
+            ->count();
+
+
+        // 检查昨天是否签到
+        $rand = Order::where('type', 135)
+            ->where('user_id', '=', $user_id)
+            ->whereTime('create_time', 'yesterday')
+            ->value('rand');
+
+        $rand = $rand + 1;
+
+
+        if ($registration_user) {
+            # 已经签到直接提示
+            $msg = "已签到过，加油！已连续签到".$rand."天";
+            return $this->success($msg, 'index/member/registration');
+            // return "已连续签到" . $rand . "天";
+        }
+
+
+        // 生成签到记录订单
+        $arr = [
+            'title'      => "扫码签到",
+            'rand'         => $rand,
+        ];
+
+        // 更新签到天数
+        $rand = Order::where('out_trade_no', $out_trade_no)
+            ->update($arr);
+
+
+        // 设置对应奖励的 数
+        if ($rand == 3) {
+            $reward = 1;
+        } elseif ($rand == 8) {
+            $reward = 3;
+        } elseif ($rand == 16) {
+            $reward = 6;
+        } elseif ($rand == 32) {
+            $reward = 18;
+        } elseif ($rand > 32) {
+            $reward = 1;
+        } else {
+            $reward = 0;
+        }
+
+        $arr = [
+            "money" => $reward,
+            "title" => '扫码签到奖励'
+        ];
+
+        // 积分奖励
+        $money = new Money();
+        $money->data($arr);
+        $money->save();
+
+        $msg = "恭喜您，连续签到".$rand."天";
+        //设置成功后跳转页面的地址，默认的返回页面是$_SERVER['HTTP_REFERER']
+        return $this->success($msg, 'index/member/registration');
+        // return "恭喜您，连续签到" . $rand . "天";
+
+
     }
 
     public function vip()

@@ -924,16 +924,16 @@ class Index extends Frontend
 
     public function logout()
     {
-            // 设置Cookie 有效期为 秒
-            Cookie::set('phone', '', 1);
-            Cookie::set('user_id', '', 1);
-            Cookie::set('vip', '', 1);
-            Cookie::set('token', '', 1);
-            Cookie::set('admin', '', 1);
-            Cookie::set('photo', '', 1);
-            Cookie::set('nickname', '', 1);
-            // $warning ="退出成功";
-            return $this->success('退出成功^_^', 'login');
+        // 设置Cookie 有效期为 秒
+        Cookie::set('phone', '', 1);
+        Cookie::set('user_id', '', 1);
+        Cookie::set('vip', '', 1);
+        Cookie::set('token', '', 1);
+        Cookie::set('admin', '', 1);
+        Cookie::set('photo', '', 1);
+        Cookie::set('nickname', '', 1);
+        // $warning ="退出成功";
+        return $this->success('退出成功^_^', 'login');
     }
 
     public function login()
@@ -1873,9 +1873,10 @@ class Index extends Frontend
     }
 
 
-
     public function index()
     {
+        //重定向到News模块的Category操作
+        $this->redirect('index/member/registration');
         /**
          * 查询最新会员
          * 直接读取user_qq表里的新会员
