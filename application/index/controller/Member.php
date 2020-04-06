@@ -1310,8 +1310,7 @@ class Member extends Frontend
 
         $out_trade_no = input('out_trade_no');
 
-        echo $out_trade_no;
-        die();
+       
 
         if ($out_trade_no) {
             // 积分充值操作

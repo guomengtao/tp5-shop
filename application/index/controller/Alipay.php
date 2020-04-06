@@ -102,19 +102,6 @@ class Alipay extends Frontend
         return $alipay->send();// laravel 框架中请直接 `return $alipay`
     }
 
-    public function scan()
-    {
-        $order  = [
-            'out_trade_no' => time().'666',
-            'total_amount' => '0.01',
-            'subject'      => 't 扫码',
-        ];
-        $alipay = Pay::alipay($this->config)->scan($order);
-        // $result = $alipay->scan($order);
-        //二维码内容： $qr = $result->qr_code;
-        return $alipay->send();// laravel 框架中请直接 `return $alipay`
-    }
-
 
     /**
      * 一级回调地址
@@ -161,9 +148,6 @@ class Alipay extends Frontend
         // 重定向方式直接跳转到用户的会员里的订单管理处
         // 并且发送订单号
 
-
-        echo $return_url;
-        die();
 
         $this->redirect($return_url, ['out_trade_no' => $out_trade_no]);
 
