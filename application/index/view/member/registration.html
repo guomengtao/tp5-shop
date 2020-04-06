@@ -9,16 +9,13 @@
                 <form role="form" id="quickForm" action="{:url('index/alipay/index')}" method="post">
                     <div class="card-body">
                         <div class="form-group">
-                            <input type="hidden" name="type" value="135" class="form-control" id="exampleInputEmail1"
-                            >
+                            <input type="hidden" name="type" value="135" class="form-control" id="exampleInputEmail1">
                         </div>
                         <div class="form-group">
-                            <input type="hidden" name="price" value="0.01" class="form-control"
-                                   placeholder="大于0.1元">
+                            <input type="hidden" name="price" value="0.01" class="form-control" placeholder="大于0.1元">
                         </div>
                         <div class="form-group">
-                            <input type="hidden" name="title" value="扫码签到" class="form-control"
-                                   placeholder="大于0.1元">
+                            <input type="hidden" name="title" value="扫码签到" class="form-control" placeholder="大于0.1元">
                         </div>
                         <div class="form-group">
                             <input type="hidden" name="return_url" value="index/member/checkin" class="form-control"
@@ -31,10 +28,7 @@
                         <button type="submit" class="btn btn-primary">一分钱支付宝 扫码签到</button>
                     </div>
                 </form>
-
-                <a class="btn btn-success btn-registration" style="font-size: 12px;"
-                   href="{:url('index/alipay/index', ['price' => 0.01,'type' => 135,'return_url' => 'index/member/checkin','title' => '扫码签到'])}">
-                </a>
+ 
 
             </h2>
         </div>
