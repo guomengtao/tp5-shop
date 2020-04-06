@@ -59,7 +59,7 @@ class Alipay extends Frontend
         $total      = input('price');
         $title      = input('title');
         $type       = input('type');
-        $return_url = input('return_url ');  // 设置回调地址
+        $return_url = input('return_url');  // 设置回调地址
 
 
         $title   = $title ?: time();
