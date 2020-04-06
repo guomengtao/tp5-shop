@@ -1266,26 +1266,31 @@ class Member extends Frontend
         //        查询今天签到
         $list = Order::where('type', '=', 135)
             ->whereTime('create_time', 'today')
+            ->whereTime('status', 1)
             ->paginate(100);
 
         //        查询昨天签到
         $yesterday = Order::where('type', '=', 135)
+            ->whereTime('status', 1)
             ->whereTime('create_time', 'yesterday')
             ->paginate(100);
 
 
         //        查询前天签到
         $the_day_before_yesterday = Order::where('type', '=', 135)
+            ->whereTime('status', 1)
             ->whereTime('create_time', 'between', ['$the_day_before_begin', '$the_day_before_end'])
             ->paginate(100);
 
         //        查询最近7天签到
         $list_all = Order::where('type', '=', 135)
+            ->whereTime('status', 1)
             ->whereTime('create_time', '-7 day')
             ->paginate(100);
 
         //       连续签到排名
         $list_top = Order::where('type', '=', 135)
+            ->whereTime('status', 1)
             ->whereTime('create_time', 'today')
             ->order('rand desc')
             ->paginate(50);
@@ -1327,6 +1332,7 @@ class Member extends Frontend
 
         // 判断今天是否有签到记录
         $registration_user = Order::where('user_id', '=', $user_id)
+            ->whereTime('status', 1)
             ->where('type', '=', 135)
             ->whereTime('create_time', 'today')
             ->count();
@@ -1334,6 +1340,7 @@ class Member extends Frontend
 
         // 检查昨天是否签到
         $rand = Order::where('type', 135)
+            ->whereTime('status', 1)
             ->where('user_id', '=', $user_id)
             ->whereTime('create_time', 'yesterday')
             ->value('rand');
@@ -1351,8 +1358,8 @@ class Member extends Frontend
 
         // 生成签到记录订单
         $arr = [
-            'title'      => "扫码签到",
-            'rand'         => $rand,
+            'title' => "扫码签到",
+            'rand'  => $rand,
         ];
 
         // 更新签到天数
