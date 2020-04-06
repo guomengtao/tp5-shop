@@ -1294,10 +1294,10 @@ class Member extends Frontend
 
         //       连续签到排名
         $list_top = Order::where('type', '=', 135)
-            ->group('user_id')
             ->where('status', 1)
             ->whereTime('create_time', 'today')
             ->order(['rand' => 'desc', 'id' => 'desc'])
+            ->group('user_id')
             ->paginate(50);
 
 
