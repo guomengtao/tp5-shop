@@ -105,7 +105,9 @@ class Index extends Frontend
                 if ($rand_test){
                     // 更新密码为新密码
                     User::where('phone',$phone)->update('password',md5($password));
-                     $this->assign('warning', '恭喜您！密码更新成功！');
+                      $warning = '恭喜您！密码修改成功！';
+                }else{
+                    $warning = '验证码错误';
                 }
             }
         }
