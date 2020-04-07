@@ -102,11 +102,13 @@ class Index extends Frontend
                     ->where('phone', $phone)
                     ->whereTime('create_time', 'today')
                     ->count();
-                if ($rand_test){
+                if ($rand_test) {
+                    // 更新token讲使原来就的登录都立即失效
+                    $token = md5(time().$phone.rand(100000, 999999));
                     // 更新密码为新密码
-                    User::where('phone',$phone)->update(['password'=>md5($password)]);
-                      $warning = '恭喜您！密码修改成功！';
-                }else{
+                    User::where('phone', $phone)->update(['password' => md5($password), 'token' => $token]);
+                    $warning = '恭喜您！密码修改成功！';
+                } else {
                     $warning = '验证码错误';
                 }
             }
