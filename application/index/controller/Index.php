@@ -1049,7 +1049,7 @@ class Index extends Frontend
                         // 此处可以加一个Session或者数据库加一个记录，记录密码错误次数
                         $warning = "密码不正确";
 
-                       
+
                     }
                 }
 
