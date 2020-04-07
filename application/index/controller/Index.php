@@ -104,7 +104,7 @@ class Index extends Frontend
                     ->count();
                 if ($rand_test){
                     // 更新密码为新密码
-                    User::where('phone',$phone)->update('password',md5($password));
+                    User::where('phone',$phone)->update(['password'=>md5($password)]);
                       $warning = '恭喜您！密码修改成功！';
                 }else{
                     $warning = '验证码错误';
