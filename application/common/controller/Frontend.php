@@ -7,6 +7,7 @@ use app\index\controller\Member;
 use app\index\model\Agent;
 use app\index\model\Notice;
 use app\index\model\Noticed;
+use app\index\model\User;
 use think\Controller;
 use think\Cookie;
 use app\index\model\Footprint;
@@ -29,6 +30,25 @@ class Frontend extends Controller
         // if (!$user_id) {
         //     return $this->error('请登录', 'index/index/login');
         // }
+
+        // 验证token
+        if ($user_id) {
+            $token       = Cookie::get('token');
+            $check_token = User::where('id', $user_id)
+                ->where('token', $token)
+                ->count();
+            if (!$check_token) {
+                // 设置Cookie 有效期为 秒
+                Cookie::set('phone', '', 1);
+                Cookie::set('user_id', '', 1);
+                Cookie::set('vip', '', 1);
+                Cookie::set('token', '', 1);
+                Cookie::set('admin', '', 1);
+                Cookie::set('photo', '', 1);
+                Cookie::set('nickname', '', 1);
+            }
+        }
+
         $home = 'u/'.Cookie::get('user_id');
 
         $visit = Footprint::where('path', $home)
@@ -52,7 +72,6 @@ class Frontend extends Controller
 
         $noticeCount = Notice::count();
 
-        $user_id      = Cookie::get('user_id');
         $noticedCount = Noticed::where('user_id', $user_id)->count();
 
         $messageCount = $noticeCount - $noticedCount;
