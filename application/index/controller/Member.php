@@ -1364,7 +1364,7 @@ class Member extends Frontend
             ->update($arr);
 
 
-        if ($registration_user) {
+        if ($registration_user>=2) {
             # 已经签到直接提示
             $msg = "已签到过，加油！已连续签到".$rand."天";
             return $this->success($msg, 'index/member/registration');
