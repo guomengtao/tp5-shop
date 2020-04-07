@@ -474,5 +474,14 @@ class User extends Frontend
         return $this->fetch();
     }
 
+    /**
+     * 密码重置
+     */
+    public function password()
+    {
+        $this->assign('title', '密码重置');
+        return $this->fetch();
+    }
+
 
 }

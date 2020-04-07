@@ -68,6 +68,53 @@ class Index extends Frontend
         dump($tet);
     }
 
+    /**
+     * 密码重置
+     */
+    public function password()
+    {
+        $phone    = input('param.phone');
+        $rand     = input('param.rand');
+        $password = input('password');
+        $warning  = "";
+
+        if (Request::instance()->isPost()) {
+            $validate = new Validate(
+                [
+                    'phone'    => 'require|max:11|number|between:13000000000,18999999999',
+                    'password' => 'require|min:6',
+                    'rand'     => 'require|min:4|number'
+
+                ]
+            );
+            $data     = [
+                'phone'    => $phone,
+                'password' => $password,
+                'rand'     => $rand
+            ];
+
+            // 此处为验证格式是否正确
+            if (!$validate->check($data)) {
+                $warning = $validate->getError();
+            } else {
+                // 查询验证码是否正确
+                $rand_test = Sms::where('rand', '=', $rand)
+                    ->where('phone', $phone)
+                    ->whereTime('create_time', 'today')
+                    ->count();
+                if ($rand_test){
+                    // 更新密码为新密码
+                    User::where('phone',$phone)->update('password',md5($password));
+                     $this->assign('warning', '恭喜您！密码更新成功！');
+                }
+            }
+        }
+
+        $this->assign('warning', $warning);
+        $this->assign('title', '密码重置');
+        return $this->fetch();
+    }
+
     public function course()
     {
         $course = Shop::course();
