@@ -1049,11 +1049,7 @@ class Index extends Frontend
                         // 此处可以加一个Session或者数据库加一个记录，记录密码错误次数
                         $warning = "密码不正确";
 
-                        // 多设置一个直接停止，有用户先支付后逻辑错
-                        $this->assign('warning', $warning);
-                        $this->assign('invite_phone', $invite_phone);
-
-                        return $this->fetch();
+                       
                     }
                 }
 
