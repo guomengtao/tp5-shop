@@ -83,7 +83,6 @@
             <a href="#panel-862765" data-toggle="tab">登录 </a>
         </li>
         <li>
-<!--            <a href="#panel-401557" data-toggle="tab">{$Think.session.body==1008612?'重置密码': '注册'} </a>-->
                         <a href="{:url('index/index/register')}"
                            target="_self">注册</a>
         </li>
@@ -133,8 +132,7 @@
 
                         <small>
 
-                            <a href="#" id="resetBtn" onclick="ajaxModelPay('0.1','1008612','重置密码 {:date(" y年m月d日 H:i:s")}
-                            {$Request.ip}','1008612{:time()}')" >重置密码</a>
+                            <a href="{:url('index/index/password')}" id="resetBtn"     >重置密码</a>
                             {if condition="$Think.session.total_fee>'0'" } 请注册/登录保存您的订单...{/if}
                         </small>
 <h4>使用第三方账号登录</h4><a href="https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=100556678&redirect_uri=http://open.gaoxueya.com/index/api/qq&scope=get_user_info"
