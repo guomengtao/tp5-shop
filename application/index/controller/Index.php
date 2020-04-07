@@ -991,19 +991,105 @@ class Index extends Frontend
     {
         $phone        = input('param.phone');
         $rand         = input('param.rand');
-        $rand_test    = input('rand_test');
-        $logout       = input('param.logout');
-        $login        = input('param.login');
         $invite       = input('param.invite');
-        $admin        = input('param.admin');
-        $code         = input('code');
         $password     = input('password');
         $warning      = "";
         $invite_phone = "";
         $get_password = '';
-        $body         = Session::get('body');
 
-        $total_fee = Session::get('total_fee');
+        if ($invite) {
+            // 设置邀请人存入cookie，解决新用户先浏览页面再去注册
+            Cookie::set('invite', $invite, 3600);
+        }
+
+        $invite = Cookie::get('invite');
+
+        if (Cookie::get('invite')) {
+            // 查询邀请人会员号
+            $invite_phone = User::where('id', '=', $invite)->value('phone');
+        }
+
+
+        if (Request::instance()->isPost()) {
+            $validate = new Validate(
+                [
+                    'phone'    => 'require|max:11|number|between:13000000000,18999999999',
+                    'password' => 'require|min:6',
+
+
+                ]
+            );
+            $data     = [
+                'phone'    => $phone,
+                'password' => $password,
+            ];
+
+            // 此处为验证格式是否正确
+            if (!$validate->check($data)) {
+                $warning = $validate->getError();
+            } else {
+                $check_user = User::where('phone', '=', $phone)->count();
+
+
+                // 先判断用户是否存在，用户不存在，先通知一下
+                if (!$check_user) {
+                    $warning = "此用户不存在，注册 或 检查 用户名是否填写正确";
+                }
+
+
+                if ($check_user) {
+                    // 查询密码和账号是否正确
+
+
+                    $get_password = User::where('password', '=', md5(trim($password)))
+                        ->where('phone', $phone)
+                        ->count();
+
+                    if (!$get_password) {
+                        // 此处可以加一个Session或者数据库加一个记录，记录密码错误次数
+                        $warning = "密码不正确";
+
+                        // 多设置一个直接停止，有用户先支付后逻辑错
+                        $this->assign('warning', $warning);
+                        $this->assign('invite_phone', $invite_phone);
+
+                        return $this->fetch();
+                    }
+                }
+
+                // 确认账号密码一致开始登录操作
+                if ($get_password) {
+                    $user = User::where('phone', '=', $phone)->find();
+
+                    // 设置Cookie 有效期为 秒
+                    Cookie::set('phone', $phone, 3600000);
+                    Cookie::set('token', $user['token'], 3600000);
+                    Cookie::set('user_id', $user['id'], 3600000);
+                    Cookie::set('photo', $user['photo'], 3600000);
+
+
+                    return $this->success('登录成功^_^', 'index/member/myhome');
+                }
+            }
+        }
+
+
+        $this->assign('login_warning', $warning);
+        $this->assign('warning', '');
+        $this->assign('invite_phone', $invite_phone);
+        $this->assign('title', '会员登录');
+
+        return $this->fetch();
+    }
+
+    public function smsLogin()
+    {
+        $phone        = input('param.phone');
+        $rand         = input('param.rand');
+        $invite       = input('param.invite');
+        $warning      = "";
+        $invite_phone = "";
+        $get_rand     = '';
 
 
         if ($invite) {
@@ -1018,295 +1104,59 @@ class Index extends Frontend
             $invite_phone = User::where('id', '=', $invite)->value('phone');
         }
 
-        // 退出登录功能
-
-        if ($logout) {
-            // 设置Cookie 有效期为 秒
-            Cookie::set('phone', '', 1);
-            Cookie::set('user_id', '', 1);
-            Cookie::set('vip', '', 1);
-            Cookie::set('token', '', 1);
-            Cookie::set('admin', '', 1);
-            Cookie::set('photo', '', 1);
-            Cookie::set('nickname', '', 1);
-            // $warning ="退出成功";
-            return $this->success('退出成功^_^', 'login');
-        }
 
         if (Request::instance()->isPost()) {
-            // dump($code);
-            // if (!captcha_check($code)) {
-            //     $this->error('验证码错误');
-            // } else {
-            //     $this->success('验证码正确');
-            // }
-
-
             $validate = new Validate(
                 [
-                    'phone'    => 'require|max:11|number|between:13000000000,18999999999',
-                    'password' => 'require|min:6',
-                    'rand'     => 'require|min:4|number',
+                    'phone' => 'require|max:11|number|between:13000000000,18999999999',
+                    'rand'  => 'require|min:4|number',
 
 
                 ]
             );
             $data     = [
-                'phone'    => $phone,
-                'password' => $password,
-                'rand'     => $rand
+                'phone' => $phone,
+                'rand'  => $rand
             ];
 
-//            此处为验证格式是否正确
+            // 此处为验证格式是否正确
             if (!$validate->check($data)) {
-                // dump($validate->getError());
                 $warning = $validate->getError();
-
-                $this->assign('warning', $warning);
-                $this->assign('invite_phone', $invite_phone);
-
-                return $this->fetch();
-            }
+            } else {
+                $check_user = User::where('phone', '=', $phone)->count();
 
 
-//          三大功能：1 登录，代号0011 2 注册，代号1008611 3.重置密码，代号1008612
-
-
-//          三大功能共同需要的功能
-//          判断用户是否已存在,获取token值 方便加入cookie里
-//          如果老用户token为空，就会提示账号不存在，注册的又会错误，注册次问题。解决方法：手工给所有为空用户的token加个默认是值
-
-            $get_token = User::where('phone', '=', $phone)->value('token');
-
-
-//          第一部分 如果是0011判定是用户登录
-
-            if ($rand == '0011') {
-//                  先判断用户是否存在，用户不存在，先通知一下
-                if (!$get_token) {
+                // 先判断用户是否存在，用户不存在，先通知一下
+                if (!$check_user) {
                     $warning = "此用户不存在，注册 或 检查 用户名是否填写正确";
                 }
 
-//
 
-
-                if ($get_token) {
-//                        查询密码和账号是否正确
-
-
-                    $get_password = User::where('password', '=', md5(trim($password)))
+                if ($check_user) {
+                    // 查询密码和账号是否正确
+                    $get_rand = Sms::where('rand', '=', $rand)
+                        ->whereTime('create_time', 'today')
                         ->where('phone', $phone)
                         ->count();
 
-                    if (!$get_password) {
-//                      此处可以加一个Session或者数据库加一个记录，记录密码错误次数
-                        $warning = "密码不正确";
-
-//                        多设置一个直接停止，有用户先支付后逻辑错
-                        $this->assign('warning', $warning);
-                        $this->assign('invite_phone', $invite_phone);
-
-                        return $this->fetch();
+                    if (!$get_rand) {
+                        // 此处可以加一个Session或者数据库加一个记录，记录密码错误次数
+                        $warning = "验证码不正确";
                     }
                 }
 
-//                确认账号密码一致开始登录操作
-                // dump("666");
-                if ($get_password == 1) {
-                    $user_id = User::where('phone', '=', $phone)->value('id');
+                // 确认账号密码一致开始登录操作
+                if ($get_rand) {
+                    $user = User::where('phone', '=', $phone)->find();
 
                     // 设置Cookie 有效期为 秒
                     Cookie::set('phone', $phone, 3600000);
-                    Cookie::set('token', $get_token, 3600000);
-                    Cookie::set('user_id', $user_id, 3600000);
-
-                    // 判断用户的token是否存在，不存在的用户给补上
-                    // 此处如果不加判断，每次都更新，就会实现限制用户只能同时登录一个浏览器或者设备
-                    if (!$get_token) {
-                        User::where('phone', $phone)
-                            ->update(['token' => $get_token]);
-                        Cookie::set('token', $get_token, 3600000);
-                    }
-                    // 判断是否是先支付了，再来注册/登录的用户
-                    if (Session::get('total_fee') > 0) {
-                        //                        更新用户的用户名
-                        Session::set('phone', $phone);
-                        //  重定向到收款页面，加入订单
-                        $this->redirect('member/payReturn');
-                    }
-
-//                    设置管理方便区分管理员
-                    if ($phone == "18210787405") {
-                        Cookie::set('admin', 1, 3600000);
-                    }
-                    if ($admin) {
-                        return redirect()->restore();
-                        // 跳转之前再加一个验证是否是管理员身份  此处略
-                        return $this->success('管理员您好^_^', 'admin/index/index');
-                    } else {
-                        // return redirect()->restore(); 社交首页
-                        return $this->success('登录成功^_^', 'index/member/myhome');
-                    }
-                }
-            }
-
-//          注册和找回密码 公用查询
-
-            if ($total_fee <> 9999) {
-//              设置一个token的秘钥，注册的时候需要。
-//              找回密码 是用来更新token，更安全
-
-                $token = md5(time().$phone.rand(100000, 999999));
-
-//                设置一个注册时的万能验证码
-                if ($rand == 3066) {
-                    $rand_test = 3066;
-                }
+                    Cookie::set('token', $user['token'], 3600000);
+                    Cookie::set('user_id', $user['id'], 3600000);
+                    Cookie::set('photo', $user['photo'], 3600000);
 
 
-//              查询验证码是否正确
-                if ($rand <> 3066) {
-                    $rand_test = Sms::where('rand', '=', $rand)
-                        ->where('phone', $phone)
-                        ->whereTime('create_time', 'today')
-                        ->count();
-                }
-            }
-
-
-//          第二部分 注册会员
-//          1008611 注册会员 注意判断已经注册过的账号
-
-//            if ($total_fee > 0 and $body == 1008611) {  暂时去掉商品id验证
-            if ($login == 2) {
-                // 提交注册
-
-//                dump($login);die();
-
-                if ($get_token <> '') {
-                    $warning = "此用户已经存在, 登录 或者 查看账号是否正确";
-                } elseif ($rand_test <= 0) {
-                    $warning = "验证码不正确";
-                }
-
-
-//                    没有注册和验证码正确开始入库
-
-                if ($get_token == '' & $rand_test > 0) {
-                    $user = User::create(
-                        [
-                            'phone'    => $phone,
-                            'password' => md5(trim($password)),
-                            'invite'   => $invite,
-                            'token'    => $token
-
-                        ]
-                    );
-
-
-//                    奖励邀请用户功能 开始
-
-
-                    $invited_phone = substr_replace($phone, '****', 3, 4);
-
-                    if (!$invite) {
-                        $invite_phone = "15966982315";
-                    }
-
-                    //设置增加vip天数,先查询vip到期日期
-                    // 2018-1-18修改一个错误 时间应该expiration_time判断到期日期
-
-                    $expiration_time = User::where('phone', $invite_phone)
-                        ->whereTime('expiration_time', '>=', 'today')
-                        ->value('expiration_time');
-
-//                    如果没到期加上31天，到期了从现在起加上31天
-                    if ($expiration_time) {
-                        $expiration_time = $expiration_time + (3600 * 24 * 6);
-
-                        User::where('phone', $invite_phone)
-                            ->update(['expiration_time' => $expiration_time, 'rand' => 1]);
-                    } else {
-                        $expiration_time = time() + (3600 * 24 * 6);
-
-                        User::where('phone', $invite_phone)
-                            ->update(['expiration_time' => $expiration_time, 'start_time' => time(), 'rand' => 1]);
-                    }
-
-
-//                    通过saveAll方法批量发放奖励
-
-                    $user = model('Money');
-
-                    $list = [
-                        [
-                            'phone'   => $invite_phone,
-                            'money'   => 10,
-                            'content' => '邀请了会员'.$invited_phone.'注册奖励',
-
-                        ],
-                        [
-                            'phone'   => $phone,
-                            'money'   => 10,
-                            'content' => '新注册获得奖励',
-
-                        ]
-                    ];
-                    $user->saveAll($list);
-
-
-//                     设置Cookie 有效期为 秒
-                    Cookie::set('phone', $phone, 36000000);
-                    Cookie::set('token', $token, 36000000);
-
-//                  更新用户的用户名
-                    Session::set('phone', $phone);
-
-
-                    //  重定向到收款页面，加入订单
-                    $this->redirect('index/index');
-//                    $this->redirect('member/payReturn');
-
-                }
-            }
-
-
-//          第三部分 重置密码
-//          1008612 重置密码状态  需要判断验证码是否正确奥
-
-            if ($total_fee > 0 and $body == 1008612) {
-//                    判断用户是否存在，不存在没法操作的
-                if ($get_token == '') {
-                    $warning = "用户不存在";
-                } elseif ($rand_test <= 0) {
-                    $warning = "验证码有误";
-                }
-
-//                有注册和验证码正确 可以修改密码啦
-
-                if ($get_token <> '' and $rand_test > 0) {
-//                  此处用save方式会更新update字段时间戳
-//                  同时更新token的，使cookie更安全
-
-                    $user           = User::where('phone', $phone)
-                        ->find();
-                    $user->password = md5($password);
-                    $user->token    = $token;
-                    $user->save();
-
-                    Session::set('total_fee', '');
-                    Session::set('body', '');
-
-//                    帮助用户自动登录上。这里启用新的token更安全
-                    // 设置Cookie 有效期为 秒
-                    Cookie::set('phone', $phone, 36000000);
-                    Cookie::set('token', $token, 36000000);
-
-
-                    return $this->success('重置密码成功^_^', 'index/index/index');
-
-//                  跳出框架转到首页方式
-                    exit('<script>top.location.href="../index/index/login/221/'.$body.$phone.'"</script>');
+                    return $this->success('登录成功^_^', 'index/member/myhome');
                 }
             }
         }
@@ -1314,8 +1164,9 @@ class Index extends Frontend
 
         $this->assign('warning', $warning);
         $this->assign('invite_phone', $invite_phone);
-
-        return $this->fetch();
+        $this->assign('title', '会员登录');
+        $this->assign('login_warning', '');
+        return $this->fetch('login');
     }
 
 
