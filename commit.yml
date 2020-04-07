@@ -3,24 +3,39 @@ branches: {
   }
 fileChange:
   /application:
-    newFile: !uuid 'adda524caaa381b16efcedd0c73e933a1ce93375'
-    oldFile: !uuid 'c6f4b5aeacb0c5791082d5c4abd07100e6672f1c'
+    newFile: !uuid 'ab9975b19a97d47de1ba6d79d4d3fb389cd89c97'
+    oldFile: !uuid 'adda524caaa381b16efcedd0c73e933a1ce93375'
   /application/index:
-    newFile: !uuid 'b8982b6b4e74fe8e1d2bd59df3457d771d9ee728'
-    oldFile: !uuid '041805d8567de8dcb8e1428e7e11a31e3f0659b4'
+    newFile: !uuid '969069e75e23397dd01ce77408abec4e1c514e0c'
+    oldFile: !uuid 'b8982b6b4e74fe8e1d2bd59df3457d771d9ee728'
+  /application/index/controller:
+    newFile: !uuid 'cb4f2998c9df8dac7667a48973804ad10e9834ab'
+    oldFile: !uuid 'eca205fa218c7ad1930198eace549cf129df2f6a'
+  /application/index/controller/Index.php:
+    newFile: !uuid 'cc091ae944c033fa90d1a97a06c6b3b08663a457'
+    oldFile: !uuid '725ee236a3e24bd12d145b3732cd02a5910e3102'
+  /application/index/controller/User.php:
+    newFile: !uuid '63feb5312477aaa419d7fb6c556d9ee5159cafc1'
+    oldFile: !uuid 'f27269fa73e85e37fe112a802919dd2f126a335a'
   /application/index/view:
-    newFile: !uuid '3ca23061d0ac5d6d6d45ca1e06484b5554e7f7bc'
-    oldFile: !uuid '04a6c5989d78b07e5194d21e76a7b37d72610d4c'
-  /application/index/view/member:
-    newFile: !uuid '0b298b37d8f5f80f2c225003fd45316ba616ec92'
-    oldFile: !uuid '9ca297991d986c6ace2533a356382256c8ec7cc2'
-  /application/index/view/member/registration.html:
-    newFile: !uuid 'ec37f604a5247098bded2e1fa2eebb1ac80979fb'
-    oldFile: !uuid '8a613528379b41df2d31c722561fcd3fd26dc85f'
+    newFile: !uuid 'd6c48858f77eeb566fd41df86f6a663641744893'
+    oldFile: !uuid '3ca23061d0ac5d6d6d45ca1e06484b5554e7f7bc'
+  /application/index/view/index:
+    newFile: !uuid 'a77ee6c0c6da11e5d411767e06f218a7ed0091ee'
+    oldFile: !uuid 'cb40898e96b86c56049297be24304e3563b5e8c7'
+  /application/index/view/index/password.html:
+    newFile: !uuid '336cc54ce6a6ccafbf0e2c1a2d4d5ea583035314'
+    oldFile: null
+  /application/index/view/user:
+    newFile: !uuid '0f8d9d65e344d2f1e482ee674748fbadaecdfa01'
+    oldFile: !uuid '350d3a43297efab990bb68f30e1c3b994b023ff1'
+  /application/index/view/user/password.html:
+    newFile: !uuid '540c4f664e737c55830702e31819d7fa9cf9ce64'
+    oldFile: null
   /tp5.sql:
-    newFile: !uuid 'e69de29bb2d1d6434b8b29ae775ad8c2e48c5391'
-    oldFile: !uuid 'dbe896c77ae68e16d5891a948617137cd79d250d'
-gitCommitId: !uuid 'ea5d56535d3abc65c66dec12e144b318ea104f09'
+    newFile: !uuid '0db075adac923942b8f9ffbcca5a53adabb7fbe5'
+    oldFile: !uuid 'e69de29bb2d1d6434b8b29ae775ad8c2e48c5391'
+gitCommitId: !uuid '60dd48ba5ff780b2f5a41c4866dc9adf0476289e'
 renames: {
   }
-revisionId: 902
+revisionId: 903
