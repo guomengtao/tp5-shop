@@ -5,6 +5,7 @@ namespace app\common\controller;
 use app\admin\model\Message;
 use app\index\controller\Member;
 use app\index\model\Agent;
+use app\index\model\Fans;
 use app\index\model\Notice;
 use app\index\model\Noticed;
 use app\index\model\User;
@@ -69,6 +70,14 @@ class Frontend extends Controller
             ->where('msg', null)
             ->count();
 
+         $follow = Fans::where('follow_id',$this->user_id)
+            ->where('msg',NULL)
+            ->count();
+
+
+
+
+
 
         $noticeCount = Notice::count();
 
@@ -76,10 +85,12 @@ class Frontend extends Controller
 
         $messageCount = $noticeCount - $noticedCount;
 
-
+        $msg_total =  $messageCount + $follow;
         $this->assign("visit", $visit);
         $this->assign("visitCount", $visitCount);
         $this->assign("messageCount", $messageCount);
+        $this->assign("followCount", $follow);
+        $this->assign("msg_total", $msg_total);
     }
 
 

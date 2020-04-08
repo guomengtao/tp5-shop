@@ -4,6 +4,7 @@ namespace app\index\controller;
 
 
 use app\common\controller\Frontend;
+use app\index\model\Fans;
 use think\Request;
 use app\index\model\Sms;
 use app\index\model\Shop;
@@ -577,6 +578,43 @@ class Member extends Frontend
         return view();
     }
 
+
+    public function follow()
+    {
+        // 获取来路页面
+
+        $follow_id = input('follow_id');
+
+        $user_id = Cookie::get('user_id');
+
+
+        // 添加关注
+        if (input('editfollow') == 1) {
+            if ($user_id == $follow_id) {
+                $this->error("不能自己关注自己");
+            }
+
+            $fanscount = Fans::where('user_id', Cookie::get('user_id'))
+                ->where('follow_id', $follow_id)
+                ->count();
+
+
+            if (!$fanscount) {
+                // 添加关注
+                $user            = new Fans;
+                $user->user_id   = Cookie::get('user_id');
+                $user->follow_id = $follow_id;
+                $user->save();
+            }
+        }
+        // 取消关注
+        if (input('editfollow') == 2) {
+            // 删除状态为0的数据
+            Fans::destroy(['user_id' => Cookie::get('user_id'), 'follow_id' => $follow_id], true);
+        }
+
+        $this->redirect('index/member/home', ['user_id' => $follow_id]);
+    }
 
     public function home()
     {
@@ -1364,7 +1402,7 @@ class Member extends Frontend
             ->update($arr);
 
 
-        if ($registration_user>=2) {
+        if ($registration_user >= 2) {
             # 已经签到直接提示
             $msg = "已签到过，加油！已连续签到".$rand."天";
             return $this->success($msg, 'index/member/registration');

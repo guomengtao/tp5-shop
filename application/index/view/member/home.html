@@ -41,7 +41,7 @@
 
     <h5>{$user.nickname|default="努力学习TP5中的小强"}      </h5>
     <!-- <h5>学习tp5的JACK     </h5> -->
-    <h5> 相互学习 共同进步 ~ </h5>
+    <h5> 相互学习 共同进步 ~ {$user.followed} </h5>
 
 
 
@@ -62,7 +62,7 @@
     <ul class="dropdown-menu">
       <li  class="disabled"><a href="#">设为特别关注</a></li>
       <li role="separator" class="divider"></li>
-      <li><a  href="{:url('',['user_id'=>$user.id,'editfollow'=>2 ])}">取消关注</a></li>
+      <li><a  href="{:url('index/member/follow',['follow_id'=>$user.id,'editfollow'=>2 ])}">取消关注</a></li>
 
     </ul>
   </div>
@@ -72,9 +72,9 @@
 
       {else /}
 
-          <a class="btn btn-warning" href="{:url('',['user_id'=>$user.id,'editfollow'=>1]  )}" role="button" style="border-radius:2px;background: -webkit-linear-gradient(top, #fa7d3c 0%,#f55f10 100%);box-shadow: 0px 1px 2px rgba(0,0,0,0.3);  border-color:  #fa7d3c  "> <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 加关注</a>
+      <a class="btn btn-warning" href="{:url('index/member/follow',['follow_id'=>$user.id,'editfollow'=>1]  )}" role="button" style="border-radius:2px;background: -webkit-linear-gradient(top, #fa7d3c 0%,#f55f10 100%);box-shadow: 0px 1px 2px rgba(0,0,0,0.3);  border-color:  #fa7d3c  "> <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 加关注</a>
 
-       {/if}
+      {/if}
 
 
 

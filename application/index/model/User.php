@@ -16,14 +16,19 @@ class User extends model
     {
         // 查询当前用户信息
 
-        $user = User::with('ipinfo', 'userqq', 'fans','footprint' )
+        $user = User::with('ipinfo', 'userqq', 'fans', 'footprint')
             ->withCount('myblog')
             ->withCount('fans')
             ->where('id', $id)
-            ->order("id",'desc')
+            ->order("id", 'desc')
             ->find();
 
         return $user;
+    }
+
+    public function checkFollow()
+    {
+        return 666;
     }
 
     public function getFollowedAttr($value, $data)
@@ -31,27 +36,21 @@ class User extends model
 
         // 添加关注
         if (input('editfollow') == 1) {
-
-
             $fanscount = Fans::where('user_id', Cookie::get('user_id'))
                 ->where('follow_id', input('user_id'))
                 ->count();
 
 
             if (!$fanscount) {
-
                 // 添加关注
                 $user            = new Fans;
                 $user->user_id   = Cookie::get('user_id');
                 $user->follow_id = input('user_id');
                 $user->save();
             }
-
         }
         // 取消关注
         if (input('editfollow') == 2) {
-
-
             // 举例 这样数据库方式不支持软删除
             // Fans::where('user_id',Cookie::get('user_id'))
             //                 ->where('follow_id',input('user_id'))
@@ -60,7 +59,6 @@ class User extends model
 
             // 删除状态为0的数据
             Fans::destroy(['user_id' => Cookie::get('user_id'), 'follow_id' => input('user_id')]);
-
         }
 
 
@@ -71,13 +69,11 @@ class User extends model
 
 
         return $on;
-
     }
 
     // 测试 查询关联的多条点赞
     public function myblog()
     {
-
         return $this->hasMany('data');
     }
 
@@ -109,20 +105,16 @@ class User extends model
     {
         return $this->hasOne('UserQq', 'user_id', 'id');
     }
+
     public function footprint()
     {
-
-        return $this->hasOne('Footprint','user_id','id')->field('create_time')->order('id','desc');
-
+        return $this->hasOne('Footprint', 'user_id', 'id')->field('create_time')->order('id', 'desc');
     }
-        public function footprints()
+
+    public function footprints()
     {
-
-        return $this->hasMany('Footprint','user_id','id')->limit(10)->order('id','desc');
-
+        return $this->hasMany('Footprint', 'user_id', 'id')->limit(10)->order('id', 'desc');
     }
-
-
 
 
     protected function scopeAgeAbove($query, $lowest_age)
@@ -164,16 +156,17 @@ class User extends model
     {
         return $this->hasOne('UserQq', 'user_id', 'id');
     }
+
     public function human()
     {
         return $this->hasOne('Human', 'ip', 'ip');
     }
 
+
     public function money()
     {
         return $this->hasMany('Money');
     }
-
 
 
     public function setIpAttr($value)
@@ -201,21 +194,13 @@ class User extends model
 
     public function getTitleAttr($value)
     {
-
-
         if ($value == 1) {
-
             return "男";
         } elseif ($value == 2) {
-
             return "女";
         } else {
-
-            return $value . "";
-
+            return $value."";
         }
-
-
     }
 
     public function getContentAttr($value)
@@ -223,8 +208,7 @@ class User extends model
         // $title = [-1=>'删除',0=>'禁用',1=>'正常',2=>'待审核'];
         if ($value) {
             # code...
-            return "<>" . $value;
-
+            return "<>".$value;
         }
         return $value;
     }

@@ -33,7 +33,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <a href="{:url('index/index/course')}" class="nav-link">课程表</a>
             </li>
 
-            <li class="nav-item  d-none dropdown">
+            <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
                     推荐功能
@@ -97,7 +97,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <li class="nav-item dropdown">
                 <a class="nav-link" data-toggle="dropdown" href="#">
                     <i class="far fa-comments"></i>
-                    <span class="badge badge-danger navbar-badge">{$visitCount}</span>
+                    <span class="badge badge-warning navbar-badge">{$visitCount}</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
 
@@ -133,27 +133,31 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <li class="nav-item dropdown">
                 <a class="nav-link" data-toggle="dropdown" href="#">
                     <i class="far fa-bell"></i>
-                    <span class="badge badge-warning navbar-badge">{$messageCount?:''}</span>
+                    <span class="badge badge-danger navbar-badge">{$msg_total?:''}</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                    <span class="dropdown-header">15 Notifications</span>
-                    <div class="dropdown-divider"></div>
                     <a href="{:url('index/msg/notice')}" class="dropdown-item">
-                        <i class="fas fa-envelope mr-2"></i> {$messageCount} 条新通知
-                        <span class="float-right text-muted text-sm">3 mins</span>
+                        <i class="fas fa-envelope mr-2"></i> 通知
+                        <span class="float-right text-muted text-sm"><span class="badge badge-pill badge-danger">{$messageCount}</span></span>
                     </a>
                     <div class="dropdown-divider"></div>
                     <a href="#" class="dropdown-item">
-                        <i class="fas fa-users mr-2"></i> 8 friend requests
-                        <span class="float-right text-muted text-sm">12 hours</span>
+                        <i class="fas fa-envelope mr-2"></i> 评论
+                        <span class="float-right text-muted text-sm">
+                            <span class="badge badge-pill badge-danger"></span></span>
+
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="{:url('index/msg/follow')}" class="dropdown-item">
+                        <i class="fas fa-envelope mr-2"></i> 关注
+                        <span class="float-right text-muted text-sm"><span class="badge badge-pill badge-danger">{$followCount}</span></span>
                     </a>
                     <div class="dropdown-divider"></div>
                     <a href="#" class="dropdown-item">
-                        <i class="fas fa-file mr-2"></i> 3 new reports
-                        <span class="float-right text-muted text-sm">2 days</span>
+                        <i class="fas fa-envelope mr-2"></i> 私信
+                        <span class="float-right text-muted text-sm"><span class="badge badge-pill badge-danger"></span></span>
+
                     </a>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
                 </div>
             </li>
             <!-- 会员下拉菜单 -->

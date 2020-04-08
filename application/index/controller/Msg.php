@@ -3,6 +3,7 @@
 namespace app\index\controller;
 
 use app\admin\model\Message;
+use app\index\model\Fans;
 use app\index\model\Notice;
 use app\index\model\Noticed;
 use app\common\controller\Frontend;
@@ -52,7 +53,6 @@ class Msg extends Frontend
 
     public function view()
     {
-
         $id      = input('id') ?: 1;
         $message = Notice::where('id', $id)->find();
 
@@ -62,8 +62,8 @@ class Msg extends Frontend
             ->count();
 
         if (!$noticeCount) {
-            $info['notice_id']      = $id;
-            $info['user_id'] = $this->user_id;
+            $info['notice_id'] = $id;
+            $info['user_id']   = $this->user_id;
 
             $user = new Noticed();
             $user->data($info);
@@ -82,10 +82,27 @@ class Msg extends Frontend
         return $this->fetch();
     }
 
+    public function follow()
+    {
+        // 全部设置为已读
+        Fans::where('follow_id', $this->user_id)
+         ->update(['msg' => '1']);
+
+
+
+
+        $follow = Fans::where('follow_id', $this->user_id)
+            ->order('id desc')
+            ->paginate(9);
+
+
+        $this->assign("follow", $follow);
+        $this->assign("title", "我的粉丝");
+        return $this->fetch();
+    }
+
     public function notice()
     {
-
-
         $message = Notice::order('id', 'desc')
             ->paginate(5);
 
