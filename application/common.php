@@ -32,14 +32,7 @@ use think\Validate;
 use Ip2Region;
 
 
-function guide()
-{
-    // 此功能实现动态的引导首页
-    // 如果未扫码签到，首页设置为扫码签到
-    // 直接跳转到扫码签到页面
 
-    // 最后跳转到默认首页
-}
 
 function admin_test_model()
 {

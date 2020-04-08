@@ -70,13 +70,9 @@ class Frontend extends Controller
             ->where('msg', null)
             ->count();
 
-         $follow = Fans::where('follow_id',$this->user_id)
-            ->where('msg',NULL)
+        $follow = Fans::where('follow_id', $this->user_id)
+            ->where('msg', null)
             ->count();
-
-
-
-
 
 
         $noticeCount = Notice::count();
@@ -85,12 +81,24 @@ class Frontend extends Controller
 
         $messageCount = $noticeCount - $noticedCount;
 
-        $msg_total =  $messageCount + $follow;
+        $msg_total = $messageCount + $follow;
         $this->assign("visit", $visit);
         $this->assign("visitCount", $visitCount);
         $this->assign("messageCount", $messageCount);
         $this->assign("followCount", $follow);
         $this->assign("msg_total", $msg_total);
+    }
+
+    /**
+     * 登录验证
+     *
+     * 需要的登录的位置用$this->must_log_in()跳转
+     */
+    public function must_log_in()
+    {
+        if (!$this->user_id) {
+            $this->error('请登录！', 'index/index/login', '', 3);
+        }
     }
 
 

@@ -64,8 +64,6 @@ class Fans extends model
     public function getCheckAttr($value,$data)
     {
 
-
-
         // 查询当前用户有没有关注
 
         $user_id = $data['user_id'];

@@ -581,11 +581,14 @@ class Member extends Frontend
 
     public function follow()
     {
-        // 获取来路页面
+        $this->must_log_in();
 
+        // 获取来路页面
         $follow_id = input('follow_id');
 
         $user_id = Cookie::get('user_id');
+
+
 
 
         // 添加关注
