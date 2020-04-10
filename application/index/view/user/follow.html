@@ -7,7 +7,7 @@
 
             <!-- 循环遍历关注的粉丝-->
             {volist name="follow" id="vo"}
-            <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch">
+            <div class="col-12 col-sm-6 col-md-4 ">
                 <div class="card bg-light">
                     <div class="card-header text-muted border-bottom-0">
                         会员ID：{$vo.follow_id}
@@ -16,7 +16,7 @@
                         <div class="row">
                             <div class="col-7">
                                 <h2 class="lead"><b>
-                                    <a href="{:url('index/member/home',['user_id'=>$vo.follow_id])}"> {$vo.followuser.nickname?:$vo.follow_id}</a>
+                                    <a href="{:url('index/member/home',['user_id'=>$vo.follow_id])}" style="width: 30px;height: 30px"> {$vo.followuser.nickname?:$vo.follow_id}</a>
                                    </b></h2>
                                 <p class="text-muted text-sm"><b>年龄: </b> {:date('Y')-$vo.followqq.year}  </p>
                                 <ul class="ml-4 mb-0 fa-ul text-muted">
