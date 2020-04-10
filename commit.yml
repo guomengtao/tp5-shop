@@ -3,24 +3,36 @@ branches: {
   }
 fileChange:
   /application:
-    newFile: !uuid 'c67990b0810bceaa8ae926f0d97cb31ba7548536'
-    oldFile: !uuid '238b452f8d1173caf4b650945be4c540775eacb1'
+    newFile: !uuid 'ce66485ab40ccdd36ecc68562f1a3874efb3b369'
+    oldFile: !uuid 'c67990b0810bceaa8ae926f0d97cb31ba7548536'
   /application/index:
-    newFile: !uuid '8167bae020cdac72685be5a89278d0335c44bee6'
-    oldFile: !uuid '25af44e795cbbe0d41472a90835c3a8271a84e64'
+    newFile: !uuid 'c40dbb392edabcf8315e11de2044a983d99187a1'
+    oldFile: !uuid '8167bae020cdac72685be5a89278d0335c44bee6'
+  /application/index/model:
+    newFile: !uuid '575261c90b12f4c5b428d497061f65e9a061b2e1'
+    oldFile: !uuid '7cab65206d005d21798e494f584b9c268e21a442'
+  /application/index/model/Fans.php:
+    newFile: !uuid '56edd987c000a94c4bd12947435fb86c8439ef76'
+    oldFile: !uuid 'cd75eca4c018e50439fa2bd741d3c697597a5554'
   /application/index/view:
-    newFile: !uuid 'e389e62f888effb9480d166b3a71d1c6e89c2070'
-    oldFile: !uuid '17c34631cfd629a8ee4eed5008cf618c220614c9'
+    newFile: !uuid 'c617898db2bc208103a01b0fc25c328e37725999'
+    oldFile: !uuid 'e389e62f888effb9480d166b3a71d1c6e89c2070'
+  /application/index/view/member:
+    newFile: !uuid '1b819f032706d28fc30ccb4bf8f13f081c0a0d2e'
+    oldFile: !uuid '56cbe46bb7e55a7a81d9b3aa85e9100ef716d254'
+  /application/index/view/member/home.html:
+    newFile: !uuid '0619b441fb37b86e2087f34aa0bdf0b4c52f671c'
+    oldFile: !uuid '617b6800ed7ec8cf4d5ed507fc4ab2b040bf99ec'
   /application/index/view/user:
-    newFile: !uuid '91913c66d903c98f1533e38ddabe97d544bac38e'
-    oldFile: !uuid '01d7d70fe5201eb9c695e872580b5ee66c18ab5d'
+    newFile: !uuid '751af7a4774b4ca3b457ae699f837cb49a3ca363'
+    oldFile: !uuid '91913c66d903c98f1533e38ddabe97d544bac38e'
   /application/index/view/user/follow.html:
-    newFile: !uuid '23a21a4d151ea0972f87d91cdba2bf6aedacece5'
-    oldFile: !uuid '6c3ec74c35e2147c8362412a15752936547b4029'
+    newFile: !uuid '224e774785da97cbb0a37c459d581a411ddf3d54'
+    oldFile: !uuid '23a21a4d151ea0972f87d91cdba2bf6aedacece5'
   /tp5.sql:
-    newFile: !uuid '49d2b36b4fea6b557224f603bf44f5aad15d543f'
-    oldFile: !uuid 'e39ec26a1aeecd0fada1fd5d3c7e4d107c1ac1c0'
-gitCommitId: !uuid '3f9b01411a3b4c3795a5f037345ba8735e11135e'
+    newFile: !uuid '064ff9ad9d7051605b8a98f8757a8d242859cc4d'
+    oldFile: !uuid '49d2b36b4fea6b557224f603bf44f5aad15d543f'
+gitCommitId: !uuid '0cc1bae5721e81a35de7a48071340927098550ad'
 renames: {
   }
-revisionId: 927
+revisionId: 928
