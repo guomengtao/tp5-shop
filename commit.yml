@@ -3,30 +3,21 @@ branches: {
   }
 fileChange:
   /application:
-    newFile: !uuid 'cfbbfbf281de1fc3474824fc020a1316900bd2f2'
-    oldFile: !uuid '41bc086ce41047112b3658f9ee7ddce0880fe41f'
+    newFile: !uuid '4b0e0058d9d6203369a9ca59d1790e7e114d7036'
+    oldFile: !uuid 'cfbbfbf281de1fc3474824fc020a1316900bd2f2'
   /application/index:
-    newFile: !uuid 'ec20dc33d654402439408e330ce419c04a097503'
-    oldFile: !uuid '49971555c7d772eec34f215ca243cd912885c552'
+    newFile: !uuid 'be4c1c911f5973533593559b05254454ddbe1c3d'
+    oldFile: !uuid 'ec20dc33d654402439408e330ce419c04a097503'
   /application/index/model:
-    newFile: !uuid '49eb87e5a68f669377db64580a198c63a8c37bf5'
-    oldFile: !uuid 'a3d95a5f85e76b0cd2b1663e740d1ab3a258b873'
+    newFile: !uuid '7cab65206d005d21798e494f584b9c268e21a442'
+    oldFile: !uuid '49eb87e5a68f669377db64580a198c63a8c37bf5'
   /application/index/model/Fans.php:
-    newFile: !uuid '9d0c63582b6c0aadab577241e1bb256623845e43'
-    oldFile: !uuid 'd30de2dd882c8e547a0a260f8ae4c30bfde4f6d0'
-  /application/index/view:
-    newFile: !uuid 'a3716de74803a1b2f8ad897009ff192d672c788c'
-    oldFile: !uuid 'a25341aad95e855742f92ed738a5a6083feae414'
-  /application/index/view/user:
-    newFile: !uuid 'ba436aa1211447125108870d2db6c49a1ee19b0c'
-    oldFile: !uuid '2594dde6898ac81eec2ecb3c80a166942670047c'
-  /application/index/view/user/follow.html:
-    newFile: !uuid 'd0edc27138663db7e0095d0ee22ad362930d4032'
-    oldFile: !uuid '0d7888204ceecbe8454ae066f9d635bf62c829bb'
+    newFile: !uuid 'cd75eca4c018e50439fa2bd741d3c697597a5554'
+    oldFile: !uuid '9d0c63582b6c0aadab577241e1bb256623845e43'
   /tp5.sql:
-    newFile: !uuid 'b71edfdeea6e2af35bd925a00809f52671212938'
-    oldFile: !uuid 'a3f20f120a6affba975052f343fb38b50637280a'
-gitCommitId: !uuid '1aeca19defa2cfa2772260ee50db27b3f5d76247'
+    newFile: !uuid 'a3953085757a79d0f6dcd0d56fe4ae61e43967a6'
+    oldFile: !uuid 'b71edfdeea6e2af35bd925a00809f52671212938'
+gitCommitId: !uuid '527d9c94697454986fd56d8c6e2dd51bd2f6cc7b'
 renames: {
   }
-revisionId: 924
+revisionId: 925
