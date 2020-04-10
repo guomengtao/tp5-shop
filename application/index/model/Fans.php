@@ -36,6 +36,11 @@ class Fans extends model
     {
         return $this->hasOne('User', 'id', 'follow_id');
     }
+    // 关的用户所在地
+    public function follow()
+    {
+        return $this->hasOne('Ipinfo', 'user_id', 'user_id');
+    }
 
 
     public function userqq()
