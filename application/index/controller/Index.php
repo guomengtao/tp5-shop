@@ -1011,6 +1011,8 @@ class Index extends Frontend
 
 
         if (Request::instance()->isPost()) {
+
+
             $validate = new Validate(
                 [
                     'phone'    => 'require|max:11|number|between:13000000000,18999999999',
@@ -1027,6 +1029,8 @@ class Index extends Frontend
             // 此处为验证格式是否正确
             if (!$validate->check($data)) {
                 $warning = $validate->getError();
+
+                $this->error($warning,null);
             } else {
                 $check_user = User::where('phone', '=', $phone)->count();
 

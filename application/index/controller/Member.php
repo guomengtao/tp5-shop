@@ -9,9 +9,8 @@ use think\Request;
 use app\index\model\Sms;
 use app\index\model\Shop;
 use app\index\model\Data;
-use app\index\model\User;
+use app\index\model\User as User;
 use app\index\model\Video;
-use app\index\model\likes;
 use app\index\model\Agent as Agent_T;
 use app\index\model\Order;
 use app\index\model\Money;
@@ -583,7 +582,7 @@ class Member extends Frontend
     {
         $this->must_log_in();
 
-        // 获取来路页面
+        // 获取来路页面 redis  SWOOLE
         $follow_id = input('follow_id');
 
         $user_id = Cookie::get('user_id');
