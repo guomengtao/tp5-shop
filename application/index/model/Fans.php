@@ -43,7 +43,7 @@ class Fans extends model
     }
 
 
-    public function userqq()
+    public function qq()
     {
         // return $this->hasOne('User');
         // return $this->belongsTo('User','user_id','id');

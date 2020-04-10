@@ -18,13 +18,16 @@
                                 <h2 class="lead"><b>
                                     <a href="{:url('index/member/home',['user_id'=>$vo.follow_id])}"> {$vo.followuser.nickname?:$vo.follow_id}</a>
                                    </b></h2>
-                                <p class="text-muted text-sm"><b>最近访问: </b> {$vo.followuser.update_time}  </p>
+                                <p class="text-muted text-sm"><b>年龄: </b> {:date('Y')-$vo.qq.year}  </p>
                                 <ul class="ml-4 mb-0 fa-ul text-muted">
                                     <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span>
                                         所在地: {$vo.follow.region}
                                     </li>
-                                    <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span>
+                                    <li class="small"><span class="fa-li"><i class="fas fa-lg fa-database"></i></span>
                                         注册时间: {$vo.followuser.create_time}
+                                    </li>
+                                    <li class="small"><span class="fa-li"><i class="fas fa-lg fa-tachometer-alt"></i></span>
+                                        最近访问: {$vo.followuser.update_time}
                                     </li>
                                 </ul>
                             </div>
