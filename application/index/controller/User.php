@@ -3,6 +3,7 @@
 namespace app\index\controller;
 
 use app\common\controller\Frontend;
+use app\index\model\Fans;
 use app\index\model\Footprint;
 use app\index\model\Human;
 use think\Config;
@@ -20,6 +21,7 @@ use think\Request;
 class User extends Frontend
 {
     public $user = '';
+
     public function _initialize()
     {
         parent::_initialize();
@@ -31,7 +33,7 @@ class User extends Frontend
 
         // 查询会员信息
         $this->user = \app\index\model\User::find($this->user_id)->toArray();
-        $this->assign('user',$this->user);
+        $this->assign('user', $this->user);
     }
 
     /**
@@ -471,6 +473,18 @@ class User extends Frontend
     public function index()
     {
         $this->assign('title', '会员中心');
+        return $this->fetch();
+    }
+
+    public function follow()
+    {
+        $follow = Fans::where('user_id', $this->user_id)
+            ->order('id desc')
+            ->paginate(9);
+
+
+        $this->assign("follow", $follow);
+        $this->assign('title', '我的关注');
         return $this->fetch();
     }
 

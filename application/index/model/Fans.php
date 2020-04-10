@@ -32,9 +32,9 @@ class Fans extends model
     }
 
     // 关注
-    public function followuser()
+    public function followUser()
     {
-        return $this->hasOne('UserQq', 'user_id', 'follow_id');
+        return $this->hasOne('User', 'id', 'follow_id');
     }
 
 
