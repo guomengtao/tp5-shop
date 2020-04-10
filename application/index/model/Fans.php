@@ -45,10 +45,11 @@ class Fans extends model
 
     public function qq()
     {
-        // return $this->hasOne('User');
-        // return $this->belongsTo('User','user_id','id');
         return $this->hasOne('UserQq', 'user_id', 'user_id');
-        //hasOne('关联模型名','外键名','主键名',['模型别名定义'],'join类型');
+    }
+    public function followQq()
+    {
+        return $this->hasOne('UserQq', 'user_id', 'follow_id');
     }
 
 
