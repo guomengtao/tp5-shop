@@ -13,7 +13,7 @@ class Wechat extends model
         return request()->ip();
     }
 
-    
+
     public function footprint()
     {
         return $this->hasOne('Footprint', 'ip', 'ip');
