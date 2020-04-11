@@ -63,7 +63,7 @@ class Api extends \think\Controller
         $token = json_decode($token, true);
         dump($token);
         if (!isset($token['refresh_token'])) {
-            return "获取token失败,无重复刷新，返回重新登录！";
+            return "获取token失败,时间超时，返回重新登录，重新获取！";
         }
         $refresh_token = $token['refresh_token'];
 
@@ -127,7 +127,7 @@ class Api extends \think\Controller
         dump($photo);
         dump($nickname);
         // 进入会员中心
-        $this->success('微信登录成功', '/');
+        $this->success('微信登录成功', '/',[],90);
         // return $this->redirect('index/index/index');
 
     }
