@@ -117,10 +117,11 @@ class Api extends \think\Controller
         }
 
         // 登录操作
-        Cookie('token', $token, 3600000);
-        Cookie('user_id', $user_id, 3600000);
-        Cookie('photo', $photo, 3600000);
-        Cookie('nickname', $nickname, 3600000);
+        
+        Cookie::set('token', $token, 3600000);
+        Cookie::set('user_id', $user_id, 3600000);
+        Cookie::set('photo', $photo, 3600000);
+        Cookie::set('nickname', $nickname, 3600000);
 
         dump($token);
         dump($user_id);
