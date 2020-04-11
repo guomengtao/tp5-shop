@@ -21,16 +21,13 @@ class Api extends \think\Controller
 {
     public function ip2Region($ip = '47.100.178.109')
     {
-
-
         $ip2region = new Ip2Region();
-        $info = $ip2region->btreeSearch($ip);
+        $info      = $ip2region->btreeSearch($ip);
         echo($info['region']);
     }
 
     public function login()
     {
-
         $username = input('username');
         $password = input('password');
 
@@ -43,14 +40,10 @@ class Api extends \think\Controller
         }
 
         if ($username == '13034892752' and $password == '123456') {
-            
             return 200;
         } else {
             return 2;
-
         }
-
-
     }
 
     public function wechat()
@@ -69,11 +62,12 @@ class Api extends \think\Controller
         // $token = '{"access_token":"31_NFTr_5yfwyh18VohnLMZNkK9UPhF6MjyJEPncJHuHhACLE9baKF3UzGIJQ_l9VdZvbemBxsggZPi1iYGM8v_2A","expires_in":7200,"refresh_token":"31_hzboRAivXXSZHIVhYCmT24D98N12zdIEn6n1ItZR3duJfwjNgOSJy14edGjL8_rGrrb8J0RruoZ0v4FZBCqs1w","openid":"o8ZWLv0q--I2irppcRT87g_GNkq0","scope":"snsapi_userinfo"}';
         $token = json_decode($token, true);
         dump($token);
+        if (!isset($token['refresh_token'])) {
+            return "获取token失败,无重复刷新，返回重新登录！";
+        }
         $refresh_token = $token['refresh_token'];
 
-        if (!isset($refresh_token)) {
-            return "获取token失败";
-        }
+
         // 第三步：刷新access_token（如果需要）
 
         $url   = "https://api.weixin.qq.com/sns/oauth2/refresh_token?appid=$appId&grant_type=refresh_token&refresh_token=$refresh_token";
@@ -92,9 +86,8 @@ class Api extends \think\Controller
         // 数据库入库
 
 
-
         $openid   = $userInfo['openid'];
-        $token    = md5(time() . rand(100000, 999999));
+        $token    = md5(time().rand(100000, 999999));
         $nickname = $userInfo['nickname'];
         $photo    = $userInfo['headimgurl'];
         // 第一步查询是否入库
@@ -103,25 +96,24 @@ class Api extends \think\Controller
 
 
         if (!$user_id) {
-
             // 没有openid就存储
 
             // 创建会员表【不强制绑定用户，注意后期绑定问题】
 
 
-            $user = User::create([
-                'token'    => $token,
-                'nickname' => $nickname,
-                'photo'    => $photo,
-            ]);
+            $user = User::create(
+                [
+                    'token'    => $token,
+                    'nickname' => $nickname,
+                    'photo'    => $photo,
+                ]
+            );
 
 
             $user_id = $user->id;
 
             $userInfo['user_id'] = $user->id;
             Wechat::create($userInfo);
-
-
         }
 
         // 登录操作
@@ -130,19 +122,18 @@ class Api extends \think\Controller
         Cookie('photo', $photo, 3600000);
         Cookie('nickname', $nickname, 3600000);
 
-dump($token);
-dump($user_id);
-dump($photo);
-dump($nickname);
+        dump($token);
+        dump($user_id);
+        dump($photo);
+        dump($nickname);
         // 进入会员中心
-        $this->success('微信登录成功','/');
+        $this->success('微信登录成功', '/');
         // return $this->redirect('index/index/index');
 
     }
 
     public function qq()
     {
-
         // 从数据获取以上三个敏感信息
 
         $config = new Config();
@@ -166,7 +157,6 @@ dump($nickname);
         $code = input("code");
 
         if ($code) {
-
             $code = Cookie::set('code', $code, 200000);
         }
 
@@ -178,8 +168,8 @@ dump($nickname);
 
         //拼接URL
         $token_url = "https://graph.qq.com/oauth2.0/token?grant_type=authorization_code&"
-            . "client_id=" . $app_id . "&redirect_uri=" . urlencode($my_url)
-            . "&client_secret=" . $app_secret . "&code=" . $code;
+            ."client_id=".$app_id."&redirect_uri=".urlencode($my_url)
+            ."&client_secret=".$app_secret."&code=".$code;
         $response  = file_get_contents($token_url);
 
         if (strpos($response, "callback") !== false) {
@@ -199,7 +189,7 @@ dump($nickname);
         //Step3：使用Access Token来获取用户的OpenID
         $params = array();
         parse_str($response, $params);
-        $graph_url = "https://graph.qq.com/oauth2.0/me?access_token=" . $params['access_token'];
+        $graph_url = "https://graph.qq.com/oauth2.0/me?access_token=".$params['access_token'];
 
         $str = file_get_contents($graph_url);
 
@@ -222,7 +212,7 @@ dump($nickname);
         // Step4：使用Access Token来获取用户的OpenID
 
 
-        $graph_url = "https://graph.qq.com/user/get_user_info?access_token=" . $params['access_token'] . "&oauth_consumer_key=" . $app_id . "&openid=" . $user->openid;
+        $graph_url = "https://graph.qq.com/user/get_user_info?access_token=".$params['access_token']."&oauth_consumer_key=".$app_id."&openid=".$user->openid;
 
 
         $str        = file_get_contents($graph_url);
@@ -246,8 +236,6 @@ dump($nickname);
 
         // 没登记openID的先登记
         if (!$userQqId) {
-
-
             $user                 = new UserQq();
             $user->openid         = $openid;
             $user->nickname       = $userFromQq->nickname;
@@ -260,10 +248,7 @@ dump($nickname);
 
 
             $userQqId = $user->id;
-
-
         } else {
-
             // 如果已经存在就更新，保持数据最新
             $user                 = UserQq::get($userQqId);
             $user->openid         = $openid;
@@ -274,7 +259,6 @@ dump($nickname);
             $user->year           = $userFromQq->year;
             $user->type           = 0;
             $user->save();
-
         }
 
 
@@ -284,17 +268,18 @@ dump($nickname);
 
         // 没有绑定会员号的，创建会员账号
         if (!$userId) {
-
-            $token  = md5(time() . rand(100000, 999999));
+            $token  = md5(time().rand(100000, 999999));
             $invite = Cookie::get('invite');;
 
-            $user = User::create([
-                'invite'   => $invite,
-                'token'    => $token,
-                'photo'    => $photo,
-                'nickname' => $nickname,
-                'ip'       => 1,
-            ]);
+            $user = User::create(
+                [
+                    'invite'   => $invite,
+                    'token'    => $token,
+                    'photo'    => $photo,
+                    'nickname' => $nickname,
+                    'ip'       => 1,
+                ]
+            );
 
             $user_id = $user->id;
 
@@ -314,11 +299,7 @@ dump($nickname);
 
             // 重定向到News模块的Category操作
             $this->redirect('index/index/register', ['cate_id' => 2]);
-
-
         } else {
-
-
             $user           = User::get($userId);
             $user->nickname = $nickname;
             $user->photo    = $photo;
@@ -329,13 +310,10 @@ dump($nickname);
             Cookie('token', $user->token, 3600000);
             Cookie('user_id', $user->id, 3600000);
             Cookie('photo', $photo, 3600000);
-
         }
         // 重定向到News模块的Category操作
         return $this->redirect('index/index/index');
         return $this->success('登录成功^_^', 'index/index/index');
-
-
     }
 
     public function json()
@@ -387,7 +365,7 @@ dump($nickname);
 
         //ca证书路径地址，用于curl中ssl校验
         //请保证cacert.pem文件在当前文件夹目录中
-        $alipay_config['cacert'] = getcwd() . '\\cacert.pem';
+        $alipay_config['cacert'] = getcwd().'\\cacert.pem';
 
         //访问模式,根据自己的服务器是否支持ssl访问，若支持请选择https；若不支持请选择http
         $alipay_config['transport'] = 'http';
@@ -496,31 +474,29 @@ dump($nickname);
 
                 // 如果是签到，查询昨天累加的签到天数
                 if ($body == 135) {
-
                     $rand = Order::where('body', $body)
                         ->where('phone', $phone)
                         ->whereTime('create_time', 'yesterday')
                         ->value('rand');
-
                 }
 
 
-                $order = Order::create([
-                    'phone'        => $phone,
-                    'body'         => $body,
-                    'rand'         => $rand + 1,
-                    'subject'      => $subject,
-                    'total_fee'    => $total_fee,
-                    'buyer_id'     => $buyer_id,
-                    'buyer_email'  => $buyer_email,
-                    'out_trade_no' => $out_trade_no,
-                ]);
+                $order = Order::create(
+                    [
+                        'phone'        => $phone,
+                        'body'         => $body,
+                        'rand'         => $rand + 1,
+                        'subject'      => $subject,
+                        'total_fee'    => $total_fee,
+                        'buyer_id'     => $buyer_id,
+                        'buyer_email'  => $buyer_email,
+                        'out_trade_no' => $out_trade_no,
+                    ]
+                );
 
 
                 // 如果是vip用户，设置vip字段
                 if ($body == 105) {
-
-
                     User::where('body', $body)
                         ->update(['rand' => 105]);
 
@@ -536,7 +512,6 @@ dump($nickname);
 
                         User::where('phone', $phone)
                             ->update(['start_time' => $start_time, 'rand' => 1]);
-
                     }
                     // 根据支付价格设置对应vip有效期
                     if ($total_fee = 33) {
@@ -551,26 +526,21 @@ dump($nickname);
 
                     User::where('phone', $phone)
                         ->update(['expiration_time' => $expiration_time]);
-
-
                 }
 
 
 //                处理没有登录先付款的情况
                 if ($phone = '15966982315') {
-
 //                    设置session记录订单号，跳转到登录页面，补充订单流程
                     Session::set('name', 'thinkphp');
 //                    重定向方式
                     $this->redirect('index/login', ['id' => $body]);
-
                 }
                 //重定向到用户购买的商品结果页面
                 // $this->redirect('index/view', ['id' => $body]);
-                exit('<script>top.location.href="../index/view/id/' . $body . '"</script>');
-
+                exit('<script>top.location.href="../index/view/id/'.$body.'"</script>');
             } else {
-                echo "trade_status=" . $_GET['trade_status'];
+                echo "trade_status=".$_GET['trade_status'];
             }
 
             // echo "购买成功了...<br />";
@@ -583,8 +553,6 @@ dump($nickname);
             //如要调试，请看alipay_notify.php页面的verifyReturn函数
             // echo "付款失败";
             $result = "支付失败";
-
-
         }
 
         // 模板变量赋值
@@ -603,7 +571,7 @@ dump($nickname);
         if (!$ip or $ip == '127.0.0.1') {
             return "ok";
         }
-        $url = 'https://tool.misiyu.cn/api/queryIp?ip=' . $ip;
+        $url = 'https://tool.misiyu.cn/api/queryIp?ip='.$ip;
         echo $ip;
         $fp = file_get_contents($url);
 
@@ -616,18 +584,19 @@ dump($nickname);
             if (!$ip2Region) {
                 return "no<>1";
             }
-
         }
         $check   = Ipinfo::where('ip', $ip)->count();
         $user_id = Cookie::get('user_id');
 
         if ($check) {
-
             $user = new Ipinfo;
             // save方法第二个参数为更新条件
-            $user->save([
-                'user_id' => $user_id,
-            ], ['ip' => $ip]);
+            $user->save(
+                [
+                    'user_id' => $user_id,
+                ],
+                ['ip' => $ip]
+            );
             return;
         }
 
@@ -637,15 +606,15 @@ dump($nickname);
             $pos = $ip2Region;
         }
         if ($data['data'][0]['pos']) {
-            Ipinfo::create([
-                'region'  => $pos,
-                'isp'     => $isp,
-                'ip'      => $ip,
-                'user_id' => $user_id,
-            ]);
+            Ipinfo::create(
+                [
+                    'region'  => $pos,
+                    'isp'     => $isp,
+                    'ip'      => $ip,
+                    'user_id' => $user_id,
+                ]
+            );
         }
-
-
     }
 
     public function ip1region()
@@ -664,12 +633,14 @@ dump($nickname);
         $user_id = Cookie::get('user_id');
 
         if ($check) {
-
             $user = new Ipinfo;
             // save方法第二个参数为更新条件
-            $user->save([
-                'user_id' => $user_id,
-            ], ['ip' => $ip]);
+            $user->save(
+                [
+                    'user_id' => $user_id,
+                ],
+                ['ip' => $ip]
+            );
             return '';
         }
 
@@ -677,20 +648,19 @@ dump($nickname);
         $pos = $ip2Region;
 
         if ($pos) {
-            Ipinfo::create([
-                'region'  => $pos,
-                'ip'      => $ip,
-                'user_id' => $user_id,
-            ]);
+            Ipinfo::create(
+                [
+                    'region'  => $pos,
+                    'ip'      => $ip,
+                    'user_id' => $user_id,
+                ]
+            );
         }
-
-
     }
 
 
     public function sms()
     {
-
         $config = new Config();
         // 查询单个数据
         $config = $config
@@ -707,10 +677,10 @@ dump($nickname);
         header("content-type:text/html; charset=utf-8");
         $mobile  = input('s');
         $rand    = rand(1000, 9999); //取随机四位数字
-        $content = '验证码：' . $rand . '【高血压】';
+        $content = '验证码：'.$rand.'【高血压】';
 
         $content = urlencode($content);
-        $url     = $my_url . '?username=' . $username . '&password=' . $password . '&mobile=' . $mobile . '&content=' . $content . '';
+        $url     = $my_url.'?username='.$username.'&password='.$password.'&mobile='.$mobile.'&content='.$content.'';
 
         $fp = file_get_contents($url);
 
@@ -719,21 +689,19 @@ dump($nickname);
 
         // dump($data);
 
-        echo $data['errmsg'] . "- ";
+        echo $data['errmsg']."- ";
         echo $data['result'];
 
 
         if ($data['result'] == '0') {
-
-
             // 模型的 静态方法
             // 存入短信发送日志表
-            $user = Sms::create([
-                'phone' => $mobile,
-                'rand'  => $rand,
-            ]);
-
-
+            $user = Sms::create(
+                [
+                    'phone' => $mobile,
+                    'rand'  => $rand,
+                ]
+            );
         }
         // return $this->fetch();
 
@@ -743,7 +711,6 @@ dump($nickname);
 
     public function sendSMS($url)
     {
-
         // $url = urlencode($url);
         if (function_exists('file_get_contents')) {
             $result = file_get_contents($url);
@@ -763,7 +730,6 @@ dump($nickname);
 
     public function alipay()
     {
-
         return $this->fetch();
     }
 
@@ -802,7 +768,7 @@ dump($nickname);
 
             $trade_no = $_GET['trade_no'];
 
-            echo "您的订单号是：" . $trade_no;
+            echo "您的订单号是：".$trade_no;
 
 
             //交易状态
@@ -814,7 +780,7 @@ dump($nickname);
                 //如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
                 //如果有做过处理，不执行商户的业务程序
             } else {
-                echo "trade_status=" . $_GET['trade_status'];
+                echo "trade_status=".$_GET['trade_status'];
             }
 
             echo "购买成功了...<br />";
@@ -827,14 +793,11 @@ dump($nickname);
             //如要调试，请看alipay_notify.php页面的verifyReturn函数
             echo "付款失败";
         }
-
-
         // return $this->fetch();
     }
 
     public function demo()
     {
-
         dump("演示一下 api跨域访问");
 
         $url = "http://open.gaoxueya.com/tp5/public/index.php/index/bbs/add";
@@ -867,8 +830,6 @@ dump($nickname);
 
         // 4. 释放curl句柄
         curl_close($ch);
-
-
         //echo $output;
 
 
@@ -876,8 +837,6 @@ dump($nickname);
 
     public function weibo()
     {
-
-
 // 微博登录官方开发步骤
 // http://open.weibo.com/wiki/Connect/login
 
@@ -926,7 +885,7 @@ dump($nickname);
 //         $tom =   "https://api.weibo.com/oauth2/access_token?client_id=1460932055
 // &client_secret=0f1f4d4480b6ba59c3bb46a5238b41a0&grant_type=authorization_code&redirect_uri=http://open.gaoxueya.com/index/api/weibo&code=" .$code ;
 
-        $url = "https://api.weibo.com/oauth2/access_token?client_id=" . $app_id . "&client_secret=" . $app_secret . "&grant_type=authorization_code&redirect_uri=" . $my_url . "&code=" . $code;
+        $url = "https://api.weibo.com/oauth2/access_token?client_id=".$app_id."&client_secret=".$app_secret."&grant_type=authorization_code&redirect_uri=".$my_url."&code=".$code;
 
 // dump($url);
 
@@ -951,7 +910,7 @@ dump($nickname);
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, $url);
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($curl, CURLOPT_POST, TRUE);
+        curl_setopt($curl, CURLOPT_POST, true);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($curl, CURLOPT_USERPWD, "username:password");
         $data = curl_exec($curl);
@@ -972,7 +931,7 @@ dump($nickname);
         //echo $access_token;
 
         // 继续获得用户信息 - 开始 方法一
-        $tom = "https://api.weibo.com/2/users/show.json?access_token=" . $access_token . "&uid=" . $uid;
+        $tom = "https://api.weibo.com/2/users/show.json?access_token=".$access_token."&uid=".$uid;
 
         // 使用file方法
         // $domain = 'Rinuo.com'; 
@@ -1034,10 +993,7 @@ dump($nickname);
             // 查询单个数据
             $user = $user->where('openid', $openid)->where('type', 1)
                 ->find();
-
-
         } else {
-
             // 如果已经存在就更新，保持数据最新  暂时不更新
 
         }
@@ -1065,7 +1021,6 @@ dump($nickname);
 
 
             return $this->success('登录成功，绑定账号', 'index/index/register');
-
         }
 
 
@@ -1101,22 +1056,18 @@ dump($nickname);
         }
 
         return $this->success('登录成功^_^', 'index/index/index');
-
-
     }
 
     public function domain()
     {
-
-
         $domain = 'Rinuo.com';
-        $cha    = 'http://panda.www.net.cn/cgi-bin/check.cgi?area_domain=' . $domain;
+        $cha    = 'http://panda.www.net.cn/cgi-bin/check.cgi?area_domain='.$domain;
         $fp     = file_get_contents($cha, 'rb');
         //dump($fp);
 
 
         $xml  = simplexml_load_string($fp);
-        $data = json_decode(json_encode($xml), TRUE);
+        $data = json_decode(json_encode($xml), true);
 
         //dump($data);
         //exit();
@@ -1125,7 +1076,6 @@ dump($nickname);
 
         // 渲染模板输出
         return $this->fetch();
-
     }
 
 }
