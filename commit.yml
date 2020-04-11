@@ -3,21 +3,30 @@ branches: {
   }
 fileChange:
   /application:
-    newFile: !uuid '99341661c7d2e99627b9d10232c96c8b184f2198'
-    oldFile: !uuid '47c51264caa90a3e9d17596afb91bdcca06f3e4f'
+    newFile: !uuid '8eba1e6dc0e99df1568d8f0e48abcbec5c8aab32'
+    oldFile: !uuid '99341661c7d2e99627b9d10232c96c8b184f2198'
   /application/index:
-    newFile: !uuid '43301322a0b926f22059e19aaf077c386fe0dc8d'
-    oldFile: !uuid 'f419d31e00630343fe4045a8ec1b628557a7a22f'
+    newFile: !uuid '8c8f92a4fe495e9671be1c8a6c135c9a9a1c1732'
+    oldFile: !uuid '43301322a0b926f22059e19aaf077c386fe0dc8d'
   /application/index/controller:
-    newFile: !uuid '06a6b933111d9ffc4a85351549e0845e1bce0d45'
-    oldFile: !uuid 'a34a9562e64fc12a1219ebf950567ec50ab6850b'
+    newFile: !uuid 'b4954da3d650916b8090ae0d12600b712c7fdbb7'
+    oldFile: !uuid '06a6b933111d9ffc4a85351549e0845e1bce0d45'
   /application/index/controller/Api.php:
-    newFile: !uuid 'e454c904c194f72b4ea4e5f63aa829be260309b5'
-    oldFile: !uuid '307fbd2088363e2900984d90223826a858eda51c'
+    newFile: !uuid '03229651b247bf31d6d415e5cc4af86cf24c1de9'
+    oldFile: !uuid 'e454c904c194f72b4ea4e5f63aa829be260309b5'
+  /application/index/view:
+    newFile: !uuid '5d6575a83efeaa1f56e0fe535140c6dd1df24c5c'
+    oldFile: !uuid 'b027712034ba260b7f8355a8aef642dc854f110f'
+  /application/index/view/member:
+    newFile: !uuid '4f0eeb47ff4e55efcfef6ce3ec829fa04e93b456'
+    oldFile: !uuid '34b37b20b5d80c0498a3be4ad32bc08913a98496'
+  /application/index/view/member/registration.html:
+    newFile: !uuid '5c38d28290934d1d49ff12f5dda8cdc1e5489e07'
+    oldFile: !uuid 'ad19bff12053c649308b6e55737aeccc257d7a23'
   /tp5.sql:
-    newFile: !uuid '3f16e60b31a77bad956b5f221566d8c94e11811b'
-    oldFile: !uuid 'cd492ec52c56e6c8b4c43fd2e4df9f37ed366ada'
-gitCommitId: !uuid '32101078ba0db14a0696fac94a0e897c4c3670e4'
+    newFile: !uuid '0aa64a53b2d88ec8b08b4700c659f03cfff8629b'
+    oldFile: !uuid '3f16e60b31a77bad956b5f221566d8c94e11811b'
+gitCommitId: !uuid '4e6a4c697603dad01a64dba7026d263440bbb560'
 renames: {
   }
-revisionId: 949
+revisionId: 950
