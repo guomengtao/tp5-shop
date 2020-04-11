@@ -135,6 +135,7 @@ dump($user_id);
 dump($photo);
 dump($nickname);
         // 进入会员中心
+        $this->success('微信登录成功','/');
         // return $this->redirect('index/index/index');
 
     }
