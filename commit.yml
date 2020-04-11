@@ -3,21 +3,30 @@ branches: {
   }
 fileChange:
   /application:
-    newFile: !uuid 'cdae6c7f4bd5f8b5d49269ca0bdf5e10e8cd8a15'
-    oldFile: !uuid 'a7317a713979c6c6639910177dfcde83a3e50e3c'
+    newFile: !uuid 'b9d5ef4ba550c9d1e8c92425e41fc68ab8add777'
+    oldFile: !uuid 'cdae6c7f4bd5f8b5d49269ca0bdf5e10e8cd8a15'
   /application/index:
-    newFile: !uuid '24f3e5147dd0b0540dc76bfb949796bf999186b2'
-    oldFile: !uuid 'aa4616b51e1e162974d545fd63ac1e0c9d05536b'
+    newFile: !uuid '99246586e3e57ea20485202558b8771854ee6b08'
+    oldFile: !uuid '24f3e5147dd0b0540dc76bfb949796bf999186b2'
   /application/index/controller:
-    newFile: !uuid 'c431939b96265f3a242c0a10fe71a9aedfea9428'
-    oldFile: !uuid '7accc35ae3fd782099af7a6b9646907863d566e4'
+    newFile: !uuid '9833405855b036356fa3a8831ff44e4a03da78c8'
+    oldFile: !uuid 'c431939b96265f3a242c0a10fe71a9aedfea9428'
   /application/index/controller/Api.php:
-    newFile: !uuid '0df88bef850c337f1720f8dc1bf6479569593730'
-    oldFile: !uuid '0dd6db4633f74b16fe6008b8befee1ea0a2c1b38'
+    newFile: !uuid '27363e60ca13e0d86d7f753a5d62427d3a9191a5'
+    oldFile: !uuid '0df88bef850c337f1720f8dc1bf6479569593730'
+  /application/index/view:
+    newFile: !uuid 'b027712034ba260b7f8355a8aef642dc854f110f'
+    oldFile: !uuid 'c99723340864e399302092dde443e7df62be0239'
+  /application/index/view/common:
+    newFile: !uuid '066b9dc5a899316c91d58ca142476bed9f522753'
+    oldFile: !uuid 'fd2092059bdbcb03e75fe54aea581479c2cb1b35'
+  /application/index/view/common/basic.html:
+    newFile: !uuid '955952f5a91eda290d8ba121aa339e9a42acc617'
+    oldFile: !uuid '6de229791036dc2dd92c45d152e3bb80afcaaa7a'
   /tp5.sql:
-    newFile: !uuid '57e11554b9d4aa9f151093a83edef4a2bcf0a9a2'
-    oldFile: !uuid 'c89c576e1265124886b04b4f223400602fb09c5f'
-gitCommitId: !uuid 'a768ba5f954e9eaca01540d9190f820ecd9fc3d2'
+    newFile: !uuid 'bdbbc0c3067d2174a4c9cdc515f5bdedd58e2796'
+    oldFile: !uuid '57e11554b9d4aa9f151093a83edef4a2bcf0a9a2'
+gitCommitId: !uuid '1a44b4be270fa7e88d78682dc1cedb18ae7ec643'
 renames: {
   }
-revisionId: 944
+revisionId: 945
