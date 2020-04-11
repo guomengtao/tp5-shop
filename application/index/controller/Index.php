@@ -1066,6 +1066,7 @@ class Index extends Frontend
                     Cookie::set('token', $user['token'], 3600000);
                     Cookie::set('user_id', $user['id'], 3600000);
                     Cookie::set('photo', $user['photo'], 3600000);
+                    Cookie::set('nickname', $user['nickname'], 3600000);
 
 
                     return $this->success('登录成功^_^', 'index/member/myhome');
