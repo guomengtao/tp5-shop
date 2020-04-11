@@ -1,0 +1,41 @@
+{layout name="common/basic" /}
+
+<table class="table table-striped">
+
+    <tbody>
+    {volist name="data" id="vo"}
+    <tr>
+        <th scope="row">{$vo.create_time} </th>
+
+        <td><a href="#" target="_self">{$vo.title}</a>
+
+            <p>回复我的评论：{$vo.reply.title} </p>
+            <a href="javascript:void(0);"
+               onclick="document.getElementById('reply_{$vo.id}').style.display = document.getElementById('reply_{$vo.id}').style.display=='none'?'':'none' ">回复</a>
+            <form id="reply_{$vo.id}" action="" method="post" name="myformdislpayshow" style="display: none;">
+                <div class="form-group input-group field-feed-content required">
+                    <input type="hidden" name="reply" value="{$vo.id}">
+                    <input type="hidden" name="reply_user_id" value="{$vo.user_id}">
+                    <textarea id="titleChat_2284" name="titleChat_send" class="form-control" placeholder="写评论"
+                              aria-required="true"></textarea>
+                    <span class="input-group-btn"><button type="submit" class="btn btn-success"
+                                                          style="height: 54px;width: 54px;">评论</button></span>
+
+
+                </div>
+
+
+            </form>
+
+        </td>
+        <td>
+            <span class="right badge badge-danger">{$vo.msg?'':'未读'}</span>
+            <span class="right badge badge-success">{$vo.msg?'已读':''}</span>
+        </td>
+    </tr>
+    {/volist}
+
+
+    </tbody>
+</table>
+{$data->render()}

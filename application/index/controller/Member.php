@@ -588,8 +588,6 @@ class Member extends Frontend
         $user_id = Cookie::get('user_id');
 
 
-
-
         // 添加关注
         if (input('editfollow') == 1) {
             if ($user_id == $follow_id) {
@@ -620,8 +618,22 @@ class Member extends Frontend
 
     public function home()
     {
+        // 是否为 POST 请求
+        if (request()->isPost()) {
+            $add = Data::add();
+
+            if ($add) {
+                // $this->redirect();
+                //设置成功后跳转页面的地址，默认的返回页面是$_SERVER['HTTP_REFERER']
+                $this->success('发布成功');
+            } else {
+                //错误页面的默认跳转页面是返回前一页，通常不需要设置
+                $this->error('请填写内容');
+            }
+        }
+
         // 直接调用统一的自定义方法 查询指定用户信息
-        $user = User::userselfinfo(input('user_id'));
+        $user = User::userselfinfo(input('user_id',393));
 
         // 查询最新的聊天信息
         $data = Data::jack(input('user_id'));

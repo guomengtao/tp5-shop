@@ -2,6 +2,7 @@
 
 namespace app\common\controller;
 
+use app\index\model\Data;
 use app\admin\model\Message;
 use app\index\controller\Member;
 use app\index\model\Agent;
@@ -75,17 +76,27 @@ class Frontend extends Controller
             ->count();
 
 
+
+        // 查询评论状态正常的文章
+        $commentCount = Data::where('reply_user_id', $user_id)
+            ->where('user_id', '<>', $user_id)
+            ->where('msg', null)
+            ->count();
+
+
         $noticeCount = Notice::count();
 
         $noticedCount = Noticed::where('user_id', $user_id)->count();
 
         $messageCount = $noticeCount - $noticedCount;
 
-        $msg_total = $messageCount + $follow;
+        $msg_total = $messageCount + $follow + $commentCount;
+
         $this->assign("visit", $visit);
         $this->assign("visitCount", $visitCount);
         $this->assign("messageCount", $messageCount);
         $this->assign("followCount", $follow);
+        $this->assign("commentCount", $commentCount);
         $this->assign("msg_total", $msg_total);
     }
 

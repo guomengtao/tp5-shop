@@ -66,12 +66,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
             {if condition="!$Think.cookie.user_id"}
 
 
-            <li class="nav-item dropdown">
-                <a class="nav-link" href="__ROOT__/index/index/login">登录</a>
+            <li class="nav-item dropdown   d-sm-inline-block">
+                <a class="nav-link  d-sm-inline-block" style="white-space:nowrap;" href="__ROOT__/index/index/login">登录</a>
 
             </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link" href="{:url('index/index/register')}"
+            <li class="nav-item dropdown d-none d-sm-inline-block">
+                <a class="nav-link d-sm-inline-block"  style="white-space:nowrap;" href="{:url('index/index/register')}"
                    target="_blank">注册</a>
             </li>
             <li class="nav-item dropdown">
@@ -141,10 +141,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <span class="float-right text-muted text-sm"><span class="badge badge-pill badge-danger">{$messageCount}</span></span>
                     </a>
                     <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item">
+                    <a href="{:url('index/msg/comment')}" class="dropdown-item">
                         <i class="fas fa-envelope mr-2"></i> 评论
                         <span class="float-right text-muted text-sm">
-                            <span class="badge badge-pill badge-danger"></span></span>
+                            <span class="badge badge-pill badge-danger">{$commentCount}</span></span>
 
                     </a>
                     <div class="dropdown-divider"></div>
