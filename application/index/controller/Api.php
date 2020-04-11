@@ -123,15 +123,17 @@ class Api extends \think\Controller
         $photo    = Cookie::set('photo', $photo, 3600000);
         $nickname = Cookie::set('nickname', $nickname, 3600000);
 
-            $photo = '<img src=' . $photo . '>';
+        $photo = '<img src='.$photo.'>';
         dump($token);
         dump($user_id);
         dump($photo);
         dump($nickname);
         // 进入会员中心
-        $this->success('微信登录成功', '/', [], 90);
-        // return $this->redirect('index/index/index');
-
+        if ($user_id) {
+            $this->success('微信登录成功', '/', [], 1);
+        } else {
+            echo "登录失败";
+        }
     }
 
     public function qq()
