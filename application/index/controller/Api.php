@@ -117,10 +117,10 @@ class Api extends \think\Controller
         }
 
         // 登录操作
-         Cookie::set('token', $token, 3600000);
-         Cookie::set('user_id', $user_id, 3600000);
+        Cookie::set('token', $token, 3600000);
+        Cookie::set('user_id', $user_id, 3600000);
         Cookie::set('photo', $photo, 3600000);
-         Cookie::set('nickname', $nickname, 3600000);
+        Cookie::set('nickname', $nickname, 3600000);
 
         $photo = '<img src='.$photo.'>';
         dump($token);
@@ -129,7 +129,7 @@ class Api extends \think\Controller
         dump($nickname);
         // 进入会员中心
         if (Cookie::get('user_id')) {
-            $this->success('微信登录成功', '/', [], 1);
+            $this->success('微信登录成功', '/', [], 100);
         } else {
             echo "登录失败";
         }
