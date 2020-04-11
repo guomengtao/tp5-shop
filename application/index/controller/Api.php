@@ -122,6 +122,13 @@ class Api extends \think\Controller
         Cookie::set('photo', $photo, 3600000);
         Cookie::set('nickname', $nickname, 3600000);
 
+
+        $token    = Cookie::get('token');
+        $user_id  = Cookie::get('user_id');
+        $photo    = Cookie::get('photo');
+        $nickname = Cookie::get('nickname');
+
+          
         $photo = '<img src='.$photo.'>';
         dump($token);
         dump($user_id);
