@@ -2,37 +2,22 @@
 branches: {
   }
 fileChange:
-  /public:
-    newFile: !uuid 'df9bd0ffa0b98483511d72f246cc0248e9ef59b7'
-    oldFile: !uuid '00380afb9db6854e052a2e460fba8ee7932d84b6'
-  /public/static:
-    newFile: !uuid '27c1fbc356d9392085447e79307c36006527c88c'
-    oldFile: !uuid 'f6cfb99a93acc1e6b7bf1d7d7390531bc6111758'
-  /public/static/adminlte:
-    newFile: !uuid 'e01d1330b54755a8684fb4f08a8f1b61e2fd67ab'
-    oldFile: !uuid 'ea1331e70f16399d29f5daf2cb7b7dc1453df476'
-  /public/static/adminlte/dist:
-    newFile: !uuid '160d17b4ab21b798225cfa946e61001a98106b87'
-    oldFile: !uuid 'e2a9a01ba6f998511ee13228f39044bdc49d4be3'
-  /public/static/adminlte/dist/css:
-    newFile: !uuid '6d503c39ade02b530d44a61179b0ada2a9f30abd'
-    oldFile: !uuid 'e2ef86a4f3edb20b2d0c1c30b3a65de121fd9f3d'
-  /public/static/adminlte/dist/css/googleapis.css:
-    newFile: !uuid 'f85139310fb5bb98e8675fd1cdd757a32c944b47'
-    oldFile: null
-  /public/static/adminlte/dist/css/ionicons.min.css:
-    newFile: !uuid '1de71b1dbd6fce6e25b8d481c8f8401176327770'
-    oldFile: null
-  /public/static/adminlte/index.html:
-    newFile: !uuid '1bfe23b21327cd9d1935d026308038cb1e9655d6'
-    oldFile: !uuid 'c3e3df865d5d641b0ade297b9b71a0b161a70525'
-  /public/static/adminlte/index3.html:
-    newFile: !uuid 'a948d97e78ffd07480a56a6376de1e876a955347'
-    oldFile: !uuid 'a52fa8e9292fc5aad4ba7f17e6aee3921c3278a7'
+  /application:
+    newFile: !uuid '08171479a3b1c1b71c6d5084feb681eb29dfeb83'
+    oldFile: !uuid 'aa2e1517634127006849f8dc6b852da119528068'
+  /application/index:
+    newFile: !uuid '1e55fc0caced0cb3692ed9e65f8b819a5d0e2739'
+    oldFile: !uuid '79c590d46db8b0c8569bdd154dd5bed461692035'
+  /application/index/model:
+    newFile: !uuid 'eec5d729bac210f3fee99a1e62ccddea974f17d5'
+    oldFile: !uuid '2b3822081815242aaf86af365157bbdd8058c95c'
+  /application/index/model/Wechat.php:
+    newFile: !uuid 'ae9709524de1b8fae26f3bf3ea7e394a4523a314'
+    oldFile: !uuid '9a9b98041b6e149f8a8c9b11678eeae8b03f1b40'
   /tp5.sql:
-    newFile: !uuid '4b7073298b1a044b68010345e36a05d17f0c832b'
-    oldFile: !uuid 'e84f115d38af1dd5f53c316d09f4af64ab84c01d'
-gitCommitId: !uuid 'f2758da6a1d1a1c4f6559f14f865a2585a679bbe'
+    newFile: !uuid '182df3eec4285df04586e07b1b9413ce5801cd34'
+    oldFile: !uuid '4b7073298b1a044b68010345e36a05d17f0c832b'
+gitCommitId: !uuid '5146d029456af42ba4d3e2e808584c25abe3d90c'
 renames: {
   }
-revisionId: 936
+revisionId: 937
