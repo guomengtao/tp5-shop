@@ -305,6 +305,7 @@ class Api extends \think\Controller
             Cookie::set('user_id', $user_id, 36000000);
             Cookie::set('token', $token, 3600000);
             Cookie::set('photo', $photo, 3600000);
+            Cookie::set('nickname', $nickname, 3600000);
 
 
             // 邀请奖励功能拆分为独立的 invite()方法，需要再对接
@@ -318,12 +319,14 @@ class Api extends \think\Controller
             $user->photo    = $photo;
             $user->ip       = 1;
             $user->save();
-
-            // 设置Cookie 有效期为 秒
-            Cookie('token', $user->token, 3600000);
-            Cookie('user_id', $user->id, 3600000);
-            Cookie('photo', $photo, 3600000);
         }
+
+        // 设置Cookie 有效期为 秒
+        Cookie::set('token', $user->token, 3600000);
+        Cookie::set('user_id', $user->id, 3600000);
+        Cookie::set('photo', $photo, 3600000);
+        Cookie::set('nickname', $nickname, 3600000);
+
         // 重定向到News模块的Category操作
         return $this->redirect('index/index/index');
         return $this->success('登录成功^_^', 'index/index/index');
