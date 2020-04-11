@@ -68,7 +68,7 @@ class Api extends \think\Controller
         dump($token);
         // $token = '{"access_token":"31_NFTr_5yfwyh18VohnLMZNkK9UPhF6MjyJEPncJHuHhACLE9baKF3UzGIJQ_l9VdZvbemBxsggZPi1iYGM8v_2A","expires_in":7200,"refresh_token":"31_hzboRAivXXSZHIVhYCmT24D98N12zdIEn6n1ItZR3duJfwjNgOSJy14edGjL8_rGrrb8J0RruoZ0v4FZBCqs1w","openid":"o8ZWLv0q--I2irppcRT87g_GNkq0","scope":"snsapi_userinfo"}';
         $token = json_decode($token, true);
-  dump($token);
+        dump($token);
         $refresh_token = $token['refresh_token'];
 
         if (!isset($refresh_token)) {
@@ -88,6 +88,7 @@ class Api extends \think\Controller
         $userInfo = file_get_contents($url);
         $userInfo = json_decode($userInfo, true);
 
+        dump($userInfo);
         // 数据库入库
 
 
@@ -129,9 +130,12 @@ class Api extends \think\Controller
         Cookie('photo', $photo, 3600000);
         Cookie('nickname', $nickname, 3600000);
 
-
+dump($token);
+dump($user_id);
+dump($photo);
+dump($nickname);
         // 进入会员中心
-        return $this->redirect('index/index/index');
+        // return $this->redirect('index/index/index');
 
     }
 
