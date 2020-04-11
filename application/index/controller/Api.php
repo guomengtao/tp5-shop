@@ -132,7 +132,7 @@ class Api extends \think\Controller
         $photo = '<img src='.$photo.'>';
 
         echo $photo;
-        
+
         dump($token);
         dump($user_id);
         dump($photo);
