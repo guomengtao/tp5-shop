@@ -3,21 +3,30 @@ branches: {
   }
 fileChange:
   /application:
-    newFile: !uuid 'bc218f4497a9c2229844a03c2178b417f2991702'
-    oldFile: !uuid 'fcdafcedef9c6e81f9528a9f16aea0c7fbe17d22'
+    newFile: !uuid 'ec52d84f8331bb91f51ac215f309b9398173ac0e'
+    oldFile: !uuid 'bc218f4497a9c2229844a03c2178b417f2991702'
   /application/index:
-    newFile: !uuid '1953ce080199f33d58e7c80df12866a48d55179d'
-    oldFile: !uuid '0efb6502d9b6298efaa0b8ff474610098d37f3b1'
+    newFile: !uuid 'ba56398b3163101350e1268076d1c71dd8fcf431'
+    oldFile: !uuid '1953ce080199f33d58e7c80df12866a48d55179d'
   /application/index/controller:
-    newFile: !uuid 'ed005bcaca59b540fd92642284e5bf684b187fee'
-    oldFile: !uuid '4fb1cbab4b46e0b83cd4e03e60054ff500053935'
-  /application/index/controller/Api.php:
-    newFile: !uuid '75b53a74670c23f9a4178a77abf0ed71f8df22fc'
-    oldFile: !uuid '03229651b247bf31d6d415e5cc4af86cf24c1de9'
+    newFile: !uuid '2ccc95522e43982a35596e0397a99d375d4f539d'
+    oldFile: !uuid 'ed005bcaca59b540fd92642284e5bf684b187fee'
+  /application/index/controller/Member.php:
+    newFile: !uuid '41d238efe0f047b526bda0fd2061492060208703'
+    oldFile: !uuid 'efc51929a22ad4cd67b1208e626b86a044d3cb7f'
+  /application/index/view:
+    newFile: !uuid 'c0f7a82ff2d5571d1b197e79c4f9f3b98b0a45aa'
+    oldFile: !uuid '61b7ae2a47ce929d1cb57794d1dfa443c1bf3064'
+  /application/index/view/member:
+    newFile: !uuid 'ff7ea17bbecf4fe67b7307aa4b5cc588c6b7b39a'
+    oldFile: !uuid '4f0eeb47ff4e55efcfef6ce3ec829fa04e93b456'
+  /application/index/view/member/registration.html:
+    newFile: !uuid '3ad23d780feb8a80d986332e6b506b796005fee0'
+    oldFile: !uuid '5c38d28290934d1d49ff12f5dda8cdc1e5489e07'
   /tp5.sql:
-    newFile: !uuid 'b0fcb9ff6a5ec9de0058dbf364f2776255f8624c'
-    oldFile: !uuid 'b396b187d6e02b0d063e044d39ed7ade367cf0de'
-gitCommitId: !uuid 'bd3a79d8e122c20749e4c5999b6501a6d53c6f1c'
+    newFile: !uuid '1245c739bc12b02254bc840ce16f07feb58a612c'
+    oldFile: !uuid 'b0fcb9ff6a5ec9de0058dbf364f2776255f8624c'
+gitCommitId: !uuid 'a11bdadf1e20ff1c865cc9a48cc2b5671d6e0c0e'
 renames: {
   }
-revisionId: 954
+revisionId: 955
