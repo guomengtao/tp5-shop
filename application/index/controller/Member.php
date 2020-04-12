@@ -620,6 +620,9 @@ class Member extends Frontend
     {
         // 是否为 POST 请求
         if (request()->isPost()) {
+
+            $this->must_log_in();
+
             $add = Data::add();
 
             if ($add) {
