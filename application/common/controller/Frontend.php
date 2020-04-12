@@ -7,6 +7,7 @@ use app\admin\model\Message;
 use app\index\controller\Member;
 use app\index\model\Agent;
 use app\index\model\Fans;
+use app\index\model\Mail;
 use app\index\model\Notice;
 use app\index\model\Noticed;
 use app\index\model\User;
@@ -76,13 +77,15 @@ class Frontend extends Controller
             ->count();
 
 
-
         // 查询评论状态正常的文章
         $commentCount = Data::where('reply_user_id', $user_id)
             ->where('user_id', '<>', $user_id)
             ->where('msg', null)
             ->count();
 
+        $mailCount = Mail::where('to', $user_id)
+            ->where('msg', null)
+            ->count();
 
         $noticeCount = Notice::count();
 
@@ -90,13 +93,14 @@ class Frontend extends Controller
 
         $messageCount = $noticeCount - $noticedCount;
 
-        $msg_total = $messageCount + $follow + $commentCount;
+        $msg_total = $messageCount + $follow + $commentCount + $mailCount;
 
         $this->assign("visit", $visit);
         $this->assign("visitCount", $visitCount);
         $this->assign("messageCount", $messageCount);
         $this->assign("followCount", $follow);
         $this->assign("commentCount", $commentCount);
+        $this->assign("mailCount", $mailCount);
         $this->assign("msg_total", $msg_total);
     }
 

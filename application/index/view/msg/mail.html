@@ -1,0 +1,26 @@
+{layout name="common/basic" /}
+
+<table class="table table-striped">
+
+    <tbody>
+    {volist name="data" id="vo"}
+    <tr>
+        <th scope="row">{$vo.create_time}</th>
+
+        <td>
+            <a href="{:url('index/msg/mail_view',['group_id'=>$vo.group_id,'from'=>$vo.from,'msg_null_all'=>$vo.msg_null_all])}">{$vo.title} </a>
+        </td>
+
+        <td>
+
+            <span class="badge badge-pill badge-danger">{$vo.msg_null_all?:''}</span>
+
+
+        </td>
+    </tr>
+    {/volist}
+
+
+    </tbody>
+</table>
+{$data->render()}

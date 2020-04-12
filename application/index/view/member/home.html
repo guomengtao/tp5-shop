@@ -21,221 +21,232 @@
 <!--<body style="padding-top:70px; background: url(https://img.t.sinajs.cn/t6/skin/skin055/images/body_bg_page.jpg?id=1410943047113) no-repeat top center;    background-color: #1f160e; ">-->
 
 <!-- 顶部的头像区域 -->
-<div class="row" >
+<div class="row">
 
-  <div class="col-md-12 text-center" style="color: white;padding-bottom: 10px" >
-
-
-
-    <img    class="img-responsive center-block img-circle img" style="   width: 100px; height: 100px;   margin: 48px auto 0;  padding: 4px;     background: rgba(255,255,255,0.3);"   src="{$user.photo?:'__STATIC__/images/user/user ('.rand(1,25).').jpg'}" data-holder-rendered="true"  >
+    <div class="col-md-12 text-center" style="color: white;padding-bottom: 10px">
 
 
+        <img class="img-responsive center-block img-circle img"
+             style="   width: 100px; height: 100px;   margin: 48px auto 0;  padding: 4px;     background: rgba(255,255,255,0.3);"
+             src="{$user.photo?:'__STATIC__/images/user/user ('.rand(1,25).').jpg'}" data-holder-rendered="true">
 
 
+        <h5>{$user.nickname|default="努力学习TP5中的小强"} </h5>
+        <!-- <h5>学习tp5的JACK     </h5> -->
+        <h5> 相互学习 共同进步 ~ {$user.followed} </h5>
 
 
+        {if condition="$user.followed"}
+
+        <div class="btn-group">
+            <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                        style="border-radius:2px; color: #fff;border-color: #696e78;     box-shadow: 0px 2px 1px rgba(0,0,0,.2);background: -webkit-linear-gradient(top, #696e78 0%,#646973 100%);">
+                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> 已关注
+                    <!-- <span class="caret"></span> -->
+                </button>
 
 
+                <ul class="dropdown-menu">
+                    <li class="disabled"><a href="#">设为特别关注</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="{:url('index/member/follow',['follow_id'=>$user.id,'editfollow'=>2 ])}">取消关注</a></li>
+
+                </ul>
+            </div>
+        </div>
+
+        <!--  <a class="btn btn-default"  href="{:url('',['user_id'=>$user.id,'editfollow'=>2 ])}"  role="button" style="border-radius:2px; color: #fff;border-color: #696e78;     box-shadow: 0px 2px 1px rgba(0,0,0,.2);background: -webkit-linear-gradient(top, #696e78 0%,#646973 100%);"> <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>  已关注</a> -->
+
+        {else /}
+
+        <a class="btn btn-warning" href="{:url('index/member/follow',['follow_id'=>$user.id,'editfollow'=>1]  )}"
+           role="button"
+           style="width: 104px;border-radius:2px;background: -webkit-linear-gradient(top, #fa7d3c 0%,#f55f10 100%);box-shadow: 0px 1px 2px rgba(0,0,0,0.3);  border-color:  #fa7d3c  ">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 关注</a>
+
+        {/if}
 
 
-
-    <h5>{$user.nickname|default="努力学习TP5中的小强"}      </h5>
-    <!-- <h5>学习tp5的JACK     </h5> -->
-    <h5> 相互学习 共同进步 ~ {$user.followed} </h5>
-
+        <a class="btn btn-default" href="#" role="button"
+           style="width: 104px;border-radius:2px; color: #fff;border-color: #696e78;     box-shadow: 0px 2px 1px rgba(0,0,0,.2);background: -webkit-linear-gradient(top, #696e78 0%,#646973 100%);"
+           data-toggle="modal" data-target="#modal-default"> 私信</a>
 
 
-
-
-
-      {if condition="$user.followed"}
-
-      <div class="btn-group">
-  <div class="btn-group">
-    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"  style="border-radius:2px; color: #fff;border-color: #696e78;     box-shadow: 0px 2px 1px rgba(0,0,0,.2);background: -webkit-linear-gradient(top, #696e78 0%,#646973 100%);">
-      <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> 已关注
-      <!-- <span class="caret"></span> -->
-    </button>
-
-
-
-    <ul class="dropdown-menu">
-      <li  class="disabled"><a href="#">设为特别关注</a></li>
-      <li role="separator" class="divider"></li>
-      <li><a  href="{:url('index/member/follow',['follow_id'=>$user.id,'editfollow'=>2 ])}">取消关注</a></li>
-
-    </ul>
-  </div>
+    </div>
 </div>
 
-         <!--  <a class="btn btn-default"  href="{:url('',['user_id'=>$user.id,'editfollow'=>2 ])}"  role="button" style="border-radius:2px; color: #fff;border-color: #696e78;     box-shadow: 0px 2px 1px rgba(0,0,0,.2);background: -webkit-linear-gradient(top, #696e78 0%,#646973 100%);"> <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>  已关注</a> -->
+<div class="modal fade bs-example-modal-sm" id="modal-default" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="exampleModalLabel">发送私信</h4>
+            </div>
+            <form method="post" action="">
+                <div class="modal-body">
 
-      {else /}
+                    <div class="form-group">
+                        <label  class="control-label">收件人:</label>
+                        <input type="text" name="to" value="{$user.id}- {$user.nickname}" class="form-control" id="recipient-name">
+                    </div>
+                    <div class="form-group">
+                        <label   class="control-label">内容:</label>
+                        <textarea name="title" class="form-control" id="message-text"></textarea>
+                    </div>
 
-      <a class="btn btn-warning" href="{:url('index/member/follow',['follow_id'=>$user.id,'editfollow'=>1]  )}" role="button" style="border-radius:2px;background: -webkit-linear-gradient(top, #fa7d3c 0%,#f55f10 100%);box-shadow: 0px 1px 2px rgba(0,0,0,0.3);  border-color:  #fa7d3c  "> <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 加关注</a>
-
-      {/if}
-
-
-
-
-
-
-
-    <a class="btn btn-default disabled"  href="#" role="button" style="border-radius:2px; color: #fff;border-color: #696e78;     box-shadow: 0px 2px 1px rgba(0,0,0,.2);background: -webkit-linear-gradient(top, #696e78 0%,#646973 100%);"> 私信</a>
-
-
-
-  </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="submit" class="btn btn-primary">发送私信</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
+
+
 
 <div class="panel panel-default">
-  <div class="panel-body text-center ">
-    Basic panel example 丨 主页 123
+    <div class="panel-body text-center ">
+        Basic panel example 丨 主页 123
 
-  </div>
+    </div>
 </div>
 <!-- 主要的左右结构内容 -->
 <div class="row">
 
-  <!-- 左侧开始 -->
-  <div class="col-xs-12 col-md-4">
+    <!-- 左侧开始 -->
+    <div class="col-xs-12 col-md-4">
 
-<div class="panel panel-default">
-  <div class="panel-body text-center ">
-      关注 {:count($user.follow)}  - 粉丝 {:count($user.fans)} - 随笔 {$user.myblog_count}
+        <div class="panel panel-default">
+            <div class="panel-body text-center ">
+                关注 {:count($user.follow)} - 粉丝 {:count($user.fans)} - 随笔 {$user.myblog_count}
 
-  </div>
-</div>
-
-
-    <!-- 用户信息列表 -->
-    <ul class="list-group">
-      <li class="list-group-item">昵称： {$user.nickname|default="努力学习TP5中的小强"}
-      <li class="list-group-item">性别：
-           {$user.userqq.gender}
-
-      </li>
-      <li class="list-group-item">年龄： {:date('Y')-$user.userqq.year}</li>
-       <li class="list-group-item">所在地：{$user.ipInfo.region}</li>
-      <li class="list-group-item">注册时间：{$user.create_time}</li>
-      <li class="list-group-item">最后访问：{$user.footprint.create_time}</li>
-    </ul>
+            </div>
+        </div>
 
 
-      <div class="panel panel-default">
-        <div class="panel-heading">访问记录  <sapn class="pull-right">更多</sapn></div>
-        <div class="panel-body">
+        <!-- 用户信息列表 -->
+        <ul class="list-group">
+            <li class="list-group-item">昵称： {$user.nickname|default="努力学习TP5中的小强"}
+            <li class="list-group-item">性别：
+                {$user.userqq.gender}
 
-         {volist name='user.footprints' id='fo'}
-
-
-             {$fo.create_time}
-            {$fo.ipInfo.region}
-            {$fo.path}
-           {$fo.agentlink.browser}
-<br>
-
-
+            </li>
+            <li class="list-group-item">年龄： {:date('Y')-$user.userqq.year}</li>
+            <li class="list-group-item">所在地：{$user.ipInfo.region}</li>
+            <li class="list-group-item">注册时间：{$user.create_time}</li>
+            <li class="list-group-item">最后访问：{$user.footprint.create_time}</li>
+        </ul>
 
 
+        <div class="panel panel-default">
+            <div class="panel-heading">访问记录
+                <sapn class="pull-right">更多</sapn>
+            </div>
+            <div class="panel-body">
 
-             {/volist}
+                {volist name='user.footprints' id='fo'}
+
+
+                {$fo.create_time}
+                {$fo.ipInfo.region}
+                {$fo.path}
+                {$fo.agentlink.browser}
+                <br>
+
+
+                {/volist}
+
+            </div>
+
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">学习进度
+                <sapn class="pull-right">更多</sapn>
+            </div>
+            <div class="panel-body">
+
+
+                {$user.rand? 'VIP' : ''}
+
+
+                <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+                {$user.create_time} 加入
+
+
+                <span class="glyphicon glyphicon-yen" aria-hidden="true"></span> {$user.online_time} 分钟
+
+                <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+
+
+                <span class="glyphicon glyphicon-map-marker " aria-hidden="true"></span>
+                {$user.ipInfo.region}
+
+
+                <span class="glyphicon glyphicon-signal " aria-hidden="true"></span> {$user.ipInfo.isp}
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">他的粉丝：</div>
+            <div class="panel-body">
+
+                {volist name='user.fans' id='fo'}
+
+
+                <a href="{:url('index/member/home',['user_id'=>$fo.user_id])}" class="thumbnail">
+                    <img class="  img-circle"
+                         src="{$fo.userQq.figureurl_qq_2?$fo.userQq.figureurl_qq_2:'__STATIC__/images/user/user ('.rand(1,25).').jpg'}"
+                         data-holder-rendered="true" style="width: 28px; height: 28px;">
+                </a>
+
+
+                {/volist}
+
+            </div>
 
         </div>
 
-     </div>
-      <div class="panel panel-default">
-          <div class="panel-heading">学习进度 <sapn class="pull-right">更多</sapn>
-          </div>
-          <div class="panel-body">
+        <div class="panel panel-default">
+            <div class="panel-heading">他的关注：</div>
+            <div class="panel-body">
+
+                {volist name='user.follow' id='follow'}
 
 
-              {$user.rand? 'VIP' : ''}
+                <a href="{:url('index/member/home',['user_id'=>$follow.follow_id])}" class="thumbnail">
+                    <img class="  img-circle"
+                         src="{$follow.followuser.figureurl_qq_2?$follow.followuser.figureurl_qq_2:'__STATIC__/images/user/user ('.rand(1,25).').jpg'}"
+                         data-holder-rendered="true" style="width: 28px; height: 28px;">
+                </a>
 
 
+                {/volist}
 
-              <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
-              {$user.create_time} 加入
-
-
-              <span class="glyphicon glyphicon-yen" aria-hidden="true"></span> {$user.online_time} 分钟
-
-              <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
-
-
-              <span class="glyphicon glyphicon-map-marker " aria-hidden="true"></span>
-              {$user.ipInfo.region}
-
-
-              <span class="glyphicon glyphicon-signal " aria-hidden="true"></span> {$user.ipInfo.isp}
-          </div>
-      </div>
-
-    <div class="panel panel-default">
-        <div class="panel-heading">他的粉丝：</div>
-        <div class="panel-body">
-
-           {volist name='user.fans' id='fo'}
-
-
-
-                    <a href="{:url('index/member/home',['user_id'=>$fo.user_id])}" class="thumbnail">
-                                    <img class="  img-circle"    src="{$fo.userQq.figureurl_qq_2?$fo.userQq.figureurl_qq_2:'__STATIC__/images/user/user ('.rand(1,25).').jpg'}" data-holder-rendered="true" style="width: 28px; height: 28px;">
-                    </a>
-
-
-
-
-
-             {/volist}
+            </div>
 
         </div>
 
-     </div>
 
-  <div class="panel panel-default">
-        <div class="panel-heading">他的关注：</div>
-        <div class="panel-body">
-
-            {volist name='user.follow' id='follow'}
+    </div>
 
 
-
-                    <a href="{:url('index/member/home',['user_id'=>$follow.follow_id])}" class="thumbnail">
-                                    <img class="  img-circle"    src="{$follow.followuser.figureurl_qq_2?$follow.followuser.figureurl_qq_2:'__STATIC__/images/user/user ('.rand(1,25).').jpg'}" data-holder-rendered="true" style="width: 28px; height: 28px;">
-                    </a>
+    <!-- 左侧结束 -->
 
 
-
-             {/volist}
-
-        </div>
-
-     </div>
+    <!-- 右侧开始 -->
+    <div class="col-xs-12 col-md-8">
 
 
-  </div>
+        <!--简易即时聊天-->
 
+        <span id="bbs" style="display: none">666999</span>
 
-
-
-  <!-- 左侧结束 -->
-
-
-  <!-- 右侧开始 -->
-  <div class="col-xs-12 col-md-8">
-
-
-
-
-
-
-         <!--简易即时聊天-->
-
-                 <span id="bbs" style="display: none">666999</span>
-
-                <div class="bss_content"  id="bss_content" name="bss_content" style="margin-bottom: 10px; word-wrap:break-word;">
+        <div class="bss_content" id="bss_content" name="bss_content" style="margin-bottom: 10px; word-wrap:break-word;">
 
                     <span id="bbs_index">
 
@@ -245,13 +256,16 @@
        <div class="panel panel-default">
       <div class="panel-body">
 
-                    <div   class=" col-xs-12 col-sm-12 col-md-12 " style="padding: 0px;    border-bottom: 0px solid #eee;    margin-bottom: 0px; ">
+                    <div class=" col-xs-12 col-sm-12 col-md-12 "
+                         style="padding: 0px;    border-bottom: 0px solid #eee;    margin-bottom: 0px; ">
 
 
-                        <div class="media" >
-                            <div class="media-left" >
+                        <div class="media">
+                            <div class="media-left">
                                 <a href="{:url('/')}index/member/home/user_id/{$user.user_id}">
-                                    <img class="media-object img-circle"    src="{$user.user.userQq.figureurl_qq_2?$user.user.userQq.figureurl_qq_2:'__STATIC__/images/user/user ('.rand(1,25).').jpg'}" data-holder-rendered="true" style="width: 28px; height: 28px;">
+                                    <img class="media-object img-circle"
+                                         src="{$user.user.userQq.figureurl_qq_2?$user.user.userQq.figureurl_qq_2:'__STATIC__/images/user/user ('.rand(1,25).').jpg'}"
+                                         data-holder-rendered="true" style="width: 28px; height: 28px;">
                                 </a>
                             </div>
 
@@ -278,7 +292,8 @@
                                                                 <small>  
 
                                                                   {if condition="$user.dataself.title"}
-                                                                <div class="form-group input-group field-feed-content required" style="background-color:  #f4f4f4;padding: 10px;color: #555555">
+                                                                <div class="form-group input-group field-feed-content required"
+                                                                     style="background-color:  #f4f4f4;padding: 10px;color: #555555">
 
                                                                      @  {$user.dataself.user.userQq.nickname?$user.dataself.user.userQq.nickname:'学员'.$user.user.id}  : {$user.dataself.title}
                                                  
@@ -292,23 +307,32 @@
                                                                 </small>
                                                                 <h5> <small> {$user.watermelon.title}  {$user.create_time}  
  
-                                                                       <a href = "javascript:void(0);"  onclick="document.getElementById('reply_{$user.id}').style.display = document.getElementById('reply_{$user.id}').style.display=='none'?'':'none' ">回复</a>
+                                                                       <a href="javascript:void(0);"
+                                                                          onclick="document.getElementById('reply_{$user.id}').style.display = document.getElementById('reply_{$user.id}').style.display=='none'?'':'none' ">回复</a>
                                                                       
                                                                 {volist name='user.likesList' id='lik'}
                                                                               <a href="{:url('index/member/home',['user_id'=>$lik.user_id])}">
-                                    <img class="  img-circle"    src="{$lik.user.userQq.figureurl_qq_2?$lik.user.userQq.figureurl_qq_2:'__STATIC__/images/user/user ('.rand(1,25).').jpg'}" data-holder-rendered="true" style="width: 28px; height: 28px;">
+                                    <img class="  img-circle"
+                                         src="{$lik.user.userQq.figureurl_qq_2?$lik.user.userQq.figureurl_qq_2:'__STATIC__/images/user/user ('.rand(1,25).').jpg'}"
+                                         data-holder-rendered="true" style="width: 28px; height: 28px;">
                 </a>
                                                                   {/volist}
 
                                                                                                    </small></h5>
                                                                
-                                          <form  id="reply_{$user.id}" action="index/member/home" method="post" name="myformdislpayshow" style="display: none">
-                                                    <div class="form-group input-group field-feed-content required" >
+                                          <form id="reply_{$user.id}" action="index/member/home" method="post"
+                                                name="myformdislpayshow" style="display: none">
+                                                    <div class="form-group input-group field-feed-content required">
                                                         <input type="hidden" name="reply" value="{$user.id}">
-                                                        <input type="hidden" name="reply_user_id" value="{$user.user_id}">
+                                                        <input type="hidden" name="reply_user_id"
+                                                               value="{$user.user_id}">
 
-                                                    <textarea id="titleChat_{$user.id}" name="titleChat_send"  class="form-control"  placeholder="写评论" aria-required="true"></textarea>
-                                                    <span class="input-group-btn"><button type="submit" class="btn btn-success"  style="height: 54px;width: 54px;" >评论</button></span>
+                                                    <textarea id="titleChat_{$user.id}" name="titleChat_send"
+                                                              class="form-control" placeholder="写评论"
+                                                              aria-required="true"></textarea>
+                                                    <span class="input-group-btn"><button type="submit"
+                                                                                          class="btn btn-success"
+                                                                                          style="height: 54px;width: 54px;">评论</button></span>
 
 
 
@@ -319,8 +343,11 @@
                                                
                                                
 
-                                                                    <h5>                                <a href="{:url('/')}index/member/home/user_id/{$user.user_id}">
-                                    <img class="  img-circle"    src="{$dataself.user.userQq.figureurl_qq_2?$dataself.user.userQq.figureurl_qq_2:'__STATIC__/images/user/user ('.rand(1,25).').jpg'}" data-holder-rendered="true" style="width: 28px; height: 28px;">
+                                                                    <h5>                                <a
+                                                                            href="{:url('/')}index/member/home/user_id/{$user.user_id}">
+                                    <img class="  img-circle"
+                                         src="{$dataself.user.userQq.figureurl_qq_2?$dataself.user.userQq.figureurl_qq_2:'__STATIC__/images/user/user ('.rand(1,25).').jpg'}"
+                                         data-holder-rendered="true" style="width: 28px; height: 28px;">
                                 </a>
                                                                      {$dataself.user.userQq.nickname?$dataself.user.userQq.nickname:'学员'.$dataself.user.id}    :{$dataself.title} {$dataself.create_time}</h5>   
                                                  
@@ -343,23 +370,33 @@
       </div>
 
 
-      <div class="panel-footer  text-center " >
+      <div class="panel-footer  text-center ">
         <div class="row">
-                        <div class="col-xs-3" style="color: #8590a6"><span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> 收藏</div>
-                        <div class="col-xs-3" style="color: #8590a6"><span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span> 转发</div>
-                        <div class="col-xs-3" style="color: #8590a6" onclick="document.getElementById('reply_{$user.id}').style.display = document.getElementById('reply_{$user.id}').style.display=='none'?'':'none' " ><span class="glyphicon glyphicon-comment" aria-hidden="true"></span> {:count($user.dataselfreply)?count($user.dataselfreply):'评论'}
+                        <div class="col-xs-3" style="color: #8590a6"><span class="glyphicon glyphicon-star-empty"
+                                                                           aria-hidden="true"></span> 收藏</div>
+                        <div class="col-xs-3" style="color: #8590a6"><span class="glyphicon glyphicon-share-alt"
+                                                                           aria-hidden="true"></span> 转发</div>
+                        <div class="col-xs-3" style="color: #8590a6"
+                             onclick="document.getElementById('reply_{$user.id}').style.display = document.getElementById('reply_{$user.id}').style.display=='none'?'':'none' "><span
+                                class="glyphicon glyphicon-comment" aria-hidden="true"></span> {:count($user.dataselfreply)?count($user.dataselfreply):'评论'}
 
                          </div>
-                        <div class="col-xs-3" onclick='public_ajax("{$Think.server.script_name}/index/index/view/data_id/{$user.id}",0)'>
+                        <div class="col-xs-3"
+                             onclick='public_ajax("{$Think.server.script_name}/index/index/view/data_id/{$user.id}",0)'>
 
-                                          <span id="like_icon_{$user.id}" style="color: {$user.on?'#0084ff':'#8590a6'}; fill: currentColor;">
-                                            <svg viewBox="0 -3 20 16" xmlns="http://www.w3.org/2000/svg" class="likeicon" width="13" height="16" aria-hidden="true" style="height: 16px; width: 13px;"><title></title><g><path d="M.718 7.024c-.718 0-.718.63-.718.63l.996 9.693c0 .703.718.65.718.65h1.45c.916 0 .847-.65.847-.65V7.793c-.09-.88-.853-.79-.846-.79l-2.446.02zm11.727-.05S13.2 5.396 13.6 2.89C13.765.03 11.55-.6 10.565.53c-1.014 1.232 0 2.056-4.45 5.83C5.336 6.965 5 8.01 5 8.997v6.998c-.016 1.104.49 2 1.99 2h7.586c2.097 0 2.86-1.416 2.86-1.416s2.178-5.402 2.346-5.91c1.047-3.516-1.95-3.704-1.95-3.704l-5.387.007z"></path></g></svg>
+                                          <span id="like_icon_{$user.id}"
+                                                style="color: {$user.on?'#0084ff':'#8590a6'}; fill: currentColor;">
+                                            <svg viewBox="0 -3 20 16" xmlns="http://www.w3.org/2000/svg"
+                                                 class="likeicon" width="13" height="16" aria-hidden="true"
+                                                 style="height: 16px; width: 13px;"><title></title><g><path
+                                                    d="M.718 7.024c-.718 0-.718.63-.718.63l.996 9.693c0 .703.718.65.718.65h1.45c.916 0 .847-.65.847-.65V7.793c-.09-.88-.853-.79-.846-.79l-2.446.02zm11.727-.05S13.2 5.396 13.6 2.89C13.765.03 11.55-.6 10.565.53c-1.014 1.232 0 2.056-4.45 5.83C5.336 6.965 5 8.01 5 8.997v6.998c-.016 1.104.49 2 1.99 2h7.586c2.097 0 2.86-1.416 2.86-1.416s2.178-5.402 2.346-5.91c1.047-3.516-1.95-3.704-1.95-3.704l-5.387.007z"></path></g></svg>
                                            
-                                        <span  style="position: relative;">
-                                                <small><span id="like_{$user.id}"  style="color: #555; font-size: 12px">{$user.likeslist_count?$user.likeslist_count:"赞"}</span> </small>
+                                        <span style="position: relative;">
+                                                <small><span id="like_{$user.id}" style="color: #555; font-size: 12px">{$user.likeslist_count?$user.likeslist_count:"赞"}</span> </small>
                                                                       </span> 
                                                                   
-                                                                  <span id="like_a_{$user.id}" style="position:absolute;left:0px;top:0px;z-index:-20;color: red ;animation:mylike 2s;display:none ">+1</span>
+                                                                  <span id="like_a_{$user.id}"
+                                                                        style="position:absolute;left:0px;top:0px;z-index:-20;color: red ;animation:mylike 2s;display:none ">+1</span>
 
                                                                </span>
                                    
@@ -374,55 +411,38 @@
 
                         </span>
 
-                </div>
+        </div>
 
 
+        {$data->render()}
 
 
+        <div class="panel panel-default">
+            <div class="panel-heading">公告：</div>
+            <div class="panel-body">
+
+                这里加公告这里加公告这里加公告这里加公告这里加公告这里加公告这里加公告这里加公告
 
 
-    {$data->render()}
-
-
-
-     <div class="panel panel-default">
-        <div class="panel-heading">公告：</div>
-        <div class="panel-body">
-
-           这里加公告这里加公告这里加公告这里加公告这里加公告这里加公告这里加公告这里加公告
-
+            </div>
 
         </div>
 
-      </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">公告：</div>
+            <div class="panel-body">
 
-      <div class="panel panel-default">
-        <div class="panel-heading">公告：</div>
-        <div class="panel-body">
+                这里加公告这里加公告这里加公告这里加公告这里加公告这里加公告这里加公告这里加公告
 
-           这里加公告这里加公告这里加公告这里加公告这里加公告这里加公告这里加公告这里加公告
 
+            </div>
 
         </div>
 
-      </div>
-
-  </div>
-  <!-- 右侧结束 -->
+    </div>
+    <!-- 右侧结束 -->
 </div>
 <!-- 左右结构结束 -->
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 {include file="index/footer" /}

@@ -138,24 +138,24 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                     <a href="{:url('index/msg/notice')}" class="dropdown-item">
                         <i class="fas fa-envelope mr-2"></i> 通知
-                        <span class="float-right text-muted text-sm"><span class="badge badge-pill badge-danger">{$messageCount}</span></span>
+                        <span class="float-right text-muted text-sm"><span class="badge badge-pill badge-danger">{$messageCount?:''}</span></span>
                     </a>
                     <div class="dropdown-divider"></div>
                     <a href="{:url('index/msg/comment')}" class="dropdown-item">
                         <i class="fas fa-envelope mr-2"></i> 评论
                         <span class="float-right text-muted text-sm">
-                            <span class="badge badge-pill badge-danger">{$commentCount}</span></span>
+                            <span class="badge badge-pill badge-danger">{$commentCount?:''}</span></span>
 
                     </a>
                     <div class="dropdown-divider"></div>
                     <a href="{:url('index/msg/follow')}" class="dropdown-item">
                         <i class="fas fa-envelope mr-2"></i> 关注
-                        <span class="float-right text-muted text-sm"><span class="badge badge-pill badge-danger">{$followCount}</span></span>
+                        <span class="float-right text-muted text-sm"><span class="badge badge-pill badge-danger">{$followCount?:''}</span></span>
                     </a>
                     <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item">
+                    <a href="{:url('index/msg/mail')}" class="dropdown-item">
                         <i class="fas fa-envelope mr-2"></i> 私信
-                        <span class="float-right text-muted text-sm"><span class="badge badge-pill badge-danger"></span></span>
+                        <span class="float-right text-muted text-sm"><span class="badge badge-pill badge-danger">{$mailCount?:''}</span></span>
 
                     </a>
                 </div>

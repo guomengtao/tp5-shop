@@ -5,6 +5,7 @@ namespace app\index\controller;
 use app\admin\model\Message;
 use app\index\model\Data;
 use app\index\model\Fans;
+use app\index\model\Mail;
 use app\index\model\Notice;
 use app\index\model\Noticed;
 use app\common\controller\Frontend;
@@ -111,9 +112,68 @@ class Msg extends Frontend
         return $this->fetch();
     }
 
+    public function mail_view()
+    {
+        $group_id = input('group_id');
+        $from     = input('from');
+
+        // 是否为 POST 请求
+        if (request()->isPost()) {
+
+            $to    = input('from');
+            $title = trim(input('title'));
+
+            // 发私信功能
+            if ($to and $title) {
+                $data = Mail::send();
+
+
+                if ($data) {
+                    // $this->redirect();
+                    //设置成功后跳转页面的地址，默认的返回页面是$_SERVER['HTTP_REFERER']
+                    $this->success('发布成功');
+                } else {
+                    //错误页面的默认跳转页面是返回前一页，通常不需要设置
+                    $this->error('请填写内容');
+                }
+            }
+        }
+
+
+
+        $data = Mail::where('group_id', $group_id)
+            ->paginate(100);
+
+
+        // 全部设置为已读
+        Mail::where('group_id', $group_id)
+            ->where('to',$this->user_id)
+            ->update(['msg' => '1']);
+
+
+        $this->assign("from", $from);
+        $this->assign("msg_null_all", input('msg_null_all'));
+        $this->assign("data", $data);
+        $this->assign("title", "私信详情");
+        return $this->fetch();
+    }
+
+    public function mail()
+    {
+        $data = Mail::order('id', 'desc')
+            ->where('to', $this->user_id)
+            ->group('group_id')
+            ->paginate(5);
+
+
+        $this->assign("data", $data);
+        $this->assign("title", "我的私信");
+        return $this->fetch();
+    }
+
     public function comment()
     {
-          // 是否为 POST 请求
+        // 是否为 POST 请求
         if (request()->isPost()) {
             $add = Data::add();
 

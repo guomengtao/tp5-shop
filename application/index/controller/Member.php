@@ -5,6 +5,7 @@ namespace app\index\controller;
 
 use app\common\controller\Frontend;
 use app\index\model\Fans;
+use app\index\model\Mail;
 use think\Request;
 use app\index\model\Sms;
 use app\index\model\Shop;
@@ -620,8 +621,27 @@ class Member extends Frontend
     {
         // 是否为 POST 请求
         if (request()->isPost()) {
-
             $this->must_log_in();
+
+            $to = input('to');
+            $title = trim(input('title'));
+
+            // 发私信功能
+            if ($to and $title) {
+
+
+                $data = Mail::send();
+
+
+                if ($data) {
+                    // $this->redirect();
+                    //设置成功后跳转页面的地址，默认的返回页面是$_SERVER['HTTP_REFERER']
+                    $this->success('发布成功');
+                } else {
+                    //错误页面的默认跳转页面是返回前一页，通常不需要设置
+                    $this->error('请填写内容');
+                }
+            }
 
             $add = Data::add();
 
@@ -636,7 +656,7 @@ class Member extends Frontend
         }
 
         // 直接调用统一的自定义方法 查询指定用户信息
-        $user = User::userselfinfo(input('user_id',393));
+        $user = User::userselfinfo(input('user_id', 393));
 
         // 查询最新的聊天信息
         $data = Data::jack(input('user_id'));
