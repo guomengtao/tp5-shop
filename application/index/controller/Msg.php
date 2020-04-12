@@ -161,9 +161,10 @@ class Msg extends Frontend
     public function mail()
     {
         $data = Mail::order('id', 'desc')
-            ->where('to', $this->user_id)
+            ->where('to|from',$this->user_id)
             ->group('group_id')
             ->paginate(5);
+
 
 
         $this->assign("data", $data);
