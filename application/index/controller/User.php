@@ -25,11 +25,10 @@ class User extends Frontend
     public function _initialize()
     {
         parent::_initialize();
+        $this->must_log_in();
         // 记录访问信息 和 机器人拦截
         Member::agent();
-        if (!$this->user_id) {
-            return $this->error('请登录', 'index/index/login');
-        }
+
 
         // 查询会员信息
         $this->user = \app\index\model\User::find($this->user_id)->toArray();

@@ -25,6 +25,12 @@ use think\Request;
 class Msg extends Frontend
 {
 
+    public function _initialize()
+    {
+        parent::_initialize();
+
+        $this->must_log_in();
+    }
 
     /**
      * 空的请求
@@ -119,7 +125,6 @@ class Msg extends Frontend
 
         // 是否为 POST 请求
         if (request()->isPost()) {
-
             $to    = input('from');
             $title = trim(input('title'));
 
@@ -140,14 +145,13 @@ class Msg extends Frontend
         }
 
 
-
         $data = Mail::where('group_id', $group_id)
             ->paginate(100);
 
 
         // 全部设置为已读
         Mail::where('group_id', $group_id)
-            ->where('to',$this->user_id)
+            ->where('to', $this->user_id)
             ->update(['msg' => '1']);
 
 
@@ -158,13 +162,15 @@ class Msg extends Frontend
         return $this->fetch();
     }
 
+
     public function mail()
     {
+
+
         $data = Mail::order('id', 'desc')
-            ->where('to|from',$this->user_id)
+            ->where('to|from', $this->user_id)
             ->group('group_id')
             ->paginate(5);
-
 
 
         $this->assign("data", $data);

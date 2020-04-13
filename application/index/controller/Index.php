@@ -823,6 +823,7 @@ class Index extends Frontend
 
     public function order()
     {
+        $this->must_log_in();
         $user_id = $this->user_id;
 
         // 查询订单是否存在

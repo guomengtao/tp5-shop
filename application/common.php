@@ -32,7 +32,29 @@ use think\Validate;
 use Ip2Region;
 
 
-
+/**
+ * @param  string  $url  网址
+ * @param  string  $filename  保存文件名
+ * @param  int  $timeout  过期时间
+ * @return bool|string
+ */
+function http_down($url, $filename, $timeout = 60)
+{
+    $path = dirname($filename);
+    if (!is_dir($path) && !mkdir($path, 0755, true)) {
+        return false;
+    }
+    $fp = fopen($filename, 'w');
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_FILE, $fp);
+    curl_setopt($ch, CURLOPT_TIMEOUT, $timeout);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+    curl_exec($ch);
+    curl_close($ch);
+    fclose($fp);
+    return $filename;
+}
 
 function admin_test_model()
 {

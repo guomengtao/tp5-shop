@@ -5,12 +5,16 @@ scratch. This page gets rid of all links and provides the needed markup only.
 -->
 <html lang="en">
 <head>
+    {if condition="$msg_total"}
+    <link href="__STATIC__/images/new-shopping-cart.ico" rel="shortcut icon" type="image/vnd.microsoft.icon "/>
+    {else /}
+    <link href="__STATIC__/images/shopping-cart.ico" rel="shortcut icon" type="image/vnd.microsoft.icon"/>
+    {/if}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
     <title>{$title|default=''} | 会员中心 —— ThinkPHP5.0开发示例</title>
-
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="__STATIC__/adminlte/plugins/fontawesome-free/css/all.min.css">
     <!-- Theme style -->
@@ -67,11 +71,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
             <li class="nav-item dropdown   d-sm-inline-block">
-                <a class="nav-link  d-sm-inline-block" style="white-space:nowrap;" href="__ROOT__/index/index/login">登录</a>
+                <a class="nav-link  d-sm-inline-block" style="white-space:nowrap;"
+                   href="__ROOT__/index/index/login">登录</a>
 
             </li>
             <li class="nav-item dropdown d-none d-sm-inline-block">
-                <a class="nav-link d-sm-inline-block"  style="white-space:nowrap;" href="{:url('index/index/register')}"
+                <a class="nav-link d-sm-inline-block" style="white-space:nowrap;" href="{:url('index/index/register')}"
                    target="_blank">注册</a>
             </li>
             <li class="nav-item dropdown">
@@ -83,7 +88,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
             </li>
             {/if}
 
-            {if condition="$Think.cookie.user_id"}
 
             {if condition="!$visitCount"}
             <li class="nav-item dropdown">
@@ -163,7 +167,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <!-- 会员下拉菜单 -->
             <li class="nav-item dropdown">
                 <a class="nav-link" data-toggle="dropdown" href="#">
-                    <img src="{$Think.Cookie.photo?:'__STATIC__/adminlte/dist/img/user2-160x160.jpg'}" class="brand-image img-circle elevation-3"
+                    <img src="{$Think.Cookie.photo?:'__STATIC__/adminlte/dist/img/user2-160x160.jpg'}"
+                         class="brand-image img-circle elevation-3"
                          alt="User Image" style="width: 30px">
                 </a>
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
@@ -192,15 +197,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <i class="fas fa-users mr-2"></i> 账号设置
                         <span class="float-right text-muted text-sm">2 days</span>
                     </a>
+                    {if condition="$Think.cookie.user_id"}
                     <div class="dropdown-divider"></div>
                     <a href="{:url('index/index/logout')}" class="dropdown-item dropdown-footer">退出登录</a>
+                    {/if}
                 </div>
+
             </li>
             <li class="nav-item">
                 <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#"><i
                         class="fas fa-th-large"></i></a>
             </li>
-            {/if}
+
         </ul>
     </nav>
     <!-- /.navbar -->

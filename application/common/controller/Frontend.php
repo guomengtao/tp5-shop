@@ -30,9 +30,6 @@ class Frontend extends Controller
         $user_id = Cookie::get('user_id');
 
         $this->user_id = $user_id;
-        // if (!$user_id) {
-        //     return $this->error('请登录', 'index/index/login');
-        // }
 
         // 验证token
         if ($user_id) {
@@ -51,8 +48,19 @@ class Frontend extends Controller
                 Cookie::set('nickname', '', 1);
             }
         }
+        $this->msgCount();
+    }
 
-        $home = 'u/'.Cookie::get('user_id');
+    public function msgCount()
+    {
+
+        $msg = [];
+        $user_id = $this->user_id;
+        // if (!$user_id){
+        //         //     return false;
+        //         // }
+
+        $home = 'index/member/home/user_id/'.$user_id;
 
         $visit = Footprint::where('path', $home)
             ->where('user_id', '<>', $user_id)
@@ -102,6 +110,17 @@ class Frontend extends Controller
         $this->assign("commentCount", $commentCount);
         $this->assign("mailCount", $mailCount);
         $this->assign("msg_total", $msg_total);
+
+        $msg = [
+            'visit' => $visit,
+            'visitCount' => $visitCount,
+            'messageCount' => $messageCount,
+            'followCount' => $follow,
+            'commentCount' => $commentCount,
+            'mailCount"' => $mailCount,
+            'msg_total' => $msg_total,
+        ];
+        $this->assign("msg", $msg);
     }
 
     /**
@@ -112,7 +131,7 @@ class Frontend extends Controller
     public function must_log_in()
     {
         if (!$this->user_id) {
-            $this->error('请登录！', 'index/index/login', '', 3);
+            $this->redirect('index/index/login' );
         }
     }
 

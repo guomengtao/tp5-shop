@@ -1,43 +1,44 @@
 {
-    "name": "topthink/think",
-    "description": "the new thinkphp framework",
-    "type": "project",
-    "keywords": [
-        "framework",
-        "thinkphp",
-        "ORM"
-    ],
-    "homepage": "http://thinkphp.cn/",
-    "license": "Apache-2.0",
-    "authors": [
-        {
-            "name": "liu21st",
-            "email": "liu21st@gmail.com"
-        }
-    ],
-    "require": {
-        "php": ">=5.4.0",
-        "topthink/framework": "5.0.*",
-        "topthink/think-image": "^1.0",
-        "topthink/think-captcha": "1.*",
-        "topthink/think-mongo": "1.*",
-        "topthink/think-migration": "1.*",
-        "topthink/think-queue": "1.*",
-        "topthink/think-helper": "1.*",
-        "zoujingli/ip2region": "^1.0",
-        "jenssegers/agent": "^2.6",
-        "jaeger/querylist": "^4.1",
-        "yansongda/pay": "^2.9"
-    },
-    "autoload": {
-        "psr-4": {
-            "app\\": "application"
-        }
-    },
-    "extra": {
-        "think-path": "thinkphp"
-    },
-    "config": {
-        "preferred-install": "dist"
+  "name": "topthink/think",
+  "description": "the new thinkphp framework",
+  "type": "project",
+  "keywords": [
+    "framework",
+    "thinkphp",
+    "ORM"
+  ],
+  "homepage": "http://thinkphp.cn/",
+  "license": "Apache-2.0",
+  "authors": [
+    {
+      "name": "liu21st",
+      "email": "liu21st@gmail.com"
     }
+  ],
+  "require": {
+    "php": ">=5.4.0",
+    "topthink/framework": "5.0.*",
+    "topthink/think-image": "^1.0",
+    "topthink/think-captcha": "1.*",
+    "topthink/think-mongo": "1.*",
+    "topthink/think-migration": "1.*",
+    "topthink/think-queue": "1.*",
+    "topthink/think-helper": "1.*",
+    "zoujingli/ip2region": "^1.0",
+    "jenssegers/agent": "^2.6",
+    "jaeger/querylist": "^4.1",
+    "yansongda/pay": "^2.9",
+    "ext-curl": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "app\\": "application"
+    }
+  },
+  "extra": {
+    "think-path": "thinkphp"
+  },
+  "config": {
+    "preferred-install": "dist"
+  }
 }
