@@ -259,37 +259,34 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <nav class="mt-2">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                     data-accordion="false">
+
                     <!-- Add icons to the links using the .nav-icon class
                          with font-awesome or any other icon font library -->
-                    <li class="nav-item has-treeview menu-open">
-                        <a href="#" class="nav-link active">
-                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                    {volist  name='sidebar' id='vo'}
+
+                    <li class="nav-item has-treeview {$vo.active?'menu-open':''}">
+                        <a href="#" class="nav-link {$vo.active}">
+                            <i class="nav-icon fas fa-{$vo.icon}"></i>
                             <p>
-                                数据表
+                               {$vo.title}
                                 <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
+                            {volist  name='vo.son' id='vo'}
                             <li class="nav-item">
-                                <a href="{:url('index/index/course')}" class="nav-link active">
+                                <a href="{:url($vo.url)}" class="nav-link {$vo.active}">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>课程表</p>
+                                    <p>{$vo.title}
+
+                                    </p>
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a href="{:url('index/ajax/ajaxrun')}" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>新同学</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{:url('index/msg/notice')}" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>通知</p>
-                                </a>
-                            </li>
+                            {/volist}
+
                         </ul>
                     </li>
+                    {/volist}
                     <li class="nav-item">
                         <a href="{:url('index/index/like')}" class="nav-link">
                             <i class="nav-icon fas fa-th"></i>
@@ -380,7 +377,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     jQuery("#fa-bars").click(function () {
         console.log(2);
-        $.get("{:url('index/msg/sidebar')}",
+        $.get("{:url('index/guess/sidebarShow')}",
             function (data) {
                 console.log("Data Loaded: " + data);
             });

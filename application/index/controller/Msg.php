@@ -42,16 +42,7 @@ class Msg extends Frontend
         echo "empty";
     }
 
-    public function sidebar()
-    {
-        $sidebar = Cookie::get('sidebar');
-        // sidebar-mini sidebar-collapse
-        if ($sidebar == 'sidebar-mini') {
-            Cookie::set('sidebar', 'sidebar-mini sidebar-collapse', '31536000');
-        } else {
-            Cookie::set('sidebar', 'sidebar-mini', '31536000');
-        }
-    }
+
 
     public function index()
     {
@@ -92,6 +83,7 @@ class Msg extends Frontend
 
     public function follow()
     {
+
         // 全部设置为已读
         Fans::where('follow_id', $this->user_id)
             ->update(['msg' => '1']);

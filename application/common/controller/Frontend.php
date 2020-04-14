@@ -14,6 +14,7 @@ use app\index\model\User;
 use think\Controller;
 use think\Cookie;
 use app\index\model\Footprint;
+use think\Request;
 
 /**
  * 前台控制器基类
@@ -49,12 +50,12 @@ class Frontend extends Controller
             }
         }
         $this->msgCount();
+        $this->sidebar();
     }
 
     public function msgCount()
     {
-
-        $msg = [];
+        $msg     = [];
         $user_id = $this->user_id;
         // if (!$user_id){
         //         //     return false;
@@ -112,13 +113,13 @@ class Frontend extends Controller
         $this->assign("msg_total", $msg_total);
 
         $msg = [
-            'visit' => $visit,
-            'visitCount' => $visitCount,
+            'visit'        => $visit,
+            'visitCount'   => $visitCount,
             'messageCount' => $messageCount,
-            'followCount' => $follow,
+            'followCount'  => $follow,
             'commentCount' => $commentCount,
-            'mailCount"' => $mailCount,
-            'msg_total' => $msg_total,
+            'mailCount"'   => $mailCount,
+            'msg_total'    => $msg_total,
         ];
         $this->assign("msg", $msg);
     }
@@ -131,8 +132,83 @@ class Frontend extends Controller
     public function must_log_in()
     {
         if (!$this->user_id) {
-            $this->redirect('index/index/login' );
+            $this->redirect('index/index/login');
         }
+
+    }
+
+
+    public function sidebar()
+    {
+        $arr = [
+            '会员中心' => [
+                '会员中心' => 'index/user/index',
+                '账号设置' => 'index/user/profile',
+            ],
+            '消息管理' => [
+                '通知' => 'index/msg/notice',
+                '评论' => 'index/msg/comment',
+            ],
+            'on'   => [
+                '通知' => 'index/msg/notice',
+                '评论' => 'index/msg/comment',
+            ],
+        ];
+
+        $arr = [
+            [
+                'title'  => '会员中心',
+                'url'    => 'User',
+                'icon'   => 'tachometer-alt',
+                'active' => '',
+                'son'    => [
+                    ['title' => "会员设置", 'method' => 'profile', 'url' => 'index/user/profile', 'active' => '',],
+                    ['title' => "我的关注", 'method' => 'follow', 'url' => 'index/user/follow', 'active' => '',],
+                    ['title' => "密码修改", 'method' => 'password', 'url' => 'index/user/password', 'active' => '',],
+                ]
+            ],
+            [
+                'title'  => '消息',
+                'url'    => 'Msg',
+                'icon'   => 'comments',
+                'active' => '',
+                'son'    => [
+                    ['title' => "通知", 'method' => 'notice', 'url' => 'index/msg/notice', 'active' => '',],
+                    ['title' => "评论", 'method' => 'comment', 'url' => 'index/msg/comment', 'active' => '',],
+                    ['title' => "关注", 'method' => 'follow', 'url' => 'index/msg/follow', 'active' => '',],
+                    ['title' => "私信", 'method' => 'mail', 'url' => 'index/msg/mail', 'active' => '',],
+                ]
+            ],
+            [
+                'title'  => '推荐功能',
+                'url'    => 'Member',
+                'icon'   => 'users',
+                'active' => '',
+                'son'    => [
+                     ['title' => "我的积分", 'method' => 'money', 'url' => 'index/member/money', 'active' => '',],
+                ],
+            ],
+        ];
+
+        // 获取当前的控制器 和方法
+        $controller = Request::instance()->controller();
+        $method     = Request::instance()->action();
+
+
+        foreach ($arr as $k => $vo) {
+            if ($controller == $vo['url']) {
+                $arr[$k]['active'] = 'active';
+                $father            = $k;
+                foreach ($arr[$k]['son'] as $k2 => $vo) {
+                    if ($vo['method'] == $method) {
+                        $arr[$father]['son'][$k2]['active'] = 'active';
+                        // return;
+                    }
+                }
+            }
+        }
+
+        $this->assign("sidebar", $arr);
     }
 
 
