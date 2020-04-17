@@ -139,6 +139,7 @@ class Api extends \think\Controller
         dump($nickname);
         // 进入会员中心
         if (Cookie::get('user_id')) {
+            $this->error();
             $this->success('微信登录成功', '/', [], 100);
         } else {
             echo "登录失败";

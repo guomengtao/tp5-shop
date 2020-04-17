@@ -1,5 +1,8 @@
 {layout name="common/basic" /}
-
+<!-- 让表单提交不刷新，模拟异步体验 -->
+<div id="alert_message" style="display:none">
+    <iframe name=iframe_form id="ifr" scrolling="no"></iframe>
+</div>
 <div class="row">
     <div class="col-lg-12">
 
@@ -10,7 +13,7 @@
             </div>
             <!-- /.card-header -->
             <!-- form start -->
-            <form role="form" action="" method="post">
+            <form role="form" action="{:url('admin/msg/send')}" method="post">
                 <div class="card-body">
                     <div class="form-group">
                         <label for="exampleInputEmail1">标题</label>

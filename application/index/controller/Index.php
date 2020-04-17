@@ -150,7 +150,7 @@ class Index extends Frontend
         // 增加一个第二步的已安装判断，方便查看
         if (Request::instance()->isPost() and $install_lock == 1) {
             header('Content-Type:text/plain;charset=utf-8');
-            return $this->error("已安装,重新安装请删除application/install.lock 文件 ");
+            $this->error("已安装,重新安装请删除application/install.lock 文件 ");
             // echo "已安装installed! delllet application/install.lock file " ;
             // die();
         }
@@ -169,7 +169,7 @@ class Index extends Frontend
                 // echo 10086;
                 // return $e->getMessage();
                 // $getwrong = $e->getMessage();
-                return $this->error("连接数据库错误，请检查数据库账号密码是否正确。<br/>".$e->getMessage());
+                $this->error("连接数据库错误，请检查数据库账号密码是否正确。<br/>".$e->getMessage());
             }
 
 
@@ -985,7 +985,7 @@ class Index extends Frontend
         Cookie::set('photo', '', 1);
         Cookie::set('nickname', '', 1);
         // $warning ="退出成功";
-        return $this->success('退出成功^_^', 'login');
+        $this->success('退出成功^_^', 'login');
     }
 
     public function login()
@@ -1012,8 +1012,6 @@ class Index extends Frontend
 
 
         if (Request::instance()->isPost()) {
-
-
             $validate = new Validate(
                 [
                     'phone'    => 'require|max:11|number|between:13000000000,18999999999',
@@ -1030,48 +1028,48 @@ class Index extends Frontend
             // 此处为验证格式是否正确
             if (!$validate->check($data)) {
                 $warning = $validate->getError();
-
-                $this->error($warning,null);
-            } else {
-                $check_user = User::where('phone', '=', $phone)->count();
+                $this->error($warning);
+            }
 
 
-                // 先判断用户是否存在，用户不存在，先通知一下
-                if (!$check_user) {
-                    $warning = "此用户不存在，注册 或 检查 用户名是否填写正确";
+            $check_user = User::where('phone', '=', $phone)->count();
+
+
+            // 先判断用户是否存在，用户不存在，先通知一下
+            if (!$check_user) {
+                $warning = "此用户不存在，注册 或 检查 用户名是否填写正确";
+                $this->error($warning);
+            }
+
+
+            if ($check_user) {
+                // 查询密码和账号是否正确
+
+
+                $get_password = User::where('password', '=', md5(trim($password)))
+                    ->where('phone', $phone)
+                    ->count();
+
+                if (!$get_password) {
+                    // 此处可以加一个Session或者数据库加一个记录，记录密码错误次数
+                    $warning = "密码不正确";
+                    $this->error($warning);
                 }
+            }
+
+            // 确认账号密码一致开始登录操作
+            if ($get_password) {
+                $user = User::where('phone', '=', $phone)->find();
+
+                // 设置Cookie 有效期为 秒
+                Cookie::set('phone', $phone, 3600000);
+                Cookie::set('token', $user['token'], 3600000);
+                Cookie::set('user_id', $user['id'], 3600000);
+                Cookie::set('photo', $user['photo'], 3600000);
+                Cookie::set('nickname', $user['nickname'], 3600000);
 
 
-                if ($check_user) {
-                    // 查询密码和账号是否正确
-
-
-                    $get_password = User::where('password', '=', md5(trim($password)))
-                        ->where('phone', $phone)
-                        ->count();
-
-                    if (!$get_password) {
-                        // 此处可以加一个Session或者数据库加一个记录，记录密码错误次数
-                        $warning = "密码不正确";
-
-
-                    }
-                }
-
-                // 确认账号密码一致开始登录操作
-                if ($get_password) {
-                    $user = User::where('phone', '=', $phone)->find();
-
-                    // 设置Cookie 有效期为 秒
-                    Cookie::set('phone', $phone, 3600000);
-                    Cookie::set('token', $user['token'], 3600000);
-                    Cookie::set('user_id', $user['id'], 3600000);
-                    Cookie::set('photo', $user['photo'], 3600000);
-                    Cookie::set('nickname', $user['nickname'], 3600000);
-
-
-                    return $this->success('登录成功^_^', 'index/member/myhome');
-                }
+                $this->success('登录成功^_^', 'index/member/myhome');
             }
         }
 
@@ -1124,6 +1122,7 @@ class Index extends Frontend
             // 此处为验证格式是否正确
             if (!$validate->check($data)) {
                 $warning = $validate->getError();
+                $this->error($warning);
             } else {
                 $check_user = User::where('phone', '=', $phone)->count();
 
@@ -1131,6 +1130,7 @@ class Index extends Frontend
                 // 先判断用户是否存在，用户不存在，先通知一下
                 if (!$check_user) {
                     $warning = "此用户不存在，注册 或 检查 用户名是否填写正确";
+                    $this->error($warning);
                 }
 
 
@@ -1144,6 +1144,7 @@ class Index extends Frontend
                     if (!$get_rand) {
                         // 此处可以加一个Session或者数据库加一个记录，记录密码错误次数
                         $warning = "验证码不正确";
+                        $this->error($warning);
                     }
                 }
 
@@ -1158,7 +1159,7 @@ class Index extends Frontend
                     Cookie::set('photo', $user['photo'], 3600000);
 
 
-                    return $this->success('登录成功^_^', 'index/member/myhome');
+                    $this->success('登录成功^_^', 'index/member/myhome');
                 }
             }
         }
@@ -1208,7 +1209,7 @@ class Index extends Frontend
             // 设置Cookie 有效期为 秒
             Cookie::set('phone', '', 1);
             // $warning ="退出成功";
-            return $this->success('退出成功^_^', 'login');
+            $this->success('退出成功^_^', 'login');
         }
 
         if (Request::instance()->isPost()) {
@@ -1337,7 +1338,7 @@ class Index extends Frontend
                         Cookie::set('admin', 1, 3600000);
                     }
 
-                    return $this->success('绑定并登录成功^_^', 'index/index/index');
+                    $this->success('绑定并登录成功^_^', 'index/index/index');
                 }
 
 
@@ -1393,7 +1394,7 @@ class Index extends Frontend
                     session('openid_id', null);
 
 
-                    return $this->success('注册并绑定成功^_^', 'index/index/index');
+                    $this->success('注册并绑定成功^_^', 'index/index/index');
                 }
             }
 
@@ -1430,7 +1431,7 @@ class Index extends Frontend
                     Cookie::set('token', $token, 36000000);
 
 
-                    return $this->success('重置密码成功^_^', 'index/index/index');
+                    $this->success('重置密码成功^_^', 'index/index/index');
 
 //                  跳出框架转到首页方式
                     exit('<script>top.location.href="../index/index/login/221/'.$body.$phone.'"</script>');
@@ -2151,7 +2152,7 @@ class Index extends Frontend
         $reply          = input('reply');
 
         // if (!$user_id) {
-        //     return $this->success('请登录！', 'index/index/login');
+        //     $this->success('请登录！', 'index/index/login');
         // }
 
         if ($data_id and $reply == '') {
@@ -2184,7 +2185,7 @@ class Index extends Frontend
             echo "ok ";
             echo "感谢您，点赞成功！~";
             die();
-            // return $this->success('感谢您，点赞成功！~');
+            // $this->success('感谢您，点赞成功！~');
 
 
         }
@@ -2287,7 +2288,7 @@ class Index extends Frontend
             );
 
 
-            return $this->success('恭喜您发布课程成功^_^', 'index');
+            $this->success('恭喜您发布课程成功^_^', 'index');
         }
 
         return $this->fetch();

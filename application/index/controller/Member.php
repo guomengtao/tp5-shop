@@ -172,11 +172,12 @@ class Member extends Frontend
 
         // 是否为 POST 请求
         if (request()->isPost()) {
+
             $add = Data::add();
 
 
             if ($add) {
-                $this->redirect('index/member/myhome');
+                // $this->redirect('index/member/myhome');
                 //设置成功后跳转页面的地址，默认的返回页面是$_SERVER['HTTP_REFERER']
                 $this->success('发布成功');
             } else {

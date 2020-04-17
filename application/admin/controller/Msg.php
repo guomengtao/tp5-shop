@@ -55,7 +55,8 @@ class Msg extends Backend
             $content = input("content");
 
             if (!trim($title)) {
-                return;
+
+                $this->error("请输入通知标题奥",'','hello world');
             }
 
             $info['title']= $title;
@@ -64,6 +65,8 @@ class Msg extends Backend
             $message = new Notice();
             $message->data($info);
             $message->save();
+
+            $this->success("发送成功",'admin/msg/index');
 
         }
 
