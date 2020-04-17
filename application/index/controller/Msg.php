@@ -120,6 +120,10 @@ class Msg extends Frontend
             $to    = input('from');
             $title = trim(input('title'));
 
+            if (!$title){
+                 $this->error('请填写内容');
+            }
+
             // 发私信功能
             if ($to and $title) {
                 $data = Mail::send();
