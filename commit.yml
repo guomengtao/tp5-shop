@@ -3,81 +3,21 @@ branches: {
   }
 fileChange:
   /application:
-    newFile: !uuid '0cc2fcd1fe3d3eb7c23222a79cc7449b6d931a12'
-    oldFile: !uuid '3871e5fb1b54535acc89bdebbfcc7cd72fcd5272'
-  /application/admin:
-    newFile: !uuid '24649623a65c79cba697f559759a0c20dac539f0'
-    oldFile: !uuid 'bd8cf71990779d901f0943226c72a0b11ad1e92c'
-  /application/admin/controller:
-    newFile: !uuid '7254d9f29fc10bb9d6eae82f689a2f10fda0dc16'
-    oldFile: !uuid '76edaace894be368a8b79aea4e0cee603c348623'
-  /application/admin/controller/Msg.php:
-    newFile: !uuid 'f5d03ea07f0c1fb21effcc4fab673394d585b682'
-    oldFile: !uuid '7c386afa3f0142321e1305d9f9c74bdbea9a3a5f'
-  /application/admin/view:
-    newFile: !uuid 'a00d0e004bade133fbab18f1bc20044df01fdfa6'
-    oldFile: !uuid 'b243d5b52c33418757d36e0f5fc058c16f039072'
-  /application/admin/view/common:
-    newFile: !uuid '89d2632591079dca1899b415ad65597d24d0e886'
-    oldFile: !uuid '573ae0702a2949717116d945035cd63cf5f1f55a'
-  /application/admin/view/common/basic.html:
-    newFile: !uuid 'b4efcbe7ed7617ee98285554f1cbdbc054ecfc36'
-    oldFile: !uuid 'fd07d7116a3690f0541c59814162ea4c9a60624a'
-  /application/admin/view/msg:
-    newFile: !uuid 'cf1b50bb650e77f98b8888615e3807417bff7b90'
-    oldFile: !uuid '6ae2cf15fdbca63330397192579d20dd83630fca'
-  /application/admin/view/msg/send.html:
-    newFile: !uuid '94a33f370e1450783c6fb01866cb22131866f27f'
-    oldFile: !uuid 'e451a24c232b343a8091e26c212d7440f73f7770'
+    newFile: !uuid 'be1fc1cd5afc7f2fd5c67eee93629fe2f373b669'
+    oldFile: !uuid '0cc2fcd1fe3d3eb7c23222a79cc7449b6d931a12'
   /application/index:
-    newFile: !uuid '2234c098f28db7a0d613f4dd06ce5384e039ebe1'
-    oldFile: !uuid 'a77d398f2cd4a66eeed99164cb2ef70081982857'
+    newFile: !uuid 'b543400230ecd05be3c20f3c851ee511c7561938'
+    oldFile: !uuid '2234c098f28db7a0d613f4dd06ce5384e039ebe1'
   /application/index/controller:
-    newFile: !uuid 'cffee357eee608c794aeab4ca19c64d8998315c0'
-    oldFile: !uuid '305959dc77b9e746dd7b7cb28989d3a9b446788a'
-  /application/index/controller/Api.php:
-    newFile: !uuid '1b1da604020025a8fe3ff88d4fc28e769ddca1e1'
-    oldFile: !uuid '75b53a74670c23f9a4178a77abf0ed71f8df22fc'
-  /application/index/controller/Index.php:
-    newFile: !uuid 'da248a1e6a6adc6439be5b06404519f5ea9ae01f'
-    oldFile: !uuid '7cf25e428983ce86622fb8e9df257700e355ca85'
-  /application/index/controller/Member.php:
-    newFile: !uuid 'd0ebe787207d1bde2ccfd7815a694b7bcd3b0da7'
-    oldFile: !uuid 'b8f144c84253ff0287103ba3300f0b2a2377d611'
-  /application/index/view:
-    newFile: !uuid '4d71f42933d6bb0bce03fcb14e5f01ea32e1a896'
-    oldFile: !uuid '6667ef26a5ff5a63b3645adac43d39833a24ad22'
-  /application/index/view/common:
-    newFile: !uuid 'c4af648485b3145973389b6d5b7f7de7af221f6c'
-    oldFile: !uuid '03327b181b1ab21bb89e024eb677ed58f7494eb2'
-  /application/index/view/common/basic.html:
-    newFile: !uuid '328d6a29823da49fed2a7b2afae7e20345a183ed'
-    oldFile: !uuid '374054e6b8b8eeb66ccf13e6d84a8feba4886ffe'
-  /application/index/view/index:
-    newFile: !uuid '783d698be3d432df2cea766e8cdc4af1bbd26012'
-    oldFile: !uuid '4a40ac70da3ee71fea034c53628ba335ed136108'
-  /application/index/view/index/header.html:
-    newFile: !uuid '52ae3c8648e39cfa11058d7b4aeffafd9454fd0c'
-    oldFile: !uuid '2256070cb6b42765db947247f1a43cc24088483b'
-  /public:
-    newFile: !uuid 'a236df2e12af0c36311ec802b8256184bea89b64'
-    oldFile: !uuid 'a929e7a6e429da5cdb0c9621227a602bb633997b'
-  /public/static:
-    newFile: !uuid 'fad390b60ebc6305fa2ddfd611cebc872cd47f0e'
-    oldFile: !uuid '377091fafad23834bc595a13c6282e4f5a933299'
-  /public/static/js:
-    newFile: !uuid '0fed9273b53cc71909903ae60a1ec33102afef36'
-    oldFile: !uuid 'fb9ec3ac4a89b29af8cbd3e03f80cf75453444b6'
-  /public/static/js/alert.js:
-    newFile: !uuid '7eea6414e190c325d91c7601dc3aba169da6454d'
-    oldFile: null
-  /public/static/js/toast.js:
-    newFile: !uuid 'd08bd6a4c8a19eff33f93c515121991decd0ce6d'
-    oldFile: null
+    newFile: !uuid 'fe57bcdd391321da49dd09346e9a98a1da206a84'
+    oldFile: !uuid 'cffee357eee608c794aeab4ca19c64d8998315c0'
+  /application/index/controller/Msg.php:
+    newFile: !uuid '4f5ad9ee265f6610f75fc99dda8d44c50d494f4c'
+    oldFile: !uuid '272cac74fc785f6fa804dea1f05b00820637920a'
   /tp5.sql:
-    newFile: !uuid 'b0b6d75a91b51201163e845e3198b94ec0ff9555'
-    oldFile: !uuid '030dcc9660741f4f1f0ee0cb54e9cd252589e2bc'
-gitCommitId: !uuid '64c6f3e7dc09514488bc96c02206bfa4a560ceff'
+    newFile: !uuid 'd2bcf961cf4f6c38c6f2475d0ce7b3cfd54ab647'
+    oldFile: !uuid 'b0b6d75a91b51201163e845e3198b94ec0ff9555'
+gitCommitId: !uuid '2b0aeea68a457c5193195e9636065aa695787855'
 renames: {
   }
-revisionId: 962
+revisionId: 963
