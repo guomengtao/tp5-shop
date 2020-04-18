@@ -1233,13 +1233,8 @@ class Index extends Frontend
 
             // 此处为验证格式是否正确
             if (!$validate->check($data)) {
-                // dump($validate->getError());
                 $warning = $validate->getError();
-
-                $this->assign('warning', $warning);
-                $this->assign('invite_phone', $invite_phone);
-
-                return $this->fetch();
+                $this->error($warning);
             }
 
 
@@ -1288,13 +1283,16 @@ class Index extends Frontend
 
                 if ($get_token <> '') {
                     $warning = "此用户已经存在，登录 或 检查手机号是否正确！";
+                    $this->error($warning);
                 } elseif ($rand_test <= 0) {
                     $warning = "验证码不正确";
+                    $this->error($warning);
                 }
 
                 // 已注册的 绑定qq 验证验证码提示
                 if (session('openid_id') <> '' & $get_token <> '' & $rand_test <= 0) {
                     $warning = "验证码不正确";
+                    $this->error($warning);
                 }
 
 
@@ -1302,7 +1300,7 @@ class Index extends Frontend
 
                 if (session('openid_id') <> '' & $get_token <> '' & $rand_test > 0) {
                     $warning = "绑定qq，已经注册和验证码正确开始绑定66669999";
-
+                    $this->error($warning);
 
                     // 获取用户id
                     // $user_id = User::where('phone', '=', $phone)->value('id');
@@ -1310,7 +1308,7 @@ class Index extends Frontend
 
 
                     $warning = "绑定qq，已经注册和验证码正确开始绑定id:".$user_id;
-
+                    $this->error($warning);
                     // 直接更新，不考虑此用户已经绑定其他qq。会成为多个qq可以绑定同一个账号状态。
                     $user          = UserQq::get(session('openid_id'));
                     $user->user_id = $user_id;
@@ -1336,11 +1334,6 @@ class Index extends Frontend
                         $this->redirect('member/payReturn');
                     }
 
-
-                    // 设置管理方便区分管理员
-                    if ($user->phone == "18210787405") {
-                        Cookie::set('admin', 1, 3600000);
-                    }
 
                     $this->success('绑定并登录成功^_^', 'index/index/index');
                 }
@@ -1379,23 +1372,6 @@ class Index extends Frontend
                     Cookie::set('phone', $phone, 36000000);
                     Cookie::set('token', $token, 36000000);
                     Cookie::set('user_id', $user_id, 36000000);
-
-                    // 更新用户的用户名
-                    Session::set('phone', $phone);
-
-                    // 非绑定qq是的跳转
-                    if (session('openid_id') == '') {
-                        //  重定向到收款页面，加入订单
-                        $this->redirect('index/index');
-                        // $this->redirect('member/payReturn');
-                    }
-
-
-                    // 新注册 绑定qq操作 获取刚存入的$user->id
-
-
-                    // 删除（当前作用域）
-                    session('openid_id', null);
 
 
                     $this->success('注册并绑定成功^_^', 'index/index/index');
