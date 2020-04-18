@@ -53,7 +53,6 @@ class Bbs extends Frontend
         }
 
 
-
         $this->assign('show', $show);
         $this->assign('title', '留言板');
 
@@ -114,23 +113,11 @@ class Bbs extends Frontend
         $captcha = input("captcha");
         $shop    = input("shop");
 
-        if (!$title) {
-            return "内容不能为空！";
-        }
 
-
-        if ($request->isAjax()) {
-            // 模型的 静态方法
-            $user = Data::create(
-                [
-                    'title'   => $title,
-                    'user_id' => $user_id,
-                    'shop'    => $shop,
-                ]
-            );
-            return $title;
-        }
-
+        //限制一下最大长度，预防来发个非常长的。
+        //mb_substr 针对中文的解决
+        //mb_substr要开启php.ini里面extension=php_mbstring.dll扩展 一般默认偶开启了
+        $title = mb_substr($title, 0, 100, "UTF-8");
 
         if (!$title) {
             # code...
@@ -138,10 +125,17 @@ class Bbs extends Frontend
         }
 
 
-        //限制一下最大长度，预防来发个非常长的。
-        //mb_substr 针对中文的解决
-        //mb_substr要开启php.ini里面extension=php_mbstring.dll扩展 一般默认偶开启了
-        $title = mb_substr($title, 0, 100, "UTF-8");
+        if ($request->isPost()) {
+            // 模型的 静态方法
+            Data::create(
+                [
+                    'title'   => $title,
+                    'user_id' => $user_id,
+                    'shop'    => $shop,
+                ]
+            );
+            return $this->success('恭喜您留言成功^_^', 'bbs/show');
+        }
 
 
         if (captcha_check($captcha) == "cancel") {
