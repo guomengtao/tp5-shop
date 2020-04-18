@@ -96,6 +96,8 @@ class Index extends Frontend
             // 此处为验证格式是否正确
             if (!$validate->check($data)) {
                 $warning = $validate->getError();
+                $this->error($warning);
+                $this->error($warning);
             } else {
                 // 查询验证码是否正确
                 $rand_test = Sms::where('rand', '=', $rand)
@@ -108,8 +110,10 @@ class Index extends Frontend
                     // 更新密码为新密码
                     User::where('phone', $phone)->update(['password' => md5($password), 'token' => $token]);
                     $warning = '恭喜您！密码修改成功！';
+                    $this->success($warning);
                 } else {
                     $warning = '验证码错误';
+                    $this->error($warning);
                 }
             }
         }
