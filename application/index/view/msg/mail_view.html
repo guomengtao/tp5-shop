@@ -31,9 +31,12 @@
                     <!-- Message. Default to the left -->
                     <div class="direct-chat-msg">
                         <div class="direct-chat-infos clearfix">
-                            <span class="direct-chat-name float-left"> {$vo.user.nickname}
+                            <a href="#" class="user" data-user_id="{$vo.user.id}" >
+                                <span class="direct-chat-name float-left"> {$vo.user.nickname}
 
                             </span>
+                            </a>
+
                             <span class="direct-chat-timestamp float-right"> {$vo.create_time} </span>
                         </div>
                         <!-- /.direct-chat-infos -->
@@ -49,7 +52,9 @@
                     <!-- Message to the right -->
                     <div class="direct-chat-msg right">
                         <div class="direct-chat-infos clearfix">
+                             <a href="#" class="user" data-user_id="{$vo.user.id}" >
                             <span class="direct-chat-name float-right"> {$vo.user.nickname} </span>
+                             </a>
                             <span class="direct-chat-timestamp float-left">{$vo.create_time} （{$vo.msg?'已读':'未读'}）</span>
                         </div>
                         <!-- /.direct-chat-infos -->

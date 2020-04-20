@@ -1,0 +1,58 @@
+<div class="card bg-light">
+    <div class="card-header text-muted border-bottom-0">
+        会员ID：{$user.id}
+    </div>
+    <div class="card-body pt-0">
+        <div class="row">
+            <div class="col-7">
+                <h2 class="lead"><b>
+                    <a href="{:url('index/member/home',['user_id'=>$user.id])}" style="width: 30px;height: 30px">
+                        {$user.nickname?:$user.id}</a>
+                </b></h2>
+
+                <p class="text-muted text-sm"><b>年龄: </b> {:date('Y')-$user.userqq.id} </p>
+                <ul class="ml-4 mb-0 fa-ul text-muted">
+                    <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span>
+                        {$user.id}
+                    </li>
+                    <li class="small"><span class="fa-li"><i class="fas fa-lg fa-database"></i></span>
+                        注册: {$user.create_time}
+                    </li>
+                    <li class="small"><span class="fa-li"><i class="fas fa-lg fa-tachometer-alt"></i></span>
+                        更新: {$user.update_time}
+                    </li>
+                </ul>
+            </div>
+            <div class="col-5 text-center">
+                <img src="{$user.photo?:'__STATIC__/images/logo.jpg'}" alt=""
+                     class="img-circle img-fluid">
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <div class="text-right">
+            <a href="#" class="btn btn-sm bg-teal" data-toggle="tooltip" title="发私信">
+                <i class="fas fa-comments"></i>
+            </a>
+
+
+            {if condition="$user.followed"}
+
+
+            <a href="{:url('index/member/follow',['follow_id'=>$user.id,'editfollow'=>1]  )}"
+               class="btn btn-sm btn-success">
+                <i class="fas fa-user"></i> 相互关注
+            </a>
+
+
+            {else /}
+
+
+            <a href="{:url('index/member/follow',['follow_id'=>$user.id,'editfollow'=>1]  )}"
+               class="btn btn-sm btn-primary">
+                <i class="fas fa-user"></i> 加关注
+            </a>
+            {/if}
+        </div>
+    </div>
+</div>

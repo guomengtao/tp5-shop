@@ -1,12 +1,26 @@
 {layout name="common/basic" /}
 
 <table class="table table-striped">
+    <thead>
+    <tr>
+        <th>时间</th>
+        <th>发件人</th>
+        <th>收件人</th>
+        <th>内容</th>
+        <th>对方是否已读</th>
+    </tr>
 
+    </thead>
     <tbody>
     {volist name="data" id="vo"}
     <tr>
         <th scope="row">{$vo.create_time}</th>
-
+        <td>
+            <a href="" class="user" data-user_id="{$vo.from}">{$vo.from}</a>
+        </td>
+        <td>
+            <a href="" class="user" data-user_id="{$vo.to}">{$vo.to}</a>
+        </td>
         <td>
             <a href="{:url('index/msg/mail_view',['group_id'=>$vo.group_id,'from'=>$vo.from,'msg_null_all'=>$vo.msg_null_all])}">{$vo.title} </a>
         </td>
@@ -17,6 +31,8 @@
 
 
         </td>
+
+
     </tr>
     {/volist}
 

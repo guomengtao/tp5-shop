@@ -26,10 +26,7 @@ class User extends model
         return $user;
     }
 
-    public function checkFollow()
-    {
-        return 666;
-    }
+
 
     public function getFollowedAttr($value, $data)
     {
@@ -83,6 +80,7 @@ class User extends model
         // 查询他关注了用户
         return $this->hasMany('fans', 'user_id', 'id');
     }
+
 
     // 查询关联的多个粉丝fnsa
     public function fans()

@@ -85,7 +85,7 @@
             <tr>
                 <th> {$user.id}</th>
                 <td>
-                    <a href="{:url('index/member/home', ['user_id' => $user.id])}" >
+                    <a href="{:url('index/member/home', ['user_id' => $user.id])}"  class="user" data-user_id="{$user.id}">
                         <img style="height: 50px;width: 50px" src="{$user.photo?:'__STATIC__/images/logo.jpg'}" class="brand-image img-circle elevation-3"/>
                         {$user.nickname?$user.nickname:$user.id} </a>
                 </td>

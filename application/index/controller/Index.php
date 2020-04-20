@@ -2246,6 +2246,13 @@ class Index extends Frontend
         return $this->fetch();
     }
 
+    public function user_info(){
+        $user_id = input("user_id");
+        $data = User::find($user_id);
+        $this->assign('user',$data);
+        return $this->fetch();
+
+    }
     public function add()
     {
         $title   = input('param.title');
