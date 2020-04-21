@@ -13,46 +13,11 @@
 
     <script src="https://www.layuicdn.com/layer/layer.js"></script>
 
-    <script src="__STATIC__/js/alert.js"></script>
 
     <!--跳转变弹窗-->
     <script src="__STATIC__/js/toast.js"></script>
-    <script>
-        var _hmt = _hmt || [];
-        (function () {
-            var hm = document.createElement("script");
-            hm.src = "https://hm.baidu.com/hm.js?bd7e220b3efc6577ecbd05dc98af403a";
-            var s = document.getElementsByTagName("script")[0];
-            s.parentNode.insertBefore(hm, s);
-        })();
-    </script>
-    <script>
-        var _hmt = _hmt || [];
-        (function () {
-            var hm = document.createElement("script");
-            hm.src = "https://hm.baidu.com/hm.js?98f0256020f52b122738fde23ef1732c";
-            var s = document.getElementsByTagName("script")[0];
-            s.parentNode.insertBefore(hm, s);
-        })();
-        // 设置bootstrap导航条鼠标经过可以自动下拉打开
-        $(document).ready(function () {
-            dropdownOpen();//调用
-        });
 
-        /**
-         * 鼠标划过就展开子菜单，免得需要点击才能展开
-         */
-        function dropdownOpen() {
 
-            var $dropdownLi = $('li.dropdown');
-
-            $dropdownLi.mouseover(function () {
-                $(this).addClass('open');
-            }).mouseout(function () {
-                $(this).removeClass('open');
-            });
-        }
-    </script>
 
 </head>
 

@@ -1,71 +1,110 @@
 {layout name="common/basic" /}
 
+ <button type="button" class="btn btn-warning" title="Popover title"
+			  data-toggle="popover" data-placement="right"
+			data-content="右侧的 Popover 中的一些内容">
+		右侧的 Popover
+	</button>
+ <script>
+        $(function () {
+            $("#LinkDIV").html('<button type="btn btn-lg btn-primary" data-toggle="popover" id="temp3">弹出框3</button>');
+            $('[data-toggle="popover"]').each(function () {
+                var element = $(this);
+                var id = element.attr('id');
+                var txt = element.html();
+                element.popover({
+                    trigger: 'manual',
+                    placement: 'bottom', //top, bottom, left or right
+                    title: txt,
+                    html: 'true',
+                    content: ContentMethod(txt),
+
+                }).on("mouseenter", function () {
+                    var _this = this;
+                    $(this).popover("show");
+                    $(this).siblings(".popover").on("mouseleave", function () {
+                        $(_this).popover('hide');
+                    });
+                }).on("mouseleave", function () {
+                    var _this = this;
+                    setTimeout(function () {
+                        if (!$(".popover:hover").length) {
+                            $(_this).popover("hide")
+                        }
+                    }, 100);
+                });
+            });
+        });
+        function ContentMethod(txt) {
+            return '<table class="table table-bordered"><tr><td>' + txt + '</td><td>BB</td><td>CC</td><td>DD</td></tr>' +
+                    '<tr><td>' + txt + '</td><td>BB</td><td>CC</td><td>DD</td></tr>' +
+                    '<tr><td>' + txt + '</td><td>BB</td><td>CC</td><td>DD</td></tr>'+
+                    '<tr><td>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</td><td>BB</td><td>CC</td><td>DD</td></tr></table>';
+        }
+    </script>
+
+<h3>弹出框实例</h3> <br>
+<a href="#" data-user_id="393" class="author">tom</a>
+
+<a href="#" data-user_id="394" class="author">jack</a>
+
+<a href="#" data-user_id="395" class="author">grace</a>
 
 
-    <h3>弹出框实例</h3> <br>
-    <a href="#" data-user_id="393" class="author">tom</a>
+<div class="row">
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
 
-    <a href="#" data-user_id="394" class="author">jack</a>
+                <p class="card-text">
+                    Some quick example text to build on the card title and make up the bulk of the card's
+                    content.
+                </p>
 
-    <a href="#" data-user_id="395" class="author">grace</a>
-
-
-
-
-    <div class="row">
-        <div class="col-lg-6">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-
-                    <p class="card-text">
-                        Some quick example text to build on the card title and make up the bulk of the card's
-                        content.
-                    </p>
-
-                    <a href="#" class="card-link">Card link</a>
-                    <a href="#" class="card-link">Another link</a>
-                </div>
+                <a href="#" class="card-link">Card link</a>
+                <a href="#" class="card-link">Another link</a>
             </div>
-
-            <div class="card card-primary card-outline">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-
-                    <p class="card-text">
-                        Some quick example text to build on the card title and make up the bulk of the card's
-                        content.
-                    </p>
-                    <a href="#" class="card-link">Card link</a>
-                    <a href="#" class="card-link">Another link</a>
-                </div>
-            </div><!-- /.card -->
         </div>
-        <!-- /.col-md-6 -->
-        <div class="col-lg-6">
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="m-0">Featured</h5>
-                </div>
-                <div class="card-body">
-                    <h6 class="card-title">Special title treatment</h6>
 
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
+        <div class="card card-primary card-outline">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+
+                <p class="card-text">
+                    Some quick example text to build on the card title and make up the bulk of the card's
+                    content.
+                </p>
+                <a href="#" class="card-link">Card link</a>
+                <a href="#" class="card-link">Another link</a>
             </div>
-
-            <div class="card card-primary card-outline">
-                <div class="card-header">
-                    <h5 class="m-0">Featured</h5>
-                </div>
-                <div class="card-body">
-                    <h6 class="card-title">Special title treatment</h6>
-
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-        </div>
-        <!-- /.col-md-6 -->
+        </div><!-- /.card -->
     </div>
+    <!-- /.col-md-6 -->
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="m-0">Featured</h5>
+            </div>
+            <div class="card-body">
+                <h6 class="card-title">Special title treatment</h6>
+
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+        </div>
+
+        <div class="card card-primary card-outline">
+            <div class="card-header">
+                <h5 class="m-0">Featured</h5>
+            </div>
+            <div class="card-body">
+                <h6 class="card-title">Special title treatment</h6>
+
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+        </div>
+    </div>
+    <!-- /.col-md-6 -->
+</div>
