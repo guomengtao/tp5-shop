@@ -68,7 +68,7 @@ $(function () {
             $.ajax({
                 url: '/index/index/user_info/',
                 data: {
-                    id: id,
+                    user_id: id,
                     type: 'json'
                 },
                 success: function (t) {
