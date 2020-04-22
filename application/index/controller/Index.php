@@ -1761,7 +1761,7 @@ class Index extends Frontend
     public function index()
     {
         //重定向到News模块的Category操作
-        $this->redirect('index/member/registration');
+        $this->redirect('index/index/course');
         /**
          * 查询最新会员
          * 直接读取user_qq表里的新会员
