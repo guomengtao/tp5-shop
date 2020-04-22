@@ -32,11 +32,15 @@ $(function () {
 
                     if (ret.code == 1) {
 
-                        layer.msg(ret.msg, {icon: 1});
+
+                        setTimeout(function () {
+                            layer.msg(ret.msg, {icon: 1});
+                        }, 1000);
+                        
                         console.log("tp返回数据处理成功");
                         // 跳转
                         window.location.href = ret.url;
-                    }else {
+                    } else {
                         layer.msg(ret.msg, function () {
                             //关闭后的操作
                         });
