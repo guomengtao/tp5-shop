@@ -335,22 +335,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 <!--跳转变弹窗-->
 <script src="__STATIC__/js/toast.js"></script>
+<!-- 公共js-->
+<script src="__STATIC__/js/common.js"></script>
+<!-- 用户信息弹窗-->
+<script src="__STATIC__/js/user_info.js"></script>
 
-<script>
-
-
-    console.log(1);
-
-
-    jQuery("#fa-bars").click(function () {
-        console.log(2);
-        $.get("{:url('admin/msg/sidebar')}",
-            function (data) {
-                console.log("Data Loaded: " + data);
-            });
-    });
-
-
-</script>
 </body>
 </html>

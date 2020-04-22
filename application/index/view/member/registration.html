@@ -29,9 +29,6 @@
                         <button type="submit" class="btn btn-danger">扫码签到</button>
                     </div>
                 </form>
-<h3> 代码直播
-<a href="https://live.bilibili.com/14324019?from=search&seid=3436747137464455810">查看直播</a>
-</h3>
             </h2>
         </div>
         <div class="panel panel-danger" style="display: none">
@@ -181,7 +178,7 @@
                                     </a>
                                 </div>
                                 <div class="media-body">
-                                    <small><a href="{:url('index/member/home', ['user_id' => $user.user_id])}">{$user.user.nickname?$user.user.nickname:$user.user_id}</a>
+                                    <small><a href="{:url('index/member/home', ['user_id' => $user.user_id])}" class="user" data-user_id="{$user.user_id}">{$user.user.nickname?$user.user.nickname:$user.user_id}</a>
                                         NO.<span style="color: #D8582B;font-weight: bold;">{$k}</span></small>
                                     <h5><small>签到时间：<span
                                             style="color: #D8582B;font-weight: bold;">{$user.create_time}</span></small>

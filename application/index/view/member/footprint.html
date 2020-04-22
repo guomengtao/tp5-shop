@@ -43,7 +43,7 @@
                             <tr>
                                 <td> {$user.create_time}</td>
                                 <td>
-                                    <a href="{:url('index/member/home',['user_id'=>$user.user_id])} ">{$user.user.nickname?$user.user.nickname:
+                                    <a class="user" data-user_id="{$user.user_id}" href="{:url('index/member/home',['user_id'=>$user.user_id])} ">{$user.user.nickname?$user.user.nickname:
                                         $user.user_id} </a>
                                     ({$user.ip})  {$user.human.danger}
                                 </td>
