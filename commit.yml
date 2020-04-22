@@ -2,61 +2,19 @@
 branches: {
   }
 fileChange:
-  /application:
-    newFile: !uuid 'a06b4ead6f329f39f59ac774cc6deaf4a86f3175'
-    oldFile: !uuid 'fd26aa5defa0cbef3d896e7a0734bc482e43ffbb'
-  /application/admin:
-    newFile: !uuid '9aa049c3cc99f3762de0fd2fcb6d26fd0f51e86c'
-    oldFile: !uuid '24649623a65c79cba697f559759a0c20dac539f0'
-  /application/admin/view:
-    newFile: !uuid 'ac7c4e7a34ac723a5e36183c2c90123b6e5beea5'
-    oldFile: !uuid 'a00d0e004bade133fbab18f1bc20044df01fdfa6'
-  /application/admin/view/common:
-    newFile: !uuid 'f9edaa8a60dba2d0177e2e6207f200b976d96157'
-    oldFile: !uuid '89d2632591079dca1899b415ad65597d24d0e886'
-  /application/admin/view/common/basic.html:
-    newFile: !uuid '7ad8997d15b485fa3897d806953a376f915d4430'
-    oldFile: !uuid 'b4efcbe7ed7617ee98285554f1cbdbc054ecfc36'
-  /application/index:
-    newFile: !uuid '8c587dc65b91c53d9a237fc627e2d488cd604c28'
-    oldFile: !uuid 'ee9446d986f077beb29bbe8f6d23adc2a4f1f1b7'
-  /application/index/view:
-    newFile: !uuid '0334c081e654fc94b5bce40a4c58318b0e65a0b1'
-    oldFile: !uuid 'ab06d4c91c3f5feacb6957966489ad41e86ce5e6'
-  /application/index/view/index:
-    newFile: !uuid '23c704edcdeb6a7e423d00107e9295a6604819e6'
-    oldFile: !uuid 'b38b0b97d39bad6bb6445d36414ffa3e893d935d'
-  /application/index/view/index/user_info.html:
-    newFile: !uuid 'a6136045ea07a7b7784cd2029e04480a8a8fe8b0'
-    oldFile: !uuid '2b6f44e8bc0b58ce590bf1e01ac86860e74c4b66'
-  /application/index/view/member:
-    newFile: !uuid '2d4162d06f52129b70980e749965c1e21d2575ed'
-    oldFile: !uuid '4df9f4dc76fd09f8f8451112440d952a38a87f61'
-  /application/index/view/member/footprint.html:
-    newFile: !uuid 'a67195fba8963e51614727d85f62be1399b33c50'
-    oldFile: !uuid '8327f99b618cd885ff6fa1b2750a86a121e47842'
-  /application/index/view/member/registration.html:
-    newFile: !uuid '79c3f15b468f747de43f9669a2b8a3b23446da54'
-    oldFile: !uuid '3ad23d780feb8a80d986332e6b506b796005fee0'
-  /application/index/view/msg:
-    newFile: !uuid '5320799cd4cda2c465843e277a4137cce77f908d'
-    oldFile: !uuid 'e63e45347390e7ec85230ed2c3cf044bb2883dc7'
-  /application/index/view/msg/index.html:
-    newFile: !uuid '19c2ab71024ac2fe8299a46823c8245c9f62382a'
-    oldFile: !uuid 'ee0c3a301ed18cfa71e5f0fe91af00ba94c562e8'
   /public:
-    newFile: !uuid 'c0ed540e26df494a180a03b6a968d45c78e0c0b9'
-    oldFile: !uuid 'f12b4e0b21a10d47337b47634e8808e08304f633'
+    newFile: !uuid 'f2f11b0d25a1dc3f7b0347b427f97f1e95ce9802'
+    oldFile: !uuid 'c0ed540e26df494a180a03b6a968d45c78e0c0b9'
   /public/static:
-    newFile: !uuid '5b1576dff521e993e2e76656a146254f33a5ec96'
-    oldFile: !uuid '9079df418c80bddae1dca30efeed6e40df42811d'
+    newFile: !uuid 'd5799e26252574751770cb53abd29e5110f9396a'
+    oldFile: !uuid '5b1576dff521e993e2e76656a146254f33a5ec96'
   /public/static/js:
-    newFile: !uuid '23e12072ba2714bfe8adb1f2de806d88f46af3e1'
-    oldFile: !uuid '4a84ca9d3bea27c198862ba71385e80e93665328'
-  /public/static/js/user_info.js:
-    newFile: !uuid '21cd87201d5c8701d239a345c0871cc55279265f'
-    oldFile: !uuid '552d8869a984c7f4f4d4ba75a86cf624282a59cd'
-gitCommitId: !uuid '12fcc53442d38eac99127ca61a350f627b398037'
+    newFile: !uuid 'cb9a034ffda3aa5da0960ae75e24a303d85d5f25'
+    oldFile: !uuid '23e12072ba2714bfe8adb1f2de806d88f46af3e1'
+  /public/static/js/toast.js:
+    newFile: !uuid '8c6faeb9a0c276ac370dc0194b4d03aba276f973'
+    oldFile: !uuid '52f7a23a0d566ff20b38959e0fa83a3c2a5ad514'
+gitCommitId: !uuid 'e1e18c9a9b872a0c28796a8609009fa0a818599b'
 renames: {
   }
-revisionId: 970
+revisionId: 971
