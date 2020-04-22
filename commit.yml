@@ -3,18 +3,18 @@ branches: {
   }
 fileChange:
   /public:
-    newFile: !uuid '9e92be042148712b50b11befdaeff690eba9a5c9'
-    oldFile: !uuid 'f2f11b0d25a1dc3f7b0347b427f97f1e95ce9802'
+    newFile: !uuid '6483439983c30f4fa116630ef5da1ed93b7464a9'
+    oldFile: !uuid '9e92be042148712b50b11befdaeff690eba9a5c9'
   /public/static:
-    newFile: !uuid '6d3f9b6d44432249933ce750d3bb21d44b230c22'
-    oldFile: !uuid 'd5799e26252574751770cb53abd29e5110f9396a'
+    newFile: !uuid '062014cfd3a74c51e22926282c7e24c242d24bb7'
+    oldFile: !uuid '6d3f9b6d44432249933ce750d3bb21d44b230c22'
   /public/static/js:
-    newFile: !uuid '057aa008f310f674c0f311bba97408dda8606be6'
-    oldFile: !uuid 'cb9a034ffda3aa5da0960ae75e24a303d85d5f25'
-  /public/static/js/toast.js:
-    newFile: !uuid 'db70ea20e6be9a512134674396459244b7516f9a'
-    oldFile: !uuid '8c6faeb9a0c276ac370dc0194b4d03aba276f973'
-gitCommitId: !uuid '52af5c866e3b50133c67c72b52acad35a5ecf3b6'
+    newFile: !uuid '74e96fe5c2c6183a38c7656b966ab885eab86904'
+    oldFile: !uuid '057aa008f310f674c0f311bba97408dda8606be6'
+  /public/static/js/user_info.js:
+    newFile: !uuid '706ebd98dccb8c9e5d7e89fd8b737f97bbe72300'
+    oldFile: !uuid '21cd87201d5c8701d239a345c0871cc55279265f'
+gitCommitId: !uuid 'eec0e40891a94057130bd820023d3218b6999069'
 renames: {
   }
-revisionId: 972
+revisionId: 973
