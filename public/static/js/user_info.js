@@ -61,7 +61,7 @@ $(function () {
 
         console.log('1');
         var e = this;
-        var id = $(e).data("id");
+        var id = $(e).data("user_id");
         $(e).data("st") && clearTimeout($(e).data("st"));
 
         var o = setTimeout(function () {
