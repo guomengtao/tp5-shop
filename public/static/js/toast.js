@@ -31,15 +31,18 @@ $(function () {
                     console.log(ret.code);
 
                     if (ret.code == 1) {
-
-
-                        setTimeout(function () {
-                            layer.msg(ret.msg, {icon: 1});
-                        }, 1000);
-                        
                         console.log("tp返回数据处理成功");
-                        // 跳转
-                        window.location.href = ret.url;
+
+                        layer.msg(ret.msg, {
+                            icon: 1,
+                             time: 3000, //s后自动关闭
+                        });
+                        setTimeout(function () {
+                            window.location.href = ret.url;
+
+                        }, 1000);
+
+
                     } else {
                         layer.msg(ret.msg, function () {
                             //关闭后的操作
