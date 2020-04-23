@@ -95,7 +95,7 @@ $(function () {
         var t = this;
         $(t).data("st") && clearTimeout($(t).data("st")), setTimeout(function () {
             $(".popover:hover").length || $(t).popover("hide")
-        }, 300)
+        }, 0)
     });
 
 
