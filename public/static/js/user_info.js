@@ -69,7 +69,7 @@ $(function () {
         console.log('my=' + my);
         var l = $(".popover:hover").length;
         console.log(l);
-     t.popover("hide");
+        l || t.popover("hide");
 
 
     });
