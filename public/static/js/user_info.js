@@ -13,10 +13,10 @@ $(function () {
         $(this).attr('data-html', true);
         $(this).attr('data-trigger', 'manual');
         // $(this).attr('data-title', "个人信息");
-        // $(this).attr('data-content', load_html);
+        $(this).attr('data-content', load_html);
         console.log('ok');
-        // $(this).popover('show');
-        $(this).attr('data-content', "ret");
+        $(".popover").popover("hide");
+        $(this).popover('show');
         var check = $(this);
 
         myVar = setTimeout(function () {
@@ -32,6 +32,7 @@ $(function () {
                     console.log("url请求成功");
                     // console.log(ret);
                     check.attr('data-content', ret);
+                    $(".popover").popover("hide");
                     check.popover('show');
                     $(".popover").on("mouseleave", function () {
                         console.log('inside');
@@ -46,7 +47,7 @@ $(function () {
             })
 
         }, 500);
-
+        console.log('myvar=' + myVar);
         $(this).data("myVar", myVar);
     });
 
@@ -59,10 +60,16 @@ $(function () {
         //     close.popover('hide');
         // }, 3000)
 
+        var my = t.data("myVar");
+
+        console.log('myv=' + my);
+
         clearTimeout(t.data("myVar"));
+        my = t.data("myVar");
+        console.log('my=' + my);
         var l = $(".popover:hover").length;
         console.log(l);
-        l || t.popover("hide");
+     t.popover("hide");
 
 
     });
@@ -92,7 +99,7 @@ $(function () {
 //                         html: !0,
 //                         content: t,
 //                         container: document.body
-//                     }), $(e).popover("show"), $(".popover").on("mouseleave", function () {
+//                     }), $(".popover").popover("hide") , $(e).popover("show"), $(".popover").on("mouseleave", function () {
 //                          console.log('33');
 //                         $(e).popover("hide")
 //                     }));
@@ -103,19 +110,20 @@ $(function () {
 //                     });
 //                 }
 //             })
-//         }, 300);
+//         }, 500);
 //         $(e).data("st", o);
 //     });
 //
 //
-//     $('.usery').mouseleave(function () {
+//     $('.user').mouseleave(function () {
+//         console.log('999');
 //         var t = this;
 //         $(t).data("st") && clearTimeout($(t).data("st")), setTimeout(function () {
 //             $(".popover:hover").length || $(t).popover("hide")
 //         }, 0)
 //     });
 //
-//     $('.user').mouseleave(function () {
+//     $('.usert').mouseleave(function () {
 //         var t = this;
 //         var l = $(".popover:hover").length;
 //         console.log(l);
