@@ -3,42 +3,18 @@ branches: {
   }
 fileChange:
   /application:
-    newFile: !uuid 'e833de65c8d51d22da56fb2a20fbbf7a2ec4ccb4'
-    oldFile: !uuid '991abf247fda8151ac1e86b0bf71776fb6a6f651'
+    newFile: !uuid '3a05c75d94a84ce37b0c960f9d913414f411c4da'
+    oldFile: !uuid 'e833de65c8d51d22da56fb2a20fbbf7a2ec4ccb4'
   /application/index:
-    newFile: !uuid '10db9c890321f59d3570ba86fb59175e134c4c15'
-    oldFile: !uuid '1e853f17a1ae87d5d0ba1d73a899be4a2bb834e7'
+    newFile: !uuid '12230cf66b742a41441d427c955b426f3604dfd3'
+    oldFile: !uuid '10db9c890321f59d3570ba86fb59175e134c4c15'
   /application/index/controller:
-    newFile: !uuid 'd6742fe669fdaed04467eefae391c61afa0401cc'
-    oldFile: !uuid '7edba9eab69547bc3b9ffa6fb80c5d40dd97987c'
+    newFile: !uuid '0efa0b49b02f7e7e775cdda548370421e1d7877e'
+    oldFile: !uuid 'd6742fe669fdaed04467eefae391c61afa0401cc'
   /application/index/controller/Index.php:
-    newFile: !uuid 'e3924331f22047055f1cf376955eece5f94ea835'
-    oldFile: !uuid '072a2b5b97fb1a84c7f0c55b64b1b50baf0d7b09'
-  /application/index/view:
-    newFile: !uuid '607cb8c1474218e8d34eab0bde5b3c75db8ec690'
-    oldFile: !uuid '0334c081e654fc94b5bce40a4c58318b0e65a0b1'
-  /application/index/view/index:
-    newFile: !uuid '295c0ada4e74cff29869d1c05e82f29aba3cb446'
-    oldFile: !uuid '23c704edcdeb6a7e423d00107e9295a6604819e6'
-  /application/index/view/index/like_default.html:
-    newFile: !uuid '727b8053b8d7f6860ce5ce1022a2a7226f7a068d'
-    oldFile: null
-  /public:
-    newFile: !uuid 'c6cf3d05bbf51d988f28ad62f0a8c1750057ca21'
-    oldFile: !uuid '8b333838c24aefef9bfaba1436c5bd3ed2147199'
-  /public/static:
-    newFile: !uuid 'c49ac63dbe839f4097603e738f3b8e8827ae6662'
-    oldFile: !uuid 'd635564f89063ac124c1215b1f43dd4dea6ff164'
-  /public/static/js:
-    newFile: !uuid '51a8dcdf421aa3bbb2212bb62ffb74d657fde751'
-    oldFile: !uuid '7deda9081b46d65c726900eb58fbe887ba735364'
-  /public/static/js/toast.js:
-    newFile: !uuid '1cb65556736e2f33fca3353796162917a9128245'
-    oldFile: !uuid 'db70ea20e6be9a512134674396459244b7516f9a'
-  /public/static/js/user_info.js:
-    newFile: !uuid '32f2cf1833bb834d71911026414db4f7609c34ab'
-    oldFile: !uuid '28fb371e40a206ab6212ddea6f81673a322f7ba5'
-gitCommitId: !uuid '4c6682e04f5404d5f7e3161677825f882b167d16'
+    newFile: !uuid 'd5bcae110deb49418ec9b58bad28c8392fd3bd3a'
+    oldFile: !uuid 'e3924331f22047055f1cf376955eece5f94ea835'
+gitCommitId: !uuid '316a81feb26cb9435541f4846b66f2cd414197fa'
 renames: {
   }
-revisionId: 980
+revisionId: 981
