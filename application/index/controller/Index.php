@@ -849,12 +849,14 @@ class Index extends Frontend
         $search = input('search');
 
         if (Request::instance()->isAjax()) {
+            if (!$search) {
+                $this->success('请输入关键词', '/index/index/like/search/'.$search);
+            }
 
-             $this->success('搜索中...','/index/index/like/search/'.$search);
+            $this->success('搜索中...', '/index/index/like/search/'.$search);
         }
 
         if (!$search) {
-
             $this->assign('title', '搜索');
             return $this->fetch('like_default');
         }
