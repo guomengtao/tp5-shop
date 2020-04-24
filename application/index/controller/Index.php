@@ -848,9 +848,9 @@ class Index extends Frontend
     {
         $search = input('search');
 
-        if (Request::instance()->isPost()) {
+        if (Request::instance()->isAjax()) {
 
-             $this->success('搜索中...','/index/index/like/a/a');
+             $this->success('搜索中...','/index/index/like/search/'.$search);
         }
 
         if (!$search) {
