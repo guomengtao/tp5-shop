@@ -9,9 +9,11 @@ $(function () {
         console.log(888);
 
         url = $(this).closest("form").attr("action");
+        type = $(this).closest("form").attr("method");
         data = $(this).serialize();
 
         console.log(url);
+        console.log(type);
         console.log(data);
 
         var $button = $(this).find('button')
@@ -21,13 +23,13 @@ $(function () {
 
         $.ajax({
                 url: url,
-                type: 'POST',
+                type: type,
                 data: data,
                 dataType: 'json',
                 success: function (ret) {
                     layer.closeAll('loading');
                     console.log("url请求成功");
-                    console.log(ret);
+                    // console.log(ret);
                     console.log(ret.code);
 
                     if (ret.code == 1) {
@@ -35,7 +37,7 @@ $(function () {
 
                         layer.msg(ret.msg, {
                             icon: 1,
-                             time: 3000, //s后自动关闭
+                            time: 3000, //s后自动关闭
                         });
                         setTimeout(function () {
                             window.location.href = ret.url;

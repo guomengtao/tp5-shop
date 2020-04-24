@@ -848,6 +848,17 @@ class Index extends Frontend
     {
         $search = input('search');
 
+        if (Request::instance()->isPost()) {
+
+             $this->success('搜索中...','/index/index/like/a/a');
+        }
+
+        if (!$search) {
+
+            $this->assign('title', '搜索');
+            return $this->fetch('like_default');
+        }
+
         $show    = Shop::course($search);
         $title   = "搜索".$search;
         $show123 = Shop::where('label|title', 'like', '%'.$search.'%')->cache(3)->order('sort', 'asc')->paginate(10);
@@ -2246,13 +2257,14 @@ class Index extends Frontend
         return $this->fetch();
     }
 
-    public function user_info(){
+    public function user_info()
+    {
         $user_id = input("user_id");
-        $data = User::find($user_id);
-        $this->assign('user',$data);
+        $data    = User::find($user_id);
+        $this->assign('user', $data);
         return $this->fetch();
-
     }
+
     public function add()
     {
         $title   = input('param.title');

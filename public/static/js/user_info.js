@@ -54,7 +54,7 @@ $(function () {
     $('.user').mouseleave(function () {
 
         var t = $(this);
-        console.log('levave');
+        console.log('leave');
         // setTimeout(function () {
         //     console.log('close');
         //     close.popover('hide');
@@ -64,12 +64,13 @@ $(function () {
 
         console.log('myv=' + my);
 
-        clearTimeout(t.data("myVar"));
+
         my = t.data("myVar");
         console.log('my=' + my);
         var l = $(".popover:hover").length;
         console.log(l);
-        l || t.popover("hide");
+        l ||  clearTimeout(t.data("myVar"));
+        l ||  t.popover("hide");
 
 
     });
