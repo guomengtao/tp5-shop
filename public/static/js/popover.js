@@ -6,7 +6,7 @@ $(function () {
 
         var e = this;
         $(e).data('leave', false);
-        var loadHtml = ' <div class="spinner-grow text-primary" role="status">\n' +
+        var loadHtml = ' <div class="spinner-grow text-warning" role="status">\n' +
             '  <span class="sr-only">Loading...</span>\n' +
             '</div>';
         $(this).popover({
