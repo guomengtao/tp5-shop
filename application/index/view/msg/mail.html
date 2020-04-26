@@ -16,10 +16,10 @@
     <tr>
         <th scope="row">{$vo.create_time}</th>
         <td>
-            <a href="" class="user" data-user_id="{$vo.from}">{$vo.from}</a>
+            <a href="" data-toggle="popover" data-id="{$vo.from}">{$vo.from}</a>
         </td>
         <td>
-            <a href="" class="user" data-user_id="{$vo.to}">{$vo.to}</a>
+            <a href="" data-toggle="popover" data-id="{$vo.to}">{$vo.to}</a>
         </td>
         <td>
             <a href="{:url('index/msg/mail_view',['group_id'=>$vo.group_id,'from'=>$vo.from,'msg_null_all'=>$vo.msg_null_all])}">{$vo.title} </a>
