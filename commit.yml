@@ -2,34 +2,10 @@
 branches: {
   }
 fileChange:
-  /application:
-    newFile: !uuid 'd035cdbdcccc0e5a4c24453fa548820be91e6502'
-    oldFile: !uuid '2fb1247dece0bea5d99d2932d938cade75c7d01d'
-  /application/index:
-    newFile: !uuid '180a7c3c814e27aa6b056627b07315b104237d6a'
-    oldFile: !uuid '74c85dfe4aecdf8000c8313a57319d8fe8d42a19'
-  /application/index/view:
-    newFile: !uuid 'd6195e7dc270d1431b3ea2ca48d4f15f5b502ace'
-    oldFile: !uuid '9f478dd02727506790f5535e79a90eafd9d3e5de'
-  /application/index/view/ajax:
-    newFile: !uuid 'b7c04ad1f6fe37943981d8cc41f3c742f0f00524'
-    oldFile: !uuid '668e3d7b342698f793df0b994ea5362bebd2d89f'
-  /application/index/view/ajax/ajaxrun.html:
-    newFile: !uuid '8290e6d4dc277b7e9c276d2e625a36a83eaff772'
-    oldFile: !uuid '17a95de0ba5f60a3836ddf7a373295b7c4f4520d'
-  /public:
-    newFile: !uuid '9714a02f5bf27bad99ea800005af6fe999833723'
-    oldFile: !uuid '3220e615a825171358102a5dea3b6582e1b79fbe'
-  /public/static:
-    newFile: !uuid 'c01fc5b03b133afd626fa6bf2b4e8a4b9fea5df5'
-    oldFile: !uuid '20b69665762e487d3570cefc4db7107c4b80b326'
-  /public/static/js:
-    newFile: !uuid 'd0e976e242472a9094a63ff823878968e3ac3607'
-    oldFile: !uuid '22a1b3f091869d36b7742cf3576902cd3d8deccf'
-  /public/static/js/popover.js:
-    newFile: !uuid '6e18ab94fdab0843b7204913bbb2c8316c8b90a8'
-    oldFile: !uuid 'ba8d61b69630d053ba495ef28e333f07f4d3d9c6'
-gitCommitId: !uuid '3fb7e744cc9cdf0fba12507463f9c1e459cbc803'
+  /README.md:
+    newFile: !uuid 'e2b2055e8d71f10d44b8be1e608ab0c28403df8c'
+    oldFile: !uuid '2158e3d80b811604459802a8a000b31d917edeed'
+gitCommitId: !uuid '2b4edd8dd65cb35ac094a76c39c377fb8bc1ea35'
 renames: {
   }
-revisionId: 984
+revisionId: 985
