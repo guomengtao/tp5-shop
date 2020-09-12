@@ -313,9 +313,6 @@ class Index extends Frontend
     }
 
 
-    //    这里是控制器
-
-
     public function curl_copy_cookie()
     {
 //   $str = '<div class="name" id="abc">电影</div>';
@@ -885,6 +882,12 @@ class Index extends Frontend
         $this->assign('date', date('Ymdhis'));
         // 渲染模板输出
         return $this->fetch();
+    }
+
+    public function vip(){
+        $this->assign('title', '搜索');
+        return $this->fetch();
+
     }
 
     public function pay()
@@ -1510,7 +1513,13 @@ class Index extends Frontend
         return $this->fetch();
     }
 
-//人性化时间显示
+
+    /**
+     * 人性化时间显示
+     * @param $time
+     *
+     * @return false|string
+     */
     public function formatTime($time)
     {
         $rtime = date("m-d H:i", $time);
