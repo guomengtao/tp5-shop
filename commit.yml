@@ -2,13 +2,22 @@
 branches: {
   }
 fileChange:
-  /docs:
-    newFile: !uuid 'f35833c115592cc4d7da91500a64f6ffdfe276f6'
-    oldFile: !uuid 'd45699350ce24d880060e0faa9a99beadfc4a644'
-  /docs/gitee.md:
-    newFile: !uuid '1ac8c889325ecbd375b0453e07f77ba52c70d691'
-    oldFile: !uuid '0a48e625381ebdbf6e772e6a0db1fff2dfc9c4ce'
-gitCommitId: !uuid 'ff3945ea3251f9d8e0a79dbd610a117f1ee3bbbc'
+  /application:
+    newFile: !uuid '55c82a8478968b7acce3f83fb6ae4058b574fc3f'
+    oldFile: !uuid '575d139ed0e06c78cb5165df463207b153d99f3e'
+  /application/index:
+    newFile: !uuid 'f6b1dd8985e3fe60872ac9c5992a444607553dbf'
+    oldFile: !uuid 'a2c1ecb79d6b7f5043863d2394d15f4eb7604bc1'
+  /application/index/view:
+    newFile: !uuid '6a45370fe398588735044df68e28b621849fa0e4'
+    oldFile: !uuid '1bef86194ef4e5b45d43f2891ffdb988e7facdb8'
+  /application/index/view/common:
+    newFile: !uuid '53144410ba68e86146327f04b2f4940966c2eebf'
+    oldFile: !uuid '6b8ab5dd93685c34ed2ae8b613ad12b95d88728e'
+  /application/index/view/common/basic.html:
+    newFile: !uuid '56f654a5a7211be7edf0a61b5c39e1bf801bb6cf'
+    oldFile: !uuid 'd37369895383cf2df526e8a5747d9acc18cfb71b'
+gitCommitId: !uuid '7f1e1e109a3985aaade1b73bfeee0c9016ddd0e1'
 renames: {
   }
-revisionId: 996
+revisionId: 997
