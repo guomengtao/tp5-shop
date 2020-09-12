@@ -13,9 +13,9 @@
 ## 操作步骤：
 
 1. 要列出可用的凭据:
-   cmdkey /list
-如果有，在这里会看到一条关于gitee的登录凭据
-2. 要删除现有凭据:
+   - cmdkey /list
+   - 如果有，在这里会看到一条关于gitee的登录凭据
+2. 要删除现有凭据: 
    cmdkey /delete:targetname
 通过这个命令删除掉，这里的targetname很长，通过右键复制一下
 3. 重新登录：
