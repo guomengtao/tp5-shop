@@ -19,7 +19,7 @@
    cmdkey /delete:targetname
 通过这个命令删除掉，这里的targetname很长，通过右键复制一下
 3. 重新登录：
-   再次运行git push 会弹出一个再次登录的窗口。输入正确的gitee登录账号密码即可。
+   再次运行git push 会弹出一个再次登录的窗口。输入正确的gitee登录账号密码即可
 
 
 
