@@ -1,4 +1,8 @@
-# 修改gitee提交push时的账号密码错误
+
+# 通过cmdkey修改gitee提交push用户名或密码不正确问题
+
+## 修改gitee提交push时的账号密码错误
+
 
 ## 错题示例：
 remote: guomengtao: Incorrect username or password (access token)
