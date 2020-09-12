@@ -1,6 +1,11 @@
 # 修改gitee提交push时的账号密码错误
 
-- 测试在wim10通过窗口操作有点麻烦，以下是通过命令行方式删除掉
+## 错题示例：
+remote: guomengtao: Incorrect username or password (access token)
+fatal: Authentication failed for 'https://gitee.com/rinuo/tp5.git/'
+用户名或密码不正确（访问令牌）
+
+- 测试在win10通过窗口操作有点麻烦，以下是通过命令行方式删除掉
 - gitee的在git里的登录账号和密码失效后的处理方法
 
 ## 通过CMD命令行取消已经保存的账号密码凭证
@@ -19,7 +24,7 @@
    cmdkey /delete:targetname
 通过这个命令删除掉，这里的targetname很长，通过右键复制一下
 3. 重新登录：
-   再次运行git push 会弹出一个再次登录的窗口。输入正确的gitee登录账号密码即可
+   再次运行git push 会弹出一个再次登录的窗口。输入正确的gitee登录账号密码即可.
 
 
 
