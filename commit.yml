@@ -2,31 +2,13 @@
 branches: {
   }
 fileChange:
-  /README.md:
-    newFile: !uuid '067e57d7e251728a50931df7ec3be2822ce67cbb'
-    oldFile: !uuid 'fd4e9c50b07992ba63d93553aa85b8db24cac410'
-  /application:
-    newFile: !uuid '575d139ed0e06c78cb5165df463207b153d99f3e'
-    oldFile: !uuid 'fb7fcdc6f7e8740c3a5286eaa769ca5013558341'
-  /application/index:
-    newFile: !uuid 'a2c1ecb79d6b7f5043863d2394d15f4eb7604bc1'
-    oldFile: !uuid '0cdfbea59334da2b8dbab90c5bbd5c9a893f2bb9'
-  /application/index/view:
-    newFile: !uuid '1bef86194ef4e5b45d43f2891ffdb988e7facdb8'
-    oldFile: !uuid '34a88ecd7fea92ad6a42161ef1edcbb0e6be1c2b'
-  /application/index/view/common:
-    newFile: !uuid '6b8ab5dd93685c34ed2ae8b613ad12b95d88728e'
-    oldFile: !uuid 'd963949509c86b064037227c4ffbac2cd9c2df25'
-  /application/index/view/common/basic.html:
-    newFile: !uuid 'd37369895383cf2df526e8a5747d9acc18cfb71b'
-    oldFile: !uuid '93b8f1714ddf179b0cc4d4f50c29e8ef445fca99'
   /docs:
-    newFile: !uuid 'b5cefa0f6829539a5e55856640856dad31f3c108'
-    oldFile: null
+    newFile: !uuid '1e447d8562b3e7db633d60b987453d4f8bbad7e2'
+    oldFile: !uuid 'b5cefa0f6829539a5e55856640856dad31f3c108'
   /docs/gitee.md:
-    newFile: !uuid '1507d47def68582cacb5a32eeaf33a60677a2b3c'
-    oldFile: null
-gitCommitId: !uuid '6dafb7108637a365e4064a27c2da7c436886c05f'
+    newFile: !uuid '671ff4ab7f3cdd1f6baea843af5bd86d7b2f625a'
+    oldFile: !uuid '1507d47def68582cacb5a32eeaf33a60677a2b3c'
+gitCommitId: !uuid 'f18c3802f42888e672c98e8358d850e01fef6571'
 renames: {
   }
-revisionId: 990
+revisionId: 991
