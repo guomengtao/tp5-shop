@@ -3,12 +3,12 @@ branches: {
   }
 fileChange:
   /docs:
-    newFile: !uuid '97e46920d9d000ef27575e4b1ca64c9f0e0fc20f'
-    oldFile: !uuid '1e447d8562b3e7db633d60b987453d4f8bbad7e2'
+    newFile: !uuid 'fd35465860967e9526c8d202a057f1a18e8ffe4f'
+    oldFile: !uuid '97e46920d9d000ef27575e4b1ca64c9f0e0fc20f'
   /docs/gitee.md:
-    newFile: !uuid 'd3b180b6650de39f5179a1875c0cb55816cbaa77'
-    oldFile: !uuid '671ff4ab7f3cdd1f6baea843af5bd86d7b2f625a'
-gitCommitId: !uuid 'b1512a47f5dcd7ad6c11e759f789b7d39c38d309'
+    newFile: !uuid '02ce411e5bada9b58a504a7cf8154a7ec3dfbf68'
+    oldFile: !uuid 'd3b180b6650de39f5179a1875c0cb55816cbaa77'
+gitCommitId: !uuid 'd38b7a2ed280ec531d7e8ea373547fdebcd269bd'
 renames: {
   }
-revisionId: 992
+revisionId: 993
