@@ -69,7 +69,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         </ul>
 
         <!-- SEARCH FORM -->
-        <form class="form-inline ml-3" action="{:url('index/index/like')}">
+        <form class="form-inline d-none ml-3" action="{:url('index/index/like')}">
             <div class="input-group input-group-sm">
                 <input name="search" class="form-control form-control-navbar" type="search" placeholder="Search"
                        aria-label="Search">
@@ -82,7 +82,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         </form>
 
         <!-- Right navbar links -->
-        <ul class="navbar-nav d-none ml-auto">
+        <ul class="navbar-nav  ml-auto">
             <!-- Messages Dropdown Menu -->
             {if condition="!$Think.cookie.user_id"}
 
@@ -96,7 +96,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <a class="nav-link d-sm-inline-block" style="white-space:nowrap;" href="{:url('index/index/register')}"
                    target="_blank">注册</a>
             </li>
-            <li class="nav-item dropdown">
+            <li class="nav-item d-none dropdown">
                 <a class="nav-link"
                    href="https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=100556678&redirect_uri=http://open.gaoxueya.com/index/api/qq&scope=get_user_info"
                    target="_black"> <img class="img-circle img " src="__STATIC__/images/ico_login_qq.png"/></a>
