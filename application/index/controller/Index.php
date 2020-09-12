@@ -73,10 +73,10 @@ class Index extends Frontend
      */
     public function password()
     {
-        $phone    = input('param.phone');
-        $rand     = input('param.rand');
+        $phone = input('param.phone');
+        $rand = input('param.rand');
         $password = input('password');
-        $warning  = "";
+        $warning = "";
 
         if (Request::instance()->isPost()) {
             $validate = new Validate(
@@ -87,7 +87,7 @@ class Index extends Frontend
 
                 ]
             );
-            $data     = [
+            $data = [
                 'phone'    => $phone,
                 'password' => $password,
                 'rand'     => $rand
@@ -108,7 +108,10 @@ class Index extends Frontend
                     // 更新token讲使原来就的登录都立即失效
                     $token = md5(time().$phone.rand(100000, 999999));
                     // 更新密码为新密码
-                    User::where('phone', $phone)->update(['password' => md5($password), 'token' => $token]);
+                    User::where('phone', $phone)->update([
+                        'password' => md5($password),
+                        'token'    => $token
+                    ]);
                     $warning = '恭喜您！密码修改成功！';
                     $this->success($warning);
                 } else {
@@ -142,7 +145,7 @@ class Index extends Frontend
         $database = input('database');
         $username = input('username');
         $password = input('password');
-        $step     = input('step');
+        $step = input('step');
 
 
         // 是否存在安装锁文件
@@ -248,7 +251,7 @@ class Index extends Frontend
 
             //读取文件内容
             $sql_file = ROOT_PATH.'t9665.sql';
-            $_sql     = file_get_contents($sql_file);
+            $_sql = file_get_contents($sql_file);
 
             $_arr = explode(';', $_sql);
             // $conn=mysqli_connect($hostname, /* The host to connect to 连接MySQL地址 */
@@ -323,7 +326,8 @@ class Index extends Frontend
 
         $str = 'javascript:CustomerInfoClass.PostCustomerActionHistory(94200)';
 
-        preg_match('ustomerInfoClass.PostCustomerActionHistory/((.*?)/)', $str, $name);
+        preg_match('ustomerInfoClass.PostCustomerActionHistory/((.*?)/)', $str,
+            $name);
 
         dump($name);
         die();
@@ -396,7 +400,8 @@ class Index extends Frontend
     public function curl_get()
     {
         //使用上面保存的cookies再次访问
-        $url = 'http://crm.zhiguagua.com/SystemFrameWorkV3/Ajax/Task/LoadData.aspx?IsMenu=True&TaskName=&TaskGuid=88b5feb1-6951-43c8-aeb7-8af7f3cef372&WCFUITaskGuid=9fee84cf-bdc4-4ec0-a5f0-ba83e17415ae&LoadGridDataEventDealer=CustomizedWCFUI.ServiceFactory.CRM.CustomerInfoClass%7cLoadGridDataEvent&Version=2018/4/7%202:57:40';
+        $url
+            = 'http://crm.zhiguagua.com/SystemFrameWorkV3/Ajax/Task/LoadData.aspx?IsMenu=True&TaskName=&TaskGuid=88b5feb1-6951-43c8-aeb7-8af7f3cef372&WCFUITaskGuid=9fee84cf-bdc4-4ec0-a5f0-ba83e17415ae&LoadGridDataEventDealer=CustomizedWCFUI.ServiceFactory.CRM.CustomerInfoClass%7cLoadGridDataEvent&Version=2018/4/7%202:57:40';
 
 
         // 这个方式是获取cooike后，拿着cookie来操作
@@ -438,7 +443,8 @@ class Index extends Frontend
         // 这个是实现自动添加跟进记录的功能，十分重要，这个是开始
 
         //使用上面保存的cookies再次访问
-        $url = 'http://crm.zhiguagua.com/SystemFrameWorkV3/Ajax/Task/LoadService.aspx?IsMenu=true&TaskName=%E8%A1%8C%E5%8A%A8%E5%8E%86%E5%8F%B2%E8%AE%B0%E5%BD%95&TaskGuid=87ebc3e5-d250-4046-af13-5e04dd1862e9&WCFUITaskGuid=e3b6ccc9-f471-4219-9bae-f928e735c950&FormEvent=1&SubmitFormEventDealer=CustomizedWCFUI.ServiceFactory.CRM.CustomerActionHistoryClass%7CAddNewEvent&Version=0.34745302515421295';
+        $url
+            = 'http://crm.zhiguagua.com/SystemFrameWorkV3/Ajax/Task/LoadService.aspx?IsMenu=true&TaskName=%E8%A1%8C%E5%8A%A8%E5%8E%86%E5%8F%B2%E8%AE%B0%E5%BD%95&TaskGuid=87ebc3e5-d250-4046-af13-5e04dd1862e9&WCFUITaskGuid=e3b6ccc9-f471-4219-9bae-f928e735c950&FormEvent=1&SubmitFormEventDealer=CustomizedWCFUI.ServiceFactory.CRM.CustomerActionHistoryClass%7CAddNewEvent&Version=0.34745302515421295';
 
 
         // 这个方式是获取cooike后，拿着cookie来操作
@@ -477,7 +483,8 @@ class Index extends Frontend
         die();
 
 
-        $url = 'http://crm.zhiguagua.com/SystemFrameWorkV3/Service.CRM.CustomizedWCFUI.ServiceFactory.CRM.CustomerInfoClass.LoadDataGrid.aspx?Tab=%E4%BB%8A%E6%97%A5%E6%96%B0%E5%A2%9E';
+        $url
+            = 'http://crm.zhiguagua.com/SystemFrameWorkV3/Service.CRM.CustomizedWCFUI.ServiceFactory.CRM.CustomerInfoClass.LoadDataGrid.aspx?Tab=%E4%BB%8A%E6%97%A5%E6%96%B0%E5%A2%9E';
 
         dump("演示一下 api跨域访问");
 
@@ -524,8 +531,9 @@ class Index extends Frontend
         // 这个方法就是登陆后拿到cookie
 
         $cookie_file = "";
-        $url_login   = 'http://crm.zhiguagua.com/SystemFrameWorkV3/Ajax/User/Login.aspx?action=SubmitLoginAccount&Version=0.810160670564136';
-        $ch          = curl_init();
+        $url_login
+            = 'http://crm.zhiguagua.com/SystemFrameWorkV3/Ajax/User/Login.aspx?action=SubmitLoginAccount&Version=0.810160670564136';
+        $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url_login);
 // 返回结果 不直接输出
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -618,8 +626,10 @@ class Index extends Frontend
 
         dump("演示一下 api跨域访问");
 
-        $url = "http://crm.zhiguagua.com/SystemFrameWorkV3/Ajax/User/Login.aspx?action=SubmitLoginAccount&Version=0.12808618620752532";
-        $url = "http://crm.zhiguagua.com/SystemFrameWorkV3/Ajax/User/Login.aspx?action=SubmitLoginAccount&Version=0.810160670564136";
+        $url
+            = "http://crm.zhiguagua.com/SystemFrameWorkV3/Ajax/User/Login.aspx?action=SubmitLoginAccount&Version=0.12808618620752532";
+        $url
+            = "http://crm.zhiguagua.com/SystemFrameWorkV3/Ajax/User/Login.aspx?action=SubmitLoginAccount&Version=0.810160670564136";
         // $url = file_get_contents($url);
 
         // echo $url ;
@@ -711,11 +721,11 @@ class Index extends Frontend
 
     public function videoTime()
     {
-        $t     = input('t');
-        $d     = input('d');
-        $shop  = input('id');
+        $t = input('t');
+        $d = input('d');
+        $shop = input('id');
         $phone = Cookie::get('phone');
-        $add   = '';
+        $add = '';
 
         if (!$phone) {
             $phone = "15966982315";
@@ -775,7 +785,11 @@ class Index extends Frontend
 //                echo "开始更新增加记录";
                 $edit = Video::where('phone', $phone)
                     ->where('shop', $shop)
-                    ->update(['title' => $t + $add, 'age' => $d, 'update_time' => time()]);
+                    ->update([
+                        'title'       => $t + $add,
+                        'age'         => $d,
+                        'update_time' => time()
+                    ]);
                 echo "更新学习进度,跟新了".$edit.'条';
 
                 //            重新设置播放进度的记录
@@ -787,9 +801,9 @@ class Index extends Frontend
     // 判断播放完成后的操作
     public function videoTimeOver()
     {
-        $t     = input('t');
-        $d     = input('d');
-        $shop  = input('id');
+        $t = input('t');
+        $d = input('d');
+        $shop = input('id');
         $phone = Cookie::get('phone');
         $tshop = Cookie::get('t'.$shop);
 
@@ -861,9 +875,10 @@ class Index extends Frontend
             return $this->fetch('like_default');
         }
 
-        $show    = Shop::course($search);
-        $title   = "搜索".$search;
-        $show123 = Shop::where('label|title', 'like', '%'.$search.'%')->cache(3)->order('sort', 'asc')->paginate(10);
+        $show = Shop::course($search);
+        $title = "搜索".$search;
+        $show123 = Shop::where('label|title', 'like', '%'.$search.'%')->cache(3)
+            ->order('sort', 'asc')->paginate(10);
 
         $this->assign('title', $title);
         $this->assign('show', $show);
@@ -878,12 +893,12 @@ class Index extends Frontend
         // dump(input('')); 
         // exit();
         $phone = input('param.phone');
-        $rand  = input('param.rand');
+        $rand = input('param.rand');
 
         $subject = input('param.WIDsubject');
-        $fee     = input('param.WIDtotal_fee');
-        $lesson  = input('param.WIDbody');
-        $no      = input('param.WIDout_trade_no').Cookie::get('phone');
+        $fee = input('param.WIDtotal_fee');
+        $lesson = input('param.WIDbody');
+        $no = input('param.WIDout_trade_no').Cookie::get('phone');
 
         if ($lesson = 37) {
             $subject = "打赏:".$subject;
@@ -897,8 +912,8 @@ class Index extends Frontend
 
 
         $warning = "";
-        $user    = Cookie::get('phone');
-        $lesson  = Cookie::get('lesson');
+        $user = Cookie::get('phone');
+        $lesson = Cookie::get('lesson');
 
         // 此处处理已经登录过，但是页面没有刷新继续购物的情况。
         // 设置直接跳转到支付页面
@@ -906,8 +921,9 @@ class Index extends Frontend
             # code...
             // 用request方法获取当前域名
             $request = Request::instance();
-            $url     = $request->domain(
-                ).'/alipay/alipayapi.php?WIDtotal_fee='.$fee.'&WIDsubject='.$subject.'&WIDout_trade_no='.$no.'&WIDbody='.$lesson.'&WIDshow_url='.$lesson;
+            $url = $request->domain().'/alipay/alipayapi.php?WIDtotal_fee='.$fee
+                .'&WIDsubject='.$subject.'&WIDout_trade_no='.$no.'&WIDbody='
+                .$lesson.'&WIDshow_url='.$lesson;
 
             //重定向到支付宝
             $this->redirect($url);
@@ -927,7 +943,7 @@ class Index extends Frontend
 
                 ]
             );
-            $data     = [
+            $data = [
                 'phone' => $phone,
                 'rand'  => $rand
             ];
@@ -960,8 +976,10 @@ class Index extends Frontend
 
                     // 用request方法获取当前域名
                     $request = Request::instance();
-                    $url     = $request->domain(
-                        ).'/alipay/alipayapi.php?WIDtotal_fee='.$fee.'&WIDsubject='.$subject.'&WIDout_trade_no='.$no.'&WIDbody='.$lesson.'&WIDshow_url='.$lesson;
+                    $url = $request->domain()
+                        .'/alipay/alipayapi.php?WIDtotal_fee='.$fee
+                        .'&WIDsubject='.$subject.'&WIDout_trade_no='.$no
+                        .'&WIDbody='.$lesson.'&WIDshow_url='.$lesson;
 
                     //重定向到支付宝
                     $this->redirect($url);
@@ -975,8 +993,10 @@ class Index extends Frontend
 
                     // 用request方法获取当前域名
                     $request = Request::instance();
-                    $url     = $request->domain(
-                        ).'/alipay/alipayapi.php?WIDtotal_fee='.$fee.'&WIDsubject='.$subject.'&WIDout_trade_no='.$no.'&WIDbody='.$lesson.'&WIDshow_url='.$lesson;
+                    $url = $request->domain()
+                        .'/alipay/alipayapi.php?WIDtotal_fee='.$fee
+                        .'&WIDsubject='.$subject.'&WIDout_trade_no='.$no
+                        .'&WIDbody='.$lesson.'&WIDshow_url='.$lesson;
 
                     //重定向到支付宝
                     $this->redirect($url);
@@ -1007,11 +1027,11 @@ class Index extends Frontend
 
     public function login()
     {
-        $phone        = input('param.phone');
-        $rand         = input('param.rand');
-        $invite       = input('param.invite');
-        $password     = input('password');
-        $warning      = "";
+        $phone = input('param.phone');
+        $rand = input('param.rand');
+        $invite = input('param.invite');
+        $password = input('password');
+        $warning = "";
         $invite_phone = "";
         $get_password = '';
 
@@ -1037,7 +1057,7 @@ class Index extends Frontend
 
                 ]
             );
-            $data     = [
+            $data = [
                 'phone'    => $phone,
                 'password' => $password,
             ];
@@ -1063,7 +1083,8 @@ class Index extends Frontend
                 // 查询密码和账号是否正确
 
 
-                $get_password = User::where('password', '=', md5(trim($password)))
+                $get_password = User::where('password', '=',
+                    md5(trim($password)))
                     ->where('phone', $phone)
                     ->count();
 
@@ -1101,12 +1122,12 @@ class Index extends Frontend
 
     public function smsLogin()
     {
-        $phone        = input('param.phone');
-        $rand         = input('param.rand');
-        $invite       = input('param.invite');
-        $warning      = "";
+        $phone = input('param.phone');
+        $rand = input('param.rand');
+        $invite = input('param.invite');
+        $warning = "";
         $invite_phone = "";
-        $get_rand     = '';
+        $get_rand = '';
 
 
         if ($invite) {
@@ -1131,7 +1152,7 @@ class Index extends Frontend
 
                 ]
             );
-            $data     = [
+            $data = [
                 'phone' => $phone,
                 'rand'  => $rand
             ];
@@ -1192,18 +1213,18 @@ class Index extends Frontend
 
     public function register()
     {
-        $phone        = input('param.phone');
-        $rand         = input('param.rand');
-        $rand_test    = input('rand_test');
-        $logout       = input('param.logout');
-        $login        = input('param.login');
-        $invite       = input('param.invite');
-        $admin        = input('param.admin');
-        $password     = input('password');
-        $warning      = "";
+        $phone = input('param.phone');
+        $rand = input('param.rand');
+        $rand_test = input('rand_test');
+        $logout = input('param.logout');
+        $login = input('param.login');
+        $invite = input('param.invite');
+        $admin = input('param.admin');
+        $password = input('password');
+        $warning = "";
         $invite_phone = "";
         $get_password = '';
-        $body         = Session::get('body');
+        $body = Session::get('body');
 
         $total_fee = Session::get('total_fee');
 
@@ -1238,7 +1259,7 @@ class Index extends Frontend
 
                 ]
             );
-            $data     = [
+            $data = [
                 'phone'    => $phone,
                 'password' => $password,
                 'rand'     => $rand
@@ -1303,7 +1324,9 @@ class Index extends Frontend
                 }
 
                 // 已注册的 绑定qq 验证验证码提示
-                if (session('openid_id') <> '' & $get_token <> '' & $rand_test <= 0) {
+                if (session('openid_id') <> '' & $get_token <> '' & $rand_test
+                    <= 0
+                ) {
                     $warning = "验证码不正确";
                     $this->error($warning);
                 }
@@ -1311,7 +1334,9 @@ class Index extends Frontend
 
                 // 判断是绑定qq操作，已经注册和验证码正确开始绑定 {三个条件满足}
 
-                if (session('openid_id') <> '' & $get_token <> '' & $rand_test > 0) {
+                if (session('openid_id') <> '' & $get_token <> '' & $rand_test
+                    > 0
+                ) {
                     $warning = "绑定qq，已经注册和验证码正确开始绑定66669999";
                     $this->error($warning);
 
@@ -1323,7 +1348,7 @@ class Index extends Frontend
                     $warning = "绑定qq，已经注册和验证码正确开始绑定id:".$user_id;
                     $this->error($warning);
                     // 直接更新，不考虑此用户已经绑定其他qq。会成为多个qq可以绑定同一个账号状态。
-                    $user          = UserQq::get(session('openid_id'));
+                    $user = UserQq::get(session('openid_id'));
                     $user->user_id = $user_id;
                     $user->save();
 
@@ -1372,7 +1397,7 @@ class Index extends Frontend
                         $user_id = Cookie::get('user_id');
 
                         // 绑定上手机号
-                        $user        = User::get($user_id);
+                        $user = User::get($user_id);
                         $user->phone = $phone;
                         $user->save();
                     }
@@ -1409,10 +1434,10 @@ class Index extends Frontend
 //                  此处用save方式会更新update字段时间戳
 //                  同时更新token的，使cookie更安全
 
-                    $user           = User::where('phone', $phone)
+                    $user = User::where('phone', $phone)
                         ->find();
                     $user->password = md5($password);
-                    $user->token    = $token;
+                    $user->token = $token;
                     $user->save();
 
                     Session::set('total_fee', '');
@@ -1427,7 +1452,8 @@ class Index extends Frontend
                     $this->success('重置密码成功^_^', 'index/index/index');
 
 //                  跳出框架转到首页方式
-                    exit('<script>top.location.href="../index/index/login/221/'.$body.$phone.'"</script>');
+                    exit('<script>top.location.href="../index/index/login/221/'
+                        .$body.$phone.'"</script>');
                 }
             }
         }
@@ -1465,7 +1491,7 @@ class Index extends Frontend
         // dump(session_save_path() );
 
 //        根据存储位置，查看所有session文件
-        $dir  = session_save_path();
+        $dir = session_save_path();
         $file = scandir($dir);
         // dump($file);
 
@@ -1489,14 +1515,14 @@ class Index extends Frontend
     {
         $rtime = date("m-d H:i", $time);
         $htime = date("H:i", $time);
-        $time  = time() - $time;
+        $time = time() - $time;
         if ($time < 60) {
             $str = '刚刚';
         } elseif ($time < 60 * 60) {
             $min = floor($time / 60);
             $str = $min.'分钟前';
         } elseif ($time < 60 * 60 * 24) {
-            $h   = floor($time / (60 * 60));
+            $h = floor($time / (60 * 60));
             $str = $h.'小时前 ';
         } elseif ($time < 60 * 60 * 24 * 3) {
             $d = floor($time / (60 * 60 * 24));
@@ -1513,7 +1539,7 @@ class Index extends Frontend
 
     public function news()
     {
-        $user  = Cookie::get('phone');
+        $user = Cookie::get('phone');
         $token = Cookie::get('token');
 
         //      Cookie加密验证功能
@@ -1525,9 +1551,9 @@ class Index extends Frontend
 //        dump($all_lesson_free);die();
 
 
-        $registration_user  = '';
+        $registration_user = '';
         $registration_count = '';
-        $user_vip           = '';
+        $user_vip = '';
 
 //        如果用户登录检查今天是否签到
         if ($user) {
@@ -1605,11 +1631,11 @@ class Index extends Frontend
         // 循环嵌套播放进度
 
         foreach ($show as $k => $v) {
-            $video_title  = '0.1';
+            $video_title = '0.1';
             $video_status = '0';
-            $video_age    = '100';
-            $data_count   = '0';
-            $body         = $show[$k]['id'];
+            $video_age = '100';
+            $data_count = '0';
+            $body = $show[$k]['id'];
 
 
             // 查询播放进度和次数
@@ -1621,8 +1647,8 @@ class Index extends Frontend
 //            return $video;
 
             if ($video) {
-                $video_title  = $video->title;
-                $video_age    = $video->age;
+                $video_title = $video->title;
+                $video_age = $video->age;
                 $video_status = $video->status;
 //                查询评论次数
                 $data = Data::where('phone', '=', $user)
@@ -1631,10 +1657,10 @@ class Index extends Frontend
 
                 $data_count = $data;
             }
-            $show[$k]['video_title']  = $video_title;
-            $show[$k]['video_age']    = $video_age;
+            $show[$k]['video_title'] = $video_title;
+            $show[$k]['video_age'] = $video_age;
             $show[$k]['video_status'] = $video_status;
-            $show[$k]['data_count']   = $data_count;
+            $show[$k]['data_count'] = $data_count;
         }
 
 
@@ -1741,15 +1767,19 @@ class Index extends Frontend
         $request = Request::instance();
 
         if (!$auth->check(
-            $request->module().'/'.$request->controller().'/'.$request->action(),
+            $request->module().'/'.$request->controller().'/'
+            .$request->action(),
             Cookie::get('user_id')
-        )) {
+        )
+        ) {
             // 第一个参数是规则名称,第二个参数是用户UID
 
             if (!$auth->check(
-                $request->module().'/'.$request->controller().'/'.$request->action(),
+                $request->module().'/'.$request->controller().'/'
+                .$request->action(),
                 100867
-            )) {// 第一个参数是规则名称,第二个参数是用户UID
+            )
+            ) {// 第一个参数是规则名称,第二个参数是用户UID
                 // return array('status'=>'error','msg'=>'有权限！');
                 $this->error('你没有权限');
             } else {
@@ -1781,13 +1811,13 @@ class Index extends Frontend
          *
          */
 
-        $ip              = Request::instance()->ip();
-        $human           = Ipinfo::where('ip', $ip)->find();
-        $views_today     = Footprint::views_today();
+        $ip = Request::instance()->ip();
+        $human = Ipinfo::where('ip', $ip)->find();
+        $views_today = Footprint::views_today();
         $views_yesterday = Footprint::views_yesterday();
         // 查询今天签到
         $registration_today = Order::registration_today();
-        $humans             = Ipinfo::limit(10)->order('update_time', 'desc')->select();
+        $humans = Ipinfo::limit(10)->order('update_time', 'desc')->select();
 
         $this->assign('views_today', $views_today);
         $this->assign('views_yesterday', $views_yesterday);
@@ -1804,7 +1834,8 @@ class Index extends Frontend
         $install_lock = ROOT_PATH.'application'.DS.'install.lock';
         if (!file_exists($install_lock)) {
             //在线安装向导
-            $this->success('在线安装向导【关闭方法：在application增加一个install.lock】', 'Index/install');
+            $this->success('在线安装向导【关闭方法：在application增加一个install.lock】',
+                'Index/install');
         }
 
 
@@ -1855,10 +1886,10 @@ class Index extends Frontend
         }
 
 
-        $registration_user  = '';
+        $registration_user = '';
         $registration_count = '';
-        $user_vip           = '';
-        $page               = input('page');
+        $user_vip = '';
+        $page = input('page');
 
 
         // 接收ajax刷新缓存操作 只允许ajax方式更新缓存
@@ -1936,9 +1967,9 @@ class Index extends Frontend
 
     public function all()
     {
-        $user    = Cookie::get('phone');
+        $user = Cookie::get('phone');
         $user_id = Cookie::get('user_id');
-        $token   = Cookie::get('token');
+        $token = Cookie::get('token');
 
         //      Cookie加密验证功能
 
@@ -1949,9 +1980,9 @@ class Index extends Frontend
 //        dump($all_lesson_free);die();
 
 
-        $registration_user  = '';
+        $registration_user = '';
         $registration_count = '';
-        $user_vip           = '';
+        $user_vip = '';
 
 //        如果用户登录检查今天是否签到
         if ($user) {
@@ -2027,11 +2058,11 @@ class Index extends Frontend
         // 循环嵌套播放进度
 
         foreach ($show as $k => $v) {
-            $video_title  = '0.1';
+            $video_title = '0.1';
             $video_status = '0';
-            $video_age    = '100';
-            $data_count   = '0';
-            $body         = $show[$k]['id'];
+            $video_age = '100';
+            $data_count = '0';
+            $body = $show[$k]['id'];
 
 
             // 查询播放进度和次数
@@ -2042,8 +2073,8 @@ class Index extends Frontend
 //            return $video;
 
             if ($video) {
-                $video_title  = $video->title;
-                $video_age    = $video->age;
+                $video_title = $video->title;
+                $video_age = $video->age;
                 $video_status = $video->status;
 //                查询评论次数
                 $data = Data::where('user_id', '=', $user_id)
@@ -2052,10 +2083,10 @@ class Index extends Frontend
 
                 $data_count = $data;
             }
-            $show[$k]['video_title']  = $video_title;
-            $show[$k]['video_age']    = $video_age;
+            $show[$k]['video_title'] = $video_title;
+            $show[$k]['video_age'] = $video_age;
             $show[$k]['video_status'] = $video_status;
-            $show[$k]['data_count']   = $data_count;
+            $show[$k]['data_count'] = $data_count;
             // $show[$k]['view_count']         = view_count($show[$k]['id']);
 
 
@@ -2137,12 +2168,12 @@ class Index extends Frontend
 
     public function view()
     {
-        $id             = input('id');
-        $page_view      = input('page_view');
+        $id = input('id');
+        $page_view = input('page_view');
         $red_packet_get = input('red_packet_get');
-        $user_id        = Cookie::get('user_id');
-        $data_id        = input('data_id');
-        $reply          = input('reply');
+        $user_id = Cookie::get('user_id');
+        $data_id = input('data_id');
+        $reply = input('reply');
 
         // if (!$user_id) {
         //     $this->success('请登录！', 'index/index/login');
@@ -2168,7 +2199,7 @@ class Index extends Frontend
                 Likes::destroy(['data_id' => $data_id, 'user_id' => $user_id]);
             } else {
                 # 没有点赞创建
-                $Likes          = new Likes;
+                $Likes = new Likes;
                 $Likes->data_id = $data_id;
                 $Likes->user_id = $user_id;
                 $Likes->save();
@@ -2191,7 +2222,7 @@ class Index extends Frontend
             $view_count = Footprint::where('url', '=', $url)
                 ->count();
 
-            $user            = Shop::get($page_view);
+            $user = Shop::get($page_view);
             $user->page_view = $view_count;
             $user->save();
 
@@ -2212,7 +2243,7 @@ class Index extends Frontend
 
 
         $list['learn_count'] = 0;
-        $list['data_len']    = 0;
+        $list['data_len'] = 0;
         // $list['view_count'] = view_count($id);
 
 
@@ -2263,14 +2294,14 @@ class Index extends Frontend
     {
         $user_id = input("user_id");
 
-        $data    = User::find($user_id);
+        $data = User::find($user_id);
         $this->assign('user', $data);
         return $this->fetch();
     }
 
     public function add()
     {
-        $title   = input('param.title');
+        $title = input('param.title');
         $content = input('param.content');
 
         //dump($title);
